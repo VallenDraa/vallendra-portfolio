@@ -22,7 +22,22 @@ module.exports = withMT({
         "Noto Color Emoji",
       ],
     },
-    extend: {},
+    extend: {
+      backgroundPosition: {
+        gradient: "1000% 1000%",
+      },
+      backgroundImage: {
+        "main-gradient":
+          "linear-gradient(79deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
+      },
+      keyrames: {
+        breathing: {
+          "0%, 100%": { backgroundPosition: "0% 76%" },
+          "50%": { backgroundPosition: "100% 25%" },
+        },
+      },
+      animation: { "main-gradient": "breathing 20s ease infinite" },
+    },
   },
   plugins: [],
 });

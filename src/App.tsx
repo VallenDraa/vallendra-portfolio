@@ -1,20 +1,16 @@
-import { Typography, Navbar } from "@material-tailwind/react";
-export default function App() {
+import { FC } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./Components/styles/bg-animations.css";
+import Main from "./Components/Main/Main";
+
+const App: FC = () => {
   return (
-    <div className="flex justify-center">
-      <Navbar>
-        <ul>
-          <Typography
-            as="li"
-            variant="h3"
-            color="blue-gray-800"
-            className="font-sans font-extrabold"
-          >
-            Jestine Vallendra Dwi Putra
-          </Typography>
-          <Typography as="li" variant="lead" color=""></Typography>
-        </ul>
-      </Navbar>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Main />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
+
+export default App;
