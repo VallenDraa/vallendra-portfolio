@@ -25,9 +25,10 @@ const Profile: FC = () => {
     <section
       aria-label="profile-section"
       id="profile"
-      className="bg-gray-900 relative z-10 pb-24"
+      className="bg-gray-900 relative z-10 pb-32"
     >
-      <div className="max-w-screen-xl mx-auto pt-12 relative flex gap-10">
+      {/* main content */}
+      <div className="max-w-screen-xl mx-auto pt-16 relative flex gap-10">
         <Line className="scale-y-[18.8] bg-white/30 absolute right-[673px] top-1 z-20 rotate-90" />
         <Line className="scale-y-75 bg-white/30 absolute left-[91px] top-5 z-20" />
 
@@ -51,15 +52,15 @@ const Profile: FC = () => {
               <Typography
                 as="p"
                 variant="paragraph"
-                className="text-gray-300 font-medium"
+                className="text-gray-300 font-medium leading-loose"
               >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis
-                incidunt tempora minima iusto et suscipit sequi nostrum atque
-                ipsam consequuntur cumque eligendi provident, quidem maiores ut
-                laboriosam voluptas impedit. Est?
+                My Name is Jestine Vallendra Dwi Putra, an upcoming Full-Stack
+                Web Developer. I've been pursuing the field since 2021 which has
+                made me able to gain some valuable experiences on web
+                technologies.
               </Typography>
             </div>
-            <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60">
+            <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
               <CardBody>
                 <Typography
                   variant="h4"
@@ -69,7 +70,7 @@ const Profile: FC = () => {
                   Technologies
                 </Typography>
                 <Typography as="p" className="text-gray-400 font-medium">
-                  Languanges / Frameworks That I Use For Projects And College!
+                  Languanges / Frameworks That I Use For Projects And College !
                 </Typography>
                 <ul className="flex items-center mt-4 relative gap-1">
                   <TechListItem
@@ -120,7 +121,7 @@ const Profile: FC = () => {
 
         {/* right side */}
         <aside className="flex flex-col gap-10 basis-1/3 mt-6">
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60">
+          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg">
             <CardBody>
               <Typography
                 variant="h4"
@@ -130,8 +131,12 @@ const Profile: FC = () => {
                 EDUCATION
               </Typography>
               <Typography as="p" className="text-gray-400 font-medium">
-                A <strong className="text-gray-300">Passionate</strong> Computer
-                Science Undergraduate Student at UIN Syarif Hidayatullah Jakarta
+                A Passionate First Year Computer Science Undergraduate Student
+                at
+                <strong className="text-gray-300">
+                  {" "}
+                  UIN Syarif Hidayatullah Jakarta.
+                </strong>
               </Typography>
             </CardBody>
             <CardFooter divider className="py-3 border-gray-600 text-gray-500">
@@ -141,7 +146,7 @@ const Profile: FC = () => {
             </CardFooter>
           </Card>
 
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60">
+          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg">
             <CardBody>
               <Typography
                 variant="h4"
@@ -155,7 +160,7 @@ const Profile: FC = () => {
                 <strong className="text-gray-300">
                   Google Developer Students Club
                 </strong>{" "}
-                at UIN Syarif Hidayatullah Jakarta
+                at UIN Syarif Hidayatullah Jakarta.
               </Typography>
             </CardBody>
             <CardFooter divider className="py-3 border-gray-600 text-gray-500">

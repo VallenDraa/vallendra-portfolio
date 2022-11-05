@@ -87,8 +87,8 @@ const NavbarComponent: FC = () => {
           <Button
             variant="filled"
             color="deep-purple"
-            size="sm"
-            className="group hidden lg:flex items-center relative w-max ml-auto"
+            size="md"
+            className="group hidden lg:flex items-center relative w-max ml-auto rounded-full"
           >
             <div className="duration-200 text-center relative w-max flex justify-center items-center">
               <span className="group-hover:pr-5 duration-200">Contact Me</span>
@@ -104,7 +104,7 @@ const NavbarComponent: FC = () => {
           onClick={() => setIsNavOpen(!isNavOpen)}
         >
           <IoChevronDownOutline
-            className={`transition duration-200 text-gray-200 text-3xl ${
+            className={`transition duration-200 text-gray-200 text-xl ${
               isNavOpen ? "rotate-180" : "rotate-0"
             }`}
           />

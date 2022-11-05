@@ -1,9 +1,9 @@
-import FloatingSquares from "../FloatingSquares/FloatingSquares";
 import Hero from "./Hero/Hero";
 import NavbarComponent from "../Navbar/Navbar";
 import Profile from "./Profile/Profile";
 import Projects from "./Projects/Projects";
-import Services from "./Services/Services";
+import { IconButton } from "@material-tailwind/react";
+import { VscTriangleUp } from "react-icons/vsc";
 
 const MainPage = () => {
   return (
@@ -18,10 +18,22 @@ const MainPage = () => {
       </header>
       <main>
         <Profile />
-        <Services />
         <Projects />
       </main>
       <footer></footer>
+
+      {/* back to top button */}
+      <IconButton
+        size="lg"
+        ripple={false}
+        variant="filled"
+        color="deep-purple"
+        className="fixed bottom-5 right-10 z-50"
+      >
+        <a href="#home" className="w-full h-full">
+          <VscTriangleUp className="text-xl" />
+        </a>
+      </IconButton>
     </section>
   );
 };
