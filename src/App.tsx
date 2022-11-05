@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./Components/Main/MainPage";
 import "./Components/styles/bg-animations.css";
-import Main from "./Components/Main/Main";
 
 const App: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<Main />}></Route>
+        <Route path="*" element={<MainPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

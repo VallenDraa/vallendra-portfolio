@@ -1,20 +1,19 @@
 import FloatingSquares from "../FloatingSquares/FloatingSquares";
-import Hero from "../Hero/Hero";
+import Hero from "./Hero/Hero";
 import NavbarComponent from "../Navbar/Navbar";
 import Profile from "./Profile/Profile";
 import Projects from "./Projects/Projects";
 import Services from "./Services/Services";
 
-const Main = () => {
+const MainPage = () => {
   return (
-    <section
-      aria-label="main-window"
-      className="min-h-screen breathing flex flex-col"
-      style={{ backgroundSize: "1000% 1000%" }}
-    >
-      <FloatingSquares />
+    <section aria-label="main-window" className="min-h-screen  flex flex-col">
+      <NavbarComponent />
       {/* hero section */}
-      <header className="basis-[10%] relative z-20">
+      <header
+        style={{ backgroundSize: "1000% 1000%" }}
+        className="basis-[10%] relative z-20 breathing"
+      >
         <Hero />
       </header>
       <main>
@@ -27,4 +26,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

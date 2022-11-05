@@ -1,3 +1,3 @@
-const MENUS = ["home", "profile", "services", "projects"];
+const MENUS = ["home", "profile", "skills", "projects"];
 
 export default MENUS;

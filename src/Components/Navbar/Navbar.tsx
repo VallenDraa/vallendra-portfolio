@@ -5,22 +5,44 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { FC, Key, ReactElement, useEffect, useState } from "react";
+import { FC, Key, ReactElement, useEffect, useState, useRef } from "react";
 import { IoCall, IoChevronDownOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import MENUS from "../../Utils/Misc/Menus";
 
 const NavbarComponent: FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const navbarRef = useRef<HTMLDivElement>(null);
+  const navToggleRef = useRef<HTMLButtonElement>(null);
+
   const changeNav = () => window.innerWidth > 540 && setIsNavOpen(false);
+  const closeNavOnOutsideClick = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    // check if the target element is the nav toggle button
+    if (navToggleRef.current?.contains(target)) return;
+
+    // close if target is not the the navbar or its descendant
+    if (!navbarRef.current?.contains(target)) {
+      setIsNavOpen(false);
+    }
+  };
 
   // change navigation according to screen size
   useEffect(() => {
     window.addEventListener("resize", changeNav);
+
+    return () => window.removeEventListener("resize", changeNav);
   }, []);
 
+  // for closing the navbar when the user touches things outside of the navbar component
+  useEffect(() => {
+    window.addEventListener("click", closeNavOnOutsideClick);
+
+    return () => window.removeEventListener("click", closeNavOnOutsideClick);
+  });
+
   const NavList: FC = () => (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mb-4 mt-2 flex flex-col gap-1 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       {MENUS.map((menu: string): ReactElement => {
         return (
           <Typography key={menu as Key} as="li" variant="paragraph">
@@ -28,14 +50,14 @@ const NavbarComponent: FC = () => {
               color="indigo"
               variant="text"
               fullWidth
-              className="py-2 px-3 text-sm font-semibold text-gray-300 hover:text-white transition duration-200"
+              className="p-0 text-base font-semibold text-gray-300 hover:text-white transition duration-200"
             >
-              <Link
-                to={`/${menu === "home" ? "" : menu}`}
-                className="flex items-center capitalize"
+              <a
+                href={`#${menu}`}
+                className="flex items-center capitalize py-2 px-3"
               >
                 {menu}
-              </Link>
+              </a>
             </Button>
           </Typography>
         );
@@ -44,8 +66,11 @@ const NavbarComponent: FC = () => {
   );
 
   return (
-    <Navbar className="min-w-full py-2 px-4 rounded-none bg-transparent backdrop-blur-md backdrop-saturate-[1.275] shadow border-0 text-gray-200">
-      <div className="max-w-screen-lg mx-auto flex items-center justify-between">
+    <Navbar
+      ref={navbarRef}
+      className="fixed top-0 z-50 min-w-full py-2 px-4 rounded-none bg-transparent backdrop-blur-md backdrop-saturate-[1.275] shadow border-0 text-gray-200"
+    >
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between">
         {/* name */}
         <Typography
           as="h2"
@@ -72,6 +97,7 @@ const NavbarComponent: FC = () => {
           </Button>
         </div>
         <IconButton
+          ref={navToggleRef}
           variant="text"
           color="indigo"
           className="h-6 w-6 p-4 text-inherit lg:hidden"

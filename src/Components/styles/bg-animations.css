@@ -37,7 +37,7 @@
 .floating-squares {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
   margin: 0;
@@ -50,8 +50,8 @@
   list-style: none;
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  animation: squares 45s linear infinite;
+  background: rgba(255, 255, 255, 0.1);
+  animation: squares 40s linear infinite;
 }
 
 .floating-squares li:nth-child(0) {
