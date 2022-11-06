@@ -55,6 +55,7 @@ module.exports = withMT({
       animation: {
         squares: "squares 40s linear infinite",
         "main-gradient": "main-gradient 40s ease infinite",
+        breathing: "main-gradient 6s ease infinite",
         marquee: "marquee 20s linear infinite",
       },
     },

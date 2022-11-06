@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { FC, Key, ReactElement, useEffect, useState, useRef } from "react";
 import { IoCall, IoChevronDownOutline } from "react-icons/io5";
-import MENUS from "../../Utils/Misc/Menus";
+import MENUS from "../../Utils/Misc/MenuDatas";
 
 const NavbarComponent: FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);

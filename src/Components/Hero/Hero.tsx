@@ -1,7 +1,7 @@
-import VallenIcon from "../../../images/vallen-icon.png";
+import VallenIcon from "../../../Images/vallen-icon.png";
 import { Typography } from "@material-tailwind/react";
-import Line from "../../Line/Line";
-import FloatingSquares from "../../FloatingSquares/FloatingSquares";
+import Line from "../Line/Line";
+import FloatingSquares from "../FloatingSquares/FloatingSquares";
 
 const Hero = () => {
   return (

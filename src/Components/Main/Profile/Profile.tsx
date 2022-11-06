@@ -38,11 +38,11 @@ const Profile: FC = () => {
             <Typography
               as="h2"
               variant="h2"
-              className=" w-max text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-indigo-200 capitalize"
+              className="animate-breathing bg-gradient w-max text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-200 capitalize"
             >
               Hello World !
             </Typography>
-            <Line className="bg-gradient-to-r from-indigo-100 to-indigo-300 rotate-90 scale-y-[5] left-[103px] -bottom-6 absolute" />
+            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[5] left-[103px] -bottom-6 absolute" />
           </header>
 
           {/* small paragraph and tech stack */}
