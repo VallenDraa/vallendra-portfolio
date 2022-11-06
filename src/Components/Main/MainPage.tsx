@@ -7,13 +7,10 @@ import { VscTriangleUp } from "react-icons/vsc";
 
 const MainPage = () => {
   return (
-    <section aria-label="main-window" className="min-h-screen  flex flex-col">
+    <main className="min-h-screen flex flex-col">
       <NavbarComponent />
       {/* hero section */}
-      <header
-        style={{ backgroundSize: "1000% 1000%" }}
-        className="basis-[10%] relative z-20 breathing"
-      >
+      <header className="basis-[10%] relative z-20 bg-gradient bg-main-gradient animate-main-gradient">
         <Hero />
       </header>
       <main>
@@ -34,7 +31,7 @@ const MainPage = () => {
           <VscTriangleUp className="text-xl" />
         </a>
       </IconButton>
-    </section>
+    </main>
   );
 };
 

@@ -29,8 +29,8 @@ const Profile: FC = () => {
     >
       {/* main content */}
       <div className="max-w-screen-xl mx-auto pt-16 relative flex gap-10">
-        <Line className="scale-y-[18.8] bg-white/30 absolute right-[673px] top-1 z-20 rotate-90" />
-        <Line className="scale-y-75 bg-white/30 absolute left-[91px] top-5 z-20" />
+        <Line className="scale-y-[18.8] bg-indigo-300/60 absolute right-[673px] top-1 z-20 rotate-90" />
+        <Line className="scale-y-75 bg-indigo-300/60 absolute left-[91px] top-5 z-20" />
 
         {/* left side */}
         <div className="basis-2/3 mt-4 flex flex-col">
@@ -63,7 +63,8 @@ const Profile: FC = () => {
             <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
               <CardBody>
                 <Typography
-                  variant="h4"
+                  as="h3"
+                  variant="h3"
                   className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
                 >
                   <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
@@ -124,6 +125,7 @@ const Profile: FC = () => {
           <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg">
             <CardBody>
               <Typography
+                as="h3"
                 variant="h4"
                 className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-light-blue-500 to-white"
               >
@@ -149,6 +151,7 @@ const Profile: FC = () => {
           <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg">
             <CardBody>
               <Typography
+                as="h3"
                 variant="h4"
                 className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-pink-100"
               >

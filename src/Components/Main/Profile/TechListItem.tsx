@@ -16,7 +16,11 @@ const TechListItem: FC<IProps> = ({ Icon, text }) => {
     <li>
       <Popover
         placement="bottom"
-        dismiss={{ escapeKey: true, outsidePointerDown: true }}
+        dismiss={{
+          escapeKey: true,
+          outsidePointerDown: true,
+          ancestorScroll: true,
+        }}
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0, y: -25 },

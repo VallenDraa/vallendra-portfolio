@@ -47,7 +47,7 @@ const Hero = () => {
             </div>
 
             {/* Line to next section */}
-            <Line className="scale-y-[6.5] bg-white/30 absolute left-1/2 -translate-x-1/2 top-[360px] z-20" />
+            <Line className="scale-y-[6.5] bg-indigo-300/60 absolute left-1/2 -translate-x-1/2 top-[360px] z-20" />
           </div>
         </div>
 

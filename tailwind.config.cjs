@@ -22,22 +22,42 @@ module.exports = withMT({
         "Noto Color Emoji",
       ],
     },
+    backgroundSize: {
+      gradient: "1000% 1000%",
+    },
     extend: {
-      backgroundPosition: {
-        gradient: "1000% 1000%",
-      },
       backgroundImage: {
         "main-gradient":
-          "linear-gradient(79deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
+          "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
       },
-      keyrames: {
-        breathing: {
+      keyframes: {
+        "main-gradient": {
           "0%, 100%": { backgroundPosition: "0% 76%" },
           "50%": { backgroundPosition: "100% 25%" },
         },
+        squares: {
+          from: {
+            transform: "translateY(0) rotate(0deg)",
+            opacity: 1,
+            "border-radius": 0,
+          },
+          to: {
+            transform: "translateY(-1000px) rotate(720deg)",
+            opacity: 0,
+            "border-radius": "50%",
+          },
+        },
+        marquee: {
+          from: { transform: "translateX(120vw)" },
+          to: { transform: "translateX(-120vw)" },
+        },
       },
-      animation: { "main-gradient": "breathing 20s ease infinite" },
+      animation: {
+        squares: "squares 40s linear infinite",
+        "main-gradient": "main-gradient 40s ease infinite",
+        marquee: "marquee 20s linear infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 });
