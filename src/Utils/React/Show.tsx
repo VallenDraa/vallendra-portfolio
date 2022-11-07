@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const Show: FC<IProps> = ({ when, children }) => {
-  return <>{when && children}</>;
+  return <>{when ? children : null}</>;
 };
 
 export default Show;
