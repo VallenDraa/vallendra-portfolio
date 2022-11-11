@@ -1,11 +1,14 @@
 import Hero from "./Hero/Hero";
 import NavbarComponent from "../Navbar/Navbar";
 import Profile from "./Profile/Profile";
-import Projects from "./Projects/Projects";
+import ProjectsSection from "./Projects/ProjectsSection";
 import { IconButton } from "@material-tailwind/react";
 import { VscTriangleUp } from "react-icons/vsc";
+import { useState } from "react";
 
 const MainPage = () => {
+  const [isGoUpBtnActive, setIsGoUpBtnActive] = useState<boolean>(false);
+
   return (
     <main className="min-h-screen flex flex-col">
       <NavbarComponent />
@@ -15,17 +18,19 @@ const MainPage = () => {
       </header>
       <main>
         <Profile />
-        <Projects />
+        <ProjectsSection />
       </main>
       <footer></footer>
 
       {/* back to top button */}
       <IconButton
+        onMouseEnter={() => setIsGoUpBtnActive(true)}
+        onMouseLeave={() => setIsGoUpBtnActive(false)}
         size="lg"
         ripple={false}
         variant="filled"
         color="deep-purple"
-        className="fixed bottom-5 right-10 z-50"
+        className={`fixed bottom-5 z-50 right-10 opacity-30 hover:opacity-100`}
       >
         <a href="#home" className="w-full h-full">
           <VscTriangleUp className="text-xl" />

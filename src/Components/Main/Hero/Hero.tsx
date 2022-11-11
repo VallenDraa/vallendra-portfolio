@@ -50,9 +50,9 @@ const Hero = () => {
             <Line className="scale-y-[6.5] bg-indigo-300/60 absolute left-1/2 -translate-x-1/2 top-[360px] z-20" />
           </div>
         </div>
-
-        {/* bottom fade to profile*/}
       </div>
+
+      {/*  bottom fade to profile*/}
       <div className="h-12 w-full bg-gradient-to-b from-transparent to-gray-900 absolute bottom-0" />
     </>
   );

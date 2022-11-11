@@ -28,3 +28,8 @@ export interface IProject {
   updatedAt?: Date;
   link: string;
 }
+
+export interface IIntersectingProjectHistory {
+  prevId: string | null;
+  currentId: string | null;
+}

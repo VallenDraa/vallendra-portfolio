@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 
 // GENERATING RANDOM SQUARES
 const POPULATION = 15;
@@ -26,7 +26,9 @@ for (let i = 0; i < POPULATION; i++) {
 const FloatingSquares: FC = () => {
   return (
     <ul className="h-full inset-0 margin-0 padding-0 overflow-hidden z-0 absolute w-full">
-      {squares.map((square) => square)}
+      {squares.map((square, i) => (
+        <Fragment key={i}>{square}</Fragment>
+      ))}
     </ul>
   );
 };

@@ -27,6 +27,8 @@ module.exports = withMT({
     },
     extend: {
       backgroundImage: {
+        "radial-fade":
+          "radial-gradient(circle, rgba(33,33,33,0.24) 20%, rgba(33,33,33,0.5) 90%)",
         "main-gradient":
           "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
       },

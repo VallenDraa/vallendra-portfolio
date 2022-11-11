@@ -104,7 +104,7 @@ const NavbarComponent: FC = () => {
           onClick={() => setIsNavOpen(!isNavOpen)}
         >
           <IoChevronDownOutline
-            className={`transition duration-200 text-gray-200 text-xl ${
+            className={`transition duration-200 text-gray-200 text-3xl ${
               isNavOpen ? "rotate-180" : "rotate-0"
             }`}
           />
