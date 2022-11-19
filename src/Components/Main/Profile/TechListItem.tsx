@@ -31,7 +31,7 @@ const TechListItem: FC<IProps> = ({ Icon, text }) => {
             {Icon}
           </Button>
         </PopoverHandler>
-        <PopoverContent className="z-20 px-3 py-1 rounded-md bg-gray-700/50 border-0 text-gray-200 font-semibold">
+        <PopoverContent className="z-20 px-3 py-1 rounded-md bg-gray-700/70 border-0 text-gray-200 font-semibold">
           {text}
         </PopoverContent>
       </Popover>

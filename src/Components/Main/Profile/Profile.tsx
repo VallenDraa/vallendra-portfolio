@@ -19,6 +19,7 @@ import {
   SiC,
 } from "react-icons/si";
 import TechListItem from "./TechListItem";
+import TECHS from "../../MappedComponents/Techs";
 
 const Profile: FC = () => {
   return (
@@ -46,13 +47,13 @@ const Profile: FC = () => {
           </header>
 
           {/* small paragraph and tech stack */}
-          <footer className="mt-9 flex flex-col grow gap-2">
+          <footer className="mt-5 flex flex-col grow gap-5">
             {/* small paragraph about me */}
             <div className="basis-2/3">
               <Typography
                 as="p"
                 variant="paragraph"
-                className="text-gray-300 font-medium leading-loose"
+                className="text-gray-300 font-medium leading-loose pl-0.5"
               >
                 My Name is Jestine Vallendra Dwi Putra, an upcoming Full-Stack
                 Web Developer. I've been pursuing the field since 2021 which has
@@ -74,38 +75,14 @@ const Profile: FC = () => {
                   Languanges / Frameworks That I Use For Projects And College !
                 </Typography>
                 <ul className="flex items-center mt-4 relative gap-1">
-                  <TechListItem
-                    Icon={<SiHtml5 className="text-deep-orange-400 text-5xl" />}
-                    text="HTML 5"
-                  />
-                  <TechListItem
-                    Icon={<SiCss3 className="text-blue-600 text-5xl" />}
-                    text="CSS 3"
-                  />
-                  <TechListItem
-                    Icon={<SiTailwindcss className="text-cyan-400 text-5xl" />}
-                    text="Tailwind CSS"
-                  />
-                  <TechListItem
-                    Icon={<SiJavascript className="text-yellow-600 text-5xl" />}
-                    text="Javascript"
-                  />
-                  <TechListItem
-                    Icon={<SiTypescript className="text-blue-700 text-5xl" />}
-                    text="Typescript"
-                  />
-                  <TechListItem
-                    Icon={<SiReact className="text-light-blue-200 text-5xl" />}
-                    text="React"
-                  />
-                  <TechListItem
-                    Icon={<SiNodedotjs className="text-green-400 text-5xl" />}
-                    text="Node.js"
-                  />
-                  <TechListItem
-                    Icon={<SiC className="text-blue-700 text-5xl" />}
-                    text="C"
-                  />
+                  {TECHS.html}
+                  {TECHS.css}
+                  {TECHS["tailwind css"]}
+                  {TECHS.javascript}
+                  {TECHS.typescript}
+                  {TECHS["node.js"]}
+                  {TECHS.react}
+                  {TECHS.c}
                 </ul>
               </CardBody>
               <CardFooter
@@ -122,7 +99,7 @@ const Profile: FC = () => {
 
         {/* right side */}
         <aside className="flex flex-col gap-10 basis-1/3 mt-6">
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg">
+          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg grow">
             <CardBody>
               <Typography
                 as="h3"
@@ -148,7 +125,7 @@ const Profile: FC = () => {
             </CardFooter>
           </Card>
 
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg">
+          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg grow">
             <CardBody>
               <Typography
                 as="h3"

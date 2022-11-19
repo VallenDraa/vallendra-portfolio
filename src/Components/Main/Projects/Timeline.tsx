@@ -1,13 +1,13 @@
 import projects from "../../../Utils/Misc/ProjectDatas";
-import Project from "./Project";
+import TimelineItem from "./TimelineItem";
 
 const Timeline = () => {
   return (
     <>
       {/* The Line */}
-      <ul className="flex flex-col items-center relative z-40">
-        {projects.map((p) => {
-          return <Project key={p._id} data={p} />;
+      <ul className="flex flex-col items-end relative z-0 max-w-screen-xl mx-auto -top-20">
+        {projects.map((p, i) => {
+          return <TimelineItem key={p._id} data={p} projectIndex={i} />;
         })}
       </ul>
     </>

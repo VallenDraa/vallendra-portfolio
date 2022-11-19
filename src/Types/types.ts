@@ -1,4 +1,5 @@
 export type technologies =
+  | "html"
   | "node.js"
   | "javascript"
   | "react"
@@ -9,6 +10,6 @@ export type technologies =
   | "css"
   | "typescript"
   | "socket.io"
-  | "mongoDB";
+  | "mongodb";
 
 export type categories = "static site" | "dynamic site" | "games";

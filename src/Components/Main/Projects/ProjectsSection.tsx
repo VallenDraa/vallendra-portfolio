@@ -1,5 +1,12 @@
-import { Typography } from "@material-tailwind/react";
-import { FC, useContext, useState, useEffect } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Chip,
+  Typography,
+} from "@material-tailwind/react";
+import { FC, useContext, useState, useEffect, Fragment } from "react";
 import Line from "../../Line/Line";
 import { FaQuoteLeft } from "react-icons/fa";
 import Timeline from "./Timeline";
@@ -7,13 +14,15 @@ import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
 } from "../../../Context/IntersectingProjectCP";
 import projects from "../../../Utils/Misc/ProjectDatas";
-import Show from "../../../Utils/React/Show";
+import { IoCodeSlash, IoShare } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import TECHS from "../../MappedComponents/Techs";
 
 const ProjectsSection: FC = () => {
   const { history } = useContext(
     IntersectingProjectContext
   ) as IIntersectingProjectHistoryProvider;
-  const [activeProjectIdx, setActiveProjectIdx] = useState<number | null>(null);
+  const [activeProjectIdx, setActiveProjectIdx] = useState<number>(0);
 
   useEffect(() => {
     setActiveProjectIdx(projects.findIndex((p) => p._id === history.currentId));
@@ -63,7 +72,7 @@ const ProjectsSection: FC = () => {
           <Typography
             as="h2"
             variant="h2"
-            className="animate-breathing bg-gradient w-max text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 capitalize"
+            className="animate-breathing bg-gradient w-max text-6xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
           >
             Projects
           </Typography>
@@ -74,30 +83,119 @@ const ProjectsSection: FC = () => {
         <footer
           className="relative py-20"
           style={{
-            backgroundImage: `url(${
-              activeProjectIdx != null && projects[activeProjectIdx]?.image
-            })`,
+            backgroundImage: `url(${projects[activeProjectIdx]?.image})`,
             backgroundRepeat: "no-repeat",
             backgroundAttachment: "fixed",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         >
-          <div className="sticky bg-black z-10">
-            {activeProjectIdx != null
-              ? projects[activeProjectIdx]?.description
-              : null}
+          <div className="max-w-screen-xl mx-auto">
+            {/* for applying filter to the background image */}
+            <div className="fixed top-0 inset-x-0 h-screen backdrop-saturate-0 bg-radial-fade" />
+
+            {/* the short  project name description  */}
+            <article className="sticky top-1/2 -translate-y-1/2 mr-20 flex flex-col gap-5 z-10">
+              {/* name, categories, and short description*/}
+              <div className="bg-gray-900/60 backdrop-blur rounded-xl p-5 space-y-8 shadow-md shadow-gray-900/60">
+                <div className="flex flex-col gap-3">
+                  <h3 className="py-3 animate-breathing bg-gradient text-5xl h-fit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-light-blue-400 to-blue-500 capitalize">
+                    {projects[activeProjectIdx]?.name}
+                  </h3>
+
+                  {/* Categories*/}
+                  <div className="flex flex-wrap gap-2">
+                    {projects[activeProjectIdx]?.categories.map((cat) => {
+                      return (
+                        <Chip
+                          key={cat}
+                          className="text-[0.675rem] py-1 px-3 rounded-full bg-gray-600/70 font-semibold"
+                          value={cat}
+                          variant="filled"
+                          animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* project short description */}
+                <Typography
+                  as="p"
+                  variant="paragraph"
+                  className="text-gray-400 font-medium"
+                >
+                  {projects[activeProjectIdx]?.description || ""}
+                </Typography>
+              </div>
+
+              <Card className="bg-gray-900/60 backdrop-blur shadow-md shadow-gray-900/60">
+                <CardBody>
+                  {/* Tech Stack */}
+                  <Typography
+                    as="h4"
+                    variant="h4"
+                    className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
+                  >
+                    <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
+                    Tech Stack
+                  </Typography>
+                  <Typography as="p" className="text-gray-400 font-medium">
+                    These Are the {projects[activeProjectIdx]?.tech.length}
+                    Technologies That Were Used For This Project :
+                  </Typography>
+                  <ul className="flex items-center mt-4 relative gap-1">
+                    {projects[activeProjectIdx]?.tech.map(
+                      (tech: string, i): JSX.Element => (
+                        <Fragment key={i}>{TECHS[tech]}</Fragment>
+                      )
+                    )}
+                  </ul>
+                </CardBody>
+                <CardFooter
+                  divider
+                  className="py-3 border-gray-600 text-gray-500"
+                >
+                  {/* button group */}
+                  <div>
+                    <nav className="flex justify-end gap-2">
+                      <Button
+                        size="md"
+                        variant="text"
+                        className="rounded-full p-0"
+                      >
+                        <Link
+                          className="inline-block h-full w-full py-3 px-6"
+                          to={"/"}
+                        >
+                          Detail
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="filled"
+                        size="md"
+                        className="group hidden lg:flex items-center relative w-max rounded-full p-0"
+                      >
+                        <a
+                          target="__blank"
+                          href={projects[activeProjectIdx]?.link}
+                          className="h-full duration-200 text-center relative w-max inline-block py-3 px-6"
+                        >
+                          Visit Site
+                        </a>
+                      </Button>
+                    </nav>
+                  </div>
+                </CardFooter>
+              </Card>
+            </article>
+            {/*  top fade to timeline */}
+            <div className="h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0 inset-x-0" />
+            <Timeline />
+
+            {/* bottom fade to footer */}
+            <div className="h-20 bg-gradient-to-b from-transparent to-gray-900 absolute botom-0 inset-x-0" />
           </div>
-
-          {/* for applying filter to the background image */}
-          <div className="fixed top-0 inset-x-0 h-screen backdrop-saturate-0 bg-radial-fade" />
-
-          {/*  top fade to timeline */}
-          <div className="h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0 inset-x-0" />
-          <Timeline />
-
-          {/* bottom fade to footer */}
-          <div className="h-20 bg-gradient-to-b from-transparent to-gray-900  absolute botom-0 inset-x-0" />
         </footer>
       </div>
     </section>

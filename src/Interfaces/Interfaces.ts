@@ -1,5 +1,3 @@
-import { technologies, categories } from "../Types/types";
-
 export interface IUser {
   _id: string;
   username: string;
@@ -21,8 +19,8 @@ export interface IProject {
   description: string;
   rating: number | null;
   image: string;
-  tech: technologies[];
-  categories: categories[];
+  tech: string[];
+  categories: string[];
   comments: IComment[];
   createdAt: Date;
   updatedAt?: Date;

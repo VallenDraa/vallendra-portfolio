@@ -5,9 +5,9 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { FC, Key, ReactElement, useEffect, useState, useRef } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { IoCall, IoChevronDownOutline } from "react-icons/io5";
-import MENUS from "../../Utils/Misc/MenuDatas";
+import NavList from "./Navlist";
 
 const NavbarComponent: FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -40,30 +40,6 @@ const NavbarComponent: FC = () => {
 
     return () => window.removeEventListener("click", closeNavOnOutsideClick);
   });
-
-  const NavList: FC = () => (
-    <ul className="mb-4 mt-2 flex flex-col gap-1 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-      {MENUS.map((menu: string): ReactElement => {
-        return (
-          <Typography key={menu as Key} as="li" variant="paragraph">
-            <Button
-              color="indigo"
-              variant="text"
-              fullWidth
-              className="p-0 text-base font-semibold text-gray-300 hover:text-white transition duration-200"
-            >
-              <a
-                href={`#${menu}`}
-                className="flex items-center capitalize py-2 px-3"
-              >
-                {menu}
-              </a>
-            </Button>
-          </Typography>
-        );
-      })}
-    </ul>
-  );
 
   return (
     <Navbar
