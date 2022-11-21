@@ -24,7 +24,8 @@ export interface IProject {
   comments: IComment[];
   createdAt: Date;
   updatedAt?: Date;
-  link: string;
+  siteLink: string;
+  gitLink: string;
 }
 
 export interface IIntersectingProjectHistory {

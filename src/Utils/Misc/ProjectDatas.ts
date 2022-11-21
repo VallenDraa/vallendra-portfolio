@@ -16,13 +16,14 @@ const projects: IProject[] = [
     categories: ["dynamic site"],
     comments: [],
     createdAt: new Date("Mar 2 2022"),
-    link: "https://ultimawidget.herokuapp.com/",
+    siteLink: "https://ultimawidget.herokuapp.com/",
+    gitLink: "https://github.com/VallenDraa/ultima_widget",
   },
   {
     _id: "2",
     name: "Triquest",
     description:
-      "A quiz game website built using EJS and Node.js. This site was built for training my capabilty of using external API (OpenTDB) and integrating it with my own personalized backend.",
+      "A quiz game web app built using EJS and Node.js. This site was built for training my capabilty of using external API (OpenTDB) and integrating it with my own personalized backend.",
     rating: null,
     image: triquest,
     tech: [
@@ -37,7 +38,8 @@ const projects: IProject[] = [
     categories: ["dynamic site", "games", "crud"],
     comments: [],
     createdAt: new Date("Mar 23, 2022"),
-    link: "https://triquest.herokuapp.com/",
+    siteLink: "https://triquest.herokuapp.com/",
+    gitLink: "https://github.com/VallenDraa/triquest",
   },
   {
     _id: "3",
@@ -58,7 +60,8 @@ const projects: IProject[] = [
     categories: ["dynamic site", "crud"],
     comments: [],
     createdAt: new Date("May 7, 2022"),
-    link: "https://cas-era.herokuapp.com/",
+    siteLink: "https://cas-era.herokuapp.com/",
+    gitLink: "https://github.com/VallenDraa/casera",
   },
   {
     _id: "4",
@@ -80,7 +83,8 @@ const projects: IProject[] = [
     categories: ["dynamic site", "real time", "crud", "Web Socket"],
     comments: [],
     createdAt: new Date("Oct 17, 2022"),
-    link: "https://kon-nect.herokuapp.com/",
+    siteLink: "https://kon-nect.herokuapp.com/",
+    gitLink: "https://github.com/VallenDraa/konnect",
   },
 ];
 

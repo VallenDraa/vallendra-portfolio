@@ -110,8 +110,7 @@ const Profile: FC = () => {
                 EDUCATION
               </Typography>
               <Typography as="p" className="text-gray-400 font-medium">
-                A Passionate First Year Computer Science Undergraduate Student
-                at
+                A First Year Computer Science Major at
                 <strong className="text-gray-300">
                   {" "}
                   UIN Syarif Hidayatullah Jakarta.

@@ -32,7 +32,7 @@ const ProjectsSection: FC = () => {
     <section
       aria-label="projects-section"
       id="projects"
-      className=" bg-gray-900 relative py-32"
+      className=" bg-gray-900 relative pt-32"
     >
       {/* transition from profile to projects */}
       <Line className="scale-y-[3] bg-gradient-to-b from-cyan-300/50 to-green-300/50 absolute left-[764px] top-3 z-30" />
@@ -65,7 +65,7 @@ const ProjectsSection: FC = () => {
 
       {/* main timeline */}
       <div className=" mx-auto relative">
-        <Line className="scale-y-[2] bg-white/30 absolute left-1/2 top-16 z-20" />
+        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/50 to-green-300/50 absolute left-1/2 top-16 z-20" />
 
         {/* section Title */}
         <header className="relative z-10 pt-40 flex flex-col items-center">
@@ -95,103 +95,109 @@ const ProjectsSection: FC = () => {
             <div className="fixed top-0 inset-x-0 h-screen backdrop-saturate-0 bg-radial-fade" />
 
             {/* the short  project name description  */}
-            <article className="sticky top-1/2 -translate-y-1/2 mr-20 flex flex-col gap-5 z-10">
-              {/* name, categories, and short description*/}
-              <div className="bg-gray-900/60 backdrop-blur rounded-xl p-5 space-y-8 shadow-md shadow-gray-900/60">
-                <div className="flex flex-col gap-3">
-                  <h3 className="py-3 animate-breathing bg-gradient text-5xl h-fit font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-light-blue-400 to-blue-500 capitalize">
-                    {projects[activeProjectIdx]?.name}
-                  </h3>
+            <div className="flex gap-8 my-16">
+              <article className="sticky top-28 flex flex-col gap-5 z-10 h-max">
+                {/* name, categories, and short description*/}
+                <div className="bg-gray-900/60 backdrop-blur rounded-xl p-5 space-y-8 shadow-md shadow-gray-900/60">
+                  <div className="flex flex-col gap-3">
+                    <h3 className="py-3 text-5xl h-fit font-bold animate-breathing bg-gradient text-transparent bg-clip-text bg-gradient-to-r from-light-blue-400 to-blue-500 capitalize">
+                      {projects[activeProjectIdx]?.name}
+                    </h3>
 
-                  {/* Categories*/}
-                  <div className="flex flex-wrap gap-2">
-                    {projects[activeProjectIdx]?.categories.map((cat) => {
-                      return (
-                        <Chip
-                          key={cat}
-                          className="text-[0.675rem] py-1 px-3 rounded-full bg-gray-600/70 font-semibold"
-                          value={cat}
-                          variant="filled"
-                          animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
-                        />
-                      );
-                    })}
+                    {/* Categories*/}
+                    <div className="flex flex-wrap gap-2">
+                      {projects[activeProjectIdx]?.categories.map((cat) => {
+                        return (
+                          <Chip
+                            key={cat}
+                            className="text-[0.675rem] py-1 px-3 rounded-full bg-gray-600/70 font-semibold"
+                            value={cat}
+                            variant="filled"
+                            animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
+
+                  {/* project short description */}
+                  <Typography
+                    as="p"
+                    variant="paragraph"
+                    className="text-gray-300 font-medium"
+                  >
+                    {projects[activeProjectIdx]?.description || ""}
+                  </Typography>
                 </div>
 
-                {/* project short description */}
-                <Typography
-                  as="p"
-                  variant="paragraph"
-                  className="text-gray-400 font-medium"
-                >
-                  {projects[activeProjectIdx]?.description || ""}
-                </Typography>
-              </div>
-
-              <Card className="bg-gray-900/60 backdrop-blur shadow-md shadow-gray-900/60">
-                <CardBody>
-                  {/* Tech Stack */}
-                  <Typography
-                    as="h4"
-                    variant="h4"
-                    className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
+                <Card className="bg-gray-900/60 backdrop-blur shadow-md shadow-gray-900/60">
+                  <CardBody>
+                    {/* Tech Stack */}
+                    <Typography
+                      as="h4"
+                      variant="h4"
+                      className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
+                    >
+                      <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
+                      Tech Stack
+                    </Typography>
+                    <Typography
+                      as="p"
+                      className="text-gray-400 font-medium mb-6 mt-2"
+                    >
+                      These Are the {projects[activeProjectIdx]?.tech.length}{" "}
+                      Technologies That Were Used For This Project :
+                    </Typography>
+                    <ul className="flex items-center mt-4 relative gap-1">
+                      {projects[activeProjectIdx]?.tech.map(
+                        (tech: string, i): JSX.Element => (
+                          <Fragment key={i}>{TECHS[tech]}</Fragment>
+                        )
+                      )}
+                    </ul>
+                  </CardBody>
+                  <CardFooter
+                    divider
+                    className="py-3 border-gray-600 text-gray-500"
                   >
-                    <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
-                    Tech Stack
-                  </Typography>
-                  <Typography as="p" className="text-gray-400 font-medium">
-                    These Are the {projects[activeProjectIdx]?.tech.length}
-                    Technologies That Were Used For This Project :
-                  </Typography>
-                  <ul className="flex items-center mt-4 relative gap-1">
-                    {projects[activeProjectIdx]?.tech.map(
-                      (tech: string, i): JSX.Element => (
-                        <Fragment key={i}>{TECHS[tech]}</Fragment>
-                      )
-                    )}
-                  </ul>
-                </CardBody>
-                <CardFooter
-                  divider
-                  className="py-3 border-gray-600 text-gray-500"
-                >
-                  {/* button group */}
-                  <div>
-                    <nav className="flex justify-end gap-2">
-                      <Button
-                        size="md"
-                        variant="text"
-                        className="rounded-full p-0"
-                      >
-                        <Link
-                          className="inline-block h-full w-full py-3 px-6"
-                          to={"/"}
+                    {/* button group */}
+                    <div>
+                      <nav className="flex justify-end gap-2">
+                        <Button
+                          size="md"
+                          variant="text"
+                          className="rounded-full p-0"
                         >
-                          Detail
-                        </Link>
-                      </Button>
-                      <Button
-                        variant="filled"
-                        size="md"
-                        className="group hidden lg:flex items-center relative w-max rounded-full p-0"
-                      >
-                        <a
-                          target="__blank"
-                          href={projects[activeProjectIdx]?.link}
-                          className="h-full duration-200 text-center relative w-max inline-block py-3 px-6"
+                          <Link
+                            className="inline-block h-full w-full py-3 px-7"
+                            to={"/"}
+                          >
+                            Detail
+                          </Link>
+                        </Button>
+                        <Button
+                          variant="filled"
+                          size="md"
+                          className="group hidden lg:flex items-center relative w-max rounded-full p-0"
                         >
-                          Visit Site
-                        </a>
-                      </Button>
-                    </nav>
-                  </div>
-                </CardFooter>
-              </Card>
-            </article>
+                          <a
+                            target="__blank"
+                            href={projects[activeProjectIdx]?.siteLink}
+                            className="h-full duration-200 text-center relative w-max inline-block py-3 px-7"
+                          >
+                            Visit Site
+                          </a>
+                        </Button>
+                      </nav>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </article>
+              <Timeline />
+            </div>
+
             {/*  top fade to timeline */}
             <div className="h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0 inset-x-0" />
-            <Timeline />
 
             {/* bottom fade to footer */}
             <div className="h-20 bg-gradient-to-b from-transparent to-gray-900 absolute botom-0 inset-x-0" />

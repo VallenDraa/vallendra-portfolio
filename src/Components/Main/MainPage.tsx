@@ -5,6 +5,7 @@ import ProjectsSection from "./Projects/ProjectsSection";
 import { IconButton } from "@material-tailwind/react";
 import { VscTriangleUp } from "react-icons/vsc";
 import { useState } from "react";
+import Redirect from "./Redirect/Redirect";
 
 const MainPage = () => {
   const [isGoUpBtnActive, setIsGoUpBtnActive] = useState<boolean>(false);
@@ -19,6 +20,7 @@ const MainPage = () => {
       <main>
         <Profile />
         <ProjectsSection />
+        <Redirect />
       </main>
       <footer></footer>
 
