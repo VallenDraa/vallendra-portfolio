@@ -1,23 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2015"],
-    "allowJs": false,
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "alwaysStrict": true,
+    "strictFunctionTypes": true,
     "strictNullChecks": true,
+    "alwaysStrict": true,
+    "strictPropertyInitialization": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "ES2015",
-    "moduleResolution": "Node",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

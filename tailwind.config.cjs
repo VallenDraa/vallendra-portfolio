@@ -2,7 +2,7 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
-  content: ["./index.html", "./src/**/*.tsx"],
+  content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   theme: {
     fontFamily: {
       sans: ["Segoe UI", "sans-serif"],
