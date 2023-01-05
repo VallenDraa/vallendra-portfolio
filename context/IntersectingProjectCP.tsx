@@ -12,11 +12,7 @@ const IntersectingProjectContext =
     setHistory: () => history,
   });
 
-export const IntersectingProjectCP = ({
-  children,
-}: {
-  children: JSX.Element;
-}) => {
+export function IntersectingProjectCP({ children }: { children: JSX.Element }) {
   const [history, setHistory] = useState<IIntersectingProjectHistory>({
     prevId: null,
     currentId: null,
@@ -27,6 +23,6 @@ export const IntersectingProjectCP = ({
       {children}
     </IntersectingProjectContext.Provider>
   );
-};
+}
 
 export default IntersectingProjectContext;

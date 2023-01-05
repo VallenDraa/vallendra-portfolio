@@ -13,19 +13,10 @@ interface IProps {
   offset?: number;
 }
 
-export default function Dropdown({ Handler, menuItems, offset }: IProps) {
+export default function NavbarSubMenu({ Handler, menuItems, offset }: IProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   // auto closing the dropdown when the screen resizes
-  useEffect(() => {
-    window.addEventListener("resize", () => isVisible && setIsVisible(false));
-
-    return () =>
-      window.removeEventListener(
-        "resize",
-        () => isVisible && setIsVisible(false)
-      );
-  }, []);
 
   return (
     <Menu
@@ -40,7 +31,7 @@ export default function Dropdown({ Handler, menuItems, offset }: IProps) {
           color="indigo"
           variant="text"
           fullWidth
-          className="p-0 text-base font-semibold text-gray-300 hover:text-white transition duration-200"
+          className="p-0 text-base font-semibold text-white/70 hover:text-white transition duration-200"
         >
           {Handler}
         </Button>
@@ -50,8 +41,7 @@ export default function Dropdown({ Handler, menuItems, offset }: IProps) {
         {menuItems.map((menuItem: JSX.Element, i) => {
           return (
             <MenuItem
-              onClick={() => setIsVisible(false)}
-              className="p-0 hover:bg-gray-700/50 active:bg-gray-700/70 text-gray-300 hover:text-white active:text-gray-100"
+              className="p-0 hover:bg-gray-700/50 active:bg-gray-700/70 text-white/70 hover:text-white active:text-gray-100"
               key={i}
             >
               {menuItem}
