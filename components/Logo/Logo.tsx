@@ -1,5 +1,6 @@
 import { FC } from "react";
 import vallen from "../../images/vallen.png";
+import Image from "next/image";
 
 const Logo: FC = () => {
   return (
@@ -30,6 +31,7 @@ const Logo: FC = () => {
       </svg>
       <Image
         src={vallen}
+        alt="Jestine Vallendra Dwi Putra"
         className="absolute top-[10px] left-[20px] scale-[1.9]"
       />
     </div>

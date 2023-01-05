@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 
 interface IProps {
   when: boolean;
-  children: ReactElement;
+  children: ReactElement[] | ReactElement;
 }
 
 const Show: FC<IProps> = ({ when, children }) => {

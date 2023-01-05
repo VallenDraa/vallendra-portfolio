@@ -10,66 +10,69 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
-import TechListItem from "../Main/Profile/TechListItem";
+import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
 
-const TECHS: { [key: string]: JSX.Element } = {
+const TECHS: { [key: string]: React.ReactElement } = {
   html: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiHtml5 className="text-deep-orange-400 text-5xl" />}
       text="HTML 5"
     />
   ),
   css: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiCss3 className="text-blue-600 text-5xl" />}
       text="CSS 3"
     />
   ),
   "tailwind css": (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiTailwindcss className="text-cyan-400 text-5xl" />}
       text="Tailwind CSS"
     />
   ),
   javascript: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiJavascript className="text-yellow-600 text-5xl" />}
       text="Javascript"
     />
   ),
   typescript: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiTypescript className="text-blue-700 text-5xl" />}
       text="Typescript"
     />
   ),
   react: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiReact className="text-light-blue-200 text-5xl" />}
       text="React"
     />
   ),
 
   "node.js": (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiNodedotjs className="text-green-400 text-5xl" />}
       text="Node.js"
     />
   ),
   mongodb: (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiMongodb className="text-green-600 text-5xl" />}
       text="MongoDB"
     />
   ),
   "socket.io": (
-    <TechListItem
+    <IconWithTooltip
       Icon={<SiSocketdotio className="text-white text-5xl" />}
       text="Socket.IO"
     />
   ),
   c: (
-    <TechListItem Icon={<SiC className="text-blue-700 text-5xl" />} text="C" />
+    <IconWithTooltip
+      Icon={<SiC className="text-blue-700 text-5xl" />}
+      text="C"
+    />
   ),
 };
 

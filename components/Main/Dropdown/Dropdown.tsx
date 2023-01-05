@@ -10,9 +10,10 @@ import {
 interface IProps {
   Handler: JSX.Element;
   menuItems: JSX.Element[];
+  offset?: number;
 }
 
-const Dropdown: FC<IProps> = ({ Handler, menuItems }) => {
+export default function Dropdown({ Handler, menuItems, offset }: IProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   // auto closing the dropdown when the screen resizes
@@ -31,10 +32,8 @@ const Dropdown: FC<IProps> = ({ Handler, menuItems }) => {
       open={isVisible}
       handler={() => setIsVisible((prev: boolean) => !prev)}
       animate={{ mount: { y: 0 }, unmount: { y: 15 } }}
-      dismiss={{
-        outsidePointerDown: true,
-      }}
-      offset={10}
+      dismiss={{ outsidePointerDown: true }}
+      offset={offset}
     >
       <MenuHandler>
         <Button
@@ -46,10 +45,12 @@ const Dropdown: FC<IProps> = ({ Handler, menuItems }) => {
           {Handler}
         </Button>
       </MenuHandler>
+
       <MenuList className="bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] shadow border-0">
         {menuItems.map((menuItem: JSX.Element, i) => {
           return (
             <MenuItem
+              onClick={() => setIsVisible(false)}
               className="p-0 hover:bg-gray-700/50 active:bg-gray-700/70 text-gray-300 hover:text-white active:text-gray-100"
               key={i}
             >
@@ -60,6 +61,4 @@ const Dropdown: FC<IProps> = ({ Handler, menuItems }) => {
       </MenuList>
     </Menu>
   );
-};
-
-export default Dropdown;
+}

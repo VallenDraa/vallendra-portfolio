@@ -11,7 +11,7 @@ interface IProps {
   projectIndex: number;
 }
 
-const TimelineItem: FC<IProps> = ({ data, projectIndex }) => {
+export default function TimelineItem({ data, projectIndex }: IProps) {
   const projectRef = useRef<HTMLLIElement>(null);
   const entry = useIntersectionObserver(projectRef, {});
   const { setHistory } = useContext(
@@ -41,11 +41,9 @@ const TimelineItem: FC<IProps> = ({ data, projectIndex }) => {
       />
 
       {/* the moving date */}
-      <div className=" capitalize bg-teal-400/90 text-gray-200 shadow font-bold text-2xl tracking-wider sticky top-1/2 -translate-y-1/2 z-20 rounded-full px-5 py-3">
-        {projectIndex + 1}
+      <div className="opacity-0 lg:opacity-100 capitalize bg-teal-400/90 text-gray-200 shadow font-bold text-2xl tracking-wider sticky top-1/2 -translate-y-1/2 z-20 rounded-full px-5 py-3">
+        {projectIndex}
       </div>
     </li>
   );
-};
-
-export default TimelineItem;
+}
