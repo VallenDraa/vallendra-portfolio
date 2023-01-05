@@ -5,7 +5,7 @@ const projects: IProject[] = [
     _id: "1",
     name: "Konnect",
     description:
-      "A chat web app built using React and Node.js. Web Socket technology was used in this project, enabling fast and instant two way communication from client to the server.",
+      "A chat web app built using React and Node.js. Web Socket technology was used in this project, enabling fast instant two way communication from client to the server.",
     rating: null,
     image: "/images/projects/konnect.png",
     tech: [

@@ -18,6 +18,10 @@ module.exports = withMT({
           "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
       },
       keyframes: {
+        "fade-in": {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
         shake: {
           "0%": {
             transform: "rotateX(-20deg)",
@@ -67,6 +71,7 @@ module.exports = withMT({
         },
       },
       animation: {
+        "fade-in": "fade-in 350ms ease-in",
         shake: "shake 100ms ease-in-out",
         "open-nav": "open-nav 350ms ease-in",
         "close-nav": "close-nav 350ms ease-in",

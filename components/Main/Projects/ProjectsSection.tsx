@@ -8,6 +8,7 @@ import IntersectingProjectContext, {
 import projects from "../../../utils/misc/ProjectDatas";
 import Quote from "./Quote";
 import ProjectInfoDashboard from "./ProjectInfoDashboard";
+import Image from "next/image";
 
 const ProjectsSection: FC = () => {
   const { history } = useContext(
@@ -28,8 +29,8 @@ const ProjectsSection: FC = () => {
       <Quote />
 
       {/* main timeline */}
-      <div className="mx-auto relative">
-        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/50 to-green-300/50 absolute left-1/2 top-16 z-20" />
+      <div className="mx-auto relative ">
+        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/40 to-green-300/40 absolute left-1/2 top-16 z-20" />
 
         {/* section Title */}
         <header className="relative z-10 pt-40 flex flex-col items-center">
@@ -44,20 +45,19 @@ const ProjectsSection: FC = () => {
         </header>
 
         {/* main content */}
-        <footer
-          className="relative py-20"
-          style={{
-            backgroundImage: `url(${projects[activeProjectIdx]?.image})`,
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        >
+        <footer className="relative py-20">
+          <div className="sticky top-0">
+            <div className="absolute inset-x-0 h-screen">
+              <Image
+                className="object-cover sticky top-0 min-w-full min-h-full z-0 opacity-30"
+                width={816}
+                height={459}
+                src={projects[activeProjectIdx]?.image || projects[0]?.image}
+                alt={projects[activeProjectIdx]?.name || projects[0]?.name}
+              />
+            </div>
+          </div>
           <div className="max-w-screen-2xl px-8 mx-auto">
-            {/* for applying filter to the background image */}
-            <div className="fixed top-0 inset-x-0 h-screen backdrop-saturate-0 bg-radial-fade" />
-
             {/* the short project name description  */}
             <div className="flex gap-8 my-16 relative min-h-[4070px]">
               <ProjectInfoDashboard
@@ -67,15 +67,15 @@ const ProjectsSection: FC = () => {
             </div>
 
             {/* top fade to timeline */}
-            <div className="h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-0 inset-x-0" />
+            <div className="h-20 bg-gradient-to-b from-gray-900 to-transparent absolute top-20 inset-x-0 z-20" />
 
             {/* bottom fade to footer */}
-            <div className="h-20 bg-gradient-to-b from-transparent to-gray-900 absolute botom-0 inset-x-0" />
+            <div className="h-20 bg-gradient-to-b from-transparent to-gray-900 absolute -bottom-10 inset-x-0" />
           </div>
         </footer>
       </div>
 
-      <Line className="scale-y-[6] relative bottom-5 left-1/2 -translate-x-1/2 bg-white/90 z-50" />
+      <Line className="scale-y-[6] relative bottom-5 left-1/2 -translate-x-1/2 bg-white/40 z-30" />
     </section>
   );
 };

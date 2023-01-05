@@ -70,10 +70,10 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       {/* the nav list */}
       <ul
         ref={navListRef}
-        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static bg-gray-900 lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none"
+        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static bg-gray-900 lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none lg:animate-fade-in"
       >
         {/* close button for small screen nav */}
-        <li className="flex justify-between items-center p-3 relative lg:hidden">
+        <li className="flex justify-between items-center py-3 px-5 lg:px-3 relative lg:hidden">
           <Typography
             as="span"
             variant="paragraph"
@@ -106,7 +106,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                   >
                     <a
                       href={`#${menu}`}
-                      className="flex items-center capitalize py-2 px-3"
+                      className="flex items-center capitalize py-2 px-5 lg:px-3"
                     >
                       {menu}
                     </a>
@@ -119,7 +119,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                   <NavbarSubMenu
                     offset={14}
                     Handler={
-                      <a className="flex items-center capitalize py-2 px-3">
+                      <a className="flex items-center capitalize py-2 px-5 lg:px-3">
                         {menu}
                       </a>
                     }
@@ -148,7 +148,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       variant="text"
                       fullWidth
                       onClick={() => handleOpenAccordion(1)}
-                      className="flex justify-between items-center capitalize py-2 px-3 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none lg:rounded-lg"
+                      className="flex justify-between items-center capitalize py-2 px-5 lg:px-3 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none lg:rounded-lg"
                     >
                       {menu}
                       <IoChevronDown
@@ -166,7 +166,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       >
                         <a
                           href="#projects"
-                          className="flex items-center capitalize py-2 px-5"
+                          className="flex items-center capitalize py-2 px-7"
                         >
                           Top Picks
                         </a>
@@ -179,7 +179,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       >
                         <a
                           href="#projects"
-                          className="flex items-center capitalize py-2 px-5"
+                          className="flex items-center capitalize py-2 px-7"
                         >
                           All Collections
                         </a>

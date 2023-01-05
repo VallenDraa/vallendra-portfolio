@@ -24,6 +24,8 @@ export default function NavbarComponent() {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log(navIsOpened);
+
     if (navIsOpened && window.innerWidth < 960) {
       overlayRef.current?.classList.add("animate-open-overlay");
       navListRef.current?.classList.add("animate-open-nav");
@@ -41,11 +43,13 @@ export default function NavbarComponent() {
   /* open navigation according to screen size
   ============================================= */
   useEffect(() => {
-    const changeNav = () => setNavIsOpened(window.innerWidth > 960);
+    const navHandler = () => setNavIsOpened(window.innerWidth > 960);
 
-    window.addEventListener("resize", changeNav);
+    navHandler();
 
-    return () => window.removeEventListener("resize", changeNav);
+    window.addEventListener("resize", navHandler);
+
+    return () => window.removeEventListener("resize", navHandler);
   }, []);
 
   /* for closing the navbar when the user touches things outside of the navbar component

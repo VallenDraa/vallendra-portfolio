@@ -6,14 +6,14 @@ export interface INavIsOpened {
 }
 
 export const navInitialState = {
-  navIsOpened: true,
+  navIsOpened: false,
   setNavIsOpened() {},
 };
 
 const NavIsOpenedContext = createContext<INavIsOpened | null>(navInitialState);
 
 export function NavIsOpenedCP({ children }: { children: JSX.Element }) {
-  const [navIsOpened, setNavIsOpened] = useState(true);
+  const [navIsOpened, setNavIsOpened] = useState(false);
 
   return (
     <NavIsOpenedContext.Provider value={{ navIsOpened, setNavIsOpened }}>

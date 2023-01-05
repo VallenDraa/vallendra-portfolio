@@ -19,26 +19,29 @@ export default function Profile() {
       {/* main content */}
       <div className="max-w-screen-2xl px-8 mx-auto pt-16 relative flex flex-col xl:flex-row gap-10">
         {/* left side */}
-        <div className="xl:basis-2/3 mt-4 flex flex-col">
+        <div className="xl:basis-2/3 mt-4 flex flex-col relative">
+          {/* blur */}
+          <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-6 rotate-12 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/4 -translate-x-1/4 top-1/4 -translate-y-1/4 md:top-1/2 md:-translate-y-1/2"></div>
+
           <header className="relative">
             <Typography
               as="h2"
               variant="h2"
-              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-center md:text-start text-5xl md:text-6xl font-bold text-transparent bg-clip-text capitalize"
+              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text capitalize relative z-40"
             >
               Hello World !
             </Typography>
-            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[8] md:scale-y-[5] left-1/2 -translate-x-1/2 md:-translate-x-0 md:left-[103px] -bottom-6 absolute" />
+            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[5] -translate-x-0 left-[103px] -bottom-6 absolute" />
           </header>
 
           {/* small paragraph and tech stack */}
-          <footer className="mt-5 flex flex-col grow gap-5">
+          <footer className="mt-5 flex flex-col grow gap-5 relative z-40">
             {/* small paragraph about me */}
             <div className="xl:basis-2/3 mb-8 xl:mb-0">
               <Typography
                 as="p"
                 variant="paragraph"
-                className="text-gray-300 font-medium leading-loose pl-0.5 text-justify"
+                className="text-white/80 font-medium leading-loose pl-0.5 text-justify"
               >
                 My name is Jestine Vallendra Dwi Putra, a Front-End Developer.
                 With a year of experience in the field, I have gained a strong
@@ -53,7 +56,7 @@ export default function Profile() {
                 <Typography
                   as="h3"
                   variant="h3"
-                  className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
+                  className="text-2xl md:text-3xl uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
                 >
                   <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
                   Technologies
@@ -138,7 +141,7 @@ export default function Profile() {
         </aside>
 
         {/* transition from profile to projects */}
-        <Line className="scale-y-[4] bg-gradient-to-b from-cyan-300/50 to-green-300/50 absolute left-1/2 -translate-x-1/2 bottom-[-145px] z-30" />
+        <Line className="scale-y-[4] bg-gradient-to-b from-cyan-300/40 to-green-300/40 absolute left-1/2 -translate-x-1/2 bottom-[-145px] z-30" />
       </div>
     </section>
   );

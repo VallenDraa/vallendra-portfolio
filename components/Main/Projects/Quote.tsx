@@ -22,8 +22,8 @@ export default function Quotes() {
       </Typography>
 
       {/* background and shadow for the quote */}
-      <div className="animate-breathing bg-gradient bg-gradient-to-r from-cyan-400 to-green-400/90 rounded-xl absolute top-0 -bottom-3 left-16 right-12 transform -skew-x-12" />
-      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/60 rounded-xl absolute inset-y-0 left-16 right-14 transform -skew-x-12 z-10" />
+      <div className="animate-breathing bg-gradient bg-gradient-to-r from-cyan-400 to-green-400/90 rounded-xl absolute top-0 -bottom-3 left-12 right-10 transform -skew-x-12" />
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/60 rounded-xl absolute inset-y-0 left-12 right-12 transform -skew-x-12 z-10" />
     </div>
   );
 }

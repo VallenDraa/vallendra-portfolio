@@ -59,7 +59,7 @@ export default function Hero() {
             {/* Line to next section */}
           </div>
         </div>
-        <Line className="scale-y-[3] xl:scale-y-[6] bg-white/70 absolute left-1/2 -translate-x-1/2 bottom-[-100px] xl:bottom-[-50px] z-20" />
+        <Line className="scale-y-[3] xl:scale-y-[6] bg-white/40 absolute left-1/2 -translate-x-1/2 bottom-[-100px] xl:bottom-[-50px] z-20" />
       </section>
 
       {/* bottom fade to profile*/}
