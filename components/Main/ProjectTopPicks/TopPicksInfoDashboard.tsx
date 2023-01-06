@@ -105,30 +105,28 @@ export default function TopPicksInfoDashboard({
           </ul>
         </div>
       </CardBody>
-      <CardFooter divider className="py-3 border-gray-600 text-gray-500">
-        {/* button group */}
-        <div>
-          <nav className="flex justify-end gap-2">
-            <Button size="md" variant="text" className="rounded-full p-0">
-              <Link className="inline-block h-full w-full py-3 px-7" href={"/"}>
-                Detail
-              </Link>
-            </Button>
-            <Button
-              variant="filled"
-              size="md"
-              className="group flex items-center relative w-max rounded-full p-0"
-            >
-              <a
-                target="__blank"
-                href={activeProject?.siteLink}
-                className="h-full duration-200 text-center relative w-max inline-block py-3 px-7"
-              >
-                Visit Site
-              </a>
-            </Button>
-          </nav>
-        </div>
+      <CardFooter
+        divider
+        className="flex justify-end gap-2 py-3 border-gray-600 text-gray-500"
+      >
+        <Button size="md" variant="text" className="rounded-full p-0">
+          <Link className="inline-block h-full w-full py-3 px-7" href={"/"}>
+            Detail
+          </Link>
+        </Button>
+        <Button
+          variant="filled"
+          size="md"
+          className="group flex items-center relative w-max rounded-full p-0"
+        >
+          <a
+            target="__blank"
+            href={activeProject?.siteLink}
+            className="h-full duration-200 text-center relative w-max inline-block py-3 px-7"
+          >
+            Visit Site
+          </a>
+        </Button>
       </CardFooter>
     </Card>
   );

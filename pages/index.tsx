@@ -3,7 +3,7 @@ import Profile from "../components/Main/Profile/Profile";
 import TopPicksSection from "../components/Main/ProjectTopPicks/TopPicksSection";
 import Redirect from "../components/Main/Redirect/Redirect";
 import Head from "next/head";
-import SiteFooter from "../components/Main/SiteFooter/SiteFooter";
+import SiteFooter from "../components/SiteFooter/SiteFooter";
 
 const MainPage = () => {
   return (

@@ -4,6 +4,7 @@ const projects: IProject[] = [
   {
     _id: "1",
     name: "Konnect",
+    shortDescription: "A chat web app built using React and Node.js",
     description:
       "A chat web app built using React and Node.js. Web Socket technology was used in this project, enabling fast instant two way communication from client to the server.",
     rating: null,
@@ -27,8 +28,9 @@ const projects: IProject[] = [
   {
     _id: "2",
     name: "Casera",
+    shortDescription: "A recipe finder web app built using React and Node.js",
     description:
-      "A recipe finder web app built using React and Node.js. I built this website because often times i see my mother don't know what to cook. So this is my way to help her on that particular problem.",
+      "A recipe finder web app built using React and Node.js. I built this site to help those that don't know how to cook. Simply search a recipe and voila",
     rating: null,
     image: "/images/projects/casera.png",
     tech: [
@@ -49,6 +51,7 @@ const projects: IProject[] = [
   {
     _id: "3",
     name: "Triquest",
+    shortDescription: "A quiz game web app built using Node.js as the backend",
     description:
       "A quiz game web app built using Node.js as the backend. This site was built for training my capabilty of using external API (OpenTDB) and integrating it with my own personalized backend.",
     rating: null,
@@ -63,8 +66,10 @@ const projects: IProject[] = [
   {
     _id: "4",
     name: "Ultima Widget",
+    shortDescription:
+      "A simple weather dashboard web app built using vanilla JS and CSS",
     description:
-      "A simple weather dashboard web app built using vanilla Javascript and CSS. By building this site I was introduced to the concept of  API and asynchronous Javascript.",
+      "A simple weather dashboard web app built using vanilla JS and CSS. By building this site I was introduced to the concept of  API and asynchronous Javascript.",
     rating: null,
     image: "/images/projects/ultima_widget.png",
     tech: ["html", "javascript", "css"],

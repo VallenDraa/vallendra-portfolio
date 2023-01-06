@@ -1,6 +1,6 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import IconWithTooltip from "../../IconWithTooltip/IconWithTooltip";
-import Line from "../../Line/Line";
+import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
+import Line from "../Line/Line";
 import Link from "next/link";
 
 export default function SiteFooter() {

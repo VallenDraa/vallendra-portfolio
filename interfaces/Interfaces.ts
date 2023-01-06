@@ -16,6 +16,7 @@ export interface IComment {
 export interface IProject {
   _id: string;
   name: string;
+  shortDescription: string;
   description: string;
   rating: number | null;
   image: string;
