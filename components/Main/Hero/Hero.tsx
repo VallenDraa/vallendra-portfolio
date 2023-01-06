@@ -3,6 +3,7 @@ import Line from "../../Line/Line";
 import FloatingSquares from "../../FloatingSquares/FloatingSquares";
 import Image from "next/image";
 import myPic from "../../../public/images/vallen-icon.png";
+import FadeBottom from "../../FadePageTranstition/FadeBottom";
 
 export default function Hero() {
   return (
@@ -52,7 +53,7 @@ export default function Hero() {
                 variant="h3"
                 className="text-2xl md:text-3xl font-bold text-center xl:text-right text-white/80"
               >
-                Front-End Web Developer
+                Front-End Web Developer 👨‍💻
               </Typography>
             </div>
 
@@ -62,8 +63,7 @@ export default function Hero() {
         <Line className="scale-y-[3] xl:scale-y-[6] bg-white/40 absolute left-1/2 -translate-x-1/2 bottom-[-100px] xl:bottom-[-50px] z-20" />
       </section>
 
-      {/* bottom fade to profile*/}
-      <div className="h-12 w-full bg-gradient-to-b from-transparent to-gray-900 absolute bottom-0" />
+      <FadeBottom position="bottom-0" />
     </>
   );
 }

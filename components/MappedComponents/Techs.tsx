@@ -2,6 +2,7 @@ import {
   SiC,
   SiCss3,
   SiHtml5,
+  SiJava,
   SiJavascript,
   SiMongodb,
   SiNodedotjs,
@@ -72,6 +73,12 @@ const TECHS: { [key: string]: React.ReactElement } = {
     <IconWithTooltip
       Icon={<SiC className="text-blue-700 text-5xl" />}
       text="C"
+    />
+  ),
+  java: (
+    <IconWithTooltip
+      Icon={<SiJava className="text-red-700 text-5xl" />}
+      text="Java"
     />
   ),
 };

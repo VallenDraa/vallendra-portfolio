@@ -14,7 +14,7 @@ export default function Profile() {
     <section
       aria-label="profile-section"
       id="profile"
-      className="bg-gray-900 relative z-10 pb-32"
+      className="dark:bg-gray-900 relative z-10 pb-32"
     >
       {/* main content */}
       <div className="max-w-screen-2xl px-8 mx-auto pt-16 relative flex flex-col xl:flex-row gap-10">
@@ -24,14 +24,18 @@ export default function Profile() {
           <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-6 rotate-12 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/4 -translate-x-1/4 top-1/4 -translate-y-1/4 md:top-1/2 md:-translate-y-1/2"></div>
 
           <header className="relative">
-            <Typography
-              as="h2"
-              variant="h2"
-              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text capitalize relative z-40"
-            >
-              Hello World !
-            </Typography>
-            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[5] -translate-x-0 left-[103px] -bottom-6 absolute" />
+            <div className="flex items-center gap-1">
+              <Typography
+                as="h2"
+                variant="h2"
+                className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40"
+              >
+                Hello World
+              </Typography>
+              <span className="text-5xl">👋</span>
+            </div>
+
+            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[7] -translate-x-0 left-[143px] -bottom-6 absolute" />
           </header>
 
           {/* small paragraph and tech stack */}
@@ -72,7 +76,7 @@ export default function Profile() {
                   <li>{TECHS.typescript}</li>
                   <li>{TECHS["node.js"]}</li>
                   <li>{TECHS.react}</li>
-                  <li>{TECHS.c}</li>
+                  <li>{TECHS.java}</li>
                 </ul>
               </CardBody>
               <CardFooter
@@ -100,11 +104,8 @@ export default function Profile() {
                 EDUCATION
               </Typography>
               <Typography as="p" className="text-gray-400 font-medium">
-                A First Year Computer Science Major student at
-                <strong className="text-gray-300">
-                  {" "}
-                  Universitas Islam Negeri Syarif Hidayatullah Jakarta.
-                </strong>
+                A First Year Computer Science Major student at Universitas Islam
+                Negeri Syarif Hidayatullah Jakarta.
               </Typography>
             </CardBody>
             <CardFooter divider className="py-3 border-gray-600 text-gray-500">
@@ -125,11 +126,8 @@ export default function Profile() {
                 ACTIVITY
               </Typography>
               <Typography as="p" className="text-gray-400 font-medium">
-                An active Member of{" "}
-                <strong className="text-gray-300">
-                  Google Developer Students Club
-                </strong>{" "}
-                at UIN Syarif Hidayatullah Jakarta.
+                An active Member of Google Developer Students Club at UIN Syarif
+                Hidayatullah Jakarta.
               </Typography>
             </CardBody>
             <CardFooter divider className="py-3 border-gray-600 text-gray-500">

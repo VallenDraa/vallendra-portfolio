@@ -5,6 +5,8 @@ const FloatingSquares: FC = () => {
   const [population, setPopulation] = useState(8);
   const [squares, setSquares] = useState<React.ReactElement[]>([]);
 
+  /* Change the population of squares according to the screen size
+  =============================================================== */
   useEffect(() => {
     function changePopulation() {
       switch (true) {
@@ -29,6 +31,8 @@ const FloatingSquares: FC = () => {
     return () => window.removeEventListener("resize", changePopulation);
   }, []);
 
+  /* Render the population into actual floating squares
+  ==================================================== */
   useEffect(() => {
     function generateSquares(): void {
       const newSquares: JSX.Element[] = [];
@@ -37,7 +41,7 @@ const FloatingSquares: FC = () => {
       for (let i = 0; i < population; i++) {
         const delay = Math.round(Math.random() * 35 + 1);
         const left = Math.round(Math.random() * 100 + 1);
-        const size = Math.round(Math.random() * 350 + 50);
+        const size = Math.round(Math.random() * 300 + 50);
 
         newSquares.push(
           <li

@@ -69,8 +69,14 @@ module.exports = withMT({
           from: { transform: "translateX(120vw)" },
           to: { transform: "translateX(-120vw)" },
         },
+        rotate: {
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
       },
       animation: {
+        rotate: "rotate 3s linear infinite",
         "fade-in": "fade-in 350ms ease-in",
         shake: "shake 100ms ease-in-out",
         "open-nav": "open-nav 350ms ease-in",

@@ -9,6 +9,7 @@ import { IoCall } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import NavList from "./Navlist";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
+import Link from "next/link";
 
 export default function NavbarComponent() {
   const { navIsOpened, setNavIsOpened } = useContext(
@@ -24,8 +25,6 @@ export default function NavbarComponent() {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(navIsOpened);
-
     if (navIsOpened && window.innerWidth < 960) {
       overlayRef.current?.classList.add("animate-open-overlay");
       navListRef.current?.classList.add("animate-open-nav");
@@ -77,14 +76,11 @@ export default function NavbarComponent() {
   return (
     <Navbar
       ref={navbarRef}
-      className="fixed top-0 z-50 min-w-full py-3 px-4 rounded-none dark:bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] border-0 dark:text-white/90"
+      className="fixed top-0 z-50 min-w-full py-3 px-0 rounded-none dark:bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] border-0 dark:text-white/90"
     >
-      <div className="max-w-screen-2xl px-4 mx-auto flex items-center justify-between">
+      <div className="max-w-screen-2xl px-8 mx-auto flex items-center justify-between">
         {/* name */}
-        <Typography
-          as="h2"
-          className="cursor-pointer font-bold text-lg lg:basis-1/3"
-        >
+        <Typography as="h2" className="font-bold text-lg lg:basis-1/3">
           <span>Jestine Vallendra Dwi Putra</span>
         </Typography>
         {/* the nav list */}
@@ -97,10 +93,13 @@ export default function NavbarComponent() {
             size="md"
             className="group hidden lg:flex items-center relative w-max ml-auto rounded-full"
           >
-            <div className="duration-200 text-center relative w-max flex justify-center items-center">
+            <Link
+              href={"/contacts"}
+              className="duration-200 text-center relative w-max flex justify-center items-center"
+            >
               <span className="group-hover:pr-5 duration-200">Contact Me</span>
               <IoCall className="absolute right-0 opacity-0 pr-0 group-hover:opacity-100 duration-200" />
-            </div>
+            </Link>
           </Button>
         </div>
         <IconButton

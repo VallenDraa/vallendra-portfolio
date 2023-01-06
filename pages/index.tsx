@@ -1,6 +1,6 @@
 import Hero from "../components/Main/Hero/Hero";
 import Profile from "../components/Main/Profile/Profile";
-import ProjectsSection from "../components/Main/Projects/ProjectsSection";
+import TopPicksSection from "../components/Main/ProjectTopPicks/TopPicksSection";
 import Redirect from "../components/Main/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/Main/SiteFooter/SiteFooter";
@@ -9,16 +9,16 @@ const MainPage = () => {
   return (
     <>
       <Head>
-        <title>VallenDra | Front-End Developer</title>
+        <title>VallenDra | Home</title>
       </Head>
 
       {/* hero section */}
-      <header className="basis-[10%] relative z-20 bg-gradient bg-main-gradient animate-main-gradient">
+      <header className="relative z-30">
         <Hero />
       </header>
       <main>
         <Profile />
-        <ProjectsSection />
+        <TopPicksSection />
         <Redirect />
       </main>
       <SiteFooter />

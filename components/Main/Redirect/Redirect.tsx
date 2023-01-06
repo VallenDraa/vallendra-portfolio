@@ -9,7 +9,7 @@ export default function Redirect() {
     <section className="bg-gray-900 relative z-20">
       <div className="max-w-screen-2xl px-2 lg:px-8 mx-auto py-24 relative">
         {/* blur */}
-        <div className="h-80 w-80 scale-90 md:scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-6 rotate-12 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"></div>
+        <div className="h-80 w-80 scale-90 md:scale-110 blur-3xl rounded-full skew-x-12 rotate-90 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"></div>
 
         <div className="flex flex-col items-center relative z-30">
           <Typography

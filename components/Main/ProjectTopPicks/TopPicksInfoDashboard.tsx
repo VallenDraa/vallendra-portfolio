@@ -13,7 +13,7 @@ import { IoCodeSlash } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Show from "../../../utils/jsx/Show";
 
-export default function ProjectInfoDashboard({
+export default function TopPicksInfoDashboard({
   activeProject,
 }: {
   activeProject: IProject;

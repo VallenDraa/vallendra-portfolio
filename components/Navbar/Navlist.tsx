@@ -5,13 +5,14 @@ import {
   Accordion,
   AccordionBody,
 } from "@material-tailwind/react";
-import MENUS from "../../utils/misc/MenuDatas";
+import MENUS from "../../utils/misc/menus";
 import Show from "../../utils/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 import Line from "../Line/Line";
+import NavBtn from "./NavBtn";
 
 interface IProps {
   navListRef: RefObject<HTMLUListElement>;
@@ -70,14 +71,14 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       {/* the nav list */}
       <ul
         ref={navListRef}
-        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static bg-gray-900 lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none lg:animate-fade-in"
+        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static dark:bg-gray-900 dark:lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none lg:animate-fade-in"
       >
         {/* close button for small screen nav */}
         <li className="flex justify-between items-center py-3 px-5 lg:px-3 relative lg:hidden">
           <Typography
             as="span"
             variant="paragraph"
-            className="font-semibold text-lg text-gray-300"
+            className="font-semibold text-lg dark:text-gray-300"
           >
             Menu
           </Typography>
@@ -85,7 +86,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
             onClick={closeNav}
             color="red"
             variant="text"
-            className="w-max p-2 flex items-center justify-center text-xl text-red-800 hover:text-white transition duration-200 rounded-full"
+            className="w-max p-2 flex items-center justify-center text-xl text-red-800 dark:hover:text-white transition duration-200 rounded-full"
           >
             <IoClose />
           </Button>
@@ -96,45 +97,43 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
         {MENUS.map(
           (menu): React.ReactNode => (
             <Fragment key={menu}>
-              <Show when={menu !== "projects"}>
-                <Typography as="li" variant="paragraph">
-                  <Button
-                    color="indigo"
-                    variant="text"
-                    fullWidth
-                    className="p-0 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none lg:rounded-lg"
-                  >
-                    <a
-                      href={`#${menu}`}
-                      className="flex items-center capitalize py-2 px-5 lg:px-3"
-                    >
-                      {menu}
-                    </a>
-                  </Button>
-                </Typography>
+              {/* menu for other than projects and certicates */}
+              <Show when={menu !== "projects" && menu !== "certificates"}>
+                <li>
+                  <NavBtn menu={menu} href={`/#${menu}`} />
+                </li>
               </Show>
+
+              {/* for certticates page menu */}
+              <Show when={menu === "certificates"}>
+                <li>
+                  <NavBtn menu={menu} href={`/${menu}`} />
+                </li>
+              </Show>
+
+              {/* for project menu link */}
               <Show when={menu === "projects"}>
                 {/* project menu for large navbar */}
                 <Show when={!accordionIsVisible}>
                   <NavbarSubMenu
                     offset={14}
                     Handler={
-                      <a className="flex items-center capitalize py-2 px-5 lg:px-3">
+                      <div className="flex items-center capitalize py-2 px-5 lg:px-3">
                         {menu}
-                      </a>
+                      </div>
                     }
                     menuItems={[
-                      <a
-                        href="#projects"
+                      <Link
+                        href="/#projects"
                         className="inline-block w-full h-full p-3"
                       >
                         Top Picks
-                      </a>,
+                      </Link>,
                       <Link
-                        href={`/`}
+                        href="/projects"
                         className="inline-block w-full h-full p-3"
                       >
-                        All Collection
+                        All Projects
                       </Link>,
                     ]}
                   />
@@ -148,7 +147,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       variant="text"
                       fullWidth
                       onClick={() => handleOpenAccordion(1)}
-                      className="flex justify-between items-center capitalize py-2 px-5 lg:px-3 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none lg:rounded-lg"
+                      className="flex justify-between items-center capitalize py-2 px-5 lg:px-3 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none lg:rounded-lg"
                     >
                       {menu}
                       <IoChevronDown
@@ -162,27 +161,27 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                         color="indigo"
                         variant="text"
                         fullWidth
-                        className="p-0 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none"
+                        className="p-0 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
                       >
-                        <a
-                          href="#projects"
+                        <Link
+                          href="/#projects"
                           className="flex items-center capitalize py-2 px-7"
                         >
                           Top Picks
-                        </a>
+                        </Link>
                       </Button>
                       <Button
                         color="indigo"
                         variant="text"
                         fullWidth
-                        className="p-0 text-base font-semibold text-gray-500 lg:text-white/70 hover:text-white transition duration-200 rounded-none"
+                        className="p-0 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
                       >
-                        <a
-                          href="#projects"
+                        <Link
+                          href="/projects"
                           className="flex items-center capitalize py-2 px-7"
                         >
                           All Collections
-                        </a>
+                        </Link>
                       </Button>
                     </AccordionBody>
                   </Accordion>
@@ -196,7 +195,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           <Typography
             as="span"
             variant="small"
-            className="text-xs text-gray-600 font-semibold"
+            className="text-xs dark:text-gray-600 font-semibold"
           >
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
           </Typography>
