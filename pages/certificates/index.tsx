@@ -47,10 +47,14 @@ export default function CertificatesPage({
         <title>VallenDra | Certificates</title>
       </Head>
       <div className="relative min-h-screen flex flex-col dark:bg-gray-900 mt-40">
+        {/* blur */}
         <FadeBottom position="-top-20" />
-        <header className="max-w-screen-2xl px-8 mx-auto flex flex-col w-full">
+
+        <header className="max-w-screen-2xl px-8 mx-auto flex flex-col w-full relative ">
+          <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-12 rotate-0 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute right-5 top-5" />
+
           {/* heading and searchbar */}
-          <section className="pt-6 pb-3">
+          <section className="pt-6 pb-3 relative z-10">
             <div className="relative flex items-center gap-1">
               <Typography
                 as="h2"
@@ -60,7 +64,7 @@ export default function CertificatesPage({
                 My Certificates
               </Typography>
               <span className="text-5xl">🧾</span>
-              <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[8.5] -translate-x-0 left-[173px] -bottom-7 absolute" />
+              <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[6.5] -translate-x-0 left-[130px] -bottom-7 absolute" />
             </div>
 
             <Typography
@@ -68,8 +72,8 @@ export default function CertificatesPage({
               variant="paragraph"
               className="text-white/80 font-medium leading-loose pl-0.5 text-justify mt-5"
             >
-              The ultimate showcase of all my certificates. Mostly web but there
-              is game and desktop app too.
+              The ultimate showcase of all my projects. Mostly web but there is
+              game and desktop app too.
             </Typography>
 
             <input
@@ -80,16 +84,13 @@ export default function CertificatesPage({
               placeholder={
                 isError ? "Please Try Again Later..." : "Search Projects..."
               }
-              className="disabled:cursor-not-allowed outline-none w-full rounded-lg mt-6 h-12 px-4 dark:bg-gray-800/70 dark:focus:bg-gray-800 dark:text-gray-300 text-lg transition-colors"
+              className="disabled:cursor-not-allowed outline-none w-full rounded-lg mt-6 h-12 px-4 dark:bg-gray-800/70 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800 dark:text-gray-300 text-lg transition-colors"
             />
           </section>
         </header>
 
         {/* the certificates list */}
         <main className="max-w-screen-2xl px-12 relative mx-auto grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-5 w-full overflow-hidden">
-          {/* blur */}
-          <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-12 rotate-0 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:top-1/2 md:-translate-y-1/2"></div>
-
           {/* show project when available  */}
           <Show when={certificates.length > 0}>
             {/* {showedIndex.map((idx) => {
@@ -113,7 +114,7 @@ export default function CertificatesPage({
               <Typography
                 variant="h5"
                 as="h3"
-                className="dark:text-white/70 text-sm md:text-base lg:text-lg"
+                className="dark:text-white/60 text-sm md:text-base lg:text-lg"
               >
                 Try searching for something else.
               </Typography>
@@ -134,7 +135,7 @@ export default function CertificatesPage({
               <Typography
                 variant="h5"
                 as="h3"
-                className="dark:text-white/70 text-sm md:text-base lg:text-lg"
+                className="dark:text-white/60 text-sm md:text-base lg:text-lg"
               >
                 Try reloading the page. If the problem persists, please try
                 again later.
