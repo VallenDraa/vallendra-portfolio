@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { IProject } from "../../../interfaces/Interfaces";
 import Link from "next/link";
-import TECHS from "../../MappedComponents/Techs";
+import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Show from "../../../utils/jsx/Show";

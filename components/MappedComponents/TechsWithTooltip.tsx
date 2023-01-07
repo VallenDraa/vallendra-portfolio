@@ -13,7 +13,7 @@ import {
 } from "react-icons/si";
 import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
 
-const TECHS: { [key: string]: React.ReactElement } = {
+const techsWithTooltip: { [key: string]: React.ReactElement } = {
   html: (
     <IconWithTooltip
       Icon={<SiHtml5 className="text-deep-orange-400 text-5xl" />}
@@ -50,7 +50,6 @@ const TECHS: { [key: string]: React.ReactElement } = {
       text="React"
     />
   ),
-
   "node.js": (
     <IconWithTooltip
       Icon={<SiNodedotjs className="text-green-400 text-5xl" />}
@@ -83,4 +82,4 @@ const TECHS: { [key: string]: React.ReactElement } = {
   ),
 };
 
-export default TECHS;
+export default techsWithTooltip;

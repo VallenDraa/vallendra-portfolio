@@ -1,6 +1,6 @@
 import { IProject } from "../../interfaces/Interfaces";
 
-const projects: IProject[] = [
+const topPickedProjects: IProject[] = [
   {
     _id: "1",
     name: "Konnect",
@@ -21,7 +21,7 @@ const projects: IProject[] = [
     ],
     categories: ["dynamic site", "real time", "crud", "Web Socket"],
     comments: [],
-    createdAt: new Date("Oct 17, 2022"),
+    createdAt: new Date("Oct 17, 2022").toISOString(),
     siteLink: "https://kon-nect.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/konnect",
   },
@@ -44,7 +44,7 @@ const projects: IProject[] = [
     ],
     categories: ["dynamic site", "crud"],
     comments: [],
-    createdAt: new Date("May 7, 2022"),
+    createdAt: new Date("May 7, 2022").toISOString(),
     siteLink: "https://cas-era.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/casera",
   },
@@ -59,7 +59,7 @@ const projects: IProject[] = [
     tech: ["html", "javascript", "css", "node.js", "tailwind css", "mongodb"],
     categories: ["dynamic site", "games", "crud"],
     comments: [],
-    createdAt: new Date("Mar 23, 2022"),
+    createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: "https://triquest.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/triquest",
   },
@@ -75,10 +75,10 @@ const projects: IProject[] = [
     tech: ["html", "javascript", "css"],
     categories: ["dynamic site"],
     comments: [],
-    createdAt: new Date("Mar 2 2022"),
+    createdAt: new Date("Mar 2 2022").toISOString(),
     siteLink: "https://ultimawidget.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/ultima_widget",
   },
 ];
 
-export default projects;
+export default topPickedProjects;

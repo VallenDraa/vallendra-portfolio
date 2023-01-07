@@ -124,7 +124,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                     }
                     menuItems={[
                       <Link
-                        href="/#projects"
+                        href="/#top-picks"
                         className="inline-block w-full h-full p-3"
                       >
                         Top Picks
@@ -164,7 +164,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                         className="p-0 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
                       >
                         <Link
-                          href="/#projects"
+                          href="/#top-picks"
                           className="flex items-center capitalize py-2 px-7"
                         >
                           Top Picks

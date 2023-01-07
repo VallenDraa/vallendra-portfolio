@@ -1,34 +1,34 @@
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect, useState, useCallback } from "react";
 
 // GENERATING RANDOM SQUARES
 const FloatingSquares: FC = () => {
-  const [population, setPopulation] = useState(8);
+  const changePopulation = useCallback(() => {
+    switch (true) {
+      case window.innerWidth >= 1140:
+        return 8;
+
+      case window.innerWidth >= 960:
+        return 6;
+
+      default:
+        return 4;
+    }
+  }, []);
+
+  const [population, setPopulation] = useState(0);
   const [squares, setSquares] = useState<React.ReactElement[]>([]);
 
   /* Change the population of squares according to the screen size
   =============================================================== */
   useEffect(() => {
-    function changePopulation() {
-      switch (true) {
-        case window.innerWidth >= 1140:
-          setPopulation(12);
-          break;
+    setPopulation(changePopulation());
 
-        case window.innerWidth >= 960:
-          setPopulation(8);
-          break;
+    window.addEventListener("resize", () => setPopulation(changePopulation));
 
-        default:
-          setPopulation(4);
-          break;
-      }
-    }
-
-    changePopulation();
-
-    window.addEventListener("resize", changePopulation);
-
-    return () => window.removeEventListener("resize", changePopulation);
+    return () =>
+      window.removeEventListener("resize", () =>
+        setPopulation(changePopulation)
+      );
   }, []);
 
   /* Render the population into actual floating squares

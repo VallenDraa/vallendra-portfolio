@@ -7,7 +7,7 @@ import {
 import Line from "../../Line/Line";
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
-import TECHS from "../../MappedComponents/Techs";
+import TECHS from "../../MappedComponents/TechsWithTooltip";
 
 export default function Profile() {
   return (
@@ -35,7 +35,7 @@ export default function Profile() {
               <span className="text-5xl">👋</span>
             </div>
 
-            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[7] -translate-x-0 left-[143px] -bottom-6 absolute" />
+            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[6.8] -translate-x-0 left-[139px] -bottom-6 absolute" />
           </header>
 
           {/* small paragraph and tech stack */}

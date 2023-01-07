@@ -1,16 +1,16 @@
 export interface IUser {
   _id: string;
   username: string;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: Date | string;
+  updatedAt?: Date | string;
 }
 
 export interface IComment {
   _id: string;
   user: IUser;
   content: string;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: Date | string;
+  updatedAt?: Date | string;
 }
 
 export interface IProject {
@@ -23,8 +23,8 @@ export interface IProject {
   tech: string[];
   categories: string[];
   comments: IComment[];
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: Date | string;
+  updatedAt?: Date | string;
   siteLink: string;
   gitLink: string;
 }

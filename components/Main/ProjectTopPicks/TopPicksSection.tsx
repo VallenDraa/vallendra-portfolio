@@ -5,7 +5,7 @@ import Timeline from "./Timeline";
 import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
 } from "../../../context/IntersectingProjectCP";
-import projects from "../../../utils/misc/projects";
+import topPickedProjects from "../../../utils/misc/topPickedProjects";
 import Quote from "./Quote";
 import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
@@ -19,13 +19,15 @@ export default function TopPicksSection() {
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
 
   useEffect(() => {
-    setActiveProjectIdx(projects.findIndex((p) => p._id === history.currentId));
+    setActiveProjectIdx(
+      topPickedProjects.findIndex((p) => p._id === history.currentId)
+    );
   }, [history.currentId]);
 
   return (
     <section
-      aria-label="projects-section"
-      id="projects"
+      aria-label="top-picks-section"
+      id="top-picks"
       className="dark:bg-gray-900 relative pt-32"
     >
       <Quote />
@@ -57,8 +59,14 @@ export default function TopPicksSection() {
                 className="object-cover sticky top-0 min-w-full min-h-full z-0 opacity-30"
                 width={816}
                 height={459}
-                src={projects[activeProjectIdx]?.image || projects[0]?.image}
-                alt={projects[activeProjectIdx]?.name || projects[0]?.name}
+                src={
+                  topPickedProjects[activeProjectIdx]?.image ||
+                  topPickedProjects[0]?.image
+                }
+                alt={
+                  topPickedProjects[activeProjectIdx]?.name ||
+                  topPickedProjects[0]?.name
+                }
               />
             </div>
           </div>
@@ -66,7 +74,7 @@ export default function TopPicksSection() {
             {/* the short project name description  */}
             <div className="flex gap-8 my-16 relative min-h-[4070px]">
               <ProjectInfoDashboard
-                activeProject={projects[activeProjectIdx]}
+                activeProject={topPickedProjects[activeProjectIdx]}
               />
               <Timeline />
             </div>

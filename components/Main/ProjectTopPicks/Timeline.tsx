@@ -1,4 +1,4 @@
-import projects from "../../../utils/misc/projects";
+import projects from "../../../utils/misc/topPickedProjects";
 import TimelineItem from "./TimelineItem";
 
 export default function Timeline() {
