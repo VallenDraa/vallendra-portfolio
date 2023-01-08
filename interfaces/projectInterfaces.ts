@@ -1,13 +1,7 @@
-export interface IUser {
-  _id: string;
-  username: string;
-  createdAt: Date | string;
-  updatedAt?: Date | string;
-}
-
+import { technologies } from "./../types/types";
 export interface IComment {
   _id: string;
-  user: IUser;
+  userId: string;
   content: string;
   createdAt: Date | string;
   updatedAt?: Date | string;
@@ -20,16 +14,18 @@ export interface IProject {
   description: string;
   rating: number | null;
   image: string;
-  tech: string[];
-  categories: string[];
+  tech: technologies[];
+  categoryIds: string[];
   comments: IComment[];
   createdAt: Date | string;
   updatedAt?: Date | string;
-  siteLink: string;
+  siteLink?: string | null;
+  downloadLink?: string | null;
   gitLink: string;
 }
 
-export interface IIntersectingProjectHistory {
-  prevId: string | null;
-  currentId: string | null;
+export interface ICategory {
+  _id: string;
+  name: string;
+  projects: string[] | IProject[];
 }

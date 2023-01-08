@@ -55,7 +55,7 @@ export default function Profile() {
                 Front-End Developer.
               </Typography>
             </div>
-            <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
+            <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
               <CardBody>
                 <Typography
                   as="h3"
@@ -93,7 +93,7 @@ export default function Profile() {
 
         {/* right side */}
         <aside className="flex flex-col md:flex-row xl:flex-col gap-10 xl:basis-1/3 xl:mt-6">
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+          <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"
@@ -115,7 +115,7 @@ export default function Profile() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+          <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"
@@ -126,8 +126,8 @@ export default function Profile() {
                 ACTIVITY
               </Typography>
               <Typography as="p" className="text-gray-400 font-medium">
-                An active Member of Google Developer Students Club at UIN Syarif
-                Hidayatullah Jakarta.
+                An active Member of Google Developer Students Club at
+                Universitas Islam Negeri Syarif Hidayatullah Jakarta.
               </Typography>
             </CardBody>
             <CardFooter divider className="py-3 border-gray-600 text-gray-500">

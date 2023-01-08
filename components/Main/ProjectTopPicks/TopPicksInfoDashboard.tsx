@@ -6,7 +6,7 @@ import {
   Button,
   CardFooter,
 } from "@material-tailwind/react";
-import { IProject } from "../../../interfaces/Interfaces";
+import { IProject } from "../../../interfaces/projectInterfaces";
 import Link from "next/link";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";
@@ -54,9 +54,9 @@ export default function TopPicksInfoDashboard({
             </Show>
           </div>
 
-          {/* Categories*/}
+          {/* Project Type*/}
           <div className="flex flex-wrap gap-2">
-            {activeProject?.categories.map((cat) => {
+            {activeProject?.categoryIds.map((cat) => {
               return (
                 <Chip
                   key={cat}
@@ -121,7 +121,7 @@ export default function TopPicksInfoDashboard({
         >
           <a
             target="__blank"
-            href={activeProject?.siteLink}
+            href={activeProject?.siteLink || "#"}
             className="h-full duration-200 text-center relative w-max inline-block py-3 px-7"
           >
             Visit Site

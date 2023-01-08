@@ -1,5 +1,9 @@
 import { createContext, useState, Dispatch, SetStateAction } from "react";
-import { IIntersectingProjectHistory } from "../interfaces/Interfaces";
+
+export interface IIntersectingProjectHistory {
+  prevId: string | null;
+  currentId: string | null;
+}
 
 export interface IIntersectingProjectHistoryProvider {
   history: IIntersectingProjectHistory;

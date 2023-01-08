@@ -1,5 +1,6 @@
 import {
   SiC,
+  SiCsharp,
   SiCss3,
   SiHtml5,
   SiJava,
@@ -10,9 +11,11 @@ import {
   SiSocketdotio,
   SiTailwindcss,
   SiTypescript,
+  SiUnity,
 } from "react-icons/si";
+import { technologies } from "../../types/types";
 
-const techIcons: { [key: string]: React.ReactElement } = {
+const techIcons: { [key in technologies]: React.ReactElement | null } = {
   html: (
     <SiHtml5 className="transition-colors duration-200 text-white/50 group-hover:text-deep-orange-400 hover:text-deep-orange-400" />
   ),
@@ -43,9 +46,16 @@ const techIcons: { [key: string]: React.ReactElement } = {
   c: (
     <SiC className="transition-colors duration-200 text-white/50 group-hover:text-blue-700 hover:text-blue-700" />
   ),
+  "c#": (
+    <SiCsharp className="transition-colors duration-200 text-white/50 group-hover:text-purple-400 hover:text-purple-400" />
+  ),
+  unity: (
+    <SiUnity className="transition-colors duration-200 text-white/50 group-hover:text-gray-300 hover:text-gray-300" />
+  ),
   java: (
     <SiJava className="transition-colors duration-200 text-white/50 group-hover:text-red-700 hover:text-red-700" />
   ),
+  ejs: null,
 };
 
 export default techIcons;

@@ -5,7 +5,7 @@ import {
   Accordion,
   AccordionBody,
 } from "@material-tailwind/react";
-import MENUS from "../../utils/misc/menus";
+import MENUS from "../../utils/datas/menus";
 import Show from "../../utils/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";

@@ -4,12 +4,14 @@ export type technologies =
   | "javascript"
   | "react"
   | "ejs"
-  | "C#"
+  | "c#"
+  | "c"
   | "unity"
   | "tailwind css"
   | "css"
   | "typescript"
   | "socket.io"
+  | "java"
   | "mongodb";
 
-export type categories = "static site" | "dynamic site" | "games";
+export type categories = "website" | "desktop" | "cli" | "games";

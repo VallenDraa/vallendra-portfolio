@@ -1,4 +1,4 @@
-import { IProject } from "../../interfaces/Interfaces";
+import { IProject } from "../../../../interfaces/projectInterfaces";
 
 const topPickedProjects: IProject[] = [
   {
@@ -9,17 +9,8 @@ const topPickedProjects: IProject[] = [
       "A chat web app built using React and Node.js. Web Socket technology was used in this project, enabling fast instant two way communication from client to the server.",
     rating: null,
     image: "/images/projects/konnect.png",
-    tech: [
-      "html",
-      "javascript",
-      "css",
-      "node.js",
-      "react",
-      "tailwind css",
-      "socket.io",
-      "mongodb",
-    ],
-    categories: ["dynamic site", "real time", "crud", "Web Socket"],
+    tech: ["react", "tailwind css", "node.js", "socket.io", "mongodb"],
+    categoryIds: ["website"],
     comments: [],
     createdAt: new Date("Oct 17, 2022").toISOString(),
     siteLink: "https://kon-nect.herokuapp.com/",
@@ -33,16 +24,8 @@ const topPickedProjects: IProject[] = [
       "A recipe finder web app built using React and Node.js. I built this site to help those that don't know how to cook. Simply search a recipe and voila",
     rating: null,
     image: "/images/projects/casera.png",
-    tech: [
-      "html",
-      "javascript",
-      "css",
-      "node.js",
-      "react",
-      "tailwind css",
-      "mongodb",
-    ],
-    categories: ["dynamic site", "crud"],
+    tech: ["react", "tailwind css", "node.js", "mongodb"],
+    categoryIds: ["website"],
     comments: [],
     createdAt: new Date("May 7, 2022").toISOString(),
     siteLink: "https://cas-era.herokuapp.com/",
@@ -56,8 +39,8 @@ const topPickedProjects: IProject[] = [
       "A quiz game web app built using Node.js as the backend. This site was built for training my capabilty of using external API (OpenTDB) and integrating it with my own personalized backend.",
     rating: null,
     image: "/images/projects/triquest.png",
-    tech: ["html", "javascript", "css", "node.js", "tailwind css", "mongodb"],
-    categories: ["dynamic site", "games", "crud"],
+    tech: ["html", "tailwind css", "javascript", "node.js", "mongodb"],
+    categoryIds: ["website"],
     comments: [],
     createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: "https://triquest.herokuapp.com/",
@@ -71,9 +54,9 @@ const topPickedProjects: IProject[] = [
     description:
       "A simple weather dashboard web app built using vanilla JS and CSS. By building this site I was introduced to the concept of  API and asynchronous Javascript.",
     rating: null,
-    image: "/images/projects/ultima_widget.png",
-    tech: ["html", "javascript", "css"],
-    categories: ["dynamic site"],
+    image: "/images/projects/ultima-widget.png",
+    tech: ["html", "css", "javascript"],
+    categoryIds: ["website"],
     comments: [],
     createdAt: new Date("Mar 2 2022").toISOString(),
     siteLink: "https://ultimawidget.herokuapp.com/",

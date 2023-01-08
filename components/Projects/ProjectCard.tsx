@@ -1,7 +1,7 @@
 import { Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import { IProject } from "../../interfaces/Interfaces";
+import { IProject } from "../../interfaces/projectInterfaces";
 import { BsArrowRight } from "react-icons/bs";
 import techIcons from "../MappedComponents/TechIcons";
 
@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
     <div>
       <Link
         href={`/projects/${project._id}`}
-        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group"
+        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out"
       >
         {/* image */}
         <Image

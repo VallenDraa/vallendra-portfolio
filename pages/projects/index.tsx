@@ -5,10 +5,11 @@ import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
-import { IProject } from "../../interfaces/Interfaces";
+import { IProject } from "../../interfaces/projectInterfaces";
 import Show from "../../utils/jsx/Show";
 import { useState, useEffect } from "react";
-import allProjects from "../../utils/misc/allProjects";
+import allProjects from "../../utils/datas/projects/allProjects";
+import projectCategories from "../../utils/datas/projects/projectCategories";
 
 export default function ProjectsPage({ projects }: { projects: IProject[] }) {
   const [isError, setIsError] = useState(projects.length === 0);
@@ -95,43 +96,10 @@ export default function ProjectsPage({ projects }: { projects: IProject[] }) {
                   />
                 );
               })}
-
-              {showedIndex.map((idx) => {
-                return (
-                  <ProjectCard
-                    key={projects[idx]._id}
-                    project={projects[idx]}
-                  />
-                );
-              })}
-              {showedIndex.map((idx) => {
-                return (
-                  <ProjectCard
-                    key={projects[idx]._id}
-                    project={projects[idx]}
-                  />
-                );
-              })}
-              {showedIndex.map((idx) => {
-                return (
-                  <ProjectCard
-                    key={projects[idx]._id}
-                    project={projects[idx]}
-                  />
-                );
-              })}
-              {showedIndex.map((idx) => {
-                return (
-                  <ProjectCard
-                    key={projects[idx]._id}
-                    project={projects[idx]}
-                  />
-                );
-              })}
             </>
           </Show>
 
-          {/* show project when available  */}
+          {/* for empty search result  */}
           <Show when={projects.length > 0 && showedIndex.length === 0}>
             {/* text fallback */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">
@@ -152,7 +120,7 @@ export default function ProjectsPage({ projects }: { projects: IProject[] }) {
             </div>
           </Show>
 
-          {/* show project when available  */}
+          {/* fallback for when the projects failed to load  */}
           <Show when={projects.length === 0 || !projects}>
             {/* text fallback */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">

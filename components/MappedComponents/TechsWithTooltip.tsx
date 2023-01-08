@@ -1,5 +1,6 @@
 import {
   SiC,
+  SiCsharp,
   SiCss3,
   SiHtml5,
   SiJava,
@@ -10,10 +11,12 @@ import {
   SiSocketdotio,
   SiTailwindcss,
   SiTypescript,
+  SiUnity,
 } from "react-icons/si";
 import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
+import { technologies } from "../../types/types";
 
-const techsWithTooltip: { [key: string]: React.ReactElement } = {
+const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   html: (
     <IconWithTooltip
       Icon={<SiHtml5 className="text-deep-orange-400 text-5xl" />}
@@ -74,12 +77,25 @@ const techsWithTooltip: { [key: string]: React.ReactElement } = {
       text="C"
     />
   ),
+  "c#": (
+    <IconWithTooltip
+      Icon={<SiCsharp className="text-purple-300" />}
+      text="C#"
+    />
+  ),
+  unity: (
+    <IconWithTooltip
+      Icon={<SiUnity className="text-gray-300" />}
+      text="Unity"
+    />
+  ),
   java: (
     <IconWithTooltip
       Icon={<SiJava className="text-red-700 text-5xl" />}
       text="Java"
     />
   ),
+  ejs: null,
 };
 
 export default techsWithTooltip;

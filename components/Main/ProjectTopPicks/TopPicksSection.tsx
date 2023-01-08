@@ -1,11 +1,11 @@
 import { Typography } from "@material-tailwind/react";
-import { FC, useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Line from "../../Line/Line";
 import Timeline from "./Timeline";
 import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
 } from "../../../context/IntersectingProjectCP";
-import topPickedProjects from "../../../utils/misc/topPickedProjects";
+import topPickedProjects from "../../../utils/datas/projects/websites/topPickedProjects";
 import Quote from "./Quote";
 import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
@@ -54,7 +54,7 @@ export default function TopPicksSection() {
         {/* main content */}
         <footer className="relative pb-20 pt-5">
           <div className="sticky top-0">
-            <div className="absolute inset-x-0 h-screen">
+            <div className="absolute inset-x-0 h-screen overflow-hidden">
               <Image
                 className="object-cover sticky top-0 min-w-full min-h-full z-0 opacity-30"
                 width={816}

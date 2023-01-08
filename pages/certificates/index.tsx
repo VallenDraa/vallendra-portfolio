@@ -4,10 +4,10 @@ import Line from "../../components/Line/Line";
 import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
-import { IProject } from "../../interfaces/Interfaces";
+import { IProject } from "../../interfaces/projectInterfaces";
 import Show from "../../utils/jsx/Show";
 import { useState, useEffect } from "react";
-import certificates from "../../utils/misc/certificates";
+import certificates from "../../utils/datas/certificates";
 
 export default function CertificatesPage({
   certificates,
