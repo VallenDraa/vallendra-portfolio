@@ -8,18 +8,18 @@ const projectCategories: ICategory[] = [
   },
   {
     _id: "2",
+    name: "desktop app",
+    projects: ["13", "14"],
+  },
+  {
+    _id: "3",
     name: "cli",
     projects: ["10", "11"],
   },
   {
-    _id: "3",
+    _id: "4",
     name: "games",
     projects: ["12"],
-  },
-  {
-    _id: "4",
-    name: "desktop app",
-    projects: ["13", "14"],
   },
 ];
 

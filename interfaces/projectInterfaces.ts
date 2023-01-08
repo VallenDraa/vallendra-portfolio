@@ -27,5 +27,5 @@ export interface IProject {
 export interface ICategory {
   _id: string;
   name: string;
-  projects: string[] | IProject[];
+  projects: string[];
 }

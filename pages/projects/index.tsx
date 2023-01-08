@@ -5,15 +5,21 @@ import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
-import { IProject } from "../../interfaces/projectInterfaces";
+import { ICategory, IProject } from "../../interfaces/projectInterfaces";
 import Show from "../../utils/jsx/Show";
 import { useState, useEffect } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
 import projectCategories from "../../utils/datas/projects/projectCategories";
+import ProjectCategorySection from "../../components/Projects/ProjectCategorySection";
 
-export default function ProjectsPage({ projects }: { projects: IProject[] }) {
+interface IProps {
+  projects: IProject[];
+  categories: ICategory[];
+}
+
+export default function ProjectsPage({ projects, categories }: IProps) {
   const [isError, setIsError] = useState(projects.length === 0);
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState("");
   const [showedIndex, setShowedIndex] = useState<number[]>([]);
 
   /* Project search filter
@@ -84,22 +90,41 @@ export default function ProjectsPage({ projects }: { projects: IProject[] }) {
         </header>
 
         {/* the projects list */}
-        <main className="max-w-screen-2xl px-12 relative mx-auto grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5 pb-10 w-full">
-          {/* show project when available  */}
-          <Show when={projects.length > 0}>
-            <>
-              {showedIndex.map((idx) => {
+        <main className="max-w-screen-2xl px-12 relative mx-auto grow pt-5 pb-10 w-full">
+          {/* initial render for projects with categories */}
+          <Show when={projects.length > 0 && query === ""}>
+            <div className="space-y-10">
+              {categories.map((category) => {
                 return (
-                  <ProjectCard
-                    key={projects[idx]._id}
-                    project={projects[idx]}
+                  <ProjectCategorySection
+                    key={category._id}
+                    category={category}
+                    projects={projects}
                   />
                 );
               })}
-            </>
+            </div>
           </Show>
 
-          {/* for empty search result  */}
+          {/* search results */}
+          <Show
+            when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
+          >
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {showedIndex.map((idx) => {
+                return (
+                  <li>
+                    <ProjectCard
+                      key={projects[idx]._id}
+                      project={projects[idx]}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </Show>
+
+          {/* for empty search result */}
           <Show when={projects.length > 0 && showedIndex.length === 0}>
             {/* text fallback */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">
@@ -120,7 +145,7 @@ export default function ProjectsPage({ projects }: { projects: IProject[] }) {
             </div>
           </Show>
 
-          {/* fallback for when the projects failed to load  */}
+          {/* fallback for when the projects failed to load */}
           <Show when={projects.length === 0 || !projects}>
             {/* text fallback */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">
@@ -148,8 +173,6 @@ export default function ProjectsPage({ projects }: { projects: IProject[] }) {
   );
 }
 
-export function getStaticProps(): GetStaticPropsResult<{
-  projects: IProject[];
-}> {
-  return { props: { projects: allProjects } };
+export function getStaticProps(): GetStaticPropsResult<IProps> {
+  return { props: { projects: allProjects, categories: projectCategories } };
 }

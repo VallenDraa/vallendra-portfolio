@@ -28,7 +28,7 @@ export default function ProjectCard({ project }: { project: IProject }) {
         <div className="h-full w-full relative z-20 flex flex-col gap-1 justify-end transition-colors duration-200">
           <Typography
             variant="h5"
-            as="h3"
+            as="h4"
             className="px-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold"
           >
             {project.name}
