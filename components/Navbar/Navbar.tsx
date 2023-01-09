@@ -24,6 +24,8 @@ export default function NavbarComponent() {
   const navListRef = useRef<HTMLUListElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  /* add open animation for small navbar
+  ================================================ */
   useEffect(() => {
     if (navIsOpened && window.innerWidth < 960) {
       overlayRef.current?.classList.add("animate-open-overlay");
@@ -71,7 +73,7 @@ export default function NavbarComponent() {
     window.addEventListener("click", closeNavOnOutsideClick);
 
     return () => window.removeEventListener("click", closeNavOnOutsideClick);
-  });
+  }, []);
 
   return (
     <Navbar

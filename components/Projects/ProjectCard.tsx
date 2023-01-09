@@ -4,45 +4,78 @@ import Link from "next/link";
 import { IProject } from "../../interfaces/projectInterfaces";
 import { BsArrowRight } from "react-icons/bs";
 import techIcons from "../MappedComponents/TechIcons";
+import { compactNumberFormatter } from "../../utils/helpers/formatter";
+import { AiFillEye, AiFillHeart } from "react-icons/ai";
 
-export default function ProjectCard({ project }: { project: IProject }) {
+export default function ProjectCard({
+  project,
+  imgIsPriority,
+}: {
+  project: IProject;
+  imgIsPriority: boolean;
+}) {
   return (
     <div>
       <Link
-        href={`/projects/${project._id}`}
-        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out"
+        href={`/projects/${project.slug}`}
+        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out px-3"
       >
         {/* image */}
         <Image
-          width={400}
-          height={400}
+          fill
+          priority={imgIsPriority}
           src={project.image}
           alt={project.name}
-          className="h-full w-full object-cover opacity-90 absolute transition-transform duration-300 ease-out group-hover:scale-110"
+          className="h-full object-cover opacity-90 absolute transition-transform duration-300 ease-out group-hover:scale-110"
         />
 
         {/* fade */}
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900/90 group-hover:opacity-90 transition-opacity duration-200"></div>
 
         {/* detail */}
-        <div className="h-full w-full relative z-20 flex flex-col gap-1 justify-end transition-colors duration-200">
+        <div className="h-full w-full relative z-20 flex flex-col justify-end transition-colors duration-200">
+          {/* project title */}
+
           <Typography
-            variant="h5"
+            variant="h4"
             as="h4"
-            className="px-3 text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold"
+            className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold"
           >
             {project.name}
           </Typography>
+
+          {/* project short description */}
           <Typography
             variant="paragraph"
             as="p"
-            className="px-3 text-white/90 font-normal text-sm"
+            className="text-white/90 font-normal text-sm mt-1"
           >
             {project.shortDescription}
           </Typography>
 
+          {/* project likes and views*/}
+          <div className="flex gap-3 mt-1.5">
+            <Typography
+              variant="paragraph"
+              as="span"
+              className="text-white/80 flex items-center gap-1 text-sm font-bold"
+            >
+              <AiFillEye />
+              {compactNumberFormatter.format(project.views)}
+            </Typography>
+
+            <Typography
+              variant="paragraph"
+              as="span"
+              className="text-red-300 flex items-center gap-1 text-sm font-bold"
+            >
+              <AiFillHeart />
+              {compactNumberFormatter.format(project.likes)}
+            </Typography>
+          </div>
+
           {/* tech stack */}
-          <ul className="flex items-center gap-1 px-3 overflow-x-auto mt-3">
+          <ul className="flex items-center gap-1 overflow-x-auto mt-2.5">
             {project.tech.map((tech) => {
               return <li key={tech}>{techIcons[tech]}</li>;
             })}

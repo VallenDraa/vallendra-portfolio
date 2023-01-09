@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import ProjectCard from "./ProjectCard";
 
 interface IProps {
+  categoryIndex: number;
   projects: IProject[];
   category: ICategory;
 }
@@ -12,7 +13,11 @@ interface IPickedProjects {
   [key: string]: IProject;
 }
 
-export default function ProjectCategorySection({ category, projects }: IProps) {
+export default function ProjectCategorySection({
+  categoryIndex,
+  category,
+  projects,
+}: IProps) {
   const projectsInCategory = useMemo<IPickedProjects>(() => {
     const { projects: allProjectIds } = category;
 
@@ -30,22 +35,38 @@ export default function ProjectCategorySection({ category, projects }: IProps) {
       <Typography
         as="h3"
         variant="h3"
-        className="text-white uppercase font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1"
+        className="text-white/90 uppercase font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1"
       >
         {category.name}
       </Typography>
 
-      {/* project swiper */}
-
+      {/* display projects in this category */}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-1">
-        {category.projects.map((id) => {
+        {category.projects.map((id, i) => {
           return (
-            <li className="">
-              <ProjectCard project={projectsInCategory[id]} />;
+            <li key={id}>
+              <ProjectCard
+                imgIsPriority={isImgImportant(categoryIndex, i)}
+                project={projectsInCategory[id]}
+              />
+              ;
             </li>
           );
         })}
       </ul>
     </section>
   );
+}
+
+function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
+  let imgIsPriority;
+
+  // determining if the image is important
+  if (categoryIndex === 0) {
+    imgIsPriority = projectIndex < 4 ? true : false;
+  } else {
+    imgIsPriority = false;
+  }
+
+  return imgIsPriority;
 }

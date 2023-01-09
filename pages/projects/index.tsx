@@ -90,13 +90,15 @@ export default function ProjectsPage({ projects, categories }: IProps) {
         </header>
 
         {/* the projects list */}
-        <main className="max-w-screen-2xl px-12 relative mx-auto grow pt-5 pb-10 w-full">
+        <main className="max-w-screen-2xl px-10 relative mx-auto grow pt-5 pb-10 w-full">
           {/* initial render for projects with categories */}
           <Show when={projects.length > 0 && query === ""}>
             <div className="space-y-10">
-              {categories.map((category) => {
+              {categories.map((category, i) => {
                 return (
+                  // index is used for determining the image priority prop
                   <ProjectCategorySection
+                    categoryIndex={i}
                     key={category._id}
                     category={category}
                     projects={projects}
@@ -113,9 +115,9 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {showedIndex.map((idx) => {
                 return (
-                  <li>
+                  <li key={projects[idx]._id}>
                     <ProjectCard
-                      key={projects[idx]._id}
+                      imgIsPriority={false}
                       project={projects[idx]}
                     />
                   </li>
@@ -173,6 +175,8 @@ export default function ProjectsPage({ projects, categories }: IProps) {
   );
 }
 
-export function getStaticProps(): GetStaticPropsResult<IProps> {
-  return { props: { projects: allProjects, categories: projectCategories } };
+export function getServerSideProps(): GetStaticPropsResult<IProps> {
+  return {
+    props: { projects: allProjects, categories: projectCategories },
+  };
 }

@@ -12,6 +12,7 @@ import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Show from "../../../utils/jsx/Show";
+import { technologies } from "../../../types/types";
 
 export default function TopPicksInfoDashboard({
   activeProject,
@@ -98,7 +99,7 @@ export default function TopPicksInfoDashboard({
           </Typography>
           <ul className="flex items-center mt-4 relative gap-1 overflow-auto">
             {activeProject?.tech.map(
-              (tech: string, i): JSX.Element => (
+              (tech: technologies, i): JSX.Element => (
                 <li key={i}>{TECHS[tech]}</li>
               )
             )}
@@ -110,7 +111,10 @@ export default function TopPicksInfoDashboard({
         className="flex justify-end gap-2 py-3 border-gray-600 text-gray-500"
       >
         <Button size="md" variant="text" className="rounded-full p-0">
-          <Link className="inline-block h-full w-full py-3 px-7" href={"/"}>
+          <Link
+            className="inline-block h-full w-full py-3 px-7"
+            href={`/projects/${activeProject?.slug}`}
+          >
             Detail
           </Link>
         </Button>

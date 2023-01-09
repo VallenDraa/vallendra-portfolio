@@ -10,9 +10,11 @@ export interface IComment {
 export interface IProject {
   _id: string;
   name: string;
+  slug: string;
   shortDescription: string;
   description: string;
-  rating: number | null;
+  views: number;
+  likes: number;
   image: string;
   tech: technologies[];
   categoryIds: string[];
