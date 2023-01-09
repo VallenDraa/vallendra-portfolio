@@ -7,7 +7,7 @@ import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
 import { ICategory, IProject } from "../../interfaces/projectInterfaces";
 import Show from "../../utils/jsx/Show";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
 import projectCategories from "../../utils/datas/projects/projectCategories";
 import ProjectCategorySection from "../../components/Projects/ProjectCategorySection";
@@ -20,11 +20,7 @@ interface IProps {
 export default function ProjectsPage({ projects, categories }: IProps) {
   const [isError, setIsError] = useState(projects.length === 0);
   const [query, setQuery] = useState("");
-  const [showedIndex, setShowedIndex] = useState<number[]>([]);
-
-  /* Project search filter
-  ======================= */
-  useEffect(() => {
+  const showedIndex = useMemo<number[]>(() => {
     const newShowedIndex: number[] = projects.reduce((result, project, i) => {
       if (query === "") return [...result, i];
 
@@ -39,7 +35,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
       return result;
     }, [] as number[]);
 
-    setShowedIndex(newShowedIndex);
+    return newShowedIndex;
   }, [query]);
 
   return (

@@ -18,7 +18,7 @@ export default function ProjectCard({
     <div>
       <Link
         href={`/projects/${project.slug}`}
-        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out px-3"
+        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out"
       >
         {/* image */}
         <Image
@@ -39,7 +39,7 @@ export default function ProjectCard({
           <Typography
             variant="h4"
             as="h4"
-            className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold"
+            className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold px-3"
           >
             {project.name}
           </Typography>
@@ -48,13 +48,13 @@ export default function ProjectCard({
           <Typography
             variant="paragraph"
             as="p"
-            className="text-white/90 font-normal text-sm mt-1"
+            className="text-white/90 font-normal text-sm mt-1 px-3"
           >
             {project.shortDescription}
           </Typography>
 
           {/* project likes and views*/}
-          <div className="flex gap-3 mt-1.5">
+          <div className="flex gap-3 mt-1.5 px-3">
             <Typography
               variant="paragraph"
               as="span"
@@ -75,7 +75,7 @@ export default function ProjectCard({
           </div>
 
           {/* tech stack */}
-          <ul className="flex items-center gap-1 overflow-x-auto mt-2.5">
+          <ul className="flex items-center gap-1 overflow-x-auto mt-2.5 px-3">
             {project.tech.map((tech) => {
               return <li key={tech}>{techIcons[tech]}</li>;
             })}
