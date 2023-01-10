@@ -42,7 +42,7 @@ export default function TopPicksSection() {
             <Typography
               as="h2"
               variant="h2"
-              className="animate-breathing bg-gradient w-max text-6xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
+              className="animate-breathing bg-gradient w-max text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
             >
               Top Picks
             </Typography>

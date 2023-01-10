@@ -35,7 +35,7 @@ export default function ProjectCategorySection({
       <Typography
         as="h3"
         variant="h3"
-        className="text-white/90 uppercase font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1"
+        className="dark:text-white/90 uppercase font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1"
       >
         {category.name}
       </Typography>

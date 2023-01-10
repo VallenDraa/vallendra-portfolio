@@ -58,7 +58,7 @@ export default function ProjectCard({
             <Typography
               variant="paragraph"
               as="span"
-              className="text-white/80 flex items-center gap-1 text-sm font-bold"
+              className="text-light-green-300 flex items-center gap-1 text-sm font-bold"
             >
               <AiFillEye />
               {compactNumberFormatter.format(project.views)}

@@ -2,13 +2,14 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
+  darkMode: "class",
   content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   theme: {
     fontFamily: {
       sans: ["Segoe UI", "sans-serif"],
     },
     backgroundSize: {
-      gradient: "1000% 1000%",
+      gradient: "400% 400%",
     },
     extend: {
       backgroundImage: {
@@ -50,7 +51,7 @@ module.exports = withMT({
           "100%": { opacity: "0.1" },
         },
         "main-gradient": {
-          "0%, 100%": { backgroundPosition: "0% 76%" },
+          "0%, 100%": { backgroundPosition: "0% 75%" },
           "50%": { backgroundPosition: "100% 25%" },
         },
         squares: {
@@ -84,7 +85,7 @@ module.exports = withMT({
         "open-overlay": "open-overlay 350ms ease-in",
         "close-overlay": "close-overlay 350ms ease-in",
         squares: "squares 40s linear infinite",
-        "main-gradient": "main-gradient 40s ease infinite",
+        "main-gradient": "main-gradient 25s ease infinite",
         breathing: "main-gradient 6s ease infinite",
         marquee: "marquee 20s linear infinite",
       },
