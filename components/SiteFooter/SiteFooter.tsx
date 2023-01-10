@@ -1,10 +1,8 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
-import Line from "../Line/Line";
 import Link from "next/link";
 import { useMemo } from "react";
-import { AiFillEye } from "react-icons/ai";
-import { compactNumberFormatter } from "../../utils/helpers/formatter";
+import Line from "../Line/Line";
 
 export default function SiteFooter() {
   const year = useMemo(() => new Date().getFullYear(), []);
@@ -15,9 +13,7 @@ export default function SiteFooter() {
   // }, []);
 
   return (
-    <footer className="bg-gray-900 relative">
-      <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 absolute top-0 inset-x-0 h-[1px] z-40 min-w-full" />
-
+    <footer className="bg-gray-900 relative gradient-underline gradient-underline--indigo-to-pink before:!top-0">
       <div className="max-w-screen-2xl px-8 py-8 mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-5 relative z-40">
         <span className="text-gray-400 lg:basis-1/3">
           &copy; {year} VallenDra | Front-End Developer

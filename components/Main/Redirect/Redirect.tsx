@@ -14,12 +14,12 @@ export default function Redirect() {
         <div className="flex flex-col items-center relative z-30">
           <Typography
             as="h2"
-            className="text-white/90 text-3xl sm:text-4xl xl:text-6xl font-bold pt-6"
+            className="text-white/90 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold pt-6"
           >
             Wanna Work Together ?
           </Typography>
           <Button
-            className="mt-10 p-0 rounded-full text-xl lg:text-2xl group flex items-center justify-center hover:bg-white focus:bg-white active:bg-white hover:text-black focus:text-black text-gray-300 active:text-black outline outline-2 outline-gray-300 hover:outline-transparent hover:scale-105 hover:-translate-y-1"
+            className="mt-10 p-0 rounded-full text-xl lg:text-2xl group flex items-center justify-center hover:bg-white focus:bg-white active:bg-white hover:text-gray-900 focus:text-gray-900 text-gray-300 active:text-gray-900 outline outline-2 outline-gray-300 hover:outline-transparent hover:scale-105 hover:-translate-y-1"
             variant="text"
           >
             <Link

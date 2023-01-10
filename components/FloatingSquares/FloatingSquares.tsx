@@ -34,34 +34,30 @@ const FloatingSquares: FC = () => {
   /* Render the population into actual floating squares
   ==================================================== */
   useEffect(() => {
-    function generateSquares(): void {
-      const newSquares: JSX.Element[] = [];
+    const newSquares: JSX.Element[] = [];
 
-      // generating the squares
-      for (let i = 0; i < population; i++) {
-        const delay = Math.round(Math.random() * 35 + 1);
-        const left = Math.round(Math.random() * 100 + 1);
-        const size = Math.round(Math.random() * 300 + 50);
+    // generating the squares
+    for (let i = 0; i < population; i++) {
+      const delay = Math.round(Math.random() * 35 + 1);
+      const left = Math.round(Math.random() * 100 + 1);
+      const size = Math.round(Math.random() * 300 + 50);
 
-        newSquares.push(
-          <li
-            className="absolute block bg-white/10 animate-squares"
-            style={{
-              animationDelay: `${delay}s`,
-              left: `${left}%`,
-              width: `${size}px`,
-              height: `${size}px`,
-              bottom: `-${size}px`,
-            }}
-          ></li>
-        );
-      }
-
-      // rendering the new squares
-      setSquares(newSquares);
+      newSquares.push(
+        <li
+          className="absolute block bg-white/10 animate-squares"
+          style={{
+            animationDelay: `${delay}s`,
+            left: `${left}%`,
+            width: `${size}px`,
+            height: `${size}px`,
+            bottom: `-${size}px`,
+          }}
+        />
+      );
     }
 
-    generateSquares();
+    // rendering the new squares
+    setSquares(newSquares);
   }, [population]);
 
   return (

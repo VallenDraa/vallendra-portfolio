@@ -7,3 +7,23 @@
   -moz-tap-highlight-color: rgba(0, 0, 0, 0);
   /* outline: 1px solid green; */
 }
+
+@layer components {
+  /* Gradient underline css for text
+  ================================= */
+  .gradient-underline {
+    @apply before:animate-breathing before:bg-gradient before:bg-gradient-to-r before:w-full before:-bottom-2 before:left-0 before:absolute before:h-[1px];
+  }
+  .gradient-underline--indigo-to-pink {
+    @apply from-indigo-300 to-pink-200;
+  }
+  .gradient-underline--cyan-to-green {
+    @apply from-cyan-300 to-green-300;
+  }
+
+  /* navlist underlay for <lg screen size to smoothen open and closing animation 
+  ================================================================================== */
+  .navlist-underlay {
+    @apply before:h-full lg:before:hidden before:dark:bg-gray-900 before:w-8 before:absolute before:-translate-x-8;
+  }
+}

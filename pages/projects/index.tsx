@@ -1,6 +1,5 @@
 import { Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
-import Line from "../../components/Line/Line";
 import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
@@ -51,16 +50,15 @@ export default function ProjectsPage({ projects, categories }: IProps) {
         <header className="max-w-screen-2xl px-8 mx-auto flex flex-col w-full relative overflow-hidden">
           {/* heading and searchbar */}
           <section className="pt-6 pb-3 relative z-10">
-            <div className="relative flex items-center gap-1">
+            <div className="flex items-center gap-1 relative w-fit gradient-underline gradient-underline--indigo-to-pink">
               <Typography
                 as="h2"
                 variant="h2"
-                className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40"
+                className={`animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40`}
               >
                 All Projects
               </Typography>
               <span className="text-5xl">💻</span>
-              <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[6.5] -translate-x-0 left-[130px] -bottom-7 absolute" />
             </div>
 
             <Typography

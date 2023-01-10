@@ -4,10 +4,10 @@ import {
   CardBody,
   CardFooter,
 } from "@material-tailwind/react";
-import Line from "../../Line/Line";
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
+import Line from "../../Line/Line";
 
 export default function Profile() {
   return (
@@ -23,19 +23,15 @@ export default function Profile() {
           {/* blur */}
           <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-6 rotate-12 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute left-1/4 -translate-x-1/4 top-1/4 -translate-y-1/4 md:top-1/2 md:-translate-y-1/2"></div>
 
-          <header className="relative">
-            <div className="flex items-center gap-1">
-              <Typography
-                as="h2"
-                variant="h2"
-                className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40"
-              >
-                Hello World
-              </Typography>
-              <span className="text-5xl">👋</span>
-            </div>
-
-            <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 rotate-90 scale-y-[6.8] -translate-x-0 left-[139px] -bottom-6 absolute" />
+          <header className="flex items-center gap-1 relative w-fit gradient-underline gradient-underline--indigo-to-pink">
+            <Typography
+              as="h2"
+              variant="h2"
+              className={`animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40`}
+            >
+              Hello World
+            </Typography>
+            <span className="text-5xl">👋</span>
           </header>
 
           {/* small paragraph and tech stack */}
@@ -66,7 +62,7 @@ export default function Profile() {
                   Technologies
                 </Typography>
                 <Typography as="p" className="text-gray-400 font-medium">
-                  Languanges / Frameworks That I Use For Projects And College !
+                  Languages and frameworks that I use for projects and college !
                 </Typography>
                 <ul className="flex items-center mt-4 relative gap-1 overflow-auto">
                   <li>{TECHS.html}</li>

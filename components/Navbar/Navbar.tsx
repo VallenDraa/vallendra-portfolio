@@ -21,7 +21,7 @@ export default function NavbarComponent() {
 
   /* refs for navlist
   ================================================ */
-  const navListRef = useRef<HTMLUListElement>(null);
+  const navListRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   /* add open animation for small navbar
@@ -41,10 +41,23 @@ export default function NavbarComponent() {
     }
   }, [navIsOpened]);
 
-  /* open navigation according to screen size
-  ============================================= */
+  /* disable and enable scroll on nav state change
+  ================================================ */
   useEffect(() => {
-    const navHandler = () => setNavIsOpened(window.innerWidth > 960);
+    if (window.innerWidth >= 960 && navIsOpened) {
+      document.body.style.overflowY = "auto";
+      return;
+    }
+
+    document.body.style.overflowY = navIsOpened ? "hidden" : "auto";
+  }, [navIsOpened]);
+
+  /* open navigation according to screen size
+  =============================================== */
+  useEffect(() => {
+    const navHandler = () => {
+      setNavIsOpened(window.innerWidth >= 960);
+    };
 
     navHandler();
 
@@ -76,7 +89,7 @@ export default function NavbarComponent() {
   }, []);
 
   return (
-    <Navbar
+    <div
       ref={navbarRef}
       className="fixed top-0 z-50 min-w-full py-3 px-0 rounded-none dark:bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] border-0 dark:text-white/90"
     >
@@ -116,6 +129,6 @@ export default function NavbarComponent() {
           />
         </IconButton>
       </div>
-    </Navbar>
+    </div>
   );
 }

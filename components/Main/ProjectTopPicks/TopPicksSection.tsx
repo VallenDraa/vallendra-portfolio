@@ -1,6 +1,5 @@
 import { Typography } from "@material-tailwind/react";
 import { useContext, useState, useEffect } from "react";
-import Line from "../../Line/Line";
 import Timeline from "./Timeline";
 import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
@@ -11,6 +10,7 @@ import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
 import FadeTop from "../../FadePageTranstition/FadeTop";
 import FadeBottom from "../../FadePageTranstition/FadeBottom";
+import Line from "../../Line/Line";
 
 export default function TopPicksSection() {
   const { history } = useContext(
@@ -33,12 +33,12 @@ export default function TopPicksSection() {
       <Quote />
 
       {/* main timeline */}
-      <div className="mx-auto relative ">
-        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/40 to-green-300/40 absolute left-1/2 top-16 z-20" />
+      <div className="mx-auto relative">
+        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/40 to-green-300/40 absolute left-1/2 top-16" />
 
         {/* section Title */}
-        <header className="relative z-10 pt-40 flex flex-col items-center">
-          <div className="flex items-center gap-1">
+        <header className="relative pt-40 flex flex-col items-center">
+          <div className="flex items-center gap-1 relative h-20 z-20 gradient-underline gradient-underline--cyan-to-green">
             <Typography
               as="h2"
               variant="h2"
@@ -48,7 +48,6 @@ export default function TopPicksSection() {
             </Typography>
             <span className="text-5xl">🌟</span>
           </div>
-          <Line className="animate-breathing bg-gradient bg-gradient-to-r from-cyan-300 to-green-300 rotate-90 scale-y-[7] shadow-lg shadow-cyan-300" />
         </header>
 
         {/* main content */}

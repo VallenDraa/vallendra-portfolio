@@ -11,11 +11,10 @@ import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown } from "react-icons/io5";
-import Line from "../Line/Line";
 import NavBtn from "./NavBtn";
 
 interface IProps {
-  navListRef: RefObject<HTMLUListElement>;
+  navListRef: RefObject<HTMLDivElement>;
   overlayRef: RefObject<HTMLDivElement>;
 }
 
@@ -69,12 +68,12 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       />
 
       {/* the nav list */}
-      <ul
+      <nav
         ref={navListRef}
-        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static dark:bg-gray-900 dark:lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none lg:animate-fade-in"
+        className="flex flex-col gap-1 lg:flex-row lg:items-center fixed z-[70] top-0 left-0 w-72 lg:w-max lg:static dark:bg-gray-900 dark:lg:bg-transparent h-screen lg:h-max shadow-2xl lg:shadow-none lg:animate-fade-in navlist-underlay"
       >
         {/* close button for small screen nav */}
-        <li className="flex justify-between items-center py-3 px-5 lg:px-3 relative lg:hidden">
+        <div className="flex justify-between items-center mb-3 pt-3 pb-0.5 px-5 lg:px-3 relative lg:hidden gradient-underline gradient-underline--indigo-to-pink">
           <Typography
             as="span"
             variant="paragraph"
@@ -90,25 +89,23 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           >
             <IoClose />
           </Button>
-
-          <Line className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 absolute bottom-0 inset-x-0 h-[1px] z-40 min-w-full" />
-        </li>
+        </div>
 
         {MENUS.map(
           (menu): React.ReactNode => (
             <Fragment key={menu}>
               {/* menu for other than projects and certicates */}
               <Show when={menu !== "projects" && menu !== "certificates"}>
-                <li>
+                <div>
                   <NavBtn menu={menu} href={`/#${menu}`} />
-                </li>
+                </div>
               </Show>
 
               {/* for certticates page menu */}
               <Show when={menu === "certificates"}>
-                <li>
+                <div>
                   <NavBtn menu={menu} href={`/${menu}`} />
-                </li>
+                </div>
               </Show>
 
               {/* for project menu link */}
@@ -191,7 +188,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           )
         )}
 
-        <li className="self-center pb-6 lg:hidden mt-auto">
+        <div className="self-center pb-6 lg:hidden mt-auto">
           <Typography
             as="span"
             variant="small"
@@ -199,8 +196,8 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           >
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
           </Typography>
-        </li>
-      </ul>
+        </div>
+      </nav>
     </Show>
   );
 }
