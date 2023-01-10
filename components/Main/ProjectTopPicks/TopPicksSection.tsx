@@ -55,7 +55,6 @@ export default function TopPicksSection() {
           <div className="sticky top-0">
             <div className="absolute inset-x-0 h-screen overflow-hidden">
               <Image
-                fill
                 className="object-cover sticky top-0 min-w-full min-h-full z-0 opacity-30"
                 src={
                   topPickedProjects[activeProjectIdx]?.image ||
@@ -65,6 +64,8 @@ export default function TopPicksSection() {
                   topPickedProjects[activeProjectIdx]?.name ||
                   topPickedProjects[0]?.name
                 }
+                fill
+                sizes="75vw"
               />
             </div>
           </div>

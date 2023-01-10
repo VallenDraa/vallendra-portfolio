@@ -22,11 +22,12 @@ export default function ProjectCard({
       >
         {/* image */}
         <Image
-          fill
           priority={imgIsPriority}
           src={project.image}
           alt={project.name}
           className="h-full object-cover opacity-90 absolute transition-transform duration-300 ease-out group-hover:scale-110"
+          fill
+          sizes="90vw, (min-width: 720px) 75vw, (min-width: 960px) 50vw, (min-width: 1140px) 25vw"
         />
 
         {/* fade */}
