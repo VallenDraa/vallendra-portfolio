@@ -36,13 +36,13 @@ module.exports = withMT({
         },
         "open-nav": {
           "0%": { transform: "translateX(-100%)", opacity: "0.7" },
-          "50%": { transform: "translateX(1px)", opacity: "1" },
+          "50%": { transform: "translateX(3px)", opacity: "1" },
           "70%": { transform: "translateX(-1px)" },
           "100%": { transform: "translateX(0px)" },
         },
         "close-nav": {
           "0%": { transform: "translateX(0)", opacity: 1 },
-          "50%": { transform: "translateX(10px)", opacity: "1" },
+          "50%": { transform: "translateX(8px)", opacity: "1" },
           "100%": { transform: "translateX(-100%)", opacity: "0.7" },
         },
         "open-overlay": {

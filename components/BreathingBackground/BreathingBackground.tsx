@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import pagesEnum from "../../utils/datas/Pages";
 import FloatingSquares from "../FloatingSquares/FloatingSquares";
+import pagesEnum from "../../utils/datas/pages";
 
 export default function BreathingBackground() {
   const { route } = useRouter();

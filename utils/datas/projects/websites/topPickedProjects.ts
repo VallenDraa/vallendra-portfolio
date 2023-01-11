@@ -5,7 +5,8 @@ const topPickedProjects: IProject[] = [
     _id: "1",
     name: "Konnect",
     slug: "konnect",
-    shortDescription: "A chat web app built using React and Node.js",
+    shortDescription:
+      "A chat web app built using React and Node.js with Socket.io for real-time connection",
     description:
       "A chat web app built using React and Node.js. Web Socket technology was used in this project, enabling fast instant two way communication from client to the server.",
     views: 69420,

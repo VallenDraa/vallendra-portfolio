@@ -93,7 +93,7 @@ export default function NavbarComponent() {
       ref={navbarRef}
       className="fixed top-0 z-50 min-w-full py-3 px-0 rounded-none dark:bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] border-0 dark:text-white/90"
     >
-      <div className="max-w-screen-2xl px-8 mx-auto flex items-center justify-between">
+      <div className="max-w-screen-xl px-8 mx-auto flex items-center justify-between">
         {/* name */}
         <Typography as="h2" className="font-bold text-lg lg:basis-1/3">
           <span>Jestine Vallendra Dwi Putra</span>
@@ -101,21 +101,20 @@ export default function NavbarComponent() {
         {/* the nav list */}
         <NavList navListRef={navListRef} overlayRef={overlayRef} />
         {/* cta */}
-        <div className="sm:basis-1/3">
-          <Button
-            variant="filled"
-            color="deep-purple"
-            size="md"
-            className="group hidden lg:flex items-center relative w-max ml-auto rounded-full"
-          >
-            <Link
-              href={"/contacts"}
-              className="duration-200 text-center relative w-max flex justify-center items-center"
+        <div className="sm:basis-1/3 hidden xl:block">
+          <Link href={"/contacts"} className="w-fit block ml-auto ">
+            <Button
+              variant="filled"
+              color="deep-purple"
+              size="md"
+              className="gap-2 group duration-200 text-center relative w-max flex justify-center items-center rounded-full px-4"
             >
-              <span className="group-hover:pr-5 duration-200">Contact Me</span>
-              <IoCall className="absolute right-0 opacity-0 pr-0 group-hover:opacity-100 duration-200" />
-            </Link>
-          </Button>
+              <span className="translate-x-2.5 group-hover:translate-x-0 transition-transform duration-200">
+                Contact Me
+              </span>
+              <IoCall className="text-sm opacity-0 group-hover:opacity-100  relative -translate-x-4 group-hover:translate-x-0 transition duration-200" />
+            </Button>
+          </Link>
         </div>
         <IconButton
           ref={navToggleRef}

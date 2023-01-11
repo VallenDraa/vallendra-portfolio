@@ -14,7 +14,7 @@ export default function SiteFooter() {
 
   return (
     <footer className="bg-gray-900 relative gradient-underline gradient-underline--indigo-to-pink before:!top-0">
-      <div className="max-w-screen-2xl px-8 py-8 mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-5 relative z-40">
+      <div className="max-w-screen-xl px-8 py-8 mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-5 relative z-40">
         <span className="text-gray-400 lg:basis-1/3">
           &copy; {year} VallenDra | Front-End Developer
         </span>

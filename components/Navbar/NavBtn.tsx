@@ -9,24 +9,28 @@ export default function NavBtn({
   href?: string;
 }) {
   return (
-    <Button
-      color="indigo"
-      variant="text"
-      fullWidth
-      className={`${
-        href ? "p-0" : "flex items-center capitalize py-2 px-5 lg:px-3"
-      } text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none lg:rounded-lg`}
-    >
+    <>
       {href ? (
-        <Link
-          href={href}
-          className="flex items-center capitalize py-2 px-5 lg:px-3"
-        >
-          {menu}
+        <Link href={href}>
+          <Button
+            color="indigo"
+            variant="text"
+            fullWidth
+            className="flex items-center capitalize py-2 px-5 lg:px-3 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white duration-200 rounded-none lg:rounded-lg"
+          >
+            {menu}
+          </Button>
         </Link>
       ) : (
-        menu
+        <Button
+          color="indigo"
+          variant="text"
+          fullWidth
+          className="flex items-center capitalize py-2 px-5 lg:px-3 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white duration-200 rounded-none lg:rounded-lg"
+        >
+          {menu}
+        </Button>
       )}
-    </Button>
+    </>
   );
 }

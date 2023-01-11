@@ -50,7 +50,7 @@ export default function CertificatesPage({
         {/* blur */}
         <FadeBottom position="-top-20" />
 
-        <header className="max-w-screen-2xl px-8 mx-auto flex flex-col w-full relative ">
+        <header className="max-w-screen-xl px-8 mx-auto flex flex-col w-full relative ">
           <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-12 rotate-0 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute right-5 top-5" />
 
           {/* heading and searchbar */}
@@ -90,7 +90,7 @@ export default function CertificatesPage({
         </header>
 
         {/* the certificates list */}
-        <main className="max-w-screen-2xl px-12 relative mx-auto grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-5 w-full overflow-hidden">
+        <main className="max-w-screen-xl px-12 relative mx-auto grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-5 w-full overflow-hidden">
           {/* show project when available  */}
           <Show when={certificates.length > 0}>
             {/* {showedIndex.map((idx) => {

@@ -14,7 +14,7 @@ export default function Hero() {
         id="home"
         className="mt-10 mb-24 xl:mb-16 relative z-10"
       >
-        <div className="max-w-screen-2xl px-8 mx-auto flex flex-col xl:flex-row justify-center xl:justify-between items-center">
+        <div className="max-w-screen-xl px-8 mx-auto flex flex-col xl:flex-row justify-center xl:justify-between items-center xl:min-h-[670px]">
           {/* left side */}
           <div className="grow relative">
             {/* my photo */}

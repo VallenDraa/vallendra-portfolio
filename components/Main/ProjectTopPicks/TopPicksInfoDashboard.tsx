@@ -50,7 +50,7 @@ export default function TopPicksInfoDashboard({
               <Chip
                 color="teal"
                 value={activeProject?._id || ""}
-                className="w-12 h-12 rounded-full flex items-center justify-center text-lg"
+                className="w-12 h-12 aspect-square rounded-full flex items-center justify-center text-lg"
               />
             </Show>
           </div>
@@ -110,27 +110,20 @@ export default function TopPicksInfoDashboard({
         divider
         className="flex justify-end gap-2 py-3 border-gray-600 text-gray-500"
       >
-        <Button size="md" variant="text" className="rounded-full p-0">
-          <Link
-            className="inline-block h-full w-full py-3 px-7"
-            href={`/projects/${activeProject?.slug}`}
-          >
+        <Link href={`/projects/${activeProject?.slug}`}>
+          <Button size="md" variant="text" className="rounded-full">
             Detail
-          </Link>
-        </Button>
-        <Button
-          variant="filled"
-          size="md"
-          className="group flex items-center relative w-max rounded-full p-0"
-        >
-          <a
-            target="__blank"
-            href={activeProject?.siteLink || "#"}
-            className="h-full duration-200 text-center relative w-max inline-block py-3 px-7"
+          </Button>
+        </Link>
+        <a target="__blank" href={activeProject?.siteLink || "#"}>
+          <Button
+            variant="filled"
+            size="md"
+            className="group flex items-center relative w-max rounded-full"
           >
             Visit Site
-          </a>
-        </Button>
+          </Button>
+        </a>
       </CardFooter>
     </Card>
   );

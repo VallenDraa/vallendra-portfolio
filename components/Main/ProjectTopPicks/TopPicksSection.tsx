@@ -42,7 +42,7 @@ export default function TopPicksSection() {
             <Typography
               as="h2"
               variant="h2"
-              className="animate-breathing bg-gradient w-max text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
+              className="animate-breathing bg-gradient w-max text-5xl lg:text-6xl !leading-[initial] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
             >
               Top Picks
             </Typography>
@@ -69,7 +69,7 @@ export default function TopPicksSection() {
               />
             </div>
           </div>
-          <div className="max-w-screen-2xl px-6 mx-auto">
+          <div className="max-w-screen-xl px-6 mx-auto">
             {/* the short project name description  */}
             <div className="flex gap-8 my-16 relative min-h-[4070px]">
               <ProjectInfoDashboard

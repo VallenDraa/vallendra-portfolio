@@ -154,32 +154,26 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       />
                     </Button>
                     <AccordionBody className="py-1.5">
-                      <Button
-                        color="indigo"
-                        variant="text"
-                        fullWidth
-                        className="p-0 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
-                      >
-                        <Link
-                          href="/#top-picks"
-                          className="flex items-center capitalize py-2 px-7"
+                      <Link href="/#top-picks">
+                        <Button
+                          color="indigo"
+                          variant="text"
+                          fullWidth
+                          className="capitalize py-2 px-7 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
                         >
                           Top Picks
-                        </Link>
-                      </Button>
-                      <Button
-                        color="indigo"
-                        variant="text"
-                        fullWidth
-                        className="p-0 text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
-                      >
-                        <Link
-                          href="/projects"
-                          className="flex items-center capitalize py-2 px-7"
+                        </Button>
+                      </Link>
+                      <Link href="/projects">
+                        <Button
+                          color="indigo"
+                          variant="text"
+                          fullWidth
+                          className="capitalize py-2 px-7 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white transition duration-200 rounded-none"
                         >
                           All Collections
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </AccordionBody>
                   </Accordion>
                 </Show>
