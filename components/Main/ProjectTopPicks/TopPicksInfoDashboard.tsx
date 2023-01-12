@@ -38,7 +38,7 @@ export default function TopPicksInfoDashboard({
   }, []);
 
   return (
-    <Card className="sticky top-[20%] z-10 bg-gray-900/60 backdrop-blur rounded-xl shadow-md shadow-gray-900/60 h-max w-full inset-x-0">
+    <Card className="sticky top-[20%] z-10 dark:bg-gray-900/60 backdrop-blur rounded-xl shadow-md dark:shadow-gray-900/60 h-max w-full inset-x-0">
       <CardBody className="flex flex-col gap-7">
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-center">
@@ -76,7 +76,7 @@ export default function TopPicksInfoDashboard({
             variant="paragraph"
             className="text-gray-300 font-medium mt-3 "
           >
-            {activeProject?.description || ""}
+            {activeProject?.shortDescription || ""}
           </Typography>
         </div>
 
@@ -92,12 +92,12 @@ export default function TopPicksInfoDashboard({
           </Typography>
           <Typography
             as="p"
-            className="text-gray-400 text-sm font-medium mb-6 mt-2"
+            className="text-gray-400 text-sm font-medium mb-4 mt-2"
           >
             These Are the {activeProject?.tech.length} Technologies That Were
             Used For This Project :
           </Typography>
-          <ul className="flex items-center mt-4 relative gap-1 overflow-auto">
+          <ul className="flex items-center  relative gap-1 overflow-auto">
             {activeProject?.tech.map(
               (tech: technologies, i): JSX.Element => (
                 <li key={i}>{TECHS[tech]}</li>

@@ -51,7 +51,7 @@ export default function Profile() {
                 Front-End Developer.
               </Typography>
             </div>
-            <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
+            <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
               <CardBody>
                 <Typography
                   as="h3"
@@ -72,7 +72,7 @@ export default function Profile() {
                   <li>{TECHS.typescript}</li>
                   <li>{TECHS["node.js"]}</li>
                   <li>{TECHS.react}</li>
-                  <li>{TECHS.java}</li>
+                  <li>{TECHS["next.js"]}</li>
                 </ul>
               </CardBody>
               <CardFooter
@@ -89,7 +89,7 @@ export default function Profile() {
 
         {/* right side */}
         <aside className="flex flex-col md:flex-row xl:flex-col gap-10 xl:basis-1/3 xl:mt-6">
-          <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+          <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"
@@ -111,7 +111,7 @@ export default function Profile() {
             </CardFooter>
           </Card>
 
-          <Card className="bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+          <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"

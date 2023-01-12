@@ -12,6 +12,7 @@ export type technologies =
   | "typescript"
   | "socket.io"
   | "java"
-  | "mongodb";
+  | "mongodb"
+  | "next.js";
 
 export type categories = "website" | "desktop" | "cli" | "games";

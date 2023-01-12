@@ -25,7 +25,7 @@ const topPickedProjects: IProject[] = [
     slug: "casera",
     shortDescription: "A recipe finder web app built using React and Node.js",
     description:
-      "A recipe finder web app built using React and Node.js. I built this site to help those that don't know how to cook. Simply search a recipe and voila",
+      "The purpose of this site is to assist individuals who are not familiar with cooking by providing them with an easy way to search for recipes. With this app, users can simply search for a recipe and the app will provide them with the necessary information to prepare it. Users can also save a certain recipe for later use as well.",
     views: 69420,
     likes: 1231,
     image: "/images/projects/casera.png",
@@ -68,7 +68,7 @@ const topPickedProjects: IProject[] = [
     categoryIds: ["website"],
     comments: [],
     createdAt: new Date("Mar 2 2022").toISOString(),
-    siteLink: "https://ultimawidget.herokuapp.com/",
+    siteLink: "https://ultimawidget.cyclic.app/",
     gitLink: "https://github.com/VallenDraa/ultima_widget",
   },
 ];

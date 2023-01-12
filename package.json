@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@giscus/react": "^2.2.6",
     "@material-tailwind/react": "^1.2.5",
     "@next/font": "13.1.1",
     "@types/node": "18.11.18",

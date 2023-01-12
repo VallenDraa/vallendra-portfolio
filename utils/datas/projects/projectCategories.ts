@@ -13,7 +13,7 @@ const projectCategories: ICategory[] = [
   },
   {
     _id: "3",
-    name: "cli",
+    name: "console app",
     projects: ["10", "11"],
   },
   {

@@ -18,28 +18,29 @@ export default function Redirect() {
           >
             Wanna Work Together ?
           </Typography>
-          <Button
-            className="mt-10 p-0 rounded-full text-xl lg:text-2xl group flex items-center justify-center hover:bg-white focus:bg-white active:bg-white hover:text-gray-900 focus:text-gray-900 text-gray-300 active:text-gray-900 outline outline-2 outline-gray-300 hover:outline-transparent hover:scale-105 hover:-translate-y-1"
-            variant="text"
-          >
-            <Link
-              href="/"
-              className="py-3 px-6 duration-200 text-center relative w-max flex justify-center items-center gap-3"
+          <Link href="/" className="mt-10">
+            <Button
+              className="rounded-full text-xl lg:text-2xl group flex items-center gap-2 justify-center hover:bg-white focus:bg-white active:bg-white hover:text-gray-900 focus:text-gray-900 text-gray-300 active:text-gray-900 outline outline-2 outline-gray-300 hover:outline-transparent hover:scale-105 hover:-translate-y-1"
+              variant="text"
             >
               <span className="duration-200">Contact Me</span>
               <IoCall className="duration-200" />
-            </Link>
-          </Button>
-          <Button
-            variant="text"
-            size="sm"
-            color="gray"
-            className="mt-4 text-xs underline-offset-2 hover:underline hover:text-gray-300 text-gray-500 transition-colors duration-200 rounded-full"
+            </Button>
+          </Link>
+          <Link
+            href="https://github.com/vallendraa"
+            target="_blank"
+            className="mt-4 inline-block"
           >
-            <Link href="https://github.com/vallendraa" target="_blank">
+            <Button
+              variant="text"
+              size="sm"
+              color="gray"
+              className="text-xs underline-offset-2 hover:underline hover:text-gray-300 text-gray-500 transition-colors duration-200 rounded-full"
+            >
               Visit My Github Instead
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

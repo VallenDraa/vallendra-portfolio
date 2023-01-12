@@ -8,9 +8,7 @@ module.exports = withMT({
     fontFamily: {
       sans: ["Segoe UI", "sans-serif"],
     },
-    backgroundSize: {
-      gradient: "400% 400%",
-    },
+    backgroundSize: { gradient: "400% 400%" },
     extend: {
       backgroundImage: {
         "radial-fade":
@@ -74,9 +72,7 @@ module.exports = withMT({
           to: { transform: "translateX(-120vw)" },
         },
         rotate: {
-          "100%": {
-            transform: "rotate(360deg)",
-          },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
       animation: {

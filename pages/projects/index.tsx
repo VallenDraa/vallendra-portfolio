@@ -108,6 +108,9 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           >
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {showedIndex.map((idx) => {
+                if (projects[idx]) {
+
+                  
                 return (
                   <li key={projects[idx]._id}>
                     <ProjectCard
@@ -116,6 +119,8 @@ export default function ProjectsPage({ projects, categories }: IProps) {
                     />
                   </li>
                 );
+                }
+
               })}
             </ul>
           </Show>

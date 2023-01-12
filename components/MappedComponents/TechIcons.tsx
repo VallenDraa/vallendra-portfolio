@@ -6,6 +6,7 @@ import {
   SiJava,
   SiJavascript,
   SiMongodb,
+  SiNextdotjs,
   SiNodedotjs,
   SiReact,
   SiSocketdotio,
@@ -54,6 +55,9 @@ const techIcons: { [key in technologies]: React.ReactElement | null } = {
   ),
   java: (
     <SiJava className="transition-colors duration-200 text-white/50 group-hover:text-red-700 hover:text-red-700" />
+  ),
+  "next.js": (
+    <SiNextdotjs className="transition-colors duration-200 text-white/50 group-hover:text-gray-100 hover:text-gray-100" />
   ),
   ejs: null,
 };

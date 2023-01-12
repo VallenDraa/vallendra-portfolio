@@ -1,7 +1,4 @@
 import {
-  Popover,
-  PopoverHandler,
-  PopoverContent,
   Button,
   Tooltip,
 } from "@material-tailwind/react";
@@ -13,7 +10,11 @@ interface IProps {
   placement?: placement;
 }
 
-export default function IconWithTooltip({ Icon, text, placement }: IProps) {
+export default function IconWithTooltip({
+  Icon,
+  text,
+  placement,
+}: IProps) {
   return (
     <Tooltip
       placement={placement || "bottom"}
