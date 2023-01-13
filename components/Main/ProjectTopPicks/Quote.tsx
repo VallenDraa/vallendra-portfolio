@@ -3,7 +3,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 export default function Quotes() {
   const backgroundRadient =
-    "before:animate-breathing before:bg-gradient before:bg-gradient-to-r before:from-cyan-400 before:to-green-400/90 before:rounded-xl before:absolute before:top-0 before:-bottom-3 before:left-12 before:right-10 before:-skew-x-12";
+    "before:animate-breathing before:bg-gradient before:bg-gradient-to-r before:from-cyan-400 before:to-green-400/90 before:rounded-md before:absolute before:top-0 before:-bottom-3 before:left-12 before:right-10 before:-skew-x-12";
 
   return (
     <div
@@ -28,7 +28,7 @@ export default function Quotes() {
 
       {/* background and shadow for the quote */}
       <div className="" />
-      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/60 rounded-xl absolute inset-y-0 left-12 right-12 transform -skew-x-12 z-10" />
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/60 rounded-md absolute inset-y-0 left-12 right-12 transform -skew-x-12 z-10" />
     </div>
   );
 }

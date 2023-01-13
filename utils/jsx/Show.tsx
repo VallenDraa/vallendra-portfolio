@@ -1,8 +1,8 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 
 interface IProps {
   when: boolean;
-  children: ReactElement[] | ReactElement | string | null;
+  children: ReactNode[] | ReactNode | string | null;
 }
 
 const Show: FC<IProps> = ({ when, children }) => {

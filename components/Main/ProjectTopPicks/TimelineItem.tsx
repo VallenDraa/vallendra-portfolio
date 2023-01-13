@@ -35,13 +35,13 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
     >
       {/* the line */}
       <div
-        className={`bottom-0 -top-6 w-1 bg-gradient-to-b from-green-300 to-blue-400 bg-gradient animate-main-gradient absolute z-10 rounded-full ${
+        className={`bottom-0 -top-6 w-0.5 bg-gradient-to-b from-green-300 to-blue-400 bg-gradient animate-main-gradient absolute z-10 rounded-full ${
           projectIndex % 2 == 0 ? "rotate-180" : ""
         }`}
       />
 
       {/* the moving date */}
-      <div className="opacity-0 lg:opacity-100 capitalize bg-teal-400/90 text-gray-200 shadow font-bold text-2xl tracking-wider sticky top-1/2 -translate-y-1/2 z-20 rounded-full px-5 py-3">
+      <div className="opacity-0 lg:opacity-100 capitalize bg-teal-400/90 text-gray-200 shadow font-bold text-xl sticky top-1/2 -translate-y-1/2 z-20 rounded-full px-5 py-3">
         {projectIndex}
       </div>
     </li>

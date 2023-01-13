@@ -15,10 +15,10 @@
     @apply before:animate-breathing before:bg-gradient before:bg-gradient-to-r before:w-full before:-bottom-2 before:left-0 before:absolute before:h-[1px];
   }
   .gradient-underline--indigo-to-pink {
-    @apply from-indigo-300 to-pink-200;
+    @apply before:from-indigo-300 before:to-pink-200;
   }
   .gradient-underline--cyan-to-green {
-    @apply from-cyan-300 to-green-300;
+    @apply before:from-cyan-300 before:to-green-300;
   }
 
   /* navlist underlay for <lg screen size to smoothen open and closing animation 

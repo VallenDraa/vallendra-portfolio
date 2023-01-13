@@ -17,7 +17,7 @@ export default function Profile() {
       className="dark:bg-gray-900 relative z-10 pb-32"
     >
       {/* main content */}
-      <div className="max-w-screen-xl px-8 mx-auto pt-16 relative flex flex-col xl:flex-row gap-10">
+      <div className="max-w-screen-xl px-8 mx-auto pt-16 relative flex flex-col xl:flex-row gap-8">
         {/* left side */}
         <div className="xl:basis-2/3 mt-4 flex flex-col relative">
           {/* blur */}
@@ -51,7 +51,7 @@ export default function Profile() {
                 Front-End Developer.
               </Typography>
             </div>
-            <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
+            <Card className="rounded-md dark:bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-green-800 hover:shadow-lg">
               <CardBody>
                 <Typography
                   as="h3"
@@ -88,8 +88,8 @@ export default function Profile() {
         </div>
 
         {/* right side */}
-        <aside className="flex flex-col md:flex-row xl:flex-col gap-10 xl:basis-1/3 xl:mt-6">
-          <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+        <aside className="flex flex-col md:flex-row xl:flex-col gap-8 xl:basis-1/3 xl:mt-6">
+          <Card className="rounded-md dark:bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-light-blue-800 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"
@@ -111,7 +111,7 @@ export default function Profile() {
             </CardFooter>
           </Card>
 
-          <Card className="dark:bg-gray-800/40 shadow-lg shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
+          <Card className="rounded-md dark:bg-gray-800/40 shadow-md shadow-gray-800/60 duration-200 hover:shadow-pink-500 hover:shadow-lg basis-1/2 xl:basis-auto grow">
             <CardBody>
               <Typography
                 as="h3"

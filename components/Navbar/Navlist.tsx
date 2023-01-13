@@ -96,16 +96,12 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
             <Fragment key={menu}>
               {/* menu for other than projects and certicates */}
               <Show when={menu !== "projects" && menu !== "certificates"}>
-                <div>
-                  <NavBtn menu={menu} href={`/#${menu}`} />
-                </div>
+                <NavBtn menu={menu} href={`/#${menu}`} />
               </Show>
 
               {/* for certticates page menu */}
               <Show when={menu === "certificates"}>
-                <div>
-                  <NavBtn menu={menu} href={`/${menu}`} />
-                </div>
+                <NavBtn menu={menu} href={`/${menu}`} />
               </Show>
 
               {/* for project menu link */}

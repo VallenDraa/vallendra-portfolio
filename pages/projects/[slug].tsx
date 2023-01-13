@@ -3,17 +3,22 @@ import { IProject } from "../../interfaces/projectInterfaces";
 import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";
-import { Button, Card, Typography } from "@material-tailwind/react";
+import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import Link from "next/link";
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Image from "next/image";
 import { technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
-import { FaDownload, FaGithub, FaGlobe } from "react-icons/fa";
+import { FaDownload, FaGithub } from "react-icons/fa";
+import { SlGlobe } from "react-icons/sl";
 import Show from "../../utils/jsx/Show";
-import Comment from "../../components/ProjectDetails/Comment/Comment";
+import Comment from "../../components/DetailsPage/Comment";
+import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
+import ActionButton from "../../components/DetailsPage/ActionButton";
+import SectionHeading from "../../components/SectionHeading";
+import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
+import { useState } from "react";
 
 interface IProjectRedirect {
   slug: string;
@@ -32,6 +37,22 @@ export default function ProjectDetails({
   nextProject,
 }: IPropsData) {
   const pageTitle = `VallenDra | ${project.name}`;
+  const hasSiteOrDownloadLink = !!(project.downloadLink || project.siteLink);
+
+  /* Likes
+  ========= */
+  const [likes, setLikes] = useState(project.likes);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  async function addLike() {
+    if (!hasLiked) {
+      setLikes((likes) => likes + 1);
+      setHasLiked(true);
+    } else {
+      setLikes((likes) => likes - 1);
+      setHasLiked(false);
+    }
+  }
 
   return (
     <>
@@ -44,21 +65,18 @@ export default function ProjectDetails({
         <FadeBottom position="-top-20" />
 
         <header className="max-w-screen-xl px-8 mx-auto flex flex-col w-full overflow-hidden mt-6">
-          <section className="pb-3 relative z-10 border-b-2 dark:border-gray-700">
+          <section className="pb-3 relative z-10 border-b-2 border-white/30">
             {/* back to project button */}
-            <Link
-              href="/projects"
-              className="pb-2 text-pink-200 relative border-b-[1px] border-transparent hover:border-pink-200 w-fit h-fit flex items-center gap-1"
-            >
+            <LinkWithUnderline href="/projects">
               <BsArrowLeft />
               Back To Projects
-            </Link>
+            </LinkWithUnderline>
 
             {/* title */}
             <Typography
               as="h1"
               variant="h1"
-              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40 w-fit mt-2 leading-[initial]"
+              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-4xl md:text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40 w-fit mt-4 !leading-[initial]"
             >
               {project.name}
             </Typography>
@@ -67,13 +85,13 @@ export default function ProjectDetails({
             <Typography
               as="p"
               variant="paragraph"
-              className="dark:text-gray-200 font-medium pl-0.5 text-justify mt-2 text-lg"
+              className="dark:text-gray-200 font-medium pl-0.5 text-justify mt-2 text-sm md:text-lg"
             >
               {project.shortDescription}
             </Typography>
 
-            {/* project likes and views*/}
-            <div className="flex gap-2 mt-2.5 dark:text-gray-400">
+            {/* project views*/}
+            <div className="flex gap-3 mt-2.5 dark:text-gray-400">
               <Typography
                 variant="paragraph"
                 as="span"
@@ -91,15 +109,15 @@ export default function ProjectDetails({
                 className="flex items-center gap-1 text-sm font-bold"
               >
                 <AiFillHeart />
-                {project.likes} likes
+                {likes} likes
               </Typography>
             </div>
           </section>
         </header>
 
         {/* the project data */}
-        <main className="max-w-screen-xl px-8 relative mx-auto grow pt-5 pb-10 w-full flex flex-col gap-8">
-          {/* detail */}
+        <main className="max-w-screen-xl px-8 relative mx-auto grow py-5 w-full flex flex-col gap-8">
+          {/* image */}
           <figure className="w-[95%] mx-auto">
             <Image
               priority
@@ -111,133 +129,117 @@ export default function ProjectDetails({
             />
 
             <figcaption className="dark:text-gray-500 text-sm pt-2 text-center">
-              <span>{project.name} screenshot</span>
+              <span>Screenshot of {project.name}</span>
             </figcaption>
           </figure>
 
           {/* details */}
-          <div className="relative flex flex-col gap-12">
-            {/* app tech stack */}
-            <div className="flex flex-col gap-4 relative z-10">
-              <Typography
-                as="h2"
-                variant="h3"
-                className="dark:text-white/90 capitalize font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1 h-fit leading-[initial]"
-              >
-                Tech-Stack
-              </Typography>
-              <ul className="flex items-center relative gap-1 overflow-auto">
-                {project?.tech.map(
-                  (tech: technologies, i): JSX.Element => (
-                    <li key={i}>{TECHS[tech]}</li>
-                  )
-                )}
-              </ul>
+          <section className="flex flex-col lg:flex-row gap-8 lg:gap-2">
+            <div className="relative flex flex-col gap-12 basis-3/4">
+              {/* app tech stack */}
+              <div className="flex flex-col gap-4 relative z-10">
+                <SectionHeading>Tech Stack</SectionHeading>
+                <ul className="flex items-center relative gap-1 overflow-auto">
+                  {project?.tech.map(
+                    (tech: technologies, i): JSX.Element => (
+                      <li key={i}>{TECHS[tech]}</li>
+                    )
+                  )}
+                </ul>
+              </div>
+
+              {/* description and features of the app */}
+              <div className="flex flex-col gap-4 relative z-10">
+                <SectionHeading>Description</SectionHeading>
+                <Typography
+                  variant="paragraph"
+                  className="dark:text-white/80 px-3 font-normal leading-loose"
+                >
+                  {project.description}
+                </Typography>
+              </div>
             </div>
 
-            {/* description and features of the app */}
-            <div className="flex flex-col gap-4 relative z-10">
-              <Typography
-                as="h2"
-                variant="h3"
-                className="dark:text-white/90 capitalize font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1 h-fit leading-[initial]"
-              >
-                Description
-              </Typography>
-              <Typography
-                variant="paragraph"
-                className="dark:text-white/80 px-3"
-              >
-                {project.description}
-              </Typography>
-            </div>
-          </div>
-
-          {/* links */}
-          <Card className="relative flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-3 py-4 dark:bg-gray-800/40">
             {/* link for the code of this project */}
-            <div className="flex justify-between gap-2 static md:absolute md:left-1/2 md:-translate-x-1/2">
-              {/* Github Link */}
-              <Link
-                className="inline-block"
-                target="_blank"
-                href={project.gitLink}
-              >
-                <Button
-                  variant="filled"
-                  color="gray"
-                  className="flex items-center gap-1.5 shadow-sm hover:shadow text-gray-200 bg-gray-800 rounded-full"
-                >
-                  <FaGithub className="text-gray-100 text-xl" />
-                  Visit Repo
-                </Button>
-              </Link>
-
-              <Show when={!!(project.downloadLink || project.siteLink)}>
-                <Link
-                  className="inline-block"
-                  target="_blank"
-                  href={`${project.downloadLink || project.siteLink}`}
-                >
-                  <Button
-                    variant="filled"
+            <aside className="sticky top-0 h-fit grow flex flex-row lg:flex-col justify-between items-center gap-4 mt-3 p-4 border-2 border-[#30363d] rounded-md">
+              <div className="flex flex-col gap-3 w-full">
+                <Show when={hasSiteOrDownloadLink}>
+                  <ActionButton
+                    href={`${project.downloadLink || project.siteLink}`}
+                    variant="outlined"
                     color="blue"
-                    className="flex items-center gap-1.5 shadow-sm hover:shadow text-gray-200 rounded-full"
+                    className="w-full flex justify-center"
                   >
                     {/* download text */}
                     <Show when={!!project.downloadLink}>
-                      <>
-                        <FaDownload className="text-gray-200 text-xl" />
-                        Download
-                      </>
+                      <FaDownload className="text-blue-500 text-lg" />
+                      <span>Download</span>
                     </Show>
 
                     {/* website text */}
                     <Show when={!!project.siteLink}>
-                      <>
-                        <FaGlobe className="text-gray-200 text-xl" />
-                        Visit Site
-                      </>
+                      <SlGlobe className="text-blue-500 text-lg" />
+                      <span>Visit Site</span>
                     </Show>
-                  </Button>
-                </Link>
-              </Show>
-            </div>
+                  </ActionButton>
+                </Show>
 
-            {/* links to previous and next projects */}
-            <div className="w-full flex justify-between">
-              {/* link to previous listed projects */}
-              <Link
-                className="inline-block"
-                href={`/projects/${prevProject.slug}`}
+                {/* Github Link */}
+                <ActionButton
+                  href={project.gitLink}
+                  variant="outlined"
+                  color="gray"
+                  className="w-full flex justify-center border-gray-400 text-gray-400"
+                >
+                  <FaGithub className="text-gray-400 text-lg" />
+                  <span>Visit Repo</span>
+                </ActionButton>
+
+                {/* copy link to clipboard */}
+                <CopyLinkBtn />
+              </div>
+
+              <Tooltip
+                placement="top"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                content={
+                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
+                }
               >
                 <Button
+                  onClick={addLike}
                   variant="text"
-                  color="indigo"
-                  className="underline-offset-2 hover:underline transition-colors text-indigo-200 rounded-full"
+                  color={hasLiked ? "red" : "gray"}
+                  className="text-5xl flex flex-col items-center gap-1"
                 >
-                  {"<"} {prevProject.name}
+                  <AiFillHeart />
+                  <span className="text-sm">{likes}</span>
                 </Button>
-              </Link>
-
-              {/* link to next listed projects */}
-              <Link
-                className="inline-block"
-                href={`/projects/${nextProject.slug}`}
-              >
-                <Button
-                  variant="text"
-                  color="indigo"
-                  className="underline-offset-2 hover:underline transition-colors text-indigo-200 rounded-full"
-                >
-                  {nextProject.name} {">"}
-                </Button>
-              </Link>
-            </div>
-          </Card>
+              </Tooltip>
+            </aside>
+          </section>
 
           {/* comments */}
-          <Comment />
+          <section className="mb-5">
+            <Comment />
+            {/* links to previous and next projects */}
+            <div className="w-full flex justify-between mt-5 text-lg">
+              {/* link to previous listed projects */}
+              <LinkWithUnderline href={`/projects/${prevProject.slug}`}>
+                <BsArrowLeft />
+                {prevProject.name}
+              </LinkWithUnderline>
+
+              {/* link to next listed projects */}
+              <LinkWithUnderline href={`/projects/${prevProject.slug}`}>
+                {nextProject.name}
+                <BsArrowRight />
+              </LinkWithUnderline>
+            </div>
+          </section>
         </main>
         <SiteFooter />
       </div>

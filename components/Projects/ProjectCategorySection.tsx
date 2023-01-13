@@ -2,6 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { ICategory, IProject } from "../../interfaces/projectInterfaces";
 import { useMemo } from "react";
 import ProjectCard from "./ProjectCard";
+import SectionHeading from "../SectionHeading";
 
 interface IProps {
   categoryIndex: number;
@@ -32,16 +33,10 @@ export default function ProjectCategorySection({
 
   return (
     <section className="flex flex-col gap-6">
-      <Typography
-        as="h3"
-        variant="h3"
-        className="dark:text-white/90 capitalize font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1"
-      >
-        {category.name}
-      </Typography>
+      <SectionHeading>{category.name}</SectionHeading>
 
       {/* display projects in this category */}
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 px-1">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-2">
         {category.projects.map((id, i) => {
           return (
             <li key={id}>
@@ -49,7 +44,6 @@ export default function ProjectCategorySection({
                 imgIsPriority={isImgImportant(categoryIndex, i)}
                 project={projectsInCategory[id]}
               />
-              ;
             </li>
           );
         })}

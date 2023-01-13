@@ -106,7 +106,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           <Show
             when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {showedIndex.map((idx) => {
                 if (projects[idx]) {
                   return (

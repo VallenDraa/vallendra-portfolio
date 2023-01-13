@@ -18,7 +18,7 @@ export default function ProjectCard({
     <div>
       <Link
         href={`/projects/${project.slug}`}
-        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-xl aspect-square group hover:scale-105 transition-transform duration-300 ease-out"
+        className="block w-full bg-transparent overflow-clip relative shadow-lg shadow-gray-800/40 rounded-md aspect-square group hover:scale-105 transition-transform duration-300 ease-out"
       >
         {/* image */}
         <Image
@@ -38,7 +38,7 @@ export default function ProjectCard({
           {/* project title */}
 
           <Typography
-            variant="h4"
+            variant="h5"
             as="h4"
             className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-amber-200 font-bold px-3"
           >
@@ -49,7 +49,7 @@ export default function ProjectCard({
           <Typography
             variant="paragraph"
             as="p"
-            className="text-white/90 font-normal text-sm mt-1 px-3"
+            className="text-white/90 font-normal text-sm mt-1 px-3 md:line-clamp-2"
           >
             {project.shortDescription}
           </Typography>
@@ -59,7 +59,7 @@ export default function ProjectCard({
             <Typography
               variant="paragraph"
               as="span"
-              className="text-light-green-300 flex items-center gap-1 text-sm font-bold"
+              className="text-light-green-300 flex items-center gap-1 text-xs font-bold"
             >
               <AiFillEye />
               {compactNumberFormatter.format(project.views)}
@@ -68,7 +68,7 @@ export default function ProjectCard({
             <Typography
               variant="paragraph"
               as="span"
-              className="text-red-300 flex items-center gap-1 text-sm font-bold"
+              className="text-red-300 flex items-center gap-1 text-xs font-bold"
             >
               <AiFillHeart />
               {compactNumberFormatter.format(project.likes)}
@@ -84,7 +84,7 @@ export default function ProjectCard({
 
           <Button
             variant="text"
-            className="relative w-full py-3 px-7 flex items-center justify-center gap-2 text-indigo-300 rounded-none border-t-2 border-gray-500/30 mt-2"
+            className="relative w-full py-2 px-7 flex items-center justify-center gap-2 text-indigo-300 rounded-none border-t-2 border-gray-500/30 mt-2"
             color="indigo"
           >
             <span className="translate-x-3 group-hover:translate-x-0 transition-transform duration-200">

@@ -38,7 +38,7 @@ export default function TopPicksInfoDashboard({
   }, []);
 
   return (
-    <Card className="sticky top-[20%] z-10 dark:bg-gray-900/60 backdrop-blur rounded-xl shadow-md dark:shadow-gray-900/60 h-max w-full inset-x-0">
+    <Card className="sticky top-[20%] z-10 dark:bg-gray-900/60 backdrop-blur rounded-md shadow-md dark:shadow-gray-900/60 h-max w-full inset-x-0">
       <CardBody className="flex flex-col gap-7">
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-center">

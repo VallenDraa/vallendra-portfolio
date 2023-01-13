@@ -51,7 +51,7 @@ export default function TopPicksSection() {
         </header>
 
         {/* main content */}
-        <footer className="relative pb-20 pt-5">
+        <footer className="relative py-7">
           <div className="sticky top-0">
             <div className="absolute inset-x-0 h-screen overflow-hidden">
               <Image
@@ -71,7 +71,7 @@ export default function TopPicksSection() {
           </div>
           <div className="max-w-screen-xl px-6 mx-auto">
             {/* the short project name description  */}
-            <div className="flex gap-8 my-16 relative min-h-[4070px]">
+            <div className="flex gap-8 mt-16 relative min-h-[4000px]">
               <ProjectInfoDashboard
                 activeProject={topPickedProjects[activeProjectIdx]}
               />
@@ -87,7 +87,7 @@ export default function TopPicksSection() {
         </footer>
       </div>
 
-      <Line className="scale-y-[6] relative bottom-5 left-1/2 -translate-x-1/2 bg-white/40 z-30" />
+      <Line className="scale-y-[3.5] relative -bottom-10 left-1/2 -translate-x-1/2 bg-white/40 z-30" />
     </section>
   );
 }
