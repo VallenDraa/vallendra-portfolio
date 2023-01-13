@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
-import SiteFooter from "../../components/SiteFooter/SiteFooter";
+import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
@@ -109,18 +109,15 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {showedIndex.map((idx) => {
                 if (projects[idx]) {
-
-                  
-                return (
-                  <li key={projects[idx]._id}>
-                    <ProjectCard
-                      imgIsPriority={false}
-                      project={projects[idx]}
-                    />
-                  </li>
-                );
+                  return (
+                    <li key={projects[idx]._id}>
+                      <ProjectCard
+                        imgIsPriority={false}
+                        project={projects[idx]}
+                      />
+                    </li>
+                  );
                 }
-
               })}
             </ul>
           </Show>

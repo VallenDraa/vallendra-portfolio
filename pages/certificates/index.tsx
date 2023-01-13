@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
-import Line from "../../components/Line/Line";
-import SiteFooter from "../../components/SiteFooter/SiteFooter";
+import Line from "../../components/Line";
+import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
 import { IProject } from "../../interfaces/projectInterfaces";

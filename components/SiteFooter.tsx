@@ -1,8 +1,8 @@
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
+import IconWithTooltip from "./IconWithTooltip";
 import Link from "next/link";
 import { useMemo } from "react";
-import Line from "../Line/Line";
+import Line from "./Line";
 
 export default function SiteFooter() {
   const year = useMemo(() => new Date().getFullYear(), []);

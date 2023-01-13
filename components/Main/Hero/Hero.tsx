@@ -1,9 +1,9 @@
 import { Typography } from "@material-tailwind/react";
-import FloatingSquares from "../../FloatingSquares/FloatingSquares";
+import FloatingSquares from "../../FloatingSquares";
 import Image from "next/image";
 import myPic from "../../../public/images/vallen-icon.png";
 import FadeBottom from "../../FadePageTranstition/FadeBottom";
-import Line from "../../Line/Line";
+import Line from "../../Line";
 
 export default function Hero() {
   return (

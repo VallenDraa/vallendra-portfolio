@@ -7,7 +7,7 @@ import {
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
-import Line from "../../Line/Line";
+import Line from "../../Line";
 
 export default function Profile() {
   return (

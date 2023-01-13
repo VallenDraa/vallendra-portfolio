@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { IProject } from "../../interfaces/projectInterfaces";
 import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
-import SiteFooter from "../../components/SiteFooter/SiteFooter";
+import SiteFooter from "../../components/SiteFooter";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
@@ -13,7 +13,7 @@ import { technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub, FaGlobe } from "react-icons/fa";
 import Show from "../../utils/jsx/Show";
-import Comment from "../../components/Comment/Comment";
+import Comment from "../../components/ProjectDetails/Comment/Comment";
 
 interface IProjectRedirect {
   slug: string;
@@ -154,9 +154,9 @@ export default function ProjectDetails({
           </div>
 
           {/* links */}
-          <Card className="relative flex flex-col lg:flex-row justify-between items-center gap-4 mt-8 px-3 py-4 dark:bg-gray-800/40">
+          <Card className="relative flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-3 py-4 dark:bg-gray-800/40">
             {/* link for the code of this project */}
-            <div className="flex justify-between gap-2 static lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+            <div className="flex justify-between gap-2 static md:absolute md:left-1/2 md:-translate-x-1/2">
               {/* Github Link */}
               <Link
                 className="inline-block"

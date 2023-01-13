@@ -9,6 +9,7 @@ export interface IComment {
 
 export interface IProject {
   _id: string;
+  icon?: string;
   name: string;
   slug: string;
   shortDescription: string;

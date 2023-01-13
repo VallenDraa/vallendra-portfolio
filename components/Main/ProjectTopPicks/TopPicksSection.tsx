@@ -10,7 +10,7 @@ import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
 import FadeTop from "../../FadePageTranstition/FadeTop";
 import FadeBottom from "../../FadePageTranstition/FadeBottom";
-import Line from "../../Line/Line";
+import Line from "../../Line";
 
 export default function TopPicksSection() {
   const { history } = useContext(

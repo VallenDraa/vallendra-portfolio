@@ -14,7 +14,7 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
-import IconWithTooltip from "../IconWithTooltip/IconWithTooltip";
+import IconWithTooltip from "../IconWithTooltip";
 import { technologies } from "../../types/types";
 
 const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
