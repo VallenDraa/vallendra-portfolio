@@ -42,19 +42,19 @@ export default function ProjectsPage({ projects, categories }: IProps) {
       <Head>
         <title>VallenDra | Projects</title>
       </Head>
-      <div className="relative min-h-screen flex flex-col dark:bg-gray-900 translate-y-40">
+      <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
         {/* blur */}
-        <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-12 rotate-0 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute right-20 top-20" />
+        <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
         <FadeBottom position="-top-20" />
 
-        <header className="max-w-screen-xl px-8 mx-auto flex flex-col w-full relative overflow-hidden mt-6 mb-3">
+        <header className="relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           {/* heading and searchbar */}
           <section className="relative z-10">
-            <div className="flex items-center gap-1 relative w-fit gradient-underline gradient-underline--indigo-to-pink">
+            <div className="gradient-underline gradient-underline--indigo-to-pink relative flex w-fit items-center gap-1">
               <Typography
                 as="h2"
                 variant="h2"
-                className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40"
+                className="relative z-40 animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
               >
                 All Projects
               </Typography>
@@ -64,7 +64,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <Typography
               as="p"
               variant="paragraph"
-              className="text-white/80 font-medium leading-loose pl-0.5 text-justify mt-5"
+              className="mt-5 pl-0.5 text-justify font-medium leading-loose text-white/80"
             >
               The ultimate showcase of all my projects. Mostly web but there are
               others as well.
@@ -78,13 +78,13 @@ export default function ProjectsPage({ projects, categories }: IProps) {
               placeholder={
                 isError ? "Please Try Again Later..." : "Search Projects..."
               }
-              className="disabled:cursor-not-allowed outline-none w-full rounded-lg mt-6 h-12 px-4 dark:bg-gray-800/70 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800 dark:text-gray-300 text-lg transition-colors"
+              className="mt-6 h-12 w-full rounded-lg px-4 text-lg outline-none transition-colors disabled:cursor-not-allowed dark:bg-gray-800/70 dark:text-gray-300 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800"
             />
           </section>
         </header>
 
         {/* the projects list */}
-        <main className="max-w-screen-xl px-10 relative mx-auto grow pt-5 pb-10 w-full">
+        <main className="relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10">
           {/* initial render for projects with categories */}
           <Show when={projects.length > 0 && query === ""}>
             <div className="space-y-10">
@@ -106,7 +106,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           <Show
             when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {showedIndex.map((idx) => {
                 if (projects[idx]) {
                   return (
@@ -125,18 +125,18 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           {/* for empty search result */}
           <Show when={projects.length > 0 && showedIndex.length === 0}>
             {/* text fallback */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">
+            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
               <Typography
                 variant="h4"
                 as="h2"
-                className="dark:text-white/80 text-lg md:text-xl lg:text-2xl"
+                className="text-lg dark:text-white/80 md:text-xl lg:text-2xl"
               >
                 Sorry, Can't Find Anything 😕
               </Typography>
               <Typography
                 variant="h5"
                 as="h3"
-                className="dark:text-white/60 text-sm md:text-base lg:text-lg"
+                className="text-sm dark:text-white/60 md:text-base lg:text-lg"
               >
                 Try searching for something else.
               </Typography>
@@ -146,18 +146,18 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           {/* fallback for when the projects failed to load */}
           <Show when={projects.length === 0 || !projects}>
             {/* text fallback */}
-            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-center space-y-2 w-full px-8">
+            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
               <Typography
                 variant="h4"
                 as="h2"
-                className="dark:text-white/80 text-lg md:text-xl lg:text-2xl"
+                className="text-lg dark:text-white/80 md:text-xl lg:text-2xl"
               >
                 Sorry, Can't Seem To Load The Projects 😅
               </Typography>
               <Typography
                 variant="h5"
                 as="h3"
-                className="dark:text-white/60 text-sm md:text-base lg:text-lg"
+                className="text-sm dark:text-white/60 md:text-base lg:text-lg"
               >
                 Try reloading the page. If the problem persists, please try
                 again later.

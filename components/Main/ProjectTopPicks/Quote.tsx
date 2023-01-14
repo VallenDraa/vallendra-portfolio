@@ -7,28 +7,28 @@ export default function Quotes() {
 
   return (
     <div
-      className={`flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 relative z-10 py-8 max-w-screen-xl px-8 mx-auto ${backgroundRadient}`}
+      className={`relative z-10 mx-auto flex max-w-screen-xl flex-col items-center gap-4 py-8 px-8 sm:gap-6 lg:gap-8 ${backgroundRadient}`}
     >
-      <FaQuoteLeft className="text-7xl md:text-8xl lg:text-9xl absolute text-cyan-100/20 right-24 bottom-5 z-20" />
+      <FaQuoteLeft className="absolute right-24 bottom-5 z-20 text-7xl text-cyan-100/20 md:text-8xl lg:text-9xl" />
       <Typography
         as="q"
         variant="h1"
-        className="text-gray-50 font-extrabold text-center text-5xl md:text-6xl xl:text-7xl pb-4 relative z-20"
+        className="relative z-20 pb-4 text-center text-5xl font-extrabold text-gray-50 md:text-6xl xl:text-7xl"
       >
         The only source of knowledge is{" "}
-        <em className="underline text-cyan-300/90">experience.</em>
+        <em className="text-cyan-300/90 underline">experience.</em>
       </Typography>
       <Typography
         as="span"
         variant="h4"
-        className="text-xl sm:text-2xl md:text-3xl relative z-20 font-bold text-white/50"
+        className="relative z-20 text-xl font-bold text-white/50 sm:text-2xl md:text-3xl"
       >
         - Albert Einstein
       </Typography>
 
       {/* background and shadow for the quote */}
       <div className="" />
-      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/60 rounded-md absolute inset-y-0 left-12 right-12 transform -skew-x-12 z-10" />
+      <div className="absolute inset-y-0 left-12 right-12 z-10 -skew-x-12 transform rounded-md bg-gradient-to-r from-gray-900/90 to-gray-800/60" />
     </div>
   );
 }

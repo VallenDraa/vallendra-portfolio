@@ -15,7 +15,7 @@ export default function LinkWithUnderline({
   return (
     <Link
       href={href}
-      className={`px-1 text-pink-200 relative gradient-underline before:from-gray-600 before:to-gray-600 before:hover:from-pink-200 before:hover:to-pink-200 before:hover:-translate-y-1 before:transition before:duration-200 w-fit h-fit flex items-center gap-1 ${className}`}
+      className={`gradient-underline relative flex h-fit w-fit items-center gap-1 px-1 text-pink-200 before:from-gray-600 before:to-gray-600 before:transition before:duration-200 before:hover:-translate-y-1 before:hover:from-pink-200 before:hover:to-pink-200 ${className}`}
     >
       {children}
     </Link>

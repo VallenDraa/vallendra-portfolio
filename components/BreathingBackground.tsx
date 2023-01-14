@@ -28,7 +28,7 @@ export default function BreathingBackground() {
   return (
     <div
       ref={bgRef}
-      className="absolute bg-gradient bg-main-gradient animate-main-gradient inset-x-0"
+      className="absolute inset-x-0 animate-main-gradient bg-main-gradient bg-gradient"
     >
       <FloatingSquares />
     </div>

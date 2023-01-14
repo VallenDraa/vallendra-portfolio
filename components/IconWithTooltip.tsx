@@ -1,7 +1,4 @@
-import {
-  Button,
-  Tooltip,
-} from "@material-tailwind/react";
+import { Button, Tooltip } from "@material-tailwind/react";
 import { placement } from "@material-tailwind/react/types/components/menu";
 
 interface IProps {
@@ -10,11 +7,7 @@ interface IProps {
   placement?: placement;
 }
 
-export default function IconWithTooltip({
-  Icon,
-  text,
-  placement,
-}: IProps) {
+export default function IconWithTooltip({ Icon, text, placement }: IProps) {
   return (
     <Tooltip
       placement={placement || "bottom"}

@@ -19,7 +19,7 @@ export default function ActionButton({
         onClick={onClick}
         variant={variant}
         color={color}
-        className={`flex items-center gap-1.5 shadow-sm hover:shadow py-2 px-4 rounded ${className}`}
+        className={`flex items-center gap-1.5 rounded py-2 px-4 shadow-sm hover:shadow ${className}`}
       >
         {children}
       </Button>
@@ -29,7 +29,7 @@ export default function ActionButton({
       onClick={onClick}
       variant={variant}
       color={color}
-      className={`flex items-center gap-1.5 shadow-sm hover:shadow py-2 px-4 rounded ${className}`}
+      className={`flex items-center gap-1.5 rounded py-2 px-4 shadow-sm hover:shadow ${className}`}
     >
       {children}
     </Button>

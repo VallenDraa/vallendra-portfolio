@@ -19,7 +19,7 @@ const Logo: FC = () => {
       </svg>
       {/* inner blob */}
       <svg
-        className="w-[450px] absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+        className="absolute top-1/2 left-1/2 w-[450px] -translate-y-1/2 -translate-x-1/2"
         viewBox="0 0 200 200"
         xmlns="https://www.w3.org/2000/svg"
       >

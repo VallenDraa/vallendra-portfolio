@@ -91,28 +91,28 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="fixed top-0 z-50 min-w-full py-3 px-0 rounded-none dark:bg-gray-800/50 backdrop-blur-md backdrop-saturate-[1.275] border-0 dark:text-white/90"
+      className="fixed top-0 z-50 min-w-full rounded-none border-0 py-3 px-0 backdrop-blur-md backdrop-saturate-[1.275] dark:bg-gray-800/50 dark:text-white/90"
     >
-      <div className="max-w-screen-xl px-8 mx-auto flex items-center justify-between">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8">
         {/* name */}
-        <Typography as="h2" className="font-bold text-lg lg:basis-1/3">
+        <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
           <span>Jestine Vallendra Dwi Putra</span>
         </Typography>
         {/* the nav list */}
         <NavList navListRef={navListRef} overlayRef={overlayRef} />
         {/* cta */}
-        <div className="sm:basis-1/3 hidden xl:block">
-          <Link href={"/contacts"} className="w-fit block ml-auto ">
+        <div className="hidden sm:basis-1/3 xl:block">
+          <Link href={"/contacts"} className="ml-auto block w-fit ">
             <Button
               variant="filled"
               color="deep-purple"
               size="md"
-              className="gap-2 group duration-200 text-center relative w-max flex justify-center items-center rounded-full px-4"
+              className="group relative flex w-max items-center justify-center gap-2 rounded-full px-4 text-center duration-200"
             >
-              <span className="translate-x-2.5 group-hover:translate-x-0 transition-transform duration-200">
+              <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
                 Contact Me
               </span>
-              <IoCall className="text-sm opacity-0 group-hover:opacity-100  relative -translate-x-4 group-hover:translate-x-0 transition duration-200" />
+              <IoCall className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
             </Button>
           </Link>
         </div>
@@ -124,7 +124,7 @@ export default function NavbarComponent() {
           onClick={() => setNavIsOpened(true)}
         >
           <BiMenuAltRight
-            className={`transition duration-200 dark:text-gray-200 text-4xl`}
+            className={`text-4xl transition duration-200 dark:text-gray-200`}
           />
         </IconButton>
       </div>

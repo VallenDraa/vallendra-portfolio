@@ -33,7 +33,7 @@ export default function GoToTopBtn() {
       ripple={false}
       variant="filled"
       color="deep-purple"
-      className={`fixed bottom-5 z-40 right-10 translate-x-[200%] opacity-30 hover:opacity-100 transition duration-500`}
+      className={`fixed bottom-5 right-10 z-40 translate-x-[200%] opacity-30 transition duration-500 hover:opacity-100`}
     >
       <a href="#" className="block p-2">
         <VscTriangleUp className="text-xl" />

@@ -28,21 +28,21 @@ export default function TopPicksSection() {
     <section
       aria-label="top-picks-section"
       id="top-picks"
-      className="dark:bg-gray-900 relative pt-32"
+      className="relative pt-32 dark:bg-gray-900"
     >
       <Quote />
 
       {/* main timeline */}
-      <div className="mx-auto relative">
-        <Line className="scale-y-[2] bg-gradient-to-b from-cyan-300/40 to-green-300/40 absolute left-1/2 top-16" />
+      <div className="relative mx-auto">
+        <Line className="absolute left-1/2 top-16 scale-y-[2] bg-gradient-to-b from-cyan-300/40 to-green-300/40" />
 
         {/* section Title */}
-        <header className="relative pt-40 flex flex-col items-center">
-          <div className="flex items-center gap-1 relative h-20 z-20 gradient-underline gradient-underline--cyan-to-green">
+        <header className="relative flex flex-col items-center pt-40">
+          <div className="gradient-underline gradient-underline--cyan-to-green relative z-20 flex h-20 items-center gap-1">
             <Typography
               as="h2"
               variant="h2"
-              className="animate-breathing bg-gradient w-max text-5xl lg:text-6xl !leading-[initial] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-green-200 font-bold capitalize"
+              className="w-max animate-breathing bg-gradient-to-r from-cyan-300 to-green-200 bg-gradient bg-clip-text text-5xl font-bold capitalize !leading-[initial] text-transparent lg:text-6xl"
             >
               Top Picks
             </Typography>
@@ -55,7 +55,7 @@ export default function TopPicksSection() {
           <div className="sticky top-0">
             <div className="absolute inset-x-0 h-screen overflow-hidden">
               <Image
-                className="object-cover sticky top-0 min-w-full min-h-full z-0 opacity-30"
+                className="sticky top-0 z-0 min-h-full min-w-full object-cover opacity-30"
                 src={
                   topPickedProjects[activeProjectIdx]?.image ||
                   topPickedProjects[0]?.image
@@ -69,9 +69,9 @@ export default function TopPicksSection() {
               />
             </div>
           </div>
-          <div className="max-w-screen-xl px-6 mx-auto">
+          <div className="mx-auto max-w-screen-xl px-6">
             {/* the short project name description  */}
-            <div className="flex gap-8 mt-16 relative min-h-[4000px]">
+            <div className="relative mt-16 flex min-h-[4000px] gap-8">
               <ProjectInfoDashboard
                 activeProject={topPickedProjects[activeProjectIdx]}
               />
@@ -87,7 +87,7 @@ export default function TopPicksSection() {
         </footer>
       </div>
 
-      <Line className="scale-y-[3.5] relative -bottom-10 left-1/2 -translate-x-1/2 bg-white/40 z-30" />
+      <Line className="relative -bottom-10 left-1/2 z-30 -translate-x-1/2 scale-y-[3.5] bg-white/40" />
     </section>
   );
 }

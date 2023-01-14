@@ -16,7 +16,7 @@ export default function NavBtn({
             color="indigo"
             variant="text"
             fullWidth
-            className="flex items-center capitalize py-2 px-5 lg:px-3 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white duration-200 rounded-none lg:rounded-md"
+            className="flex items-center rounded-none py-2 px-5 text-start text-base font-semibold capitalize duration-200 dark:text-gray-500 dark:hover:text-white lg:rounded-md lg:px-3 dark:lg:text-white/70"
           >
             {menu}
           </Button>
@@ -26,7 +26,7 @@ export default function NavBtn({
           color="indigo"
           variant="text"
           fullWidth
-          className="flex items-center capitalize py-2 px-5 lg:px-3 text-start text-base font-semibold dark:text-gray-500 dark:lg:text-white/70 dark:hover:text-white duration-200 rounded-none lg:rounded-md"
+          className="flex items-center rounded-none py-2 px-5 text-start text-base font-semibold capitalize duration-200 dark:text-gray-500 dark:hover:text-white lg:rounded-md lg:px-3 dark:lg:text-white/70"
         >
           {menu}
         </Button>

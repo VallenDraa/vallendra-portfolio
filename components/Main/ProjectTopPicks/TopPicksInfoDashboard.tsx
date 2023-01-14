@@ -38,11 +38,11 @@ export default function TopPicksInfoDashboard({
   }, []);
 
   return (
-    <Card className="sticky top-[20%] z-10 dark:bg-gray-900/60 backdrop-blur rounded-md shadow-md dark:shadow-gray-900/60 h-max w-full inset-x-0">
+    <Card className="sticky inset-x-0 top-[20%] z-10 h-max w-full rounded-md shadow-md backdrop-blur dark:bg-gray-900/60 dark:shadow-gray-900/60">
       <CardBody className="flex flex-col gap-7">
         <div className="flex flex-col gap-3">
-          <div className="flex justify-between items-center">
-            <h3 className="py-3 text-5xl h-fit font-bold animate-breathing bg-gradient text-transparent bg-clip-text bg-gradient-to-r from-light-blue-400 to-blue-500 capitalize">
+          <div className="flex items-center justify-between">
+            <h3 className="h-fit animate-breathing bg-gradient-to-r from-light-blue-400 to-blue-500 bg-gradient bg-clip-text py-3 text-5xl font-bold capitalize text-transparent">
               {activeProject?.name}
             </h3>
 
@@ -50,7 +50,7 @@ export default function TopPicksInfoDashboard({
               <Chip
                 color="teal"
                 value={activeProject?._id || ""}
-                className="w-12 h-12 aspect-square rounded-full flex items-center justify-center text-lg"
+                className="flex aspect-square h-12 w-12 items-center justify-center rounded-full text-lg"
               />
             </Show>
           </div>
@@ -61,7 +61,7 @@ export default function TopPicksInfoDashboard({
               return (
                 <Chip
                   key={cat}
-                  className="text-[0.675rem] py-1 px-3 rounded-full bg-gray-600/70 font-semibold"
+                  className="rounded-full bg-gray-600/70 py-1 px-3 text-[0.675rem] font-semibold"
                   value={cat}
                   variant="filled"
                   animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
@@ -74,7 +74,7 @@ export default function TopPicksInfoDashboard({
           <Typography
             as="p"
             variant="paragraph"
-            className="text-gray-300 font-medium mt-3 "
+            className="mt-3 font-medium text-gray-300 "
           >
             {activeProject?.shortDescription || ""}
           </Typography>
@@ -85,19 +85,19 @@ export default function TopPicksInfoDashboard({
           <Typography
             as="h4"
             variant="h4"
-            className="uppercase flex items-center gap-2 mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-green-500 to-white"
+            className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-white bg-clip-text font-bold uppercase text-transparent"
           >
-            <IoCodeSlash className="text-green-400 bg-gray-700/90 p-1 rounded-lg text-3xl" />
+            <IoCodeSlash className="rounded-lg bg-gray-700/90 p-1 text-3xl text-green-400" />
             Tech Stack
           </Typography>
           <Typography
             as="p"
-            className="text-gray-400 text-sm font-medium mb-4 mt-2"
+            className="mb-4 mt-2 text-sm font-medium text-gray-400"
           >
             These Are the {activeProject?.tech.length} Technologies That Were
             Used For This Project :
           </Typography>
-          <ul className="flex items-center  relative gap-1 overflow-auto">
+          <ul className="relative flex  items-center gap-1 overflow-auto">
             {activeProject?.tech.map(
               (tech: technologies, i): JSX.Element => (
                 <li key={i}>{TECHS[tech]}</li>
@@ -108,7 +108,7 @@ export default function TopPicksInfoDashboard({
       </CardBody>
       <CardFooter
         divider
-        className="flex justify-end gap-2 py-3 border-gray-600 text-gray-500"
+        className="flex justify-end gap-2 border-gray-600 py-3 text-gray-500"
       >
         <Link href={`/projects/${activeProject?.slug}`}>
           <Button size="md" variant="text" className="rounded-full">
@@ -119,7 +119,7 @@ export default function TopPicksInfoDashboard({
           <Button
             variant="filled"
             size="md"
-            className="group flex items-center relative w-max rounded-full"
+            className="group relative flex w-max items-center rounded-full"
           >
             Visit Site
           </Button>

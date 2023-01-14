@@ -44,7 +44,7 @@ const FloatingSquares: FC = () => {
 
       newSquares.push(
         <li
-          className="absolute block bg-white/10 animate-squares"
+          className="absolute block animate-squares bg-white/10"
           style={{
             animationDelay: `${delay}s`,
             left: `${left}%`,
@@ -61,7 +61,7 @@ const FloatingSquares: FC = () => {
   }, [population]);
 
   return (
-    <ul className="h-full inset-0 sm:margin-0 padding-0 overflow-hidden z-0 absolute w-full">
+    <ul className="sm:margin-0 padding-0 absolute inset-0 z-0 h-full w-full overflow-hidden">
       {squares.map((square, i) => (
         <Fragment key={i}>{square}</Fragment>
       ))}

@@ -10,7 +10,7 @@ export default function SectionHeading({
     <Typography
       as="h2"
       variant="h4"
-      className="dark:text-white capitalize font-bold flex gap-2 before:inline-block before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 before:w-1 h-fit leading-[initial]"
+      className="flex h-fit gap-2 font-bold capitalize leading-[initial] before:inline-block before:w-1 before:bg-gradient-to-r before:from-indigo-300 before:to-pink-200 dark:text-white"
     >
       {children}
     </Typography>

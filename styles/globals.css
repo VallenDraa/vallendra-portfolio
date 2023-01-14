@@ -12,7 +12,7 @@
   /* Gradient underline css for text
   ================================= */
   .gradient-underline {
-    @apply before:animate-breathing before:bg-gradient before:bg-gradient-to-r before:w-full before:-bottom-2 before:left-0 before:absolute before:h-[1px];
+    @apply before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full before:animate-breathing before:bg-gradient-to-r before:bg-gradient;
   }
   .gradient-underline--indigo-to-pink {
     @apply before:from-indigo-300 before:to-pink-200;
@@ -24,6 +24,6 @@
   /* navlist underlay for <lg screen size to smoothen open and closing animation 
   ================================================================================== */
   .navlist-underlay {
-    @apply before:h-full lg:before:hidden before:dark:bg-gray-900 before:w-8 before:absolute before:-translate-x-8;
+    @apply before:absolute before:h-full before:w-8 before:-translate-x-8 before:dark:bg-gray-900 lg:before:hidden;
   }
 }

@@ -56,16 +56,13 @@ export default function ProjectDetails({
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-      </Head>
-      <div className="relative min-h-screen flex flex-col dark:bg-gray-900 translate-y-40">
+      <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
         {/* blur */}
-        <div className="h-80 w-80 scale-110 transition-transform duration-200 blur-3xl rounded-full skew-x-12 rotate-0 bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 absolute right-20 top-20" />
+        <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
         <FadeBottom position="-top-20" />
 
-        <header className="max-w-screen-xl px-8 mx-auto flex flex-col w-full overflow-hidden mt-6">
-          <section className="pb-3 relative z-10 border-b-2 border-white/30">
+        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
+          <section className="relative z-10 border-b-2 border-white/30 pb-3">
             {/* back to project button */}
             <LinkWithUnderline href="/projects">
               <BsArrowLeft />
@@ -76,7 +73,7 @@ export default function ProjectDetails({
             <Typography
               as="h1"
               variant="h1"
-              className="animate-breathing bg-gradient bg-gradient-to-r from-indigo-300 to-pink-200 text-start text-4xl md:text-5xl font-bold text-transparent bg-clip-text capitalize relative z-40 w-fit mt-4 !leading-[initial]"
+              className="relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
             >
               {project.name}
             </Typography>
@@ -85,13 +82,13 @@ export default function ProjectDetails({
             <Typography
               as="p"
               variant="paragraph"
-              className="dark:text-gray-200 font-medium pl-0.5 text-justify mt-2 text-sm md:text-lg"
+              className="mt-2 pl-0.5 text-justify text-sm font-medium dark:text-gray-200 md:text-lg"
             >
               {project.shortDescription}
             </Typography>
 
             {/* project views*/}
-            <div className="flex gap-3 mt-2.5 dark:text-gray-400">
+            <div className="mt-2.5 flex gap-3 dark:text-gray-400">
               <Typography
                 variant="paragraph"
                 as="span"
@@ -118,30 +115,30 @@ export default function ProjectDetails({
         </header>
 
         {/* the project data */}
-        <main className="max-w-screen-xl px-8 relative mx-auto grow py-5 w-full flex flex-col gap-8">
+        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5">
           {/* image */}
-          <figure className="w-[95%] mx-auto">
+          <figure className="mx-auto w-[95%]">
             <Image
               priority
               src={project.image}
               alt={project.name}
               width={960}
               height={540}
-              className="opacity-90 object-cover rounded-md w-full"
+              className="w-full rounded-md object-cover opacity-90"
             />
 
-            <figcaption className="dark:text-gray-500 text-sm pt-2 text-center">
+            <figcaption className="pt-2 text-center text-sm dark:text-gray-500">
               <span>Screenshot of {project.name}</span>
             </figcaption>
           </figure>
 
           {/* details */}
-          <section className="flex flex-col lg:flex-row gap-8 lg:gap-2">
-            <div className="relative flex flex-col gap-12 basis-3/4">
+          <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
+            <div className="relative flex basis-3/4 flex-col gap-12">
               {/* app tech stack */}
-              <div className="flex flex-col gap-4 relative z-10">
+              <div className="relative z-10 flex flex-col gap-4">
                 <SectionHeading>Tech Stack</SectionHeading>
-                <ul className="flex items-center relative gap-1 overflow-auto">
+                <ul className="relative flex items-center gap-1 overflow-auto">
                   {project?.tech.map(
                     (tech: technologies, i): JSX.Element => (
                       <li key={i}>{TECHS[tech]}</li>
@@ -151,11 +148,11 @@ export default function ProjectDetails({
               </div>
 
               {/* description and features of the app */}
-              <div className="flex flex-col gap-4 relative z-10">
+              <div className="relative z-10 flex flex-col gap-4">
                 <SectionHeading>Description</SectionHeading>
                 <Typography
                   variant="paragraph"
-                  className="dark:text-white/80 px-3 font-normal leading-loose"
+                  className="px-3 font-normal leading-loose dark:text-white/80"
                 >
                   {project.description}
                 </Typography>
@@ -163,24 +160,24 @@ export default function ProjectDetails({
             </div>
 
             {/* link for the code of this project */}
-            <aside className="sticky top-0 h-fit grow flex flex-row lg:flex-col justify-between items-center gap-4 mt-3 p-4 border-2 border-[#30363d] rounded-md">
-              <div className="flex flex-col gap-3 w-full">
+            <aside className="sticky top-0 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 border-[#30363d] p-4 lg:flex-col">
+              <div className="flex w-full flex-col gap-3">
                 <Show when={hasSiteOrDownloadLink}>
                   <ActionButton
                     href={`${project.downloadLink || project.siteLink}`}
                     variant="outlined"
                     color="blue"
-                    className="w-full flex justify-center"
+                    className="flex w-full justify-center"
                   >
                     {/* download text */}
                     <Show when={!!project.downloadLink}>
-                      <FaDownload className="text-blue-500 text-lg" />
+                      <FaDownload className="text-lg text-blue-500" />
                       <span>Download</span>
                     </Show>
 
                     {/* website text */}
                     <Show when={!!project.siteLink}>
-                      <SlGlobe className="text-blue-500 text-lg" />
+                      <SlGlobe className="text-lg text-blue-500" />
                       <span>Visit Site</span>
                     </Show>
                   </ActionButton>
@@ -191,9 +188,9 @@ export default function ProjectDetails({
                   href={project.gitLink}
                   variant="outlined"
                   color="gray"
-                  className="w-full flex justify-center border-gray-400 text-gray-400"
+                  className="flex w-full justify-center border-gray-400 text-gray-400"
                 >
-                  <FaGithub className="text-gray-400 text-lg" />
+                  <FaGithub className="text-lg text-gray-400" />
                   <span>Visit Repo</span>
                 </ActionButton>
 
@@ -215,7 +212,7 @@ export default function ProjectDetails({
                   onClick={addLike}
                   variant="text"
                   color={hasLiked ? "red" : "gray"}
-                  className={`text-5xl flex flex-col items-center gap-1 ${
+                  className={`flex flex-col items-center gap-1 text-5xl ${
                     hasLiked ? "text-red-300" : ""
                   }`}
                 >
@@ -230,7 +227,7 @@ export default function ProjectDetails({
           <section className="mb-5">
             <Comment />
             {/* links to previous and next projects */}
-            <div className="w-full flex justify-between mt-5 text-lg">
+            <div className="mt-5 flex w-full justify-between text-lg">
               {/* link to previous listed projects */}
               <LinkWithUnderline href={`/projects/${prevProject.slug}`}>
                 <BsArrowLeft />
