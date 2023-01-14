@@ -9,9 +9,9 @@ import ICertificate, {
   ICertificateCategory,
 } from "../../interfaces/certificateInterface";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
-import CertificateCategorySection from "../../components/certificates/certificateCategorySection";
 import CertificateCard from "../../components/certificates/CertificateCard";
 import certificateCategories from "../../utils/datas/certificates/certificateCategories";
+import CertificateCategorySection from "../../components/certificates/CertificateCategorySection";
 
 interface IProps {
   certificates: ICertificate[];

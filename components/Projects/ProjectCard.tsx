@@ -17,7 +17,7 @@ export default function ProjectCard({
   return (
     <div>
       <Link
-        href={`/projects`}
+        href={`/projects/${project.slug}`}
         className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-gray-800/40 transition-transform duration-300 ease-out hover:scale-105"
       >
         {/* image */}

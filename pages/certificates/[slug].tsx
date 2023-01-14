@@ -1,17 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { IProject } from "../../interfaces/projectInterface";
-import allProjects from "../../utils/datas/projects/allProjects";
-import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Image from "next/image";
-import { technologies } from "../../types/types";
-import TECHS from "../../components/MappedComponents/TechsWithTooltip";
-import { FaDownload, FaGithub } from "react-icons/fa";
-import { SlGlobe } from "react-icons/sl";
+import { FaRegNewspaper } from "react-icons/fa";
 import Show from "../../utils/jsx/Show";
 import Comment from "../../components/DetailsPage/Comment";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
@@ -19,29 +13,31 @@ import ActionButton from "../../components/DetailsPage/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState } from "react";
+import ICertificate from "../../interfaces/certificateInterface";
+import Head from "next/head";
+import allCertificates from "../../utils/datas/certificates/allCertificates";
 
-interface IProjectRedirect {
+interface ICertificateRedirect {
   slug: string;
   name: string;
 }
 
 interface IPropsData {
-  project: IProject;
-  prevProject: IProjectRedirect;
-  nextProject: IProjectRedirect;
+  certificate: ICertificate;
+  prevCertificate: ICertificateRedirect;
+  nextCertificate: ICertificateRedirect;
 }
 
-export default function ProjectDetails({
-  project,
-  prevProject,
-  nextProject,
+export default function CertificateDetails({
+  certificate,
+  prevCertificate,
+  nextCertificate,
 }: IPropsData) {
-  const pageTitle = `VallenDra | ${project.name}`;
-  const hasSiteOrDownloadLink = !!(project.downloadLink || project.siteLink);
+  const pageTitle = `VallenDra | ${certificate.name}`;
 
   /* Likes
   ========= */
-  const [likes, setLikes] = useState(project.likes);
+  const [likes, setLikes] = useState(certificate.likes);
   const [hasLiked, setHasLiked] = useState(false);
 
   async function addLike() {
@@ -66,10 +62,10 @@ export default function ProjectDetails({
 
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           <section className="relative z-10 border-b-2 border-white/30 pb-3">
-            {/* back to project button */}
-            <LinkWithUnderline href="/projects">
+            {/* back to certificate button */}
+            <LinkWithUnderline href="/certificates">
               <BsArrowLeft />
-              Back To Projects
+              Back To Certificates
             </LinkWithUnderline>
 
             {/* title */}
@@ -78,7 +74,7 @@ export default function ProjectDetails({
               variant="h1"
               className="relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
             >
-              {project.name}
+              {certificate.name}
             </Typography>
 
             {/* short description */}
@@ -87,10 +83,10 @@ export default function ProjectDetails({
               variant="paragraph"
               className="mt-2 pl-0.5 text-justify text-sm font-medium dark:text-gray-200 md:text-lg"
             >
-              {project.shortDescription}
+              {certificate.shortDescription}
             </Typography>
 
-            {/* project views*/}
+            {/* certificate views*/}
             <div className="mt-2.5 flex gap-3 dark:text-gray-400">
               <Typography
                 variant="paragraph"
@@ -98,7 +94,7 @@ export default function ProjectDetails({
                 className="flex items-center gap-1 text-sm font-bold"
               >
                 <AiFillEye />
-                {project.views} views
+                {certificate.views} views
               </Typography>
 
               <span>&bull;</span>
@@ -117,84 +113,53 @@ export default function ProjectDetails({
           </section>
         </header>
 
-        {/* the project data */}
+        {/* the certificate data */}
         <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5">
           {/* image */}
           <figure className="mx-auto w-[95%]">
             <Image
               priority
-              src={project.image}
-              alt={project.name}
+              src={certificate.image}
+              alt={certificate.name}
               width={960}
               height={540}
               className="w-full rounded-md object-cover opacity-90"
             />
 
             <figcaption className="pt-2 text-center text-sm dark:text-gray-500">
-              <span>Screenshot of {project.name}</span>
+              <span>Screenshot of {certificate.name}</span>
             </figcaption>
           </figure>
 
           {/* details */}
           <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
             <div className="relative flex basis-3/4 flex-col gap-12">
-              {/* app tech stack */}
-              <div className="relative z-10 flex flex-col gap-4">
-                <SectionHeading>Tech Stack</SectionHeading>
-                <ul className="relative flex items-center gap-1 overflow-auto">
-                  {project?.tech.map(
-                    (tech: technologies, i): JSX.Element => (
-                      <li key={i}>{TECHS[tech]}</li>
-                    )
-                  )}
-                </ul>
-              </div>
-
-              {/* description and features of the app */}
+              {/* description of the certicates */}
               <div className="relative z-10 flex flex-col gap-4">
                 <SectionHeading>Description</SectionHeading>
                 <Typography
                   variant="paragraph"
                   className="px-3 font-normal leading-loose dark:text-white/80"
                 >
-                  {project.description}
+                  {certificate.description}
                 </Typography>
               </div>
             </div>
 
-            {/* link for the code of this project */}
+            {/* link for the code of this certificate */}
             <aside className="sticky top-0 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 border-[#30363d] p-4 lg:flex-col">
               <div className="flex w-full flex-col gap-3">
-                <Show when={hasSiteOrDownloadLink}>
-                  <ActionButton
-                    href={`${project.downloadLink || project.siteLink}`}
-                    variant="outlined"
-                    color="blue"
-                    className="flex w-full justify-center"
-                  >
-                    {/* download text */}
-                    <Show when={!!project.downloadLink}>
-                      <FaDownload className="text-lg text-blue-500" />
-                      <span>Download</span>
-                    </Show>
-
-                    {/* website text */}
-                    <Show when={!!project.siteLink}>
-                      <SlGlobe className="text-lg text-blue-500" />
-                      <span>Visit Site</span>
-                    </Show>
-                  </ActionButton>
-                </Show>
-
-                {/* Github Link */}
                 <ActionButton
-                  href={project.gitLink}
+                  href={certificate.certificateLink}
                   variant="outlined"
-                  color="gray"
-                  className="flex w-full justify-center border-gray-400 text-gray-400"
+                  color="blue"
+                  className="flex w-full justify-center"
                 >
-                  <FaGithub className="text-lg text-gray-400" />
-                  <span>Visit Repo</span>
+                  {/* certificate link text */}
+                  <Show when={!!certificate.certificateLink}>
+                    <FaRegNewspaper className="text-lg text-blue-500" />
+                    <span>See Certificate</span>
+                  </Show>
                 </ActionButton>
 
                 {/* copy link to clipboard */}
@@ -234,18 +199,18 @@ export default function ProjectDetails({
               {/* link to previous listed projects */}
               <LinkWithUnderline
                 className="grow md:flex-grow-0"
-                href={`/projects/${prevProject.slug}`}
+                href={`/certificates/${prevCertificate.slug}`}
               >
                 <BsArrowLeft />
-                {prevProject.name}
+                {prevCertificate.name}
               </LinkWithUnderline>
 
               {/* link to next listed projects */}
               <LinkWithUnderline
                 className="grow justify-end md:flex-grow-0"
-                href={`/projects/${nextProject.slug}`}
+                href={`/certificates/${nextCertificate.slug}`}
               >
-                {nextProject.name}
+                {nextCertificate.name}
                 <BsArrowRight />
               </LinkWithUnderline>
             </div>
@@ -262,36 +227,42 @@ export function getServerSideProps(
 ): GetServerSidePropsResult<IPropsData> {
   const { params } = context;
 
-  // get target project index
-  const projectIdx = allProjects.findIndex(
-    (project) => project.slug === params?.slug
+  // get target certificate index
+  const certifIdx = allCertificates.findIndex(
+    (certificate) => certificate.slug === params?.slug
   );
 
-  // get the project itself
-  const project: IProject = allProjects[projectIdx] || null;
+  // get the certificate itself
+  const certificate: ICertificate = allCertificates[certifIdx] || null;
 
-  /* (fetch 3 projects later when working on the API)
+  /* (fetch 3 certificates later when working on the API)
   ================================================== */
 
-  // get the next project slug
-  const nextProject =
-    projectIdx === allProjects.length - 1
-      ? allProjects[0]
-      : allProjects[projectIdx + 1];
+  // get the next certificate slug
+  const nextCertificate =
+    certifIdx === allCertificates.length - 1
+      ? allCertificates[0]
+      : allCertificates[certifIdx + 1];
 
   // get the previous slug
-  const prevProject =
-    projectIdx === 0
-      ? allProjects[allProjects.length - 1]
-      : allProjects[projectIdx - 1];
+  const prevCertificate =
+    certifIdx === 0
+      ? allCertificates[allCertificates.length - 1]
+      : allCertificates[certifIdx - 1];
 
-  return project === null
+  return certificate === null
     ? { notFound: true }
     : {
         props: {
-          project,
-          nextProject: { name: nextProject.name, slug: nextProject.slug },
-          prevProject: { name: prevProject.name, slug: prevProject.slug },
+          certificate,
+          nextCertificate: {
+            name: nextCertificate.name,
+            slug: nextCertificate.slug,
+          },
+          prevCertificate: {
+            name: prevCertificate.name,
+            slug: prevCertificate.slug,
+          },
         },
       };
 }

@@ -40,7 +40,7 @@ const FloatingSquares: FC = () => {
     for (let i = 0; i < population; i++) {
       const delay = Math.round(Math.random() * 35 + 1);
       const left = Math.round(Math.random() * 100 + 1);
-      const size = Math.round(Math.random() * 300 + 50);
+      const size = Math.round(Math.random() * 120 + 50);
 
       newSquares.push(
         <li

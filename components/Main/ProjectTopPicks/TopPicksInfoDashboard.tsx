@@ -13,6 +13,7 @@ import { IoCodeSlash } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Show from "../../../utils/jsx/Show";
 import { technologies } from "../../../types/types";
+import projectCategories from "../../../utils/datas/projects/projectCategories";
 
 export default function TopPicksInfoDashboard({
   activeProject,
@@ -57,16 +58,20 @@ export default function TopPicksInfoDashboard({
 
           {/* Project Type*/}
           <div className="flex flex-wrap gap-2">
-            {activeProject?.categoryIds.map((cat) => {
-              return (
+            {activeProject?.categoryIds.map((catId) => {
+              const category = projectCategories.find(
+                ({ _id }) => _id === catId
+              );
+
+              return category ? (
                 <Chip
-                  key={cat}
+                  key={catId}
                   className="rounded-full bg-gray-600/70 py-1 px-3 text-[0.675rem] font-semibold"
-                  value={cat}
+                  value={category?.name}
                   variant="filled"
                   animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
                 />
-              );
+              ) : null;
             })}
           </div>
 

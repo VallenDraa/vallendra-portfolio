@@ -69,7 +69,7 @@ export default function TopPicksSection() {
               />
             </div>
           </div>
-          <div className="mx-auto max-w-screen-xl px-6 ">
+          <div className="mx-auto max-w-screen-xl px-6">
             {/* the short project name description  */}
             <div className="relative mt-16 flex min-h-[4000px] gap-8">
               <ProjectInfoDashboard
