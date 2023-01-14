@@ -36,7 +36,7 @@ export default function ProjectCategorySection({
       <SectionHeading>{category.name}</SectionHeading>
 
       {/* display projects in this category */}
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-2">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-3">
         {category.projects.map((id, i) => {
           return (
             <li key={id}>

@@ -106,7 +106,9 @@ export default function ProjectDetails({
               <Typography
                 variant="paragraph"
                 as="span"
-                className="flex items-center gap-1 text-sm font-bold"
+                className={`flex items-center gap-1 text-sm font-bold ${
+                  hasLiked ? "text-red-300" : "text-inherit"
+                }`}
               >
                 <AiFillHeart />
                 {likes} likes
@@ -213,7 +215,9 @@ export default function ProjectDetails({
                   onClick={addLike}
                   variant="text"
                   color={hasLiked ? "red" : "gray"}
-                  className="text-5xl flex flex-col items-center gap-1"
+                  className={`text-5xl flex flex-col items-center gap-1 ${
+                    hasLiked ? "text-red-300" : ""
+                  }`}
                 >
                   <AiFillHeart />
                   <span className="text-sm">{likes}</span>
