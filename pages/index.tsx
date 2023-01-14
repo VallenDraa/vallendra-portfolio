@@ -5,7 +5,7 @@ import Redirect from "../components/Main/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 
-const MainPage = () => {
+export default function Home() {
   return (
     <>
       <Head>
@@ -24,6 +24,4 @@ const MainPage = () => {
       <SiteFooter />
     </>
   );
-};
-
-export default MainPage;
+}
