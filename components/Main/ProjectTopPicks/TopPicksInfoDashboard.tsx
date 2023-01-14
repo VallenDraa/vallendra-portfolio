@@ -6,7 +6,7 @@ import {
   Button,
   CardFooter,
 } from "@material-tailwind/react";
-import { IProject } from "../../../interfaces/projectInterfaces";
+import { IProject } from "../../../interfaces/projectInterface";
 import Link from "next/link";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";

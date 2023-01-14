@@ -4,7 +4,7 @@ import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
-import { ICategory, IProject } from "../../interfaces/projectInterfaces";
+import { IProjectCategory, IProject } from "../../interfaces/projectInterface";
 import Show from "../../utils/jsx/Show";
 import { useState, useEffect, useMemo } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
@@ -13,7 +13,7 @@ import ProjectCategorySection from "../../components/Projects/ProjectCategorySec
 
 interface IProps {
   projects: IProject[];
-  categories: ICategory[];
+  categories: IProjectCategory[];
 }
 
 export default function ProjectsPage({ projects, categories }: IProps) {

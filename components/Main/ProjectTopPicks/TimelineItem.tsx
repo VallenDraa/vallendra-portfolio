@@ -3,7 +3,7 @@ import { useEffect, useRef, useContext, FC } from "react";
 import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
 } from "../../../context/IntersectingProjectCP";
-import { IProject } from "../../../interfaces/projectInterfaces";
+import { IProject } from "../../../interfaces/projectInterface";
 import useIntersectionObserver from "../../../utils/hooks/useIntersectionObserver";
 
 interface IProps {

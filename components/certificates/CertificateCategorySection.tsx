@@ -1,29 +1,32 @@
 import { Typography } from "@material-tailwind/react";
-import { IProjectCategory, IProject } from "../../interfaces/projectInterface";
 import { useMemo } from "react";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "./CertificateCard";
 import SectionHeading from "../SectionHeading";
+import ICertificate, {
+  ICertificateCategory,
+} from "../../interfaces/certificateInterface";
+import CertificateCard from "./CertificateCard";
 
 interface IProps {
   categoryIndex: number;
-  projects: IProject[];
-  category: IProjectCategory;
+  certificates: ICertificate[];
+  category: ICertificateCategory;
 }
 
-interface IPickedProjects {
-  [key: string]: IProject;
+interface IPickedCertificates {
+  [key: string]: ICertificate;
 }
 
-export default function ProjectCategorySection({
+export default function CertificateCategorySection({
   categoryIndex,
   category,
-  projects,
+  certificates,
 }: IProps) {
-  const projectsInCategory = useMemo<IPickedProjects>(() => {
-    const { projects: allProjectIds } = category;
+  const certificatesInCategory = useMemo<IPickedCertificates>(() => {
+    const { certificates: allProjectIds } = category;
 
     const pickedProjects = allProjectIds.reduce((res, id) => {
-      const pickedProject = projects.find((project) => project._id === id);
+      const pickedProject = certificates.find((project) => project._id === id);
 
       return { ...res, [id]: pickedProject };
     }, {});
@@ -35,14 +38,14 @@ export default function ProjectCategorySection({
     <section className="flex flex-col gap-6">
       <SectionHeading>{category.name}</SectionHeading>
 
-      {/* display projects in this category */}
+      {/* display certificates in this category */}
       <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {category.projects.map((id, i) => {
+        {category.certificates.map((id, i) => {
           return (
             <li key={id}>
-              <ProjectCard
+              <CertificateCard
                 imgIsPriority={isImgImportant(categoryIndex, i)}
-                project={projectsInCategory[id]}
+                certificate={certificatesInCategory[id]}
               />
             </li>
           );

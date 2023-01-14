@@ -1,12 +1,12 @@
-import { IProject } from "../../../interfaces/projectInterfaces";
-import cliProjects from "./cli/cliProjects";
-import desktopProjects from "./dekstop/desktopProjects";
+import { IProject } from "../../../interfaces/projectInterface";
+import consoleProjects from "./console/consoleProjects";
+import desktopProjects from "./desktop/desktopProjects";
 import gameProjects from "./games/gameProjects";
-import websiteProjects from "./websites/websiteProjects";
+import webProjects from "./web/webProjects";
 
 const allProjects: IProject[] = [
-  ...websiteProjects,
-  ...cliProjects,
+  ...webProjects,
+  ...consoleProjects,
   ...gameProjects,
   ...desktopProjects,
 ];

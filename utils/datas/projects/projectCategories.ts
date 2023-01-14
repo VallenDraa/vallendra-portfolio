@@ -1,6 +1,6 @@
-import { ICategory } from "./../../../interfaces/projectInterfaces";
+import { IProjectCategory } from "../../../interfaces/projectInterface";
 
-const projectCategories: ICategory[] = [
+const projectCategories: IProjectCategory[] = [
   {
     _id: "1",
     name: "website",

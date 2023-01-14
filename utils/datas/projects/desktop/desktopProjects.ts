@@ -1,4 +1,4 @@
-import { IProject } from "../../../../interfaces/projectInterfaces";
+import { IProject } from "../../../../interfaces/projectInterface";
 
 const desktopProjects: IProject[] = [
   {
@@ -13,8 +13,7 @@ const desktopProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/turu-list.png",
     tech: ["java", "mongodb"],
-    categoryIds: ["desktop"],
-    comments: [],
+    categoryIds: ["2"],
     createdAt: new Date("Dec 10, 2022").toISOString(),
     downloadLink: "https://github.com/VallenDraa/turu-list",
     gitLink: "https://github.com/VallenDraa/turu-list",
@@ -29,8 +28,7 @@ const desktopProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/calculator-pro.png",
     tech: ["java"],
-    categoryIds: ["desktop"],
-    comments: [],
+    categoryIds: ["2"],
     createdAt: new Date("Nov 28, 2022").toISOString(),
     downloadLink: "https://github.com/VallenDraa/kalkulator-pro",
     gitLink: "https://github.com/VallenDraa/kalkulator-pro",

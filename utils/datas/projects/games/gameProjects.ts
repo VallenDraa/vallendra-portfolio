@@ -1,4 +1,4 @@
-import { IProject } from "../../../../interfaces/projectInterfaces";
+import { IProject } from "../../../../interfaces/projectInterface";
 
 const gameProjects: IProject[] = [
   {
@@ -13,8 +13,7 @@ const gameProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/spinning-cell.png",
     tech: ["c#", "unity"],
-    categoryIds: ["games"],
-    comments: [],
+    categoryIds: ["4"],
     createdAt: new Date("Sep 1, 2021").toISOString(),
     downloadLink: "https://github.com/VallenDraa/spinning-cell",
     gitLink: "https://github.com/VallenDraa/spinning-cell",

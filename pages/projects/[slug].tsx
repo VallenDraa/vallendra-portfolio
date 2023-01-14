@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { IProject } from "../../interfaces/projectInterfaces";
+import { IProject } from "../../interfaces/projectInterface";
 import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";

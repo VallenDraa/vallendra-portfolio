@@ -1,4 +1,4 @@
-import { IProject } from "../../../../interfaces/projectInterfaces";
+import { IProject } from "../../../../interfaces/projectInterface";
 
 const topPickedProjects: IProject[] = [
   {
@@ -13,8 +13,8 @@ const topPickedProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/konnect.png",
     tech: ["react", "tailwind css", "node.js", "socket.io", "mongodb"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("Oct 17, 2022").toISOString(),
     siteLink: "https://kon-nect.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/konnect",
@@ -30,8 +30,8 @@ const topPickedProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/casera.png",
     tech: ["react", "tailwind css", "node.js", "mongodb"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("May 7, 2022").toISOString(),
     siteLink: "https://cas-era.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/casera",
@@ -47,8 +47,7 @@ const topPickedProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/triquest.png",
     tech: ["html", "tailwind css", "javascript", "node.js", "mongodb"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
     createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: "https://triquest.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/triquest",
@@ -65,8 +64,7 @@ const topPickedProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/ultima-widget.png",
     tech: ["html", "css", "javascript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
     createdAt: new Date("Mar 2 2022").toISOString(),
     siteLink: "https://ultimawidget.cyclic.app/",
     gitLink: "https://github.com/VallenDraa/ultima_widget",

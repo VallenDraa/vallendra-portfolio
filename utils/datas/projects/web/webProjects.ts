@@ -1,7 +1,7 @@
-import { IProject } from "../../../../interfaces/projectInterfaces";
-import topPickedProjects from "../websites/topPickedProjects";
+import { IProject } from "../../../../interfaces/projectInterface";
+import topPickedProjects from "./topPickedProjects";
 
-const websiteProjects: IProject[] = [
+const webProjects: IProject[] = [
   ...topPickedProjects,
   {
     _id: "5",
@@ -14,8 +14,8 @@ const websiteProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/devils-burger.png",
     tech: ["html", "css", "javascript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("Dec 25, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/devils-burger",
     gitLink: "https://github.com/VallenDraa/devils-burger",
@@ -31,8 +31,8 @@ const websiteProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/typelist.png",
     tech: ["html", "tailwind css", "typescript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("Oct 14, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/typelist",
     gitLink: "https://github.com/VallenDraa/typelist",
@@ -47,8 +47,8 @@ const websiteProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/typelist.png",
     tech: ["react", "tailwind css", "typescript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: null,
     gitLink: "https://github.com/VallenDraa/tailwind-book",
@@ -64,8 +64,8 @@ const websiteProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/nucleic-acid-converter.png",
     tech: ["html", "css", "javascript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
+
     createdAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/nucleic-acid-converter",
     gitLink: "https://github.com/VallenDraa/nucleic-acid-converter",
@@ -81,12 +81,11 @@ const websiteProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/old-portfolio.png",
     tech: ["html", "css", "javascript"],
-    categoryIds: ["website"],
-    comments: [],
+    categoryIds: ["1"],
     createdAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/old-portfolio",
     gitLink: "https://github.com/VallenDraa/old-portfolio",
   },
 ];
 
-export default websiteProjects;
+export default webProjects;

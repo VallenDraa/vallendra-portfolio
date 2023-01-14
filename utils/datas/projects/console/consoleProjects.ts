@@ -1,4 +1,4 @@
-import { IProject } from "../../../../interfaces/projectInterfaces";
+import { IProject } from "../../../../interfaces/projectInterface";
 
 const cliProjects: IProject[] = [
   {
@@ -12,8 +12,7 @@ const cliProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/bus-primajasa.png",
     tech: ["c"],
-    categoryIds: ["cli"],
-    comments: [],
+    categoryIds: ["3"],
     createdAt: new Date("Nov 12, 2022").toISOString(),
     gitLink: "https://github.com/VallenDraa/bus-primajasa",
   },
@@ -28,8 +27,7 @@ const cliProjects: IProject[] = [
     likes: 1231,
     image: "/images/projects/perkutut-airlines.png",
     tech: ["c"],
-    categoryIds: ["cli"],
-    comments: [],
+    categoryIds: ["3"],
     createdAt: new Date("Nov 10, 2022").toISOString(),
     gitLink: "https://github.com/VallenDraa/perkutut-airlines",
   },

@@ -1,11 +1,4 @@
-import { technologies } from "./../types/types";
-export interface IComment {
-  _id: string;
-  userId: string;
-  content: string;
-  createdAt: Date | string;
-  updatedAt?: Date | string;
-}
+import { technologies } from "../types/types";
 
 export interface IProject {
   _id: string;
@@ -19,7 +12,6 @@ export interface IProject {
   image: string;
   tech: technologies[];
   categoryIds: string[];
-  comments: IComment[];
   createdAt: Date | string;
   updatedAt?: Date | string;
   siteLink?: string | null;
@@ -27,7 +19,7 @@ export interface IProject {
   gitLink: string;
 }
 
-export interface ICategory {
+export interface IProjectCategory {
   _id: string;
   name: string;
   projects: string[];

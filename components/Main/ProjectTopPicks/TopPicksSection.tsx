@@ -4,7 +4,7 @@ import Timeline from "./Timeline";
 import IntersectingProjectContext, {
   IIntersectingProjectHistoryProvider,
 } from "../../../context/IntersectingProjectCP";
-import topPickedProjects from "../../../utils/datas/projects/websites/topPickedProjects";
+import topPickedProjects from "../../../utils/datas/projects/web/topPickedProjects";
 import Quote from "./Quote";
 import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
