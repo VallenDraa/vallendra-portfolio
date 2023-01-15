@@ -10,7 +10,7 @@ import Show from "../../utils/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
-import { IoClose, IoChevronDown } from "react-icons/io5";
+import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
 import NavBtn from "./NavBtn";
 
 interface IProps {
@@ -91,6 +91,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           </Button>
         </div>
 
+        {/* menu lists */}
         {MENUS.map(
           (menu): React.ReactNode => (
             <Fragment key={menu}>
@@ -177,6 +178,24 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
             </Fragment>
           )
         )}
+
+        <Link
+          href={"/contacts"}
+          className="mx-auto mt-2 block w-11/12 lg:hidden"
+        >
+          <Button
+            variant="filled"
+            color="deep-purple"
+            size="md"
+            fullWidth
+            className="group relative flex items-center justify-center gap-2 rounded-full px-4 text-center duration-200"
+          >
+            <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
+              Contact Me
+            </span>
+            <IoCall className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
+          </Button>
+        </Link>
 
         <div className="mt-auto self-center pb-6 lg:hidden">
           <Typography
