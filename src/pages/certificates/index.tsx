@@ -4,29 +4,37 @@ import Head from "next/head";
 import { GetStaticPropsResult } from "next";
 import Show from "../../utils/jsx/Show";
 import { useState, useMemo } from "react";
+import SearchInput from "../../components/SearchInput";
+import { useRouter } from "next/router";
 import ICertificate, {
   ICertificateCategory,
 } from "../../interfaces/certificateInterface";
-import allCertificates from "../../utils/datas/certificates/allCertificates";
-import CertificateCard from "../../components/certificates/CertificateCard";
-import certificateCategories from "../../utils/datas/certificates/certificateCategories";
 import CertificateCategorySection from "../../components/certificates/CertificateCategorySection";
+import CertificateCard from "../../components/certificates/CertificateCard";
+import allCertificates from "../../utils/datas/certificates/allCertificates";
+import certificateCategories from "../../utils/datas/certificates/certificateCategories";
 
 interface IProps {
   certificates: ICertificate[];
   categories: ICertificateCategory[];
 }
 
-export default function CertificatesPage({ certificates, categories }: IProps) {
+export default function ProjectsPage({ certificates, categories }: IProps) {
+  const router = useRouter();
+
   const [isError, setIsError] = useState(certificates.length === 0);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>(
+    (router.query.find as string) || ""
+  );
+  const [searchIsLoading, setSearchIsLoading] = useState(false);
+
   const showedIndex = useMemo<number[]>(() => {
     const newShowedIndex: number[] = certificates.reduce(
-      (result, certificate, i) => {
+      (result, project, i) => {
         if (query === "") return [...result, i];
 
         if (
-          certificate.name
+          project.name
             .toLocaleLowerCase()
             .includes(query.toLocaleLowerCase().trim())
         ) {
@@ -48,9 +56,11 @@ export default function CertificatesPage({ certificates, categories }: IProps) {
       </Head>
       <div className="fade-bottom relative flex min-h-screen translate-y-20 flex-col after:-top-20 dark:bg-gray-900">
         {/* blur */}
-        <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
+        <div
+          className={`absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200`}
+        />
 
-        <header className="relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
+        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           {/* heading and searchbar */}
           <section className="relative z-10">
             <div className="gradient-underline gradient-underline--indigo-to-pink relative flex w-fit items-center gap-1">
@@ -72,21 +82,25 @@ export default function CertificatesPage({ certificates, categories }: IProps) {
               The ultimate showcase of all my certificates
             </Typography>
 
-            <input
-              disabled={isError}
-              onChange={(e) => setQuery(e.target.value)}
-              role="search"
-              type="text"
-              placeholder={
-                isError ? "Please Try Again Later..." : "Search certificates..."
-              }
-              className="mt-6 h-12 w-full rounded-lg px-4 text-lg outline-none transition-colors disabled:cursor-not-allowed dark:bg-gray-800/70 dark:text-gray-300 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800"
+            <SearchInput
+              willRedirect
+              defaultValue={query}
+              placeholder="Search certificates..."
+              loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
+              callback={(query) => setQuery(query)}
             />
           </section>
         </header>
 
         {/* the certificates list */}
-        <main className="relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10">
+        <main
+          className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 ${
+            /* overlay for awaiting search results */
+            searchIsLoading
+              ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
+              : ""
+          }`}
+        >
           {/* initial render for certificates with categories */}
           <Show when={certificates.length > 0 && query === ""}>
             <div className="space-y-10">
@@ -148,7 +162,7 @@ export default function CertificatesPage({ certificates, categories }: IProps) {
           </Show>
 
           {/* fallback for when the certificates failed to load */}
-          <Show when={certificates.length === 0 || !certificates}>
+          <Show when={certificates.length === 0 || !certificates || isError}>
             {/* text fallback */}
             <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
               <Typography
