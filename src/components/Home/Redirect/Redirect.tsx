@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Redirect() {
   return (
     <section className="relative z-20 bg-gray-900">
-      <div className="relative mx-auto max-w-screen-xl px-2 py-24 lg:px-8">
+      <div className="relative mx-auto max-w-screen-xl px-2 py-24 lg:px-8 xl:px-0">
         {/* blur */}
         <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-90 skew-x-12 scale-90 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl md:scale-110"></div>
 
@@ -18,7 +18,7 @@ export default function Redirect() {
           >
             Wanna Work Together ?
           </Typography>
-          <Link href="/" className="mt-10">
+          <Link href="/contacts" className="mt-10">
             <Button
               className="group flex items-center justify-center gap-2 rounded-full text-xl text-gray-300 outline outline-2 outline-gray-300 focus:bg-white focus:text-gray-900 hover:-translate-y-1 hover:scale-105 hover:bg-white hover:text-gray-900 hover:outline-transparent active:bg-white active:text-gray-900 lg:text-2xl"
               variant="text"

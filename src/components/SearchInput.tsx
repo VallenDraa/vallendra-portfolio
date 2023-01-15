@@ -1,13 +1,14 @@
-import { InputHTMLAttributes } from "react";
-import Show from "../utils/jsx/Show";
-import { AiOutlineLoading } from "react-icons/ai";
 import { useState } from "react";
 import { useEffect } from "react";
 import useDebounce from "../utils/hooks/useDebounce";
 import { useRouter } from "next/router";
 import { useRef } from "react";
+import StyledInput from "./StyledComponents/StyledInput";
+import { Input, InputProps } from "@material-tailwind/react";
+import Show from "../utils/jsx/Show";
+import { AiOutlineLoading } from "react-icons/ai";
 
-interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IProps extends InputProps {
   queryKey?: string; // will default to find if not provided
   defaultValue?: string;
   debounceMs?: number;
@@ -16,7 +17,12 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   callback: (query: string) => void;
 }
 
-export default function SearchInput(props: IProps) {
+export default function SearchInput({
+  ref,
+  placeholder,
+  disabled,
+  ...props
+}: IProps) {
   const DEFAULT_QUERY_KEY = "find";
 
   const router = useRouter();
@@ -62,32 +68,23 @@ export default function SearchInput(props: IProps) {
   }, [router.query[props.queryKey || DEFAULT_QUERY_KEY]]);
 
   return (
-    <div className="relative">
-      <input
-        ref={inputRef}
-        disabled={props.disabled || !!searchError}
-        onChange={(e) => {
-          if (props.onChange) props.onChange(e);
+    <StyledInput
+      icon={
+        <Show when={isWaitingResult}>
+          <AiOutlineLoading className="animate-spin text-lg dark:text-gray-300" />
+        </Show>
+      }
+      ref={inputRef}
+      label={placeholder || ""}
+      disabled={disabled || !!searchError}
+      onChange={(e) => {
+        if (props.onChange) props.onChange(e);
 
-          setTempQuery(e.target.value);
-        }}
-        value={tempQuery}
-        role="search"
-        type="text"
-        placeholder={
-          searchError
-            ? "Fail to search, please try again later !"
-            : props.placeholder
-        }
-        className={`h-12 w-full rounded-lg px-4 text-lg outline-none transition-colors disabled:cursor-not-allowed dark:bg-gray-800/70 dark:text-gray-300 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800 ${
-          props.className || ""
-        }`}
-        style={props.style}
-      />
-
-      <Show when={isWaitingResult}>
-        <AiOutlineLoading className="absolute right-4 top-1/3 animate-spin text-lg dark:text-gray-300" />
-      </Show>
-    </div>
+        setTempQuery(e.target.value);
+      }}
+      value={tempQuery}
+      role="search"
+      {...props}
+    />
   );
 }

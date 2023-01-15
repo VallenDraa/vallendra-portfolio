@@ -116,7 +116,12 @@ export default function TopPicksInfoDashboard({
         className="flex justify-end gap-2 border-gray-600 py-3 text-gray-500"
       >
         <Link href={`/projects/${activeProject?.slug}`}>
-          <Button size="md" variant="text" className="rounded-full">
+          <Button
+            size="md"
+            variant="text"
+            color="gray"
+            className="rounded-full"
+          >
             Detail
           </Button>
         </Link>

@@ -7,7 +7,7 @@ export default function Quotes() {
 
   return (
     <div
-      className={`relative z-10 mx-auto flex max-w-screen-xl flex-col items-center gap-4 py-8 px-8 sm:gap-6 lg:gap-8 ${backgroundRadient}`}
+      className={`relative z-10 mx-auto flex max-w-screen-xl flex-col items-center gap-4 py-8 px-8 sm:gap-6 lg:gap-8 lg:px-0 ${backgroundRadient}`}
     >
       <FaQuoteLeft className="absolute right-24 bottom-5 z-20 text-7xl text-cyan-100/20 md:text-8xl lg:text-9xl" />
       <Typography

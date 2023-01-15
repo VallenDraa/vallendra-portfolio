@@ -17,7 +17,7 @@ export default function Profile() {
       className="relative z-10 pb-32 dark:bg-gray-900"
     >
       {/* main content */}
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 xl:flex-row">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 lg:px-0 xl:flex-row">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           {/* blur */}

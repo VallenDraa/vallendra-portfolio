@@ -62,7 +62,7 @@ export default function ProjectDetails({
         {/* blur */}
         <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
 
-        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
+        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           <section className="relative z-10 border-b-2 border-white/30 pb-3">
             {/* back to project button */}
             <LinkWithUnderline href="/projects">
@@ -116,7 +116,7 @@ export default function ProjectDetails({
         </header>
 
         {/* the project data */}
-        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5">
+        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 lg:px-0">
           {/* image */}
           <figure className="mx-auto w-[95%]">
             <Image

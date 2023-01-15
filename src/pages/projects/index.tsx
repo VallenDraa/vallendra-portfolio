@@ -55,7 +55,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           className={`absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200`}
         />
 
-        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
+        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           {/* heading and searchbar */}
           <section className="relative z-10">
             <div className="gradient-underline gradient-underline--indigo-to-pink relative flex w-fit items-center gap-1">
@@ -81,7 +81,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <SearchInput
               willRedirect
               defaultValue={query}
-              placeholder="Search Projects..."
+              placeholder="Search Projects"
               loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
               callback={(query) => setQuery(query)}
             />
@@ -137,7 +137,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           {/* for empty search result */}
           <Show when={projects.length > 0 && showedIndex.length === 0}>
             {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
+            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center lg:px-0">
               <Typography
                 variant="h4"
                 as="h2"
@@ -158,7 +158,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           {/* fallback for when the projects failed to load */}
           <Show when={projects.length === 0 || !projects || isError}>
             {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
+            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center lg:px-0">
               <Typography
                 variant="h4"
                 as="h2"
