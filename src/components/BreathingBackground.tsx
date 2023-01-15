@@ -12,15 +12,11 @@ export default function BreathingBackground() {
 
     switch (route) {
       case pagesEnum.index:
-        bgRef.current.style.height = "770px";
-        break;
-
-      case pagesEnum.contact:
-        bgRef.current.style.height = "100vh";
+        bgRef.current.style.height = "760px";
         break;
 
       default:
-        bgRef.current.style.height = "200px";
+        bgRef.current.style.height = "140px";
         break;
     }
   }, [route]);
