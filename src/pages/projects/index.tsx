@@ -10,8 +10,8 @@ import { useState, useMemo } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
 import projectCategories from "../../utils/datas/projects/projectCategories";
 import ProjectCategorySection from "../../components/Projects/ProjectCategorySection";
-import useDebounce from "../../utils/hooks/useDebounce";
-import { AiOutlineLoading } from "react-icons/ai";
+import SearchInput from "../../components/SearchInput";
+import { useRouter } from "next/router";
 
 interface IProps {
   projects: IProject[];
@@ -19,25 +19,21 @@ interface IProps {
 }
 
 export default function ProjectsPage({ projects, categories }: IProps) {
-  const [isError, setIsError] = useState(projects.length === 0);
-  const [query, setQuery] = useState("");
-  const [finalQuery, setFinalQuery] = useState("");
+  const router = useRouter();
 
-  /* Querying projects
-  =================== */
-  const [isWaitingResult, searchError] = useDebounce(
-    () => setFinalQuery(query),
-    600,
-    [query]
+  const [isError, setIsError] = useState(projects.length === 0);
+  const [query, setQuery] = useState<string>(
+    (router.query.find as string) || ""
   );
+
   const showedIndex = useMemo<number[]>(() => {
     const newShowedIndex: number[] = projects.reduce((result, project, i) => {
-      if (finalQuery === "") return [...result, i];
+      if (query === "") return [...result, i];
 
       if (
         project.name
           .toLocaleLowerCase()
-          .includes(finalQuery.toLocaleLowerCase().trim())
+          .includes(query.toLocaleLowerCase().trim())
       ) {
         return [...result, i];
       }
@@ -46,7 +42,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
     }, [] as number[]);
 
     return newShowedIndex;
-  }, [finalQuery]);
+  }, [query]);
 
   return (
     <>
@@ -56,9 +52,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
       <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
         {/* blur */}
         <div
-          className={`absolute right-20 top-20  h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200 ${
-            isWaitingResult ? "z-30" : ""
-          }`}
+          className={`absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200`}
         />
         <FadeBottom position="-top-20" />
 
@@ -79,44 +73,34 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <Typography
               as="p"
               variant="paragraph"
-              className="mt-5 pl-0.5 text-justify font-medium leading-loose text-white/80"
+              className="my-5 pl-0.5 text-justify font-medium leading-loose text-white/80"
             >
               The ultimate showcase of all my projects. Mostly web but there are
               others as well.
             </Typography>
 
-            <div className="relative mt-6">
-              <input
-                disabled={isError || !!searchError}
-                onChange={(e) => setQuery(e.target.value)}
-                role="search"
-                type="text"
-                placeholder={
-                  isError || !!searchError
-                    ? "Please Try Again Later..."
-                    : "Search Projects..."
-                }
-                className="h-12 w-full rounded-lg px-4 text-lg outline-none transition-colors disabled:cursor-not-allowed dark:bg-gray-800/70 dark:text-gray-300 dark:focus:bg-gray-800 dark:disabled:bg-gray-700 dark:disabled:hover:bg-gray-800"
-              />
-
-              <Show when={isWaitingResult}>
-                <AiOutlineLoading className="absolute right-4 top-1/3 animate-spin text-lg dark:text-gray-300" />
-              </Show>
-            </div>
+            <SearchInput
+              willRedirect
+              defaultValue={query}
+              placeholder="Search Projects..."
+              callback={(query) => setQuery(query)}
+            />
           </section>
         </header>
 
         {/* the projects list */}
         <main
           className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 ${
-            /* overlay for awaiting search results */
+            /* overlay for awaiting search results 
             isWaitingResult
-              ? "after:absolute after:inset-0 after:z-20 after:animate-fade-in dark:after:bg-gray-900/50"
-              : ""
+            ? "after:absolute after:inset-0 after:z-20 after:animate-fade-in dark:after:bg-gray-900/50"
+            : ""
+            */
+            ""
           }`}
         >
           {/* initial render for projects with categories */}
-          <Show when={projects.length > 0 && finalQuery === ""}>
+          <Show when={projects.length > 0 && query === ""}>
             <div className="space-y-10">
               {categories.map((category, i) => {
                 return (
@@ -134,9 +118,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
 
           {/* search results */}
           <Show
-            when={
-              projects.length > 0 && showedIndex.length > 0 && finalQuery !== ""
-            }
+            when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
             <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {showedIndex.map((idx) => {
@@ -176,7 +158,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           </Show>
 
           {/* fallback for when the projects failed to load */}
-          <Show when={projects.length === 0 || !projects}>
+          <Show when={projects.length === 0 || !projects || isError}>
             {/* text fallback */}
             <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center">
               <Typography
