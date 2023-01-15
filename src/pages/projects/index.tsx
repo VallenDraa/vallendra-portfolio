@@ -1,5 +1,4 @@
 import { Typography } from "@material-tailwind/react";
-import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import ProjectCard from "../../components/Projects/ProjectCard";
@@ -25,6 +24,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
   const [query, setQuery] = useState<string>(
     (router.query.find as string) || ""
   );
+  const [searchIsLoading, setSearchIsLoading] = useState(false);
 
   const showedIndex = useMemo<number[]>(() => {
     const newShowedIndex: number[] = projects.reduce((result, project, i) => {
@@ -49,14 +49,13 @@ export default function ProjectsPage({ projects, categories }: IProps) {
       <Head>
         <title>VallenDra | Projects</title>
       </Head>
-      <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-screen translate-y-40 flex-col after:-top-20 dark:bg-gray-900">
         {/* blur */}
         <div
           className={`absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200`}
         />
-        <FadeBottom position="-top-20" />
 
-        <header className="relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
+        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           {/* heading and searchbar */}
           <section className="relative z-10">
             <div className="gradient-underline gradient-underline--indigo-to-pink relative flex w-fit items-center gap-1">
@@ -83,6 +82,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
               willRedirect
               defaultValue={query}
               placeholder="Search Projects..."
+              loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
               callback={(query) => setQuery(query)}
             />
           </section>
@@ -91,12 +91,10 @@ export default function ProjectsPage({ projects, categories }: IProps) {
         {/* the projects list */}
         <main
           className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 ${
-            /* overlay for awaiting search results 
-            isWaitingResult
-            ? "after:absolute after:inset-0 after:z-20 after:animate-fade-in dark:after:bg-gray-900/50"
-            : ""
-            */
-            ""
+            /* overlay for awaiting search results */
+            searchIsLoading
+              ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
+              : ""
           }`}
         >
           {/* initial render for projects with categories */}

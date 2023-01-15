@@ -1,5 +1,4 @@
 import { Typography } from "@material-tailwind/react";
-import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
@@ -47,10 +46,9 @@ export default function CertificatesPage({ certificates, categories }: IProps) {
       <Head>
         <title>VallenDra | Certificates</title>
       </Head>
-      <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-screen translate-y-40 flex-col after:-top-20 dark:bg-gray-900">
         {/* blur */}
         <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
-        <FadeBottom position="-top-20" />
 
         <header className="relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           {/* heading and searchbar */}

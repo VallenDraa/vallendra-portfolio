@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       {/* hero section */}
-      <header className="relative z-30">
+      <header className="fade-bottom relative z-30 after:bottom-0">
         <Hero />
       </header>
       <main>

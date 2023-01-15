@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import FadeBottom from "../../components/FadePageTranstition/FadeBottom";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Image from "next/image";
@@ -55,10 +54,9 @@ export default function CertificateDetails({
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div className="relative flex min-h-screen translate-y-40 flex-col dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-screen translate-y-40 flex-col after:-top-20 dark:bg-gray-900">
         {/* blur */}
         <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
-        <FadeBottom position="-top-20" />
 
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8">
           <section className="relative z-10 border-b-2 border-white/30 pb-3">

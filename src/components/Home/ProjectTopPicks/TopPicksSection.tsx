@@ -8,8 +8,6 @@ import topPickedProjects from "../../../utils/datas/projects/web/topPickedProjec
 import Quote from "./Quote";
 import ProjectInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
-import FadeTop from "../../FadePageTranstition/FadeTop";
-import FadeBottom from "../../FadePageTranstition/FadeBottom";
 import Line from "../../Line";
 
 export default function TopPicksSection() {
@@ -51,7 +49,7 @@ export default function TopPicksSection() {
         </header>
 
         {/* main content */}
-        <footer className="relative py-7">
+        <footer className="fade-top fade-bottom relative py-7 before:top-5 after:-bottom-10">
           <div className="sticky top-0">
             <div className="absolute inset-x-0 h-screen overflow-hidden">
               <Image
@@ -77,12 +75,6 @@ export default function TopPicksSection() {
               />
               <Timeline />
             </div>
-
-            {/* top fade to timeline */}
-            <FadeTop position="top-5" />
-
-            {/* bottom fade to footer */}
-            <FadeBottom position="-bottom-10" />
           </div>
         </footer>
       </div>

@@ -10,7 +10,9 @@ import { useRef } from "react";
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   queryKey?: string; // will default to find if not provided
   defaultValue?: string;
+  debounceMs?: number;
   willRedirect: boolean; // will redirect to query url (ex. /projects?q=lorem)
+  loadingCallback?: (isWaiting: boolean) => void;
   callback: (query: string) => void;
 }
 
@@ -25,9 +27,14 @@ export default function SearchInput(props: IProps) {
   const [finalQuery, setFinalQuery] = useState(props.defaultValue || "");
   const [isWaitingResult, searchError] = useDebounce(
     () => setFinalQuery(tempQuery),
-    600,
+    props.debounceMs || 600,
     [tempQuery]
   );
+
+  /* will trigger everytime isWaitingResult changes */
+  useEffect(() => {
+    if (props.loadingCallback) props.loadingCallback(isWaitingResult);
+  }, [isWaitingResult]);
 
   /* will call the callback and redirect to the query url if told to
   ================================================================= */

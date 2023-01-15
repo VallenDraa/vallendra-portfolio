@@ -2,7 +2,6 @@ import { Typography } from "@material-tailwind/react";
 import FloatingSquares from "../../FloatingSquares";
 import Image from "next/image";
 import myPic from "../../../../public/images/vallen-icon.png";
-import FadeBottom from "../../FadePageTranstition/FadeBottom";
 import Line from "../../Line";
 
 export default function Hero() {
@@ -62,8 +61,6 @@ export default function Hero() {
         </div>
         <Line className="absolute left-1/2 bottom-[-100px] z-20 -translate-x-1/2 scale-y-[3] bg-white/40 xl:bottom-[-50px] xl:scale-y-[6]" />
       </section>
-
-      <FadeBottom position="bottom-0" />
     </>
   );
 }
