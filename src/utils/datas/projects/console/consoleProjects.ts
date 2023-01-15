@@ -15,6 +15,7 @@ const cliProjects: IProject[] = [
     categoryIds: ["3"],
     createdAt: new Date("Nov 12, 2022").toISOString(),
     gitLink: "https://github.com/VallenDraa/bus-primajasa",
+    isTopPick: false,
   },
   {
     _id: "11",
@@ -30,6 +31,7 @@ const cliProjects: IProject[] = [
     categoryIds: ["3"],
     createdAt: new Date("Nov 10, 2022").toISOString(),
     gitLink: "https://github.com/VallenDraa/perkutut-airlines",
+    isTopPick: false,
   },
 ];
 

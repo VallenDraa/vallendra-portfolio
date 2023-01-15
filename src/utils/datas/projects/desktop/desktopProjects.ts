@@ -17,6 +17,7 @@ const desktopProjects: IProject[] = [
     createdAt: new Date("Dec 10, 2022").toISOString(),
     downloadLink: "https://github.com/VallenDraa/turu-list",
     gitLink: "https://github.com/VallenDraa/turu-list",
+    isTopPick: false,
   },
   {
     _id: "14",
@@ -32,6 +33,7 @@ const desktopProjects: IProject[] = [
     createdAt: new Date("Nov 28, 2022").toISOString(),
     downloadLink: "https://github.com/VallenDraa/kalkulator-pro",
     gitLink: "https://github.com/VallenDraa/kalkulator-pro",
+    isTopPick: false,
   },
 ];
 

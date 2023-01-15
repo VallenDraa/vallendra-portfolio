@@ -17,6 +17,7 @@ export interface IProject {
   siteLink?: string | null;
   downloadLink?: string | null;
   gitLink: string;
+  isTopPick: boolean;
 }
 
 export interface IProjectCategory {

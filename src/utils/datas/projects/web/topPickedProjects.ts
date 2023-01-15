@@ -18,6 +18,7 @@ const topPickedProjects: IProject[] = [
     createdAt: new Date("Oct 17, 2022").toISOString(),
     siteLink: "https://kon-nect.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/konnect",
+    isTopPick: true,
   },
   {
     _id: "2",
@@ -35,6 +36,7 @@ const topPickedProjects: IProject[] = [
     createdAt: new Date("May 7, 2022").toISOString(),
     siteLink: "https://cas-era.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/casera",
+    isTopPick: true,
   },
   {
     _id: "3",
@@ -51,6 +53,7 @@ const topPickedProjects: IProject[] = [
     createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: "https://triquest.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/triquest",
+    isTopPick: true,
   },
   {
     _id: "4",
@@ -68,6 +71,7 @@ const topPickedProjects: IProject[] = [
     createdAt: new Date("Mar 2 2022").toISOString(),
     siteLink: "https://ultimawidget.cyclic.app/",
     gitLink: "https://github.com/VallenDraa/ultima_widget",
+    isTopPick: true,
   },
 ];
 

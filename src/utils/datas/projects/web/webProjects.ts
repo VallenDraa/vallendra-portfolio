@@ -19,6 +19,7 @@ const webProjects: IProject[] = [
     createdAt: new Date("Dec 25, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/devils-burger",
     gitLink: "https://github.com/VallenDraa/devils-burger",
+    isTopPick: false,
   },
   {
     _id: "6",
@@ -36,6 +37,7 @@ const webProjects: IProject[] = [
     createdAt: new Date("Oct 14, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/typelist",
     gitLink: "https://github.com/VallenDraa/typelist",
+    isTopPick: false,
   },
   {
     _id: "7",
@@ -52,6 +54,7 @@ const webProjects: IProject[] = [
     createdAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: null,
     gitLink: "https://github.com/VallenDraa/tailwind-book",
+    isTopPick: false,
   },
   {
     _id: "8",
@@ -69,6 +72,7 @@ const webProjects: IProject[] = [
     createdAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/nucleic-acid-converter",
     gitLink: "https://github.com/VallenDraa/nucleic-acid-converter",
+    isTopPick: false,
   },
   {
     _id: "9",
@@ -85,6 +89,7 @@ const webProjects: IProject[] = [
     createdAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/old-portfolio",
     gitLink: "https://github.com/VallenDraa/old-portfolio",
+    isTopPick: false,
   },
 ];
 
