@@ -1,6 +1,6 @@
 import { NavIsOpenedCP } from "../../context/NavIsOpenedCP";
 import { ThemeProvider } from "@material-tailwind/react";
-import customMaterialStyles from "../../material-tailwind.config";
+import customMaterialStyles from "../../../material-tailwind.config";
 import { IntersectingProjectCP } from "../../context/IntersectingProjectCP";
 
 export default function ContextProviders({ children }: { children: any }) {

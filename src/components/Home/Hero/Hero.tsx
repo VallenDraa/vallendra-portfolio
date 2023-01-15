@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import FloatingSquares from "../../FloatingSquares";
 import Image from "next/image";
-import myPic from "../../../public/images/vallen-icon.png";
+import myPic from "../../../../public/images/vallen-icon.png";
 import FadeBottom from "../../FadePageTranstition/FadeBottom";
 import Line from "../../Line";
 

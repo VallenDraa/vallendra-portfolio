@@ -3,7 +3,7 @@ const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
   darkMode: "class",
-  content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
+  content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
   theme: {
     fontFamily: {
       sans: ["Segoe UI", "sans-serif"],

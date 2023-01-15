@@ -1,7 +1,7 @@
-import Hero from "../components/Main/Hero/Hero";
-import Profile from "../components/Main/Profile/Profile";
-import TopPicksSection from "../components/Main/ProjectTopPicks/TopPicksSection";
-import Redirect from "../components/Main/Redirect/Redirect";
+import Hero from "../components/Home/Hero/Hero";
+import Profile from "../components/Home/Profile/Profile";
+import TopPicksSection from "../components/Home/ProjectTopPicks/TopPicksSection";
+import Redirect from "../components/Home/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 
