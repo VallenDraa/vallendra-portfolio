@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, DependencyList } from "react";
 
 export default function useDebounce(
   callback: () => void,
-  duration: number
+  duration: number,
+  deps: DependencyList
 ): [isWaiting: boolean, error: Error | null] {
   // states
   const [isWaiting, setIsWaiting] = useState(false);
@@ -23,7 +24,7 @@ export default function useDebounce(
     } catch (e) {
       setError(e as Error);
     }
-  });
+  }, deps);
 
   return [isWaiting, error];
 }
