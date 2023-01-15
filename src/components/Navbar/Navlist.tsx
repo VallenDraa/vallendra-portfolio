@@ -39,10 +39,10 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
   /* for handling accordion visibility
   ==================================== */
   useEffect(() => {
-    setAccordionIsVisible(!(window.innerWidth > 960));
+    setAccordionIsVisible(!(window.innerWidth >= 960));
 
     function menuAccordionHandler() {
-      window.innerWidth > 960
+      window.innerWidth >= 960
         ? setAccordionIsVisible(false)
         : setAccordionIsVisible(true);
     }

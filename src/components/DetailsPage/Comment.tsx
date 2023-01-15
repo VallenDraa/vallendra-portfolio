@@ -9,7 +9,7 @@ export default function Comment() {
   useEffect(() => {
     setIsVisible(false);
 
-    const timer = setTimeout(() => setIsVisible(true), 100);
+    const timer = setTimeout(() => setIsVisible(true), 150);
 
     return () => clearTimeout(timer);
   }, [asPath]);

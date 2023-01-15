@@ -101,7 +101,7 @@ export default function NavbarComponent() {
         {/* the nav list */}
         <NavList navListRef={navListRef} overlayRef={overlayRef} />
         {/* cta */}
-        <div className="hidden sm:basis-1/3 xl:block">
+        <div className="hidden sm:basis-1/3 lg:block">
           <Link href={"/contacts"} className="ml-auto block w-fit ">
             <Button
               variant="filled"
