@@ -10,6 +10,7 @@ import { useState, useEffect, useMemo } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
 import projectCategories from "../../utils/datas/projects/projectCategories";
 import ProjectCategorySection from "../../components/Projects/ProjectCategorySection";
+import useDebounce from "../../utils/hooks/useDebounce";
 
 interface IProps {
   projects: IProject[];
@@ -19,14 +20,19 @@ interface IProps {
 export default function ProjectsPage({ projects, categories }: IProps) {
   const [isError, setIsError] = useState(projects.length === 0);
   const [query, setQuery] = useState("");
+  const [finalQuery, setFinalQuery] = useState("");
+
+  /* Querying projects
+  =================== */
+  const [isWaitingResult, error] = useDebounce(() => setFinalQuery(query), 400);
   const showedIndex = useMemo<number[]>(() => {
     const newShowedIndex: number[] = projects.reduce((result, project, i) => {
-      if (query === "") return [...result, i];
+      if (finalQuery === "") return [...result, i];
 
       if (
         project.name
           .toLocaleLowerCase()
-          .includes(query.toLocaleLowerCase().trim())
+          .includes(finalQuery.toLocaleLowerCase().trim())
       ) {
         return [...result, i];
       }
@@ -35,7 +41,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
     }, [] as number[]);
 
     return newShowedIndex;
-  }, [query]);
+  }, [finalQuery]);
 
   return (
     <>
@@ -86,7 +92,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
         {/* the projects list */}
         <main className="relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10">
           {/* initial render for projects with categories */}
-          <Show when={projects.length > 0 && query === ""}>
+          <Show when={projects.length > 0 && finalQuery === ""}>
             <div className="space-y-10">
               {categories.map((category, i) => {
                 return (
@@ -104,7 +110,9 @@ export default function ProjectsPage({ projects, categories }: IProps) {
 
           {/* search results */}
           <Show
-            when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
+            when={
+              projects.length > 0 && showedIndex.length > 0 && finalQuery !== ""
+            }
           >
             <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {showedIndex.map((idx) => {
