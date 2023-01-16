@@ -1,7 +1,7 @@
 import { Button, Typography } from "@material-tailwind/react";
 import Head from "next/head";
 import StyledInput from "../components/StyledComponents/StyledInput";
-import { IoMail, IoPaperPlane } from "react-icons/io5";
+import { IoMail, IoPaperPlane, IoShareSocial } from "react-icons/io5";
 import { MdBlock } from "react-icons/md";
 import { FormEvent } from "react";
 import StyledTextArea from "../components/StyledComponents/StyledTextArea";
@@ -114,7 +114,23 @@ export default function Contacts() {
           </form>
 
           {/* other social media */}
-          <aside className="flex grow flex-col gap-4 rounded-md p-6 shadow-md dark:bg-gray-800/40 dark:shadow-gray-800/60"></aside>
+          <aside className="flex grow flex-col gap-4 rounded-md p-6 shadow-md dark:bg-gray-800/40 dark:shadow-gray-800/60">
+            <header className="mb-3 space-y-1">
+              <Typography
+                as="h3"
+                variant="h4"
+                className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-white bg-clip-text font-bold uppercase text-transparent"
+              >
+                <IoShareSocial className="rounded-lg bg-gray-700/90 p-1 text-3xl text-light-blue-400" />
+                My Socials
+              </Typography>
+              <Typography as="p" className="font-medium text-gray-400">
+                A First Year Computer Science Major student at Universitas Islam
+                Negeri Syarif Hidayatullah Jakarta.
+              </Typography>
+            </header>
+            <main></main>
+          </aside>
         </main>
       </div>
     </>

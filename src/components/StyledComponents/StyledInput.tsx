@@ -9,7 +9,7 @@ const StyledInput = forwardRef<HTMLInputElement, InputProps>(
         labelProps={{ className: "!text-gray-500" }}
         color="gray"
         type={props.type || "text"}
-        className={`h-12 w-full rounded !border-t-0 !border-transparent px-4 text-lg outline-none transition-colors focus:!border-gray-500 disabled:cursor-not-allowed disabled:opacity-20 dark:bg-gray-800/70 dark:text-gray-300 dark:focus:bg-gray-800/80 ${
+        className={`h-12 w-full rounded !border-t-0 !border-transparent px-4 text-lg outline-none transition-colors focus:!border-gray-500 disabled:cursor-not-allowed disabled:opacity-20 dark:bg-gray-800/60 dark:text-gray-300 dark:focus:bg-gray-800/80 ${
           props.className || ""
         }`}
         {...props}
