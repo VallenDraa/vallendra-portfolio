@@ -1,14 +1,17 @@
-import { Button, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import Head from "next/head";
-import StyledInput from "../components/StyledComponents/StyledInput";
-import { IoMail, IoPaperPlane, IoShareSocial } from "react-icons/io5";
-import { MdBlock } from "react-icons/md";
 import { FormEvent } from "react";
+import { IoMail, IoPaperPlane, IoShareSocial } from "react-icons/io5";
+import StyledInput from "../components/StyledComponents/StyledInput";
 import StyledTextArea from "../components/StyledComponents/StyledTextArea";
 import StyledButton from "../components/StyledComponents/StyledButton";
+import { BiBlock } from "react-icons/bi";
+import SocialsWithIcon from "../components/SocialWithIcons";
+import IconWithTooltip from "../components/IconWithTooltip";
+import { useRef, useState } from "react";
 
 export default function Contacts() {
-  function sendMessage(e: FormEvent) {
+  function sendMessage(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
@@ -45,21 +48,21 @@ export default function Contacts() {
         </header>
 
         {/* form and other contact link */}
-        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col gap-6 px-8 xl:flex-row xl:px-0">
+        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 sm:flex-row xl:px-0">
           {/* email form */}
           <form
             onSubmit={sendMessage}
             name="message-form"
-            className="flex flex-col gap-4 rounded-md p-6 shadow-md dark:bg-gray-800/40 dark:shadow-gray-800/60 xl:basis-2/3"
+            className="flex grow flex-col gap-4 rounded-md p-6 shadow-md dark:bg-gray-800/40 dark:shadow-gray-800/60"
           >
             <fieldset className="flex flex-col gap-4">
               <div className="mb-3 space-y-1">
                 <Typography
                   as="legend"
                   variant="h3"
-                  className="flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-white bg-clip-text text-2xl font-bold uppercase text-transparent md:text-3xl"
+                  className="flex items-center gap-2 bg-gradient-to-tr from-pink-300 to-pink-100 bg-clip-text text-2xl font-bold uppercase text-transparent md:text-3xl"
                 >
-                  <IoMail className="rounded-lg bg-gray-700/90 p-1 text-3xl text-light-blue-400" />
+                  <IoMail className="rounded-lg bg-gray-700/90 p-1 text-3xl text-pink-300" />
                   Email Form
                 </Typography>
                 <Typography as="span" className="font-medium text-gray-400">
@@ -93,7 +96,7 @@ export default function Contacts() {
 
             <div role="group" className="flex gap-2 self-end">
               <StyledButton
-                icon={<MdBlock />}
+                icon={<BiBlock />}
                 type="reset"
                 variant="text"
                 size="md"
@@ -114,22 +117,38 @@ export default function Contacts() {
           </form>
 
           {/* other social media */}
-          <aside className="flex grow flex-col gap-4 rounded-md p-6 shadow-md dark:bg-gray-800/40 dark:shadow-gray-800/60">
-            <header className="mb-3 space-y-1">
+          <aside className="flex flex-col items-start gap-4 rounded-md p-6 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12">
+            <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 pb-5 dark:border-gray-700 sm:justify-center">
+              <div className="flex gap-2 sm:justify-center">
+                <IconWithTooltip
+                  isButton={false}
+                  text="My Socials"
+                  placement="top"
+                  icon={
+                    <IoShareSocial className="rounded-lg bg-gray-700/90 p-1 text-3xl text-light-blue-400 sm:text-4xl" />
+                  }
+                />
+
+                <Typography
+                  as="h3"
+                  variant="h4"
+                  className="flex items-center bg-gradient-to-tr from-light-blue-500 to-white bg-clip-text font-bold uppercase text-transparent sm:hidden"
+                >
+                  My Socials
+                </Typography>
+              </div>
+
               <Typography
-                as="h3"
-                variant="h4"
-                className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-white bg-clip-text font-bold uppercase text-transparent"
+                as="p"
+                className="font-medium text-gray-400 sm:hidden"
               >
-                <IoShareSocial className="rounded-lg bg-gray-700/90 p-1 text-3xl text-light-blue-400" />
-                My Socials
-              </Typography>
-              <Typography as="p" className="font-medium text-gray-400">
-                A First Year Computer Science Major student at Universitas Islam
-                Negeri Syarif Hidayatullah Jakarta.
+                Connect with me and stay updated on my projects or thoughts on
+                these platforms
               </Typography>
             </header>
-            <main></main>
+            <main className="flex w-full grow justify-between sm:flex-col ">
+              <SocialsWithIcon size="text-4xl" smSize="sm:text-5xl" />
+            </main>
           </aside>
         </main>
       </div>

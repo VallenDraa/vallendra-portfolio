@@ -1,8 +1,5 @@
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import IconWithTooltip from "./IconWithTooltip";
-import Link from "next/link";
 import { useMemo } from "react";
-import Line from "./Line";
+import SocialsWithIcon from "./SocialWithIcons";
 
 export default function SiteFooter() {
   const year = useMemo(() => new Date().getFullYear(), []);
@@ -24,31 +21,7 @@ export default function SiteFooter() {
         </span> */}
 
         <div className="flex grow items-center justify-center gap-2 lg:flex-grow-0 lg:basis-1/3 lg:justify-end">
-          <Link
-            href="https://github.com/vallendraa"
-            target="_blank"
-            className="block"
-          >
-            <IconWithTooltip
-              placement="top"
-              Icon={<FaGithub className="text-4xl text-gray-100" />}
-              text={"Github"}
-            />
-          </Link>
-          <Link href="https://linkedin.com" target="_blank" className="block">
-            <IconWithTooltip
-              placement="top"
-              Icon={<FaLinkedin className="text-4xl text-blue-600" />}
-              text={"LinkedIn"}
-            />
-          </Link>
-          <Link href="https://instagram.com" target="_blank" className="block">
-            <IconWithTooltip
-              placement="top"
-              Icon={<FaInstagram className="text-4xl text-pink-300" />}
-              text={"Instagram"}
-            />
-          </Link>
+          <SocialsWithIcon size="text-4xl" />
         </div>
       </div>
     </footer>
