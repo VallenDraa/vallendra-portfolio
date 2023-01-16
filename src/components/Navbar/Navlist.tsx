@@ -12,6 +12,7 @@ import Link from "next/link";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
 import NavBtn from "./NavBtn";
+import StyledButton from "../StyledComponents/StyledButton";
 
 interface IProps {
   navListRef: RefObject<HTMLDivElement>;
@@ -183,18 +184,16 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           href={"/contacts"}
           className="mx-auto mt-2 block w-11/12 lg:hidden"
         >
-          <Button
+          <StyledButton
+            icon={<IoCall />}
             variant="filled"
             color="deep-purple"
             size="md"
             fullWidth
-            className="group relative flex items-center justify-center gap-2 rounded-full px-4 text-center duration-200"
+            className="w-full"
           >
-            <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
-              Contact Me
-            </span>
-            <IoCall className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
-          </Button>
+            Contact Me
+          </StyledButton>
         </Link>
 
         <div className="mt-auto self-center pb-6 lg:hidden">

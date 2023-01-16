@@ -14,6 +14,9 @@ import { useState, useEffect } from "react";
 import Show from "../../../utils/jsx/Show";
 import { technologies } from "../../../types/types";
 import projectCategories from "../../../utils/datas/projects/projectCategories";
+import StyledButton from "../../StyledComponents/StyledButton";
+import { BiDetail } from "react-icons/bi";
+import { SlGlobe } from "react-icons/sl";
 
 export default function TopPicksInfoDashboard({
   activeProject,
@@ -116,23 +119,19 @@ export default function TopPicksInfoDashboard({
         className="flex justify-end gap-2 border-gray-600 py-3 text-gray-500"
       >
         <Link href={`/projects/${activeProject?.slug}`}>
-          <Button
+          <StyledButton
+            icon={<BiDetail />}
             size="md"
             variant="text"
             color="gray"
-            className="rounded-full"
           >
             Detail
-          </Button>
+          </StyledButton>
         </Link>
         <a target="__blank" href={activeProject?.siteLink || "#"}>
-          <Button
-            variant="filled"
-            size="md"
-            className="group relative flex w-max items-center rounded-full"
-          >
+          <StyledButton icon={<SlGlobe />} variant="filled" size="md">
             Visit Site
-          </Button>
+          </StyledButton>
         </a>
       </CardFooter>
     </Card>

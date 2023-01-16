@@ -178,7 +178,6 @@ export default function ProjectDetails({
 
                     {/* website text */}
                     <Show when={!!project.siteLink}>
-                      <SlGlobe className="text-lg text-blue-500" />
                       <span>Visit Site</span>
                     </Show>
                   </ActionButton>

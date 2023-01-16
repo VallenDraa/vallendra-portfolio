@@ -5,6 +5,7 @@ import { IoMail, IoPaperPlane } from "react-icons/io5";
 import { MdBlock } from "react-icons/md";
 import { FormEvent } from "react";
 import StyledTextArea from "../components/StyledComponents/StyledTextArea";
+import StyledButton from "../components/StyledComponents/StyledButton";
 
 export default function Contacts() {
   function sendMessage(e: FormEvent) {
@@ -91,30 +92,24 @@ export default function Contacts() {
             </fieldset>
 
             <div role="group" className="flex gap-2 self-end">
-              <Button
-                type="submit"
+              <StyledButton
+                icon={<MdBlock />}
+                type="reset"
                 variant="text"
                 size="md"
                 color="red"
-                className="group relative flex w-max items-center justify-center gap-2 rounded-full text-center duration-200"
               >
-                <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
-                  Reset
-                </span>
-                <MdBlock className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
-              </Button>
+                Reset
+              </StyledButton>
 
-              <Button
+              <StyledButton
+                icon={<IoPaperPlane />}
                 type="submit"
                 variant="filled"
                 size="md"
-                className="group relative flex w-max items-center justify-center gap-2 rounded-full text-center duration-200"
               >
-                <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
-                  Send Message
-                </span>
-                <IoPaperPlane className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
-              </Button>
+                Send Message
+              </StyledButton>
             </div>
           </form>
 

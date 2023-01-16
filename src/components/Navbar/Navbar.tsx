@@ -1,15 +1,11 @@
-import {
-  Navbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-tailwind/react";
+import { Typography, IconButton } from "@material-tailwind/react";
 import { useEffect, useContext, useRef } from "react";
 import { IoCall } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 import NavList from "./Navlist";
 import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
 import Link from "next/link";
+import StyledButton from "../StyledComponents/StyledButton";
 
 export default function NavbarComponent() {
   const { navIsOpened, setNavIsOpened } = useContext(
@@ -103,17 +99,14 @@ export default function NavbarComponent() {
         {/* cta */}
         <div className="hidden sm:basis-1/3 lg:block">
           <Link href={"/contacts"} className="ml-auto block w-fit">
-            <Button
+            <StyledButton
+              icon={<IoCall />}
               variant="filled"
               color="deep-purple"
               size="md"
-              className="group relative flex w-max items-center justify-center gap-2 rounded-full px-4 text-center duration-200"
             >
-              <span className="translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0">
-                Contact Me
-              </span>
-              <IoCall className="relative -translate-x-4 text-sm  opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
-            </Button>
+              Contact Me
+            </StyledButton>
           </Link>
         </div>
         <IconButton

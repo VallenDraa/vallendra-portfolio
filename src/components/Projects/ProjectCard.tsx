@@ -6,6 +6,7 @@ import { BsArrowRight } from "react-icons/bs";
 import techIcons from "../MappedComponents/TechIcons";
 import { compactNumberFormatter } from "../../utils/helpers/formatter";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
+import StyledButton from "../StyledComponents/StyledButton";
 
 export default function ProjectCard({
   project,
@@ -82,16 +83,14 @@ export default function ProjectCard({
             })}
           </ul>
 
-          <Button
+          <StyledButton
             variant="text"
+            icon={<BsArrowRight />}
             className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-gray-500/30 py-2 px-7 text-indigo-300"
             color="indigo"
           >
-            <span className="translate-x-3 transition-transform duration-200 group-hover:translate-x-0">
-              See Detail
-            </span>
-            <BsArrowRight className="relative -translate-x-4 text-xl opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
-          </Button>
+            See Detail
+          </StyledButton>
         </div>
       </Link>
     </div>
