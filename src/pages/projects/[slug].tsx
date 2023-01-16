@@ -14,7 +14,7 @@ import { SlGlobe } from "react-icons/sl";
 import Show from "../../utils/jsx/Show";
 import Comment from "../../components/DetailsPage/Comment";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
-import ActionButton from "../../components/DetailsPage/ActionButton";
+import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState } from "react";
@@ -163,35 +163,33 @@ export default function ProjectDetails({
             {/* link for the code of this project */}
             <aside className="sticky top-0 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 border-[#30363d] p-4 lg:flex-col">
               <div className="flex w-full flex-col gap-3">
-                <Show when={hasSiteOrDownloadLink}>
+                {/* when the project has download link */}
+                <Show when={!!project.downloadLink === true}>
                   <ActionButton
-                    href={`${project.downloadLink || project.siteLink}`}
-                    variant="outlined"
-                    color="blue"
-                    className="flex w-full justify-center"
+                    href={`${project.downloadLink}`}
+                    icon={<FaDownload className="text-lg text-blue-500" />}
                   >
-                    {/* download text */}
-                    <Show when={!!project.downloadLink}>
-                      <FaDownload className="text-lg text-blue-500" />
-                      <span>Download</span>
-                    </Show>
+                    Download
+                  </ActionButton>
+                </Show>
 
-                    {/* website text */}
-                    <Show when={!!project.siteLink}>
-                      <span>Visit Site</span>
-                    </Show>
+                {/* when the project has a website link */}
+                <Show when={!!project.siteLink === true}>
+                  <ActionButton
+                    href={`${project.siteLink}`}
+                    icon={<SlGlobe className="text-lg text-blue-500" />}
+                  >
+                    Visit Site
                   </ActionButton>
                 </Show>
 
                 {/* Github Link */}
                 <ActionButton
+                  icon={<FaGithub className="text-lg" />}
                   href={project.gitLink}
-                  variant="outlined"
                   color="gray"
-                  className="flex w-full justify-center border-gray-400 text-gray-400"
                 >
-                  <FaGithub className="text-lg text-gray-400" />
-                  <span>Visit Repo</span>
+                  Visit Repo
                 </ActionButton>
 
                 {/* copy link to clipboard */}

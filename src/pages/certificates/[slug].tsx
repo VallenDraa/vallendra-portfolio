@@ -8,7 +8,7 @@ import { FaRegNewspaper } from "react-icons/fa";
 import Show from "../../utils/jsx/Show";
 import Comment from "../../components/DetailsPage/Comment";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
-import ActionButton from "../../components/DetailsPage/ActionButton";
+import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState } from "react";
