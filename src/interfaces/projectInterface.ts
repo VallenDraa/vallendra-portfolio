@@ -19,9 +19,3 @@ export interface IProject {
   gitLink: string;
   isTopPick: boolean;
 }
-
-export interface IProjectCategory {
-  _id: string;
-  name: string;
-  projects: string[];
-}

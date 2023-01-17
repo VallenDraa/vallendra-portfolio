@@ -1,13 +1,13 @@
-import { Typography } from "@material-tailwind/react";
-import { IProjectCategory, IProject } from "../../interfaces/projectInterface";
+import { IProject } from "../../interfaces/projectInterface";
 import { useMemo } from "react";
-import ProjectCard from "./ProjectCard";
 import SectionHeading from "../SectionHeading";
+import ItemCard from "../Cards/ItemCard";
+import ICategory from "../../interfaces/category";
 
 interface IProps {
   categoryIndex: number;
   projects: IProject[];
-  category: IProjectCategory;
+  category: ICategory;
 }
 
 interface IPickedProjects {
@@ -20,7 +20,7 @@ export default function ProjectCategorySection({
   projects,
 }: IProps) {
   const projectsInCategory = useMemo<IPickedProjects>(() => {
-    const { projects: allProjectIds } = category;
+    const { items: allProjectIds } = category;
 
     const pickedProjects = allProjectIds.reduce((res, id) => {
       const pickedProject = projects.find((project) => project._id === id);
@@ -37,12 +37,18 @@ export default function ProjectCategorySection({
 
       {/* display projects in this category */}
       <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {category.projects.map((id, i) => {
+        {category.items.map((id, i) => {
           return (
             <li key={id}>
-              <ProjectCard
+              <ItemCard
                 imgIsPriority={isImgImportant(categoryIndex, i)}
-                project={projectsInCategory[id]}
+                imgSrc={projectsInCategory[id].image}
+                itemLikes={projectsInCategory[id].likes}
+                itemLink={`/projects/${projectsInCategory[id].slug}`}
+                itemName={projectsInCategory[id].name}
+                itemShortDesc={projectsInCategory[id].shortDescription}
+                itemViews={projectsInCategory[id].views}
+                techs={projectsInCategory[id].tech}
               />
             </li>
           );

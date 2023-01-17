@@ -8,7 +8,6 @@ import StyledButton from "../components/StyledComponents/StyledButton";
 import { BiBlock } from "react-icons/bi";
 import SocialsWithIcon from "../components/SocialWithIcons";
 import IconWithTooltip from "../components/IconWithTooltip";
-import { useRef, useState } from "react";
 
 export default function Contacts() {
   function sendMessage(e: FormEvent<HTMLFormElement>) {

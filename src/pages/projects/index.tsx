@@ -1,20 +1,21 @@
 import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
-import ProjectCard from "../../components/Projects/ProjectCard";
 import { GetStaticPropsResult } from "next";
-import { IProjectCategory, IProject } from "../../interfaces/projectInterface";
+import { IProject } from "../../interfaces/projectInterface";
 import Show from "../../utils/jsx/Show";
 import { useState, useMemo } from "react";
 import allProjects from "../../utils/datas/projects/allProjects";
 import projectCategories from "../../utils/datas/projects/projectCategories";
-import ProjectCategorySection from "../../components/Projects/ProjectCategorySection";
+import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
+import ItemCard from "../../components/Cards/ItemCard";
+import ICategory from "../../interfaces/category";
 
 interface IProps {
   projects: IProject[];
-  categories: IProjectCategory[];
+  categories: ICategory[];
 }
 
 export default function ProjectsPage({ projects, categories }: IProps) {
@@ -118,14 +119,20 @@ export default function ProjectsPage({ projects, categories }: IProps) {
           <Show
             when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
-            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {showedIndex.map((idx) => {
                 if (projects[idx]) {
                   return (
                     <li key={projects[idx]._id}>
-                      <ProjectCard
+                      <ItemCard
                         imgIsPriority={false}
-                        project={projects[idx]}
+                        imgSrc={projects[idx].image}
+                        itemLikes={projects[idx].likes}
+                        itemLink={`/projects/${projects[idx].slug}`}
+                        itemName={projects[idx].name}
+                        itemShortDesc={projects[idx].shortDescription}
+                        itemViews={projects[idx].views}
+                        techs={projects[idx].tech}
                       />
                     </li>
                   );

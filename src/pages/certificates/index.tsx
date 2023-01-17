@@ -6,17 +6,16 @@ import Show from "../../utils/jsx/Show";
 import { useState, useMemo } from "react";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
-import ICertificate, {
-  ICertificateCategory,
-} from "../../interfaces/certificateInterface";
-import CertificateCategorySection from "../../components/certificates/CertificateCategorySection";
-import CertificateCard from "../../components/certificates/CertificateCard";
+import ICertificate from "../../interfaces/certificateInterface";
+import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
 import certificateCategories from "../../utils/datas/certificates/certificateCategories";
+import ItemCard from "../../components/Cards/ItemCard";
+import ICategory from "../../interfaces/category";
 
 interface IProps {
   certificates: ICertificate[];
-  categories: ICertificateCategory[];
+  categories: ICategory[];
 }
 
 export default function ProjectsPage({ certificates, categories }: IProps) {
@@ -124,14 +123,19 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
               certificates.length > 0 && showedIndex.length > 0 && query !== ""
             }
           >
-            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {showedIndex.map((idx) => {
                 if (certificates[idx]) {
                   return (
                     <li key={certificates[idx]._id}>
-                      <CertificateCard
+                      <ItemCard
                         imgIsPriority={false}
-                        certificate={certificates[idx]}
+                        imgSrc={certificates[idx].image}
+                        itemLikes={certificates[idx].likes}
+                        itemLink={`/certificates/${certificates[idx].slug}`}
+                        itemName={certificates[idx].name}
+                        itemShortDesc={certificates[idx].shortDescription}
+                        itemViews={certificates[idx].views}
                       />
                     </li>
                   );

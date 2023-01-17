@@ -1,15 +1,15 @@
-import { ICertificateCategory } from "../../../interfaces/certificateInterface";
+import ICategory from "../../../interfaces/category";
 
-const certificateCategories: ICertificateCategory[] = [
+const certificateCategories: ICategory[] = [
   {
     _id: "1",
     name: "web certifications",
-    certificates: ["1"],
+    items: ["1"],
   },
   {
     _id: "2",
     name: "programming language certifications",
-    certificates: ["2"],
+    items: ["2"],
   },
 ];
 

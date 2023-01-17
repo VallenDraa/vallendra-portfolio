@@ -11,11 +11,4 @@ interface ICertificate {
   createdAt: Date | string;
   certificateLink: string;
 }
-
-export interface ICertificateCategory {
-  _id: string;
-  name: string;
-  certificates: string[];
-}
-
 export default ICertificate;
