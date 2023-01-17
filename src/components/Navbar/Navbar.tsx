@@ -8,9 +8,7 @@ import Link from "next/link";
 import StyledButton from "../StyledComponents/StyledButton";
 
 export default function NavbarComponent() {
-  const { navIsOpened, setNavIsOpened } = useContext(
-    NavIsOpenedContext
-  ) as INavIsOpened;
+  const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
   const navbarRef = useRef<HTMLDivElement>(null);
   const navToggleRef = useRef<HTMLButtonElement>(null);

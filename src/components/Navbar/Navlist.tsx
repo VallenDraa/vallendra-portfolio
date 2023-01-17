@@ -9,7 +9,7 @@ import MENUS from "../../utils/datas/menus";
 import Show from "../../utils/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";
-import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
+import NavIsOpenedContext from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
 import NavBtn from "./NavBtn";
 import StyledButton from "../StyledComponents/StyledButton";
@@ -22,9 +22,7 @@ interface IProps {
 export default function NavList({ navListRef, overlayRef }: IProps) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(0);
-  const { navIsOpened, setNavIsOpened } = useContext(
-    NavIsOpenedContext
-  ) as INavIsOpened;
+  const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
   function handleOpenAccordion(value: number) {
     setOpenedAccordion(openedAccordion === value ? 0 : value);

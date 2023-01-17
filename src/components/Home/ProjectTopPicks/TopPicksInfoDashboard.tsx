@@ -3,26 +3,27 @@ import {
   Chip,
   Typography,
   CardBody,
-  Button,
   CardFooter,
 } from "@material-tailwind/react";
 import { IProject } from "../../../interfaces/projectInterface";
 import Link from "next/link";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Show from "../../../utils/jsx/Show";
 import { technologies } from "../../../types/types";
-import projectCategories from "../../../utils/datas/projects/projectCategories";
 import StyledButton from "../../StyledComponents/StyledButton";
 import { BiDetail } from "react-icons/bi";
 import { SlGlobe } from "react-icons/sl";
+import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
 
 export default function TopPicksInfoDashboard({
   activeProject,
 }: {
   activeProject: IProject;
 }) {
+  const { dashboardRef } = useContext(DashboardControllerContext);
+
   const [numberIsVisible, setNumberIsVisible] = useState(false);
 
   /* contains window resize listener to handle number visibility
@@ -42,13 +43,19 @@ export default function TopPicksInfoDashboard({
   }, []);
 
   return (
-    <Card className="sticky inset-x-0 top-[20%] z-10 h-max w-full rounded-md shadow-md backdrop-blur dark:bg-gray-900/60 dark:shadow-gray-900/60">
-      <CardBody className="flex flex-col gap-7">
-        <div className="flex flex-col gap-3">
+    <Card
+      ref={dashboardRef}
+      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md opacity-0 shadow-md backdrop-blur transition-opacity duration-200 dark:bg-gray-900/60 dark:shadow-gray-900/60"
+    >
+      <CardBody className="flex flex-col gap-10">
+        <div className="flex flex-col">
           <div className="flex items-center justify-between">
-            <h3 className="h-fit animate-breathing bg-gradient-to-r from-light-blue-400 to-blue-500 bg-gradient bg-clip-text py-3 text-5xl font-bold capitalize text-transparent">
+            <Typography
+              as="h3"
+              className="h-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text py-3 text-4xl font-bold capitalize text-transparent sm:text-5xl"
+            >
               {activeProject?.name}
-            </h3>
+            </Typography>
 
             <Show when={numberIsVisible}>
               <Chip
@@ -59,30 +66,11 @@ export default function TopPicksInfoDashboard({
             </Show>
           </div>
 
-          {/* Project Type*/}
-          <div className="flex flex-wrap gap-2">
-            {activeProject?.categoryIds.map((catId) => {
-              const category = projectCategories.find(
-                ({ _id }) => _id === catId
-              );
-
-              return category ? (
-                <Chip
-                  key={catId}
-                  className="rounded-full bg-gray-600/70 py-1 px-3 text-[0.675rem] font-semibold"
-                  value={category?.name}
-                  variant="filled"
-                  animate={{ mount: { y: 0 }, unmount: { y: 50 } }}
-                />
-              ) : null;
-            })}
-          </div>
-
           {/* project short description */}
           <Typography
             as="p"
             variant="paragraph"
-            className="mt-3 font-medium text-gray-300 "
+            className="mt-3 font-medium text-gray-300"
           >
             {activeProject?.shortDescription || ""}
           </Typography>

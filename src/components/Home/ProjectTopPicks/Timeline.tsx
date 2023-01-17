@@ -6,10 +6,8 @@ export default function Timeline() {
     <div className="absolute inset-0 flex justify-center lg:static lg:block">
       {/* The Line */}
       <ul className="relative z-0 mx-auto flex max-w-screen-xl flex-col items-end px-8 xl:px-0">
-        {projects.map((p) => {
-          return (
-            <TimelineItem key={p._id} data={p} projectIndex={Number(p._id)} />
-          );
+        {projects.map((p, i) => {
+          return <TimelineItem key={p._id} data={p} projectIndex={i} />;
         })}
       </ul>
     </div>

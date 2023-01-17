@@ -1,4 +1,10 @@
-import { createContext, useState, Dispatch, SetStateAction } from "react";
+import {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from "react";
 
 export interface INavIsOpened {
   navIsOpened: boolean;
@@ -10,9 +16,9 @@ export const navInitialState = {
   setNavIsOpened() {},
 };
 
-const NavIsOpenedContext = createContext<INavIsOpened | null>(navInitialState);
+export const NavIsOpenedContext = createContext<INavIsOpened>(navInitialState);
 
-export function NavIsOpenedCP({ children }: { children: JSX.Element }) {
+export function NavIsOpenedCP({ children }: { children: ReactNode }) {
   const [navIsOpened, setNavIsOpened] = useState(false);
 
   return (

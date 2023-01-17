@@ -1,4 +1,10 @@
-import { createContext, useState, Dispatch, SetStateAction } from "react";
+import {
+  ReactNode,
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 export interface IIntersectingProjectHistory {
   prevId: string | null;
@@ -11,12 +17,12 @@ export interface IIntersectingProjectHistoryProvider {
 }
 
 const IntersectingProjectContext =
-  createContext<IIntersectingProjectHistoryProvider | null>({
+  createContext<IIntersectingProjectHistoryProvider>({
     history: { prevId: null, currentId: null },
     setHistory: () => history,
   });
 
-export function IntersectingProjectCP({ children }: { children: JSX.Element }) {
+export function IntersectingProjectCP({ children }: { children: ReactNode }) {
   const [history, setHistory] = useState<IIntersectingProjectHistory>({
     prevId: null,
     currentId: null,

@@ -34,10 +34,10 @@
   }
 
   .fade-bottom {
-    @apply after:absolute after:inset-x-0 after:h-20 after:bg-gradient-to-b after:from-transparent after:dark:to-gray-900;
+    @apply after:absolute after:inset-x-0 after:z-40 after:h-20 after:bg-gradient-to-b after:from-transparent after:dark:to-gray-900;
   }
 
   .fade-top {
-    @apply before:absolute before:inset-x-0 before:z-20 before:h-20 before:bg-gradient-to-b before:to-transparent before:dark:from-gray-900;
+    @apply before:absolute before:inset-x-0 before:z-40 before:h-20 before:bg-gradient-to-b before:to-transparent before:dark:from-gray-900;
   }
 }
