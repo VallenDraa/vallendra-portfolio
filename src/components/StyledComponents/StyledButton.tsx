@@ -16,7 +16,7 @@ const StyledButton = forwardRef<HTMLButtonElement, IProps>(
     return (
       <Button
         ref={forwardedRef}
-        className={`group relative flex w-max items-center justify-center gap-2 rounded-full text-center duration-200 ${className}`}
+        className={`group relative flex w-max items-center justify-center gap-2 rounded-full px-4 text-center duration-200 ${className}`}
         {...props}
       >
         {/* when icon is provided */}
