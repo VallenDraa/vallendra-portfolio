@@ -54,7 +54,7 @@ export default function TopPicksInfoDashboard({
               as="h3"
               className="h-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text py-3 text-4xl font-bold capitalize text-transparent sm:text-5xl"
             >
-              {activeProject?.name}
+              {activeProject?.name || ""}
             </Typography>
 
             <Show when={numberIsVisible}>
@@ -90,8 +90,8 @@ export default function TopPicksInfoDashboard({
             as="p"
             className="mb-4 mt-2 text-sm font-medium text-gray-400"
           >
-            These Are the {activeProject?.tech.length} Technologies That Were
-            Used For This Project :
+            These Are the {activeProject?.tech.length || 0} Technologies That
+            Were Used For This Project :
           </Typography>
           <ul className="relative flex  items-center gap-1 overflow-auto">
             {activeProject?.tech.map(

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../../../utils/hooks/useIntersectionObserver";
+import useIntersectionObserver from "../utils/hooks/useIntersectionObserver";
 
-export default function DashboardController({
+export default function IntersectionDiv({
   callback,
   topPercentage,
 }: {
@@ -18,7 +18,7 @@ export default function DashboardController({
   return (
     <div
       ref={revealerRef}
-      className="absolute bg-white"
+      className="absolute"
       style={{ top: `${topPercentage}%` }}
     />
   );

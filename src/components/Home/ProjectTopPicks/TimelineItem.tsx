@@ -3,8 +3,8 @@ import IntersectingProjectContext from "../../../context/IntersectingProjectCP";
 import { IProject } from "../../../interfaces/projectInterface";
 import useIntersectionObserver from "../../../utils/hooks/useIntersectionObserver";
 import Show from "../../../utils/jsx/Show";
-import DashboardController from "./DashboardController";
 import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
+import IntersectionDiv from "../../IntersectionDiv";
 
 interface IProps {
   data: IProject;
@@ -15,27 +15,23 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
   const lineIsInverted = projectIndex === 0 ? false : projectIndex % 2 === 0;
   const projectIsFirstTopPick = projectIndex === 0;
 
-  const projectRef = useRef<HTMLLIElement>(null);
-  const entry = useIntersectionObserver(projectRef, {});
   const { setHistory } = useContext(IntersectingProjectContext);
 
   const { openDashboard } = useContext(DashboardControllerContext);
 
   // mount and dismount intersection observer
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      setHistory((prevValue) => ({
-        prevId: prevValue.currentId,
-        currentId: data._id,
-      }));
-    }
-  }, [entry?.isIntersecting]);
+  function changeProject() {
+    setHistory((prevValue) => ({
+      prevId: prevValue.currentId,
+      currentId: data._id,
+    }));
+  }
 
   return (
-    <li
-      ref={projectRef}
-      className="relative mb-4 flex h-[1000px] flex-col items-center"
-    >
+    <li className="relative mb-4 flex h-[1000px] flex-col items-center">
+      {/* project changer div */}
+      <IntersectionDiv topPercentage={0} callback={changeProject} />
+
       {/* the line */}
       <div
         className={`absolute bottom-0 -top-6 z-10 w-0.5 rounded-full bg-white/20 ${
@@ -50,12 +46,15 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
 
       {/* open dashboard when this controller is visible */}
       <Show when={projectIsFirstTopPick}>
-        <DashboardController topPercentage={40} callback={openDashboard} />
+        <IntersectionDiv topPercentage={40} callback={openDashboard} />
       </Show>
 
       <Show when={!projectIsFirstTopPick}>
-        <DashboardController topPercentage={10} callback={openDashboard} />
+        <IntersectionDiv topPercentage={10} callback={openDashboard} />
       </Show>
+
+      {/* project changer div */}
+      <IntersectionDiv topPercentage={70} callback={changeProject} />
     </li>
   );
 }

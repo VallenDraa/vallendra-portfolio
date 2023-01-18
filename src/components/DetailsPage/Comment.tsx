@@ -9,12 +9,14 @@ export default function Comment() {
   useEffect(() => {
     setIsVisible(false);
 
-    const timer = setTimeout(() => setIsVisible(true), 150);
+    const timer = setTimeout(() => setIsVisible(true), 300);
 
     return () => clearTimeout(timer);
   }, [asPath]);
 
-  return isVisible ? (
+  if (!isVisible) return null;
+
+  return (
     <Giscus
       term={asPath}
       repo={(process.env.NEXT_PUBLIC_REPO as Repo) || ""}
@@ -30,5 +32,5 @@ export default function Comment() {
       theme="transparent_dark"
       inputPosition="top"
     />
-  ) : null;
+  );
 }

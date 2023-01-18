@@ -7,10 +7,8 @@ import Quote from "./Quote";
 import TopPicksInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
 import Line from "../../Line";
-import DashboardControllerProvider, {
-  DashboardControllerContext,
-} from "../../../context/TopPicksDashboardControllerCP";
-import DashboardController from "./DashboardController";
+import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
+import IntersectionDiv from "../../IntersectionDiv";
 
 export default function TopPicksSection() {
   const { history } = useContext(IntersectingProjectContext);
@@ -51,7 +49,7 @@ export default function TopPicksSection() {
             </Typography>
             <span className="text-5xl">🌟</span>
             {/* hides dashboard when this controller is visible */}
-            <DashboardController topPercentage={0} callback={hideDashboard} />
+            <IntersectionDiv topPercentage={0} callback={hideDashboard} />
           </div>
         </header>
 
