@@ -45,7 +45,7 @@ export default function TopPicksInfoDashboard({
   return (
     <Card
       ref={dashboardRef}
-      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md opacity-0 shadow-md backdrop-blur transition-opacity duration-200 dark:bg-gray-900/60 dark:shadow-gray-900/60"
+      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
     >
       <CardBody className="flex flex-col gap-10">
         <div className="flex flex-col">

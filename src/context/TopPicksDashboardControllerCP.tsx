@@ -23,11 +23,11 @@ export default function DashboardControllerProvider({
   /* Dashboard visibility controller function
   =========================================== */
   function openDashboard() {
-    dashboardRef.current?.classList.remove("opacity-0");
+    dashboardRef.current?.classList.add("-translate-y-1/2");
   }
 
   function hideDashboard() {
-    dashboardRef.current?.classList.add("opacity-0");
+    dashboardRef.current?.classList.remove("-translate-y-1/2");
   }
 
   return (

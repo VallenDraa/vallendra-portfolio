@@ -19,9 +19,7 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
   const entry = useIntersectionObserver(projectRef, {});
   const { setHistory } = useContext(IntersectingProjectContext);
 
-  const { openDashboard, hideDashboard } = useContext(
-    DashboardControllerContext
-  );
+  const { openDashboard } = useContext(DashboardControllerContext);
 
   // mount and dismount intersection observer
   useEffect(() => {
@@ -38,11 +36,6 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
       ref={projectRef}
       className="relative mb-4 flex h-[1000px] flex-col items-center"
     >
-      {/* hides dashboard when this controller is visible */}
-      <Show when={projectIsFirstTopPick}>
-        <DashboardController topPercentage={0} callback={hideDashboard} />
-      </Show>
-
       {/* the line */}
       <div
         className={`absolute bottom-0 -top-6 z-10 w-0.5 rounded-full bg-white/20 ${
@@ -56,7 +49,13 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
       </div>
 
       {/* open dashboard when this controller is visible */}
-      <DashboardController topPercentage={40} callback={openDashboard} />
+      <Show when={projectIsFirstTopPick}>
+        <DashboardController topPercentage={40} callback={openDashboard} />
+      </Show>
+
+      <Show when={!projectIsFirstTopPick}>
+        <DashboardController topPercentage={10} callback={openDashboard} />
+      </Show>
     </li>
   );
 }

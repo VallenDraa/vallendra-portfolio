@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect } from "react";
 import Timeline from "./Timeline";
 import IntersectingProjectContext from "../../../context/IntersectingProjectCP";
 import topPickedProjects from "../../../utils/datas/projects/web/topPickedProjects";
@@ -7,7 +7,10 @@ import Quote from "./Quote";
 import TopPicksInfoDashboard from "./TopPicksInfoDashboard";
 import Image from "next/image";
 import Line from "../../Line";
-import DashboardControllerProvider from "../../../context/TopPicksDashboardControllerCP";
+import DashboardControllerProvider, {
+  DashboardControllerContext,
+} from "../../../context/TopPicksDashboardControllerCP";
+import DashboardController from "./DashboardController";
 
 export default function TopPicksSection() {
   const { history } = useContext(IntersectingProjectContext);
@@ -19,6 +22,8 @@ export default function TopPicksSection() {
       topPickedProjects.findIndex((p) => p._id === history.currentId)
     );
   }, [history.currentId]);
+
+  const { hideDashboard } = useContext(DashboardControllerContext);
 
   return (
     <section
@@ -45,6 +50,8 @@ export default function TopPicksSection() {
               Top Picks
             </Typography>
             <span className="text-5xl">🌟</span>
+            {/* hides dashboard when this controller is visible */}
+            <DashboardController topPercentage={0} callback={hideDashboard} />
           </div>
         </header>
 
@@ -70,12 +77,10 @@ export default function TopPicksSection() {
           <div className="mx-auto max-w-screen-xl px-6">
             {/* the short project name description  */}
             <div className="relative flex min-h-[4000px] gap-8 pt-16">
-              <DashboardControllerProvider>
-                <TopPicksInfoDashboard
-                  activeProject={topPickedProjects[activeProjectIdx]}
-                />
-                <Timeline />
-              </DashboardControllerProvider>
+              <TopPicksInfoDashboard
+                activeProject={topPickedProjects[activeProjectIdx]}
+              />
+              <Timeline />
             </div>
           </div>
         </footer>

@@ -4,6 +4,7 @@ import TopPicksSection from "../components/Home/ProjectTopPicks/TopPicksSection"
 import Redirect from "../components/Home/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
+import DashboardControllerProvider from "../context/TopPicksDashboardControllerCP";
 
 export default function Home() {
   return (
@@ -13,12 +14,14 @@ export default function Home() {
       </Head>
 
       {/* hero section */}
-      <header className="fade-bottom relative z-30 after:bottom-0">
+      <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
         <Hero />
       </header>
       <main>
         <Profile />
-        <TopPicksSection />
+        <DashboardControllerProvider>
+          <TopPicksSection />
+        </DashboardControllerProvider>
         <Redirect />
       </main>
       <SiteFooter />
