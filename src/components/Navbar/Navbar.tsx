@@ -1,15 +1,18 @@
 import { Typography, IconButton } from "@material-tailwind/react";
-import { useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
 import { IoCall } from "react-icons/io5";
-import { BiMenuAltRight } from "react-icons/bi";
+import { BiMenu, BiMenuAltRight } from "react-icons/bi";
 import NavList from "./Navlist";
-import NavIsOpenedContext, { INavIsOpened } from "../../context/NavIsOpenedCP";
+import NavIsOpenedContext from "../../context/NavIsOpenedCP";
 import Link from "next/link";
 import StyledButton from "../StyledComponents/StyledButton";
+import ThemeToggler from "./ThemeToggler";
 
 export default function NavbarComponent() {
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
+  /* Ref for navbar
+  =============================================== */
   const navbarRef = useRef<HTMLDivElement>(null);
   const navToggleRef = useRef<HTMLButtonElement>(null);
 
@@ -60,8 +63,8 @@ export default function NavbarComponent() {
     return () => window.removeEventListener("resize", navHandler);
   }, []);
 
-  /* for closing the navbar when the user touches things outside of the navbar component
-  ====================================================================================== */
+  /* for closing the navbar when user touches outside of the navbar component
+  ========================================================================== */
   useEffect(() => {
     const closeNavOnOutsideClick = (e: MouseEvent) => {
       if (window.innerWidth >= 960) return;
@@ -85,18 +88,24 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-50 min-w-full rounded-none border-0 py-3 px-0 backdrop-blur-md backdrop-saturate-[1.275] dark:bg-gray-800/50 dark:text-white/90"
+      className="sticky top-0 z-50 min-w-full rounded-none border-0 py-3 px-0 backdrop-blur-md dark:bg-gray-800/50 dark:text-white/90"
     >
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 xl:px-0">
-        {/* name */}
+        {/* name section */}
         <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
           <span>Jestine Vallendra Dwi Putra</span>
         </Typography>
-        {/* the nav list */}
+
+        {/* the nav list section */}
         <NavList navListRef={navListRef} overlayRef={overlayRef} />
-        {/* cta */}
-        <div className="hidden sm:basis-1/3 lg:block">
-          <Link href={"/contacts"} className="ml-auto block w-fit">
+
+        {/* right section */}
+        <div className="hidden items-center justify-end gap-3 sm:basis-1/3 lg:flex">
+          {/* theme toggler */}
+          <ThemeToggler className="hidden lg:inline-block" />
+
+          {/* contact me button */}
+          <Link href={"/contacts"} className="block w-fit">
             <StyledButton
               icon={<IoCall />}
               variant="filled"
@@ -107,17 +116,22 @@ export default function NavbarComponent() {
             </StyledButton>
           </Link>
         </div>
-        <IconButton
-          ref={navToggleRef}
-          variant="text"
-          color="indigo"
-          className="p-5 text-inherit lg:hidden"
-          onClick={() => setNavIsOpened(true)}
-        >
-          <BiMenuAltRight
-            className={`text-4xl transition duration-200 dark:text-gray-200`}
-          />
-        </IconButton>
+
+        {/* show when screen is small */}
+        <div className="flex items-center justify-end gap-3 lg:hidden">
+          <ThemeToggler className="inline-block" />
+
+          <IconButton
+            ref={navToggleRef}
+            size="md"
+            variant="text"
+            color="indigo"
+            className="text-inherit"
+            onClick={() => setNavIsOpened(true)}
+          >
+            <BiMenu className="text-4xl transition duration-200 dark:text-gray-200" />
+          </IconButton>
+        </div>
       </div>
     </div>
   );

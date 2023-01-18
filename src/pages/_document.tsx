@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en" className="dark">
       <Head />
-      <body className="scrollbar-kece overflow-x-hidden dark:caret-pink-200">
+      <body className="overflow-x-hidden dark:caret-pink-200">
         <Main />
         <NextScript />
       </body>

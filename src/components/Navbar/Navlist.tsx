@@ -13,6 +13,7 @@ import NavIsOpenedContext from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
 import NavBtn from "./NavBtn";
 import StyledButton from "../StyledComponents/StyledButton";
+import ThemeToggler from "./ThemeToggler";
 
 interface IProps {
   navListRef: RefObject<HTMLDivElement>;
@@ -63,7 +64,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       <div
         onClick={closeNav}
         ref={overlayRef}
-        className="overlay fixed inset-0 z-[60] h-screen bg-black/40 lg:hidden"
+        className="fixed inset-0 z-[60] h-screen bg-black/40 lg:hidden"
       />
 
       {/* the nav list */}
@@ -80,6 +81,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           >
             Menu
           </Typography>
+
           <Button
             onClick={closeNav}
             color="red"

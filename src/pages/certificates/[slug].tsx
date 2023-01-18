@@ -114,7 +114,7 @@ export default function CertificateDetails({
         {/* the certificate data */}
         <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 lg:px-0">
           {/* image */}
-          <figure className="mx-auto w-[95%]">
+          <figure className="mx-auto w-full md:w-[95%]">
             <Image
               priority
               src={certificate.image}

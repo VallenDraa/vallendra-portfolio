@@ -12,7 +12,7 @@
   /* cool scrollbar
   ================ */
   .scrollbar-kece {
-    @apply scrollbar-thin scrollbar-thumb-white/30 selection:bg-indigo-500/50 hover:scrollbar-thumb-white/50 dark:scrollbar-track-gray-900;
+    @apply scrollbar-thin scrollbar-track-indigo-50 scrollbar-thumb-indigo-200/60 hover:scrollbar-thumb-indigo-200  dark:scrollbar-track-gray-900 dark:scrollbar-thumb-white/30 dark:hover:scrollbar-thumb-white/50;
   }
 
   /* Gradient underline css for text
@@ -39,5 +39,12 @@
 
   .fade-top {
     @apply before:absolute before:inset-x-0 before:z-40 before:h-20 before:bg-gradient-to-b before:to-transparent before:dark:from-gray-900;
+  }
+}
+
+@layer base {
+  body,
+  ul {
+    @apply scrollbar-kece scroll-auto;
   }
 }

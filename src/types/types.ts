@@ -16,3 +16,4 @@ export type technologies =
   | "next.js";
 
 export type categories = "website" | "desktop" | "cli" | "games";
+
