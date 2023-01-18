@@ -1,13 +1,13 @@
-/** @type {import('tailwindcss').Config} */
 const withMT = require("@material-tailwind/react/utils/withMT");
 
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+/** @type {import('tailwindcss').Config} */
 module.exports = withMT({
   darkMode: "class",
   content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
   theme: {
-    fontFamily: {
-      sans: ["Segoe UI", "sans-serif"],
-    },
+    fontFamily,
     backgroundSize: { gradient: "400% 400%" },
     extend: {
       backgroundImage: {

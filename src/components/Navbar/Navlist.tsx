@@ -64,20 +64,20 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       <div
         onClick={closeNav}
         ref={overlayRef}
-        className="fixed inset-0 z-[60] h-screen bg-black/40 lg:hidden"
+        className="fixed inset-0 z-[60] h-screen bg-indigo-900/40 dark:bg-black/40 lg:hidden"
       />
 
       {/* the nav list */}
       <nav
         ref={navListRef}
-        className="navlist-underlay fixed top-0 left-0 z-[70] flex h-screen w-72 flex-col gap-1 shadow-2xl dark:bg-gray-900 lg:static lg:h-max lg:w-max lg:animate-fade-in lg:flex-row lg:items-center lg:shadow-none dark:lg:bg-transparent"
+        className="navlist-underlay fixed top-0 left-0 z-[70] flex h-screen w-72 flex-col gap-1 bg-indigo-50 shadow-none dark:bg-gray-900 dark:shadow-2xl dark:shadow-gray-900 lg:static lg:h-max lg:w-max lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent dark:lg:shadow-none"
       >
         {/* close button for small screen nav */}
         <div className="gradient-underline gradient-underline--indigo-to-pink relative mb-3 flex items-center justify-between px-5 pt-3 pb-0.5 lg:hidden lg:px-3">
           <Typography
             as="span"
             variant="paragraph"
-            className="text-lg font-semibold dark:text-gray-300"
+            className="text-lg font-semibold text-indigo-500 dark:text-gray-300"
           >
             Menu
           </Typography>
@@ -142,7 +142,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                       variant="text"
                       fullWidth
                       onClick={() => handleOpenAccordion(1)}
-                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize transition duration-200 dark:text-gray-500 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-white/70"
+                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-white/70"
                     >
                       {menu}
                       <IoChevronDown
@@ -157,7 +157,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                           color="indigo"
                           variant="text"
                           fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize transition duration-200 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
+                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
                         >
                           Top Picks
                         </Button>
@@ -167,7 +167,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                           color="indigo"
                           variant="text"
                           fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize transition duration-200 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
+                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
                         >
                           All Collections
                         </Button>
@@ -200,7 +200,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           <Typography
             as="span"
             variant="small"
-            className="text-xs font-semibold dark:text-gray-600"
+            className="text-xs font-semibold text-indigo-300 dark:text-gray-600"
           >
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
           </Typography>

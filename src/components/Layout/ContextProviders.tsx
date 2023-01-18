@@ -1,17 +1,22 @@
 import { NavIsOpenedCP } from "../../context/NavIsOpenedCP";
-import { ThemeProvider } from "@material-tailwind/react";
 import customMaterialStyles from "../../../material-tailwind.config";
 import { IntersectingProjectCP } from "../../context/IntersectingProjectCP";
-import ThemeContextProvider from "../../context/ThemeCP";
+import { ThemeProvider as MTThemeProvider } from "@material-tailwind/react";
+import { ThemeProvider as NextThemeProvider } from "next-themes";
 
 export default function ContextProviders({ children }: { children: any }) {
   return (
-    <ThemeContextProvider>
+    <NextThemeProvider
+      enableSystem
+      attribute="class"
+      defaultTheme="system"
+      storageKey="color-theme"
+    >
       <NavIsOpenedCP>
-        <ThemeProvider value={customMaterialStyles}>
+        <MTThemeProvider value={customMaterialStyles}>
           <IntersectingProjectCP>{children}</IntersectingProjectCP>
-        </ThemeProvider>
+        </MTThemeProvider>
       </NavIsOpenedCP>
-    </ThemeContextProvider>
+    </NextThemeProvider>
   );
 }

@@ -88,7 +88,7 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-50 min-w-full rounded-none border-0 py-3 px-0 backdrop-blur-md dark:bg-gray-800/50 dark:text-white/90"
+      className="sticky top-0 z-50 min-w-full rounded-none border-0 bg-indigo-200/50 py-3 px-0 text-indigo-500/90 backdrop-blur-md dark:bg-gray-800/50 dark:text-white/90"
     >
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 xl:px-0">
         {/* name section */}

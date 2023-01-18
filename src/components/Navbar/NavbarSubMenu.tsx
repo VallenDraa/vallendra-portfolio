@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Menu,
@@ -16,8 +16,6 @@ interface IProps {
 export default function NavbarSubMenu({ Handler, menuItems, offset }: IProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  // auto closing the dropdown when the screen resizes
-
   return (
     <Menu
       open={isVisible}
@@ -31,17 +29,17 @@ export default function NavbarSubMenu({ Handler, menuItems, offset }: IProps) {
           color="indigo"
           variant="text"
           fullWidth
-          className="p-0 text-base font-semibold text-white/70 transition duration-200 hover:text-white"
+          className="p-0 text-base font-semibold text-indigo-400 hover:text-indigo-500 dark:text-white/70 dark:hover:text-white"
         >
           {Handler}
         </Button>
       </MenuHandler>
 
-      <MenuList className="border-0 bg-gray-800/50 shadow backdrop-blur-md backdrop-saturate-[1.275]">
+      <MenuList className="border-0 bg-indigo-200/50 shadow backdrop-blur-md dark:bg-gray-800/50">
         {menuItems.map((menuItem: JSX.Element, i) => {
           return (
             <MenuItem
-              className="p-0 text-white/70 hover:bg-gray-700/50 hover:text-white active:bg-gray-700/70 active:text-gray-100"
+              className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white"
               key={i}
             >
               {menuItem}

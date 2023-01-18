@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Head>
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="dark flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col">
         <NavbarComponent />
         <BreathingBackground />
         {children}

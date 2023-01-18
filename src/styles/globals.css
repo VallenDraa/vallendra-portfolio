@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -moz-tap-highlight-color: rgba(0, 0, 0, 0);
-  /* outline: 1px solid green; */
-}
-
 @layer components {
   /* cool scrollbar
   ================ */
@@ -30,7 +24,7 @@
   /* navlist underlay for <lg screen size to smoothen open and closing animation 
   ================================================================================== */
   .navlist-underlay {
-    @apply before:absolute before:h-full before:w-8 before:-translate-x-8 before:dark:bg-gray-900 lg:before:hidden;
+    @apply before:absolute before:h-full before:w-8 before:-translate-x-8 before:bg-indigo-50 before:dark:bg-gray-900 lg:before:hidden;
   }
 
   .fade-bottom {
@@ -43,8 +37,9 @@
 }
 
 @layer base {
-  body,
-  ul {
-    @apply scrollbar-kece scroll-auto;
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* outline: 1px solid green; */
   }
 }
