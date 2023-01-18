@@ -45,7 +45,7 @@ export default function TopPicksInfoDashboard({
   return (
     <Card
       ref={dashboardRef}
-      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
+      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md bg-indigo-50/80 shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
     >
       <CardBody className="flex flex-col gap-10">
         <div className="flex flex-col">
@@ -69,8 +69,8 @@ export default function TopPicksInfoDashboard({
           {/* project short description */}
           <Typography
             as="p"
-            variant="paragraph"
-            className="mt-3 font-medium text-gray-300"
+            variant="lead"
+            className="mt-3 font-medium text-indigo-400 dark:text-gray-400"
           >
             {activeProject?.shortDescription || ""}
           </Typography>
@@ -81,14 +81,14 @@ export default function TopPicksInfoDashboard({
           <Typography
             as="h4"
             variant="h4"
-            className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-white bg-clip-text font-bold uppercase text-transparent"
+            className="mb-2 flex items-center gap-2 bg-gradient-to-tr  from-green-500 to-green-200 bg-clip-text font-bold uppercase text-transparent dark:to-white"
           >
-            <IoCodeSlash className="rounded-lg bg-gray-700/90 p-1 text-3xl text-green-400" />
+            <IoCodeSlash className="rounded-lg bg-indigo-800/50 p-1 text-3xl text-green-400 dark:bg-gray-700/90" />
             Tech Stack
           </Typography>
           <Typography
             as="p"
-            className="mb-4 mt-2 text-sm font-medium text-gray-400"
+            className="mb-4 mt-2 text-sm font-medium text-indigo-300 dark:text-gray-300"
           >
             These Are the {activeProject?.tech.length || 0} Technologies That
             Were Used For This Project :

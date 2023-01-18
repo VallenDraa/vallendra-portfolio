@@ -7,7 +7,8 @@ import { ThemeProvider as NextThemeProvider } from "next-themes";
 export default function ContextProviders({ children }: { children: any }) {
   return (
     <NextThemeProvider
-      enableSystem
+      enableSystem={false}
+      enableColorScheme
       attribute="class"
       defaultTheme="system"
       storageKey="color-theme"

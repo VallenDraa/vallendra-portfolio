@@ -27,18 +27,18 @@ export default function TopPicksSection() {
     <section
       aria-label="top-picks-section"
       id="top-picks"
-      className="relative pt-32 dark:bg-gray-900"
+      className="relative bg-indigo-50 pt-32 dark:bg-gray-900"
     >
       <div className="mx-0 sm:mx-4 xl:mx-0">
         <Quote />
       </div>
 
       {/* main timeline */}
-      <div className="relative mx-auto">
-        <Line className="absolute left-1/2 top-16 z-30 scale-y-[2] bg-white/40" />
+      <div className="relative mx-auto bg-indigo-100/90 dark:bg-gray-900">
+        <Line className="absolute left-1/2 top-16 z-30 scale-y-[2]" />
 
         {/* section Title */}
-        <header className="relative z-20 flex flex-col items-center pt-40 pb-12 dark:bg-gray-900">
+        <header className="relative z-20 flex flex-col items-center bg-indigo-50 pt-40 pb-12 dark:bg-gray-900">
           <div className="gradient-underline gradient-underline--indigo-to-pink relative z-20 flex h-20 items-center gap-1">
             <Typography
               as="h2"
@@ -84,7 +84,7 @@ export default function TopPicksSection() {
         </footer>
       </div>
 
-      <Line className="relative -bottom-4 left-1/2 z-40 -translate-x-1/2 scale-y-[4] bg-white/40 lg:scale-y-[3.5] xl:-bottom-10" />
+      <Line className="relative -bottom-4 left-1/2 z-40 -translate-x-1/2 scale-y-[4] lg:scale-y-[3.5] xl:-bottom-10" />
     </section>
   );
 }

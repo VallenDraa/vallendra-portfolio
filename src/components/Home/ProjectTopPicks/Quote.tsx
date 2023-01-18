@@ -2,11 +2,14 @@ import { Typography } from "@material-tailwind/react";
 import { FaQuoteLeft } from "react-icons/fa";
 
 export default function Quotes() {
+  const quoteGradient =
+    "before:absolute before:top-0 before:-bottom-3 before:left-12 before:right-10 before:-skew-x-12 before:animate-breathing before:rounded-md before:bg-gradient-to-tr before:from-indigo-200 before:to-purple-200 before:bg-gradient dark:before:from-indigo-300 dark:before:to-purple-200";
+
   return (
     <div
-      className={`relative z-40 mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-8 before:absolute before:top-0 before:-bottom-3 before:left-12 before:right-10 before:-skew-x-12 before:animate-breathing before:rounded-md before:bg-gradient-to-tr before:from-indigo-300 before:to-purple-200 before:bg-gradient sm:gap-6 lg:gap-8 lg:px-0`}
+      className={`relative z-40 mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-8  sm:gap-6 lg:gap-8 lg:px-0 ${quoteGradient}`}
     >
-      <FaQuoteLeft className="absolute right-24 bottom-5 z-20 text-7xl text-cyan-100/20 md:text-8xl lg:text-9xl" />
+      <FaQuoteLeft className="absolute right-24 bottom-5 z-20 text-7xl text-white/20 dark:text-white/10  md:text-8xl lg:text-9xl" />
       <Typography
         as="q"
         variant="h1"
@@ -24,8 +27,7 @@ export default function Quotes() {
       </Typography>
 
       {/* background and shadow for the quote */}
-      <div className="" />
-      <div className="absolute inset-y-0 left-12 right-12 z-10 -skew-x-12 transform rounded-md bg-gradient-to-r from-gray-900/90 to-gray-800/60" />
+      <div className="absolute inset-y-0 left-12 right-12 z-10 -skew-x-12 transform rounded-md bg-gradient-to-r from-indigo-200/50 to-white/50 dark:from-gray-900/90 dark:to-gray-800/60" />
     </div>
   );
 }

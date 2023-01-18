@@ -160,7 +160,7 @@ export default function Profile() {
         </aside>
 
         {/* transition from profile to projects */}
-        <Line className="absolute left-1/2 bottom-[-145px] z-30 -translate-x-1/2 scale-y-[4] bg-gradient-to-b from-cyan-300/40 to-green-300/40" />
+        <Line className="absolute left-1/2 bottom-[-145px] z-30 -translate-x-1/2 scale-y-[4]" />
       </div>
     </section>
   );
