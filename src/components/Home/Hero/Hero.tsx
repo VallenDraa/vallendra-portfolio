@@ -59,7 +59,7 @@ export default function Hero() {
             {/* Line to next section */}
           </div>
         </div>
-        <Line className="absolute left-1/2 bottom-[-100px] z-20 -translate-x-1/2 scale-y-[3] bg-white/40 xl:bottom-[-50px] xl:scale-y-[6]" />
+        <Line className="absolute left-1/2 bottom-[-100px] z-20 -translate-x-1/2 scale-y-[3]  bg-indigo-800/40 dark:bg-white/40 xl:bottom-[-50px] xl:scale-y-[6]" />
       </section>
     </>
   );

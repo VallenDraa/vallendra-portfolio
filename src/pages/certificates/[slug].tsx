@@ -70,7 +70,7 @@ export default function CertificateDetails({
             <Typography
               as="h1"
               variant="h1"
-              className="relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
+              className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
             >
               {certificate.name}
             </Typography>

@@ -1,6 +1,7 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
+import BlurredBlob from "../../BlurredBlob";
 
 /* redirects the user to a contacts page or to my github account
 ================================================================ */
@@ -9,7 +10,12 @@ export default function Redirect() {
     <section className="relative z-20 bg-gray-900">
       <div className="relative mx-auto max-w-screen-xl px-2 py-24 lg:px-8 xl:px-0">
         {/* blur */}
-        <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rotate-90 skew-x-12 scale-90 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl md:scale-110"></div>
+        <BlurredBlob
+          left="left-1/2"
+          top="top-1/2"
+          translateX="-translate-x-1/2"
+          translateY="-translate-y-1/2"
+        />
 
         <div className="relative z-30 flex flex-col items-center">
           <Typography

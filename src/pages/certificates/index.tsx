@@ -66,7 +66,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
               <Typography
                 as="h2"
                 variant="h2"
-                className="relative z-40 animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
+                className="primary-gradient relative z-40 animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
               >
                 My Certificates
               </Typography>

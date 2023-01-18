@@ -52,7 +52,7 @@ export default function TopPicksInfoDashboard({
           <div className="flex items-center justify-between">
             <Typography
               as="h3"
-              className="h-fit animate-breathing bg-gradient-to-r from-indigo-300 to-pink-200 bg-gradient bg-clip-text py-3 text-4xl font-bold capitalize text-transparent sm:text-5xl"
+              className="primary-gradient h-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text py-3 text-4xl font-bold capitalize text-transparent sm:text-5xl"
             >
               {activeProject?.name || ""}
             </Typography>
