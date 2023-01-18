@@ -16,6 +16,7 @@ import StyledButton from "../../StyledComponents/StyledButton";
 import { BiDetail } from "react-icons/bi";
 import { SlGlobe } from "react-icons/sl";
 import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
+import { useTheme } from "next-themes";
 
 export default function TopPicksInfoDashboard({
   activeProject,
@@ -25,6 +26,8 @@ export default function TopPicksInfoDashboard({
   const { dashboardRef } = useContext(DashboardControllerContext);
 
   const [numberIsVisible, setNumberIsVisible] = useState(false);
+
+  const { theme } = useTheme();
 
   /* contains window resize listener to handle number visibility
   ============================================================== */
@@ -45,7 +48,7 @@ export default function TopPicksInfoDashboard({
   return (
     <Card
       ref={dashboardRef}
-      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md bg-indigo-50/80 shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
+      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md bg-indigo-100/60 shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
     >
       <CardBody className="flex flex-col gap-10">
         <div className="flex flex-col">
@@ -108,10 +111,11 @@ export default function TopPicksInfoDashboard({
       >
         <Link href={`/projects/${activeProject?.slug}`}>
           <StyledButton
-            icon={<BiDetail />}
+            icon={<BiDetail className="text-indigo-400 dark:text-gray-500" />}
             size="md"
             variant="text"
-            color="gray"
+            color={theme === "dark" ? "gray" : "indigo"}
+            className="text-indigo-400 dark:text-gray-500"
           >
             Detail
           </StyledButton>

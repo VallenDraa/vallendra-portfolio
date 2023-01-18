@@ -13,7 +13,7 @@ export default function Quotes() {
       <Typography
         as="q"
         variant="h1"
-        className="relative z-20 pb-4 text-center text-5xl font-extrabold leading-[initial] text-gray-50 md:text-6xl xl:text-7xl"
+        className="relative z-20 pb-4 text-center text-5xl font-extrabold leading-[initial] text-white dark:text-gray-50 md:text-6xl xl:text-7xl"
       >
         I'm clueless at programming, because I'm a{" "}
         <em className="text-[#818cf8] underline">JS Dev.</em>

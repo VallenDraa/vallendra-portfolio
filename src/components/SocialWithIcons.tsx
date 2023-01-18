@@ -6,6 +6,7 @@ import {
   FaLinkedinIn,
   FaWhatsapp,
 } from "react-icons/fa";
+import { useTheme } from "next-themes";
 
 type Size = "text-4xl" | "text-5xl" | "text-6xl" | "text-7xl";
 type SMSize = `sm:${Size}`;
@@ -57,7 +58,11 @@ export default function SocialsWithIcon({
       >
         <IconWithTooltip
           placement="top"
-          icon={<FaGithub className={`${sizeClasses} text-gray-100`} />}
+          icon={
+            <FaGithub
+              className={`${sizeClasses} text-gray-800 dark:text-gray-100`}
+            />
+          }
           text={"Github"}
         />
       </Link>
