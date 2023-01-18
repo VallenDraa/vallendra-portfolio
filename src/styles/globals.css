@@ -38,7 +38,7 @@
   /* gradients
   ============ */
   .primary-gradient {
-    @apply from-indigo-300 to-pink-200 dark:from-indigo-300;
+    @apply from-indigo-300 to-pink-200;
   }
 }
 

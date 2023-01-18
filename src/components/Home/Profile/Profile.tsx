@@ -59,7 +59,7 @@ export default function Profile() {
             </div>
 
             {/* techs */}
-            <Card className="indigo-pink-gradient rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-green-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-green-800">
+            <Card className="indigo-pink-gradient rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-green-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-green-800">
               <CardBody>
                 <Typography
                   as="h3"
@@ -101,7 +101,7 @@ export default function Profile() {
         {/* right side */}
         <aside className="flex flex-col gap-8 md:flex-row xl:mt-6 xl:basis-1/3 xl:flex-col">
           {/* education */}
-          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-light-blue-800 dark:bg-gray-800/40 dark:shadow-gray-800/60 xl:basis-auto">
+          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-light-blue-800 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-light-blue-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"
@@ -130,7 +130,7 @@ export default function Profile() {
           </Card>
 
           {/* activity */}
-          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-pink-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 xl:basis-auto">
+          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-pink-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-pink-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"
