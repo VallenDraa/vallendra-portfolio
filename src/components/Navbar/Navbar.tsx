@@ -88,9 +88,9 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-50 min-w-full rounded-none border-0 bg-indigo-200/50 py-3 px-0 text-indigo-500/90 backdrop-blur-md dark:bg-gray-800/50 dark:text-white/90"
+      className="sticky top-0 z-50 min-w-full rounded-none border-0 bg-indigo-100/50 py-3 px-0 backdrop-blur-md dark:bg-gray-800/50 "
     >
-      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 xl:px-0">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 xl:px-0">
         {/* name section */}
         <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
           <span>Jestine Vallendra Dwi Putra</span>
@@ -105,7 +105,7 @@ export default function NavbarComponent() {
           <ThemeToggler className="hidden lg:inline-block" />
 
           {/* contact me button */}
-          <Link href={"/contacts"} className="block w-fit">
+          <Link href="/contacts" className="block w-fit">
             <StyledButton
               icon={<IoCall />}
               variant="filled"
@@ -129,7 +129,7 @@ export default function NavbarComponent() {
             className="text-inherit"
             onClick={() => setNavIsOpened(true)}
           >
-            <BiMenu className="text-4xl transition duration-200 dark:text-gray-200" />
+            <BiMenu className="text-4xl text-indigo-500 transition duration-200 dark:text-gray-200" />
           </IconButton>
         </div>
       </div>

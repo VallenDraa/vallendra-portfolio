@@ -34,12 +34,12 @@ export default function TopPicksSection() {
       </div>
 
       {/* main timeline */}
-      <div className="relative mx-auto bg-indigo-100/90 dark:bg-gray-900">
+      <div className="relative mx-auto bg-indigo-100/30 dark:bg-gray-900">
         <Line className="absolute left-1/2 top-16 z-30 scale-y-[2]" />
 
         {/* section Title */}
         <header className="relative z-20 flex flex-col items-center bg-indigo-50 pt-40 pb-12 dark:bg-gray-900">
-          <div className="gradient-underline gradient-underline--indigo-to-pink relative z-20 flex h-20 items-center gap-1">
+          <div className="gradient-underline gradient-underline--primary relative z-20 flex h-20 items-center gap-1">
             <Typography
               as="h2"
               variant="h2"

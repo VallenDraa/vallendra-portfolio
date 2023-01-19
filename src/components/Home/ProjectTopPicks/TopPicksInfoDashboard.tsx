@@ -48,7 +48,7 @@ export default function TopPicksInfoDashboard({
   return (
     <Card
       ref={dashboardRef}
-      className="sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md bg-indigo-100/60 shadow-md backdrop-blur transition duration-500  dark:bg-gray-900/60 dark:shadow-gray-900/60"
+      className="card-colors sticky inset-x-0 top-1/2 z-10 h-max w-full -translate-y-1/2 rounded-md shadow-md backdrop-blur transition duration-500"
     >
       <CardBody className="flex flex-col gap-10">
         <div className="flex flex-col">
@@ -86,7 +86,7 @@ export default function TopPicksInfoDashboard({
             variant="h4"
             className="mb-2 flex items-center gap-2 bg-gradient-to-tr  from-green-500 to-green-200 bg-clip-text font-bold uppercase text-transparent dark:to-white"
           >
-            <IoCodeSlash className="rounded-lg bg-indigo-800/50 p-1 text-3xl text-green-400 dark:bg-gray-700/90" />
+            <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
             Tech Stack
           </Typography>
           <Typography

@@ -29,7 +29,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
   return (
     <Link
       href={props.itemLink}
-      className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-gray-800/40 transition-transform duration-300 ease-out hover:scale-105"
+      className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
     >
       {/* image */}
       <Image
@@ -42,7 +42,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
       />
 
       {/* fade */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900/90 transition-opacity duration-200 group-hover:opacity-90" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 to-gray-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-gray-900/50 dark:to-gray-900/90" />
 
       {/* detail */}
       <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
@@ -93,7 +93,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
         <StyledButton
           variant="text"
           icon={<BsArrowRight />}
-          className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-gray-500/30 py-2 px-7 text-indigo-300"
+          className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-gray-500/30 py-3 px-7 text-indigo-300"
           color="indigo"
         >
           See Detail

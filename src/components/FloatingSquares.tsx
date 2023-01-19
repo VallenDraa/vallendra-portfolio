@@ -5,13 +5,13 @@ const FloatingSquares: FC = () => {
   const changePopulation = useCallback(() => {
     switch (true) {
       case window.innerWidth >= 1140:
-        return 8;
+        return 9;
 
       case window.innerWidth >= 960:
-        return 6;
+        return 7;
 
       default:
-        return 4;
+        return 5;
     }
   }, []);
 

@@ -46,7 +46,11 @@ export default function SocialsWithIcon({
       >
         <IconWithTooltip
           placement="top"
-          icon={<FaWhatsapp className={`${sizeClasses} text-green-300`} />}
+          icon={
+            <FaWhatsapp
+              className={`${sizeClasses} text-green-400 dark:text-green-300`}
+            />
+          }
           text={"Whatsapp"}
         />
       </Link>

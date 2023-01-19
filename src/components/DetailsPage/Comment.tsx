@@ -1,17 +1,16 @@
 import Giscus, { Repo } from "@giscus/react";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Comment() {
   const { asPath } = useRouter();
   const [isVisible, setIsVisible] = useState(true);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setIsVisible(false);
-
-    const timer = setTimeout(() => setIsVisible(true), 300);
-
-    return () => clearTimeout(timer);
+    setIsVisible(true);
   }, [asPath]);
 
   if (!isVisible) return null;
@@ -29,7 +28,7 @@ export default function Comment() {
       lang="en"
       loading="lazy"
       reactionsEnabled="0"
-      theme="transparent_dark"
+      theme={theme === "dark" ? "transparent_dark" : "light"}
       inputPosition="top"
     />
   );

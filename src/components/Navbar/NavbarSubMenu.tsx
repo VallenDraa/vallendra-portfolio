@@ -35,11 +35,11 @@ export default function NavbarSubMenu({ Handler, menuItems, offset }: IProps) {
         </Button>
       </MenuHandler>
 
-      <MenuList className="border-0 bg-indigo-200/50 shadow backdrop-blur-md dark:bg-gray-800/50">
+      <MenuList className="border-0 bg-indigo-100/50 shadow backdrop-blur-md dark:bg-gray-800/50">
         {menuItems.map((menuItem: JSX.Element, i) => {
           return (
             <MenuItem
-              className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white"
+              className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 active:bg-white/20 dark:text-white/70 dark:hover:text-white"
               key={i}
             >
               {menuItem}

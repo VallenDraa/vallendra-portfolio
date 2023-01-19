@@ -29,7 +29,7 @@ export default function Profile() {
             translateY="-translate-y-1/4"
           />
 
-          <header className="gradient-underline gradient-underline--indigo-to-pink relative flex w-fit items-center gap-1">
+          <header className="gradient-underline gradient-underline--primary relative flex w-fit items-center gap-1">
             <Typography
               as="h2"
               variant="h2"
@@ -47,7 +47,7 @@ export default function Profile() {
               <Typography
                 as="p"
                 variant="paragraph"
-                className="pl-0.5 text-justify font-medium leading-loose text-indigo-900/80 dark:text-white/80"
+                className="pl-0.5 text-justify font-medium leading-loose text-indigo-700/80 dark:text-white/80"
               >
                 My name is Jestine Vallendra Dwi Putra, a Front-End Developer.
                 With a year of experience in the field, I have gained a strong
@@ -59,14 +59,14 @@ export default function Profile() {
             </div>
 
             {/* techs */}
-            <Card className="indigo-pink-gradient rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-green-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-green-800">
+            <Card className="indigo-pink-gradient card-colors rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-green-500  dark:hover:shadow-lg dark:hover:shadow-green-800">
               <CardBody>
                 <Typography
                   as="h3"
                   variant="h3"
                   className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-200 bg-clip-text text-2xl font-bold uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
                 >
-                  <IoCodeSlash className="rounded-lg bg-indigo-800/50 p-1 text-3xl text-green-400 dark:bg-gray-700/90" />
+                  <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
                   Technologies
                 </Typography>
                 <Typography
@@ -101,14 +101,14 @@ export default function Profile() {
         {/* right side */}
         <aside className="flex flex-col gap-8 md:flex-row xl:mt-6 xl:basis-1/3 xl:flex-col">
           {/* education */}
-          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-light-blue-800 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-light-blue-800 xl:basis-auto">
+          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-light-blue-800  dark:hover:shadow-lg dark:hover:shadow-light-blue-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"
                 variant="h4"
-                className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-white bg-clip-text font-bold uppercase text-transparent"
+                className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-200 bg-clip-text font-bold uppercase text-transparent"
               >
-                <IoSchool className="rounded-lg bg-indigo-800/50 p-1 text-3xl text-light-blue-400 dark:bg-gray-700/90" />
+                <IoSchool className="icon-with-bg-colors rounded-lg p-1 text-3xl text-light-blue-400" />
                 EDUCATION
               </Typography>
               <Typography
@@ -130,14 +130,14 @@ export default function Profile() {
           </Card>
 
           {/* activity */}
-          <Card className="grow basis-1/2 rounded-md bg-indigo-100/30 shadow-md shadow-indigo-200 duration-200 hover:shadow-lg hover:shadow-pink-500 dark:bg-gray-800/40 dark:shadow-gray-800/60 dark:hover:shadow-lg dark:hover:shadow-pink-800 xl:basis-auto">
+          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-pink-500 dark:hover:shadow-lg dark:hover:shadow-pink-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"
                 variant="h4"
                 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-300 to-pink-100 bg-clip-text font-bold uppercase text-transparent"
               >
-                <FaGoogle className="rounded-lg bg-indigo-800/50 p-1 text-3xl text-pink-300 dark:bg-gray-700/90" />
+                <FaGoogle className="icon-with-bg-colors rounded-lg p-1 text-3xl text-pink-300" />
                 ACTIVITY
               </Typography>
               <Typography

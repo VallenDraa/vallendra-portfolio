@@ -16,6 +16,8 @@ interface IProps extends InputProps {
   callback: (query: string) => void;
 }
 
+const DEFAULT_QUERY_KEY = "find";
+
 export default function SearchInput({
   ref,
   placeholder,
@@ -29,8 +31,6 @@ export default function SearchInput({
   onChange,
   ...props
 }: IProps) {
-  const DEFAULT_QUERY_KEY = "find";
-
   const router = useRouter();
 
   const [tempQuery, setTempQuery] = useState(defaultValue || "");

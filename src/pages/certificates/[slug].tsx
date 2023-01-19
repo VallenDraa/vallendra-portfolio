@@ -54,12 +54,9 @@ export default function CertificateDetails({
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div className="fade-bottom relative flex min-h-screen translate-y-20 flex-col after:-top-20 dark:bg-gray-900">
-        {/* blur */}
-        <div className="absolute right-20 top-20 h-80 w-80 rotate-0 skew-x-12 scale-110 rounded-full bg-gradient-to-br from-indigo-700 to-pink-700 opacity-50 blur-3xl transition-transform duration-200" />
-
+      <div className="fade-bottom relative flex min-h-screen translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
-          <section className="relative z-10 border-b-2 border-white/30 pb-3">
+          <section className="relative z-10 border-b-2 border-indigo-100 pb-3 dark:border-white/30 ">
             {/* back to certificate button */}
             <LinkWithUnderline href="/certificates">
               <BsArrowLeft />
@@ -79,13 +76,13 @@ export default function CertificateDetails({
             <Typography
               as="p"
               variant="paragraph"
-              className="mt-2 pl-0.5 text-justify text-sm font-medium dark:text-gray-200 md:text-lg"
+              className="mt-1 pl-0.5 text-justify text-sm font-medium leading-loose text-indigo-400 dark:text-gray-200 md:text-lg"
             >
               {certificate.shortDescription}
             </Typography>
 
             {/* certificate views*/}
-            <div className="mt-2.5 flex gap-3 dark:text-gray-400">
+            <div className="mt-2.5 flex gap-3 text-indigo-200 dark:text-gray-400">
               <Typography
                 variant="paragraph"
                 as="span"
@@ -112,7 +109,7 @@ export default function CertificateDetails({
         </header>
 
         {/* the certificate data */}
-        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 lg:px-0">
+        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 xl:px-0">
           {/* image */}
           <figure className="mx-auto w-full md:w-[95%]">
             <Image
@@ -124,7 +121,7 @@ export default function CertificateDetails({
               className="w-full rounded-md object-cover opacity-90"
             />
 
-            <figcaption className="pt-2 text-center text-sm dark:text-gray-500">
+            <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
               <span>Screenshot of {certificate.name}</span>
             </figcaption>
           </figure>
@@ -137,7 +134,7 @@ export default function CertificateDetails({
                 <SectionHeading>Description</SectionHeading>
                 <Typography
                   variant="paragraph"
-                  className="px-3 font-normal leading-loose dark:text-white/80"
+                  className="px-3 font-normal leading-loose text-indigo-400 dark:text-gray-400"
                 >
                   {certificate.description}
                 </Typography>
@@ -145,7 +142,7 @@ export default function CertificateDetails({
             </div>
 
             {/* link for the code of this certificate */}
-            <aside className="sticky top-0 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 border-[#30363d] p-4 lg:flex-col">
+            <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
               <div className="flex w-full flex-col gap-3">
                 <ActionButton
                   href={certificate.certificateLink}

@@ -3,10 +3,31 @@
 @tailwind utilities;
 
 @layer components {
+  /* icons
+  ======= */
+  .icon-with-bg-colors {
+    @apply bg-indigo-100  dark:bg-gray-700/90;
+  }
+
+  /* cards 
+  ======= */
+  .card-colors {
+    @apply !bg-indigo-100/40 !shadow-indigo-100 dark:!bg-gray-800/40 dark:!shadow-gray-800/50;
+  }
+  .detail-aside-colors {
+    @apply border-2 border-indigo-100 dark:border-[#30363d];
+  }
+
   /* cool scrollbar
   ================ */
   .scrollbar-kece {
     @apply scrollbar-thin scrollbar-track-indigo-50 scrollbar-thumb-indigo-200/60 hover:scrollbar-thumb-indigo-200  dark:scrollbar-track-gray-900 dark:scrollbar-thumb-white/30 dark:hover:scrollbar-thumb-white/50;
+  }
+
+  /* Normal underline css for text
+  ================================= */
+  .normal-underline {
+    @apply before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full;
   }
 
   /* Gradient underline css for text
@@ -14,11 +35,8 @@
   .gradient-underline {
     @apply before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full before:animate-breathing before:bg-gradient-to-r before:bg-gradient;
   }
-  .gradient-underline--indigo-to-pink {
-    @apply before:from-indigo-300 before:to-pink-200;
-  }
-  .gradient-underline--cyan-to-green {
-    @apply before:from-cyan-300 before:to-green-300;
+  .gradient-underline--primary {
+    @apply before:primary-gradient;
   }
 
   /* navlist underlay for <lg screen size to smoothen open and closing animation 
@@ -38,7 +56,7 @@
   /* gradients
   ============ */
   .primary-gradient {
-    @apply from-indigo-300 to-pink-200;
+    @apply from-purple-200 to-pink-200 dark:from-indigo-200;
   }
 }
 

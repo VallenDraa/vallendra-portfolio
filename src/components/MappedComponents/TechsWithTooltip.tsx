@@ -20,7 +20,9 @@ import { technologies } from "../../types/types";
 const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   html: (
     <IconWithTooltip
-      icon={<SiHtml5 className="text-[2.5rem] text-deep-orange-400" />}
+      icon={
+        <SiHtml5 className="text-[2.5rem] text-deep-orange-500 dark:text-deep-orange-400" />
+      }
       text="HTML 5"
     />
   ),
@@ -38,7 +40,9 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   ),
   javascript: (
     <IconWithTooltip
-      icon={<SiJavascript className="text-[2.5rem] text-yellow-600" />}
+      icon={
+        <SiJavascript className="text-[2.5rem] text-yellow-600 dark:bg-transparent" />
+      }
       text="Javascript"
     />
   ),
@@ -50,7 +54,9 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   ),
   react: (
     <IconWithTooltip
-      icon={<SiReact className="text-[2.5rem] text-light-blue-200" />}
+      icon={
+        <SiReact className="text-[2.5rem] text-light-blue-300 dark:text-light-blue-200" />
+      }
       text="React"
     />
   ),
@@ -68,7 +74,9 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   ),
   "socket.io": (
     <IconWithTooltip
-      icon={<SiSocketdotio className="text-[2.5rem] text-white" />}
+      icon={
+        <SiSocketdotio className="text-[2.5rem] text-white dark:text-gray-100" />
+      }
       text="Socket.io"
     />
   ),
@@ -98,7 +106,9 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
   ),
   "next.js": (
     <IconWithTooltip
-      icon={<SiNextdotjs className="text-[2.5rem] text-gray-100" />}
+      icon={
+        <SiNextdotjs className="text-[2.5rem] text-white dark:text-gray-100" />
+      }
       text="Next.js"
     />
   ),

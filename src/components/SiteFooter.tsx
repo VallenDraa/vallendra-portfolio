@@ -10,7 +10,7 @@ export default function SiteFooter() {
   // }, []);
 
   return (
-    <footer className="gradient-underline gradient-underline--indigo-to-pink relative bg-indigo-50 before:!top-0 dark:bg-gray-900">
+    <footer className="gradient-underline gradient-underline--primary relative bg-indigo-50 before:!top-0 dark:bg-gray-900">
       <div className="relative z-40 mx-auto flex max-w-screen-xl flex-col-reverse items-center justify-between gap-5 px-8 py-8 lg:flex-row xl:px-0">
         <span className="text-indigo-400 dark:text-gray-400 lg:basis-1/3">
           &copy; {year} VallenDra | Front-End Developer

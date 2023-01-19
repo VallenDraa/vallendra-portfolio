@@ -73,7 +73,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
         className="navlist-underlay fixed top-0 left-0 z-[70] flex h-screen w-72 flex-col gap-1 bg-indigo-50 shadow-none dark:bg-gray-900 dark:shadow-2xl dark:shadow-gray-900 lg:static lg:h-max lg:w-max lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent dark:lg:shadow-none"
       >
         {/* close button for small screen nav */}
-        <div className="gradient-underline gradient-underline--indigo-to-pink relative mb-3 flex items-center justify-between px-5 pt-3 pb-0.5 lg:hidden lg:px-3">
+        <div className="gradient-underline gradient-underline--primary relative mb-3 flex items-center justify-between px-5 pt-3 pb-0.5 lg:hidden lg:px-3">
           <Typography
             as="span"
             variant="paragraph"
@@ -151,6 +151,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
                         }`}
                       />
                     </Button>
+
                     <AccordionBody className="py-1.5">
                       <Link href="/#top-picks">
                         <Button

@@ -1,4 +1,4 @@
-import { TooltipStylesType } from "@material-tailwind/react";
+import { InputStylesType, TooltipStylesType } from "@material-tailwind/react";
 
 interface ICustomStyles {
   tooltip: TooltipStylesType;

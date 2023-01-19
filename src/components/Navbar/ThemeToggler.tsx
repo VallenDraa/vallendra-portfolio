@@ -19,7 +19,7 @@ export default function ThemeToggler({
     <IconButton
       size="md"
       variant="text"
-      color={theme === "light" ? "gray" : "amber"}
+      color={theme === "light" ? "indigo" : "amber"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className={`text-lg ${className} `}
     >
@@ -27,7 +27,7 @@ export default function ThemeToggler({
       {theme === "dark" ? (
         <BsFillSunFill />
       ) : (
-        <BsFillMoonStarsFill className="text-gray-700" />
+        <BsFillMoonStarsFill className="text-indigo-500/70" />
       )}
     </IconButton>
   );

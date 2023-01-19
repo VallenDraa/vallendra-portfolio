@@ -1,5 +1,4 @@
 import { Typography } from "@material-tailwind/react";
-import FloatingSquares from "../../FloatingSquares";
 import Image from "next/image";
 import myPic from "../../../../public/images/vallen-icon.png";
 import Line from "../../Line";
@@ -7,7 +6,6 @@ import Line from "../../Line";
 export default function Hero() {
   return (
     <>
-      <FloatingSquares />
       <section
         aria-label="hero-section"
         id="home"
