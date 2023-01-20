@@ -79,13 +79,13 @@ export default function ProjectDetails({
             <Typography
               as="p"
               variant="paragraph"
-              className="mt-1 pl-0.5 text-justify text-sm font-medium leading-loose text-indigo-400 dark:text-gray-200 md:text-lg"
+              className="mt-1 pl-0.5 text-justify text-sm font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
             >
               {project.shortDescription}
             </Typography>
 
             {/* project views*/}
-            <div className="mt-2.5 flex gap-3 text-indigo-200 dark:text-gray-400">
+            <div className="mt-2.5 flex gap-3 text-indigo-300 dark:text-gray-400">
               <Typography
                 variant="paragraph"
                 as="span"
@@ -149,7 +149,7 @@ export default function ProjectDetails({
                 <SectionHeading>Description</SectionHeading>
                 <Typography
                   variant="paragraph"
-                  className="px-3 font-normal leading-loose text-indigo-400 dark:text-gray-400"
+                  className="px-3 font-normal leading-loose text-indigo-600 dark:text-gray-400"
                 >
                   {project.description}
                 </Typography>

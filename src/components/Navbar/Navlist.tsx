@@ -83,6 +83,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
           </Typography>
 
           <Button
+            aria-label="Close menu button"
             onClick={closeNav}
             color="red"
             variant="text"

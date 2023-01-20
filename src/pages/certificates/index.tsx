@@ -12,7 +12,6 @@ import allCertificates from "../../utils/datas/certificates/allCertificates";
 import certificateCategories from "../../utils/datas/certificates/certificateCategories";
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
-import BlurredBlob from "../../components/BlurredBlob";
 import SearchNotFound from "../../components/SearchNotFound";
 
 interface IProps {
