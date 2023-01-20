@@ -1,6 +1,8 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Comment from "../DetailsPage/Comment";
 import LinkWithUnderline from "../DetailsPage/LinkWithUnderline";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface IProps {
   prevLink: string;
@@ -15,9 +17,21 @@ export default function DetailFooter({
   nextLink,
   nextTitle,
 }: IProps) {
+  const { asPath } = useRouter();
+  const [commentIsVisible, setCommentIsVisible] = useState(true);
+
+  useEffect(() => {
+    setCommentIsVisible(false);
+    setCommentIsVisible(true);
+  }, [asPath]);
+
   return (
     <section className="mb-5">
-      <Comment />
+      {
+        commentIsVisible ? 
+        <Comment />
+          : null
+      }
       {/* links to previous and next projects */}
       <div className="mt-5 flex w-full justify-between gap-8 text-base">
         {/* link to previous listed projects */}

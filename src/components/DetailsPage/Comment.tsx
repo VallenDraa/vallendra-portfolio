@@ -1,19 +1,10 @@
 import Giscus, { Repo } from "@giscus/react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 export default function Comment() {
   const { asPath } = useRouter();
-  const [isVisible, setIsVisible] = useState(true);
   const { theme } = useTheme();
-
-  useEffect(() => {
-    setIsVisible(false);
-    setIsVisible(true);
-  }, [asPath]);
-
-  if (!isVisible) return null;
 
   return (
     <Giscus
