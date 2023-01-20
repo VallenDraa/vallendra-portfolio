@@ -9,6 +9,7 @@ export interface IProject {
   description: string;
   views: number;
   likes: number;
+  loadingImage?: string;
   image: string;
   tech: technologies[];
   categoryIds: string[];

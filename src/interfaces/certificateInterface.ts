@@ -6,6 +6,7 @@ interface ICertificate {
   description: string;
   views: number;
   likes: number;
+  loadingImage?: string;
   image: string;
   categoryIds: string[];
   createdAt: Date | string;
