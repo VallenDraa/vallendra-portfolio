@@ -12,6 +12,7 @@ import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
+import SearchNotFound from "../../components/SearchNotFound";
 
 interface IProps {
   projects: IProject[];
@@ -138,23 +139,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
 
           {/* for empty search result */}
           <Show when={projects.length > 0 && showedIndex.length === 0}>
-            {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center lg:px-0">
-              <Typography
-                variant="h4"
-                as="h2"
-                className="text-lg dark:text-white/80 md:text-xl lg:text-2xl"
-              >
-                Sorry, Can't Find Anything 😕
-              </Typography>
-              <Typography
-                variant="h5"
-                as="h3"
-                className="text-sm dark:text-white/60 md:text-base lg:text-lg"
-              >
-                Try searching for something else.
-              </Typography>
-            </div>
+            <SearchNotFound />
           </Show>
 
           {/* fallback for when the projects failed to load */}

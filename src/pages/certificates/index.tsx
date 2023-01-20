@@ -13,6 +13,7 @@ import certificateCategories from "../../utils/datas/certificates/certificateCat
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
 import BlurredBlob from "../../components/BlurredBlob";
+import SearchNotFound from "../../components/SearchNotFound";
 
 interface IProps {
   certificates: ICertificate[];
@@ -72,7 +73,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
             <Typography
               as="p"
               variant="paragraph"
-              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose  text-indigo-400 dark:text-white/80"
+              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80"
             >
               The ultimate showcase of all my certificates
             </Typography>
@@ -142,23 +143,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
 
           {/* for empty search result */}
           <Show when={certificates.length > 0 && showedIndex.length === 0}>
-            {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center lg:px-0">
-              <Typography
-                variant="h4"
-                as="h2"
-                className="text-lg dark:text-white/80 md:text-xl lg:text-2xl"
-              >
-                Sorry, Can't Find Anything 😕
-              </Typography>
-              <Typography
-                variant="h5"
-                as="h3"
-                className="text-sm dark:text-white/60 md:text-base lg:text-lg"
-              >
-                Try searching for something else.
-              </Typography>
-            </div>
+            <SearchNotFound />
           </Show>
 
           {/* fallback for when the certificates failed to load */}
