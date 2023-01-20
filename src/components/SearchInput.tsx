@@ -76,6 +76,7 @@ export default function SearchInput({
           <AiOutlineLoading className="animate-spin text-lg dark:text-gray-300" />
         </Show>
       }
+      aria-label={placeholder || ""}
       label={placeholder || ""}
       disabled={disabled || !!searchError}
       onChange={(e) => {

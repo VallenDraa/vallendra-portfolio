@@ -50,8 +50,8 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
 
         <Typography
           variant="h5"
-          as="h4"
-          className="bg-gradient-to-r from-pink-200 to-amber-200 bg-clip-text px-3 font-bold text-transparent"
+          as="span"
+          className="block bg-gradient-to-r from-pink-200 to-amber-200 bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl"
         >
           {props.itemName}
         </Typography>
@@ -60,7 +60,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
         <Typography
           variant="paragraph"
           as="p"
-          className="mt-1 px-3 text-sm font-normal text-white/90 md:line-clamp-2"
+          className="mt-1 px-3 text-base font-normal  text-white/90 sm:text-sm md:line-clamp-2"
         >
           {props.itemShortDesc}
         </Typography>
