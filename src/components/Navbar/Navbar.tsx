@@ -93,7 +93,7 @@ export default function NavbarComponent() {
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 xl:px-0">
         {/* name section */}
         <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
-          <span>Jestine Vallendra Dwi Putra</span>
+          <Link href="/">Jestine Vallendra Dwi Putra</Link>
         </Typography>
 
         {/* the nav list section */}

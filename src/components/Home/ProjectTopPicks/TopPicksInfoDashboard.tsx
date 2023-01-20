@@ -114,7 +114,7 @@ export default function TopPicksInfoDashboard({
             icon={<BiDetail className="text-indigo-400 dark:text-gray-500" />}
             size="md"
             variant="text"
-            color={theme === "dark" ? "gray" : "indigo"}
+            color="gray"
             className="text-indigo-400 dark:text-gray-500"
           >
             Detail

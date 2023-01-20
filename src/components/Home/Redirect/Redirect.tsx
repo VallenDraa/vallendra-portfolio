@@ -1,25 +1,13 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
-import BlurredBlob from "../../BlurredBlob";
-import { useTheme } from "next-themes";
 
 /* redirects the user to a contacts page or to my github account
 ================================================================ */
 export default function Redirect() {
-  const { theme } = useTheme();
-
   return (
     <section className="relative z-20 h-[full] bg-indigo-50 dark:bg-gray-900">
-      <div className="relative mx-auto max-w-screen-xl overflow-visible px-2 py-24 lg:px-8 xl:px-0">
-        {/* blur */}
-        <BlurredBlob
-          left="left-1/2"
-          top="top-3/4"
-          translateX="-translate-x-1/2"
-          translateY="-translate-y-3/4"
-        />
-
+      <div className="relative mx-auto max-w-screen-xl px-2 py-24 lg:px-8 xl:px-0">
         <div className="relative z-30 flex flex-col items-center">
           <Typography
             as="h2"
@@ -44,7 +32,7 @@ export default function Redirect() {
             <Button
               variant="text"
               size="sm"
-              color={theme === "dark" ? "gray" : "indigo"}
+              color={"gray"}
               className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
             >
               Visit My Github Instead

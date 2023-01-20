@@ -34,7 +34,7 @@ export default function TimelineItem({ data, projectIndex }: IProps) {
 
       {/* the line */}
       <div
-        className={`absolute bottom-0 -top-6 z-10 w-0.5 rounded-full bg-indigo-500/40 dark:bg-white/20 ${
+        className={`absolute bottom-0 -top-6 z-10 w-0.5 rounded-full bg-indigo-500/30 dark:bg-white/20 ${
           lineIsInverted ? "rotate-180" : ""
         }`}
       />
