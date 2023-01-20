@@ -1,12 +1,11 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { AiFillHeart } from "react-icons/ai";
+import { BsArrowLeft } from "react-icons/bs";
 import Image from "next/image";
 import { FaRegNewspaper } from "react-icons/fa";
 import Show from "../../utils/jsx/Show";
-import Comment from "../../components/DetailsPage/Comment";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
@@ -15,6 +14,8 @@ import { useState } from "react";
 import ICertificate from "../../interfaces/certificateInterface";
 import Head from "next/head";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
+import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
+import DetailFooter from "../../components/Details/DetailFooter";
 
 interface ICertificateRedirect {
   slug: string;
@@ -82,29 +83,11 @@ export default function CertificateDetails({
             </Typography>
 
             {/* certificate views*/}
-            <div className="mt-2.5 flex gap-3 text-indigo-300 dark:text-gray-400">
-              <Typography
-                variant="paragraph"
-                as="span"
-                className="flex items-center gap-1 text-sm font-bold"
-              >
-                <AiFillEye />
-                {certificate.views} views
-              </Typography>
-
-              <span>&bull;</span>
-
-              <Typography
-                variant="paragraph"
-                as="span"
-                className={`flex items-center gap-1 text-sm font-bold ${
-                  hasLiked ? "text-red-300" : "text-inherit"
-                }`}
-              >
-                <AiFillHeart />
-                {likes} likes
-              </Typography>
-            </div>
+            <ViewsAndLikes
+              hasLiked={hasLiked}
+              likes={likes}
+              views={certificate.views}
+            />
           </section>
         </header>
 
@@ -186,30 +169,13 @@ export default function CertificateDetails({
             </aside>
           </section>
 
-          {/* comments */}
-          <section className="mb-5">
-            <Comment />
-            {/* links to previous and next projects */}
-            <div className="mt-5 flex w-full flex-wrap justify-between gap-8 text-base">
-              {/* link to previous listed projects */}
-              <LinkWithUnderline
-                className="grow md:flex-grow-0"
-                href={`/certificates/${prevCertificate.slug}`}
-              >
-                <BsArrowLeft />
-                {prevCertificate.name}
-              </LinkWithUnderline>
-
-              {/* link to next listed projects */}
-              <LinkWithUnderline
-                className="grow justify-end md:flex-grow-0"
-                href={`/certificates/${nextCertificate.slug}`}
-              >
-                {nextCertificate.name}
-                <BsArrowRight />
-              </LinkWithUnderline>
-            </div>
-          </section>
+          {/* details footer, includes link */}
+          <DetailFooter
+            prevLink={`/certificates/${prevCertificate.slug}`}
+            prevTitle={prevCertificate.name}
+            nextLink={`/certificates/${nextCertificate.slug}`}
+            nextTitle={nextCertificate.name}
+          />
         </main>
         <SiteFooter />
       </div>

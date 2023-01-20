@@ -75,7 +75,7 @@ export default function Profile() {
                 >
                   Languages and frameworks that I use for projects and college !
                 </Typography>
-                <ul className="relative mt-4 flex items-center gap-1 overflow-auto">
+                <ul className="scrollbar-kece relative mt-4 flex items-center gap-1 overflow-auto">
                   <li>{TECHS.html}</li>
                   <li>{TECHS.css}</li>
                   <li>{TECHS["tailwind css"]}</li>

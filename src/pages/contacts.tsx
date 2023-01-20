@@ -36,7 +36,7 @@ export default function Contacts() {
           <Typography
             as="p"
             variant="paragraph"
-            className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose  text-indigo-400 dark:text-white/80"
+            className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose  text-indigo-700 dark:text-white/80"
           >
             You can contact me via email or through others means that are
             provided below !
@@ -63,33 +63,43 @@ export default function Contacts() {
                 </Typography>
                 <Typography
                   as="span"
-                  className="font-medium text-indigo-300 dark:text-gray-400"
+                  className="font-medium text-indigo-600 dark:text-gray-400"
                 >
                   Fill the fields below to send a message via email !
                 </Typography>
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <StyledInput required label="Name" name="name" type="text" />
+                <StyledInput
+                  required
+                  label="Name"
+                  type="text"
+                  aria-label="name input"
+                />
                 <StyledInput
                   required
                   label="E-mail"
-                  name="email"
                   type="email"
+                  aria-label="email input"
                 />
-                <StyledInput label="Phone" name="phone" type="tel" />
+                <StyledInput
+                  label="Phone"
+                  name="phone"
+                  type="tel"
+                  aria-label="telephone number input"
+                />
                 <StyledInput
                   required
                   label="Subject"
-                  name="subject"
                   type="text"
+                  aria-label="email subject input"
                 />
               </div>
               <StyledTextArea
                 required
                 label="Message"
-                name="message"
                 rows={6}
+                aria-label="email content input"
               />
             </fieldset>
 
@@ -116,10 +126,12 @@ export default function Contacts() {
           </form>
 
           {/* other social media */}
-          <aside className="card-colors flex flex-col items-start gap-4 rounded-md p-6 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12">
+          <aside className="card-colors flex flex-col items-start gap-0 rounded-md p-6 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12 sm:gap-4">
             <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 border-indigo-300 pb-5 dark:border-gray-700 sm:justify-center">
               <div className="flex gap-2 sm:justify-center">
                 <IconWithTooltip
+                  withPadding={false}
+                  isButton={false}
                   text="My Socials"
                   placement="top"
                   icon={
@@ -138,7 +150,7 @@ export default function Contacts() {
 
               <Typography
                 as="p"
-                className="font-medium text-indigo-300 dark:text-gray-400 sm:hidden"
+                className="font-medium text-indigo-600 dark:text-gray-400 sm:hidden"
               >
                 Connect with me and stay updated on my projects or thoughts on
                 these platforms

@@ -4,20 +4,22 @@ import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { AiFillHeart } from "react-icons/ai";
+import { BsArrowLeft } from "react-icons/bs";
 import Image from "next/image";
 import { technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
 import Show from "../../utils/jsx/Show";
-import Comment from "../../components/DetailsPage/Comment";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState } from "react";
+import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
+import DetailFooter from "../../components/Details/DetailFooter";
+import { useTheme } from "next-themes";
 
 interface IProjectRedirect {
   slug: string;
@@ -36,6 +38,8 @@ export default function ProjectDetails({
   nextProject,
 }: IPropsData) {
   const pageTitle = `VallenDra | ${project.name}`;
+
+  const { theme } = useTheme();
 
   /* Likes
   ========= */
@@ -84,30 +88,11 @@ export default function ProjectDetails({
               {project.shortDescription}
             </Typography>
 
-            {/* project views*/}
-            <div className="mt-2.5 flex gap-3 text-indigo-300 dark:text-gray-400">
-              <Typography
-                variant="paragraph"
-                as="span"
-                className="flex items-center gap-1 text-sm font-bold"
-              >
-                <AiFillEye />
-                {project.views} views
-              </Typography>
-
-              <span>&bull;</span>
-
-              <Typography
-                variant="paragraph"
-                as="span"
-                className={`flex items-center gap-1 text-sm font-bold ${
-                  hasLiked ? "text-red-300" : "text-inherit"
-                }`}
-              >
-                <AiFillHeart />
-                {likes} likes
-              </Typography>
-            </div>
+            <ViewsAndLikes
+              hasLiked={hasLiked}
+              likes={likes}
+              views={project.views}
+            />
           </section>
         </header>
 
@@ -121,7 +106,7 @@ export default function ProjectDetails({
               alt={project.name}
               width={960}
               height={540}
-              className="w-full rounded-md object-cover opacity-90"
+              className="w-full rounded-md object-cover opacity-90 shadow"
             />
 
             <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
@@ -135,7 +120,7 @@ export default function ProjectDetails({
               {/* app tech stack */}
               <div className="relative z-10 flex flex-col gap-4">
                 <SectionHeading>Tech Stack</SectionHeading>
-                <ul className="relative flex items-center gap-1 overflow-auto">
+                <ul className="scrollbar-kece relative flex items-center gap-1 overflow-auto">
                   {project?.tech.map(
                     (tech: technologies, i): JSX.Element => (
                       <li key={i}>{TECHS[tech]}</li>
@@ -183,7 +168,7 @@ export default function ProjectDetails({
                 <ActionButton
                   icon={<FaGithub className="text-lg" />}
                   href={project.gitLink}
-                  color="gray"
+                  color={"gray"}
                 >
                   Visit Repo
                 </ActionButton>
@@ -218,29 +203,12 @@ export default function ProjectDetails({
           </section>
 
           {/* comments */}
-          <section className="mb-5">
-            <Comment />
-            {/* links to previous and next projects */}
-            <div className="mt-5 flex w-full flex-wrap justify-between gap-8 text-base">
-              {/* link to previous listed projects */}
-              <LinkWithUnderline
-                className="grow md:flex-grow-0"
-                href={`/projects/${prevProject.slug}`}
-              >
-                <BsArrowLeft />
-                {prevProject.name}
-              </LinkWithUnderline>
-
-              {/* link to next listed projects */}
-              <LinkWithUnderline
-                className="grow justify-end md:flex-grow-0"
-                href={`/projects/${nextProject.slug}`}
-              >
-                {nextProject.name}
-                <BsArrowRight />
-              </LinkWithUnderline>
-            </div>
-          </section>
+          <DetailFooter
+            prevLink={`/projects/${prevProject.slug}`}
+            prevTitle={prevProject.name}
+            nextLink={`/projects/${nextProject.slug}`}
+            nextTitle={nextProject.name}
+          />
         </main>
         <SiteFooter />
       </div>
