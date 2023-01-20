@@ -64,7 +64,7 @@ export default function NavList({ navListRef, overlayRef }: IProps) {
       <div
         onClick={closeNav}
         ref={overlayRef}
-        className="fixed inset-0 z-[60] h-screen bg-indigo-900/40 dark:bg-black/40 lg:hidden"
+        className="fixed inset-0 z-[60] h-screen bg-indigo-800/30 dark:bg-black/40 lg:hidden"
       />
 
       {/* the nav list */}

@@ -23,13 +23,13 @@ export default function Redirect() {
         <div className="relative z-30 flex flex-col items-center">
           <Typography
             as="h2"
-            className="pt-6 text-4xl font-bold text-indigo-400/90 dark:text-gray-200 md:text-5xl lg:text-6xl"
+            className="pt-6 text-4xl font-bold text-indigo-500 dark:text-gray-200 md:text-5xl lg:text-6xl"
           >
             Wanna Work Together ?
           </Typography>
           <Link href="/contacts" className="mt-8">
             <Button
-              className="group flex items-center justify-center gap-2 rounded-full text-xl text-indigo-400 outline outline-2 outline-indigo-400 focus:text-indigo-400 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-50 hover:outline-indigo-50 active:bg-white active:text-indigo-400 active:outline-white dark:text-gray-300 dark:outline-gray-300 dark:focus:bg-white dark:focus:text-gray-900 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:active:text-gray-900 lg:text-2xl"
+              className="group flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 focus:text-indigo-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-50 hover:outline-indigo-50 active:bg-white active:text-indigo-500 active:outline-white dark:text-gray-300 dark:outline-gray-300 dark:focus:bg-white dark:focus:text-gray-900 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:active:text-gray-900 lg:text-2xl"
               variant="text"
             >
               <span className="duration-200">Contact Me</span>
@@ -45,7 +45,7 @@ export default function Redirect() {
               variant="text"
               size="sm"
               color={theme === "dark" ? "gray" : "indigo"}
-              className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-400 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
+              className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
             >
               Visit My Github Instead
             </Button>

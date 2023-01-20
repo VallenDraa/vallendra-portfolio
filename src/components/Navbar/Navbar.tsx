@@ -122,6 +122,7 @@ export default function NavbarComponent() {
           <ThemeToggler className="inline-block" />
 
           <IconButton
+            aria-label="Navigation menu button"
             ref={navToggleRef}
             size="md"
             variant="text"
@@ -129,7 +130,7 @@ export default function NavbarComponent() {
             className="text-inherit"
             onClick={() => setNavIsOpened(true)}
           >
-            <BiMenu className="text-4xl text-indigo-500 transition duration-200 dark:text-gray-200" />
+            <BiMenu className="text-4xl text-indigo-400 transition duration-200 dark:text-gray-200" />
           </IconButton>
         </div>
       </div>

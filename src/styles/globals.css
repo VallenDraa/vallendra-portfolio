@@ -56,7 +56,7 @@
   /* gradients
   ============ */
   .primary-gradient {
-    @apply from-purple-200 to-pink-200 dark:from-indigo-200;
+    @apply from-purple-200 to-pink-200 dark:from-indigo-300 dark:to-pink-200;
   }
 }
 

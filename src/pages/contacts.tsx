@@ -120,7 +120,6 @@ export default function Contacts() {
             <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 border-indigo-300 pb-5 dark:border-gray-700 sm:justify-center">
               <div className="flex gap-2 sm:justify-center">
                 <IconWithTooltip
-                  isButton={false}
                   text="My Socials"
                   placement="top"
                   icon={

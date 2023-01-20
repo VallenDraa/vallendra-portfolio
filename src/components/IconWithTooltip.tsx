@@ -10,7 +10,18 @@ interface IProps extends Omit<TooltipProps, "children"> {
 }
 
 const IconWithTooltip = forwardRef<HTMLDivElement, IProps>(
-  ({ ref, icon, text, placement, isButton = true, ...props }, forwardedRef) => {
+  (
+    {
+      ["aria-label"]: ariaLabel,
+      ref,
+      icon,
+      text,
+      placement,
+      isButton = false,
+      ...props
+    },
+    forwardedRef
+  ) => {
     return (
       <Tooltip
         ref={forwardedRef}
@@ -23,11 +34,19 @@ const IconWithTooltip = forwardRef<HTMLDivElement, IProps>(
         {...props}
       >
         {isButton ? (
-          <Button variant="text" color="gray" size="sm">
+          <Button
+            aria-label={ariaLabel}
+            variant="text"
+            color="gray"
+            size="sm"
+            className="p-3.5"
+          >
             {icon}
           </Button>
         ) : (
-          <div className="inline-block">{icon}</div>
+          <div className="inline-block rounded-md p-3.5 transition-colors duration-200 hover:bg-indigo-200/30 active:bg-indigo-200/50 dark:hover:bg-gray-500/30 dark:active:bg-gray-500/50 ">
+            {icon}
+          </div>
         )}
       </Tooltip>
     );

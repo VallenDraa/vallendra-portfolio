@@ -73,7 +73,7 @@ export default function TopPicksInfoDashboard({
           <Typography
             as="p"
             variant="lead"
-            className="mt-3 font-medium text-indigo-400 dark:text-gray-400"
+            className="mt-1 font-medium text-indigo-600 dark:text-gray-300"
           >
             {activeProject?.shortDescription || ""}
           </Typography>
@@ -91,7 +91,7 @@ export default function TopPicksInfoDashboard({
           </Typography>
           <Typography
             as="p"
-            className="mb-4 mt-2 text-sm font-medium text-indigo-300 dark:text-gray-300"
+            className="mb-4 mt-2 text-sm font-medium text-indigo-500 dark:text-gray-400"
           >
             These Are the {activeProject?.tech.length || 0} Technologies That
             Were Used For This Project :

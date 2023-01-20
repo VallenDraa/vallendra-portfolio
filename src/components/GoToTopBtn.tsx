@@ -28,14 +28,15 @@ export default function GoToTopBtn() {
   }, []);
   return (
     <IconButton
+      aria-label="Go to top button"
       ref={goUpBtnRef}
       size="lg"
       ripple={false}
       variant="filled"
       color="deep-purple"
-      className={`fixed bottom-5 right-10 z-40 translate-x-[200%] opacity-30 transition duration-500 hover:opacity-100`}
+      className="fixed bottom-5 right-10 z-40 translate-x-[200%] opacity-30 transition duration-500 hover:opacity-100"
     >
-      <a href="#" className="block p-2">
+      <a aria-label="Go to top link" href="#" className="block p-2">
         <VscTriangleUp className="text-xl" />
       </a>
     </IconButton>

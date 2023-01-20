@@ -71,7 +71,7 @@ export default function Profile() {
                 </Typography>
                 <Typography
                   as="p"
-                  className="font-medium text-indigo-300 dark:text-gray-400"
+                  className="font-medium text-indigo-600 dark:text-gray-400"
                 >
                   Languages and frameworks that I use for projects and college !
                 </Typography>
@@ -88,7 +88,7 @@ export default function Profile() {
               </CardBody>
               <CardFooter
                 divider
-                className="border-indigo-400 py-3 text-indigo-400 dark:border-gray-600 dark:text-gray-500"
+                className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
               >
                 <Typography variant="small" className="text-right">
                   And Learning More 😎
@@ -113,7 +113,7 @@ export default function Profile() {
               </Typography>
               <Typography
                 as="p"
-                className="font-medium text-indigo-300 dark:text-gray-400"
+                className="font-medium text-indigo-600 dark:text-gray-400"
               >
                 A First Year Computer Science Major student at Universitas Islam
                 Negeri Syarif Hidayatullah Jakarta.
@@ -121,7 +121,7 @@ export default function Profile() {
             </CardBody>
             <CardFooter
               divider
-              className="border-indigo-400 py-3 text-indigo-400 dark:border-gray-600 dark:text-gray-500"
+              className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
             >
               <Typography variant="small" className="text-right">
                 EST. 2022 - 2026
@@ -142,7 +142,7 @@ export default function Profile() {
               </Typography>
               <Typography
                 as="p"
-                className="font-medium text-indigo-300 dark:text-gray-400"
+                className="font-medium text-indigo-600 dark:text-gray-400"
               >
                 An active Member of Google Developer Students Club at
                 Universitas Islam Negeri Syarif Hidayatullah Jakarta.
@@ -150,7 +150,7 @@ export default function Profile() {
             </CardBody>
             <CardFooter
               divider
-              className="border-indigo-400 py-3 text-indigo-400 dark:border-gray-600 dark:text-gray-500"
+              className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
             >
               <Typography variant="small" className="text-right">
                 EST. 2022 - 2023

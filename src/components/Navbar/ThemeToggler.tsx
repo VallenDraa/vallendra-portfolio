@@ -17,6 +17,7 @@ export default function ThemeToggler({
 
   return (
     <IconButton
+      aria-label="Theme toggle button"
       size="md"
       variant="text"
       color={theme === "light" ? "indigo" : "amber"}
