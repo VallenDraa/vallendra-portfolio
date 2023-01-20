@@ -77,7 +77,7 @@ export default function CertificateDetails({
             <Typography
               as="p"
               variant="paragraph"
-              className="mt-1 pl-0.5 text-justify text-sm font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
+              className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
             >
               {certificate.shortDescription}
             </Typography>

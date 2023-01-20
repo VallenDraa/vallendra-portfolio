@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import ContextProviders from "../components/Layout/ContextProviders";
+import ProgressBar from "../components/ProgressBar";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <ContextProviders>
+      <ProgressBar />
       {SiteLayout(<Component {...pageProps} />)}
     </ContextProviders>
   );

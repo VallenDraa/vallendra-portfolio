@@ -72,7 +72,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
             <Typography
               as="p"
               variant="paragraph"
-              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80"
+              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
             >
               The ultimate showcase of all my certificates
             </Typography>
@@ -173,7 +173,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
   );
 }
 
-export function getServerSideProps(): GetStaticPropsResult<IProps> {
+export function getStaticProps(): GetStaticPropsResult<IProps> {
   return {
     props: { certificates: allCertificates, categories: certificateCategories },
   };

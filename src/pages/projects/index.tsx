@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
-import { getImage } from "../../../service/image";
 
 interface IProps {
   projects: IProject[];
@@ -53,7 +52,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
         <title>VallenDra | Projects</title>
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
-        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
+        <header className=" z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           {/* heading and searchbar */}
           <section className="relative z-10">
             <div className="relative flex w-fit items-center gap-1">
@@ -70,7 +69,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
             <Typography
               as="p"
               variant="paragraph"
-              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80"
+              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
             >
               The ultimate showcase of all my projects. Mostly web but there are
               others as well.
@@ -171,9 +170,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
   );
 }
 
-export function getServerSideProps(): GetStaticPropsResult<IProps> {
-  allProjects.forEach((proj) => getImage(proj.slug));
-
+export function getStaticProps(): GetStaticPropsResult<IProps> {
   return {
     props: { projects: allProjects, categories: projectCategories },
   };
