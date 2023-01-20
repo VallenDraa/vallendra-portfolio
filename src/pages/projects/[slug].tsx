@@ -61,7 +61,7 @@ export default function ProjectDetails({
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div className="fade-bottom relative flex min-h-screen translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           <section className="relative z-10 border-b-2 border-indigo-100 pb-3 dark:border-white/30 ">
             {/* back to project button */}
