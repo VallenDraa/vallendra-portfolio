@@ -50,7 +50,7 @@ export default function Profile() {
             </div>
 
             {/* techs */}
-            <Card className="indigo-pink-gradient card-colors hover:!!shadow-green-500 rounded-md shadow-md duration-200 hover:shadow-lg dark:hover:!shadow-green-800">
+            <Card className="indigo-pink-gradient card-colors rounded-md shadow-md duration-200 hover:shadow-lg hover:!shadow-green-500 dark:hover:!shadow-green-800">
               <CardBody>
                 <Typography
                   as="h3"
