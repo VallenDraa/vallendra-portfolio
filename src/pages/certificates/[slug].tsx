@@ -10,12 +10,13 @@ import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ICertificate from "../../interfaces/certificateInterface";
 import Head from "next/head";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
 import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
 import DetailFooter from "../../components/Details/DetailFooter";
+import { commaSeparator } from "../../utils/helpers/formatter";
 
 interface ICertificateRedirect {
   slug: string;
@@ -39,6 +40,7 @@ export default function CertificateDetails({
   ========= */
   const [likes, setLikes] = useState(certificate.likes);
   const [hasLiked, setHasLiked] = useState(false);
+  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
 
   async function addLike() {
     if (!hasLiked) {
@@ -163,7 +165,7 @@ export default function CertificateDetails({
                   }`}
                 >
                   <AiFillHeart />
-                  <span className="text-sm">{likes}</span>
+                  <span className="text-sm">{formattedLikes}</span>
                 </Button>
               </Tooltip>
             </aside>

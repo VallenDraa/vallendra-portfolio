@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetServerSideProps } from "next";
 import { IProject } from "../../interfaces/projectInterface";
 import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
@@ -16,10 +16,11 @@ import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
 import DetailFooter from "../../components/Details/DetailFooter";
 import { useTheme } from "next-themes";
+import { commaSeparator } from "../../utils/helpers/formatter";
 
 interface IProjectRedirect {
   slug: string;
@@ -45,6 +46,7 @@ export default function ProjectDetails({
   ========= */
   const [likes, setLikes] = useState(project.likes);
   const [hasLiked, setHasLiked] = useState(false);
+  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
 
   async function addLike() {
     if (!hasLiked) {
@@ -196,7 +198,7 @@ export default function ProjectDetails({
                   }`}
                 >
                   <AiFillHeart />
-                  <span className="text-sm">{likes}</span>
+                  <span className="text-sm">{formattedLikes}</span>
                 </Button>
               </Tooltip>
             </aside>
@@ -216,9 +218,7 @@ export default function ProjectDetails({
   );
 }
 
-export function getServerSideProps(
-  context: GetServerSidePropsContext
-): GetServerSidePropsResult<IPropsData> {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context;
 
   // get target project index
@@ -253,4 +253,4 @@ export function getServerSideProps(
           prevProject: { name: prevProject.name, slug: prevProject.slug },
         },
       };
-}
+};

@@ -24,18 +24,14 @@ export default function Redirect() {
               <IoCall className="duration-200" />
             </Button>
           </Link>
-          <Link
-            href="https://github.com/vallendraa"
-            target="_blank"
-            className="mt-4 inline-block"
-          >
+          <Link href="/projects" className="mt-4 inline-block">
             <Button
               variant="text"
               size="sm"
-              color={"gray"}
+              color="gray"
               className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
             >
-              Visit My Github Instead
+              See other projects instead
             </Button>
           </Link>
         </div>

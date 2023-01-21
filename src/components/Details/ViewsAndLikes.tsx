@@ -1,5 +1,7 @@
 import { Typography } from "@material-tailwind/react";
+import { useMemo } from "react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
+import { commaSeparator } from "../../utils/helpers/formatter";
 
 export default function ViewsAndLikes({
   views,
@@ -10,6 +12,9 @@ export default function ViewsAndLikes({
   likes: number;
   hasLiked: boolean;
 }) {
+  const formattedViews = useMemo(() => commaSeparator.format(views), []);
+  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
+
   return (
     <div className="mt-2.5 flex gap-3 text-indigo-300 dark:text-gray-400">
       <Typography
@@ -18,7 +23,7 @@ export default function ViewsAndLikes({
         className="flex items-center gap-1 text-sm font-bold"
       >
         <AiFillEye />
-        {views} views
+        {formattedViews} views
       </Typography>
 
       <span>&bull;</span>
@@ -31,7 +36,7 @@ export default function ViewsAndLikes({
         }`}
       >
         <AiFillHeart />
-        {likes} likes
+        {formattedLikes} likes
       </Typography>
     </div>
   );

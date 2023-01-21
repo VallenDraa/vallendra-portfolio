@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
+import { GetStaticProps } from "next"
 
 interface IProps {
   projects: IProject[];
@@ -170,8 +171,8 @@ export default function ProjectsPage({ projects, categories }: IProps) {
   );
 }
 
-export function getStaticProps(): GetStaticPropsResult<IProps> {
-  return {
+export const getStaticProps: GetStaticProps = async () => {
+return {
     props: { projects: allProjects, categories: projectCategories },
   };
 }

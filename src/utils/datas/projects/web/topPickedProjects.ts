@@ -14,7 +14,6 @@ const topPickedProjects: IProject[] = [
     image: "/images/projects/konnect.png",
     tech: ["react", "tailwind css", "node.js", "socket.io", "mongodb"],
     categoryIds: ["1"],
-
     createdAt: new Date("Oct 17, 2022").toISOString(),
     siteLink: "https://kon-nect.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/konnect",
@@ -32,7 +31,6 @@ const topPickedProjects: IProject[] = [
     image: "/images/projects/casera.png",
     tech: ["react", "tailwind css", "node.js", "mongodb"],
     categoryIds: ["1"],
-
     createdAt: new Date("May 7, 2022").toISOString(),
     siteLink: "https://cas-era.herokuapp.com/",
     gitLink: "https://github.com/VallenDraa/casera",

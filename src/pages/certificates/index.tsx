@@ -173,7 +173,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
   );
 }
 
-export function getStaticProps(): GetStaticPropsResult<IProps> {
+export async function getStaticProps() {
   return {
     props: { certificates: allCertificates, categories: certificateCategories },
   };

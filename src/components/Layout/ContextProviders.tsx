@@ -10,7 +10,7 @@ export default function ContextProviders({ children }: { children: any }) {
       enableSystem={false}
       enableColorScheme
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="dark"
       storageKey="color-theme"
     >
       <NavIsOpenedCP>
