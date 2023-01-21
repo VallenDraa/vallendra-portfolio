@@ -1,6 +1,6 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import Comment from "../DetailsPage/Comment";
-import LinkWithUnderline from "../DetailsPage/LinkWithUnderline";
+import Comment from "./Comment";
+import LinkWithUnderline from "./LinkWithUnderline";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -27,11 +27,7 @@ export default function DetailFooter({
 
   return (
     <section className="mb-5">
-      {
-        commentIsVisible ? 
-        <Comment />
-          : null
-      }
+      {commentIsVisible ? <Comment /> : null}
       {/* links to previous and next projects */}
       <div className="mt-5 flex w-full justify-between gap-8 text-base">
         {/* link to previous listed projects */}

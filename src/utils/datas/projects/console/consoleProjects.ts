@@ -5,9 +5,12 @@ const cliProjects: IProject[] = [
     _id: "10",
     name: "Bus Primajasa",
     slug: "bus-primajasa",
-    shortDescription:
+    shortDescriptionEN:
       "A CLI based bus booking app made with the C programming language",
-    description: `A CLI based bus booking app made with the C programming language.`,
+    descriptionEN: `A CLI based bus booking app made with the C programming language.`,
+    shortDescriptionID:
+      "A CLI based bus booking app made with the C programming language",
+    descriptionID: `A CLI based bus booking app made with the C programming language.`,
     views: 69420,
     likes: 1231,
     image: "/images/projects/bus-primajasa.png",
@@ -21,9 +24,12 @@ const cliProjects: IProject[] = [
     _id: "11",
     name: "Perkutut Airlines",
     slug: "perkutut-airlines",
-    shortDescription:
+    shortDescriptionEN:
       "A CLI based airplane ticket booking app made with the C programming language",
-    description: `A CLI based based airplane ticket booking app made with the C programming language.`,
+    descriptionEN: `A CLI based based airplane ticket booking app made with the C programming language.`,
+    shortDescriptionID:
+      "A CLI based airplane ticket booking app made with the C programming language",
+    descriptionID: `A CLI based based airplane ticket booking app made with the C programming language.`,
     views: 69420,
     likes: 1231,
     image: "/images/projects/perkutut-airlines.png",

@@ -5,8 +5,10 @@ export interface IProject {
   icon?: string;
   name: string;
   slug: string;
-  shortDescription: string;
-  description: string;
+  shortDescriptionEN: string;
+  descriptionEN: string;
+  shortDescriptionID: string;
+  descriptionID: string;
   views: number;
   likes: number;
   loadingImage?: string;

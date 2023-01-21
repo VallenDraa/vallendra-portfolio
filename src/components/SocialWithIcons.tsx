@@ -6,6 +6,7 @@ import {
   FaLinkedinIn,
   FaWhatsapp,
 } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 
 type Size = "text-4xl" | "text-5xl" | "text-6xl" | "text-7xl";
 type SMSize = `sm:${Size}`;
@@ -37,7 +38,7 @@ export default function SocialsWithIcon({
 
   return (
     <>
-      <Link
+      {/* <Link
         aria-label="Whatsapp link"
         href="https://wa.me/6281282029927"
         target="_blank"
@@ -53,6 +54,33 @@ export default function SocialsWithIcon({
             />
           }
           text="Whatsapp"
+        />
+      </Link> */}
+      <Link aria-label="Email link" href="/contacts" className="block">
+        <IconWithTooltip
+          isButton
+          placement="top"
+          aria-label="Email link button"
+          icon={
+            <AiOutlineMail
+              className={`${sizeClasses} text-green-400 dark:text-green-300`}
+            />
+          }
+          text="Email"
+        />
+      </Link>
+      <Link
+        aria-label="Instagram link"
+        href="https://instagram.com"
+        target="_blank"
+        className="block"
+      >
+        <IconWithTooltip
+          isButton
+          placement="top"
+          aria-label="Instagram link button"
+          icon={<FaInstagram className={`${sizeClasses} text-pink-300`} />}
+          text="Instagram"
         />
       </Link>
       <Link
@@ -85,20 +113,6 @@ export default function SocialsWithIcon({
           aria-label="Linkedin link button"
           icon={<FaLinkedinIn className={`${sizeClasses} text-blue-600`} />}
           text="LinkedIn"
-        />
-      </Link>
-      <Link
-        aria-label="Instagram link"
-        href="https://instagram.com"
-        target="_blank"
-        className="block"
-      >
-        <IconWithTooltip
-          isButton
-          placement="top"
-          aria-label="Instagram link button"
-          icon={<FaInstagram className={`${sizeClasses} text-pink-300`} />}
-          text="Instagram"
         />
       </Link>
     </>

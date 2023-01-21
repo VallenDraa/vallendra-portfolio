@@ -48,7 +48,7 @@ export default function CertificateCategorySection({
                 itemLikes={certificatesInCategory[id].likes}
                 itemLink={`/certificates/${certificatesInCategory[id].slug}`}
                 itemName={certificatesInCategory[id].name}
-                itemShortDesc={certificatesInCategory[id].shortDescription}
+                itemShortDesc={certificatesInCategory[id].shortDescriptionEN}
                 itemViews={certificatesInCategory[id].views}
               />
             </li>

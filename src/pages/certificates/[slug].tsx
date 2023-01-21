@@ -14,9 +14,11 @@ import { useState, useMemo } from "react";
 import ICertificate from "../../interfaces/certificateInterface";
 import Head from "next/head";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
-import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
-import DetailFooter from "../../components/Details/DetailFooter";
+import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
+import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/helpers/formatter";
+import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
+import { language } from "../../types/types";
 
 interface ICertificateRedirect {
   slug: string;
@@ -35,6 +37,10 @@ export default function CertificateDetails({
   nextCertificate,
 }: IPropsData) {
   const pageTitle = `VallenDra | ${certificate.name}`;
+
+  /* language switcher
+  =================== */
+  const [activeLanguage, setActiveLanguage] = useState<language>("en");
 
   /* Likes
   ========= */
@@ -59,37 +65,51 @@ export default function CertificateDetails({
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
-          <section className="relative z-10 border-b-2 border-indigo-100 pb-3 dark:border-white/30 ">
-            {/* back to certificate button */}
-            <LinkWithUnderline href="/certificates">
-              <BsArrowLeft />
-              Back To Certificates
-            </LinkWithUnderline>
+          <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
+            <div>
+              {/* back to certificates button */}
+              <LinkWithUnderline href="/certificates">
+                <BsArrowLeft />
+                Back To Certificates
+              </LinkWithUnderline>
 
-            {/* title */}
-            <Typography
-              as="h1"
-              variant="h1"
-              className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-            >
-              {certificate.name}
-            </Typography>
+              {/* title */}
+              <Typography
+                as="h1"
+                variant="h1"
+                className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
+              >
+                {certificate.name}
+              </Typography>
 
-            {/* short description */}
-            <Typography
-              as="p"
-              variant="paragraph"
-              className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
-            >
-              {certificate.shortDescription}
-            </Typography>
+              {/* short description */}
+              <Typography
+                as="p"
+                variant="paragraph"
+                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
+              >
+                <Show when={activeLanguage === "en"}>
+                  {certificate.shortDescriptionEN}
+                </Show>
+                <Show when={activeLanguage === "id"}>
+                  {certificate.shortDescriptionID}
+                </Show>
+              </Typography>
 
-            {/* certificate views*/}
-            <ViewsAndLikes
-              hasLiked={hasLiked}
-              likes={likes}
-              views={certificate.views}
-            />
+              <ViewsAndLikes
+                hasLiked={hasLiked}
+                likes={likes}
+                views={certificate.views}
+              />
+            </div>
+            <div className="flex lg:self-end lg:px-2">
+              <LanguageToggle
+                activeLanguage={activeLanguage}
+                cb={() =>
+                  setActiveLanguage((prev) => (prev === "en" ? "id" : "en"))
+                }
+              />
+            </div>
           </section>
         </header>
 
@@ -121,7 +141,12 @@ export default function CertificateDetails({
                   variant="paragraph"
                   className="px-3 font-normal leading-loose text-indigo-600 dark:text-gray-400"
                 >
-                  {certificate.description}
+                  <Show when={activeLanguage === "en"}>
+                    {certificate.descriptionEN}
+                  </Show>
+                  <Show when={activeLanguage === "id"}>
+                    {certificate.descriptionID}
+                  </Show>
                 </Typography>
               </div>
             </div>

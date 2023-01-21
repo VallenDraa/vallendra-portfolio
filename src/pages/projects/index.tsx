@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
 import ICategory from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
-import { GetStaticProps } from "next"
+import { GetStaticProps } from "next";
 
 interface IProps {
   projects: IProject[];
@@ -73,7 +73,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
               className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
             >
               The ultimate showcase of all my projects. Mostly web but there are
-              others as well.
+              others too.
             </Typography>
 
             <SearchInput
@@ -127,7 +127,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
                         itemLikes={projects[idx].likes}
                         itemLink={`/projects/${projects[idx].slug}`}
                         itemName={projects[idx].name}
-                        itemShortDesc={projects[idx].shortDescription}
+                        itemShortDesc={projects[idx].shortDescriptionEN}
                         itemViews={projects[idx].views}
                         techs={projects[idx].tech}
                       />
@@ -172,7 +172,7 @@ export default function ProjectsPage({ projects, categories }: IProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-return {
+  return {
     props: { projects: allProjects, categories: projectCategories },
   };
-}
+};

@@ -7,7 +7,7 @@ import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
 import Image from "next/image";
-import { technologies } from "../../types/types";
+import { language, technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
@@ -17,10 +17,12 @@ import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState, useMemo } from "react";
-import ViewsAndLikes from "../../components/Details/ViewsAndLikes";
-import DetailFooter from "../../components/Details/DetailFooter";
+import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
+import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { useTheme } from "next-themes";
 import { commaSeparator } from "../../utils/helpers/formatter";
+import { IoLanguage } from "react-icons/io5";
+import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
 
 interface IProjectRedirect {
   slug: string;
@@ -40,7 +42,9 @@ export default function ProjectDetails({
 }: IPropsData) {
   const pageTitle = `VallenDra | ${project.name}`;
 
-  const { theme } = useTheme();
+  /* language switcher
+  =================== */
+  const [activeLanguage, setActiveLanguage] = useState<language>("en");
 
   /* Likes
   ========= */
@@ -65,36 +69,51 @@ export default function ProjectDetails({
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
-          <section className="relative z-10 border-b-2 border-indigo-100 pb-3 dark:border-white/30 ">
-            {/* back to project button */}
-            <LinkWithUnderline href="/projects">
-              <BsArrowLeft />
-              Back To Projects
-            </LinkWithUnderline>
+          <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
+            <div>
+              {/* back to project button */}
+              <LinkWithUnderline href="/projects">
+                <BsArrowLeft />
+                Back To Projects
+              </LinkWithUnderline>
 
-            {/* title */}
-            <Typography
-              as="h1"
-              variant="h1"
-              className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-            >
-              {project.name}
-            </Typography>
+              {/* title */}
+              <Typography
+                as="h1"
+                variant="h1"
+                className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
+              >
+                {project.name}
+              </Typography>
 
-            {/* short description */}
-            <Typography
-              as="p"
-              variant="paragraph"
-              className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
-            >
-              {project.shortDescription}
-            </Typography>
+              {/* short description */}
+              <Typography
+                as="p"
+                variant="paragraph"
+                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
+              >
+                <Show when={activeLanguage === "en"}>
+                  {project.shortDescriptionEN}
+                </Show>
+                <Show when={activeLanguage === "id"}>
+                  {project.shortDescriptionID}
+                </Show>
+              </Typography>
 
-            <ViewsAndLikes
-              hasLiked={hasLiked}
-              likes={likes}
-              views={project.views}
-            />
+              <ViewsAndLikes
+                hasLiked={hasLiked}
+                likes={likes}
+                views={project.views}
+              />
+            </div>
+            <div className="flex lg:self-end lg:px-2">
+              <LanguageToggle
+                activeLanguage={activeLanguage}
+                cb={() =>
+                  setActiveLanguage((prev) => (prev === "en" ? "id" : "en"))
+                }
+              />
+            </div>
           </section>
         </header>
 
@@ -138,7 +157,12 @@ export default function ProjectDetails({
                   variant="paragraph"
                   className="px-3 font-normal leading-loose text-indigo-600 dark:text-gray-400"
                 >
-                  {project.description}
+                  <Show when={activeLanguage === "en"}>
+                    {project.descriptionEN}
+                  </Show>
+                  <Show when={activeLanguage === "id"}>
+                    {project.descriptionID}
+                  </Show>
                 </Typography>
               </div>
             </div>
@@ -170,7 +194,7 @@ export default function ProjectDetails({
                 <ActionButton
                   icon={<FaGithub className="text-lg" />}
                   href={project.gitLink}
-                  color={"gray"}
+                  color="gray"
                 >
                   Visit Repo
                 </ActionButton>

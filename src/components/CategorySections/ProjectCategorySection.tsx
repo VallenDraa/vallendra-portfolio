@@ -46,7 +46,7 @@ export default function ProjectCategorySection({
                 itemLikes={projectsInCategory[id].likes}
                 itemLink={`/projects/${projectsInCategory[id].slug}`}
                 itemName={projectsInCategory[id].name}
-                itemShortDesc={projectsInCategory[id].shortDescription}
+                itemShortDesc={projectsInCategory[id].shortDescriptionEN}
                 itemViews={projectsInCategory[id].views}
                 techs={projectsInCategory[id].tech}
               />

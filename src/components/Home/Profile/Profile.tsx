@@ -8,7 +8,6 @@ import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
 import Line from "../../Line";
-import BlurredBlob from "../../BlurredBlob";
 
 export default function Profile() {
   return (
@@ -21,19 +20,11 @@ export default function Profile() {
       <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 xl:flex-row xl:px-0">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
-          {/* blur */}
-          <BlurredBlob
-            left="left-1/4"
-            top="top-1/4"
-            translateX="-translate-x-1/4"
-            translateY="-translate-y-1/4"
-          />
-
           <header className="gradient-underline gradient-underline--primary relative flex w-fit items-center gap-1">
             <Typography
               as="h2"
               variant="h2"
-              className={`primary-gradient relative z-40 animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent`}
+              className="primary-gradient relative z-40 animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
             >
               Hello World
             </Typography>
@@ -59,7 +50,7 @@ export default function Profile() {
             </div>
 
             {/* techs */}
-            <Card className="indigo-pink-gradient card-colors rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-green-500  dark:hover:shadow-lg dark:hover:shadow-green-800">
+            <Card className="indigo-pink-gradient card-colors hover:!!shadow-green-500 rounded-md shadow-md duration-200 hover:shadow-lg dark:hover:!shadow-green-800">
               <CardBody>
                 <Typography
                   as="h3"
@@ -101,7 +92,7 @@ export default function Profile() {
         {/* right side */}
         <aside className="flex flex-col gap-8 md:flex-row xl:mt-6 xl:basis-1/3 xl:flex-col">
           {/* education */}
-          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-light-blue-800  dark:hover:shadow-lg dark:hover:shadow-light-blue-800 xl:basis-auto">
+          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:!shadow-light-blue-800  dark:hover:!shadow-light-blue-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"
@@ -130,7 +121,7 @@ export default function Profile() {
           </Card>
 
           {/* activity */}
-          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:shadow-pink-500 dark:hover:shadow-lg dark:hover:shadow-pink-800 xl:basis-auto">
+          <Card className="card-colors grow basis-1/2 rounded-md shadow-md duration-200 hover:shadow-lg hover:!shadow-pink-500 dark:hover:!shadow-pink-800 xl:basis-auto">
             <CardBody>
               <Typography
                 as="h3"

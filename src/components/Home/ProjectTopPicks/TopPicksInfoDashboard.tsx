@@ -75,7 +75,7 @@ export default function TopPicksInfoDashboard({
             variant="lead"
             className="mt-1 font-medium text-indigo-600 dark:text-gray-300"
           >
-            {activeProject?.shortDescription || ""}
+            {activeProject?.shortDescriptionEN || ""}
           </Typography>
         </div>
 

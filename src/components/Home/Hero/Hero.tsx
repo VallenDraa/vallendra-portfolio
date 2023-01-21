@@ -36,7 +36,7 @@ export default function Hero() {
                 variant="h3"
                 className="hidden font-bold text-white/80 xl:inline"
               >
-                Hello, I'm
+                Yes it's him,
               </Typography>
               <Typography
                 as="h1"
@@ -50,7 +50,8 @@ export default function Hero() {
                 variant="h3"
                 className="text-center text-2xl font-bold text-white/80 md:text-3xl xl:text-right"
               >
-                Front-End Web Developer 👨‍💻
+                <span className="hidden xl:inline">The</span> Front-End Web
+                Developer 👨‍💻
               </Typography>
             </div>
           </div>

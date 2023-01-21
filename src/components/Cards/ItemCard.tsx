@@ -70,7 +70,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
           <Typography
             variant="paragraph"
             as="span"
-            className="flex items-center gap-1 text-xs font-bold text-green-300"
+            className="flex items-center gap-1 text-xs font-bold text-teal-300"
           >
             <AiFillEye />
             {compactNumberFormatter.format(props.itemViews)}

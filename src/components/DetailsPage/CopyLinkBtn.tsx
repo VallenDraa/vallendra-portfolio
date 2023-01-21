@@ -29,11 +29,11 @@ export default function CopyLinkBtn() {
   return (
     <ActionButton
       onClick={copyLinkToClipBoard}
-      color={isError ? "red" : "green"}
+      color={isError ? "red" : "teal"}
       icon={
         <>
           <Show when={!hasBeenPressed}>
-            <AiOutlineLink className="text-green-500" />
+            <AiOutlineLink className="text-teal-500" />
           </Show>
 
           {/* content for pressed and errorless state */}

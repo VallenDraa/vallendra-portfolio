@@ -5,9 +5,13 @@ const desktopProjects: IProject[] = [
     _id: "13",
     name: "Turu List",
     slug: "turu-list",
-    shortDescription:
+    shortDescriptionEN:
       "A todo list made using Java and Swing with MongoDB as the database.",
-    description:
+    descriptionEN:
+      "A todo list made using Java and Swing with MongoDB as the database.",
+    shortDescriptionID:
+      "A todo list made using Java and Swing with MongoDB as the database.",
+    descriptionID:
       "A todo list made using Java and Swing with MongoDB as the database.",
     views: 69420,
     likes: 1231,
@@ -23,8 +27,10 @@ const desktopProjects: IProject[] = [
     _id: "14",
     name: "Calculator Pro",
     slug: "calculator-pro",
-    shortDescription: "A calculator app made using Java and Swing.",
-    description: "A calculator app made using Java and Swing.",
+    shortDescriptionEN: "A calculator app made using Java and Swing.",
+    descriptionEN: "A calculator app made using Java and Swing.",
+    shortDescriptionID: "A calculator app made using Java and Swing.",
+    descriptionID: "A calculator app made using Java and Swing.",
     views: 69420,
     likes: 1231,
     image: "/images/projects/calculator-pro.png",

@@ -130,7 +130,7 @@ export default function ProjectsPage({ certificates, categories }: IProps) {
                         itemLikes={certificates[idx].likes}
                         itemLink={`/certificates/${certificates[idx].slug}`}
                         itemName={certificates[idx].name}
-                        itemShortDesc={certificates[idx].shortDescription}
+                        itemShortDesc={certificates[idx].shortDescriptionEN}
                         itemViews={certificates[idx].views}
                       />
                     </li>
