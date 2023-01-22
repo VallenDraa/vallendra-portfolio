@@ -2,7 +2,7 @@ import { Button, Tooltip, TooltipProps } from "@material-tailwind/react";
 import { placement } from "@material-tailwind/react/types/components/menu";
 import { forwardRef } from "react";
 
-interface IProps extends Omit<TooltipProps, "children"> {
+interface Props extends Omit<TooltipProps, "children"> {
   withPadding?: boolean;
   icon: JSX.Element;
   text: string;
@@ -10,7 +10,7 @@ interface IProps extends Omit<TooltipProps, "children"> {
   isButton?: boolean;
 }
 
-const IconWithTooltip = forwardRef<HTMLDivElement, IProps>(
+const IconWithTooltip = forwardRef<HTMLDivElement, Props>(
   (
     {
       ["aria-label"]: ariaLabel,

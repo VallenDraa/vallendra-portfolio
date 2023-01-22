@@ -6,7 +6,7 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 import MENUS from "../../utils/datas/menus";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
 import Link from "next/link";
 import NavIsOpenedContext from "../../context/NavIsOpenedCP";
@@ -15,12 +15,12 @@ import NavBtn from "./NavBtn";
 import StyledButton from "../StyledComponents/StyledButton";
 import ThemeToggler from "./ThemeToggler";
 
-interface IProps {
+interface Props {
   navListRef: RefObject<HTMLDivElement>;
   overlayRef: RefObject<HTMLDivElement>;
 }
 
-export default function NavList({ navListRef, overlayRef }: IProps) {
+export default function NavList({ navListRef, overlayRef }: Props) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(0);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);

@@ -1,25 +1,25 @@
 import { useMemo } from "react";
 import SectionHeading from "../SectionHeading";
-import ICertificate from "../../interfaces/certificateInterface";
+import Certificate from "../../interfaces/certificate.interface";
 import ItemCard from "../Cards/ItemCard";
-import ICategory from "../../interfaces/category";
+import Category from "../../interfaces/category";
 
-interface IProps {
+interface Props {
   categoryIndex: number;
-  certificates: ICertificate[];
-  category: ICategory;
+  certificates: Certificate[];
+  category: Category;
 }
 
-interface IPickedCertificates {
-  [key: string]: ICertificate;
+interface PickedCertificates {
+  [key: string]: Certificate;
 }
 
 export default function CertificateCategorySection({
   categoryIndex,
   category,
   certificates,
-}: IProps) {
-  const certificatesInCategory = useMemo<IPickedCertificates>(() => {
+}: Props) {
+  const certificatesInCategory = useMemo<PickedCertificates>(() => {
     const { items: allCertifIds } = category;
 
     const pickedCertificates = allCertifIds.reduce((res, id) => {

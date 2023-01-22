@@ -7,13 +7,13 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 
-interface IProps {
+interface Props {
   Handler: JSX.Element;
   menuItems: JSX.Element[];
   offset?: number;
 }
 
-export default function NavbarSubMenu({ Handler, menuItems, offset }: IProps) {
+export default function NavbarSubMenu({ Handler, menuItems, offset }: Props) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   return (

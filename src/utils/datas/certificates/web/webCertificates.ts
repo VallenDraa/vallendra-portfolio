@@ -1,6 +1,6 @@
-import ICertificate from "../../../../interfaces/certificateInterface";
+import Certificate from "../../../../interfaces/certificate.interface";
 
-const webCertificates: ICertificate[] = [
+const webCertificates: Certificate[] = [
   {
     _id: "1",
     name: "Belajar Dasar Pemrograman Web",

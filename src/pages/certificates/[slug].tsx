@@ -5,37 +5,37 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
 import Image from "next/image";
 import { FaRegNewspaper } from "react-icons/fa";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState, useMemo } from "react";
-import ICertificate from "../../interfaces/certificateInterface";
+import Certificate from "../../interfaces/certificate.interface";
 import Head from "next/head";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
-import { commaSeparator } from "../../utils/helpers/formatter";
+import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
 import { language } from "../../types/types";
 
-interface ICertificateRedirect {
+interface CertificateRedirect {
   slug: string;
   name: string;
 }
 
-interface IPropsData {
-  certificate: ICertificate;
-  prevCertificate: ICertificateRedirect;
-  nextCertificate: ICertificateRedirect;
+interface PropsData {
+  certificate: Certificate;
+  prevCertificate: CertificateRedirect;
+  nextCertificate: CertificateRedirect;
 }
 
 export default function CertificateDetails({
   certificate,
   prevCertificate,
   nextCertificate,
-}: IPropsData) {
+}: PropsData) {
   const pageTitle = `VallenDra | ${certificate.name}`;
 
   /* language switcher
@@ -212,7 +212,7 @@ export default function CertificateDetails({
 
 export function getServerSideProps(
   context: GetServerSidePropsContext
-): GetServerSidePropsResult<IPropsData> {
+): GetServerSidePropsResult<PropsData> {
   const { params } = context;
 
   // get target certificate index
@@ -221,7 +221,7 @@ export function getServerSideProps(
   );
 
   // get the certificate itself
-  const certificate: ICertificate = allCertificates[certifIdx] || null;
+  const certificate: Certificate = allCertificates[certifIdx] || null;
 
   /* (fetch 3 certificates later when working on the API)
   ================================================== */

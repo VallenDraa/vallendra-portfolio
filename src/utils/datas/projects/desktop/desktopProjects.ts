@@ -1,6 +1,6 @@
-import { IProject } from "../../../../interfaces/projectInterface";
+import { Project } from "../../../../interfaces/project.interface";
 
-const desktopProjects: IProject[] = [
+const desktopProjects: Project[] = [
   {
     _id: "13",
     name: "Turu List",

@@ -1,11 +1,11 @@
 import { FC, ReactNode } from "react";
 
-interface IProps {
+interface Props {
   when: boolean;
   children: ReactNode[] | ReactNode | string | null;
 }
 
-const Show: FC<IProps> = ({ when, children }) => {
+const Show: FC<Props> = ({ when, children }) => {
   return <>{when ? children : null}</>;
 };
 

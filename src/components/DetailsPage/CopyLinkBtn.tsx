@@ -1,6 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import { useState } from "react";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import {
   AiOutlineCheck,
   AiOutlineClose,

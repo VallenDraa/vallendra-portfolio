@@ -5,12 +5,12 @@ import {
   CardBody,
   CardFooter,
 } from "@material-tailwind/react";
-import { IProject } from "../../../interfaces/projectInterface";
+import { Project } from "../../../interfaces/project.interface";
 import Link from "next/link";
 import TECHS from "../../MappedComponents/TechsWithTooltip";
 import { IoCodeSlash } from "react-icons/io5";
 import { useState, useEffect, useContext } from "react";
-import Show from "../../../utils/jsx/Show";
+import Show from "../../../utils/client/jsx/Show";
 import { technologies } from "../../../types/types";
 import StyledButton from "../../StyledComponents/StyledButton";
 import { BiDetail } from "react-icons/bi";
@@ -21,7 +21,7 @@ import { useTheme } from "next-themes";
 export default function TopPicksInfoDashboard({
   activeProject,
 }: {
-  activeProject: IProject;
+  activeProject: Project;
 }) {
   const { dashboardRef } = useContext(DashboardControllerContext);
 

@@ -1,17 +1,17 @@
 import { useEffect, useRef, useContext } from "react";
 import IntersectingProjectContext from "../../../context/IntersectingProjectCP";
-import { IProject } from "../../../interfaces/projectInterface";
-import useIntersectionObserver from "../../../utils/hooks/useIntersectionObserver";
-import Show from "../../../utils/jsx/Show";
+import { Project } from "../../../interfaces/project.interface";
+import useIntersectionObserver from "../../../utils/client/hooks/useIntersectionObserver";
+import Show from "../../../utils/client/jsx/Show";
 import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
 import IntersectionDiv from "../../IntersectionDiv";
 
-interface IProps {
-  data: IProject;
+interface Props {
+  data: Project;
   projectIndex: number;
 }
 
-export default function TimelineItem({ data, projectIndex }: IProps) {
+export default function TimelineItem({ data, projectIndex }: Props) {
   const lineIsInverted = projectIndex === 0 ? false : projectIndex % 2 === 0;
   const projectIsFirstTopPick = projectIndex === 0;
 

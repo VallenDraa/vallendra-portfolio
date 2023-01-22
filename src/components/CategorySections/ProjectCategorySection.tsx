@@ -1,25 +1,25 @@
-import { IProject } from "../../interfaces/projectInterface";
+import { Project } from "../../interfaces/project.interface";
 import { useMemo } from "react";
 import SectionHeading from "../SectionHeading";
 import ItemCard from "../Cards/ItemCard";
-import ICategory from "../../interfaces/category";
+import Category from "../../interfaces/category";
 
-interface IProps {
+interface Props {
   categoryIndex: number;
-  projects: IProject[];
-  category: ICategory;
+  projects: Project[];
+  category: Category;
 }
 
-interface IPickedProjects {
-  [key: string]: IProject;
+interface PickedProjects {
+  [key: string]: Project;
 }
 
 export default function ProjectCategorySection({
   categoryIndex,
   category,
   projects,
-}: IProps) {
-  const projectsInCategory = useMemo<IPickedProjects>(() => {
+}: Props) {
+  const projectsInCategory = useMemo<PickedProjects>(() => {
     const { items: allProjectIds } = category;
 
     const pickedProjects = allProjectIds.reduce((res, id) => {

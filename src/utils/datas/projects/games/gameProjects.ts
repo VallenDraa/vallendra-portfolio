@@ -1,6 +1,6 @@
-import { IProject } from "../../../../interfaces/projectInterface";
+import { Project } from "../../../../interfaces/project.interface";
 
-const gameProjects: IProject[] = [
+const gameProjects: Project[] = [
   {
     _id: "12",
     name: "Spinning Cell",

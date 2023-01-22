@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import { useMemo } from "react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import { commaSeparator } from "../../utils/helpers/formatter";
+import { commaSeparator } from "../../utils/client/helpers/formatter";
 
 export default function ViewsAndLikes({
   views,

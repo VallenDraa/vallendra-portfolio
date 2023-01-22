@@ -1,17 +1,16 @@
 import { ReactNode, RefObject, createContext, useRef } from "react";
 
-interface IDashboardControllerContext {
+interface DashboardController {
   hideDashboard: () => void;
   openDashboard: () => void;
   dashboardRef: RefObject<HTMLDivElement> | null;
 }
 
-export const DashboardControllerContext =
-  createContext<IDashboardControllerContext>({
-    hideDashboard: () => {},
-    openDashboard: () => {},
-    dashboardRef: null,
-  });
+export const DashboardControllerContext = createContext<DashboardController>({
+  hideDashboard: () => {},
+  openDashboard: () => {},
+  dashboardRef: null,
+});
 
 export default function DashboardControllerProvider({
   children,

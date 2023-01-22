@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { IProject } from "../../interfaces/projectInterface";
+import { Project } from "../../interfaces/project.interface";
 import allProjects from "../../utils/datas/projects/allProjects";
 import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";
@@ -11,7 +11,7 @@ import { language, technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
@@ -19,27 +19,25 @@ import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import { useState, useMemo } from "react";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
-import { useTheme } from "next-themes";
-import { commaSeparator } from "../../utils/helpers/formatter";
-import { IoLanguage } from "react-icons/io5";
+import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
 
-interface IProjectRedirect {
+interface ProjectRedirect {
   slug: string;
   name: string;
 }
 
-interface IPropsData {
-  project: IProject;
-  prevProject: IProjectRedirect;
-  nextProject: IProjectRedirect;
+interface PropsData {
+  project: Project;
+  prevProject: ProjectRedirect;
+  nextProject: ProjectRedirect;
 }
 
 export default function ProjectDetails({
   project,
   prevProject,
   nextProject,
-}: IPropsData) {
+}: PropsData) {
   const pageTitle = `VallenDra | ${project.name}`;
 
   /* language switcher
@@ -251,7 +249,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
 
   // get the project itself
-  const project: IProject = allProjects[projectIdx] || null;
+  const project: Project = allProjects[projectIdx] || null;
 
   /* (fetch 3 projects later when working on the API)
   ================================================== */

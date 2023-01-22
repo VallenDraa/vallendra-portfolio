@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import useDebounce from "../utils/hooks/useDebounce";
+import useDebounce from "../utils/client/hooks/useDebounce";
 import { useRouter } from "next/router";
 import StyledInput from "./StyledComponents/StyledInput";
 import { InputProps } from "@material-tailwind/react";
-import Show from "../utils/jsx/Show";
+import Show from "../utils/client/jsx/Show";
 import { AiOutlineLoading } from "react-icons/ai";
 
-interface IProps extends InputProps {
+interface Props extends InputProps {
   queryKey?: string; // will default to find if not provided
   defaultValue?: string;
   debounceMs?: number;
@@ -30,7 +30,7 @@ export default function SearchInput({
   callback,
   onChange,
   ...props
-}: IProps) {
+}: Props) {
   const router = useRouter();
 
   const [tempQuery, setTempQuery] = useState(defaultValue || "");

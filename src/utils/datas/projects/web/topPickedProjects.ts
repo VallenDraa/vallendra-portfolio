@@ -1,6 +1,6 @@
-import { IProject } from "../../../../interfaces/projectInterface";
+import { Project } from "../../../../interfaces/project.interface";
 
-const topPickedProjects: IProject[] = [
+const topPickedProjects: Project[] = [
   {
     _id: "1",
     name: "Konnect",

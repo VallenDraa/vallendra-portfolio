@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import useIntersectionObserver from "../utils/hooks/useIntersectionObserver";
+import useIntersectionObserver from "../utils/client/hooks/useIntersectionObserver";
 
 export default function IntersectionDiv({
   callback,

@@ -6,24 +6,24 @@ import {
   SetStateAction,
 } from "react";
 
-export interface IIntersectingProjectHistory {
+export interface IntersectingProjectHistory {
   prevId: string | null;
   currentId: string | null;
 }
 
-export interface IIntersectingProjectHistoryProvider {
-  history: IIntersectingProjectHistory;
-  setHistory: Dispatch<SetStateAction<IIntersectingProjectHistory>>;
+export interface IntersectingProjectHistoryProvider {
+  history: IntersectingProjectHistory;
+  setHistory: Dispatch<SetStateAction<IntersectingProjectHistory>>;
 }
 
 const IntersectingProjectContext =
-  createContext<IIntersectingProjectHistoryProvider>({
+  createContext<IntersectingProjectHistoryProvider>({
     history: { prevId: null, currentId: null },
     setHistory: () => history,
   });
 
 export function IntersectingProjectCP({ children }: { children: ReactNode }) {
-  const [history, setHistory] = useState<IIntersectingProjectHistory>({
+  const [history, setHistory] = useState<IntersectingProjectHistory>({
     prevId: null,
     currentId: null,
   });

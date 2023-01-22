@@ -1,26 +1,25 @@
 import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
-import { GetStaticPropsResult } from "next";
-import { IProject } from "../../interfaces/projectInterface";
-import Show from "../../utils/jsx/Show";
+import { Project } from "../../interfaces/project.interface";
+import Show from "../../utils/client/jsx/Show";
 import { useState, useMemo } from "react";
-import allProjects from "../../utils/datas/projects/allProjects";
-import projectCategories from "../../utils/datas/projects/projectCategories";
 import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
-import ICategory from "../../interfaces/category";
+import Category from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
 import { GetStaticProps } from "next";
+import { getAllProjects } from "../../server/service/projects/projects.service";
+import { getAllProjectCategories } from "../../server/service/projects/projectCategory.service";
 
-interface IProps {
-  projects: IProject[];
-  categories: ICategory[];
+interface Props {
+  projects: Project[];
+  categories: Category[];
 }
 
-export default function ProjectsPage({ projects, categories }: IProps) {
+export default function ProjectsPage({ projects, categories }: Props) {
   const router = useRouter();
 
   const [isError, setIsError] = useState(projects.length === 0);
@@ -172,7 +171,17 @@ export default function ProjectsPage({ projects, categories }: IProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: { projects: allProjects, categories: projectCategories },
-  };
+  const projects = await getAllProjects();
+  const categories = await getAllProjectCategories();
+
+  if (projects && categories) {
+    return {
+      props: {
+        projects: JSON.parse(projects),
+        categories: JSON.parse(categories),
+      },
+    };
+  } else {
+    return { notFound: true };
+  }
 };

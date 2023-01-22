@@ -2,24 +2,24 @@ import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
 import { GetStaticPropsResult } from "next";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import { useState, useMemo } from "react";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
-import ICertificate from "../../interfaces/certificateInterface";
+import Certificate from "../../interfaces/certificate.interface";
 import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
 import allCertificates from "../../utils/datas/certificates/allCertificates";
 import certificateCategories from "../../utils/datas/certificates/certificateCategories";
 import ItemCard from "../../components/Cards/ItemCard";
-import ICategory from "../../interfaces/category";
+import Category from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
 
-interface IProps {
-  certificates: ICertificate[];
-  categories: ICategory[];
+interface Props {
+  certificates: Certificate[];
+  categories: Category[];
 }
 
-export default function ProjectsPage({ certificates, categories }: IProps) {
+export default function ProjectsPage({ certificates, categories }: Props) {
   const router = useRouter();
 
   const [isError, setIsError] = useState(certificates.length === 0);

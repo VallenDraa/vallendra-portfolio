@@ -1,8 +1,8 @@
-import ICertificate from "../../../interfaces/certificateInterface";
+import Certificate from "../../../interfaces/certificate.interface";
 import progLangCertificates from "./progLang/progLangCertificates";
 import webCertificates from "./web/webCertificates";
 
-const allCertificates: ICertificate[] = [
+const allCertificates: Certificate[] = [
   ...webCertificates,
   ...progLangCertificates,
 ];

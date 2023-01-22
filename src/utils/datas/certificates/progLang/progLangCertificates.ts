@@ -1,6 +1,6 @@
-import ICertificate from "../../../../interfaces/certificateInterface";
+import Certificate from "../../../../interfaces/certificate.interface";
 
-const progLangCertificates: ICertificate[] = [
+const progLangCertificates: Certificate[] = [
   {
     _id: "2",
     name: "Belajar Dasar Pemrograman Javascript",

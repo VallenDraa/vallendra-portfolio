@@ -3,13 +3,13 @@ import Link from "next/link";
 import { technologies } from "../../types/types";
 import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import { compactNumberFormatter } from "../../utils/helpers/formatter";
+import { compactNumberFormatter } from "../../utils/client/helpers/formatter";
 import StyledButton from "../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
-import Show from "../../utils/jsx/Show";
+import Show from "../../utils/client/jsx/Show";
 import TechsSection from "./TechsSection";
 
-interface IProps {
+interface Props {
   // image props
   imgIsPriority: boolean;
   imgSrc: string | StaticImageData;
@@ -25,13 +25,14 @@ interface IProps {
   techs?: technologies[];
 }
 
-export default function ItemCard({ techs = [], ...props }: IProps) {
+export default function ItemCard({ techs = [], ...props }: Props) {
   return (
     <Link
       href={props.itemLink}
       className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
     >
       {/* image */}
+      {/*       
       <Image
         priority={props.imgIsPriority}
         src={props.imgSrc}
@@ -39,7 +40,7 @@ export default function ItemCard({ techs = [], ...props }: IProps) {
         className="absolute h-full object-cover opacity-90 transition-transform duration-300 ease-out group-hover:scale-110"
         fill
         sizes="90vw, (min-width: 720px) 75vw, (min-width: 960px) 50vw, (min-width: 1140px) 25vw"
-      />
+      /> */}
 
       {/* fade */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 to-gray-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-gray-900/50 dark:to-gray-900/90" />

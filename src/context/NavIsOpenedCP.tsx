@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 
-export interface INavIsOpened {
+export interface NavIsOpened {
   navIsOpened: boolean;
   setNavIsOpened: Dispatch<SetStateAction<boolean>>;
 }
@@ -16,7 +16,7 @@ export const navInitialState = {
   setNavIsOpened() {},
 };
 
-export const NavIsOpenedContext = createContext<INavIsOpened>(navInitialState);
+export const NavIsOpenedContext = createContext<NavIsOpened>(navInitialState);
 
 export function NavIsOpenedCP({ children }: { children: ReactNode }) {
   const [navIsOpened, setNavIsOpened] = useState(false);

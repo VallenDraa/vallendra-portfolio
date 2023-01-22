@@ -4,7 +4,7 @@ import LinkWithUnderline from "./LinkWithUnderline";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-interface IProps {
+interface Props {
   prevLink: string;
   prevTitle: string;
   nextLink: string;
@@ -16,7 +16,7 @@ export default function DetailFooter({
   prevTitle,
   nextLink,
   nextTitle,
-}: IProps) {
+}: Props) {
   const { asPath } = useRouter();
   const [commentIsVisible, setCommentIsVisible] = useState(true);
 

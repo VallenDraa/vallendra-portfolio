@@ -1,5 +1,5 @@
 import { NavIsOpenedCP } from "../../context/NavIsOpenedCP";
-import customMaterialStyles from "../../../material-tailwind.config";
+import customMaterialStyles from "../../../materialTailwind.config";
 import { IntersectingProjectCP } from "../../context/IntersectingProjectCP";
 import { ThemeProvider as MTThemeProvider } from "@material-tailwind/react";
 import { ThemeProvider as NextThemeProvider } from "next-themes";

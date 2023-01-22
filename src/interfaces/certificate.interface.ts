@@ -1,8 +1,5 @@
-import { technologies } from "../types/types";
-
-export interface IProject {
+interface Certificate {
   _id: string;
-  icon?: string;
   name: string;
   slug: string;
   shortDescriptionEN: string;
@@ -13,12 +10,8 @@ export interface IProject {
   likes: number;
   loadingImage?: string;
   image: string;
-  tech: technologies[];
   categoryIds: string[];
   createdAt: Date | string;
-  updatedAt?: Date | string;
-  siteLink?: string | null;
-  downloadLink?: string | null;
-  gitLink: string;
-  isTopPick: boolean;
+  certificateLink: string;
 }
+export default Certificate;

@@ -1,10 +1,10 @@
-import { InputStylesType, TooltipStylesType } from "@material-tailwind/react";
+import { TooltipStylesType } from "@material-tailwind/react";
 
-interface ICustomStyles {
+interface CustomStyles {
   tooltip: TooltipStylesType;
 }
 
-const customMaterialStyles: ICustomStyles = {
+const customMaterialStyles: CustomStyles = {
   tooltip: {
     styles: {
       base: {

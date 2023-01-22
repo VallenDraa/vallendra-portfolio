@@ -1,6 +1,6 @@
-import { IProject } from "../../../../interfaces/projectInterface";
+import { Project } from "../../../../interfaces/project.interface";
 
-const cliProjects: IProject[] = [
+const clProjects: Project[] = [
   {
     _id: "10",
     name: "Bus Primajasa",
@@ -41,4 +41,4 @@ const cliProjects: IProject[] = [
   },
 ];
 
-export default cliProjects;
+export default clProjects;

@@ -15,7 +15,7 @@ type LGSize = `lg:${Size}`;
 type XLSize = `xl:${Size}`;
 type XXLSize = `2xl:${Size}`;
 
-interface IProps {
+interface Props {
   size: Size;
   smSize?: SMSize;
   mdSize?: MDSize;
@@ -31,7 +31,7 @@ export default function SocialsWithIcon({
   lgSize,
   xlSize,
   xxlSize,
-}: IProps) {
+}: Props) {
   const sizeClasses = `${size} ${smSize || ""} ${mdSize || ""} ${
     lgSize || ""
   } ${xlSize || ""} ${xxlSize || ""}`.trim();

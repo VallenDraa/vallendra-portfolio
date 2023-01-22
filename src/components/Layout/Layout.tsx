@@ -3,7 +3,6 @@ import NavbarComponent from "../Navbar/Navbar";
 import BreathingBackground from "../BreathingBackground";
 import Head from "next/head";
 import GoToTopBtn from "../GoToTopBtn";
-import { useTheme } from "next-themes";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -11,12 +10,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Head>
         <meta
           name="theme-color"
-          content={"#37474f"}
+          content="#37474f"
           media="(prefers-color-scheme: dark)"
         />
         <meta
           name="theme-color"
-          content={"#c5cae9"}
+          content="#c5cae9"
           media="(prefers-color-scheme: light)"
         />
         <link rel="icon" href="/images/favicon.ico" />
