@@ -41,7 +41,7 @@ export default function ItemCard({ techs = [], ...props }: Props) {
         alt={props.itemName}
         format="webp"
         crop="fill"
-        className="absolute h-full object-cover opacity-90 transition-transform duration-300 ease-out group-hover:scale-110"
+        className="absolute h-full object-cover opacity-90 transition-transform duration-300 ease-out group-hover:scale-105"
         sizes="25w"
       />
 

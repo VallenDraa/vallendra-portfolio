@@ -5,9 +5,9 @@ export async function getAllProjectCategories() {
   try {
     connectMongo();
 
-    const allProjects = await ProjectCategoryModel.find().lean();
+    const allProjectCategories = await ProjectCategoryModel.find().lean();
 
-    return JSON.stringify(allProjects);
+    return JSON.stringify(allProjectCategories);
   } catch (error) {
     console.error(error);
   }

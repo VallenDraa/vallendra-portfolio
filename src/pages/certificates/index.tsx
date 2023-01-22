@@ -8,11 +8,11 @@ import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 import Certificate from "../../interfaces/certificate.interface";
 import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
-import allCertificates from "../../utils/datas/certificates/allCertificates";
-import certificateCategories from "../../utils/datas/certificates/certificateCategories";
 import ItemCard from "../../components/Cards/ItemCard";
 import Category from "../../interfaces/category";
 import SearchNotFound from "../../components/SearchNotFound";
+import { getAllCertificates } from "../../server/service/certificates/certificates.service";
+import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
 
 interface Props {
   certificates: Certificate[];
@@ -174,7 +174,17 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 }
 
 export async function getStaticProps() {
-  return {
-    props: { certificates: allCertificates, categories: certificateCategories },
-  };
+  const certificates = await getAllCertificates();
+  const categories = await getAllCertificateCategories();
+
+  if (certificates && categories) {
+    return {
+      props: {
+        certificates: JSON.parse(certificates),
+        categories: JSON.parse(categories),
+      },
+    };
+  } else {
+    return { notFound: true };
+  }
 }
