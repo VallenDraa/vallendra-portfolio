@@ -8,6 +8,7 @@ import StyledButton from "../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
 import Show from "../../utils/client/jsx/Show";
 import TechsSection from "./TechsSection";
+import { CldImage } from "next-cloudinary";
 
 interface Props {
   // image props
@@ -32,15 +33,17 @@ export default function ItemCard({ techs = [], ...props }: Props) {
       className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
     >
       {/* image */}
-      {/*       
-      <Image
+      <CldImage
         priority={props.imgIsPriority}
+        width="750"
+        height="750"
         src={props.imgSrc}
         alt={props.itemName}
+        format="webp"
+        crop="fill"
         className="absolute h-full object-cover opacity-90 transition-transform duration-300 ease-out group-hover:scale-110"
-        fill
-        sizes="90vw, (min-width: 720px) 75vw, (min-width: 960px) 50vw, (min-width: 1140px) 25vw"
-      /> */}
+        sizes="25w"
+      />
 
       {/* fade */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 to-gray-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-gray-900/50 dark:to-gray-900/90" />
