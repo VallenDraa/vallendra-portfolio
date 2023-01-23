@@ -1,7 +1,5 @@
-import { GetServerSideProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Project } from "../../interfaces/project.interface";
-import allProjects from "../../utils/datas/projects/allProjects";
-import Head from "next/head";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
@@ -21,6 +19,12 @@ import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
+import {
+  getAllProjects,
+  getProjectWithPrevAndNext,
+} from "../../server/service/projects/projects.service";
+import Head from "next/head";
+import { CldImage } from "next-cloudinary";
 
 interface ProjectRedirect {
   slug: string;
@@ -119,12 +123,12 @@ export default function ProjectDetails({
         <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 xl:px-0">
           {/* image */}
           <figure className="mx-auto w-full md:w-[95%]">
-            <Image
+            <CldImage
               priority
               src={project.image}
               alt={project.name}
-              width={960}
-              height={540}
+              width={1280}
+              height={720}
               className="w-full rounded-md object-cover opacity-90 shadow"
             />
 
@@ -240,39 +244,40 @@ export default function ProjectDetails({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await getAllProjects();
+
+  if (res) {
+    const projects = JSON.parse(res) as Project[];
+    const paths = projects.map((p) => ({ params: { slug: p.slug } }));
+
+    return { fallback: false, paths };
+  } else {
+    return { fallback: false, paths: [] };
+  }
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
+  if (!params?.slug) return { notFound: true };
 
-  // get target project index
-  const projectIdx = allProjects.findIndex(
-    (project) => project.slug === params?.slug
-  );
+  const res = await getProjectWithPrevAndNext(params.slug as string);
 
-  // get the project itself
-  const project: Project = allProjects[projectIdx] || null;
+  if (res) {
+    const parsedData = JSON.parse(res) as PropsData;
 
-  /* (fetch 3 projects later when working on the API)
-  ================================================== */
+    const { project, prevProject, nextProject } = parsedData;
 
-  // get the next project slug
-  const nextProject =
-    projectIdx === allProjects.length - 1
-      ? allProjects[0]
-      : allProjects[projectIdx + 1];
-
-  // get the previous slug
-  const prevProject =
-    projectIdx === 0
-      ? allProjects[allProjects.length - 1]
-      : allProjects[projectIdx - 1];
-
-  return project === null
-    ? { notFound: true }
-    : {
-        props: {
-          project,
-          nextProject: { name: nextProject.name, slug: nextProject.slug },
-          prevProject: { name: prevProject.name, slug: prevProject.slug },
-        },
-      };
+    return project === null
+      ? { notFound: true }
+      : {
+          props: {
+            project,
+            nextProject: { name: nextProject.name, slug: nextProject.slug },
+            prevProject: { name: prevProject.name, slug: prevProject.slug },
+          },
+        };
+  } else {
+    return { notFound: true };
+  }
 };

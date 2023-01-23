@@ -1,13 +1,36 @@
+import Certificate from "../../../interfaces/certificate.interface";
 import CertificateModel from "../../model/certificate.model";
 import connectMongo from "../../mongo/mongodb";
 
-export async function getCertificate(slug: string) {
+export async function getCertificateWithPrevAndNext(slug: string) {
   try {
     connectMongo();
 
-    const certificate = await CertificateModel.findOne({ slug }).lean();
+    const certificate = (await CertificateModel.findOne({
+      slug,
+    }).lean()) as Certificate;
 
-    return JSON.stringify(certificate);
+    /* get the next and previous Certificate name and slug
+    ================================================= */
+    const [nextCertificate] = await CertificateModel.find({
+      createdAt: { $gt: certificate.createdAt },
+    })
+      .sort({ createdAt: 1 })
+      .limit(1)
+      .select(["slug", "name"]);
+
+    const [prevCertificate] = await CertificateModel.find({
+      createdAt: { $lt: certificate.createdAt },
+    })
+      .sort({ createdAt: -1 })
+      .limit(1)
+      .select(["slug", "name"]);
+
+    return JSON.stringify({
+      certificate,
+      nextCertificate: nextCertificate || prevCertificate,
+      prevCertificate: prevCertificate || nextCertificate,
+    });
   } catch (error) {
     console.error(error);
   }

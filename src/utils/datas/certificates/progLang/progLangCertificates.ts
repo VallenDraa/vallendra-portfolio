@@ -13,7 +13,7 @@ const progLangCertificates: Certificate[] = [
     likes: 1234,
     image: "/images/certificates/js-dasar-dicoding.png",
     categoryIds: ["1"],
-    createdAt: new Date("Jan 11, 2023").toUTCString(),
+    madeAt: new Date("Jan 11, 2023").toUTCString(),
     certificateLink: "https://www.dicoding.com/certificates/07Z6G32GWXQR",
   },
 ];

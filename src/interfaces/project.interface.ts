@@ -14,7 +14,8 @@ export interface Project {
   image: string;
   tech: technologies[];
   categoryIds: string[];
-  createdAt: Date | string;
+  madeAt: Date | string;
+  createdAt?: Date | string;
   updatedAt?: Date | string;
   siteLink?: string | null;
   downloadLink?: string | null;

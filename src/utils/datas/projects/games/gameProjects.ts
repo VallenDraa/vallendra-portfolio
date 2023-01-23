@@ -18,7 +18,7 @@ const gameProjects: Project[] = [
     image: "/images/projects/spinning-cell.png",
     tech: ["c#", "unity"],
     categoryIds: ["4"],
-    createdAt: new Date("Sep 1, 2021").toISOString(),
+    madeAt: new Date("Sep 1, 2021").toISOString(),
     downloadLink: "https://github.com/VallenDraa/spinning-cell",
     gitLink: "https://github.com/VallenDraa/spinning-cell",
     isTopPick: false,

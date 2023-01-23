@@ -1,4 +1,9 @@
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import {
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  GetStaticPaths,
+  GetStaticProps,
+} from "next";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
@@ -19,6 +24,11 @@ import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
 import { language } from "../../types/types";
+import {
+  getAllCertificates,
+  getCertificateWithPrevAndNext,
+} from "../../server/service/certificates/certificates.service";
+import { CldImage } from "next-cloudinary";
 
 interface CertificateRedirect {
   slug: string;
@@ -117,12 +127,12 @@ export default function CertificateDetails({
         <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 xl:px-0">
           {/* image */}
           <figure className="mx-auto w-full md:w-[95%]">
-            <Image
+            <CldImage
               priority
               src={certificate.image}
               alt={certificate.name}
-              width={960}
-              height={540}
+              width={1280}
+              height={720}
               className="w-full rounded-md object-cover opacity-90"
             />
 
@@ -210,47 +220,46 @@ export default function CertificateDetails({
   );
 }
 
-export function getServerSideProps(
-  context: GetServerSidePropsContext
-): GetServerSidePropsResult<PropsData> {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await getAllCertificates();
+
+  if (res) {
+    const certificates = JSON.parse(res) as Certificate[];
+    const paths = certificates.map((c) => ({ params: { slug: c.slug } }));
+
+    return { fallback: false, paths };
+  } else {
+    return { fallback: false, paths: [] };
+  }
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
+  if (!params?.slug) return { notFound: true };
 
-  // get target certificate index
-  const certifIdx = allCertificates.findIndex(
-    (certificate) => certificate.slug === params?.slug
-  );
+  const res = await getCertificateWithPrevAndNext(params.slug as string);
 
-  // get the certificate itself
-  const certificate: Certificate = allCertificates[certifIdx] || null;
+  if (res) {
+    const parsedData = JSON.parse(res) as PropsData;
 
-  /* (fetch 3 certificates later when working on the API)
-  ================================================== */
+    const { certificate, prevCertificate, nextCertificate } = parsedData;
 
-  // get the next certificate slug
-  const nextCertificate =
-    certifIdx === allCertificates.length - 1
-      ? allCertificates[0]
-      : allCertificates[certifIdx + 1];
-
-  // get the previous slug
-  const prevCertificate =
-    certifIdx === 0
-      ? allCertificates[allCertificates.length - 1]
-      : allCertificates[certifIdx - 1];
-
-  return certificate === null
-    ? { notFound: true }
-    : {
-        props: {
-          certificate,
-          nextCertificate: {
-            name: nextCertificate.name,
-            slug: nextCertificate.slug,
+    return certificate === null
+      ? { notFound: true }
+      : {
+          props: {
+            certificate,
+            nextCertificate: {
+              name: nextCertificate.name,
+              slug: nextCertificate.slug,
+            },
+            prevCertificate: {
+              name: prevCertificate.name,
+              slug: prevCertificate.slug,
+            },
           },
-          prevCertificate: {
-            name: prevCertificate.name,
-            slug: prevCertificate.slug,
-          },
-        },
-      };
-}
+        };
+  } else {
+    return { notFound: true };
+  }
+};

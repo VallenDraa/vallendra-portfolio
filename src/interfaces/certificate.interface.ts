@@ -11,7 +11,9 @@ interface Certificate {
   loadingImage?: string;
   image: string;
   categoryIds: string[];
-  createdAt: Date | string;
+  madeAt: Date | string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   certificateLink: string;
 }
 export default Certificate;

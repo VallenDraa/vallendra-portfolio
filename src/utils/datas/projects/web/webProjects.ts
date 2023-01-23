@@ -18,7 +18,7 @@ const webProjects: Project[] = [
     tech: ["html", "css", "javascript"],
     categoryIds: ["1"],
 
-    createdAt: new Date("Dec 25, 2022").toISOString(),
+    madeAt: new Date("Dec 25, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/devils-burger",
     gitLink: "https://github.com/VallenDraa/devils-burger",
     isTopPick: false,
@@ -38,7 +38,7 @@ const webProjects: Project[] = [
     tech: ["html", "tailwind css", "typescript"],
     categoryIds: ["1"],
 
-    createdAt: new Date("Oct 14, 2022").toISOString(),
+    madeAt: new Date("Oct 14, 2022").toISOString(),
     siteLink: "https://vallendraa.github.io/typelist",
     gitLink: "https://github.com/VallenDraa/typelist",
     isTopPick: false,
@@ -58,7 +58,7 @@ const webProjects: Project[] = [
     tech: ["react", "tailwind css", "typescript"],
     categoryIds: ["1"],
 
-    createdAt: new Date("Mar 23, 2022").toISOString(),
+    madeAt: new Date("Mar 23, 2022").toISOString(),
     siteLink: null,
     gitLink: "https://github.com/VallenDraa/tailwind-book",
     isTopPick: false,
@@ -78,7 +78,7 @@ const webProjects: Project[] = [
     tech: ["html", "css", "javascript"],
     categoryIds: ["1"],
 
-    createdAt: new Date("Dec 25, 2021").toISOString(),
+    madeAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/nucleic-acid-converter",
     gitLink: "https://github.com/VallenDraa/nucleic-acid-converter",
     isTopPick: false,
@@ -97,7 +97,7 @@ const webProjects: Project[] = [
     image: "/images/projects/old-portfolio.png",
     tech: ["html", "css", "javascript"],
     categoryIds: ["1"],
-    createdAt: new Date("Dec 25, 2021").toISOString(),
+    madeAt: new Date("Dec 25, 2021").toISOString(),
     siteLink: "https://vallendraa.github.io/old-portfolio",
     gitLink: "https://github.com/VallenDraa/old-portfolio",
     isTopPick: false,

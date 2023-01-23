@@ -1,7 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
-import { GetStaticPropsResult } from "next";
 import Show from "../../utils/client/jsx/Show";
 import { useState, useMemo } from "react";
 import SearchInput from "../../components/SearchInput";
