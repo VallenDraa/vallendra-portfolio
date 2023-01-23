@@ -17,4 +17,4 @@ export type technologies =
 
 export type categories = "website" | "desktop" | "cli" | "games";
 
-export type language = "id" | "en";
+export type Language = "id" | "en";

@@ -53,7 +53,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
       <Head>
         <title>VallenDra | Certificates</title>
       </Head>
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           {/* heading and searchbar */}
           <section className="relative z-10">

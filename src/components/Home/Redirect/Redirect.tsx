@@ -6,7 +6,7 @@ import Link from "next/link";
 ================================================================ */
 export default function Redirect() {
   return (
-    <section className="relative z-20 h-[full] bg-indigo-50 dark:bg-gray-900">
+    <section className="relative z-20 h-[full]">
       <div className="relative mx-auto max-w-screen-xl px-2 py-24 lg:px-8 xl:px-0">
         <div className="relative z-30 flex flex-col items-center">
           <Typography

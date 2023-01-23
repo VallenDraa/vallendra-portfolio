@@ -23,7 +23,7 @@ import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
-import { language } from "../../types/types";
+import { Language } from "../../types/types";
 import {
   getAllCertificates,
   getCertificateWithPrevAndNext,
@@ -50,7 +50,7 @@ export default function CertificateDetails({
 
   /* language switcher
   =================== */
-  const [activeLanguage, setActiveLanguage] = useState<language>("en");
+  const [activeLanguage, setActiveLanguage] = useState<Language>("en");
 
   /* Likes
   ========= */
@@ -73,7 +73,7 @@ export default function CertificateDetails({
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col bg-indigo-50 after:-top-20 dark:bg-gray-900">
+      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
           <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
             <div>
@@ -115,9 +115,7 @@ export default function CertificateDetails({
             <div className="flex lg:self-end lg:px-2">
               <LanguageToggle
                 activeLanguage={activeLanguage}
-                cb={() =>
-                  setActiveLanguage((prev) => (prev === "en" ? "id" : "en"))
-                }
+                setActiveLanguage={setActiveLanguage}
               />
             </div>
           </section>
