@@ -5,8 +5,15 @@ import Redirect from "../components/Home/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 import DashboardControllerProvider from "../context/TopPicksDashboardControllerCP";
+import { GetStaticProps } from "next";
+import { Project } from "../interfaces/project.interface";
+import { getTopPickedProjects } from "../server/service/projects/projects.service";
 
-export default function Home() {
+interface Props {
+  topPickedProjects: Project[];
+}
+
+export default function Home({ topPickedProjects }: Props) {
   return (
     <>
       <Head>
@@ -20,7 +27,7 @@ export default function Home() {
       <main>
         <Profile />
         <DashboardControllerProvider>
-          <TopPicksSection />
+          <TopPicksSection topPickedProjects={topPickedProjects} />
         </DashboardControllerProvider>
         <Redirect />
       </main>
@@ -28,3 +35,15 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await getTopPickedProjects();
+
+  if (res) {
+    const topPickedProjects = JSON.parse(res) as Project[];
+
+    return { props: { topPickedProjects } };
+  } else {
+    return { notFound: true };
+  }
+};

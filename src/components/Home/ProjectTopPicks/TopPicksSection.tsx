@@ -2,26 +2,30 @@ import { Typography } from "@material-tailwind/react";
 import { useContext, useState, useEffect } from "react";
 import Timeline from "./Timeline";
 import IntersectingProjectContext from "../../../context/IntersectingProjectCP";
-import topPickedProjects from "../../../utils/datas/projects/web/topPickedProjects";
 import Quote from "./Quote";
 import TopPicksInfoDashboard from "./TopPicksInfoDashboard";
-import Image from "next/image";
 import Line from "../../Line";
 import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
 import IntersectionDiv from "../../IntersectionDiv";
+import { Project } from "../../../interfaces/project.interface";
+import { CldImage } from "next-cloudinary";
 
-export default function TopPicksSection() {
+interface Props {
+  topPickedProjects: Project[];
+}
+
+export default function TopPicksSection({ topPickedProjects }: Props) {
   const { history } = useContext(IntersectingProjectContext);
 
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
 
+  const { hideDashboard } = useContext(DashboardControllerContext);
+
   useEffect(() => {
     setActiveProjectIdx(
-      topPickedProjects.findIndex((p) => p._id === history.currentId)
+      history.currentId ? parseInt(history.currentId) - 1 : 0
     );
   }, [history.currentId]);
-
-  const { hideDashboard } = useContext(DashboardControllerContext);
 
   return (
     <section
@@ -57,7 +61,9 @@ export default function TopPicksSection() {
         <footer className="fade-top fade-bottom relative pb-7 before:top-0 after:-bottom-10">
           <div className="sticky top-0">
             <div className="absolute inset-x-0 h-screen overflow-hidden">
-              <Image
+              <CldImage
+                height={1920}
+                width={1080}
                 className="sticky top-0 z-0 min-h-full min-w-full object-cover opacity-30"
                 src={
                   topPickedProjects[activeProjectIdx]?.image ||
@@ -67,8 +73,6 @@ export default function TopPicksSection() {
                   topPickedProjects[activeProjectIdx]?.name ||
                   topPickedProjects[0]?.name
                 }
-                fill
-                sizes="75vw"
               />
             </div>
           </div>
