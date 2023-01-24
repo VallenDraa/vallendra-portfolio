@@ -52,7 +52,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
         <title>VallenDra | Projects</title>
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
+        <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-0">
           {/* heading and searchbar */}
           <section className="relative z-10">
             <div className="relative flex w-fit items-center gap-1">

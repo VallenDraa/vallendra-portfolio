@@ -64,10 +64,17 @@ export default function TopPickItem({
         <div
           className={`${twistDirection === "left" ? "w-11/12" : "w-full pr-5"}`}
         >
-          <Typography variant="h3">{project.name}</Typography>
+          {/* short description */}
+          <Typography
+            variant="h2"
+            as="h3"
+            className="primary-gradient animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold !leading-[initial] text-transparent"
+          >
+            {project.name}
+          </Typography>
           <Typography
             variant="paragraph"
-            className="font-normal leading-loose text-indigo-600 dark:text-gray-400"
+            className="text-base font-medium leading-loose text-indigo-600 dark:text-white/70"
           >
             <Show when={language === "en"}>{project.shortDescriptionEN}</Show>
             <Show when={language === "id"}>{project.shortDescriptionID}</Show>

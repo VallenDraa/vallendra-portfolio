@@ -24,7 +24,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
       id="top-picks"
       className="fade-bottom fade-top relative before:top-0 after:bottom-0 dark:bg-gray-800/20"
     >
-      <div className="relative mx-auto flex w-full max-w-screen-xl flex-col items-center gap-10 px-8 xl:px-0">
+      <div className="relative mx-auto flex w-full max-w-screen-xl flex-col items-center gap-10 px-8 2xl:px-0">
         <Line className="relative z-40 scale-y-[3]" />
 
         {/* project timeline */}

@@ -11,7 +11,7 @@ export default function Hero() {
         id="home"
         className="relative z-10 mb-24 xl:mb-8"
       >
-        <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center px-8 lg:px-2 xl:min-h-[650px] xl:flex-row xl:justify-between xl:px-0">
+        <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center px-8 lg:px-2 xl:min-h-[650px] xl:flex-row xl:justify-between 2xl:px-0">
           {/* left side */}
           <div className="relative grow">
             {/* my photo */}
@@ -19,7 +19,6 @@ export default function Hero() {
               src={myPic}
               alt="Jestine Vallendra Dwi Putra"
               className="relative w-full xl:-left-8"
-              unoptimized
               width={600}
               height={600}
               priority
@@ -57,7 +56,7 @@ export default function Hero() {
           </div>
         </div>
         {/* Line to next section */}
-        <Line className="absolute left-1/2 bottom-[-100px] z-20 -translate-x-1/2 scale-y-[3]  xl:bottom-[-50px] xl:scale-y-[6]" />
+        <Line className="absolute left-1/2 bottom-[-100px] z-20 -translate-x-1/2 scale-y-[3] xl:-bottom-3 xl:scale-y-[6]" />
       </section>
     </>
   );

@@ -90,7 +90,7 @@ export default function NavbarComponent() {
       ref={navbarRef}
       className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/50 py-3 px-0 backdrop-blur-md dark:bg-gray-800/50 "
     >
-      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 xl:px-0">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 2xl:px-0">
         {/* name section */}
         <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
           <Link href="/">Jestine Vallendra Dwi Putra</Link>

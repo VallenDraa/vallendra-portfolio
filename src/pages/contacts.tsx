@@ -21,7 +21,7 @@ export default function Contacts() {
       </Head>
       <div className="fade-bottom relative flex grow translate-y-20 flex-col after:-top-20">
         {/* page title*/}
-        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
+        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-0">
           <div className="relative flex w-fit items-center gap-1">
             <Typography
               as="h2"
@@ -44,7 +44,7 @@ export default function Contacts() {
         </header>
 
         {/* form and other contact link */}
-        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 sm:flex-row xl:px-0">
+        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 sm:flex-row 2xl:px-0">
           {/* email form */}
           <form
             onSubmit={sendMessage}

@@ -23,7 +23,7 @@ export default function Home({ topPickedProjects }: Props) {
       </Head>
 
       {/* hero section */}
-      <header className="fade-bottom relative z-30 after:-bottom-2.5 after:z-0  xl:after:-bottom-3.5">
+      <header className="fade-bottom relative z-30 after:-bottom-10 after:z-0 after:md:-bottom-2.5 xl:after:-bottom-3.5">
         <Hero />
       </header>
       <main>

@@ -74,7 +74,7 @@ export default function CertificateDetails({
         <title>{pageTitle}</title>
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 xl:px-0">
+        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-0">
           <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
             <div>
               {/* back to certificates button */}
@@ -96,7 +96,7 @@ export default function CertificateDetails({
               <Typography
                 as="p"
                 variant="paragraph"
-                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-200 md:text-lg"
+                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
               >
                 <Show when={activeLanguage === "en"}>
                   {certificate.shortDescriptionEN}
@@ -122,7 +122,7 @@ export default function CertificateDetails({
         </header>
 
         {/* the certificate data */}
-        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 xl:px-0">
+        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-0">
           {/* image */}
           <figure className="mx-auto w-full md:w-[95%]">
             <CldImage
