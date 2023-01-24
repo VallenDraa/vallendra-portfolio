@@ -27,8 +27,6 @@ export default function TopPicksInfoDashboard({
 
   const [numberIsVisible, setNumberIsVisible] = useState(false);
 
-  const { theme } = useTheme();
-
   /* contains window resize listener to handle number visibility
   ============================================================== */
   useEffect(() => {

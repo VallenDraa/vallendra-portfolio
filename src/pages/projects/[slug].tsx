@@ -5,7 +5,7 @@ import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
 import Image from "next/image";
-import { language, technologies } from "../../types/types";
+import { Language, technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
