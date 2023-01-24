@@ -6,7 +6,6 @@ import { Language, technologies } from "../../../types/types";
 import Show from "../../../utils/client/jsx/Show";
 import techsWithTooltip from "../../MappedComponents/TechsWithTooltip";
 import StyledButton from "../../StyledComponents/StyledButton";
-import { BiDetail } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 
@@ -27,42 +26,55 @@ export default function TopPickItem({
 }: Props) {
   return (
     <div
-      className={`flex min-h-[425px] flex-col ${
-        twistDirection === "left" ? "lg:flex-row" : "lg:flex-row-reverse"
+      className={`relative flex min-h-[500px] flex-col gap-0.5 border-dashed border-white/70 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
+        twistDirection === "left"
+          ? `rounded-r-2xl border-r-[1px] after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-[1px] after:border-dashed after:border-white/70 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
+              isFirst
+                ? "after:rounded-tr-2xl lg:after:rounded-none"
+                : "after:rounded-tr-2xl"
+            }`
+          : "mx-auto w-11/12 rounded-l-3xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-white/70 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
       }`}
     >
+      {/* div to hide the top-left border for smaller screen */}
+      <Show when={isFirst}>
+        <div className="absolute left-0 right-1/2 -top-3 h-3 bg-indigo-50 dark:bg-[#272727]" />
+      </Show>
+
+      {/* dot in line */}
       <div
-        className={`relative flex basis-1/2 items-center ${
+        className={`absolute top-1/2 z-[60] h-5 w-5 -translate-y-1/2 rounded-full border-[1px] border-indigo-300 dark:bg-gray-900 ${
           twistDirection === "left"
-            ? `after:absolute after:inset-y-0 after:right-0 after:z-50 after:w-12 after:rounded-br-2xl after:border-r-2 after:border-dashed after:border-white/70 ${
-                isFirst ? "" : "after:rounded-tr-2xl"
-              } `
-            : "before:absolute before:inset-y-0 before:-left-6 before:z-50 before:w-12 before:rounded-tl-2xl before:rounded-bl-2xl before:border-l-2 before:border-dashed before:border-white/70 lg:justify-end"
+            ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
+            : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
         }`}
-      >
+      />
+
+      {/* picture wrapper*/}
+      <div className="relative flex basis-1/2 items-center">
+        {/* picture */}
         <CldImage
           src={project.image}
           width={960}
           height={540}
-          effect={[{ aspectRatio: "16:9" }]}
-          className="aspect-video w-11/12 rounded-2xl object-cover"
-        />
-
-        {/* dot in line */}
-        <div
-          className={`absolute top-1/2 z-[60] h-5 w-5 -translate-y-1/2 rounded-full border-2 border-indigo-300 dark:bg-gray-900 ${
-            twistDirection === "left" ? "right-[-9px]" : "left-[-33px]"
+          className={`mt-8 aspect-video w-11/12 rounded-2xl object-cover lg:mt-0 ${
+            twistDirection === "left" ? "" : "ml-auto"
           }`}
         />
       </div>
 
+      {/* description */}
       <div
-        className={`flex basis-1/2 items-center ${
-          twistDirection === "left" ? "justify-end" : ""
+        className={`flex basis-1/2 items-center pt-2 pb-8 lg:p-0 ${
+          twistDirection === "left" ? "lg:justify-end" : "pl-5"
         }`}
       >
         <div
-          className={`${twistDirection === "left" ? "w-11/12" : "w-full pr-5"}`}
+          className={`w-11/12 ${
+            twistDirection === "left"
+              ? ""
+              : "ml-auto text-end lg:ml-0 lg:w-full lg:text-start"
+          }`}
         >
           {/* short description */}
           <Typography
@@ -81,7 +93,11 @@ export default function TopPickItem({
           </Typography>
 
           <div className="flex flex-col">
-            <ul className="relative flex items-center gap-1 overflow-auto">
+            <ul
+              className={`relative flex items-center gap-1 overflow-auto ${
+                twistDirection === "left" ? "" : "justify-end lg:justify-start"
+              }`}
+            >
               {project.tech.map(
                 (tech: technologies, i): JSX.Element => (
                   <li key={i}>{techsWithTooltip[tech]}</li>
@@ -89,11 +105,14 @@ export default function TopPickItem({
               )}
             </ul>
 
-            <Link href={`/projects/${project.slug}`}>
+            <Link
+              href={`/projects/${project.slug}`}
+              className="inline-block lg:w-max"
+            >
               <StyledButton
                 variant="outlined"
                 icon={<BsArrowRight />}
-                className="relative mt-2 flex items-center justify-center gap-2 self-start rounded"
+                className="relative mt-2 flex w-full items-center justify-center gap-2 self-start rounded lg:w-max"
                 color="teal"
                 size="md"
               >

@@ -30,7 +30,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 w-1/2 space-y-3 pb-6 pr-5 after:absolute after:inset-y-0 after:right-0 after:w-[1px] after:bg-gradient-to-b after:from-white/40 after:to-white/70">
+          <div className="relative z-20 w-1/2 space-y-3 pb-6 pr-5 after:absolute after:inset-y-0 after:right-0 after:w-[0.5px] after:bg-gradient-to-b after:from-white/40 after:to-white/50">
             <div className="flex items-center">
               <Typography
                 as="h2"
