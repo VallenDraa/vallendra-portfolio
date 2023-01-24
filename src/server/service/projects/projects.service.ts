@@ -2,16 +2,6 @@ import { Project } from "../../../interfaces/project.interface";
 import ProjectModel from "../../model/project.model";
 import connectMongo from "../../mongo/mongodb";
 
-export async function getTopPickedProjects() {
-  try {
-    const topPickedProjects = await ProjectModel.find({ isTopPick: true });
-
-    return JSON.stringify(topPickedProjects);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function getProjectWithPrevAndNext(slug: string) {
   try {
     connectMongo();

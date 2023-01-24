@@ -16,6 +16,7 @@ import StyledButton from "../../StyledComponents/StyledButton";
 import { BiDetail } from "react-icons/bi";
 import { SlGlobe } from "react-icons/sl";
 import { DashboardControllerContext } from "../../../context/TopPicksDashboardControllerCP";
+import { useTheme } from "next-themes";
 
 export default function TopPicksInfoDashboard({
   activeProject,
@@ -25,6 +26,8 @@ export default function TopPicksInfoDashboard({
   const { dashboardRef } = useContext(DashboardControllerContext);
 
   const [numberIsVisible, setNumberIsVisible] = useState(false);
+
+  const { theme } = useTheme();
 
   /* contains window resize listener to handle number visibility
   ============================================================== */
