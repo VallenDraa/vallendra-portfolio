@@ -47,7 +47,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
           </div>
 
           <div>
-            {topPickedProjects.map((project) => {
+            {/* {topPickedProjects.map((project) => {
               const component = (
                 <TopPickItem
                   language={activeLanguage}
@@ -61,7 +61,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
                 lineTwistDirection.current === "left" ? "right" : "left";
 
               return component;
-            })}
+            })} */}
           </div>
         </div>
       </div>

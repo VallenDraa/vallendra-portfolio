@@ -24,7 +24,7 @@ export default function TopPickItem({
         twistDirection === "left" ? "lg:flex-row" : "lg:flex-row-reverse"
       }`}
     >
-      <div
+      {/* <div
         className={`relative flex basis-1/2 ${
           twistDirection === "left"
             ? "after:absolute after:inset-y-0 after:right-[-0.5px] after:w-12 after:rounded-br-3xl after:border-r-2 after:border-dashed after:border-white/70"
@@ -55,7 +55,7 @@ export default function TopPickItem({
             <Show when={language === "id"}>{project.shortDescriptionID}</Show>
           </Typography>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
