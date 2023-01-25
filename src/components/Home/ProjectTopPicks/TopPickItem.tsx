@@ -54,7 +54,7 @@ export default function TopPickItem({
 
       {/* dot in line */}
       <div
-        className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-gray-900 dark:text-white/60 ${
+        className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-[#272727] dark:text-white/60 ${
           twistDirection === "left"
             ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
             : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"

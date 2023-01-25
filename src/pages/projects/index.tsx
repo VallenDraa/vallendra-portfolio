@@ -86,7 +86,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
         {/* the projects list */}
         <main
-          className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 ${
+          className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
             /* overlay for awaiting search results */
             searchIsLoading
               ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
