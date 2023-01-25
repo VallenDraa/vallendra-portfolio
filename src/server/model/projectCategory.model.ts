@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Category from "../../interfaces/category";
+import Category from "../../interfaces/category.interface";
 
 interface ProjectCategory extends Omit<Category, "_id">, mongoose.Document {
   madeAt: Date;

@@ -6,6 +6,7 @@ import TopPickItem, { TwistDirection } from "./TopPickItem";
 import { Language } from "../../../types/types";
 import LanguageToggle from "../../DetailsPage/LanguageToggle";
 import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
 
 interface Props {
   topPickedProjects: Project[];
@@ -61,11 +62,13 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
             {topPickedProjects.map((project, i) => {
               const component = (
                 <TopPickItem
+                  projectOrder={i + 1}
                   language={activeLanguage}
                   key={project._id}
                   project={project}
                   twistDirection={lineTwistDirection.current}
                   isFirst={i === 0}
+                  isLast={i === topPickedProjects.length - 1}
                 />
               );
 
@@ -77,24 +80,29 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
           </div>
 
           {/* see all projects */}
-          <div className="flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-2xl before:border-r-2 before:border-dashed before:border-white/70 after:z-50 after:h-28 after:w-[1px] after:bg-gradient-to-b after:from-white/70 after:to-white/20">
-            <Tooltip
-              animate={{
-                mount: { scale: 1, y: 0 },
-                unmount: { scale: 0, y: 25 },
-              }}
-              content="See All Projects"
-            >
-              {/* dot in line */}
-              <IconButton
-                variant="gradient"
-                color="teal"
-                size="lg"
-                className="rounded-full dark:bg-gray-900"
+          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-white/40 after:z-50 after:h-28 after:w-[1px] after:bg-gradient-to-b after:from-white/70 after:to-white/20">
+            {/* blur */}
+            <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-deep-purple-500 blur-2xl" />
+
+            <Link href="/projects">
+              <Tooltip
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                content="See All Projects"
               >
-                <BsArrowRight className="text-3xl" />
-              </IconButton>
-            </Tooltip>
+                {/* dot in line */}
+                <IconButton
+                  variant="gradient"
+                  color="deep-purple"
+                  size="lg"
+                  className="relative z-[55] rounded-full transition duration-200 hover:scale-125 dark:bg-gray-900"
+                >
+                  <BsArrowRight className="text-3xl" />
+                </IconButton>
+              </Tooltip>
+            </Link>
           </div>
         </div>
       </div>

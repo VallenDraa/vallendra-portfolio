@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import SectionHeading from "../SectionHeading";
 import Certificate from "../../interfaces/certificate.interface";
 import ItemCard from "../Cards/ItemCard";
-import Category from "../../interfaces/category";
+import Category from "../../interfaces/category.interface";
 
 interface Props {
   categoryIndex: number;

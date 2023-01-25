@@ -9,7 +9,7 @@ import BlurredBlob from "../../BlurredBlob";
 export default function Redirect() {
   return (
     <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-0">
-      <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5]" />
+      <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5] bg-white/20" />
 
       {/* blur */}
       <BlurredBlob

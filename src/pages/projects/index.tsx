@@ -8,7 +8,7 @@ import ProjectCategorySection from "../../components/CategorySections/ProjectCat
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
-import Category from "../../interfaces/category";
+import Category from "../../interfaces/category.interface";
 import SearchNotFound from "../../components/SearchNotFound";
 import { GetStaticProps } from "next";
 import { getAllProjects } from "../../server/service/projects/projects.service";

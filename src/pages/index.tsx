@@ -3,8 +3,6 @@ import Profile from "../components/Home/Profile/Profile";
 import Redirect from "../components/Home/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
-import DashboardControllerProvider from "../context/TopPicksDashboardControllerCP";
-import TopPicksSection from "../components/Home/ProjectTopPicks/TopPicksSection";
 import { Project } from "../interfaces/project.interface";
 import Quotes from "../components/Home/ProjectTopPicks/Quote";
 import NewTopPickSection from "../components/Home/ProjectTopPicks/NewTopPickSection";
@@ -23,7 +21,7 @@ export default function Home({ topPickedProjects }: Props) {
       </Head>
 
       {/* hero section */}
-      <header className="fade-bottom relative z-30 after:-bottom-10 after:z-0 after:md:-bottom-2.5 xl:after:-bottom-3.5">
+      <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
         <Hero />
       </header>
       <main>

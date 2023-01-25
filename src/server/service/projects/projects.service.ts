@@ -4,6 +4,7 @@ import connectMongo from "../../mongo/mongodb";
 
 export async function getTopPickedProjects() {
   try {
+    connectMongo();
     const topPickedProjects = await ProjectModel.find({ isTopPick: true });
 
     return JSON.stringify(topPickedProjects);

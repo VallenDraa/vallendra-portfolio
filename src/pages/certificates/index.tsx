@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Certificate from "../../interfaces/certificate.interface";
 import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
 import ItemCard from "../../components/Cards/ItemCard";
-import Category from "../../interfaces/category";
+import Category from "../../interfaces/category.interface";
 import SearchNotFound from "../../components/SearchNotFound";
 import { getAllCertificates } from "../../server/service/certificates/certificates.service";
 import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
