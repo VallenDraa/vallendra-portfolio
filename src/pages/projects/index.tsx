@@ -59,17 +59,16 @@ export default function ProjectsPage({ projects, categories }: Props) {
               <Typography
                 as="h2"
                 variant="h2"
-                className="primary-gradient relative z-40 animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
+                className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
               >
                 All Projects
               </Typography>
-              <span className="text-5xl">💻</span>
+              <span className="text-4xl md:text-5xl">💻</span>
             </div>
-
             <Typography
               as="p"
               variant="paragraph"
-              className="mb-5 mt-1 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
+              className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
             >
               The ultimate showcase of all my projects. Mostly web but there are
               others too.
