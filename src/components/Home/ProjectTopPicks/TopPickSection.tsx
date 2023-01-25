@@ -32,7 +32,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
         <div className="relative w-full">
           {/* section Title */}
           <div className="relative z-20 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:bg-gradient-to-b after:from-indigo-500/50 after:to-indigo-500/70 dark:after:from-white/40 dark:after:to-white/60 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 bg-indigo-50 pb-3 dark:bg-[#272727] md:pb-0 lg:bg-transparent">
+            <div className="relative z-30 bg-indigo-50 pb-5 dark:bg-[#272727] md:pb-0 lg:bg-transparent">
               <div className="flex items-center">
                 <Typography
                   as="h2"
