@@ -15,17 +15,6 @@ export default function Redirect() {
     <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-0">
       <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5] bg-indigo-500/30 dark:bg-white/20" />
 
-      {/* blur */}
-      <Show when={theme === "dark"}>
-        <BlurredBlob
-          scale="scale-100"
-          left="left-1/2"
-          top="top-3/4"
-          translateX="-translate-x-1/2"
-          translateY="-translate-y-3/4"
-        />
-      </Show>
-
       <Typography
         as="h2"
         className="relative z-10 pt-4 text-4xl font-bold text-indigo-500 dark:text-gray-200 md:text-5xl lg:text-6xl"
