@@ -1,4 +1,4 @@
-import React from "react";
+import R from "react";
 import { Project } from "../../../interfaces/project.interface";
 import { CldImage } from "next-cloudinary";
 import { Typography } from "@material-tailwind/react";
@@ -8,6 +8,7 @@ import techsWithTooltip from "../../MappedComponents/TechsWithTooltip";
 import StyledButton from "../../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import useIntersectionObserver from "../../../utils/client/hooks/useIntersectionObserver";
 
 export type TwistDirection = "right" | "left";
 
@@ -28,6 +29,31 @@ export default function TopPickItem({
   isFirst = false,
   isLast = false,
 }: Props) {
+  const dotRef = R.useRef<HTMLDivElement>(null);
+  const picWrapperRef = R.useRef<HTMLDivElement>(null);
+  const descWrapperRef = R.useRef<HTMLDivElement>(null);
+
+  const dotObserver = useIntersectionObserver(dotRef, {});
+
+  R.useEffect(() => {
+    const picClasses = picWrapperRef.current?.classList;
+    const descClasses = descWrapperRef.current?.classList;
+
+    if (dotObserver?.isIntersecting) {
+      picClasses?.remove("opacity-30");
+      picClasses?.remove("scale-90");
+
+      descClasses?.remove("opacity-30");
+      descClasses?.remove("scale-90");
+    } else {
+      picClasses?.add("opacity-30");
+      picClasses?.add("scale-90");
+
+      descClasses?.add("opacity-30");
+      descClasses?.add("scale-90");
+    }
+  }, [dotObserver?.isIntersecting]);
+
   return (
     <div
       className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-[1px] border-dashed border-indigo-500/70 dark:border-white/60 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
@@ -39,7 +65,7 @@ export default function TopPickItem({
                 ? "after:rounded-tr-2xl lg:after:rounded-none"
                 : "ml-3 after:rounded-tr-2xl lg:ml-0"
             }`
-          : "mx-auto mr-4 rounded-l-xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-indigo-500/70 dark:before:border-white/60 lg:mr-0 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
+          : "mx-auto mr-3 rounded-l-xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-indigo-500/70 dark:before:border-white/60 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
       }`}
     >
       {/* div to hide the top-left border for smaller screen */}
@@ -54,6 +80,7 @@ export default function TopPickItem({
 
       {/* dot in line */}
       <div
+        ref={dotRef}
         className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-[#272727] dark:text-white/60 ${
           twistDirection === "left"
             ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
@@ -64,7 +91,10 @@ export default function TopPickItem({
       </div>
 
       {/* picture wrapper*/}
-      <div className="relative flex basis-1/2 items-center">
+      <div
+        ref={picWrapperRef}
+        className="relative flex basis-1/2 scale-90 items-center opacity-30 transition duration-500"
+      >
         {/* picture */}
         <CldImage
           src={project.image}
@@ -79,7 +109,8 @@ export default function TopPickItem({
 
       {/* description */}
       <div
-        className={`flex basis-1/2 items-center pt-2 pb-8 lg:p-0 ${
+        ref={descWrapperRef}
+        className={`flex basis-1/2 scale-90 items-center pt-2 pb-8 opacity-30 transition duration-500 lg:p-0 ${
           twistDirection === "left" ? "lg:justify-end" : "pl-5"
         }`}
       >
