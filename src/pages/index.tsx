@@ -5,7 +5,7 @@ import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 import { Project } from "../interfaces/project.interface";
 import Quotes from "../components/Home/ProjectTopPicks/Quote";
-import NewTopPickSection from "../components/Home/ProjectTopPicks/NewTopPickSection";
+import TopPickSection from "../components/Home/ProjectTopPicks/topPickSection";
 import { GetStaticProps } from "next";
 import { getTopPickedProjects } from "../server/service/projects/projects.service";
 
@@ -31,7 +31,7 @@ export default function Home({ topPickedProjects }: Props) {
             <Quotes />
           </div>
         </section>
-        <NewTopPickSection topPickedProjects={topPickedProjects} />
+        <TopPickSection topPickedProjects={topPickedProjects} />
         <Redirect />
       </main>
       <SiteFooter />
