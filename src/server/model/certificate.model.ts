@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 import Certificate from "../../interfaces/certificate.interface";
 
 interface CertificateDocument
@@ -32,7 +32,7 @@ const CertificateSchema = new mongoose.Schema<CertificateDocument>(
   { timestamps: true }
 );
 
-const CertificateModel =
+const CertificateModel: Model<CertificateDocument> =
   mongoose.models.certificates ||
   mongoose.model<CertificateDocument>("certificates", CertificateSchema);
 

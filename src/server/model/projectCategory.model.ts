@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 import Category from "../../interfaces/category.interface";
 
 interface ProjectCategory extends Omit<Category, "_id">, mongoose.Document {
@@ -16,7 +16,7 @@ const ProjectCategorySchema = new mongoose.Schema<ProjectCategory>(
   { timestamps: true }
 );
 
-const ProjectCategoryModel =
+const ProjectCategoryModel: Model<ProjectCategory> =
   mongoose.models["project-categories"] ||
   mongoose.model<ProjectCategory>("project-categories", ProjectCategorySchema);
 

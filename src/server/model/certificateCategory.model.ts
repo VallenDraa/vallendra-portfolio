@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 import Category from "../../interfaces/category.interface";
 
 interface CertificateCategory extends Omit<Category, "_id">, mongoose.Document {
@@ -20,7 +20,7 @@ const CertificateCategorySchema = new mongoose.Schema<CertificateCategory>(
   { timestamps: true }
 );
 
-const CertificateCategoryModel =
+const CertificateCategoryModel: Model<CertificateCategory> =
   mongoose.models["certificate-categories"] ||
   mongoose.model<CertificateCategory>(
     "certificate-categories",

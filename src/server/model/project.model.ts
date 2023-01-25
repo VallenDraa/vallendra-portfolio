@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 import { Project } from "../../interfaces/project.interface";
 
 interface ProjectDocument extends Omit<Project, "_id">, mongoose.Document {
@@ -35,7 +35,7 @@ const ProjectSchema = new mongoose.Schema<ProjectDocument>(
   { timestamps: true }
 );
 
-const ProjectModel =
+const ProjectModel: Model<ProjectDocument> =
   mongoose.models.projects ||
   mongoose.model<ProjectDocument>("projects", ProjectSchema);
 
