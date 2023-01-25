@@ -31,30 +31,32 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 w-1/2 space-y-3 pb-6 pr-5 after:absolute after:inset-y-0 after:right-0 after:w-[0.5px] after:bg-gradient-to-b after:from-white/40 after:to-white/50">
-            <div className="flex items-center">
+          <div className="relative z-20 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:bg-gradient-to-b after:from-indigo-500/50 after:to-indigo-500/70 dark:after:from-white/40 dark:after:to-white/60 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-30 bg-indigo-50 pb-3 dark:bg-[#272727] md:pb-0 lg:bg-transparent">
+              <div className="flex items-center">
+                <Typography
+                  as="h2"
+                  variant="h1"
+                  className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
+                >
+                  Top Picks
+                </Typography>
+                <span className="text-3xl">🌟</span>
+              </div>
+
               <Typography
-                as="h2"
-                variant="h1"
-                className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
+                as="p"
+                variant="paragraph"
+                className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
               >
-                Top Picks
+                A selection of my best projects as of now.
               </Typography>
-              <span className="text-3xl">🌟</span>
+
+              <LanguageToggle
+                activeLanguage={activeLanguage}
+                setActiveLanguage={setActiveLanguage}
+              />
             </div>
-
-            <Typography
-              as="p"
-              variant="paragraph"
-              className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
-            >
-              A selection of my best projects as of now.
-            </Typography>
-
-            <LanguageToggle
-              activeLanguage={activeLanguage}
-              setActiveLanguage={setActiveLanguage}
-            />
           </div>
 
           {/* projects */}
@@ -80,9 +82,9 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
           </div>
 
           {/* see all projects */}
-          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-white/40 after:z-50 after:h-28 after:w-[1px] after:bg-gradient-to-b after:from-white/70 after:to-white/20">
+          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-500/40 after:z-50 after:h-28 after:w-[1px] after:bg-gradient-to-b after:from-indigo-500/40 after:to-indigo-500/30 dark:before:border-white/40 dark:after:from-white/50 dark:after:to-white/20">
             {/* blur */}
-            <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-deep-purple-500 blur-2xl" />
+            <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
 
             <Link href="/projects">
               <Tooltip
@@ -97,7 +99,7 @@ export default function NewTopPickSection({ topPickedProjects }: Props) {
                   variant="gradient"
                   color="deep-purple"
                   size="lg"
-                  className="relative z-[55] rounded-full transition duration-200 hover:scale-125 dark:bg-gray-900"
+                  className="group relative z-[55] rounded-full transition duration-200 hover:scale-125 dark:bg-gray-900"
                 >
                   <BsArrowRight className="text-3xl" />
                 </IconButton>

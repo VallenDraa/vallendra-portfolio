@@ -30,16 +30,16 @@ export default function TopPickItem({
 }: Props) {
   return (
     <div
-      className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-[1px] border-dashed border-white/60 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
+      className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-[1px] border-dashed border-indigo-500/70 dark:border-white/60 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
         isLast ? "border-b-[1px]" : ""
       } ${
         twistDirection === "left"
-          ? `rounded-r-2xl border-r-[1px] after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-[1px] after:border-dashed after:border-white/60 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
+          ? `rounded-r-2xl border-r-[1px] after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-[1px] after:border-dashed after:border-indigo-500/70 dark:after:border-white/60 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
               isFirst
                 ? "after:rounded-tr-2xl lg:after:rounded-none"
                 : "ml-3 after:rounded-tr-2xl lg:ml-0"
             }`
-          : "mx-auto mr-4 rounded-l-xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-white/60 lg:mr-0 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
+          : "mx-auto mr-4 rounded-l-xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-indigo-500/70 dark:before:border-white/60 lg:mr-0 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
       }`}
     >
       {/* div to hide the top-left border for smaller screen */}
@@ -54,7 +54,7 @@ export default function TopPickItem({
 
       {/* dot in line */}
       <div
-        className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] text-xs dark:border-indigo-300 dark:bg-gray-900 dark:text-white/60 ${
+        className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-gray-900 dark:text-white/60 ${
           twistDirection === "left"
             ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
             : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
@@ -108,7 +108,7 @@ export default function TopPickItem({
 
           <div className="flex flex-col">
             <ul
-              className={`relative flex items-center gap-1 overflow-auto ${
+              className={`scrollbar-kece relative flex items-center gap-1 overflow-auto ${
                 twistDirection === "left" ? "" : "justify-end lg:justify-start"
               }`}
             >
