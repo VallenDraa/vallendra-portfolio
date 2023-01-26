@@ -36,7 +36,7 @@ export default function GoToTopBtn() {
         ripple={false}
         variant="filled"
         color="deep-purple"
-        className="fixed bottom-5 right-1/2 z-40 translate-x-1/2 opacity-30 transition duration-500 hover:opacity-100"
+        className="fixed bottom-5 right-1/2 z-50 translate-x-1/2 opacity-30 duration-500 hover:opacity-100 md:right-10 md:translate-x-0"
       >
         <VscTriangleUp className="text-xl" />
       </IconButton>
