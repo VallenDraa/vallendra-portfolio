@@ -3,19 +3,16 @@ import { FC, Fragment, useEffect, useState, useCallback } from "react";
 // GENERATING RANDOM SQUARES
 const FloatingSquares: FC = () => {
   const changePopulation = useCallback(() => {
-    switch (true) {
-      case window.innerWidth >= 1140:
-        return 9;
-
-      case window.innerWidth >= 960:
-        return 7;
-
-      default:
-        return 5;
+    if (window.innerWidth >= 1140) {
+      return 12;
+    } else if (window.innerWidth >= 960) {
+      return 10;
+    } else {
+      return 8;
     }
   }, []);
 
-  const [population, setPopulation] = useState(0);
+  const [population, setPopulation] = useState(8);
   const [squares, setSquares] = useState<React.ReactElement[]>([]);
 
   /* Change the population of squares according to the screen size
