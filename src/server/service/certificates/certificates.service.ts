@@ -40,11 +40,11 @@ export async function getCertificateWithPrevAndNext(slug: string) {
       }
     }
 
-    return JSON.stringify({
+    return {
       certificate,
       nextCertificate: nextCertificate || prevCertificate,
       prevCertificate: prevCertificate || nextCertificate,
-    });
+    };
   } catch (error) {
     console.error(error);
   }
@@ -56,7 +56,7 @@ export async function getAllCertificates() {
 
     const allCertificates = await CertificateModel.find().lean();
 
-    return JSON.stringify(allCertificates);
+    return allCertificates;
   } catch (error) {
     console.error(error);
   }

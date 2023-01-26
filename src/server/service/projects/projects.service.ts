@@ -6,9 +6,11 @@ import connectMongo from "../../mongo/mongodb";
 export async function getTopPickedProjects() {
   try {
     connectMongo();
-    const topPickedProjects = await ProjectModel.find({ isTopPick: true });
+    const topPickedProjects = await ProjectModel.find({
+      isTopPick: true,
+    }).lean();
 
-    return JSON.stringify(topPickedProjects);
+    return topPickedProjects;
   } catch (error) {
     console.error(error);
   }
@@ -19,7 +21,7 @@ export async function getProjectWithPrevAndNext(slug: string) {
     connectMongo();
 
     let nextProject: LeanDocument<Project>, prevProject: LeanDocument<Project>;
-    const project = await ProjectModel.findOne<Project>({ slug }).lean();
+    const project = await ProjectModel.findOne({ slug }).lean();
 
     if (project === null) throw new Error();
     if (!project.createdAt) throw new Error();
@@ -48,11 +50,11 @@ export async function getProjectWithPrevAndNext(slug: string) {
       }
     }
 
-    return JSON.stringify({
+    return {
       project,
       nextProject: nextProject || prevProject,
       prevProject: prevProject || nextProject,
-    });
+    };
   } catch (error) {
     console.error(error);
   }
@@ -64,7 +66,7 @@ export async function getAllProjects() {
 
     const allProjects = await ProjectModel.find().lean();
 
-    return JSON.stringify(allProjects);
+    return allProjects;
   } catch (error) {
     console.error(error);
   }

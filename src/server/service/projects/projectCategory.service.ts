@@ -7,7 +7,7 @@ export async function getAllProjectCategories() {
 
     const allProjectCategories = await ProjectCategoryModel.find().lean();
 
-    return JSON.stringify(allProjectCategories);
+    return allProjectCategories;
   } catch (error) {
     console.error(error);
   }

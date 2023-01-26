@@ -8,7 +8,7 @@ export async function getAllCertificateCategories() {
     const allCertificateCategories =
       await CertificateCategoryModel.find().lean();
 
-    return JSON.stringify(allCertificateCategories);
+    return allCertificateCategories;
   } catch (error) {
     console.error(error);
   }
