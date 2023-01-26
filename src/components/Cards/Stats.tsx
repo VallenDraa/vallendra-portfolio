@@ -3,6 +3,9 @@ import R from "react";
 import Show from "../../utils/client/jsx/Show";
 import { compactNumberFormatter } from "../../utils/client/helpers/formatter";
 
+const skeleton =
+  "after:h-4 after:w-8 after:animate-pulse after:rounded-full after:bg-white/20";
+
 export default function Stats({
   icon,
   isLoading = false,
@@ -24,9 +27,7 @@ export default function Stats({
       variant="paragraph"
       as="span"
       className={`flex items-center gap-1 text-xs font-bold ${textColor} ${
-        isLoading
-          ? "after:h-4 after:w-8 after:animate-pulse after:rounded-full after:bg-white/20"
-          : ""
+        isLoading ? skeleton : ""
       }`}
     >
       {icon}
