@@ -4,7 +4,6 @@ import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
-import Image from "next/image";
 import { Language, technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
@@ -14,7 +13,6 @@ import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import { useState, useMemo } from "react";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
@@ -26,6 +24,10 @@ import {
 import Head from "next/head";
 import { CldImage } from "next-cloudinary";
 import { JSONSerialize } from "../../utils/server/serialize";
+import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
+import { useSWRConfig } from "swr";
+import R from "react";
+import { useRouter } from "next/router";
 
 interface ProjectRedirect {
   slug: string;
@@ -45,15 +47,35 @@ export default function ProjectDetails({
 }: PropsData) {
   const pageTitle = `VallenDra | ${project.name}`;
 
-  /* language switcher
+  /* Others
   =================== */
-  const [activeLanguage, setActiveLanguage] = useState<Language>("en");
+  const router = useRouter();
+
+  /* Language switcher
+  =================== */
+  const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* Dynamic Views
+  ================== */
+  const viewsRes = useGetViewsById(project._id, "projects", true);
 
   /* Likes
-  ========= */
-  const [likes, setLikes] = useState(project.likes);
-  const [hasLiked, setHasLiked] = useState(false);
-  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
+  ================== */
+  const [likes, setLikes] = R.useState(project.likes);
+  const [hasLiked, setHasLiked] = R.useState(false);
+  const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [router.asPath]);
 
   async function addLike() {
     if (!hasLiked) {
@@ -104,9 +126,10 @@ export default function ProjectDetails({
               </Typography>
 
               <ViewsAndLikes
+                isLoading={viewsRes.isLoading}
                 hasLiked={hasLiked}
                 likes={likes}
-                views={project.views}
+                views={viewsRes.data?.views || project.views}
               />
             </div>
             <div className="flex lg:self-end lg:px-2">
