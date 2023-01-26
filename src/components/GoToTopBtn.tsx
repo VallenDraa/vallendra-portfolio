@@ -17,8 +17,8 @@ export default function GoToTopBtn() {
         (height.scrollTop / (height.scrollHeight - height.clientHeight)) * 100;
 
       scrollPercentage.current > 5
-        ? goUpBtnRef.current?.classList.remove("translate-x-[200%]")
-        : goUpBtnRef.current?.classList.add("translate-x-[200%]");
+        ? goUpBtnRef.current?.classList.remove("translate-y-[200%]")
+        : goUpBtnRef.current?.classList.add("translate-y-[200%]");
     }
 
     window.addEventListener("scroll", goUpBtnViewHandler);
@@ -28,7 +28,7 @@ export default function GoToTopBtn() {
     };
   }, []);
   return (
-    <Link aria-label="Go to top link" href="#" className="block p-2">
+    <a aria-label="Go to top link" href="#" className="block p-2">
       <IconButton
         aria-label="Go to top button"
         ref={goUpBtnRef}
@@ -36,10 +36,10 @@ export default function GoToTopBtn() {
         ripple={false}
         variant="filled"
         color="deep-purple"
-        className="fixed bottom-5 right-10 z-40 translate-x-[200%] opacity-30 transition duration-500 hover:opacity-100"
+        className="fixed bottom-5 right-1/2 z-40 translate-x-1/2 opacity-30 transition duration-500 hover:opacity-100"
       >
         <VscTriangleUp className="text-xl" />
       </IconButton>
-    </Link>
+    </a>
   );
 }
