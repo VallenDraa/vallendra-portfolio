@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import Link from "next/link";
 import { technologies } from "../../types/types";
 import { Typography } from "@material-tailwind/react";
@@ -11,6 +11,10 @@ import TechsSection from "./TechsSection";
 import { CldImage } from "next-cloudinary";
 
 interface Props {
+  // for data fetching purpose
+  _id: string;
+  type: "project" | "certificate";
+
   // image props
   imgIsPriority: boolean;
   imgSrc: string | StaticImageData;

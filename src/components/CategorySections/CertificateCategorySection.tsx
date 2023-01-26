@@ -43,6 +43,8 @@ export default function CertificateCategorySection({
           return (
             <li key={id}>
               <ItemCard
+                _id={id}
+                type="certificate"
                 imgIsPriority={isImgImportant(categoryIndex, i)}
                 imgSrc={certificatesInCategory[id].image}
                 itemLikes={certificatesInCategory[id].likes}

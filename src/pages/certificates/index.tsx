@@ -125,6 +125,8 @@ export default function ProjectsPage({ certificates, categories }: Props) {
                   return (
                     <li key={certificates[idx]._id}>
                       <ItemCard
+                        _id={certificates[idx]._id}
+                        type="certificate"
                         imgIsPriority={false}
                         imgSrc={certificates[idx].image}
                         itemLikes={certificates[idx].likes}

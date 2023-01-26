@@ -41,6 +41,8 @@ export default function ProjectCategorySection({
           return (
             <li key={id}>
               <ItemCard
+                _id={id}
+                type="project"
                 imgIsPriority={isImgImportant(categoryIndex, i)}
                 imgSrc={projectsInCategory[id].image}
                 itemLikes={projectsInCategory[id].likes}
