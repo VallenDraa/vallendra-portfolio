@@ -3,17 +3,21 @@ import Link from "next/link";
 import { technologies } from "../../types/types";
 import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import { compactNumberFormatter } from "../../utils/client/helpers/formatter";
 import StyledButton from "../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
 import Show from "../../utils/client/jsx/Show";
 import TechsSection from "./TechsSection";
 import { CldImage } from "next-cloudinary";
+import R from "react";
+import useIntersectionObserver from "../../utils/client/hooks/useIntersectionObserver";
+import Stats from "./Stats";
+import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
+import { useSWRConfig } from "swr";
 
 interface Props {
   // for data fetching purpose
   _id: string;
-  type: "project" | "certificate";
+  type: "projects" | "certificates";
 
   // image props
   imgIsPriority: boolean;
@@ -30,9 +34,41 @@ interface Props {
   techs?: technologies[];
 }
 
-export default function ItemCard({ techs = [], ...props }: Props) {
+export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
+  const viewsUrl = `/api/views/${type}/${_id}`;
+
+  const [hasFetched, setHasFetched] = R.useState(false);
+  const [willFetch, setWillFetch] = R.useState(false);
+
+  const itemCardRef = R.useRef<HTMLAnchorElement>(null);
+  const observer = useIntersectionObserver(itemCardRef, {});
+
+  const { mutate } = useSWRConfig();
+  const viewsRes = useGetViewsById(_id, type, willFetch);
+
+  /* Check if element is intersecting and views has been fetched 
+  ============================================================= */
+  R.useEffect(() => {
+    if (observer?.isIntersecting) {
+      if (!hasFetched) setWillFetch(true);
+    }
+  }, [observer?.isIntersecting, hasFetched]);
+
+  R.useEffect(() => {
+    if (willFetch) {
+      try {
+        mutate(viewsUrl);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setHasFetched(true);
+      }
+    }
+  }, [willFetch]);
+
   return (
     <Link
+      ref={itemCardRef}
       href={props.itemLink}
       className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
     >
@@ -55,7 +91,6 @@ export default function ItemCard({ techs = [], ...props }: Props) {
       {/* detail */}
       <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
         {/* props title */}
-
         <Typography
           variant="h5"
           as="span"
@@ -68,30 +103,26 @@ export default function ItemCard({ techs = [], ...props }: Props) {
         <Typography
           variant="paragraph"
           as="p"
-          className="mt-1 px-3 text-base font-normal  text-white/90 sm:text-sm md:line-clamp-2"
+          className="mt-1 px-3 text-base font-normal text-white/90 sm:text-sm md:line-clamp-2"
         >
           {props.itemShortDesc}
         </Typography>
 
         {/* props likes and views*/}
         <div className="mt-1.5 flex gap-3 px-3">
-          <Typography
-            variant="paragraph"
-            as="span"
-            className="flex items-center gap-1 text-xs font-bold text-teal-300"
-          >
-            <AiFillEye />
-            {compactNumberFormatter.format(props.itemViews)}
-          </Typography>
+          <Stats
+            isLoading={viewsRes?.isLoading || !hasFetched}
+            icon={<AiFillEye />}
+            number={viewsRes?.data?.views || props.itemViews}
+            textColor="text-teal-300"
+          />
 
-          <Typography
-            variant="paragraph"
-            as="span"
-            className="flex items-center gap-1 text-xs font-bold text-red-300"
-          >
-            <AiFillHeart />
-            {compactNumberFormatter.format(props.itemLikes)}
-          </Typography>
+          <Stats
+            isLoading
+            icon={<AiFillHeart />}
+            number={props.itemLikes}
+            textColor="text-red-300"
+          />
         </div>
 
         <Show when={techs.length > 0}>

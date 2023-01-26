@@ -122,7 +122,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
                     <li key={projects[idx]._id}>
                       <ItemCard
                         _id={projects[idx]._id}
-                        type="project"
+                        type="projects"
                         imgIsPriority={false}
                         imgSrc={projects[idx].image}
                         itemLikes={projects[idx].likes}
