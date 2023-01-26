@@ -11,7 +11,9 @@ export default function useGetViewsById(
   type: "certificates" | "projects",
   willFetch: boolean
 ) {
-  const url = `/api/views/${type}/${id}`;
+  const url = R.useMemo(() => `/api/views/${type}/${id}`, [type, id]);
+
+  const { mutate } = useSWRConfig();
 
   const { data, isLoading, error } = useSWR<Response>(
     url,
@@ -22,15 +24,12 @@ export default function useGetViewsById(
 
       return views;
     },
-    {
-      revalidateOnFocus: true,
-    }
+    { revalidateOnFocus: true }
   );
-  const { mutate } = useSWRConfig();
 
   R.useEffect(() => {
     if (willFetch) mutate(url);
-  }, [willFetch]);
+  }, [willFetch, id]);
 
   return { data, isLoading, error };
 }
