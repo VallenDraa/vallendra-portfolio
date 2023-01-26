@@ -12,7 +12,6 @@ import R from "react";
 import useIntersectionObserver from "../../utils/client/hooks/useIntersectionObserver";
 import Stats from "./Stats";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import { useSWRConfig } from "swr";
 
 interface Props {
   // for data fetching purpose
@@ -35,15 +34,14 @@ interface Props {
 }
 
 export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
-  const viewsUrl = `/api/views/${type}/${_id}`;
-
   const [hasFetched, setHasFetched] = R.useState(false);
   const [willFetch, setWillFetch] = R.useState(false);
 
   const itemCardRef = R.useRef<HTMLAnchorElement>(null);
-  const observer = useIntersectionObserver(itemCardRef, {});
+  const observer = useIntersectionObserver(itemCardRef, {
+    freezeOnceVisible: true,
+  });
 
-  const { mutate } = useSWRConfig();
   const viewsRes = useGetViewsById(_id, type, willFetch);
 
   /* Check if element is intersecting and views has been fetched 
@@ -55,16 +53,10 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
   }, [observer?.isIntersecting, hasFetched]);
 
   R.useEffect(() => {
-    if (willFetch) {
-      try {
-        mutate(viewsUrl);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setHasFetched(true);
-      }
+    if (viewsRes.data?.views) {
+      setHasFetched(true);
     }
-  }, [willFetch]);
+  }, [viewsRes.data?.views]);
 
   return (
     <Link

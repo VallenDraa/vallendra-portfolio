@@ -1,4 +1,5 @@
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
+import R from "react";
 
 interface Response {
   _id: string;
@@ -25,6 +26,11 @@ export default function useGetViewsById(
       revalidateOnFocus: true,
     }
   );
+  const { mutate } = useSWRConfig();
+
+  R.useEffect(() => {
+    if (willFetch) mutate(url);
+  }, [willFetch]);
 
   return { data, isLoading, error };
 }
