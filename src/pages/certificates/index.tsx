@@ -12,6 +12,7 @@ import Category from "../../interfaces/category.interface";
 import SearchNotFound from "../../components/SearchNotFound";
 import { getAllCertificates } from "../../server/service/certificates/certificates.service";
 import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
+import { JSONSerialize } from "../../utils/server/serialize";
 
 interface Props {
   certificates: Certificate[];
@@ -173,17 +174,10 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 }
 
 export async function getStaticProps() {
-  const certificates = await getAllCertificates();
-  const categories = await getAllCertificateCategories();
+  const certificates = await JSONSerialize(await getAllCertificates());
+  const categories = await JSONSerialize(await getAllCertificateCategories());
 
-  if (certificates && categories) {
-    return {
-      props: {
-        certificates: JSON.parse(certificates),
-        categories: JSON.parse(categories),
-      },
-    };
-  } else {
-    return { notFound: true };
-  }
+  return certificates && categories
+    ? { props: { certificates, categories } }
+    : { notFound: true };
 }

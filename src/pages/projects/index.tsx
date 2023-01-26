@@ -13,6 +13,7 @@ import SearchNotFound from "../../components/SearchNotFound";
 import { GetStaticProps } from "next";
 import { getAllProjects } from "../../server/service/projects/projects.service";
 import { getAllProjectCategories } from "../../server/service/projects/projectCategory.service";
+import { JSONSerialize } from "../../utils/server/serialize";
 
 interface Props {
   projects: Project[];
@@ -170,17 +171,10 @@ export default function ProjectsPage({ projects, categories }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getAllProjects();
-  const categories = await getAllProjectCategories();
+  const projects = await JSONSerialize(await getAllProjects());
+  const categories = await JSONSerialize(await getAllProjectCategories());
 
-  if (projects && categories) {
-    return {
-      props: {
-        projects: JSON.parse(projects),
-        categories: JSON.parse(categories),
-      },
-    };
-  } else {
-    return { notFound: true };
-  }
+  return projects && categories
+    ? { props: { projects, categories } }
+    : { notFound: true };
 };

@@ -12,7 +12,7 @@ interface Props {
   topPickedProjects: Project[];
 }
 
-export default function NewTopPickSection({ topPickedProjects }: Props) {
+export default function TopPickSection({ topPickedProjects }: Props) {
   /* language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = useState<Language>("en");

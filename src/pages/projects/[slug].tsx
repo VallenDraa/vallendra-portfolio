@@ -25,6 +25,7 @@ import {
 } from "../../server/service/projects/projects.service";
 import Head from "next/head";
 import { CldImage } from "next-cloudinary";
+import { JSONSerialize } from "../../utils/server/serialize";
 
 interface ProjectRedirect {
   slug: string;
@@ -243,10 +244,9 @@ export default function ProjectDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await getAllProjects();
+  const projects = await JSONSerialize(await getAllProjects());
 
-  if (res) {
-    const projects = JSON.parse(res) as Project[];
+  if (projects) {
     const paths = projects.map((p) => ({ params: { slug: p.slug } }));
 
     return { fallback: false, paths };
@@ -257,24 +257,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
+
   if (!params?.slug) return { notFound: true };
+  if (typeof params.slug !== "string") return { notFound: true };
 
-  const res = await getProjectWithPrevAndNext(params.slug as string);
+  const props = await JSONSerialize(
+    await getProjectWithPrevAndNext(params.slug)
+  );
 
-  if (res) {
-    const parsedData = JSON.parse(res) as PropsData;
-
-    const { project, prevProject, nextProject } = parsedData;
-
-    return project === null
-      ? { notFound: true }
-      : {
-          props: {
-            project,
-            nextProject: { name: nextProject.name, slug: nextProject.slug },
-            prevProject: { name: prevProject.name, slug: prevProject.slug },
-          },
-        };
+  if (props) {
+    return props.project === null ? { notFound: true } : { props };
   } else {
     return { notFound: true };
   }

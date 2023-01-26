@@ -29,6 +29,7 @@ import {
   getCertificateWithPrevAndNext,
 } from "../../server/service/certificates/certificates.service";
 import { CldImage } from "next-cloudinary";
+import { JSONSerialize } from "../../utils/server/serialize";
 
 interface CertificateRedirect {
   slug: string;
@@ -219,10 +220,9 @@ export default function CertificateDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await getAllCertificates();
+  const certificates = await JSONSerialize(await getAllCertificates());
 
-  if (res) {
-    const certificates = JSON.parse(res) as Certificate[];
+  if (certificates) {
     const paths = certificates.map((c) => ({ params: { slug: c.slug } }));
 
     return { fallback: false, paths };
@@ -233,30 +233,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
+
   if (!params?.slug) return { notFound: true };
+  if (typeof params.slug !== "string") return { notFound: true };
 
-  const res = await getCertificateWithPrevAndNext(params.slug as string);
+  const props = await JSONSerialize(
+    await getCertificateWithPrevAndNext(params.slug)
+  );
 
-  if (res) {
-    const parsedData = JSON.parse(res) as PropsData;
-
-    const { certificate, prevCertificate, nextCertificate } = parsedData;
-
-    return certificate === null
-      ? { notFound: true }
-      : {
-          props: {
-            certificate,
-            nextCertificate: {
-              name: nextCertificate.name,
-              slug: nextCertificate.slug,
-            },
-            prevCertificate: {
-              name: prevCertificate.name,
-              slug: prevCertificate.slug,
-            },
-          },
-        };
+  if (props) {
+    return props.certificate === null ? { notFound: true } : { props };
   } else {
     return { notFound: true };
   }

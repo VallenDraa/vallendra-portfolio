@@ -5,9 +5,10 @@ import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 import { Project } from "../interfaces/project.interface";
 import Quotes from "../components/Home/ProjectTopPicks/Quote";
-import TopPickSection from "../components/Home/ProjectTopPicks/topPickSection";
 import { GetStaticProps } from "next";
 import { getTopPickedProjects } from "../server/service/projects/projects.service";
+import TopPickSection from "../components/Home/ProjectTopPicks/TopPickSection";
+import { JSONSerialize } from "../utils/server/serialize";
 
 interface Props {
   topPickedProjects: Project[];
@@ -40,13 +41,7 @@ export default function Home({ topPickedProjects }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await getTopPickedProjects();
+  const topPickedProjects = await JSONSerialize(await getTopPickedProjects());
 
-  if (res) {
-    const topPickedProjects = JSON.parse(res) as Project[];
-
-    return { props: { topPickedProjects } };
-  } else {
-    return { notFound: true };
-  }
+  return { props: { topPickedProjects } };
 };
