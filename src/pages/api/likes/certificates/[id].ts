@@ -27,8 +27,6 @@ const handler: NextApiHandler = async (req, res) => {
 
         const response = { ...likes, hasLiked };
 
-        console.log(response);
-
         res.json(response);
         break;
       }
