@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 import createError from "../error/createError";
 
-let isConnected = false;
 const MONGO_URI = process.env.MONGO_URI;
 
 export default async function connectMongo(): Promise<void | Error> {
-  if (!isConnected) {
+  if (!isMongoConnected()) {
     if (!MONGO_URI) return createError();
 
     try {
@@ -13,10 +12,8 @@ export default async function connectMongo(): Promise<void | Error> {
       await mongoose.connect(MONGO_URI);
 
       console.log("connected");
-
-      isConnected = isMongoConnected();
     } catch (error) {
-      isConnected = false;
+      console.error(error);
     }
   }
 }
