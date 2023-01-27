@@ -1,35 +1,32 @@
-import {
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  GetStaticPaths,
-  GetStaticProps,
-} from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
-import Image from "next/image";
 import { FaRegNewspaper } from "react-icons/fa";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import { useState, useMemo } from "react";
+import R from "react";
 import Certificate from "../../interfaces/certificate.interface";
 import Head from "next/head";
-import allCertificates from "../../utils/datas/certificates/allCertificates";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
-import { Language } from "../../types/types";
+import { Language, LikesOperationBody } from "../../types/types";
 import {
   getAllCertificates,
   getCertificateWithPrevAndNext,
 } from "../../server/service/certificates/certificates.service";
 import { CldImage } from "next-cloudinary";
 import { JSONSerialize } from "../../utils/server/serialize";
+import { useRouter } from "next/router";
+import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
+import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
+import useDebounce from "../../utils/client/hooks/useDebounce";
 
 interface CertificateRedirect {
   slug: string;
@@ -49,17 +46,75 @@ export default function CertificateDetails({
 }: PropsData) {
   const pageTitle = `VallenDra | ${certificate.name}`;
 
-  /* language switcher
+  /* Others
   =================== */
-  const [activeLanguage, setActiveLanguage] = useState<Language>("en");
+  const router = useRouter();
+
+  /* Language switcher
+  =================== */
+  const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* Dynamic Views
+  ================== */
+  const viewsRes = useGetViewsById(certificate._id, "certificates", true);
+  const likesRes = useGetLikesById(certificate._id, "certificates", true);
 
   /* Likes
-  ========= */
-  const [likes, setLikes] = useState(certificate.likes);
-  const [hasLiked, setHasLiked] = useState(false);
-  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
+  ================== */
+  const [likes, setLikes] = R.useState(certificate.likes);
+  const [willSendLike, setWillSendLike] = R.useState(false);
+  const [hasLiked, setHasLiked] = R.useState(false);
+  const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+  const [, likeUpdateError] = useDebounce(
+    async () => {
+      if (!willSendLike) return;
+      const operation: LikesOperationBody = {
+        operation: hasLiked ? "increment" : "decrement",
+      };
 
-  async function addLike() {
+      try {
+        await fetch(`/api/likes/certificates/${certificate._id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(operation),
+        });
+
+        setWillSendLike(false);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    500,
+    [willSendLike, hasLiked]
+  );
+
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/certificates/${certificate._id}`, {
+          method: "PUT",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [router.asPath]);
+
+  /* For setting the fetched like to the local likes 
+  ==================================================== */
+  R.useEffect(() => {
+    setLikes(likesRes.data?.likes || certificate.likes);
+  }, [likesRes.data?.likes]);
+
+  /* For setting the fetched hasLiked to the local hasLiked 
+  ==================================================== */
+  R.useEffect(() => {
+    setHasLiked(likesRes.data?.hasLiked || false);
+  }, [likesRes.data?.hasLiked]);
+
+  async function toggleLike() {
     if (!hasLiked) {
       setLikes((likes) => likes + 1);
       setHasLiked(true);
@@ -67,6 +122,8 @@ export default function CertificateDetails({
       setLikes((likes) => likes - 1);
       setHasLiked(false);
     }
+
+    setWillSendLike(true);
   }
 
   return (
@@ -180,28 +237,37 @@ export default function CertificateDetails({
                 <CopyLinkBtn />
               </div>
 
-              <Tooltip
-                placement="top"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content={
-                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                }
-              >
-                <Button
-                  onClick={addLike}
-                  variant="text"
-                  color={hasLiked ? "red" : "gray"}
-                  className={`flex flex-col items-center gap-1 text-5xl ${
-                    hasLiked ? "text-red-300" : ""
-                  }`}
+              {/* Like button */}
+              <Show when={viewsRes.isLoading && likesRes.isLoading}>
+                <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
+                  <div className="basis-3/4 rounded-lg bg-white/20" />
+                  <div className="basis-1/4 rounded-lg bg-white/20" />
+                </div>
+              </Show>
+              <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
+                <Tooltip
+                  placement="top"
+                  animate={{
+                    mount: { scale: 1, y: 0 },
+                    unmount: { scale: 0, y: 25 },
+                  }}
+                  content={
+                    hasLiked ? "Thank you so much !" : "Likes are appreciated !"
+                  }
                 >
-                  <AiFillHeart />
-                  <span className="text-sm">{formattedLikes}</span>
-                </Button>
-              </Tooltip>
+                  <Button
+                    onClick={toggleLike}
+                    variant="text"
+                    color={hasLiked ? "red" : "gray"}
+                    className={`flex flex-col items-center gap-1 text-5xl ${
+                      hasLiked ? "text-red-300" : ""
+                    }`}
+                  >
+                    <AiFillHeart />
+                    <span className="text-sm">{formattedLikes}</span>
+                  </Button>
+                </Tooltip>
+              </Show>
             </aside>
           </section>
 

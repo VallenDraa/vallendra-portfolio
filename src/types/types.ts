@@ -21,6 +21,11 @@ export type Language = "id" | "en";
 
 /* Rest API types
 ================= */
+
+export type LikesOperationBody = {
+  operation: LikesPUTOperation;
+};
+
 export type LikesPUTOperation = "increment" | "decrement";
 
 export type StatsType = "views" | "likes";
