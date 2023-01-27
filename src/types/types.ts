@@ -18,3 +18,9 @@ export type technologies =
 export type categories = "website" | "desktop" | "cli" | "games";
 
 export type Language = "id" | "en";
+
+/* Rest API types
+================= */
+export type LikesPUTOperation = "increment" | "decrement";
+
+export type StatsType = "views" | "likes";

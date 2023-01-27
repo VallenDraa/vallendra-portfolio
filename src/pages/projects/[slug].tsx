@@ -25,9 +25,11 @@ import Head from "next/head";
 import { CldImage } from "next-cloudinary";
 import { JSONSerialize } from "../../utils/server/serialize";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import { useSWRConfig } from "swr";
 import R from "react";
 import { useRouter } from "next/router";
+import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
+import useDebounce from "../../utils/client/hooks/useDebounce";
+import { LikesOperationBody } from "../api/likes/projects/[id]";
 
 interface ProjectRedirect {
   slug: string;
@@ -58,12 +60,36 @@ export default function ProjectDetails({
   /* Dynamic Views
   ================== */
   const viewsRes = useGetViewsById(project._id, "projects", true);
+  const likesRes = useGetLikesById(project._id, "projects", true);
 
   /* Likes
   ================== */
   const [likes, setLikes] = R.useState(project.likes);
+  const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
   const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+  const [, likeUpdateError] = useDebounce(
+    async () => {
+      if (!willSendLike) return;
+      const operation: LikesOperationBody = {
+        operation: hasLiked ? "increment" : "decrement",
+      };
+
+      try {
+        await fetch(`/api/likes/projects/${project._id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(operation),
+        });
+
+        setWillSendLike(false);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    500,
+    [willSendLike, hasLiked]
+  );
 
   /* For incrementing view upon page load
   ==================================================== */
@@ -77,7 +103,19 @@ export default function ProjectDetails({
     })();
   }, [router.asPath]);
 
-  async function addLike() {
+  /* For setting the fetched like to the local likes 
+  ==================================================== */
+  R.useEffect(() => {
+    setLikes(likesRes.data?.likes || project.likes);
+  }, [likesRes.data?.likes]);
+
+  /* For setting the fetched hasLiked to the local hasLiked 
+  ==================================================== */
+  R.useEffect(() => {
+    setHasLiked(likesRes.data?.hasLiked || false);
+  }, [likesRes.data?.hasLiked]);
+
+  async function toggleLike() {
     if (!hasLiked) {
       setLikes((likes) => likes + 1);
       setHasLiked(true);
@@ -85,6 +123,8 @@ export default function ProjectDetails({
       setLikes((likes) => likes - 1);
       setHasLiked(false);
     }
+
+    setWillSendLike(true);
   }
 
   return (
@@ -126,7 +166,7 @@ export default function ProjectDetails({
               </Typography>
 
               <ViewsAndLikes
-                isLoading={viewsRes.isLoading}
+                isLoading={viewsRes.isLoading && likesRes.isLoading}
                 hasLiked={hasLiked}
                 likes={likes}
                 views={viewsRes.data?.views || project.views}
@@ -227,28 +267,37 @@ export default function ProjectDetails({
                 <CopyLinkBtn />
               </div>
 
-              <Tooltip
-                placement="top"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content={
-                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                }
-              >
-                <Button
-                  onClick={addLike}
-                  variant="text"
-                  color={hasLiked ? "red" : "gray"}
-                  className={`flex flex-col items-center gap-1 text-5xl ${
-                    hasLiked ? "text-red-300" : ""
-                  }`}
+              {/* Like button */}
+              <Show when={viewsRes.isLoading && likesRes.isLoading}>
+                <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
+                  <div className="basis-3/4 rounded-lg bg-white/20" />
+                  <div className="basis-1/4 rounded-lg bg-white/20" />
+                </div>
+              </Show>
+              <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
+                <Tooltip
+                  placement="top"
+                  animate={{
+                    mount: { scale: 1, y: 0 },
+                    unmount: { scale: 0, y: 25 },
+                  }}
+                  content={
+                    hasLiked ? "Thank you so much !" : "Likes are appreciated !"
+                  }
                 >
-                  <AiFillHeart />
-                  <span className="text-sm">{formattedLikes}</span>
-                </Button>
-              </Tooltip>
+                  <Button
+                    onClick={toggleLike}
+                    variant="text"
+                    color={hasLiked ? "red" : "gray"}
+                    className={`flex flex-col items-center gap-1 text-5xl ${
+                      hasLiked ? "text-red-300" : ""
+                    }`}
+                  >
+                    <AiFillHeart />
+                    <span className="text-sm">{formattedLikes}</span>
+                  </Button>
+                </Tooltip>
+              </Show>
             </aside>
           </section>
 

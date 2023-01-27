@@ -11,6 +11,7 @@ export interface Project {
   descriptionID: string;
   views: number;
   likes: number;
+  likers: string[];
   image: string;
   tech: technologies[];
   categoryIds: string[];

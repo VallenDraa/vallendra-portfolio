@@ -12,6 +12,7 @@ import R from "react";
 import useIntersectionObserver from "../../utils/client/hooks/useIntersectionObserver";
 import Stats from "./Stats";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
+import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 
 interface Props {
   // for data fetching purpose
@@ -34,29 +35,38 @@ interface Props {
 }
 
 export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
+  /* Helper state
+   ====================== */
   const [hasFetched, setHasFetched] = R.useState(false);
   const [willFetch, setWillFetch] = R.useState(false);
 
+  /* Intersection Observer
+  ======================= */
   const itemCardRef = R.useRef<HTMLAnchorElement>(null);
   const observer = useIntersectionObserver(itemCardRef, {
     freezeOnceVisible: true,
   });
 
+  /* Getting the stats
+  ====================== */
   const viewsRes = useGetViewsById(_id, type, willFetch);
+  const likesRes = useGetLikesById(_id, type, willFetch);
 
-  /* Check if element is intersecting and views has been fetched 
-  ============================================================= */
+  /* Check if element is intersecting 
+  =========================================== */
   R.useEffect(() => {
     if (observer?.isIntersecting) {
       if (!hasFetched) setWillFetch(true);
     }
   }, [observer?.isIntersecting, hasFetched]);
 
+  /* Check if views and likes had been fetched 
+  =========================================== */
   R.useEffect(() => {
-    if (viewsRes.data?.views) {
+    if (viewsRes.data?.views && likesRes.data?.likes) {
       setHasFetched(true);
     }
-  }, [viewsRes.data?.views]);
+  }, [viewsRes.data?.views, likesRes.data?.likes]);
 
   return (
     <Link
@@ -95,7 +105,7 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
         <Typography
           variant="paragraph"
           as="p"
-          className="mt-1 px-3 text-base font-normal text-white/90 sm:text-sm md:line-clamp-2"
+          className="mt-1 px-3 text-base font-normal text-white/70 sm:text-sm md:line-clamp-2"
         >
           {props.itemShortDesc}
         </Typography>
@@ -103,17 +113,17 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
         {/* props likes and views*/}
         <div className="mt-1.5 flex gap-3 px-3">
           <Stats
-            isLoading={viewsRes?.isLoading || !hasFetched}
             icon={<AiFillEye />}
-            number={viewsRes?.data?.views || props.itemViews}
             textColor="text-teal-300"
+            isLoading={viewsRes?.isLoading || !hasFetched}
+            number={viewsRes?.data?.views || props.itemViews}
           />
 
           <Stats
-            isLoading
             icon={<AiFillHeart />}
-            number={props.itemLikes}
             textColor="text-red-300"
+            isLoading={likesRes.isLoading || !hasFetched}
+            number={likesRes?.data?.likes || props.itemLikes}
           />
         </div>
 

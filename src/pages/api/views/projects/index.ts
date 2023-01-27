@@ -1,17 +1,24 @@
 import { NextApiHandler } from "next";
-import { getAllProjectViews } from "../../../../server/service/projects/projectViewsAndLikes.service";
+import { getAllProjectStats } from "../../../../server/service/projects/projectStats.service";
 
+/* This handles getting all the project views */
 const handler: NextApiHandler = async (req, res) => {
-  if (req.method === "GET") {
-    try {
-      const projects = await getAllProjectViews();
+  try {
+    switch (req.method) {
+      case "GET": {
+        const projects = await getAllProjectStats(["views"]);
 
-      res.json(projects);
-    } catch (error) {
-      console.error(error);
+        res.json(projects);
+        break;
+      }
+
+      default: {
+        res.status(405).json({ message: "Invalid method for the request" });
+        break;
+      }
     }
-  } else {
-    res.status(405).json({ message: "Invalid method for the request" });
+  } catch (error) {
+    console.error(error);
   }
 };
 

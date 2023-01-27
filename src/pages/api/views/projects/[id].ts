@@ -1,9 +1,11 @@
 import { NextApiHandler } from "next";
 import {
-  getProjectViews,
+  getProjectStats,
   incProjectStat,
-} from "../../../../server/service/projects/projectViewsAndLikes.service";
+} from "../../../../server/service/projects/projectStats.service";
 
+/* this handles operation on views for a single project
+====================================================== */
 const handler: NextApiHandler = async (req, res) => {
   try {
     const { id } = req.query;
@@ -11,16 +13,25 @@ const handler: NextApiHandler = async (req, res) => {
 
     /* Check the http method
     ======================= */
-    if (req.method === "GET") {
-      const views = await getProjectViews(id);
+    switch (req.method) {
+      case "GET": {
+        const views = await getProjectStats(id, ["views"]);
 
-      res.json(views);
-    } else if (req.method === "PUT") {
-      await incProjectStat(id, "views");
+        res.json(views);
+        break;
+      }
 
-      res.json(204);
-    } else {
-      res.status(405).json({ message: "Invalid method for the request" });
+      case "PUT": {
+        await incProjectStat(id, "views");
+
+        res.json(204);
+        break;
+      }
+
+      default: {
+        res.status(405).json({ message: "Invalid method for the request" });
+        break;
+      }
     }
   } catch (error) {
     console.error(error);

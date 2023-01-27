@@ -86,7 +86,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
             {/* blur */}
             <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
 
-            <Link href="/projects">
+            <Link aria-label="All projects link" href="/projects">
               <Tooltip
                 animate={{
                   mount: { scale: 1, y: 0 },
@@ -96,6 +96,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
               >
                 {/* dot in line */}
                 <IconButton
+                  aria-label="All projects button"
                   variant="gradient"
                   color="deep-purple"
                   size="lg"

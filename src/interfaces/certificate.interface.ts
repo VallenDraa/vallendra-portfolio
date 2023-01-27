@@ -8,6 +8,7 @@ interface Certificate {
   descriptionID: string;
   views: number;
   likes: number;
+  likers: string[];
   loadingImage?: string;
   image: string;
   categoryIds: string[];
