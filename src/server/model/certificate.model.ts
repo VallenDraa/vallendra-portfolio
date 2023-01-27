@@ -18,6 +18,7 @@ const CertificateSchema = new mongoose.Schema<CertificateDocument>(
     descriptionID: { type: String, required: true },
     views: { type: Number },
     likes: { type: Number },
+    likers: [{ type: String, default: [] }],
     image: { type: String, required: true },
     categoryIds: [
       {

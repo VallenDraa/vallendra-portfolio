@@ -9,9 +9,11 @@ export async function getCertificateWithPrevAndNext(slug: string) {
 
     let nextCertificate: LeanDocument<Certificate>,
       prevCertificate: LeanDocument<Certificate>;
-    const certificate = await CertificateModel.findOne<Certificate>({
+    const certificate = await CertificateModel.findOne({
       slug,
-    }).lean();
+    })
+      .select("-likers")
+      .lean();
 
     if (certificate === null) throw new Error();
     if (!certificate.createdAt) throw new Error();
@@ -54,7 +56,9 @@ export async function getAllCertificates() {
   try {
     connectMongo();
 
-    const allCertificates = await CertificateModel.find().lean();
+    const allCertificates = await CertificateModel.find()
+      .select("-likers")
+      .lean();
 
     return allCertificates;
   } catch (error) {
@@ -65,7 +69,7 @@ export async function getAllCertificates() {
 /* Helpers
 ========== */
 async function getFirstCertificate(select: (keyof Certificate)[] = []) {
-  const [firstCertificate] = await CertificateModel.find<Certificate>()
+  const [firstCertificate] = await CertificateModel.find()
     .sort({ createdAt: 1 })
     .limit(1)
     .select(select)
@@ -75,7 +79,7 @@ async function getFirstCertificate(select: (keyof Certificate)[] = []) {
 }
 
 async function getLastCertificate(select: (keyof Certificate)[] = []) {
-  const [lastCertificate] = await CertificateModel.find<Certificate>()
+  const [lastCertificate] = await CertificateModel.find()
     .sort({ createdAt: -1 })
     .limit(1)
     .select(select)
@@ -85,7 +89,7 @@ async function getLastCertificate(select: (keyof Certificate)[] = []) {
 }
 
 async function getNextCertificate(createdAt: Date) {
-  const [nextCertificate] = await CertificateModel.find<Certificate>({
+  const [nextCertificate] = await CertificateModel.find({
     createdAt: { $gt: createdAt },
   })
     .sort({ createdAt: 1 })
@@ -97,7 +101,7 @@ async function getNextCertificate(createdAt: Date) {
 }
 
 async function getPrevCertificate(createdAt: Date) {
-  const [prevCertificate] = await CertificateModel.find<Certificate>({
+  const [prevCertificate] = await CertificateModel.find({
     createdAt: { $lt: createdAt },
   })
     .sort({ createdAt: -1 })

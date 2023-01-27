@@ -17,6 +17,7 @@ const ProjectSchema = new mongoose.Schema<ProjectDocument>(
     descriptionID: { type: String, required: true },
     views: { type: Number },
     likes: { type: Number },
+    likers: [{ type: String, default: [] }],
     image: { type: String, required: true },
     tech: [{ type: String, default: [] }],
     categoryIds: [

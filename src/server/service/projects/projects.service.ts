@@ -8,7 +8,9 @@ export async function getTopPickedProjects() {
     connectMongo();
     const topPickedProjects = await ProjectModel.find({
       isTopPick: true,
-    }).lean();
+    })
+      .select("-likers")
+      .lean();
 
     return topPickedProjects;
   } catch (error) {
@@ -21,7 +23,9 @@ export async function getProjectWithPrevAndNext(slug: string) {
     connectMongo();
 
     let nextProject: LeanDocument<Project>, prevProject: LeanDocument<Project>;
-    const project = await ProjectModel.findOne({ slug }).lean();
+    const project = await ProjectModel.findOne({ slug })
+      .select("-likers")
+      .lean();
 
     if (project === null) throw new Error();
     if (!project.createdAt) throw new Error();
@@ -64,7 +68,7 @@ export async function getAllProjects() {
   try {
     connectMongo();
 
-    const allProjects = await ProjectModel.find().lean();
+    const allProjects = await ProjectModel.find().select("-likers").lean();
 
     return allProjects;
   } catch (error) {
@@ -75,7 +79,7 @@ export async function getAllProjects() {
 /* Helpers
 ========== */
 async function getFirstProject(select: (keyof Project)[] = []) {
-  const [firstProject] = await ProjectModel.find<Project>()
+  const [firstProject] = await ProjectModel.find()
     .sort({ createdAt: 1 })
     .limit(1)
     .select(select)
@@ -85,7 +89,7 @@ async function getFirstProject(select: (keyof Project)[] = []) {
 }
 
 async function getLastProject(select: (keyof Project)[] = []) {
-  const [lastProject] = await ProjectModel.find<Project>()
+  const [lastProject] = await ProjectModel.find()
     .sort({ createdAt: -1 })
     .limit(1)
     .select(select)
@@ -95,7 +99,7 @@ async function getLastProject(select: (keyof Project)[] = []) {
 }
 
 async function getNextProject(createdAt: Date) {
-  const [nextProject] = await ProjectModel.find<Project>({
+  const [nextProject] = await ProjectModel.find({
     createdAt: { $gt: createdAt },
   })
     .sort({ createdAt: 1 })
@@ -107,7 +111,7 @@ async function getNextProject(createdAt: Date) {
 }
 
 async function getPrevProject(createdAt: Date) {
-  const [prevProject] = await ProjectModel.find<Project>({
+  const [prevProject] = await ProjectModel.find({
     createdAt: { $lt: createdAt },
   })
     .sort({ createdAt: -1 })
