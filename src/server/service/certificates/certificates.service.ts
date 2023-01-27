@@ -4,66 +4,58 @@ import CertificateModel from "../../model/certificate.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getCertificateWithPrevAndNext(slug: string) {
-  try {
-    connectMongo();
+  connectMongo();
 
-    let nextCertificate: LeanDocument<Certificate>,
-      prevCertificate: LeanDocument<Certificate>;
-    const certificate = await CertificateModel.findOne({
-      slug,
-    })
-      .select("-likers")
-      .lean();
+  let nextCertificate: LeanDocument<Certificate>,
+    prevCertificate: LeanDocument<Certificate>;
+  const certificate = await CertificateModel.findOne({
+    slug,
+  })
+    .select("-likers")
+    .lean();
 
-    if (certificate === null) throw new Error();
-    if (!certificate.createdAt) throw new Error();
+  if (certificate === null) throw new Error();
+  if (!certificate.createdAt) throw new Error();
 
-    const certificateId = certificate._id.toString();
-    const certificateCreatedAt = certificate.createdAt as Date;
+  const certificateId = certificate._id.toString();
+  const certificateCreatedAt = certificate.createdAt as Date;
 
-    const { _id: firstCertificateId } = await getFirstCertificate(["_id"]);
-    const { _id: lastCertificateId } = await getLastCertificate(["_id"]);
+  const { _id: firstCertificateId } = await getFirstCertificate(["_id"]);
+  const { _id: lastCertificateId } = await getLastCertificate(["_id"]);
 
-    const certificateIsFirst = certificateId === firstCertificateId.toString();
-    const certificateIsLast = certificateId === lastCertificateId.toString();
+  const certificateIsFirst = certificateId === firstCertificateId.toString();
+  const certificateIsLast = certificateId === lastCertificateId.toString();
 
-    /* get the next and previous certificate name and slug
+  /* get the next and previous certificate name and slug
     ================================================= */
-    if (certificateIsFirst) {
-      nextCertificate = await getNextCertificate(certificateCreatedAt);
-      prevCertificate = await getLastCertificate(["slug", "name"]);
+  if (certificateIsFirst) {
+    nextCertificate = await getNextCertificate(certificateCreatedAt);
+    prevCertificate = await getLastCertificate(["slug", "name"]);
+  } else {
+    if (certificateIsLast) {
+      prevCertificate = await getPrevCertificate(certificateCreatedAt);
+      nextCertificate = await getFirstCertificate(["slug", "name"]);
     } else {
-      if (certificateIsLast) {
-        prevCertificate = await getPrevCertificate(certificateCreatedAt);
-        nextCertificate = await getFirstCertificate(["slug", "name"]);
-      } else {
-        prevCertificate = await getPrevCertificate(certificateCreatedAt);
-        nextCertificate = await getNextCertificate(certificateCreatedAt);
-      }
+      prevCertificate = await getPrevCertificate(certificateCreatedAt);
+      nextCertificate = await getNextCertificate(certificateCreatedAt);
     }
-
-    return {
-      certificate,
-      nextCertificate: nextCertificate || prevCertificate,
-      prevCertificate: prevCertificate || nextCertificate,
-    };
-  } catch (error) {
-    console.error(error);
   }
+
+  return {
+    certificate,
+    nextCertificate: nextCertificate || prevCertificate,
+    prevCertificate: prevCertificate || nextCertificate,
+  };
 }
 
 export async function getAllCertificates() {
-  try {
-    connectMongo();
+  connectMongo();
 
-    const allCertificates = await CertificateModel.find()
-      .select("-likers")
-      .lean();
+  const allCertificates = await CertificateModel.find()
+    .select("-likers")
+    .lean();
 
-    return allCertificates;
-  } catch (error) {
-    console.error(error);
-  }
+  return allCertificates;
 }
 
 /* Helpers

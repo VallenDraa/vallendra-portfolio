@@ -1,10 +1,13 @@
 import { Types } from "mongoose";
 import { StatsType } from "../../../types/types";
 import ProjectModel from "../../model/project.model";
+import connectMongo from "../../mongo/mongodb";
 
 /* Services for fetching stats
 ============================== */
 export async function getProjectStats(_id: string, fields: StatsType[]) {
+  connectMongo();
+
   const project = await ProjectModel.findById(_id)
     .select([...fields, "_id"])
     .lean();
@@ -15,6 +18,8 @@ export async function getProjectStats(_id: string, fields: StatsType[]) {
 }
 
 export async function getAllProjectStats(fields: StatsType[]) {
+  connectMongo();
+
   const projects = await ProjectModel.find()
     .select([...fields, "_id"])
     .lean();
@@ -25,10 +30,14 @@ export async function getAllProjectStats(fields: StatsType[]) {
 /* Services for mutating stats
 ============================== */
 export async function incProjectStat(_id: string, field: "views" | "likes") {
+  connectMongo();
+
   await ProjectModel.updateOne({ _id }, { $inc: { [field]: 1 } }).lean();
 }
 
 export async function decProjectStat(_id: string, field: "views" | "likes") {
+  connectMongo();
+
   await ProjectModel.updateOne({ _id }, { $inc: { [field]: -1 } }).lean();
 }
 
@@ -39,6 +48,8 @@ export async function editLikersList(
   uniqueId: string,
   operation: "add" | "remove"
 ) {
+  connectMongo();
+
   await ProjectModel.updateOne(
     { _id: projectId },
     operation === "add"
@@ -51,6 +62,8 @@ export async function editLikersList(
 }
 
 export async function getProjectLikers(_id: string) {
+  connectMongo();
+
   const likers: { _id: Types.ObjectId; likers: string[] } | null =
     await ProjectModel.findById(_id).select("likers").lean();
 
@@ -58,6 +71,8 @@ export async function getProjectLikers(_id: string) {
 }
 
 export async function getHasLiked(_id: string, uniqueIpId: string) {
+  connectMongo();
+
   const res = await getProjectLikers(_id);
   if (!res) throw new Error();
 

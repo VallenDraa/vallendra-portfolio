@@ -2,14 +2,9 @@ import CertificateCategoryModel from "../../model/certificateCategory.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getAllCertificateCategories() {
-  try {
-    connectMongo();
+  connectMongo();
 
-    const allCertificateCategories =
-      await CertificateCategoryModel.find().lean();
+  const allCertificateCategories = await CertificateCategoryModel.find().lean();
 
-    return allCertificateCategories;
-  } catch (error) {
-    console.error(error);
-  }
+  return allCertificateCategories;
 }

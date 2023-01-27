@@ -1,79 +1,70 @@
 import { LeanDocument } from "mongoose";
-import { Project } from "../../../interfaces/project.interface";
 import ProjectModel from "../../model/project.model";
+import Project from "../../../interfaces/project.interface";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getTopPickedProjects() {
-  try {
-    connectMongo();
-    const topPickedProjects = await ProjectModel.find({
-      isTopPick: true,
-    })
-      .select("-likers")
-      .lean();
+  connectMongo();
 
-    return topPickedProjects;
-  } catch (error) {
-    console.error(error);
-  }
+  const topPickedProjects = await ProjectModel.find({
+    isTopPick: true,
+  })
+    .select("-likers")
+    .lean();
+
+  return topPickedProjects;
 }
 
 export async function getProjectWithPrevAndNext(slug: string) {
-  try {
-    connectMongo();
+  connectMongo();
 
-    let nextProject: LeanDocument<Project>, prevProject: LeanDocument<Project>;
-    const project = await ProjectModel.findOne({ slug })
-      .select("-likers")
-      .lean();
+  let nextProject: LeanDocument<Project>, prevProject: LeanDocument<Project>;
+  const project = await ProjectModel.findOne({
+    slug,
+  })
+    .select("-likers")
+    .lean();
 
-    if (project === null) throw new Error();
-    if (!project.createdAt) throw new Error();
+  if (project === null) throw new Error();
+  if (!project.createdAt) throw new Error();
 
-    const projectId = project._id.toString();
-    const projectCreatedAt = project.createdAt as Date;
+  const projectId = project._id.toString();
+  const projectCreatedAt = project.createdAt as Date;
 
-    const { _id: firstProjectId } = await getFirstProject(["_id"]);
-    const { _id: lastProjectId } = await getLastProject(["_id"]);
+  const { _id: firstProjectId } = await getFirstProject(["_id"]);
+  const { _id: lastProjectId } = await getLastProject(["_id"]);
 
-    const projectIsFirst = projectId === firstProjectId.toString();
-    const projectIsLast = projectId === lastProjectId.toString();
+  const projectIsFirst = projectId === firstProjectId.toString();
+  const projectIsLast = projectId === lastProjectId.toString();
 
-    /* get the next and previous project name and slug
+  /* get the next and previous project name and slug
     ================================================= */
-    if (projectIsFirst) {
-      nextProject = await getNextProject(projectCreatedAt);
-      prevProject = await getLastProject(["slug", "name"]);
+  if (projectIsFirst) {
+    nextProject = await getNextProject(projectCreatedAt);
+    prevProject = await getLastProject(["slug", "name"]);
+  } else {
+    if (projectIsLast) {
+      prevProject = await getPrevProject(projectCreatedAt);
+      nextProject = await getFirstProject(["slug", "name"]);
     } else {
-      if (projectIsLast) {
-        prevProject = await getPrevProject(projectCreatedAt);
-        nextProject = await getFirstProject(["slug", "name"]);
-      } else {
-        prevProject = await getPrevProject(projectCreatedAt);
-        nextProject = await getNextProject(projectCreatedAt);
-      }
+      prevProject = await getPrevProject(projectCreatedAt);
+      nextProject = await getNextProject(projectCreatedAt);
     }
-
-    return {
-      project,
-      nextProject: nextProject || prevProject,
-      prevProject: prevProject || nextProject,
-    };
-  } catch (error) {
-    console.error(error);
   }
+
+  return {
+    project,
+    nextProject: nextProject || prevProject,
+    prevProject: prevProject || nextProject,
+  };
 }
 
 export async function getAllProjects() {
-  try {
-    connectMongo();
+  connectMongo();
 
-    const allProjects = await ProjectModel.find().select("-likers").lean();
+  const allProjects = await ProjectModel.find().select("-likers").lean();
 
-    return allProjects;
-  } catch (error) {
-    console.error(error);
-  }
+  return allProjects;
 }
 
 /* Helpers

@@ -2,13 +2,9 @@ import ProjectCategoryModel from "../../model/projectCategory.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getAllProjectCategories() {
-  try {
-    connectMongo();
+  connectMongo();
 
-    const allProjectCategories = await ProjectCategoryModel.find().lean();
+  const allProjectCategories = await ProjectCategoryModel.find().lean();
 
-    return allProjectCategories;
-  } catch (error) {
-    console.error(error);
-  }
+  return allProjectCategories;
 }
