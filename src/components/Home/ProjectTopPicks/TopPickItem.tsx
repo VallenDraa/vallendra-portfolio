@@ -1,5 +1,5 @@
 import R from "react";
-import { Project } from "../../../interfaces/project.interface";
+import Project from "../../../interfaces/project.interface";
 import { CldImage } from "next-cloudinary";
 import { Typography } from "@material-tailwind/react";
 import { Language, technologies } from "../../../types/types";

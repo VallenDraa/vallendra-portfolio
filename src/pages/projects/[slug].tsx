@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Project } from "../../interfaces/project.interface";
+import Project from "../../interfaces/project.interface";
 import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
-import { Language, technologies } from "../../types/types";
+import { Language, LikesOperationBody, technologies } from "../../types/types";
 import TECHS from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
@@ -29,7 +29,6 @@ import R from "react";
 import { useRouter } from "next/router";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 import useDebounce from "../../utils/client/hooks/useDebounce";
-import { LikesOperationBody } from "../api/likes/projects/[id]";
 
 interface ProjectRedirect {
   slug: string;

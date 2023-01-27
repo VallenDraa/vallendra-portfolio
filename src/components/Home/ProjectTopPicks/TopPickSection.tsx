@@ -1,5 +1,5 @@
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { Project } from "../../../interfaces/project.interface";
+import Project from "../../../interfaces/project.interface";
 import Line from "../../Line";
 import { useRef, useState } from "react";
 import TopPickItem, { TwistDirection } from "./TopPickItem";

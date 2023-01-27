@@ -6,12 +6,8 @@ import {
   editLikersList,
   getHasLiked,
 } from "../../../../server/service/projects/projectStats.service";
-import { LikesPUTOperation } from "../../../../types/types";
 import getUniqueIpId from "../../../../utils/server/getUniqueIpId";
-
-export interface LikesOperationBody {
-  operation: LikesPUTOperation;
-}
+import { LikesOperationBody } from "../../../../types/types";
 
 /* this handles operation on likes for a single project
 ====================================================== */

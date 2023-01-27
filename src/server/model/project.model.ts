@@ -1,5 +1,5 @@
 import mongoose, { Model } from "mongoose";
-import { Project } from "../../interfaces/project.interface";
+import Project from "../../interfaces/project.interface";
 
 interface ProjectDocument extends Omit<Project, "_id">, mongoose.Document {
   createdAt: Date;

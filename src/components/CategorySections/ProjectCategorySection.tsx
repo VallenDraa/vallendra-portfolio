@@ -1,4 +1,4 @@
-import { Project } from "../../interfaces/project.interface";
+import Project from "../../interfaces/project.interface";
 import { useMemo } from "react";
 import SectionHeading from "../SectionHeading";
 import ItemCard from "../Cards/ItemCard";

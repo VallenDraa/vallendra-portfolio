@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Head from "next/head";
-import { Project } from "../../interfaces/project.interface";
+import Project from "../../interfaces/project.interface";
 import Show from "../../utils/client/jsx/Show";
 import { useState, useMemo } from "react";
 import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";

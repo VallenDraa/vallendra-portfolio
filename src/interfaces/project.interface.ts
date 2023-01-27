@@ -1,6 +1,6 @@
 import { technologies } from "../types/types";
 
-export interface Project {
+export default interface Project {
   _id: string;
   icon?: string;
   name: string;

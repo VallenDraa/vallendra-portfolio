@@ -3,7 +3,7 @@ import Profile from "../components/Home/Profile/Profile";
 import Redirect from "../components/Home/Redirect/Redirect";
 import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
-import { Project } from "../interfaces/project.interface";
+import Project from "../interfaces/project.interface";
 import Quotes from "../components/Home/ProjectTopPicks/Quote";
 import { GetStaticProps } from "next";
 import { getTopPickedProjects } from "../server/service/projects/projects.service";
