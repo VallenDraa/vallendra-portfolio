@@ -1,5 +1,6 @@
 import { RefObject } from "react";
 type FadeInAnimation =
+  | "animate-fade-in"
   | "animate-fade-in-left"
   | "animate-fade-in-right"
   | "animate-fade-in-bottom"
