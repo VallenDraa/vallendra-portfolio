@@ -44,8 +44,8 @@ export default function Contacts() {
               variant="paragraph"
               className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
             >
-              You can contact me via email or through others means that are
-              provided below !
+              You can contact me via email or through others means provided
+              below !
             </Typography>
           </header>
         </Observe>
