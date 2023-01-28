@@ -27,7 +27,7 @@ export default function Stats({
       variant="paragraph"
       as="span"
       className={`flex items-center gap-1 text-xs font-bold ${textColor} ${
-        isLoading ? skeleton : ""
+        isLoading ? skeleton : "animate-fade-in"
       }`}
     >
       {icon}

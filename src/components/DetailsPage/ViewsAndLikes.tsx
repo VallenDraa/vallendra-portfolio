@@ -27,7 +27,7 @@ export default function ViewsAndLikes({
         variant="paragraph"
         as="span"
         className={`flex items-center gap-1 text-sm font-bold ${
-          isLoading ? skeleton : ""
+          isLoading ? skeleton : "animate-fade-in"
         }`}
       >
         <AiFillEye />
@@ -41,7 +41,7 @@ export default function ViewsAndLikes({
         as="span"
         className={`flex items-center gap-1 text-sm font-bold ${
           hasLiked ? "text-red-300" : "text-inherit"
-        } ${isLoading ? skeleton : ""}`}
+        } ${isLoading ? skeleton : "animate-fade-in"}`}
       >
         <AiFillHeart />
         <Show when={!isLoading}>{formattedLikes} likes</Show>
