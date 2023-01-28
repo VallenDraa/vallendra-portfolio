@@ -12,7 +12,7 @@ export default function BreathingBackground() {
 
     switch (route) {
       case pagesEnum.index:
-        bgRef.current.style.height = "760px";
+        bgRef.current.style.height = "750px";
         break;
 
       default:
