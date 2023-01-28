@@ -13,7 +13,7 @@ export default function Hero() {
         id="home"
         className="relative z-10 mb-24 xl:mb-8"
       >
-        <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center px-8 lg:px-2 xl:min-h-[650px] xl:flex-row xl:justify-between 2xl:px-0">
+        <div className="mx-auto flex max-w-screen-xl flex-col items-center justify-center px-8 lg:px-2 xl:min-h-[650px] xl:flex-row xl:justify-between 2xl:px-2">
           {/* left side */}
           <Observe
             freezeOnceVisible

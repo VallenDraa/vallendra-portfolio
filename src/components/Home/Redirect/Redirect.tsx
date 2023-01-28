@@ -12,7 +12,7 @@ import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 ================================================================ */
 export default function Redirect() {
   return (
-    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-0">
+    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-2">
       <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5] bg-indigo-500/30 dark:bg-white/20" />
 
       <Observe

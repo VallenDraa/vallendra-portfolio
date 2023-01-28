@@ -27,7 +27,7 @@ export default function Contacts() {
           freezeOnceVisible
           onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 0)}
         >
-          <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 opacity-0 2xl:px-0">
+          <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 opacity-0 2xl:px-2">
             <div className="relative flex w-fit items-center gap-1">
               <Typography
                 as="h2"
@@ -51,7 +51,7 @@ export default function Contacts() {
         </Observe>
 
         {/* form and other contact link */}
-        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 sm:flex-row 2xl:px-0">
+        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 overflow-x-hidden sm:flex-row 2xl:px-2">
           {/* email form */}
 
           <Observe

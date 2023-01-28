@@ -16,9 +16,9 @@ export default function Profile() {
     <section
       aria-label="profile-section"
       id="profile"
-      className="relative z-10 space-y-12 bg-indigo-50 dark:bg-gray-900"
+      className="relative z-10 space-y-8 bg-indigo-50 dark:bg-gray-900"
     >
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 xl:flex-row 2xl:px-0">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 pb-4 overflow-x-hidden xl:flex-row 2xl:px-2">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <Observe
