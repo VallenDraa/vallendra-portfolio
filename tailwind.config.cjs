@@ -6,12 +6,6 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = withMT({
   darkMode: "class",
   content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
-  // safelist: [
-  //   "animate-fade-in-left",
-  //   "animate-fade-in-right",
-  //   "animate-fade-in-bottom",
-  //   "animate-fade-in-top",
-  // ],
   theme: {
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
