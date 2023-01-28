@@ -32,7 +32,7 @@ export default function ProjectCategorySection({
   }, []);
 
   return (
-    <section className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <SectionHeading>{category.name}</SectionHeading>
 
       {/* display projects in this category */}
@@ -56,7 +56,7 @@ export default function ProjectCategorySection({
           );
         })}
       </ul>
-    </section>
+    </div>
   );
 }
 

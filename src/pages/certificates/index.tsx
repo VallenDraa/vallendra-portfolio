@@ -13,6 +13,8 @@ import SearchNotFound from "../../components/SearchNotFound";
 import { getAllCertificates } from "../../server/service/certificates/certificates.service";
 import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
 import { JSONSerialize } from "../../utils/server/serialize";
+import Observe from "../../components/Observe";
+import fadeIn from "../../utils/client/helpers/animateOnObserved";
 
 interface Props {
   certificates: Certificate[];
@@ -56,35 +58,48 @@ export default function ProjectsPage({ certificates, categories }: Props) {
       </Head>
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-0">
-          {/* heading and searchbar */}
-          <section className="relative z-10">
-            <div className="relative flex w-fit items-center gap-1">
+          {/* heading */}
+          <Observe
+            freezeOnceVisible
+            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+          >
+            <div className="relative z-10 opacity-0">
+              <div className="relative flex w-fit items-center gap-1">
+                <Typography
+                  as="h2"
+                  variant="h2"
+                  className="primary-gradient relative z-40 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
+                >
+                  My Certificates
+                </Typography>
+                <span className="text-4xl md:text-5xl">📃</span>
+              </div>
+
               <Typography
-                as="h2"
-                variant="h2"
-                className="primary-gradient relative z-40 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
+                as="p"
+                variant="paragraph"
+                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
               >
-                My Certificates
+                The ultimate showcase of all my certificates
               </Typography>
-              <span className="text-4xl md:text-5xl">📃</span>
             </div>
+          </Observe>
 
-            <Typography
-              as="p"
-              variant="paragraph"
-              className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
-            >
-              The ultimate showcase of all my certificates
-            </Typography>
-
-            <SearchInput
-              willRedirect
-              defaultValue={query}
-              placeholder="Search Certificates"
-              loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
-              callback={(query) => setQuery(query)}
-            />
-          </section>
+          {/* searchbar */}
+          <Observe
+            freezeOnceVisible
+            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+          >
+            <div className="opacity-0">
+              <SearchInput
+                willRedirect
+                defaultValue={query}
+                placeholder="Search Certificates"
+                loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
+                callback={(query) => setQuery(query)}
+              />
+            </div>
+          </Observe>
         </header>
 
         {/* the certificates list */}
@@ -102,12 +117,20 @@ export default function ProjectsPage({ certificates, categories }: Props) {
               {categories.map((category, i) => {
                 return (
                   // index is used for determining the image priority prop
-                  <CertificateCategorySection
-                    categoryIndex={i}
+                  <Observe
                     key={category._id}
-                    category={category}
-                    certificates={certificates}
-                  />
+                    freezeOnceVisible
+                    onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
+                  >
+                    <section className="opacity-0">
+                      <CertificateCategorySection
+                        categoryIndex={i}
+                        key={category._id}
+                        category={category}
+                        certificates={certificates}
+                      />
+                    </section>
+                  </Observe>
                 );
               })}
             </div>
@@ -150,7 +173,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           {/* fallback for when the certificates failed to load */}
           <Show when={certificates.length === 0 || !certificates || isError}>
             {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 space-y-2 px-8 text-center lg:px-0">
+            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 animate-fade-in space-y-2 px-8 text-center lg:px-0">
               <Typography
                 variant="h4"
                 as="h2"

@@ -34,7 +34,7 @@ export default function CertificateCategorySection({
   }, []);
 
   return (
-    <section className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <SectionHeading>{category.name}</SectionHeading>
 
       {/* display certificates in this category */}
@@ -57,7 +57,7 @@ export default function CertificateCategorySection({
           );
         })}
       </ul>
-    </section>
+    </div>
   );
 }
 
