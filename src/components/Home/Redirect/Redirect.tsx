@@ -17,7 +17,7 @@ export default function Redirect() {
 
       <Observe
         freezeOnceVisible
-        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
       >
         <Typography
           as="h2"
@@ -29,7 +29,7 @@ export default function Redirect() {
 
       <Observe
         freezeOnceVisible
-        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
+        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
       >
         <Link href="/contacts" className="relative z-10 mt-8 opacity-0">
           <Button
@@ -44,7 +44,7 @@ export default function Redirect() {
 
       <Observe
         freezeOnceVisible
-        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
       >
         <Link
           href="/projects"

@@ -10,7 +10,7 @@ export default function Quotes() {
   return (
     <Observe
       freezeOnceVisible
-      enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+      onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
     >
       <div
         className={`relative z-40 mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-8 opacity-0 sm:gap-6 lg:gap-8 lg:px-0 ${quoteGradient}`}

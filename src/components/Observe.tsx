@@ -6,14 +6,14 @@ import { IS_PROD } from "../../constants";
 
 interface Props<T extends HTMLElement> extends UseIntersectionObserverProps {
   children: React.ReactElement;
-  enterCB?: (element: R.RefObject<T>) => void;
-  exitCB?: (element: R.RefObject<T>) => void;
+  onEnter?: (element: R.RefObject<T>) => void;
+  onExit?: (element: R.RefObject<T>) => void;
 }
 
 function Observe<T extends HTMLElement>({
   children,
-  enterCB,
-  exitCB,
+  onEnter,
+  onExit,
   freezeOnceVisible,
   ...others
 }: Props<T>) {
@@ -25,9 +25,9 @@ function Observe<T extends HTMLElement>({
 
   R.useEffect(() => {
     if (entry?.isIntersecting) {
-      enterCB && enterCB(ref);
+      onEnter && onEnter(ref);
     } else {
-      exitCB && exitCB(ref);
+      onExit && onExit(ref);
     }
   }, [entry?.isIntersecting]);
 
