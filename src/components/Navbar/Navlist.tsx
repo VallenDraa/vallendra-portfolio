@@ -13,7 +13,6 @@ import NavIsOpenedContext from "../../context/NavIsOpenedCP";
 import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
 import NavBtn from "./NavBtn";
 import StyledButton from "../StyledComponents/StyledButton";
-import ThemeToggler from "./ThemeToggler";
 
 interface Props {
   navListRef: RefObject<HTMLDivElement>;
@@ -99,12 +98,20 @@ export default function NavList({ navListRef, overlayRef }: Props) {
             <Fragment key={menu}>
               {/* menu for other than projects and certicates */}
               <Show when={menu !== "projects" && menu !== "certificates"}>
-                <NavBtn menu={menu} href={`/#${menu}`} />
+                <NavBtn
+                  onClick={() => window.innerWidth < 960 && closeNav()}
+                  menu={menu}
+                  href={`/#${menu}`}
+                />
               </Show>
 
               {/* for certticates page menu */}
               <Show when={menu === "certificates"}>
-                <NavBtn menu={menu} href={`/${menu}`} />
+                <NavBtn
+                  onClick={() => window.innerWidth < 960 && closeNav()}
+                  menu={menu}
+                  href={`/${menu}`}
+                />
               </Show>
 
               {/* for project menu link */}
@@ -156,6 +163,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
                     <AccordionBody className="py-1.5">
                       <Link href="/#top-picks">
                         <Button
+                          onClick={closeNav}
                           color="indigo"
                           variant="text"
                           fullWidth
@@ -166,6 +174,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
                       </Link>
                       <Link href="/projects">
                         <Button
+                          onClick={closeNav}
                           color="indigo"
                           variant="text"
                           fullWidth

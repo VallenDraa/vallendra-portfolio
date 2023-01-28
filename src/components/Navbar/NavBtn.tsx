@@ -4,12 +4,15 @@ import Link from "next/link";
 export default function NavBtn({
   menu,
   href,
+  onClick,
 }: {
   menu: string;
   href?: string;
+  onClick?: () => void;
 }) {
   const ButtonElement = (
     <Button
+      onClick={() => onClick && onClick()}
       color="indigo"
       variant="text"
       fullWidth
