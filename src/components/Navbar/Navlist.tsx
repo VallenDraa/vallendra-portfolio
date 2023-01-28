@@ -32,7 +32,14 @@ export default function NavList({ navListRef, overlayRef }: Props) {
     navListRef.current?.classList.add("animate-close-nav");
     overlayRef.current?.classList.add("animate-close-overlay");
 
-    setTimeout(() => setNavIsOpened(false), 340);
+    setTimeout(() => {
+      navListRef.current?.classList.add("opacity-0");
+      overlayRef.current?.classList.add("opacity-0");
+    }, 340);
+
+    setTimeout(() => {
+      setNavIsOpened(false);
+    }, 345);
   }
 
   /* for handling accordion visibility
@@ -192,6 +199,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
         )}
 
         <Link
+          onClick={closeNav}
           href={"/contacts"}
           className="mx-auto mt-2 block w-11/12 lg:hidden"
         >
