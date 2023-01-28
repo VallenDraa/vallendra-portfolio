@@ -22,11 +22,13 @@ export default function BreathingBackground() {
   }, [route]);
 
   return (
-    <div
-      ref={bgRef}
-      className="absolute inset-x-0 animate-main-gradient bg-main-gradient bg-gradient"
-    >
-      <FloatingSquares />
+    <div className="absolute inset-x-0 animate-fade-in">
+      <div
+        ref={bgRef}
+        className="animate-main-gradient bg-main-gradient bg-gradient"
+      >
+        <FloatingSquares />
+      </div>
     </div>
   );
 }

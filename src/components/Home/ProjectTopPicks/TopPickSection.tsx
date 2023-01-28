@@ -7,6 +7,8 @@ import { Language } from "../../../types/types";
 import LanguageToggle from "../../DetailsPage/LanguageToggle";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import Observe from "../../Observe";
+import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 
 interface Props {
   topPickedProjects: Project[];
@@ -33,29 +35,46 @@ export default function TopPickSection({ topPickedProjects }: Props) {
           {/* section Title */}
           <div className="relative z-20 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:bg-gradient-to-b after:from-indigo-500/50 after:to-indigo-500/70 dark:after:from-white/40 dark:after:to-white/60 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
             <div className="relative z-30 bg-indigo-50 pb-5 dark:bg-[#272727] md:pb-0 lg:bg-transparent">
-              <div className="flex items-center">
-                <Typography
-                  as="h2"
-                  variant="h1"
-                  className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
-                >
-                  Top Picks
-                </Typography>
-                <span className="text-3xl">🌟</span>
-              </div>
-
-              <Typography
-                as="p"
-                variant="paragraph"
-                className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
+              <Observe
+                freezeOnceVisible
+                enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
               >
-                A selection of my best projects as of now.
-              </Typography>
+                <div className="flex items-center opacity-0">
+                  <Typography
+                    as="h2"
+                    variant="h1"
+                    className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
+                  >
+                    Top Picks
+                  </Typography>
+                  <span className="text-3xl">🌟</span>
+                </div>
+              </Observe>
 
-              <LanguageToggle
-                activeLanguage={activeLanguage}
-                setActiveLanguage={setActiveLanguage}
-              />
+              <Observe
+                freezeOnceVisible
+                enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
+              >
+                <Typography
+                  as="p"
+                  variant="paragraph"
+                  className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-white/80 md:text-lg"
+                >
+                  A selection of my best projects as of now.
+                </Typography>
+              </Observe>
+
+              <Observe
+                freezeOnceVisible
+                enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+              >
+                <div className="opacity-0">
+                  <LanguageToggle
+                    activeLanguage={activeLanguage}
+                    setActiveLanguage={setActiveLanguage}
+                  />
+                </div>
+              </Observe>
             </div>
           </div>
 

@@ -5,41 +5,61 @@ import Line from "../../Line";
 import BlurredBlob from "../../BlurredBlob";
 import { useTheme } from "next-themes";
 import Show from "../../../utils/client/jsx/Show";
+import Observe from "../../Observe";
+import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 
 /* redirects the user to a contacts page or to my github account
 ================================================================ */
 export default function Redirect() {
-  const { theme } = useTheme();
-
   return (
     <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-0">
       <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5] bg-indigo-500/30 dark:bg-white/20" />
 
-      <Typography
-        as="h2"
-        className="relative z-10 pt-4 text-4xl font-bold text-indigo-500 dark:text-gray-200 md:text-5xl lg:text-6xl"
+      <Observe
+        freezeOnceVisible
+        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
       >
-        Wanna Work Together ?
-      </Typography>
-      <Link href="/contacts" className="relative z-10 mt-8">
-        <Button
-          className="group flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 focus:text-indigo-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:focus:bg-white dark:focus:text-gray-900 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
-          variant="text"
+        <Typography
+          as="h2"
+          className="relative z-10 pt-4 text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
         >
-          <span className="duration-200">Contact Me</span>
-          <IoCall className="duration-200" />
-        </Button>
-      </Link>
-      <Link href="/projects" className="relative z-10 mt-4 inline-block">
-        <Button
-          variant="text"
-          size="sm"
-          color="gray"
-          className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
+          Wanna Work Together ?
+        </Typography>
+      </Observe>
+
+      <Observe
+        freezeOnceVisible
+        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
+      >
+        <Link href="/contacts" className="relative z-10 mt-8 opacity-0">
+          <Button
+            className="group flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 focus:text-indigo-500 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:focus:bg-white dark:focus:text-gray-900 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
+            variant="text"
+          >
+            <span className="duration-200">Contact Me</span>
+            <IoCall className="duration-200" />
+          </Button>
+        </Link>
+      </Observe>
+
+      <Observe
+        freezeOnceVisible
+        enterCB={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+      >
+        <Link
+          href="/projects"
+          className="relative z-10 mt-4 inline-block opacity-0"
         >
-          See other projects instead
-        </Button>
-      </Link>
+          <Button
+            variant="text"
+            size="sm"
+            color="gray"
+            className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
+          >
+            See other projects instead
+          </Button>
+        </Link>
+      </Observe>
     </section>
   );
 }
