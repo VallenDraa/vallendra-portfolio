@@ -6,6 +6,12 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = withMT({
   darkMode: "class",
   content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
+  // safelist: [
+  //   "animate-fade-in-left",
+  //   "animate-fade-in-right",
+  //   "animate-fade-in-bottom",
+  //   "animate-fade-in-top",
+  // ],
   theme: {
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
@@ -17,6 +23,30 @@ module.exports = withMT({
           "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
       },
       keyframes: {
+        "fade-in-left": {
+          "0%": { transform: "translateX(-30%)", opacity: 0 },
+          "50%": { transform: "translateX(1.8%)", opacity: 0.6 },
+          "75%": { transform: "translateX(-0.9%)", opacity: 0.8 },
+          "100%": { transform: "translateX(0%)", opacity: 1 },
+        },
+        "fade-in-right": {
+          "0%": { transform: "translateX(30%)", opacity: 0 },
+          "50%": { transform: "translateX(-1.8%)", opacity: 0.6 },
+          "75%": { transform: "translateX(0.9%)", opacity: 0.8 },
+          "100%": { transform: "translateX(0%)", opacity: 1 },
+        },
+        "fade-in-bottom": {
+          "0%": { transform: "translateY(-50%)", opacity: 0 },
+          "50%": { transform: "translateY(3%)", opacity: 0.6 },
+          "75%": { transform: "translateY(-1.5%)", opacity: 0.8 },
+          "100%": { transform: "translateX(0%)", opacity: 1 },
+        },
+        "fade-in-top": {
+          "0%": { transform: "translateY(50%)", opacity: 0 },
+          "50%": { transform: "translateY(-3%)", opacity: 0.6 },
+          "75%": { transform: "translateY(1.5%)", opacity: 0.8 },
+          "100%": { transform: "translateX(0%)", opacity: 1 },
+        },
         "fade-in": {
           from: { opacity: 0 },
           to: { opacity: 1 },
@@ -77,7 +107,11 @@ module.exports = withMT({
       },
       animation: {
         rotate: "rotate 3s linear infinite",
-        "fade-in": "fade-in 350ms ease-in",
+        "fade-in-left": "fade-in-left 850ms ease-in-out",
+        "fade-in-right": "fade-in-right 850ms ease-in-out",
+        "fade-in-bottom": "fade-in-bottom 850ms ease-in-out",
+        "fade-in-top": "fade-in-top 850ms ease-in-out",
+        "fade-in": "fade-in 350ms ease-out",
         shake: "shake 100ms ease-in-out",
         "open-nav": "open-nav 350ms ease-in",
         "close-nav": "close-nav 350ms ease-in",
