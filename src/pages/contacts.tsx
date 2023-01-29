@@ -51,9 +51,8 @@ export default function Contacts() {
         </Observe>
 
         {/* form and other contact link */}
-        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 px-8 overflow-x-hidden sm:flex-row 2xl:px-2">
+        <main className="relative z-20 mx-auto mb-10 flex w-full max-w-screen-xl flex-col-reverse gap-6 overflow-hidden px-8 sm:flex-row 2xl:px-2">
           {/* email form */}
-
           <Observe
             freezeOnceVisible
             onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 100)}
@@ -182,6 +181,7 @@ export default function Contacts() {
 
                 <Typography
                   as="p"
+                  variant="paragraph"
                   className="font-medium text-indigo-600 dark:text-gray-400 sm:hidden"
                 >
                   Connect with me and stay updated on my projects or thoughts on
