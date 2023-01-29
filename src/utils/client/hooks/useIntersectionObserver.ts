@@ -4,7 +4,7 @@ export interface UseIntersectionObserverProps extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
 }
 
-function useIntersectionObserver(
+export default function useIntersectionObserver(
   elementRef: RefObject<Element>,
   {
     threshold = 0,
@@ -41,5 +41,3 @@ function useIntersectionObserver(
 
   return entry;
 }
-
-export default useIntersectionObserver;

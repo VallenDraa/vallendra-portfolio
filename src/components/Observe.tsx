@@ -10,7 +10,7 @@ interface Props<T extends HTMLElement> extends UseIntersectionObserverProps {
   onExit?: (element: R.RefObject<T>) => void;
 }
 
-function Observe<T extends HTMLElement>({
+export default function Observe<T extends HTMLElement>({
   children,
   onEnter,
   onExit,
@@ -33,5 +33,3 @@ function Observe<T extends HTMLElement>({
 
   return R.cloneElement(children, { ref });
 }
-
-export default Observe;
