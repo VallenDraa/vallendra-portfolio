@@ -5,6 +5,8 @@ import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import ContextProviders from "../components/Layout/ContextProviders";
 import ProgressBar from "../components/ProgressBar";
+import { Analytics } from '@vercel/analytics/react';
+
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,6 +22,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ContextProviders>
       <ProgressBar />
+      <Analytics />
       {SiteLayout(<Component {...pageProps} />)}
     </ContextProviders>
   );

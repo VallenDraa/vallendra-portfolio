@@ -3,23 +3,12 @@ import NavbarComponent from "../Navbar/Navbar";
 import BreathingBackground from "../BreathingBackground";
 import Head from "next/head";
 import GoToTopBtn from "../GoToTopBtn";
+import Seo from "../../seo/Seo";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Head>
-        <meta
-          name="theme-color"
-          content="#37474f"
-          media="(prefers-color-scheme: dark)"
-        />
-        <meta
-          name="theme-color"
-          content="#c5cae9"
-          media="(prefers-color-scheme: light)"
-        />
-        <link rel="icon" href="/images/favicon.ico" />
-      </Head>
+      <Seo />
       <div className="flex flex-col">
         <NavbarComponent />
         <BreathingBackground />
