@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ogLinkMaker } from "../pages/api/og";
 
 export interface BaseSeo {
   title: string;
@@ -119,7 +120,12 @@ const defaultSeo: Seo = {
   og: {
     siteName: "Jestine Vallendra Dwi Putra",
     contentType: "Portfolio Website",
-    imageUrl: `${process.env.NEXT_PUBLIC_URL}`,
+    imageUrl: ogLinkMaker({
+      title: "VallenDra",
+      shortDesc:
+        "My portfolio website where I showcase my projects and certificates.",
+      imgLink: "home-page_anbfpj",
+    }),
     imageAlt: "A screenshot of Vallendra's Portfolio",
     siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
   },

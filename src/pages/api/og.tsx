@@ -1,6 +1,9 @@
 import { ImageResponse } from "@vercel/og";
 import { NextApiHandler } from "next";
 import Showcase from "../../server/ogComponents/showcase.og";
+import OgComponent from "../../interfaces/ogComponent.interface";
+
+export const config = { runtime: "edge" };
 
 const handler: NextApiHandler = (req) => {
   try {
@@ -12,17 +15,9 @@ const handler: NextApiHandler = (req) => {
     const imgLink =
       searchParams.get("cld-img") ??
       `${process.env.URL}/images/vallen-icon.png`;
-    const imgIsCloudinary = searchParams.has("img") ? true : false;
 
     return new ImageResponse(
-      (
-        <Showcase
-          title={title}
-          shortDesc={shortDesc}
-          imgLink={imgLink}
-          imgIsCloudinary={imgIsCloudinary}
-        />
-      ),
+      <Showcase title={title} shortDesc={shortDesc} imgLink={imgLink} />,
       { width: 1280, height: 720 }
     );
   } catch (error) {
@@ -31,6 +26,8 @@ const handler: NextApiHandler = (req) => {
   }
 };
 
-export const config = { runtime: "edge" };
+export function ogLinkMaker({ title, shortDesc, imgLink }: OgComponent) {
+  return `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${title}&short-desc=${shortDesc}&cld-img=${imgLink}`;
+}
 
 export default handler;
