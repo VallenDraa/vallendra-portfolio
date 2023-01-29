@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ogLinkMaker } from "../pages/api/og";
+import { ogLinkMaker } from "../utils/client/helpers/ogLinkMaker";
 
 export interface BaseSeo {
   title: string;

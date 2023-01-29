@@ -1,7 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { NextApiHandler } from "next";
 import Showcase from "../../server/ogComponents/showcase.og";
-import OgComponent from "../../interfaces/ogComponent.interface";
 
 export const config = { runtime: "edge" };
 
@@ -25,9 +24,5 @@ const handler: NextApiHandler = (req) => {
     return new Response(`Failed to generate the image`, { status: 500 });
   }
 };
-
-export function ogLinkMaker({ title, shortDesc, imgLink }: OgComponent) {
-  return `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${title}&short-desc=${shortDesc}&cld-img=${imgLink}`;
-}
 
 export default handler;
