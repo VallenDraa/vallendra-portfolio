@@ -18,7 +18,6 @@ import Observe from "../components/Observe";
 import fadeIn from "../utils/client/helpers/animateOnObserved";
 import R from "react";
 import { EmailBody } from "./api/email";
-import Show from "../utils/client/jsx/Show";
 
 export default function Contacts() {
   /* Email body content refs
