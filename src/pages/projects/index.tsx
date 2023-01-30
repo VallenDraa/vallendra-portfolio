@@ -1,6 +1,5 @@
 import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
-import Head from "next/head";
 import Project from "../../interfaces/project.interface";
 import Show from "../../utils/client/jsx/Show";
 import { useState, useMemo } from "react";
@@ -16,6 +15,8 @@ import { getAllProjectCategories } from "../../server/service/projects/projectCa
 import { JSONSerialize } from "../../utils/server/serialize";
 import Observe from "../../components/Observe";
 import fadeIn from "../../utils/client/helpers/animateOnObserved";
+import Seo from "../../seo/Seo";
+import projectsPageSeo from "../../seo/projectsPage.seo";
 
 interface Props {
   projects: Project[];
@@ -51,9 +52,8 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
   return (
     <>
-      <Head>
-        <title>VallenDra | Projects</title>
-      </Head>
+      <Seo base={projectsPageSeo.base} og={projectsPageSeo.og} />
+
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
           {/* heading */}

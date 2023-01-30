@@ -18,6 +18,9 @@ import Observe from "../components/Observe";
 import fadeIn from "../utils/client/helpers/animateOnObserved";
 import R from "react";
 import { EmailBody } from "./api/email";
+import Seo from "../seo/Seo";
+import contactsPageSeo from "../seo/contactsPage.seo";
+import StyledAlert from "../components/StyledComponents/StyledAlert";
 
 export default function Contacts() {
   /* Email body content refs
@@ -70,10 +73,10 @@ export default function Contacts() {
 
   return (
     <>
-      <Head>
-        <title>VallenDra | Contacts</title>
-      </Head>
-      <Alert
+      <Seo base={contactsPageSeo.base} og={contactsPageSeo.og} />
+
+      {/* alert that is shown after sending an email */}
+      <StyledAlert
         icon={
           emailHasError ? (
             <IoWarning className="text-2xl" />
@@ -81,8 +84,7 @@ export default function Contacts() {
             <IoInformationCircle className="text-2xl" />
           )
         }
-        className="fixed bottom-0 z-[55] items-center rounded-none"
-        color={emailHasError ? "red" : "deep-purple"}
+        color={emailHasError ? "red" : "green"}
         show={showAlert}
         animate={{ mount: { y: 0 }, unmount: { y: 100 } }}
         dismissible={{ onClose: () => setShowAlert(false) }}
@@ -90,7 +92,8 @@ export default function Contacts() {
         {emailHasError
           ? "Failed to send email, please try again later !"
           : "Email was successfully sent !"}
-      </Alert>
+      </StyledAlert>
+
       <div className="fade-bottom relative flex grow translate-y-20 flex-col after:-top-20">
         {/* page title*/}
         <Observe

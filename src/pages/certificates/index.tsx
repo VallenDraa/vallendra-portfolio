@@ -15,6 +15,8 @@ import { getAllCertificateCategories } from "../../server/service/certificates/c
 import { JSONSerialize } from "../../utils/server/serialize";
 import Observe from "../../components/Observe";
 import fadeIn from "../../utils/client/helpers/animateOnObserved";
+import Seo from "../../seo/Seo";
+import certificatesPageSeo from "../../seo/certificatePage.seo";
 
 interface Props {
   certificates: Certificate[];
@@ -53,9 +55,8 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
   return (
     <>
-      <Head>
-        <title>VallenDra | Certificates</title>
-      </Head>
+      <Seo base={certificatesPageSeo.base} og={certificatesPageSeo.og} />
+
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
           {/* heading */}

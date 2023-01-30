@@ -11,7 +11,6 @@ import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import R from "react";
 import Certificate from "../../interfaces/certificate.interface";
-import Head from "next/head";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
@@ -26,7 +25,9 @@ import { JSONSerialize } from "../../utils/server/serialize";
 import { useRouter } from "next/router";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
+import showcaseSeo from "../../seo/showcase.seo";
 import useDebounce from "../../utils/client/hooks/useDebounce";
+import Seo from "../../seo/Seo";
 
 interface CertificateRedirect {
   slug: string;
@@ -44,8 +45,6 @@ export default function CertificateDetails({
   prevCertificate,
   nextCertificate,
 }: PropsData) {
-  const pageTitle = `VallenDra | ${certificate.name}`;
-
   /* Others
   =================== */
   const router = useRouter();
@@ -53,6 +52,22 @@ export default function CertificateDetails({
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* Seo Data
+  =================== */
+  const seoData = R.useMemo(() => {
+    const { name, slug, image, shortDescriptionEN, shortDescriptionID } =
+      certificate;
+
+    return showcaseSeo({
+      title: name,
+      cldImage: image,
+      slug,
+      shortDesc:
+        activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,
+      type: "certificates",
+    });
+  }, [certificate, activeLanguage]);
 
   /* Dynamic Views
   ================== */
@@ -128,9 +143,8 @@ export default function CertificateDetails({
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-      </Head>
+      <Seo base={seoData.base} og={seoData.og} />
+
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
           <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
