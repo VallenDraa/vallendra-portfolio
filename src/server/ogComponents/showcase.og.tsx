@@ -27,7 +27,7 @@ export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
         <div tw="flex items-center">
           <img
             tw="mr-2"
-            src={`${process.env.BASE_URL}/images/vallen-icon.png`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/images/vallen-icon.png`}
             width={80}
             height={80}
           />

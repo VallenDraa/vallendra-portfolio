@@ -1,7 +1,6 @@
 import Hero from "../components/Home/Hero/Hero";
 import Profile from "../components/Home/Profile/Profile";
 import Redirect from "../components/Home/Redirect/Redirect";
-import Head from "next/head";
 import SiteFooter from "../components/SiteFooter";
 import Project from "../interfaces/project.interface";
 import Quotes from "../components/Home/ProjectTopPicks/Quote";
@@ -9,6 +8,8 @@ import { GetStaticProps } from "next";
 import { getTopPickedProjects } from "../server/service/projects/projects.service";
 import TopPickSection from "../components/Home/ProjectTopPicks/TopPickSection";
 import { JSONSerialize } from "../utils/server/serialize";
+import Seo from "../seo/Seo";
+import defaultSeo from "../seo/default.seo";
 
 interface Props {
   topPickedProjects: Project[];
@@ -17,9 +18,7 @@ interface Props {
 export default function Home({ topPickedProjects }: Props) {
   return (
     <>
-      <Head>
-        <title>VallenDra | Home</title>
-      </Head>
+      <Seo base={defaultSeo.base} og={defaultSeo.og} />
 
       {/* hero section */}
       <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
