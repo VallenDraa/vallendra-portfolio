@@ -122,7 +122,7 @@ const defaultSeo: Seo = {
       title: "VallenDra",
       shortDesc:
         "My portfolio website where I showcase my projects and certificates.",
-      imgLink: "home-page_anbfpj",
+      imgLink: "pages/home-page_anbfpj",
     }),
     imageAlt: "A screenshot of Vallendra's Portfolio",
     siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
