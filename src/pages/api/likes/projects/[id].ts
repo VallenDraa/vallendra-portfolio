@@ -17,13 +17,13 @@ const handler: NextApiHandler = async (req, res) => {
     if (typeof id !== "string" || !id) throw new Error();
 
     const uniqueIpId = getUniqueIpId(req);
+    const hasLiked = await getHasLiked(id, uniqueIpId);
 
     /* Check the http method
     ======================= */
     switch (req.method) {
       case "GET": {
         const likes = await getProjectStats(id, ["likes"]);
-        const hasLiked = await getHasLiked(id, uniqueIpId);
 
         const response = { ...likes, hasLiked };
 
@@ -37,11 +37,15 @@ const handler: NextApiHandler = async (req, res) => {
         /* Check the operation type
         =========================== */
         if (operation === "increment") {
-          await editLikersList(id, uniqueIpId, "add");
-          await incProjectStat(id, "likes");
+          if (!hasLiked) {
+            await editLikersList(id, uniqueIpId, "add");
+            await incProjectStat(id, "likes");
+          }
         } else {
-          await editLikersList(id, uniqueIpId, "remove");
-          await decProjectStat(id, "likes");
+          if (hasLiked) {
+            await editLikersList(id, uniqueIpId, "remove");
+            await decProjectStat(id, "likes");
+          }
         }
 
         res.json(204);
