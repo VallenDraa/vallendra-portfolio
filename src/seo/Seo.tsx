@@ -1,29 +1,11 @@
 import Head from "next/head";
-import { ogLinkMaker } from "../utils/client/helpers/ogLinkMaker";
-
-export interface BaseSeo {
-  title: string;
-  desc: string;
-  robots?: string;
-}
-
-export interface OgSeo {
-  siteName: string;
-  siteUrl: string;
-  contentType: string;
-  imageUrl: string;
-  imageAlt: string;
-}
-
-export interface Seo {
-  base?: BaseSeo;
-  og?: OgSeo;
-}
+import defaultSeo from "./default.seo";
+import { BaseSeo, OgSeo, SEO } from "../interfaces/seo.interface";
 
 export default function Seo({
   base = defaultSeo.base as BaseSeo,
   og = defaultSeo.og as OgSeo,
-}: Seo) {
+}: SEO) {
   return (
     <Head>
       {/* base meta */}
@@ -109,22 +91,3 @@ export default function Seo({
     </Head>
   );
 }
-
-const defaultSeo: Seo = {
-  base: {
-    title: "Jestine Vallendra Dwi Putra",
-    desc: "A Portfolio made by Jestine Vallendra Dwi Putra. This site showcases his past programming projects and also the certificates that he had managed to collect.",
-  },
-  og: {
-    siteName: "Jestine Vallendra Dwi Putra",
-    contentType: "Portfolio Website",
-    imageUrl: ogLinkMaker({
-      title: "VallenDra",
-      shortDesc:
-        "My portfolio website where I showcase my projects and certificates.",
-      imgLink: "pages/home-page_anbfpj",
-    }),
-    imageAlt: "A screenshot of Vallendra's Portfolio",
-    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
-  },
-};
