@@ -31,8 +31,6 @@ export default function Seo({
       <meta lang="en" />
       <meta name="description" content={base.desc} />
       <meta name="theme-color" content="#7986cb" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content={base.robots || "follow, index"} />
 
