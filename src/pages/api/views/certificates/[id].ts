@@ -24,7 +24,7 @@ const handler: NextApiHandler = async (req, res) => {
       case "PUT": {
         await incCertificateStat(id, "views");
 
-        res.json(204);
+        res.status(204).end();
         break;
       }
 

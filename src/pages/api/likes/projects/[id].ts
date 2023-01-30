@@ -48,7 +48,7 @@ const handler: NextApiHandler = async (req, res) => {
           }
         }
 
-        res.json(204);
+        res.status(204).end();
         break;
       }
 
