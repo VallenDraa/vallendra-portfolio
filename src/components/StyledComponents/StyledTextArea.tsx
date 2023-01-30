@@ -1,11 +1,8 @@
 import { Textarea, TextareaProps } from "@material-tailwind/react";
-import { useTheme } from "next-themes";
 import { forwardRef } from "react";
 
 const StyledTextArea = forwardRef<HTMLDivElement, TextareaProps>(
   ({ ref: normalRef, className, ...props }, forwardRef) => {
-    const { theme } = useTheme();
-
     return (
       <Textarea
         ref={forwardRef}

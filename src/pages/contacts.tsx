@@ -1,7 +1,13 @@
-import { Typography } from "@material-tailwind/react";
+import { Alert, Typography } from "@material-tailwind/react";
 import Head from "next/head";
 import { FormEvent } from "react";
-import { IoMail, IoPaperPlane, IoShareSocial } from "react-icons/io5";
+import {
+  IoWarning,
+  IoInformationCircle,
+  IoMail,
+  IoPaperPlane,
+  IoShareSocial,
+} from "react-icons/io5";
 import StyledInput from "../components/StyledComponents/StyledInput";
 import StyledTextArea from "../components/StyledComponents/StyledTextArea";
 import StyledButton from "../components/StyledComponents/StyledButton";
@@ -10,17 +16,82 @@ import SocialsWithIcon from "../components/SocialWithIcons";
 import IconWithTooltip from "../components/IconWithTooltip";
 import Observe from "../components/Observe";
 import fadeIn from "../utils/client/helpers/animateOnObserved";
+import R from "react";
+import { EmailBody } from "./api/email";
+import Show from "../utils/client/jsx/Show";
 
 export default function Contacts() {
-  function sendMessage(e: FormEvent<HTMLFormElement>) {
+  /* Email body content refs
+  ========================== */
+  const emailRef = R.useRef("");
+  const subjectRef = R.useRef("");
+  const messageRef = R.useRef("");
+
+  /* Email alert
+  ========================== */
+  const [showAlert, setShowAlert] = R.useState(false);
+  const [emailIsSending, setEmailIsSending] = R.useState(false);
+  const [emailHasError, setEmailHasError] = R.useState(false);
+
+  const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  }
+    setEmailIsSending(true);
+
+    if (!emailRef.current) return;
+    if (!subjectRef.current) return;
+    if (!messageRef.current) return;
+
+    const email: EmailBody = {
+      senderEmail: emailRef.current,
+      emailSubject: subjectRef.current,
+      message: messageRef.current,
+    };
+
+    try {
+      await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(email),
+      });
+
+      setEmailHasError(false);
+    } catch (error) {
+      console.error(error);
+
+      setEmailHasError(true);
+    } finally {
+      setTimeout(() => {
+        setEmailIsSending(false);
+        setShowAlert(true);
+      }, 500);
+
+      setTimeout(() => setShowAlert(false), 2000);
+    }
+  };
 
   return (
     <>
       <Head>
         <title>VallenDra | Contacts</title>
       </Head>
+      <Alert
+        icon={
+          emailHasError ? (
+            <IoWarning className="text-2xl" />
+          ) : (
+            <IoInformationCircle className="text-2xl" />
+          )
+        }
+        className="fixed bottom-0 z-[55] items-center rounded-none"
+        color={emailHasError ? "red" : "deep-purple"}
+        show={showAlert}
+        animate={{ mount: { y: 0 }, unmount: { y: 100 } }}
+        dismissible={{ onClose: () => setShowAlert(false) }}
+      >
+        {emailHasError
+          ? "Failed to send email, please try again later !"
+          : "Email was successfully sent !"}
+      </Alert>
       <div className="fade-bottom relative flex grow translate-y-20 flex-col after:-top-20">
         {/* page title*/}
         <Observe
@@ -58,7 +129,7 @@ export default function Contacts() {
             onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 100)}
           >
             <form
-              onSubmit={sendMessage}
+              onSubmit={sendEmail}
               name="message-form"
               className="card-colors flex grow flex-col gap-4 rounded-md p-6 opacity-0 shadow-md"
             >
@@ -84,26 +155,17 @@ export default function Contacts() {
                     </Typography>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-4  md:grid-cols-2">
+                  {/* inputs */}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <StyledInput
-                      required
-                      label="Name"
-                      type="text"
-                      aria-label="name input"
-                    />
-                    <StyledInput
+                      onChange={(e) => (emailRef.current = e.target.value)}
                       required
                       label="E-mail"
                       type="email"
                       aria-label="email input"
                     />
                     <StyledInput
-                      label="Phone"
-                      name="phone"
-                      type="tel"
-                      aria-label="telephone number input"
-                    />
-                    <StyledInput
+                      onChange={(e) => (subjectRef.current = e.target.value)}
                       required
                       label="Subject"
                       type="text"
@@ -112,6 +174,7 @@ export default function Contacts() {
                   </div>
 
                   <StyledTextArea
+                    onChange={(e) => (messageRef.current = e.target.value)}
                     required
                     label="Message"
                     rows={6}
@@ -129,21 +192,26 @@ export default function Contacts() {
                   className="flex items-center gap-2 self-end opacity-0"
                 >
                   <StyledButton
+                    disabled={emailIsSending}
                     icon={<BiBlock />}
                     type="reset"
                     variant="text"
                     size="md"
                     color="red"
-                    className="h-full"
+                    className={`h-full ${
+                      emailIsSending ? "animate-pulse" : ""
+                    }`}
                   >
                     Reset
                   </StyledButton>
 
                   <StyledButton
+                    disabled={emailIsSending}
                     icon={<IoPaperPlane />}
                     type="submit"
                     variant="filled"
                     size="md"
+                    className={`${emailIsSending ? "animate-pulse" : ""}`}
                   >
                     Send Message
                   </StyledButton>
@@ -157,7 +225,7 @@ export default function Contacts() {
             freezeOnceVisible
             onEnter={(ref) => fadeIn(ref, "animate-fade-in-right", 200)}
           >
-            <aside className="card-colors flex flex-col items-start gap-0 rounded-md p-6 opacity-0 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12 sm:gap-4">
+            <aside className="card-colors flex flex-col items-start gap-0 rounded-md p-6 opacity-0 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12">
               <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 border-indigo-300 pb-5 dark:border-gray-700 sm:justify-center">
                 <div className="flex gap-2 sm:justify-center">
                   <IconWithTooltip
