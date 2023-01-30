@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
 import Link from "next/link";
-import { technologies } from "../../types/types";
+import { ShowcaseType, technologies } from "../../types/types";
 import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import StyledButton from "../StyledComponents/StyledButton";
@@ -17,7 +17,7 @@ import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 interface Props {
   // for data fetching purpose
   _id: string;
-  type: "projects" | "certificates";
+  type: ShowcaseType;
 
   // image props
   imgIsPriority: boolean;

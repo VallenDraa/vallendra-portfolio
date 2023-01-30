@@ -19,9 +19,10 @@ export type categories = "website" | "desktop" | "cli" | "games";
 
 export type Language = "id" | "en";
 
+export type ShowcaseType = "projects" | "certificates";
+
 /* Rest API types
 ================= */
-
 export type LikesOperationBody = {
   operation: LikesPUTOperation;
 };
