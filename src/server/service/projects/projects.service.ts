@@ -9,6 +9,7 @@ export async function getTopPickedProjects() {
   const topPickedProjects = await ProjectModel.find({
     isTopPick: true,
   })
+    .sort({ madeAt: -1 })
     .select("-likers")
     .lean();
 
