@@ -16,7 +16,7 @@ const defaultSeo: SEO = {
       imgLink: "pages/home-page_anbfpj",
     }),
     imageAlt: "A screenshot of the home page",
-    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    siteUrl: `${process.env.BASE_URL}`,
   },
 };
 

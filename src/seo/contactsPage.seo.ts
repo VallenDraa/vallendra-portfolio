@@ -16,7 +16,7 @@ const contactsPageSeo: SEO = {
       imgLink: "pages/contacts-page_mipiu7",
     }),
     imageAlt: "A screenshot of the contacts page",
-    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/contacts`,
+    siteUrl: `${process.env.BASE_URL}/contacts`,
   },
 };
 

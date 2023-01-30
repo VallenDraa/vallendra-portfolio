@@ -16,7 +16,7 @@ const projectsPageSeo: SEO = {
       imgLink: "pages/projects-page_wkiz3c",
     }),
     imageAlt: "A screenshot of the projects page",
-    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/projects`,
+    siteUrl: `${process.env.BASE_URL}/projects`,
   },
 };
 

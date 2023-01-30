@@ -24,7 +24,7 @@ export default function showcaseSeo({
       contentType: `${type} showcase`,
       imageUrl: ogLinkMaker({ title, shortDesc, imgLink: cldImage }),
       imageAlt: `A screenshot of the ${title}.`,
-      siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/${type}/${slug}`,
+      siteUrl: `${process.env.BASE_URL}/${type}/${slug}`,
     },
   };
 }

@@ -16,7 +16,7 @@ const certificatesPageSeo: SEO = {
       imgLink: "pages/certificates-page_wlduyl",
     }),
     imageAlt: "A screenshot of the certificates page",
-    siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/certificates`,
+    siteUrl: `${process.env.BASE_URL}/certificates`,
   },
 };
 
