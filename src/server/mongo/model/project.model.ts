@@ -1,12 +1,12 @@
-import mongoose, { Model } from "mongoose";
-import Project from "../../interfaces/project.interface";
+import m from "mongoose";
+import Project from "../../../interfaces/project.interface";
 
-interface ProjectDocument extends Omit<Project, "_id">, mongoose.Document {
+interface ProjectDocument extends Omit<Project, "_id">, m.Document {
   createdAt: Date;
   updatedAt?: Date;
 }
 
-const ProjectSchema = new mongoose.Schema<ProjectDocument>(
+const ProjectSchema = new m.Schema<ProjectDocument>(
   {
     icon: { type: String, required: false },
     name: { type: String, required: true },
@@ -22,7 +22,7 @@ const ProjectSchema = new mongoose.Schema<ProjectDocument>(
     tech: [{ type: String, default: [] }],
     categoryIds: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: m.Schema.Types.ObjectId,
         ref: "project-categories",
         default: [],
       },
@@ -36,8 +36,7 @@ const ProjectSchema = new mongoose.Schema<ProjectDocument>(
   { timestamps: true }
 );
 
-const ProjectModel: Model<ProjectDocument> =
-  mongoose.models.projects ||
-  mongoose.model<ProjectDocument>("projects", ProjectSchema);
+const ProjectModel: m.Model<ProjectDocument> =
+  m.models.projects || m.model<ProjectDocument>("projects", ProjectSchema);
 
 export default ProjectModel;

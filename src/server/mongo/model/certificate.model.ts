@@ -1,14 +1,14 @@
-import mongoose, { Model } from "mongoose";
-import Certificate from "../../interfaces/certificate.interface";
+import m from "mongoose";
+import Certificate from "../../../interfaces/certificate.interface";
 
 interface CertificateDocument
   extends Omit<Certificate, "_id">,
-    mongoose.Document {
+    m.Document {
   madeAt: Date;
   updatedAt?: Date;
 }
 
-const CertificateSchema = new mongoose.Schema<CertificateDocument>(
+const CertificateSchema = new m.Schema<CertificateDocument>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true },
@@ -22,7 +22,7 @@ const CertificateSchema = new mongoose.Schema<CertificateDocument>(
     image: { type: String, required: true },
     categoryIds: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: m.Schema.Types.ObjectId,
         ref: "certificate-categories",
         default: [],
       },
@@ -33,8 +33,8 @@ const CertificateSchema = new mongoose.Schema<CertificateDocument>(
   { timestamps: true }
 );
 
-const CertificateModel: Model<CertificateDocument> =
-  mongoose.models.certificates ||
-  mongoose.model<CertificateDocument>("certificates", CertificateSchema);
+const CertificateModel: m.Model<CertificateDocument> =
+  m.models.certificates ||
+  m.model<CertificateDocument>("certificates", CertificateSchema);
 
 export default CertificateModel;
