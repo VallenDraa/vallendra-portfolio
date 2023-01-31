@@ -1,20 +1,18 @@
 import mongoose from "mongoose";
-import createError from "../error/createError";
 
 const MONGO_URI = process.env.MONGO_URI;
 
 export default async function connectMongo(): Promise<void | Error> {
   if (!isMongoConnected()) {
-    if (!MONGO_URI) return createError();
+    if (!MONGO_URI)
+      throw new Error(
+        "Please provide a mongo URI to connect to the database !"
+      );
 
-    try {
-      mongoose.set("strictQuery", true);
-      await mongoose.connect(MONGO_URI);
+    mongoose.set("strictQuery", true);
+    await mongoose.connect(MONGO_URI);
 
-      console.log("connected");
-    } catch (error) {
-      console.error(error);
-    }
+    console.log("connected");
   }
 }
 

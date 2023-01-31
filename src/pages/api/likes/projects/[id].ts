@@ -8,13 +8,21 @@ import {
 } from "../../../../server/service/projects/projectStats.service";
 import getUniqueIpId from "../../../../utils/server/getUniqueIpId";
 import { LikesOperationBody } from "../../../../types/types";
+import {
+  internalServerErrorRes,
+  invalidBodyRes,
+  invalidHttpMethodRes,
+} from "../../../../server/error/response.error";
 
 /* this handles operation on likes for a single project
 ====================================================== */
 const handler: NextApiHandler = async (req, res) => {
   try {
     const { id } = req.query;
-    if (typeof id !== "string" || !id) throw new Error();
+    if (typeof id !== "string" || !id) {
+      invalidBodyRes(res);
+      return;
+    }
 
     const uniqueIpId = getUniqueIpId(req);
     const hasLiked = await getHasLiked(id, uniqueIpId);
@@ -33,6 +41,11 @@ const handler: NextApiHandler = async (req, res) => {
 
       case "PUT": {
         const { operation } = req.body as LikesOperationBody;
+
+        if (!operation) {
+          invalidBodyRes(res);
+          return;
+        }
 
         /* Check the operation type
         =========================== */
@@ -53,12 +66,13 @@ const handler: NextApiHandler = async (req, res) => {
       }
 
       default: {
-        res.status(405).json({ message: "Invalid method for the request" });
+        invalidHttpMethodRes(res);
         break;
       }
     }
   } catch (error) {
     console.error(error);
+    internalServerErrorRes(res);
   }
 };
 

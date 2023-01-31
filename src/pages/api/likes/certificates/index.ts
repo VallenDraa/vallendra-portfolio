@@ -1,5 +1,9 @@
 import { NextApiHandler } from "next";
 import { getAllCertificateStats } from "../../../../server/service/certificates/certificateStats.service";
+import {
+  internalServerErrorRes,
+  invalidHttpMethodRes,
+} from "../../../../server/error/response.error";
 
 /* This handles getting all the certificate likes */
 const handler: NextApiHandler = async (req, res) => {
@@ -13,12 +17,13 @@ const handler: NextApiHandler = async (req, res) => {
       }
 
       default: {
-        res.status(405).json({ message: "Invalid method for the request" });
+        invalidHttpMethodRes(res);
         break;
       }
     }
   } catch (error) {
     console.error(error);
+    internalServerErrorRes(res);
   }
 };
 

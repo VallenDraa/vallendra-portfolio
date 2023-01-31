@@ -1,5 +1,10 @@
 import { NextApiHandler } from "next";
 import nodemailer, { SendMailOptions } from "nodemailer";
+import {
+  internalServerErrorRes,
+  invalidHttpMethodRes,
+  invalidBodyRes,
+} from "../../../server/error/response.error";
 
 export interface EmailBody {
   senderEmail: string;
@@ -21,7 +26,10 @@ const handler: NextApiHandler = async (req, res) => {
       case "POST": {
         const { emailSubject, senderEmail, message } = req.body as EmailBody;
 
-        if (!emailSubject || !senderEmail || !message) throw new Error();
+        if (!emailSubject || !senderEmail || !message) {
+          invalidBodyRes(res);
+          return;
+        }
 
         const mailOptions: SendMailOptions = {
           from: senderEmail,
@@ -34,7 +42,7 @@ const handler: NextApiHandler = async (req, res) => {
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
             console.error(error);
-            throw new Error();
+            internalServerErrorRes(res);
           }
         });
 
@@ -43,7 +51,7 @@ const handler: NextApiHandler = async (req, res) => {
       }
 
       default: {
-        res.status(405).json({ message: "Invalid method for the request" });
+        invalidHttpMethodRes(res);
         break;
       }
     }

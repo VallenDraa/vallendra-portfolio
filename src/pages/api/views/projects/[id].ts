@@ -3,13 +3,21 @@ import {
   getProjectStats,
   incProjectStat,
 } from "../../../../server/service/projects/projectStats.service";
+import {
+  internalServerErrorRes,
+  invalidBodyRes,
+  invalidHttpMethodRes,
+} from "../../../../server/error/response.error";
 
 /* this handles operation on views for a single project
 ====================================================== */
 const handler: NextApiHandler = async (req, res) => {
   try {
     const { id } = req.query;
-    if (typeof id !== "string" || !id) throw new Error();
+    if (typeof id !== "string" || !id) {
+      invalidBodyRes(res);
+      return;
+    }
 
     /* Check the http method
     ======================= */
@@ -29,12 +37,13 @@ const handler: NextApiHandler = async (req, res) => {
       }
 
       default: {
-        res.status(405).json({ message: "Invalid method for the request" });
+        invalidHttpMethodRes(res);
         break;
       }
     }
   } catch (error) {
     console.error(error);
+    internalServerErrorRes(res);
   }
 };
 
