@@ -1,4 +1,4 @@
-import ProjectCategoryModel from "../../model/projectCategory.model";
+import ProjectCategoryModel from "../../mongo/model/projectCategory.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getAllProjectCategories() {

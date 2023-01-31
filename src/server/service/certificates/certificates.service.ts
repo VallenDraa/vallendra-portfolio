@@ -1,6 +1,6 @@
 import { LeanDocument } from "mongoose";
 import Certificate from "../../../interfaces/certificate.interface";
-import CertificateModel from "../../model/certificate.model";
+import CertificateModel from "../../mongo/model/certificate.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getCertificateWithPrevAndNext(slug: string) {
@@ -14,8 +14,10 @@ export async function getCertificateWithPrevAndNext(slug: string) {
     .select("-likers")
     .lean();
 
-  if (certificate === null) throw new Error();
-  if (!certificate.createdAt) throw new Error();
+  if (certificate === null)
+    throw new Error("The target certificate can't be found !");
+  if (!certificate.createdAt)
+    throw new Error("The target certificate doesn't have a createdAt field !");
 
   const certificateId = certificate._id.toString();
   const certificateCreatedAt = certificate.createdAt as Date;

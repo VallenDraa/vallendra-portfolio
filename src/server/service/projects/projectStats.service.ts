@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { StatsType } from "../../../types/types";
-import ProjectModel from "../../model/project.model";
+import ProjectModel from "../../mongo/model/project.model";
 import connectMongo from "../../mongo/mongodb";
 
 /* Services for fetching stats
@@ -12,7 +12,7 @@ export async function getProjectStats(_id: string, fields: StatsType[]) {
     .select([...fields, "_id"])
     .lean();
 
-  if (project === null) throw new Error();
+  if (project === null) throw new Error("The target project can't be found !");
 
   return project;
 }
@@ -74,7 +74,7 @@ export async function getHasLiked(_id: string, uniqueIpId: string) {
   connectMongo();
 
   const res = await getProjectLikers(_id);
-  if (!res) throw new Error();
+  if (!res) throw new Error("The target project can't be found !");
 
   const hasLiked = res.likers.includes(uniqueIpId);
 

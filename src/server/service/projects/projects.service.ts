@@ -1,5 +1,5 @@
 import { LeanDocument } from "mongoose";
-import ProjectModel from "../../model/project.model";
+import ProjectModel from "../../mongo/model/project.model";
 import Project from "../../../interfaces/project.interface";
 import connectMongo from "../../mongo/mongodb";
 
@@ -26,8 +26,10 @@ export async function getProjectWithPrevAndNext(slug: string) {
     .select("-likers")
     .lean();
 
-  if (project === null) throw new Error();
-  if (!project.createdAt) throw new Error();
+  if (project === null) throw new Error("The target project can't be found !");
+
+  if (!project.createdAt)
+    throw new Error("The target projcet doesn't have a createdAt field !");
 
   const projectId = project._id.toString();
   const projectCreatedAt = project.createdAt as Date;

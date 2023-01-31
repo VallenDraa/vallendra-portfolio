@@ -1,4 +1,4 @@
-import CertificateCategoryModel from "../../model/certificateCategory.model";
+import CertificateCategoryModel from "../../mongo/model/certificateCategory.model";
 import connectMongo from "../../mongo/mongodb";
 
 export async function getAllCertificateCategories() {

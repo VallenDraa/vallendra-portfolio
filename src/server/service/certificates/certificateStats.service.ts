@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 import { StatsType } from "../../../types/types";
-import CertificateModel from "../../model/certificate.model";
+import CertificateModel from "../../mongo/model/certificate.model";
 import connectMongo from "../../mongo/mongodb";
 
 /* Services for fetching stats
@@ -12,7 +12,8 @@ export async function getCertificateStats(_id: string, fields: StatsType[]) {
     .select([...fields, "_id"])
     .lean();
 
-  if (certificate === null) throw new Error();
+  if (certificate === null)
+    throw new Error("The target certificate can't be found !");
 
   return certificate;
 }
@@ -80,7 +81,7 @@ export async function getHasLiked(_id: string, uniqueIpId: string) {
   connectMongo();
 
   const res = await getCertificateLikers(_id);
-  if (!res) throw new Error();
+  if (!res) throw new Error("The target certificate can't be found !");
 
   const hasLiked = res.likers.includes(uniqueIpId);
 
