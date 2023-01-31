@@ -9,6 +9,7 @@ import StyledButton from "../../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 import Observe from "../../Observe";
+import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 
 export type TwistDirection = "right" | "left";
 
@@ -29,6 +30,19 @@ export default function TopPickItem({
   isFirst = false,
   isLast = false,
 }: Props) {
+  const animationTechDelay = R.useMemo(() => {
+    let delay = 0;
+    const delayArray: number[] = [];
+
+    for (let i = 0; i < project.tech.length; i++) {
+      delayArray[i] = delay;
+
+      delay += 75;
+    }
+
+    return delayArray;
+  }, [project.tech]);
+
   const picWrapperRef = R.useRef<HTMLDivElement>(null);
   const descWrapperRef = R.useRef<HTMLDivElement>(null);
 
@@ -50,32 +64,32 @@ export default function TopPickItem({
 
   return (
     <div
-      className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-[1px] border-dashed border-indigo-500/70 dark:border-white/60 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
-        isLast ? "border-b-[1px]" : ""
+      className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-2 border-dashed border-indigo-300/70 dark:border-white/40 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
+        isLast ? "border-b-2" : ""
       } ${
         twistDirection === "left"
-          ? `rounded-r-2xl border-r-[1px] after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-[1px] after:border-dashed after:border-indigo-500/70 dark:after:border-white/60 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
+          ? `rounded-r-2xl border-r-2 after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-2 after:border-dashed after:border-indigo-300/70 dark:after:border-white/40 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
               isFirst
                 ? "after:rounded-tr-2xl lg:after:rounded-none"
                 : "ml-3 after:rounded-tr-2xl lg:ml-0"
             }`
-          : "mx-auto mr-3 rounded-l-xl border-l-[1px] before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-[1px] before:border-dashed before:border-indigo-500/70 dark:before:border-white/60 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
+          : "mx-auto mr-3 rounded-l-xl border-l-2 before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-2 before:border-dashed before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
       }`}
     >
       {/* div to hide the top-left border for smaller screen */}
       <Show when={isFirst}>
-        <div className="absolute left-0 right-1/2 -top-3 h-3 bg-indigo-50 dark:bg-[#272727]" />
+        <div className="absolute left-0 right-1/2 -top-3 h-3 bg-indigo-50 dark:bg-gray-900" />
       </Show>
 
       {/* div to hide the bottom-right border for smaller screen */}
       <Show when={isLast}>
-        <div className="absolute right-0 left-1/2 -bottom-3 h-3 bg-indigo-50 dark:bg-[#272727]" />
+        <div className="absolute right-0 left-1/2 -bottom-3 h-3 bg-indigo-50 dark:bg-gray-900" />
       </Show>
 
       {/* dot in line */}
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
-          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-[#272727] dark:text-white/60 ${
+          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-gray-900 dark:text-white/70 ${
             twistDirection === "left"
               ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
@@ -134,25 +148,33 @@ export default function TopPickItem({
 
           <div className="flex flex-col">
             <ul
-              className={`scrollbar-kece relative flex items-center gap-1 overflow-auto ${
+              className={`scrollbar-kece relative flex items-center gap-1 overflow-x-auto overflow-y-hidden ${
                 twistDirection === "left" ? "" : "justify-end lg:justify-start"
               }`}
             >
-              {project.tech.map(
-                (tech: technologies, i): JSX.Element => (
-                  <li key={i}>{techsWithTooltip[tech]}</li>
-                )
-              )}
+              {project.tech.map((tech: technologies, i): JSX.Element => {
+                return (
+                  <Observe
+                    key={i}
+                    freezeOnceVisible
+                    onEnter={(ref) =>
+                      fadeIn(ref, "animate-fade-in-left", animationTechDelay[i])
+                    }
+                  >
+                    <li className="opacity-0">{techsWithTooltip[tech]}</li>
+                  </Observe>
+                );
+              })}
             </ul>
 
             <Link
               href={`/projects/${project.slug}`}
-              className="inline-block lg:w-max"
+              className="mt-2 inline-block lg:w-max"
             >
               <StyledButton
                 variant="outlined"
                 icon={<BsArrowRight />}
-                className="relative mt-2 flex w-full items-center justify-center gap-2 self-start rounded lg:w-max"
+                className="relative flex w-full items-center justify-center gap-2 self-start rounded lg:w-max"
                 color="teal"
                 size="md"
               >

@@ -18,7 +18,7 @@ const ActionButton = forwardRef<HTMLButtonElement, Props>(
         fullWidth={fullWidth || true}
         variant={variant || "outlined"}
         ref={forwardedRef}
-        className={`flex items-center justify-center gap-1.5 rounded py-2 px-4 shadow-sm hover:shadow ${className}`}
+        className={`flex items-center justify-center gap-1.5 rounded  shadow-sm hover:shadow ${className}`}
         {...props}
       >
         {/* when icon is visible */}

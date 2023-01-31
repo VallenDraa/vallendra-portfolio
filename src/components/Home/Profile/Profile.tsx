@@ -6,19 +6,33 @@ import {
 } from "@material-tailwind/react";
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
-import TECHS from "../../MappedComponents/TechsWithTooltip";
-import Line from "../../Line";
+import TECHS, { myTechStack } from "../../MappedComponents/TechsWithTooltip";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import R from "react";
 
 export default function Profile() {
+  const animationTechDelay = R.useMemo(() => {
+    let delay = 0;
+    const delayArray: number[] = [];
+
+    for (let i = 0; i < myTechStack.length; i++) {
+      delayArray[i] = delay;
+
+      delay += 75;
+    }
+
+    return delayArray;
+  }, []);
+  const [techCardIsVisible, setTechCardIsVisible] = R.useState(false);
+
   return (
     <section
       aria-label="profile-section"
       id="profile"
       className="relative z-10 space-y-8 bg-indigo-50 dark:bg-gray-900"
     >
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 pb-4 overflow-x-hidden xl:flex-row 2xl:px-2">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 pb-10 overflow-x-hidden xl:flex-row 2xl:px-2">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <Observe
@@ -63,7 +77,10 @@ export default function Profile() {
             {/* techs */}
             <Observe
               freezeOnceVisible
-              onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 200)}
+              onEnter={(ref) => {
+                setTechCardIsVisible(true);
+                fadeIn(ref, "animate-fade-in-left", 200);
+              }}
             >
               <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md duration-200 hover:shadow-lg hover:!shadow-green-500 dark:hover:!shadow-green-800">
                 <CardBody>
@@ -82,15 +99,25 @@ export default function Profile() {
                     Languages and frameworks that I use for projects and college
                     !
                   </Typography>
-                  <ul className="scrollbar-kece relative mt-4 flex items-center gap-1 overflow-auto">
-                    <li>{TECHS.html}</li>
-                    <li>{TECHS.css}</li>
-                    <li>{TECHS["tailwind css"]}</li>
-                    <li>{TECHS.javascript}</li>
-                    <li>{TECHS.typescript}</li>
-                    <li>{TECHS["node.js"]}</li>
-                    <li>{TECHS.react}</li>
-                    <li>{TECHS["next.js"]}</li>
+                  <ul className="scrollbar-kece relative mt-4 flex items-center gap-1 overflow-x-auto overflow-y-hidden">
+                    {techCardIsVisible &&
+                      myTechStack.map((key, i) => {
+                        return (
+                          <Observe
+                            key={key}
+                            freezeOnceVisible
+                            onEnter={(ref) =>
+                              fadeIn(
+                                ref,
+                                "animate-fade-in-left",
+                                animationTechDelay[i]
+                              )
+                            }
+                          >
+                            <li className="opacity-0">{TECHS[key]}</li>
+                          </Observe>
+                        );
+                      })}
                   </ul>
                 </CardBody>
                 <CardFooter
@@ -177,9 +204,6 @@ export default function Profile() {
           </Observe>
         </aside>
       </div>
-
-      {/* transition from profile to projects */}
-      <Line className="mx-auto scale-y-[2]" />
     </section>
   );
 }

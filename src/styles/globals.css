@@ -6,7 +6,7 @@
   /* icons
   ======= */
   .icon-with-bg-colors {
-    @apply bg-indigo-100  dark:bg-gray-700/90;
+    @apply bg-indigo-100 dark:bg-gray-700/90;
   }
 
   /* cards 

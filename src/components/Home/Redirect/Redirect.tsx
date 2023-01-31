@@ -2,9 +2,6 @@ import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
 import Line from "../../Line";
-import BlurredBlob from "../../BlurredBlob";
-import { useTheme } from "next-themes";
-import Show from "../../../utils/client/jsx/Show";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 
@@ -12,16 +9,14 @@ import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 ================================================================ */
 export default function Redirect() {
   return (
-    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center px-2 py-32 lg:px-8 2xl:px-2">
-      <Line className="absolute top-8 left-1/2 z-40 -translate-x-1/2 scale-y-[3.5] bg-indigo-500/30 dark:bg-white/20" />
-
+    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pt-16 pb-28">
       <Observe
         freezeOnceVisible
         onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
       >
         <Typography
           as="h2"
-          className="relative z-10 pt-4 text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
+          className="relative z-10 text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
         >
           Wanna Work Together ?
         </Typography>

@@ -1,10 +1,24 @@
-const Line = ({ className, scale }: { className?: string; scale?: string }) => {
-  return (
-    <div
-      className={`${className} h-10 w-[1px] bg-indigo-500/50 dark:bg-white/40`}
-      style={{ scale }}
-    />
-  );
-};
+import R from "react";
+
+interface Props
+  extends R.DetailedHTMLProps<
+    R.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
+  scale?: string;
+}
+
+const Line = R.forwardRef<HTMLDivElement, Props>(
+  ({ ref: normalRef, style, className, scale, ...props }, forwardRef) => {
+    return (
+      <div
+        ref={forwardRef}
+        className={`${className} h-10 w-[2px] bg-indigo-300/50 dark:bg-white/30`}
+        style={{ scale }}
+        {...props}
+      />
+    );
+  }
+);
 
 export default Line;

@@ -26,11 +26,6 @@ export default function Home({ topPickedProjects }: Props) {
       </header>
       <main>
         <Profile />
-        <section aria-label="quote-section" id="quote" className="pt-12 pb-20">
-          <div className="mx-0 sm:mx-4 xl:mx-0">
-            <Quotes />
-          </div>
-        </section>
         <TopPickSection topPickedProjects={topPickedProjects} />
         <Redirect />
       </main>

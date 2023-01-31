@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import FloatingSquares from "./FloatingSquares";
 import pagesEnum from "../utils/data/pages";
+import Observe from "./Observe";
+import fadeIn from "../utils/client/helpers/animateOnObserved";
 
 export default function BreathingBackground() {
   const { route } = useRouter();
@@ -22,13 +24,18 @@ export default function BreathingBackground() {
   }, [route]);
 
   return (
-    <div className="absolute inset-x-0 animate-fade-in">
-      <div
-        ref={bgRef}
-        className="animate-main-gradient bg-main-gradient bg-gradient"
-      >
-        <FloatingSquares />
+    <Observe
+      freezeOnceVisible
+      onEnter={(ref) => fadeIn(ref, "animate-fade-in")}
+    >
+      <div className="absolute inset-x-0 opacity-0">
+        <div
+          ref={bgRef}
+          className="animate-main-gradient bg-main-gradient bg-gradient"
+        >
+          <FloatingSquares />
+        </div>
       </div>
-    </div>
+    </Observe>
   );
 }

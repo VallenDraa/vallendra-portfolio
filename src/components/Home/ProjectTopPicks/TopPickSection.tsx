@@ -25,16 +25,14 @@ export default function TopPickSection({ topPickedProjects }: Props) {
     <section
       aria-label="top-picks-section"
       id="top-picks"
-      className="fade-bottom fade-top relative before:top-0 after:bottom-0 dark:bg-gray-800/20"
+      className="relative dark:bg-gray-900"
     >
       <div className="relative mx-auto flex w-full max-w-screen-xl flex-col items-center gap-10 px-8 2xl:px-2">
-        <Line className="relative z-40 scale-y-[3]" />
-
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:bg-gradient-to-b after:from-indigo-500/50 after:to-indigo-500/70 dark:after:from-white/40 dark:after:to-white/60 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 bg-indigo-50 pb-5 dark:bg-[#272727] md:pb-0 lg:bg-transparent">
+          <div className="relative z-20 pt-24 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-30 bg-indigo-50 pb-5 dark:bg-gray-900 md:pb-0 lg:bg-transparent">
               <Observe
                 freezeOnceVisible
                 onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
@@ -101,9 +99,9 @@ export default function TopPickSection({ topPickedProjects }: Props) {
           </div>
 
           {/* see all projects */}
-          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-500/40 after:z-50 after:h-28 after:w-[1px] after:bg-gradient-to-b after:from-indigo-500/40 after:to-indigo-500/30 dark:before:border-white/40 dark:after:from-white/50 dark:after:to-white/20">
+          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-300/50 after:z-50 after:h-40 after:w-[2px] after:bg-indigo-300/50 dark:before:border-white/40 dark:after:bg-white/30">
             {/* blur */}
-            <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
+            <div className="absolute left-1/2 top-[40%] h-24 w-24 -translate-x-1/2 -translate-y-[40%] rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
 
             <Link aria-label="All projects link" href="/projects">
               <Tooltip

@@ -116,3 +116,13 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
 };
 
 export default techsWithTooltip;
+
+export const myTechStack: technologies[] = [
+  "html",
+  "css",
+  "tailwind css",
+  "javascript",
+  "react",
+  "next.js",
+  "node.js",
+];
