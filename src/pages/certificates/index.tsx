@@ -118,20 +118,12 @@ export default function ProjectsPage({ certificates, categories }: Props) {
               {categories.map((category, i) => {
                 return (
                   // index is used for determining the image priority prop
-                  <Observe
+                  <CertificateCategorySection
+                    categoryIndex={i}
                     key={category._id}
-                    freezeOnceVisible
-                    onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
-                  >
-                    <section className="opacity-0">
-                      <CertificateCategorySection
-                        categoryIndex={i}
-                        key={category._id}
-                        category={category}
-                        certificates={certificates}
-                      />
-                    </section>
-                  </Observe>
+                    category={category}
+                    certificates={certificates}
+                  />
                 );
               })}
             </div>

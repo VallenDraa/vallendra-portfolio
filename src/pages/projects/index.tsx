@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import SiteFooter from "../../components/SiteFooter";
 import Project from "../../interfaces/project.interface";
 import Show from "../../utils/client/jsx/Show";
-import { useState, useMemo } from "react";
+import R from "react";
 import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
 import SearchInput from "../../components/SearchInput";
 import { useRouter } from "next/router";
@@ -26,13 +26,13 @@ interface Props {
 export default function ProjectsPage({ projects, categories }: Props) {
   const router = useRouter();
 
-  const [isError, setIsError] = useState(projects.length === 0);
-  const [query, setQuery] = useState<string>(
+  const [isError, setIsError] = R.useState(projects.length === 0);
+  const [query, setQuery] = R.useState<string>(
     (router.query.find as string) || ""
   );
-  const [searchIsLoading, setSearchIsLoading] = useState(false);
+  const [searchIsLoading, setSearchIsLoading] = R.useState(false);
 
-  const showedIndex = useMemo<number[]>(() => {
+  const showedIndex = R.useMemo<number[]>(() => {
     const newShowedIndex: number[] = projects.reduce((result, project, i) => {
       if (query === "") return [...result, i];
 
@@ -115,19 +115,12 @@ export default function ProjectsPage({ projects, categories }: Props) {
               {categories.map((category, i) => {
                 return (
                   // index is used for determining the image priority prop
-                  <Observe
+                  <ProjectCategorySection
+                    categoryIndex={i}
                     key={category._id}
-                    freezeOnceVisible
-                    onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
-                  >
-                    <section className="opacity-0">
-                      <ProjectCategorySection
-                        categoryIndex={i}
-                        category={category}
-                        projects={projects}
-                      />
-                    </section>
-                  </Observe>
+                    category={category}
+                    projects={projects}
+                  />
                 );
               })}
             </div>

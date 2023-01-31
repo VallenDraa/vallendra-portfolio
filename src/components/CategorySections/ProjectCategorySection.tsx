@@ -3,6 +3,8 @@ import { useMemo } from "react";
 import SectionHeading from "../SectionHeading";
 import ItemCard from "../Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
+import Observe from "../Observe";
+import fadeIn from "../../utils/client/helpers/animateOnObserved";
 
 interface Props {
   categoryIndex: number;
@@ -32,31 +34,43 @@ export default function ProjectCategorySection({
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
-      <SectionHeading>{category.name}</SectionHeading>
+    <section className="flex flex-col gap-6">
+      <Observe
+        freezeOnceVisible
+        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
+      >
+        <div className="opacity-0">
+          <SectionHeading>{category.name}</SectionHeading>
+        </div>
+      </Observe>
 
       {/* display projects in this category */}
-      <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {category.items.map((id, i) => {
-          return (
-            <li key={id}>
-              <ItemCard
-                _id={id}
-                type="projects"
-                imgIsPriority={isImgImportant(categoryIndex, i)}
-                imgSrc={projectsInCategory[id].image}
-                itemLikes={projectsInCategory[id].likes}
-                itemLink={`/projects/${projectsInCategory[id].slug}`}
-                itemName={projectsInCategory[id].name}
-                itemShortDesc={projectsInCategory[id].shortDescriptionEN}
-                itemViews={projectsInCategory[id].views}
-                techs={projectsInCategory[id].tech}
-              />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      <Observe
+        freezeOnceVisible
+        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 350)}
+      >
+        <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {category.items.map((id, i) => {
+            return (
+              <li key={id}>
+                <ItemCard
+                  _id={id}
+                  type="projects"
+                  imgIsPriority={isImgImportant(categoryIndex, i)}
+                  imgSrc={projectsInCategory[id].image}
+                  itemLikes={projectsInCategory[id].likes}
+                  itemLink={`/projects/${projectsInCategory[id].slug}`}
+                  itemName={projectsInCategory[id].name}
+                  itemShortDesc={projectsInCategory[id].shortDescriptionEN}
+                  itemViews={projectsInCategory[id].views}
+                  techs={projectsInCategory[id].tech}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </Observe>
+    </section>
   );
 }
 

@@ -8,7 +8,7 @@ import techsWithTooltip from "../../MappedComponents/TechsWithTooltip";
 import StyledButton from "../../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
-import useIntersectionObserver from "../../../utils/client/hooks/useIntersectionObserver";
+import Observe from "../../Observe";
 
 export type TwistDirection = "right" | "left";
 
@@ -29,30 +29,24 @@ export default function TopPickItem({
   isFirst = false,
   isLast = false,
 }: Props) {
-  const dotRef = R.useRef<HTMLDivElement>(null);
   const picWrapperRef = R.useRef<HTMLDivElement>(null);
   const descWrapperRef = R.useRef<HTMLDivElement>(null);
 
-  const dotObserver = useIntersectionObserver(dotRef, {});
+  function projectInView() {
+    picWrapperRef.current?.classList.remove("opacity-30");
+    picWrapperRef.current?.classList.remove("scale-90");
 
-  R.useEffect(() => {
-    const picClasses = picWrapperRef.current?.classList;
-    const descClasses = descWrapperRef.current?.classList;
+    descWrapperRef.current?.classList.remove("opacity-30");
+    descWrapperRef.current?.classList.remove("scale-90");
+  }
 
-    if (dotObserver?.isIntersecting) {
-      picClasses?.remove("opacity-30");
-      picClasses?.remove("scale-90");
+  function projectNotInView() {
+    picWrapperRef.current?.classList.add("opacity-30");
+    picWrapperRef.current?.classList.add("scale-90");
 
-      descClasses?.remove("opacity-30");
-      descClasses?.remove("scale-90");
-    } else {
-      picClasses?.add("opacity-30");
-      picClasses?.add("scale-90");
-
-      descClasses?.add("opacity-30");
-      descClasses?.add("scale-90");
-    }
-  }, [dotObserver?.isIntersecting]);
+    descWrapperRef.current?.classList.add("opacity-30");
+    descWrapperRef.current?.classList.add("scale-90");
+  }
 
   return (
     <div
@@ -79,16 +73,17 @@ export default function TopPickItem({
       </Show>
 
       {/* dot in line */}
-      <div
-        ref={dotRef}
-        className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-[#272727] dark:text-white/60 ${
-          twistDirection === "left"
-            ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
-            : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
-        }`}
-      >
-        {projectOrder}
-      </div>
+      <Observe onEnter={projectInView} onExit={projectNotInView}>
+        <div
+          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-[1px] border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-[#272727] dark:text-white/60 ${
+            twistDirection === "left"
+              ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
+              : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
+          }`}
+        >
+          {projectOrder}
+        </div>
+      </Observe>
 
       {/* picture wrapper*/}
       <div
