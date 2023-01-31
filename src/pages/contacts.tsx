@@ -209,6 +209,7 @@ export default function Contacts() {
                     type="submit"
                     variant="filled"
                     size="md"
+                    color="teal"
                     className={`${emailIsSending ? "animate-pulse" : ""}`}
                   >
                     Send Message
