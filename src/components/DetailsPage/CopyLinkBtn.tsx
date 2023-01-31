@@ -39,8 +39,7 @@ export default function CopyLinkBtn() {
         url: globalThis.window.location.href,
       })
       .then(() => setHasBeenPressed(true))
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         setIsError(true);
         setTimeout(() => setIsError(false), 1500);
       })

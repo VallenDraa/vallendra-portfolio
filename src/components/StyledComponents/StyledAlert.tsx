@@ -19,7 +19,7 @@ export default function StyledAlert({
       className={`fixed bottom-0 z-[55] items-center rounded-none ${className}`}
       color={color}
       show={show}
-      animate={{ mount: { y: 0 }, unmount: { y: 100 } }}
+      animate={{ mount: { y: 0 }, unmount: { y: 10 } }}
       dismissible={dismissible}
       {...props}
     >

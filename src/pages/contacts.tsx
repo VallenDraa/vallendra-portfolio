@@ -1,5 +1,4 @@
-import { Alert, Typography } from "@material-tailwind/react";
-import Head from "next/head";
+import { Typography } from "@material-tailwind/react";
 import { FormEvent } from "react";
 import {
   IoWarning,
@@ -21,6 +20,7 @@ import { EmailBody } from "./api/email";
 import Seo from "../seo/Seo";
 import contactsPageSeo from "../seo/contactsPage.seo";
 import StyledAlert from "../components/StyledComponents/StyledAlert";
+import alertHandler from "../utils/client/helpers/alertHandler";
 
 export default function Contacts() {
   /* Email body content refs
@@ -58,16 +58,13 @@ export default function Contacts() {
 
       setEmailHasError(false);
     } catch (error) {
-      console.error(error);
-
       setEmailHasError(true);
     } finally {
-      setTimeout(() => {
-        setEmailIsSending(false);
-        setShowAlert(true);
-      }, 500);
-
-      setTimeout(() => setShowAlert(false), 2000);
+      alertHandler({
+        setShowAlert,
+        onShow: () => setEmailIsSending(false),
+        showDelay: 500,
+      });
     }
   };
 
@@ -86,7 +83,6 @@ export default function Contacts() {
         }
         color={emailHasError ? "red" : "green"}
         show={showAlert}
-        animate={{ mount: { y: 0 }, unmount: { y: 100 } }}
         dismissible={{ onClose: () => setShowAlert(false) }}
       >
         {emailHasError

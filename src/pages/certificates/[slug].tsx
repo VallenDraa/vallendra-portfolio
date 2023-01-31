@@ -28,6 +28,9 @@ import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 import showcaseSeo from "../../seo/showcase.seo";
 import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
+import StyledAlert from "../../components/StyledComponents/StyledAlert";
+import { IoWarning } from "react-icons/io5";
+import alertHandler from "../../utils/client/helpers/alertHandler";
 
 interface CertificateRedirect {
   slug: string;
@@ -48,6 +51,7 @@ export default function CertificateDetails({
   /* Others
   =================== */
   const router = useRouter();
+  const [showAlert, setShowAlert] = R.useState(false);
 
   /* Language switcher
   =================== */
@@ -96,7 +100,7 @@ export default function CertificateDetails({
 
         setWillSendLike(false);
       } catch (error) {
-        console.error(error);
+        alertHandler({ setShowAlert });
       }
     },
     500,
@@ -112,7 +116,7 @@ export default function CertificateDetails({
           method: "PUT",
         });
       } catch (error) {
-        console.error(error);
+        alertHandler({ setShowAlert });
       }
     })();
   }, [router.asPath]);
@@ -144,6 +148,15 @@ export default function CertificateDetails({
   return (
     <>
       <Seo base={seoData.base} og={seoData.og} />
+
+      <StyledAlert
+        icon={<IoWarning className="text-2xl" />}
+        color={"red"}
+        show={showAlert}
+        dismissible={{ onClose: () => setShowAlert(false) }}
+      >
+        Oops, please try to reload or try visiting the page at a later time !
+      </StyledAlert>
 
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
