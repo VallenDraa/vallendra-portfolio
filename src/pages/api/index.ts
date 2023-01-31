@@ -1,25 +1,29 @@
 import { NextApiHandler } from "next";
-
-let apiVisitor = 0;
-
-const response = {
-  message:
-    "Do you get to this part of the site very often? What am i saying of course you don't.",
-  end_points: [
-    {
-      certificates: [
-        "/api/views/certificates",
-        "/api/views/certificates/[certificate-id]",
-      ],
-    },
-    { projects: ["/api/views/projects", "/api/views/projects/[project-id]"] },
-  ],
-};
+import { incApiVisitors } from "../../server/service/apiVisitor.service";
+import { internalServerErrorRes } from "../../server/error/response.error";
+import getRandomMessage from "../../utils/data/apiPageMessages";
+import apiDocs from "../../utils/data/apiDocs";
 
 const handler: NextApiHandler = async (req, res) => {
-  apiVisitor += 1;
+  /* increment and fetch api visitor data
+  ======================================= */
+  try {
+    const data = await incApiVisitors();
 
-  return res.json({ ...response, apiVisitor });
+    if (!data) {
+      internalServerErrorRes(res);
+      return;
+    }
+
+    return res.json({
+      apiVisitors: data?.visitors,
+      message: getRandomMessage(),
+      ...apiDocs,
+    });
+  } catch (error) {
+    console.error(error);
+    internalServerErrorRes(res);
+  }
 };
 
 export default handler;
