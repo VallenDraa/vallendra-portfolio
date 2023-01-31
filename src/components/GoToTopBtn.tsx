@@ -28,7 +28,11 @@ export default function GoToTopBtn() {
     };
   }, []);
   return (
-    <a aria-label="Go to top link" href="#" className="block p-2">
+    <a
+      aria-label="Go to top link"
+      href="#"
+      className="fixed bottom-5 right-1/2 z-50 inline-block translate-x-1/2 opacity-30 hover:opacity-100 md:right-10 md:translate-x-0"
+    >
       <IconButton
         aria-label="Go to top button"
         ref={goUpBtnRef}
@@ -36,7 +40,7 @@ export default function GoToTopBtn() {
         ripple={false}
         variant="filled"
         color="deep-purple"
-        className="fixed bottom-5 right-1/2 z-50 translate-x-1/2 opacity-30 duration-500 hover:opacity-100 md:right-10 md:translate-x-0"
+        className="p-2 duration-500"
       >
         <VscTriangleUp className="text-xl" />
       </IconButton>
