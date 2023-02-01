@@ -10,6 +10,7 @@ import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import LeftRightMesh from "./LeftRightMesh";
 
 export type TwistDirection = "right" | "left";
 
@@ -47,18 +48,18 @@ export default function TopPickItem({
   const descWrapperRef = R.useRef<HTMLDivElement>(null);
 
   function projectInView() {
-    picWrapperRef.current?.classList.remove("opacity-30");
+    picWrapperRef.current?.classList.remove("grayscale");
     picWrapperRef.current?.classList.remove("scale-90");
 
-    descWrapperRef.current?.classList.remove("opacity-30");
+    descWrapperRef.current?.classList.remove("grayscale");
     descWrapperRef.current?.classList.remove("scale-90");
   }
 
   function projectNotInView() {
-    picWrapperRef.current?.classList.add("opacity-30");
+    picWrapperRef.current?.classList.add("grayscale");
     picWrapperRef.current?.classList.add("scale-90");
 
-    descWrapperRef.current?.classList.add("opacity-30");
+    descWrapperRef.current?.classList.add("grayscale");
     descWrapperRef.current?.classList.add("scale-90");
   }
 
@@ -76,20 +77,27 @@ export default function TopPickItem({
           : "mx-auto mr-3 rounded-l-xl border-l-2 before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-2 before:border-dashed before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
       }`}
     >
+      {/* Mesh */}
+
+      <LeftRightMesh
+        className="hidden lg:block"
+        twistDirection={twistDirection}
+      />
+
       {/* div to hide the top-left border for smaller screen */}
       <Show when={isFirst}>
-        <div className="absolute left-0 right-1/2 -top-3 h-3 bg-indigo-50 dark:bg-gray-900" />
+        <div className="absolute left-0 right-1/2 -top-3 block h-3 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
       </Show>
 
       {/* div to hide the bottom-right border for smaller screen */}
       <Show when={isLast}>
-        <div className="absolute right-0 left-1/2 -bottom-3 h-3 bg-indigo-50 dark:bg-gray-900" />
+        <div className="absolute right-0 left-1/2 -bottom-3 block h-3 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
       </Show>
 
       {/* dot in line */}
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
-          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500 bg-indigo-50 text-xs text-indigo-700 dark:border-indigo-300 dark:bg-gray-900 dark:text-white/70 ${
+          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-white/70 ${
             twistDirection === "left"
               ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
@@ -102,7 +110,7 @@ export default function TopPickItem({
       {/* picture wrapper*/}
       <div
         ref={picWrapperRef}
-        className="relative flex basis-1/2 scale-90 items-center opacity-30 transition duration-500"
+        className="relative flex basis-1/2 scale-90 items-center grayscale transition duration-500"
       >
         {/* picture */}
         <CldImage
@@ -110,7 +118,7 @@ export default function TopPickItem({
           alt={project.name}
           width={960}
           height={540}
-          className={`mt-8 aspect-video w-11/12 rounded object-cover lg:mt-0 ${
+          className={`mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0 ${
             twistDirection === "left" ? "" : "ml-auto"
           }`}
         />
@@ -119,7 +127,7 @@ export default function TopPickItem({
       {/* description */}
       <div
         ref={descWrapperRef}
-        className={`flex basis-1/2 scale-90 items-center pt-2 pb-8 opacity-30 transition duration-500 lg:p-0 ${
+        className={`relative z-40 flex basis-1/2 scale-90 items-center pt-2 pb-8 grayscale transition duration-500 lg:p-0 ${
           twistDirection === "left" ? "lg:justify-end" : "pl-5"
         }`}
       >

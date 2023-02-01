@@ -1,6 +1,5 @@
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 import Project from "../../../interfaces/project.interface";
-import Line from "../../Line";
 import { useRef, useState } from "react";
 import TopPickItem, { TwistDirection } from "./TopPickItem";
 import { Language } from "../../../types/types";
@@ -9,6 +8,7 @@ import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import TopBottomWaves from "./TopBottomWaves";
 
 interface Props {
   topPickedProjects: Project[];
@@ -25,14 +25,16 @@ export default function TopPickSection({ topPickedProjects }: Props) {
     <section
       aria-label="top-picks-section"
       id="top-picks"
-      className="relative dark:bg-gray-900"
+      className="relative bg-top-pick-light dark:bg-top-pick-dark"
     >
+      <TopBottomWaves />
+
       <div className="relative mx-auto flex w-full max-w-screen-xl flex-col items-center gap-10 px-8 2xl:px-2">
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 pt-24 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 bg-indigo-50 pb-5 dark:bg-gray-900 md:pb-0 lg:bg-transparent">
+          <div className="relative z-20 pt-24 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-30 pb-5 backdrop-blur-sm md:pb-0 lg:bg-transparent">
               <Observe
                 freezeOnceVisible
                 onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}

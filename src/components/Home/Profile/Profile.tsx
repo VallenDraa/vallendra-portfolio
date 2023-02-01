@@ -32,7 +32,7 @@ export default function Profile() {
       id="profile"
       className="relative z-10 space-y-8 bg-indigo-50 dark:bg-gray-900"
     >
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 pt-16 pb-10 overflow-x-hidden xl:flex-row 2xl:px-2">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 py-16 overflow-x-hidden xl:flex-row 2xl:px-2">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <Observe

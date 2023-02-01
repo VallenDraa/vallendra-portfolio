@@ -10,6 +10,12 @@ module.exports = withMT({
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
     extend: {
+      colors: {
+        "top-pick": {
+          dark: "#2f2f2f",
+          light: "#dbdef1",
+        },
+      },
       backgroundImage: {
         "radial-fade":
           "radial-gradient(circle, rgba(33,33,33,0.24) 20%, rgba(33,33,33,0.5) 90%)",

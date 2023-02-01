@@ -1,7 +1,6 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
-import Line from "../../Line";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 
@@ -9,7 +8,7 @@ import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 ================================================================ */
 export default function Redirect() {
   return (
-    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pt-16 pb-28">
+    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pb-24 pt-10">
       <Observe
         freezeOnceVisible
         onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
