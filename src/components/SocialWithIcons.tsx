@@ -1,12 +1,8 @@
 import Link from "next/link";
 import IconWithTooltip from "./IconWithTooltip";
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedinIn,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
+import Show from "../utils/client/jsx/Show";
 
 type Size = "text-4xl" | "text-5xl" | "text-6xl" | "text-7xl";
 type SMSize = `sm:${Size}`;
@@ -22,6 +18,7 @@ interface Props {
   lgSize?: LGSize;
   xlSize?: XLSize;
   xxlSize?: XXLSize;
+  redirectToEmailAddress?: boolean;
 }
 
 export default function SocialsWithIcon({
@@ -31,6 +28,7 @@ export default function SocialsWithIcon({
   lgSize,
   xlSize,
   xxlSize,
+  redirectToEmailAddress = false,
 }: Props) {
   const sizeClasses = `${size} ${smSize || ""} ${mdSize || ""} ${
     lgSize || ""
@@ -38,40 +36,43 @@ export default function SocialsWithIcon({
 
   return (
     <>
-      {/* <Link
-        aria-label="Whatsapp link"
-        href="https://wa.me/6281282029927"
-        target="_blank"
-        className="block"
-      >
-        <IconWithTooltip
-          isButton
-          placement="top"
-          aria-label="Whatsapp link button"
-          icon={
-            <FaWhatsapp
-              className={`${sizeClasses} text-green-400 dark:text-green-300`}
-            />
-          }
-          text="Whatsapp"
-        />
-      </Link> */}
-      <Link aria-label="Email link" href="/contacts" className="block">
-        <IconWithTooltip
-          isButton
-          placement="top"
-          aria-label="Email link button"
-          icon={
-            <AiOutlineMail
-              className={`${sizeClasses} text-green-400 dark:text-green-300`}
-            />
-          }
-          text="Email"
-        />
-      </Link>
+      <Show when={!redirectToEmailAddress}>
+        <Link aria-label="Email link" href="/contacts" className="block">
+          <IconWithTooltip
+            isButton
+            placement="top"
+            aria-label="Email link button"
+            icon={
+              <AiOutlineMail
+                className={`${sizeClasses} text-green-400 dark:text-green-300`}
+              />
+            }
+            text="Email"
+          />
+        </Link>
+      </Show>
+      <Show when={redirectToEmailAddress}>
+        <a
+          aria-label="Email link"
+          href="mailto:vallenatwork@gmail.com"
+          className="block"
+        >
+          <IconWithTooltip
+            isButton
+            placement="top"
+            aria-label="Email link button"
+            icon={
+              <AiOutlineMail
+                className={`${sizeClasses} text-green-400 dark:text-green-300`}
+              />
+            }
+            text="Mail me through an email service instead."
+          />
+        </a>
+      </Show>
       <Link
         aria-label="Instagram link"
-        href="https://instagram.com"
+        href="https://instagram.com/vallendra_"
         target="_blank"
         className="block"
       >
@@ -103,7 +104,7 @@ export default function SocialsWithIcon({
       </Link>
       <Link
         aria-label="Linkedin link"
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/in/vallendra/"
         target="_blank"
         className="block"
       >

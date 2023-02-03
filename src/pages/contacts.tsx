@@ -143,13 +143,13 @@ export default function Contacts() {
                       className="flex items-center gap-2 bg-gradient-to-tr from-pink-300 to-pink-100 bg-clip-text text-2xl font-bold uppercase text-transparent md:text-3xl"
                     >
                       <IoMail className="icon-with-bg-colors rounded-lg p-1 text-3xl text-pink-300" />
-                      Email Form
+                      Quick Message
                     </Typography>
                     <Typography
                       as="span"
                       className="font-medium text-indigo-600 dark:text-gray-400"
                     >
-                      Fill the fields below to send a message via email !
+                      Fill the fields below to send a quick message via email !
                     </Typography>
                   </div>
 
@@ -260,7 +260,11 @@ export default function Contacts() {
                 onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 400)}
               >
                 <main className="flex w-full grow justify-between opacity-0 sm:flex-col">
-                  <SocialsWithIcon size="text-4xl" smSize="sm:text-5xl" />
+                  <SocialsWithIcon
+                    size="text-4xl"
+                    smSize="sm:text-5xl"
+                    redirectToEmailAddress
+                  />
                 </main>
               </Observe>
             </aside>
