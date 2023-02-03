@@ -25,7 +25,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
     <section
       aria-label="top-picks-section"
       id="top-picks"
-      className="relative bg-top-pick-light dark:bg-top-pick-dark"
+      className="relative bg-top-pick-light transition-colors dark:bg-top-pick-dark"
     >
       <TopBottomWaves />
 
@@ -34,7 +34,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
         <div className="relative w-full">
           {/* section Title */}
           <div className="relative z-20 pt-24 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 pb-5 backdrop-blur-sm md:pb-0 lg:bg-transparent">
+            <div className="relative z-30 pb-5 backdrop-blur-sm md:pb-0 lg:bg-transparent lg:backdrop-blur-sm">
               <Observe
                 freezeOnceVisible
                 onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
