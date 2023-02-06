@@ -1,7 +1,7 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
 
-interface Response {
+interface ViewsResponse {
   _id: string;
   views: number;
 }
@@ -9,13 +9,13 @@ interface Response {
 export default function useGetViewsById(
   id: string,
   type: "certificates" | "projects",
-  willFetch: boolean
+  willFetch: boolean = true
 ) {
   const url = R.useMemo(() => `/api/views/${type}/${id}`, [type, id]);
 
   const { mutate } = useSWRConfig();
 
-  const { data, isLoading, error } = useSWR<Response>(
+  const { data, isLoading, error } = useSWR<ViewsResponse>(
     url,
     async () => {
       if (!willFetch) return;

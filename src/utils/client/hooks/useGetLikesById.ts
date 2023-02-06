@@ -1,7 +1,7 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
 
-interface Response {
+interface LikedResponse {
   _id: string;
   likes: number;
   hasLiked: boolean; // has liked the project
@@ -16,7 +16,7 @@ export default function useGetLikesById(
 
   const { mutate } = useSWRConfig();
 
-  const { data, isLoading, error } = useSWR<Response>(
+  const { data, isLoading, error } = useSWR<LikedResponse>(
     url,
     async () => {
       if (!willFetch) return;
