@@ -62,14 +62,13 @@ export default function Profile() {
                 <Typography
                   as="p"
                   variant="paragraph"
-                  className="pl-0.5 text-justify font-medium leading-loose text-indigo-700/80 dark:text-white/80"
+                  className="pl-0.5 text-justify font-medium leading-loose text-indigo-700/80 dark:text-gray-300"
                 >
-                  My name is Jestine Vallendra Dwi Putra, a Front-End Developer.
-                  With a year of experience in the field, I have gained a strong
-                  foundation in web technologies and have had the opportunity to
-                  work on numerous personal projects. I am constantly striving
-                  to learn and improve my skills, and also excited to thrive as
-                  a Front-End Developer.
+                  My name is Jestine Vallendra Dwi Putra. I started my coding
+                  journey in Game Development using Unity but soon realized that
+                  I have a potato PC, so I diverted my attention to Web
+                  Development. I'm currently working with React and its tech
+                  stacks.
                 </Typography>
               </div>
             </Observe>
@@ -154,8 +153,8 @@ export default function Profile() {
                   as="p"
                   className="font-medium text-indigo-600 dark:text-gray-400"
                 >
-                  A First Year Computer Science Major student at Universitas
-                  Islam Negeri Syarif Hidayatullah Jakarta.
+                  Majoring in Informatics / Computer Science at UIN Syarif
+                  Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
@@ -188,8 +187,8 @@ export default function Profile() {
                   as="p"
                   className="font-medium text-indigo-600 dark:text-gray-400"
                 >
-                  An active Member of Google Developer Students Club at
-                  Universitas Islam Negeri Syarif Hidayatullah Jakarta.
+                  An active member of Google Developer Students Club UIN Syarif
+                  Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
