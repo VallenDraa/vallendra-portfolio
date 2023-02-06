@@ -46,7 +46,7 @@ export default function Hero() {
                   variant="h3"
                   className="invisible absolute font-bold text-white/80 opacity-0 xl:visible xl:relative"
                 >
-                  Yes it's him.
+                  Yes it's him,
                 </Typography>
               </Observe>
               <Observe
@@ -77,13 +77,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        {/* Line to next section */}
-        <Observe
-          freezeOnceVisible
-          onEnter={(ref) => fadeIn(ref, "animate-fade-in", 950)}
-        >
-          <Line className="absolute left-1/2 bottom-[-110px] z-20 -translate-x-1/2 scale-y-[3.5] opacity-0 xl:-bottom-3 xl:scale-y-[6]" />
-        </Observe>
       </section>
     </>
   );
