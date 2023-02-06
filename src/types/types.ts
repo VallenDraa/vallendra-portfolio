@@ -2,6 +2,7 @@ export type technologies =
   | "html"
   | "node.js"
   | "javascript"
+  | "jquery"
   | "react"
   | "ejs"
   | "c#"

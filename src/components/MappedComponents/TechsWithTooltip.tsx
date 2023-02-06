@@ -5,6 +5,7 @@ import {
   SiHtml5,
   SiJava,
   SiJavascript,
+  SiJquery,
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
@@ -44,6 +45,14 @@ const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
         <SiJavascript className="text-[2.5rem] text-yellow-600 dark:bg-transparent" />
       }
       text="Javascript"
+    />
+  ),
+  jquery: (
+    <IconWithTooltip
+      icon={
+        <SiJquery className="text-[2.5rem] text-blue-700 dark:bg-transparent" />
+      }
+      text="JQuery"
     />
   ),
   typescript: (

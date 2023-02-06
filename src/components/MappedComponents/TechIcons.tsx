@@ -5,6 +5,7 @@ import {
   SiHtml5,
   SiJava,
   SiJavascript,
+  SiJquery,
   SiMongodb,
   SiNextdotjs,
   SiNodedotjs,
@@ -28,6 +29,9 @@ const techIcons: { [key in technologies]: React.ReactElement | null } = {
   ),
   javascript: (
     <SiJavascript className="text-white/50 transition-colors duration-200 group-hover:text-yellow-600 hover:text-yellow-600" />
+  ),
+  jquery: (
+    <SiJquery className="text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:text-blue-700" />
   ),
   typescript: (
     <SiTypescript className="text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:text-blue-700" />
