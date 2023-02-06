@@ -51,7 +51,7 @@ export default function CertificateCategorySection({
         freezeOnceVisible
         onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 350)}
       >
-        <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
           {category.items.map((id, i) => {
             return (
               <li key={id}>
