@@ -4,7 +4,18 @@ import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Show from "../utils/client/jsx/Show";
 
-type Size = "text-4xl" | "text-5xl" | "text-6xl" | "text-7xl";
+type Size =
+  | "text-xs"
+  | "text-sm"
+  | "text-md"
+  | "text-lg"
+  | "text-xl"
+  | "text-2xl"
+  | "text-3xl"
+  | "text-4xl"
+  | "text-5xl"
+  | "text-6xl"
+  | "text-7xl";
 type SMSize = `sm:${Size}`;
 type MDSize = `md:${Size}`;
 type LGSize = `lg:${Size}`;
