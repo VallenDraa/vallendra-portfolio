@@ -65,7 +65,7 @@ export default function CertificateDetails({
         alertHandler({ setShowAlert });
       }
     })();
-  }, [router.asPath]);
+  }, [router.asPath, certificate._id]);
 
   /* Language switcher
   =================== */
@@ -148,7 +148,6 @@ export default function CertificateDetails({
 
     setWillSendLike(true);
   }
-
   return (
     <>
       <Seo base={seoData.base} og={seoData.og} />
@@ -198,7 +197,7 @@ export default function CertificateDetails({
               <ViewsAndLikes
                 hasLiked={hasLiked}
                 likes={likes}
-                views={certificate.views}
+                views={viewsRes.data?.views || certificate.views}
               />
             </div>
             <div className="flex lg:self-end lg:px-2">

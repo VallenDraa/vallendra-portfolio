@@ -65,7 +65,7 @@ export default function ProjectDetails({
         alertHandler({ setShowAlert });
       }
     })();
-  }, [router.asPath]);
+  }, [router.asPath, project._id]);
 
   /* Language switcher
   =================== */
