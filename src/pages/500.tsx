@@ -4,27 +4,23 @@ import LinkWithUnderline from "../components/DetailsPage/LinkWithUnderline";
 
 export default function ServerErrorPage() {
   return (
-    <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col items-center justify-center gap-3 bg-indigo-50 px-8 after:-top-20 dark:bg-gray-900">
-      <div className="space-y-2 text-center">
+    <div className="fade-bottom relative flex min-h-[75vh] translate-y-20 flex-col items-center justify-center gap-3 px-8 after:-top-20">
+      <div className="flex flex-col items-start space-y-2 text-center">
+        <Typography
+          variant="h3"
+          as="span"
+          className="relative z-10 font-bold text-indigo-500 dark:text-gray-300"
+        >
+          Error 500 😕
+        </Typography>
         <Typography
           variant="h4"
           as="span"
-          className="relative z-10 text-lg text-indigo-500 dark:text-white/80 md:text-xl lg:text-2xl"
+          className="text-indigo-300 dark:text-gray-500"
         >
-          The operation cannot be executed 😕
-        </Typography>
-        <Typography
-          variant="h5"
-          as="span"
-          className="text-sm text-indigo-300 dark:text-white/60 md:text-base lg:text-lg"
-        >
-          Click the link below to go back.
+          Please try reloading the page or come again later.
         </Typography>
       </div>
-
-      <LinkWithUnderline href="/" className="relative z-10">
-        Home page
-      </LinkWithUnderline>
     </div>
   );
 }
