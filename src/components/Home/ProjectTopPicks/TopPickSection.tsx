@@ -58,7 +58,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
                 <Typography
                   as="p"
                   variant="paragraph"
-                  className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-white/80 md:text-lg"
+                  className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-gray-300 md:text-lg"
                 >
                   A selection of my best projects as of now.
                 </Typography>
@@ -119,7 +119,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
                   variant="gradient"
                   color="deep-purple"
                   size="lg"
-                  className="group relative z-[55] rounded-full transition duration-200 hover:scale-125 dark:bg-gray-900"
+                  className="group relative z-[55] rounded-full transition duration-200 hover:scale-125"
                 >
                   <BsArrowRight className="text-3xl" />
                 </IconButton>

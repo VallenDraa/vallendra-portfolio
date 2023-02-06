@@ -75,7 +75,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
               <Typography
                 as="p"
                 variant="paragraph"
-                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-white/80 md:text-lg"
+                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-300 md:text-lg"
               >
                 The ultimate showcase of all my projects. Mostly web but there
                 are others too.
@@ -166,14 +166,14 @@ export default function ProjectsPage({ projects, categories }: Props) {
               <Typography
                 variant="h4"
                 as="h2"
-                className="text-lg dark:text-white/80 md:text-xl lg:text-2xl"
+                className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
               >
                 Sorry, Can't Seem To Load The Projects 😅
               </Typography>
               <Typography
                 variant="h5"
                 as="h3"
-                className="text-sm dark:text-white/60 md:text-base lg:text-lg"
+                className="text-sm dark:text-gray-500 md:text-base lg:text-lg"
               >
                 Try reloading the page. If the problem persists, please try
                 again later.

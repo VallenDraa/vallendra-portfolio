@@ -19,7 +19,7 @@ export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
           <p tw="text-5xl text-white mb-0 text-[#ffca28] opacity-90 font-bold">
             {title}
           </p>
-          <p tw="text-xl text-white/80">{shortDesc}</p>
+          <p tw="text-xl text-gray-300">{shortDesc}</p>
         </div>
 
         {/* image */}
@@ -41,15 +41,15 @@ export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
             height={80}
           />
           <div tw="flex flex-col">
-            <span tw="text-base text-white/70 mb-0.5">
+            <span tw="text-base text-gray-300 mb-0.5">
               Jestine Vallendra Dwi Putra
             </span>
-            <span tw="text-sm text-white/60">Front-End Web Developer</span>
+            <span tw="text-sm text-gray-500">Front-End Web Developer</span>
           </div>
         </div>
 
         {/* year */}
-        <span tw="text-white/80">
+        <span tw="text-gray-300">
           &copy; {new Date().getUTCFullYear()} | vallendra.my.id
         </span>
       </div>

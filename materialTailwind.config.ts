@@ -9,7 +9,7 @@ const customMaterialStyles: CustomStyles = {
     styles: {
       base: {
         bg: "bg-gray-800",
-        color: "text-white/80",
+        color: "text-gray-300",
       },
     },
   },
