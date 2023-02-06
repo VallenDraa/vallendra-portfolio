@@ -13,7 +13,7 @@ export default function alertHandler({
   onShow,
   onHide,
   showDelay = 0,
-  showDuration = 2000,
+  showDuration = 4000,
 }: Args) {
   setTimeout(() => {
     if (onShow) onShow();
