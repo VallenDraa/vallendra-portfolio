@@ -48,7 +48,10 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
   /* Check if views and likes had been fetched 
   =========================================== */
   R.useEffect(() => {
-    if (viewsRes.data?.views && likesRes.data?.likes) {
+    if (
+      typeof viewsRes.data?.views !== "number" &&
+      typeof likesRes.data?.likes !== "number"
+    ) {
       setHasFetched(true);
     }
   }, [viewsRes.data?.views, likesRes.data?.likes]);
