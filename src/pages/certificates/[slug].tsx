@@ -53,6 +53,20 @@ export default function CertificateDetails({
   const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
 
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/certificates/${certificate._id}`, {
+          method: "PUT",
+        });
+      } catch (error) {
+        alertHandler({ setShowAlert });
+      }
+    })();
+  }, [router.asPath]);
+
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
@@ -107,24 +121,14 @@ export default function CertificateDetails({
     [willSendLike, hasLiked]
   );
 
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        await fetch(`/api/views/certificates/${certificate._id}`, {
-          method: "PUT",
-        });
-      } catch (error) {
-        alertHandler({ setShowAlert });
-      }
-    })();
-  }, [router.asPath]);
-
   /* For setting the fetched like to the local likes 
   ==================================================== */
   R.useEffect(() => {
-    setLikes(likesRes.data?.likes || certificate.likes);
+    setLikes(
+      typeof likesRes.data?.likes !== "number"
+        ? certificate.likes
+        : likesRes.data?.likes
+    );
   }, [likesRes.data?.likes]);
 
   /* For setting the fetched hasLiked to the local hasLiked 

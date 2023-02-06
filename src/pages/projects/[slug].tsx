@@ -55,6 +55,18 @@ export default function ProjectDetails({
   const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
 
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
+      } catch (error) {
+        alertHandler({ setShowAlert });
+      }
+    })();
+  }, [router.asPath]);
+
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
@@ -109,22 +121,14 @@ export default function ProjectDetails({
     [willSendLike, hasLiked]
   );
 
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
-      } catch (error) {
-        alertHandler({ setShowAlert });
-      }
-    })();
-  }, [router.asPath]);
-
   /* For setting the fetched like to the local likes 
   ==================================================== */
   R.useEffect(() => {
-    setLikes(likesRes.data?.likes || project.likes);
+    setLikes(
+      typeof likesRes.data?.likes !== "number"
+        ? project.likes
+        : likesRes.data?.likes
+    );
   }, [likesRes.data?.likes]);
 
   /* For setting the fetched hasLiked to the local hasLiked 
