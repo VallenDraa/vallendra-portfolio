@@ -31,7 +31,7 @@ export default function GoToTopBtn() {
     <a
       aria-label="Go to top link"
       href="#"
-      className="fixed bottom-5 right-1/2 z-50 inline-block translate-x-1/2 opacity-30 hover:opacity-100 md:right-10 md:translate-x-0"
+      className="fixed bottom-5 right-10 z-50 inline-block translate-x-0 opacity-30 hover:opacity-100"
     >
       <IconButton
         aria-label="Go to top button"
@@ -40,7 +40,7 @@ export default function GoToTopBtn() {
         ripple={false}
         variant="filled"
         color="deep-purple"
-        className="p-2 duration-500"
+        className="p-2"
       >
         <VscTriangleUp className="text-xl" />
       </IconButton>
