@@ -261,8 +261,8 @@ export default function Contacts() {
               >
                 <main className="flex w-full grow justify-between opacity-0 sm:flex-col">
                   <SocialsWithIcon
-                    size="text-4xl"
-                    smSize="sm:text-5xl"
+                    textSize="text-4xl"
+                    smTextSize="sm:text-5xl"
                     redirectToEmailAddress
                   />
                 </main>
