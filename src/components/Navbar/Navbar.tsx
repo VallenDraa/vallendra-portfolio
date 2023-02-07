@@ -84,11 +84,10 @@ export default function NavbarComponent() {
 
     return () => window.removeEventListener("click", closeNavOnOutsideClick);
   }, []);
-
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/50 py-3 px-0  dark:bg-gray-800/50"
+      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/90 py-3 px-0 dark:bg-gray-800/90 [@supports(backdrop-filter:blur(12px))]:bg-indigo-100/50 [@supports(backdrop-filter:blur(12px))]:backdrop-blur-md dark:[@supports(backdrop-filter:blur(12px))]:bg-gray-800/50"
     >
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 2xl:px-2">
         {/* name section */}
