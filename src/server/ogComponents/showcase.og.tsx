@@ -16,7 +16,7 @@ export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
 
         {/* data */}
         <div tw="flex flex-col px-10 w-[520px] h-[630px] justify-center">
-          <p tw="text-5xl text-white mb-0 text-[#ffca28] opacity-90 font-bold">
+          <p tw="text-5xl text-white mb-0 text-gray-50 opacity-90 font-bold">
             {title}
           </p>
           <p tw="text-xl text-gray-300">{shortDesc}</p>
@@ -44,7 +44,7 @@ export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
             <span tw="text-base text-gray-300 mb-0.5">
               Jestine Vallendra Dwi Putra
             </span>
-            <span tw="text-sm text-gray-500">Front-End Web Developer</span>
+            <span tw="text-sm text-gray-400">Front-End Web Developer</span>
           </div>
         </div>
 
