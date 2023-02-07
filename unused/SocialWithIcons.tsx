@@ -1,9 +1,10 @@
 import Link from "next/link";
-import IconWithTooltip from "./IconWithTooltip";
-import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
-import Show from "../utils/client/jsx/Show";
-import { TextSizes } from "../types/types";
+import IconWithTooltip from "../src/components/IconWithTooltip";
+import { FaGithub, FaGithubSquare } from "react-icons/fa";
+import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
+import Show from "../src/utils/client/jsx/Show";
+import { TextSizes } from "../src/types/types";
+import { MdEmail } from "react-icons/md";
 
 export default function SocialsWithIcon({
   textSize,
@@ -29,7 +30,7 @@ export default function SocialsWithIcon({
             placement="top"
             aria-label="Email link button"
             icon={
-              <AiOutlineMail
+              <MdEmail
                 className={`${sizeClasses} text-green-400 dark:text-green-300`}
               />
             }
@@ -48,7 +49,7 @@ export default function SocialsWithIcon({
             placement="top"
             aria-label="Email link button"
             icon={
-              <AiOutlineMail
+              <MdEmail
                 className={`${sizeClasses} text-green-400 dark:text-green-300`}
               />
             }
@@ -66,7 +67,7 @@ export default function SocialsWithIcon({
           isButton
           placement="top"
           aria-label="Instagram link button"
-          icon={<FaInstagram className={`${sizeClasses} text-pink-300`} />}
+          icon={<AiFillInstagram className={`${sizeClasses} text-pink-300`} />}
           text="Instagram"
         />
       </Link>
@@ -81,7 +82,7 @@ export default function SocialsWithIcon({
           placement="top"
           aria-label="Github link button"
           icon={
-            <FaGithub
+            <FaGithubSquare
               className={`${sizeClasses} text-gray-800 dark:text-gray-100`}
             />
           }
@@ -98,7 +99,7 @@ export default function SocialsWithIcon({
           isButton
           placement="top"
           aria-label="Linkedin link button"
-          icon={<FaLinkedinIn className={`${sizeClasses} text-blue-600`} />}
+          icon={<AiFillLinkedin className={`${sizeClasses} text-blue-600`} />}
           text="LinkedIn"
         />
       </Link>
