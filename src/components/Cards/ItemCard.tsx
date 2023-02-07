@@ -49,8 +49,8 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
   =========================================== */
   R.useEffect(() => {
     if (
-      typeof viewsRes.data?.views !== "number" &&
-      typeof likesRes.data?.likes !== "number"
+      typeof viewsRes.data?.views === "number" &&
+      typeof likesRes.data?.likes === "number"
     ) {
       setHasFetched(true);
     }
