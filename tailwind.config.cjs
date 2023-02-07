@@ -51,17 +51,6 @@ module.exports = withMT({
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
-        shake: {
-          "0%": {
-            transform: "rotateX(-20deg)",
-          },
-          "50%": {
-            transform: "rotateX(20deg)",
-          },
-          "100%": {
-            transform: "rotateX(0deg)",
-          },
-        },
         "open-nav": {
           "0%": { transform: "translateX(-100%)", opacity: "0.7" },
           "50%": { transform: "translateX(3px)", opacity: "1" },
@@ -101,18 +90,13 @@ module.exports = withMT({
           from: { transform: "translateX(120vw)" },
           to: { transform: "translateX(-120vw)" },
         },
-        rotate: {
-          "100%": { transform: "rotate(360deg)" },
-        },
       },
       animation: {
-        rotate: "rotate 3s linear infinite",
         "fade-in-left": "fade-in-left 850ms ease-in-out",
         "fade-in-right": "fade-in-right 850ms ease-in-out",
         "fade-in-bottom": "fade-in-bottom 850ms ease-in-out",
         "fade-in-top": "fade-in-top 850ms ease-in-out",
         "fade-in": "fade-in 350ms ease-out",
-        shake: "shake 100ms ease-in-out",
         "open-nav": "open-nav 350ms ease-in",
         "close-nav": "close-nav 350ms ease-in",
         "open-overlay": "open-overlay 350ms ease-in",
