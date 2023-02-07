@@ -22,13 +22,13 @@ const StyledButton = forwardRef<HTMLButtonElement, Props>(
         {/* when icon is provided */}
         <Show when={!!icon === true}>
           <span
-            className={`translate-x-2.5 transition-transform duration-200 group-hover:translate-x-0 ${textClasses}`}
+            className={`translate-x-3.5 transition-transform duration-200 group-hover:translate-x-0 ${textClasses}`}
           >
             {props.children}
           </span>
 
           <span
-            className={`relative -translate-x-4 text-sm opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100 ${iconClasses}`}
+            className={`relative -translate-x-4 text-lg opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100 ${iconClasses}`}
           >
             {icon}
           </span>

@@ -99,6 +99,7 @@ export const myTechStack: technologies[] = [
   "css",
   "tailwind css",
   "javascript",
+  "typescript",
   "react",
   "next.js",
   "node.js",

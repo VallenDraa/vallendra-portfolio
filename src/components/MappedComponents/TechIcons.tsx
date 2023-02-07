@@ -106,7 +106,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-100 hover:text-gray-100 dark:group-hover:text-gray-900 dark:hover:text-gray-900"
+          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
       }`}
     />
   ),
@@ -133,7 +133,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-100 hover:text-gray-100 dark:group-hover:text-gray-900 dark:hover:text-gray-900"
+          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
       }`}
     />
   ),
@@ -151,7 +151,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-100 hover:text-gray-100 dark:group-hover:text-gray-900 dark:hover:text-gray-900"
+          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
       }`}
     />
   ),

@@ -79,9 +79,9 @@ export default function ProjectsPage({ certificates, categories }: Props) {
               <Typography
                 as="p"
                 variant="paragraph"
-                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-300 md:text-lg"
+                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
               >
-                The ultimate showcase of all my certificates
+                The not too ultimate showcase of all my certificates
               </Typography>
             </div>
           </Observe>

@@ -1,9 +1,7 @@
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
 import Project from "../../../interfaces/project.interface";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import TopPickItem, { TwistDirection } from "./TopPickItem";
-import { Language } from "../../../types/types";
-import LanguageToggle from "../../DetailsPage/LanguageToggle";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 import Observe from "../../Observe";
@@ -15,10 +13,6 @@ interface Props {
 }
 
 export default function TopPickSection({ topPickedProjects }: Props) {
-  /* language switcher
-  =================== */
-  const [activeLanguage, setActiveLanguage] = useState<Language>("en");
-
   const lineTwistDirection = useRef<TwistDirection>("left");
 
   return (
@@ -33,8 +27,8 @@ export default function TopPickSection({ topPickedProjects }: Props) {
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 pt-24 pb-6 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 bg-[#dbdef1] pb-5 dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
+          <div className="relative z-20 pt-24 pb-1 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
               <Observe
                 freezeOnceVisible
                 onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
@@ -63,18 +57,6 @@ export default function TopPickSection({ topPickedProjects }: Props) {
                   A selection of my best projects as of now.
                 </Typography>
               </Observe>
-
-              <Observe
-                freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
-              >
-                <div className="opacity-0">
-                  <LanguageToggle
-                    activeLanguage={activeLanguage}
-                    setActiveLanguage={setActiveLanguage}
-                  />
-                </div>
-              </Observe>
             </div>
           </div>
 
@@ -84,7 +66,6 @@ export default function TopPickSection({ topPickedProjects }: Props) {
               const component = (
                 <TopPickItem
                   projectOrder={i + 1}
-                  language={activeLanguage}
                   key={project._id}
                   project={project}
                   twistDirection={lineTwistDirection.current}

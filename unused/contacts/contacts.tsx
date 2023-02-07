@@ -111,7 +111,7 @@
 //             <Typography
 //               as="p"
 //               variant="paragraph"
-//               className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-300 md:text-lg"
+//               className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
 //             >
 //               You can contact me via email or through others means provided
 //               below !

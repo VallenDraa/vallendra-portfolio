@@ -198,23 +198,6 @@ export default function NavList({ navListRef, overlayRef }: Props) {
           )
         )}
 
-        <Link
-          onClick={closeNav}
-          href={"/contacts"}
-          className="mx-auto mt-2 block w-11/12 lg:hidden"
-        >
-          <StyledButton
-            icon={<IoCall />}
-            variant="filled"
-            color="deep-purple"
-            size="md"
-            fullWidth
-            className="w-full"
-          >
-            Contact Me
-          </StyledButton>
-        </Link>
-
         <div className="mt-auto self-center pb-6 lg:hidden">
           <Typography
             as="span"

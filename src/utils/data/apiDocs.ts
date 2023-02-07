@@ -58,20 +58,6 @@ const apiDocs = {
         },
       ],
     },
-    email_endpoints: {
-      send_email: {
-        path: "/api/email",
-        methods: ["POST"],
-        desc: "will send me an email",
-        body: {
-          POST: {
-            senderEmail: "string",
-            emailSubject: "string",
-            message: "string",
-          },
-        },
-      },
-    },
   },
 };
 

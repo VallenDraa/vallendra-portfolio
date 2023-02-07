@@ -69,8 +69,8 @@ export default function Profile() {
                   My name is Jestine Vallendra Dwi Putra. I started my coding
                   journey in Game Development using Unity but soon realized that
                   I have a potato PC, so I diverted my attention to Web
-                  Development. I'm currently working with React and its tech
-                  stacks.
+                  Development. I mainly use React and its tech stacks when
+                  making stuff now.
                 </Typography>
               </div>
             </Observe>
@@ -83,7 +83,7 @@ export default function Profile() {
                 fadeIn(ref, "animate-fade-in-left", 200);
               }}
             >
-              <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md duration-200 hover:shadow-lg">
+              <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md duration-200">
                 <CardBody>
                   <Typography
                     as="h3"
@@ -143,7 +143,7 @@ export default function Profile() {
             freezeOnceVisible
             onEnter={(ref) => fadeIn(ref, "animate-fade-in-right", 300)}
           >
-            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 hover:shadow-lg xl:basis-auto">
+            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
               <CardBody>
                 <Typography
                   as="h3"
@@ -177,7 +177,7 @@ export default function Profile() {
             freezeOnceVisible
             onEnter={(ref) => fadeIn(ref, "animate-fade-in-right", 300)}
           >
-            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 hover:shadow-lg xl:basis-auto">
+            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
               <CardBody>
                 <Typography
                   as="h3"

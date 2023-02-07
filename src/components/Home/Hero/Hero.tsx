@@ -1,7 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import myPic from "../../../../public/images/vallen-icon.png";
-import Line from "../../Line";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 

@@ -18,7 +18,6 @@ interface Props {
   projectOrder: number;
   twistDirection: TwistDirection;
   project: Project;
-  language: Language;
   isFirst: boolean;
   isLast: boolean;
 }
@@ -27,7 +26,6 @@ export default function TopPickItem({
   projectOrder,
   twistDirection,
   project,
-  language,
   isFirst = false,
   isLast = false,
 }: Props) {
@@ -97,7 +95,7 @@ export default function TopPickItem({
       {/* dot in line */}
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
-          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-gray-400 ${
+          className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-gray-400 ${
             twistDirection === "left"
               ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
@@ -150,8 +148,7 @@ export default function TopPickItem({
             variant="paragraph"
             className="text-base font-medium leading-loose text-indigo-600 dark:text-gray-300"
           >
-            <Show when={language === "en"}>{project.shortDescriptionEN}</Show>
-            <Show when={language === "id"}>{project.shortDescriptionID}</Show>
+            {project.shortDescriptionEN}
           </Typography>
 
           <div className="flex flex-col">
@@ -181,8 +178,8 @@ export default function TopPickItem({
             >
               <StyledButton
                 variant="outlined"
-                icon={<BsArrowRight />}
-                className="relative flex w-full items-center justify-center gap-2 self-start rounded lg:w-max"
+                icon={<BsArrowRight className="text-teal-600" />}
+                className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 lg:w-max"
                 color="teal"
                 size="md"
               >
