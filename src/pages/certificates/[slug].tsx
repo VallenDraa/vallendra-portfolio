@@ -249,10 +249,6 @@ export default function CertificateDetails({
 
             {/* link for the code of this certificate */}
             <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
-              <span className="text-indigo-600 dark:text-gray-400">
-                Received on {new Date(certificate.madeAt).toLocaleDateString()}
-              </span>
-
               {/* see certificate and copy link button*/}
               <div className="flex w-full flex-col gap-3">
                 <ActionButton
