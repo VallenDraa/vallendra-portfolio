@@ -1,127 +1,95 @@
-import {
-  SiC,
-  SiCsharp,
-  SiCss3,
-  SiHtml5,
-  SiJava,
-  SiJavascript,
-  SiJquery,
-  SiMongodb,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiReact,
-  SiSocketdotio,
-  SiTailwindcss,
-  SiTypescript,
-  SiUnity,
-} from "react-icons/si";
 import IconWithTooltip from "../IconWithTooltip";
 import { technologies } from "../../types/types";
+import techIcons from "./TechIcons";
 
-const techsWithTooltip: { [key in technologies]: React.ReactElement | null } = {
-  html: (
+const techsWithTooltip: {
+  [key in technologies]: (isColorOn?: boolean) => React.ReactElement | null;
+} = {
+  html: (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiHtml5 className="text-[2.3rem] text-deep-orange-500 dark:text-deep-orange-400" />
-      }
+      icon={techIcons["html"]("text-4xl", isColorOn)}
       text="HTML 5"
     />
   ),
-  css: (
+  css: (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiCss3 className="text-[2.3rem] text-blue-600" />}
+      icon={techIcons["css"]("text-4xl", isColorOn)}
       text="CSS 3"
     />
   ),
-  "tailwind css": (
+  "tailwind css": (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiTailwindcss className="text-[2.3rem] text-cyan-400" />}
+      icon={techIcons["tailwind css"]("text-4xl", isColorOn)}
       text="Tailwind CSS"
     />
   ),
-  javascript: (
+  javascript: (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiJavascript className="text-[2.3rem] text-yellow-600 dark:bg-transparent" />
-      }
+      icon={techIcons["javascript"]("text-4xl", isColorOn)}
       text="Javascript"
     />
   ),
-  jquery: (
+  jquery: (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiJquery className="text-[2.3rem] text-blue-700 dark:bg-transparent" />
-      }
+      icon={techIcons["jquery"]("text-4xl", isColorOn)}
       text="JQuery"
     />
   ),
-  typescript: (
+  typescript: (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiTypescript className="text-[2.3rem] text-blue-700" />}
+      icon={techIcons["typescript"]("text-4xl", isColorOn)}
       text="Typescript"
     />
   ),
-  react: (
+  react: (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiReact className="text-[2.3rem] text-light-blue-300 dark:text-light-blue-200" />
-      }
+      icon={techIcons["react"]("text-4xl", isColorOn)}
       text="React"
     />
   ),
-  "node.js": (
+  "node.js": (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiNodedotjs className="text-[2.3rem] text-green-400" />}
+      icon={techIcons["node.js"]("text-4xl", isColorOn)}
       text="Node.js"
     />
   ),
-  mongodb: (
+  mongodb: (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiMongodb className="text-[2.3rem] text-green-600" />}
+      icon={techIcons["mongodb"]("text-4xl", isColorOn)}
       text="MongoDB"
     />
   ),
-  "socket.io": (
+  "socket.io": (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiSocketdotio className="text-[2.3rem] text-white dark:text-gray-100" />
-      }
+      icon={techIcons["socket.io"]("text-4xl", isColorOn)}
       text="Socket.io"
     />
   ),
-  c: (
-    <IconWithTooltip
-      icon={<SiC className="text-[2.3rem] text-blue-700" />}
-      text="C"
-    />
+  c: (isColorOn = true) => (
+    <IconWithTooltip icon={techIcons["c"]("text-4xl", isColorOn)} text="C" />
   ),
-  "c#": (
-    <IconWithTooltip
-      icon={<SiCsharp className="text-[2.3rem] text-purple-300" />}
-      text="C#"
-    />
+  "c#": (isColorOn = true) => (
+    <IconWithTooltip icon={techIcons["c#"]("text-4xl", isColorOn)} text="C#" />
   ),
-  unity: (
+  unity: (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiUnity className="text-[2.3rem] text-gray-300" />}
+      icon={techIcons["unity"]("text-4xl", isColorOn)}
       text="Unity"
     />
   ),
-  java: (
+  java: (isColorOn = true) => (
     <IconWithTooltip
-      icon={<SiJava className="text-[2.3rem] text-red-700" />}
+      icon={techIcons["java"]("text-4xl", isColorOn)}
       text="Java"
     />
   ),
-  "next.js": (
+  "next.js": (isColorOn = true) => (
     <IconWithTooltip
-      icon={
-        <SiNextdotjs className="text-[2.3rem] text-white dark:text-gray-100" />
-      }
+      icon={techIcons["next.js"]("text-4xl", isColorOn)}
       text="Next.js"
     />
   ),
-  ejs: null,
+  ejs: (isColorOn = true) => null,
 };
 
 export default techsWithTooltip;

@@ -3,47 +3,22 @@ import IconWithTooltip from "./IconWithTooltip";
 import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import Show from "../utils/client/jsx/Show";
-
-type Size =
-  | "text-xs"
-  | "text-sm"
-  | "text-md"
-  | "text-lg"
-  | "text-xl"
-  | "text-2xl"
-  | "text-3xl"
-  | "text-4xl"
-  | "text-5xl"
-  | "text-6xl"
-  | "text-7xl";
-type SMSize = `sm:${Size}`;
-type MDSize = `md:${Size}`;
-type LGSize = `lg:${Size}`;
-type XLSize = `xl:${Size}`;
-type XXLSize = `2xl:${Size}`;
-
-interface Props {
-  size: Size;
-  smSize?: SMSize;
-  mdSize?: MDSize;
-  lgSize?: LGSize;
-  xlSize?: XLSize;
-  xxlSize?: XXLSize;
-  redirectToEmailAddress?: boolean;
-}
+import { TextSizes } from "../types/types";
 
 export default function SocialsWithIcon({
-  size,
-  smSize,
-  mdSize,
-  lgSize,
-  xlSize,
-  xxlSize,
+  textSize,
+  smTextSize,
+  mdTextSize,
+  lgTextSize,
+  xlTextSize,
+  xxlTextSize,
   redirectToEmailAddress = false,
-}: Props) {
-  const sizeClasses = `${size} ${smSize || ""} ${mdSize || ""} ${
-    lgSize || ""
-  } ${xlSize || ""} ${xxlSize || ""}`.trim();
+}: TextSizes & {
+  redirectToEmailAddress?: boolean;
+}) {
+  const sizeClasses = `${textSize} ${smTextSize || ""} ${mdTextSize || ""} ${
+    lgTextSize || ""
+  } ${xlTextSize || ""} ${xxlTextSize || ""}`.trim();
 
   return (
     <>

@@ -5,7 +5,7 @@ import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
 import { Language, LikesOperationBody, technologies } from "../../types/types";
-import TECHS from "../../components/MappedComponents/TechsWithTooltip";
+import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
 import Show from "../../utils/client/jsx/Show";
@@ -238,7 +238,7 @@ export default function ProjectDetails({
                 <ul className="scrollbar-kece relative flex items-center gap-1 overflow-auto">
                   {project?.tech.map(
                     (tech: technologies, i): JSX.Element => (
-                      <li key={i}>{TECHS[tech]}</li>
+                      <li key={i}>{TechWithTooltip[tech]()}</li>
                     )
                   )}
                 </ul>

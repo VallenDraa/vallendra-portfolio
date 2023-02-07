@@ -169,7 +169,7 @@ export default function TopPickItem({
                       fadeIn(ref, "animate-fade-in-left", animationTechDelay[i])
                     }
                   >
-                    <li className="opacity-0">{techsWithTooltip[tech]}</li>
+                    <li className="opacity-0">{techsWithTooltip[tech]()}</li>
                   </Observe>
                 );
               })}

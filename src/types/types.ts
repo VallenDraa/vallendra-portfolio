@@ -31,3 +31,32 @@ export type LikesOperationBody = {
 export type LikesPUTOperation = "increment" | "decrement";
 
 export type StatsType = "views" | "likes";
+
+/* Font Sizes
+============= */
+export type TextSize =
+  | "text-xs"
+  | "text-sm"
+  | "text-md"
+  | "text-lg"
+  | "text-xl"
+  | "text-2xl"
+  | "text-3xl"
+  | "text-4xl"
+  | "text-5xl"
+  | "text-6xl"
+  | "text-7xl";
+export type SMTextSize = `sm:${TextSize}`;
+export type MDTextSize = `md:${TextSize}`;
+export type LGTextSize = `lg:${TextSize}`;
+export type XLTextSize = `xl:${TextSize}`;
+export type XXLTextSize = `2xl:${TextSize}`;
+
+export type TextSizes = {
+  textSize: TextSize;
+  smTextSize?: SMTextSize;
+  mdTextSize?: MDTextSize;
+  lgTextSize?: LGTextSize;
+  xlTextSize?: XLTextSize;
+  xxlTextSize?: XXLTextSize;
+};
