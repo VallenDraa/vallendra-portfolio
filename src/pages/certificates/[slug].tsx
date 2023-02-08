@@ -53,20 +53,6 @@ export default function CertificateDetails({
   const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
 
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        await fetch(`/api/views/certificates/${certificate._id}`, {
-          method: "PUT",
-        });
-      } catch (error) {
-        alertHandler({ setShowAlert });
-      }
-    })();
-  }, [router.asPath, certificate._id]);
-
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
@@ -121,6 +107,20 @@ export default function CertificateDetails({
     [willSendLike, hasLiked]
   );
 
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/certificates/${certificate._id}`, {
+          method: "PUT",
+        });
+      } catch (error) {
+        alertHandler({ setShowAlert });
+      }
+    })();
+  }, [router.asPath, certificate._id]);
+
   /* For setting the fetched like to the local likes 
   ==================================================== */
   R.useEffect(() => {
@@ -148,6 +148,7 @@ export default function CertificateDetails({
 
     setWillSendLike(true);
   }
+
   return (
     <>
       <Seo base={seoData.base} og={seoData.og} />
@@ -197,7 +198,10 @@ export default function CertificateDetails({
               <ViewsAndLikes
                 hasLiked={hasLiked}
                 likes={likes}
-                views={viewsRes.data?.views || certificate.views}
+                views={
+                  viewsRes.data?.views
+                    || certificate.views
+                }
               />
             </div>
             <div className="flex lg:self-end lg:px-2">

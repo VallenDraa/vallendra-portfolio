@@ -55,18 +55,6 @@ export default function ProjectDetails({
   const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
 
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
-      } catch (error) {
-        alertHandler({ setShowAlert });
-      }
-    })();
-  }, [router.asPath, project._id]);
-
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
@@ -120,6 +108,18 @@ export default function ProjectDetails({
     500,
     [willSendLike, hasLiked]
   );
+
+  /* For incrementing view upon page load
+  ==================================================== */
+  R.useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
+      } catch (error) {
+        alertHandler({ setShowAlert });
+      }
+    })();
+  }, [router.asPath, project._id]);
 
   /* For setting the fetched like to the local likes 
   ==================================================== */
