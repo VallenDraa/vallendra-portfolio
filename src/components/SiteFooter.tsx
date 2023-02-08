@@ -10,7 +10,11 @@ export default function SiteFooter() {
     <footer className="gradient-underline gradient-underline--primary relative flex flex-col gap-2 px-8 py-4 before:!top-0">
       {/* socials */}
       <div className="mx-auto flex w-fit max-w-screen-xl items-center gap-2.5 text-3xl text-indigo-400 dark:text-gray-400 [&>*]:p-1">
-        <a aria-label="Email link button" href="mailto:vallenatwork@gmail.com">
+        <a
+          target="_blank"
+          aria-label="Email link button"
+          href="mailto:vallenatwork@gmail.com"
+        >
           <MdEmail />
         </a>
         <a
@@ -19,10 +23,15 @@ export default function SiteFooter() {
         >
           <AiFillInstagram />
         </a>
-        <a aria-label="Github link button" href="https://github.com/vallendraa">
+        <a
+          target="_blank"
+          aria-label="Github link button"
+          href="https://github.com/vallendraa"
+        >
           <FaGithub />
         </a>
         <a
+          target="_blank"
           aria-label="Linkedin link"
           href="https://www.linkedin.com/in/vallendra/"
         >
@@ -50,7 +59,7 @@ export default function SiteFooter() {
             Material Tailwind,
           </a>
           <span>and</span>
-          <span className="translate-y-0.5 text-lg text-pink-300 dark:text-pink-200">
+          <span className="translate-y-[1px] text-lg text-pink-300 dark:text-pink-200">
             &hearts;
           </span>
         </div>
