@@ -70,7 +70,7 @@ export default function Hero() {
                   className="text-center text-2xl font-bold text-white/80 opacity-0 md:text-3xl xl:text-right"
                 >
                   <span className="hidden xl:inline">The</span> Front-End Web
-                  Developer 👨‍💻
+                  Developer {"</>"}
                 </Typography>
               </Observe>
             </div>
