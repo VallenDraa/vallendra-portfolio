@@ -11,7 +11,7 @@ export default function Redirect() {
     <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pb-24 pt-10">
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
       >
         <Typography
           as="h2"
@@ -23,7 +23,7 @@ export default function Redirect() {
 
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
       >
         <a
           href="mailto:vallenatwork@gmail.com"
@@ -41,7 +41,7 @@ export default function Redirect() {
 
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
       >
         <Link
           href="/projects"

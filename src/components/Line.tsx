@@ -18,7 +18,7 @@ const Line = R.forwardRef<HTMLDivElement, Props>(
         {...props}
       />
     );
-  }
+  },
 );
 
 export default Line;

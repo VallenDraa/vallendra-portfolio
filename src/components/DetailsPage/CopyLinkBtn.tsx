@@ -5,7 +5,7 @@ import ActionButton from "../StyledComponents/ActionButton";
 
 export default function CopyLinkBtn() {
   const [shareIsSupported, setShareIsSupported] = R.useState<boolean | null>(
-    null
+    null,
   );
   const [copyLinkIsSupported, setCopyLinkIsSupported] = R.useState<
     boolean | null

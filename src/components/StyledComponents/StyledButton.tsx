@@ -11,7 +11,7 @@ interface Props extends ButtonProps {
 const StyledButton = forwardRef<HTMLButtonElement, Props>(
   (
     { ref, className = "", textClasses = "", iconClasses = "", icon, ...props },
-    forwardedRef
+    forwardedRef,
   ) => {
     return (
       <Button
@@ -38,7 +38,7 @@ const StyledButton = forwardRef<HTMLButtonElement, Props>(
         <Show when={!!icon === false}>{props.children}</Show>
       </Button>
     );
-  }
+  },
 );
 
 export default StyledButton;

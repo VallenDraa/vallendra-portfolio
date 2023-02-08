@@ -25,7 +25,7 @@ export default function ProjectCategorySection({
     const { items: allProjectIds } = category;
 
     const pickedProjects = allProjectIds.reduce((res, id) => {
-      const pickedProject = projects.find((project) => project._id === id);
+      const pickedProject = projects.find(project => project._id === id);
 
       return { ...res, [id]: pickedProject };
     }, {});
@@ -37,7 +37,7 @@ export default function ProjectCategorySection({
     <section className="flex flex-col gap-6">
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
       >
         <div className="opacity-0">
           <SectionHeading>{category.name}</SectionHeading>
@@ -47,7 +47,7 @@ export default function ProjectCategorySection({
       {/* display projects in this category */}
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 350)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
         <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
           {category.items.map((id, i) => {

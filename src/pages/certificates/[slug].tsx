@@ -104,7 +104,7 @@ export default function CertificateDetails({
       }
     },
     500,
-    [willSendLike, hasLiked]
+    [willSendLike, hasLiked],
   );
 
   /* For incrementing view upon page load
@@ -127,7 +127,7 @@ export default function CertificateDetails({
     setLikes(
       typeof likesRes.data?.likes !== "number"
         ? certificate.likes
-        : likesRes.data?.likes
+        : likesRes.data?.likes,
     );
   }, [likesRes.data?.likes]);
 
@@ -139,10 +139,10 @@ export default function CertificateDetails({
 
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes((likes) => likes + 1);
+      setLikes(likes => likes + 1);
       setHasLiked(true);
     } else {
-      setLikes((likes) => likes - 1);
+      setLikes(likes => likes - 1);
       setHasLiked(false);
     }
 
@@ -198,10 +198,7 @@ export default function CertificateDetails({
               <ViewsAndLikes
                 hasLiked={hasLiked}
                 likes={likes}
-                views={
-                  viewsRes.data?.views
-                    || certificate.views
-                }
+                views={viewsRes.data?.views || certificate.views}
               />
             </div>
             <div className="flex lg:self-end lg:px-2">
@@ -324,7 +321,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const certificates = await JSONSerialize(await getAllCertificates());
 
   if (certificates) {
-    const paths = certificates.map((c) => ({ params: { slug: c.slug } }));
+    const paths = certificates.map(c => ({ params: { slug: c.slug } }));
 
     return { fallback: false, paths };
   } else {
@@ -332,14 +329,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;
 
   if (!params?.slug) return { notFound: true };
   if (typeof params.slug !== "string") return { notFound: true };
 
   const props = await JSONSerialize(
-    await getCertificateWithPrevAndNext(params.slug)
+    await getCertificateWithPrevAndNext(params.slug),
   );
 
   if (props) {

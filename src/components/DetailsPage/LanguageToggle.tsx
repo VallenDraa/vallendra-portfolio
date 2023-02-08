@@ -15,7 +15,7 @@ export default function LanguageToggle({
       className="w-full lg:w-max"
       icon={<IoLanguage />}
       color="teal"
-      onClick={() => setActiveLanguage((prev) => (prev === "en" ? "id" : "en"))}
+      onClick={() => setActiveLanguage(prev => (prev === "en" ? "id" : "en"))}
     >
       {activeLanguage === "en" ? "Read In Indonesian" : "Read In English"}
     </ActionButton>

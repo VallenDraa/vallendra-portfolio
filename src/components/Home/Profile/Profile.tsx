@@ -39,7 +39,7 @@ export default function Profile() {
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 0)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-left", 0)}
           >
             <header className="gradient-underline gradient-underline--primary relative flex w-fit items-center gap-1 opacity-0">
               <Typography
@@ -58,7 +58,7 @@ export default function Profile() {
             {/* small paragraph about me */}
             <Observe
               freezeOnceVisible
-              onEnter={(ref) => fadeIn(ref, "animate-fade-in-left", 0)}
+              onEnter={ref => fadeIn(ref, "animate-fade-in-left", 0)}
             >
               <div className="mb-8 opacity-0 xl:mb-0 xl:basis-2/3">
                 <Typography
@@ -78,7 +78,7 @@ export default function Profile() {
             {/* techs */}
             <Observe
               freezeOnceVisible
-              onEnter={(ref) => {
+              onEnter={ref => {
                 setTechCardIsVisible(true);
                 fadeIn(ref, "animate-fade-in-left", 200);
               }}
@@ -107,11 +107,11 @@ export default function Profile() {
                           <Observe
                             key={key}
                             freezeOnceVisible
-                            onEnter={(ref) =>
+                            onEnter={ref =>
                               fadeIn(
                                 ref,
                                 "animate-fade-in-left",
-                                animationTechDelay[i]
+                                animationTechDelay[i],
                               )
                             }
                           >
@@ -141,7 +141,7 @@ export default function Profile() {
           {/* education */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-right", 300)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
           >
             <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
               <CardBody>
@@ -175,7 +175,7 @@ export default function Profile() {
           {/* activity */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-right", 300)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
           >
             <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
               <CardBody>

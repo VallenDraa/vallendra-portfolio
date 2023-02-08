@@ -162,7 +162,7 @@ export default function TopPickItem({
                   <Observe
                     key={i}
                     freezeOnceVisible
-                    onEnter={(ref) =>
+                    onEnter={ref =>
                       fadeIn(ref, "animate-fade-in-left", animationTechDelay[i])
                     }
                   >

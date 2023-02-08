@@ -28,7 +28,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
   const [isError, setIsError] = R.useState(projects.length === 0);
   const [query, setQuery] = R.useState<string>(
-    (router.query.find as string) || ""
+    (router.query.find as string) || "",
   );
   const [searchIsLoading, setSearchIsLoading] = R.useState(false);
 
@@ -59,7 +59,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
           {/* heading */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
           >
             <div className="relative z-10 opacity-0">
               <div className="relative flex w-fit items-center gap-1">
@@ -86,15 +86,15 @@ export default function ProjectsPage({ projects, categories }: Props) {
           {/* searchbar */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
           >
             <div className="opacity-0">
               <SearchInput
                 willRedirect
                 defaultValue={query}
                 placeholder="Search Projects"
-                loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
-                callback={(query) => setQuery(query)}
+                loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
+                callback={query => setQuery(query)}
               />
             </div>
           </Observe>
@@ -131,7 +131,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
             when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
             <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {showedIndex.map((idx) => {
+              {showedIndex.map(idx => {
                 if (projects[idx]) {
                   return (
                     <li key={projects[idx]._id}>

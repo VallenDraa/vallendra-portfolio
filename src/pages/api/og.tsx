@@ -4,7 +4,7 @@ import Showcase from "../../server/ogComponents/showcase.og";
 
 export const config = { runtime: "edge" };
 
-const handler: NextApiHandler = (req) => {
+const handler: NextApiHandler = req => {
   try {
     const { searchParams } = new URL(req.url as string);
 
@@ -17,7 +17,7 @@ const handler: NextApiHandler = (req) => {
 
     return new ImageResponse(
       <Showcase title={title} shortDesc={shortDesc} imgLink={imgLink} />,
-      { width: 1280, height: 720 }
+      { width: 1280, height: 720 },
     );
   } catch (error) {
     console.error(error);

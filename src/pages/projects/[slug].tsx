@@ -106,7 +106,7 @@ export default function ProjectDetails({
       }
     },
     500,
-    [willSendLike, hasLiked]
+    [willSendLike, hasLiked],
   );
 
   /* For incrementing view upon page load
@@ -127,7 +127,7 @@ export default function ProjectDetails({
     setLikes(
       typeof likesRes.data?.likes !== "number"
         ? project.likes
-        : likesRes.data?.likes
+        : likesRes.data?.likes,
     );
   }, [likesRes.data?.likes]);
 
@@ -139,10 +139,10 @@ export default function ProjectDetails({
 
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes((likes) => likes + 1);
+      setLikes(likes => likes + 1);
       setHasLiked(true);
     } else {
-      setLikes((likes) => likes - 1);
+      setLikes(likes => likes - 1);
       setHasLiked(false);
     }
 
@@ -239,7 +239,7 @@ export default function ProjectDetails({
                   {project?.tech.map(
                     (tech: technologies, i): JSX.Element => (
                       <li key={i}>{TechWithTooltip[tech]()}</li>
-                    )
+                    ),
                   )}
                 </ul>
               </div>
@@ -349,7 +349,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await JSONSerialize(await getAllProjects());
 
   if (projects) {
-    const paths = projects.map((p) => ({ params: { slug: p.slug } }));
+    const paths = projects.map(p => ({ params: { slug: p.slug } }));
 
     return { fallback: false, paths };
   } else {
@@ -357,14 +357,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;
 
   if (!params?.slug) return { notFound: true };
   if (typeof params.slug !== "string") return { notFound: true };
 
   const props = await JSONSerialize(
-    await getProjectWithPrevAndNext(params.slug)
+    await getProjectWithPrevAndNext(params.slug),
   );
 
   if (props) {

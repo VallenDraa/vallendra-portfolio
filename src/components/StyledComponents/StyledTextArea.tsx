@@ -14,7 +14,7 @@ const StyledTextArea = forwardRef<HTMLDivElement, TextareaProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 export default StyledTextArea;

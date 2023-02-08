@@ -11,7 +11,7 @@ interface Props extends ButtonProps {
 const ActionButton = forwardRef<HTMLButtonElement, Props>(
   (
     { ref, className = "", children, href, icon, variant, fullWidth, ...props },
-    forwardedRef
+    forwardedRef,
   ) => {
     const button = (
       <Button
@@ -39,7 +39,7 @@ const ActionButton = forwardRef<HTMLButtonElement, Props>(
     ) : (
       button
     );
-  }
+  },
 );
 
 export default ActionButton;

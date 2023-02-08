@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 const StyledInput = forwardRef<HTMLInputElement, InputProps>(
   (
     { ref: normalRef, className, icon, placeholder, value, ...props },
-    forwardRef
+    forwardRef,
   ) => {
     return (
       <Input
@@ -20,7 +20,7 @@ const StyledInput = forwardRef<HTMLInputElement, InputProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 export default StyledInput;

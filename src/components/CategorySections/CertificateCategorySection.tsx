@@ -26,7 +26,7 @@ export default function CertificateCategorySection({
 
     const pickedCertificates = allCertifIds.reduce((res, id) => {
       const pickedCertificate = certificates.find(
-        (project) => project._id === id
+        project => project._id === id,
       );
 
       return { ...res, [id]: pickedCertificate };
@@ -39,7 +39,7 @@ export default function CertificateCategorySection({
     <section className="flex flex-col gap-6">
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 250)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
       >
         <div className="opacity-0">
           <SectionHeading>{category.name}</SectionHeading>
@@ -49,7 +49,7 @@ export default function CertificateCategorySection({
       {/* display certificates in this category */}
       <Observe
         freezeOnceVisible
-        onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 350)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
         <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
           {category.items.map((id, i) => {

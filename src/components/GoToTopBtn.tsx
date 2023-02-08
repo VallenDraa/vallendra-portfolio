@@ -1,5 +1,4 @@
-import { IconButton, Tooltip } from "@material-tailwind/react";
-import Link from "next/link";
+import { IconButton } from "@material-tailwind/react";
 import { useEffect, useRef } from "react";
 import { VscTriangleUp } from "react-icons/vsc";
 

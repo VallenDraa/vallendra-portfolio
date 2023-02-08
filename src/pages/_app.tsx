@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useEffect } from "react";
+import { ReactElement, ReactNode } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";

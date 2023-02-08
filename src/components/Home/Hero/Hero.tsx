@@ -16,7 +16,7 @@ export default function Hero() {
           {/* left side */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-left")}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-left")}
           >
             <div className="relative w-2/3 grow opacity-0 md:w-fit">
               {/* my photo */}
@@ -38,7 +38,7 @@ export default function Hero() {
             <div aria-label="name-section">
               <Observe
                 freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 50)}
+                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 50)}
               >
                 <Typography
                   as="span"
@@ -50,7 +50,7 @@ export default function Hero() {
               </Observe>
               <Observe
                 freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 350)}
+                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
               >
                 <Typography
                   as="h1"
@@ -62,7 +62,7 @@ export default function Hero() {
               </Observe>
               <Observe
                 freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 650)}
+                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 650)}
               >
                 <Typography
                   as="span"

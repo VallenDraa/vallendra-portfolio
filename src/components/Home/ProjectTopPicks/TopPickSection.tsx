@@ -31,7 +31,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
             <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
               <Observe
                 freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
               >
                 <div className="flex items-center opacity-0">
                   <Typography
@@ -47,7 +47,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
 
               <Observe
                 freezeOnceVisible
-                onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 100)}
+                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
               >
                 <Typography
                   as="p"

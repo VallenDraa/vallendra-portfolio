@@ -28,7 +28,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
   const [isError, setIsError] = useState(certificates.length === 0);
   const [query, setQuery] = useState<string>(
-    (router.query.find as string) || ""
+    (router.query.find as string) || "",
   );
   const [searchIsLoading, setSearchIsLoading] = useState(false);
 
@@ -47,7 +47,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
         return result;
       },
-      [] as number[]
+      [] as number[],
     );
 
     return newShowedIndex;
@@ -62,7 +62,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           {/* heading */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 0)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
           >
             <div className="relative z-10 opacity-0">
               <div className="relative flex w-fit items-center gap-1">
@@ -89,15 +89,15 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           {/* searchbar */}
           <Observe
             freezeOnceVisible
-            onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
           >
             <div className="opacity-0">
               <SearchInput
                 willRedirect
                 defaultValue={query}
                 placeholder="Search Certificates"
-                loadingCallback={(isWaiting) => setSearchIsLoading(isWaiting)}
-                callback={(query) => setQuery(query)}
+                loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
+                callback={query => setQuery(query)}
               />
             </div>
           </Observe>
@@ -136,7 +136,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
             }
           >
             <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {showedIndex.map((idx) => {
+              {showedIndex.map(idx => {
                 if (certificates[idx]) {
                   return (
                     <li key={certificates[idx]._id}>

@@ -19,7 +19,7 @@ export default function Stats({
 }) {
   const formattedNumber = R.useMemo(
     () => compactNumberFormatter.format(number),
-    [number]
+    [number],
   );
 
   return (

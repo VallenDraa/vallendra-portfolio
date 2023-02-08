@@ -24,7 +24,7 @@ const FloatingSquares: FC = () => {
 
     return () =>
       window.removeEventListener("resize", () =>
-        setPopulation(changePopulation)
+        setPopulation(changePopulation),
       );
   }, []);
 
@@ -49,7 +49,7 @@ const FloatingSquares: FC = () => {
             height: `${size}px`,
             bottom: `-${size}px`,
           }}
-        />
+        />,
       );
     }
 

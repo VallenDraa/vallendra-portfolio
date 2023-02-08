@@ -23,7 +23,7 @@ const IconWithTooltip = R.forwardRef<HTMLDivElement, Props>(
       withPadding = true,
       ...props
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     return (
       <Tooltip
@@ -58,7 +58,7 @@ const IconWithTooltip = R.forwardRef<HTMLDivElement, Props>(
         )}
       </Tooltip>
     );
-  }
+  },
 );
 
 export default IconWithTooltip;

@@ -38,7 +38,7 @@ export default function SearchInput({
   const [isWaitingResult, searchError] = useDebounce(
     () => setFinalQuery(tempQuery),
     debounceMs || 600,
-    [tempQuery]
+    [tempQuery],
   );
 
   /* will trigger everytime isWaitingResult changes */
@@ -79,7 +79,7 @@ export default function SearchInput({
       aria-label={placeholder || ""}
       label={placeholder || ""}
       disabled={disabled || !!searchError}
-      onChange={(e) => {
+      onChange={e => {
         if (onChange) onChange(e);
 
         setTempQuery(e.target.value);

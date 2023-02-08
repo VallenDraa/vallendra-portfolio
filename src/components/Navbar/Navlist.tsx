@@ -195,7 +195,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
                 </Show>
               </Show>
             </Fragment>
-          )
+          ),
         )}
 
         <div className="mt-auto self-center pb-6 lg:hidden">
