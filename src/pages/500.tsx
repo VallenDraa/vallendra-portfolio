@@ -1,11 +1,8 @@
 import { Typography } from "@material-tailwind/react";
-import React from "react";
-import LinkWithUnderline from "../components/DetailsPage/LinkWithUnderline";
-
 export default function ServerErrorPage() {
   return (
     <div className="fade-bottom relative flex min-h-[75vh] translate-y-20 flex-col items-center justify-center gap-3 px-8 after:-top-20">
-      <div className="flex flex-col items-start space-y-2 text-center">
+      <div className="flex flex-col items-start space-y-2">
         <Typography
           variant="h3"
           as="span"
