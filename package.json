@@ -17,7 +17,7 @@
     "@vercel/og": "^0.0.27",
     "mongoose": "^6.8.4",
     "next": "latest",
-    "next-cloudinary": "^1.11.0",
+    "next-cloudinary": "^2.2.0",
     "next-sitemap": "^3.1.49",
     "next-themes": "^0.2.1",
     "nextjs-progressbar": "^0.0.16",
@@ -28,6 +28,7 @@
     "swr": "^2.0.1"
   },
   "devDependencies": {
+    "@next/env": "*",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/node": "18.11.18",
     "@types/react": "^18.0.17",
@@ -40,7 +41,11 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-next": "^13.1.6",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.3",
     "postcss": "^8.4.18",
