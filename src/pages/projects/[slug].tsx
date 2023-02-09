@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
@@ -21,7 +21,10 @@ import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
-import { getProjectWithPrevAndNext } from "../../server/service/projects/projects.service";
+import {
+  getAllProjects,
+  getProjectWithPrevAndNext,
+} from "../../server/service/projects/projects.service";
 import { JSONSerialize } from "../../utils/server/serialize";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
@@ -347,6 +350,17 @@ export default function ProjectDetails({
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const certificates = await JSONSerialize(await getAllProjects());
+
+  if (certificates) {
+    const paths = certificates.map(c => ({ params: { slug: c.slug } }));
+
+    return { fallback: false, paths };
+  }
+  return { fallback: false, paths: [] };
+};
 
 export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;

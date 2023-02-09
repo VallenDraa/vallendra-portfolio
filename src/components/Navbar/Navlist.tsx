@@ -47,7 +47,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
     setAccordionIsVisible(!(window.innerWidth >= 960));
 
     function menuAccordionHandler() {
-      setAccordionIsVisible(window.innerWidth >= 960);
+      setAccordionIsVisible(!(window.innerWidth >= 960));
     }
 
     window.addEventListener("resize", menuAccordionHandler);
