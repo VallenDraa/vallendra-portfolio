@@ -1,14 +1,14 @@
 import { StaticImageData } from "next/image";
 import Link from "next/link";
-import { ShowcaseType, technologies } from "../../types/types";
 import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
-import StyledButton from "../StyledComponents/StyledButton";
 import { BsArrowRight } from "react-icons/bs";
-import Show from "../../utils/client/jsx/Show";
-import TechsSection from "./TechsSection";
 import { CldImage } from "next-cloudinary";
 import R from "react";
+import StyledButton from "../StyledComponents/StyledButton";
+import Show from "../../utils/client/jsx/Show";
+import TechsSection from "./TechsSection";
+import { ShowcaseType, Technologies } from "../../types/types";
 import Stats from "./Stats";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
@@ -31,7 +31,7 @@ interface Props {
   itemLikes: number;
 
   // optional props
-  techs?: technologies[];
+  techs?: Technologies[];
 }
 
 export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
@@ -101,7 +101,7 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
             {props.itemShortDesc}
           </Typography>
 
-          {/* props likes and views*/}
+          {/* props likes and views */}
           <div className="mt-1.5 flex gap-3 px-3">
             <Stats
               icon={<AiFillEye />}

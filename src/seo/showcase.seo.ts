@@ -1,6 +1,6 @@
 import { ShowcaseType } from "../types/types";
 import { ogLinkMaker } from "../utils/client/helpers/ogLinkMaker";
-import { SEO } from "./../interfaces/seo.interface";
+import { SEO } from "../interfaces/seo.interface";
 
 interface Args {
   title: string;

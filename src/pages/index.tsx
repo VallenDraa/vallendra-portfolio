@@ -1,9 +1,9 @@
+import { GetStaticProps } from "next";
 import Hero from "../components/Home/Hero/Hero";
 import Profile from "../components/Home/Profile/Profile";
 import Redirect from "../components/Home/Redirect/Redirect";
 import SiteFooter from "../components/SiteFooter";
 import Project from "../interfaces/project.interface";
-import { GetStaticProps } from "next";
 import { getTopPickedProjects } from "../server/service/projects/projects.service";
 import TopPickSection from "../components/Home/ProjectTopPicks/TopPickSection";
 import { JSONSerialize } from "../utils/server/serialize";

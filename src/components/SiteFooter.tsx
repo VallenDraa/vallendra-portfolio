@@ -14,6 +14,7 @@ export default function SiteFooter() {
           target="_blank"
           aria-label="Email link button"
           href="mailto:vallenatwork@gmail.com"
+          rel="noreferrer"
         >
           <MdEmail />
         </a>
@@ -27,6 +28,7 @@ export default function SiteFooter() {
           target="_blank"
           aria-label="Github link button"
           href="https://github.com/vallendraa"
+          rel="noreferrer"
         >
           <FaGithub />
         </a>
@@ -34,6 +36,7 @@ export default function SiteFooter() {
           target="_blank"
           aria-label="Linkedin link"
           href="https://www.linkedin.com/in/vallendra/"
+          rel="noreferrer"
         >
           <AiFillLinkedin />
         </a>
@@ -48,6 +51,7 @@ export default function SiteFooter() {
             href="https://nextjs.org"
             target="_blank"
             className="text-pink-300 underline underline-offset-2 dark:text-pink-200"
+            rel="noreferrer"
           >
             Next.js,
           </a>
@@ -55,6 +59,7 @@ export default function SiteFooter() {
             href="https://www.material-tailwind.com/"
             target="_blank"
             className="text-pink-300 underline underline-offset-2 dark:text-pink-200"
+            rel="noreferrer"
           >
             Material Tailwind,
           </a>

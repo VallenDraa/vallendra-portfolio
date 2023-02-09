@@ -1,11 +1,9 @@
 import { Typography, IconButton } from "@material-tailwind/react";
-import { useEffect, useContext, useRef, useState } from "react";
-import { IoCall } from "react-icons/io5";
-import { BiMenu, BiMenuAltRight } from "react-icons/bi";
-import NavList from "./Navlist";
-import NavIsOpenedContext from "../../context/NavIsOpenedCP";
+import { useEffect, useContext, useRef } from "react";
+import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
-import StyledButton from "../StyledComponents/StyledButton";
+import NavList from "./Navlist";
+import { NavIsOpenedContext } from "../../context/NavIsOpenedCP";
 import ThemeToggler from "./ThemeToggler";
 
 export default function NavbarComponent() {
@@ -61,6 +59,7 @@ export default function NavbarComponent() {
     window.addEventListener("resize", navHandler);
 
     return () => window.removeEventListener("resize", navHandler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* for closing the navbar when user touches outside of the navbar component
@@ -83,6 +82,7 @@ export default function NavbarComponent() {
     window.addEventListener("click", closeNavOnOutsideClick);
 
     return () => window.removeEventListener("click", closeNavOnOutsideClick);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div

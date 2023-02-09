@@ -1,21 +1,18 @@
 import IconWithTooltip from "../IconWithTooltip";
-import { technologies } from "../../types/types";
+import { Technologies } from "../../types/types";
 import techIcons from "./TechIcons";
 
 const techsWithTooltip: {
-  [key in technologies]: (isColorOn?: boolean) => React.ReactElement | null;
+  [key in Technologies]: (isColorOn?: boolean) => React.ReactElement | null;
 } = {
   html: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["html"]("text-4xl", isColorOn)}
+      icon={techIcons.html("text-4xl", isColorOn)}
       text="HTML 5"
     />
   ),
   css: (isColorOn = true) => (
-    <IconWithTooltip
-      icon={techIcons["css"]("text-4xl", isColorOn)}
-      text="CSS 3"
-    />
+    <IconWithTooltip icon={techIcons.css("text-4xl", isColorOn)} text="CSS 3" />
   ),
   "tailwind css": (isColorOn = true) => (
     <IconWithTooltip
@@ -25,25 +22,25 @@ const techsWithTooltip: {
   ),
   javascript: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["javascript"]("text-4xl", isColorOn)}
+      icon={techIcons.javascript("text-4xl", isColorOn)}
       text="Javascript"
     />
   ),
   jquery: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["jquery"]("text-4xl", isColorOn)}
+      icon={techIcons.jquery("text-4xl", isColorOn)}
       text="JQuery"
     />
   ),
   typescript: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["typescript"]("text-4xl", isColorOn)}
+      icon={techIcons.typescript("text-4xl", isColorOn)}
       text="Typescript"
     />
   ),
   react: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["react"]("text-4xl", isColorOn)}
+      icon={techIcons.react("text-4xl", isColorOn)}
       text="React"
     />
   ),
@@ -55,7 +52,7 @@ const techsWithTooltip: {
   ),
   mongodb: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["mongodb"]("text-4xl", isColorOn)}
+      icon={techIcons.mongodb("text-4xl", isColorOn)}
       text="MongoDB"
     />
   ),
@@ -66,22 +63,19 @@ const techsWithTooltip: {
     />
   ),
   c: (isColorOn = true) => (
-    <IconWithTooltip icon={techIcons["c"]("text-4xl", isColorOn)} text="C" />
+    <IconWithTooltip icon={techIcons.c("text-4xl", isColorOn)} text="C" />
   ),
   "c#": (isColorOn = true) => (
     <IconWithTooltip icon={techIcons["c#"]("text-4xl", isColorOn)} text="C#" />
   ),
   unity: (isColorOn = true) => (
     <IconWithTooltip
-      icon={techIcons["unity"]("text-4xl", isColorOn)}
+      icon={techIcons.unity("text-4xl", isColorOn)}
       text="Unity"
     />
   ),
   java: (isColorOn = true) => (
-    <IconWithTooltip
-      icon={techIcons["java"]("text-4xl", isColorOn)}
-      text="Java"
-    />
+    <IconWithTooltip icon={techIcons.java("text-4xl", isColorOn)} text="Java" />
   ),
   "next.js": (isColorOn = true) => (
     <IconWithTooltip
@@ -89,12 +83,12 @@ const techsWithTooltip: {
       text="Next.js"
     />
   ),
-  ejs: (isColorOn = true) => null,
+  ejs: () => null,
 };
 
 export default techsWithTooltip;
 
-export const myTechStack: technologies[] = [
+export const myTechStack: Technologies[] = [
   "html",
   "css",
   "tailwind css",

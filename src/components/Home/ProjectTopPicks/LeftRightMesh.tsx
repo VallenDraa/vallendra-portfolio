@@ -1,9 +1,9 @@
-import darkMesh from "../../../../public/svg/dark-mesh.svg";
-import lightMesh from "../../../../public/svg/light-mesh.svg";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import R from "react";
-import { TwistDirection } from "./TopPickItem";
+import lightMesh from "../../../../public/svg/light-mesh.svg";
+import darkMesh from "../../../../public/svg/dark-mesh.svg";
+import { TwistDirection } from "../../../types/types";
 
 export default function LeftRightMesh({
   twistDirection,
@@ -15,9 +15,7 @@ export default function LeftRightMesh({
   const { theme } = useTheme();
   const [isDark, setIsDark] = R.useState(true);
 
-  R.useEffect(() => {
-    theme === "dark" ? setIsDark(true) : setIsDark(false);
-  }, [theme]);
+  R.useEffect(() => setIsDark(theme === "dark"), [theme]);
 
   return (
     <Image

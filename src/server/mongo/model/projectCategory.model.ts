@@ -11,7 +11,7 @@ const ProjectCategorySchema = new m.Schema<ProjectCategory>(
     name: { type: String, required: true },
     items: [{ type: m.Schema.Types.ObjectId, ref: "projects", default: [] }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const ProjectCategoryModel: m.Model<ProjectCategory> =

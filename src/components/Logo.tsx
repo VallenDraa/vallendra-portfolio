@@ -1,8 +1,7 @@
-import { FC } from "react";
-import vallen from "../../images/vallen.png";
 import Image from "next/image";
+import vallen from "../../images/vallen.png";
 
-const Logo: FC = () => {
+export default function Logo() {
   return (
     <div className="relative aspect-square">
       {/* outer blob */}
@@ -36,6 +35,4 @@ const Logo: FC = () => {
       />
     </div>
   );
-};
-
-export default Logo;
+}

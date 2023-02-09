@@ -22,5 +22,5 @@ export default function NavBtn({
     </Button>
   );
 
-  return <>{href ? <Link href={href}>{ButtonElement}</Link> : ButtonElement}</>;
+  return href ? <Link href={href}>{ButtonElement}</Link> : ButtonElement;
 }

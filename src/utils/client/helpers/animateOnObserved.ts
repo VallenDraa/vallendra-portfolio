@@ -1,4 +1,5 @@
 import { RefObject } from "react";
+
 type FadeInAnimation =
   | "animate-fade-in"
   | "animate-fade-in-left"
@@ -13,7 +14,7 @@ type FadeInAnimation =
 export default function fadeIn<T extends HTMLElement>(
   ref: RefObject<T>,
   animation: FadeInAnimation,
-  delay: number = 0
+  delay = 0,
 ) {
   setTimeout(() => {
     ref.current?.classList.remove("opacity-0");

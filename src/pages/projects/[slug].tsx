@@ -1,13 +1,17 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import Project from "../../interfaces/project.interface";
-import SiteFooter from "../../components/SiteFooter";
+import { GetStaticProps } from "next";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
-import { Language, LikesOperationBody, technologies } from "../../types/types";
-import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
+import { CldImage } from "next-cloudinary";
+import R from "react";
+import { useRouter } from "next/router";
+import { IoWarning } from "react-icons/io5";
+import Project from "../../interfaces/project.interface";
+import SiteFooter from "../../components/SiteFooter";
+import { Language, LikesOperationBody, Technologies } from "../../types/types";
+import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
@@ -17,22 +21,15 @@ import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
-import {
-  getAllProjects,
-  getProjectWithPrevAndNext,
-} from "../../server/service/projects/projects.service";
-import { CldImage } from "next-cloudinary";
+import { getProjectWithPrevAndNext } from "../../server/service/projects/projects.service";
 import { JSONSerialize } from "../../utils/server/serialize";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import R from "react";
-import { useRouter } from "next/router";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 import useDebounce from "../../utils/client/hooks/useDebounce";
 import showcaseSeo from "../../seo/showcase.seo";
 import Seo from "../../seo/Seo";
 import StyledAlert from "../../components/StyledComponents/StyledAlert";
 import alertHandler from "../../utils/client/helpers/alertHandler";
-import { IoWarning } from "react-icons/io5";
 
 interface ProjectRedirect {
   slug: string;
@@ -122,7 +119,7 @@ export default function ProjectDetails({
   }, [router.asPath, project._id]);
 
   /* For setting the fetched like to the local likes 
-  ==================================================== */
+  =================================================== */
   R.useEffect(() => {
     setLikes(
       typeof likesRes.data?.likes !== "number"
@@ -132,17 +129,23 @@ export default function ProjectDetails({
   }, [likesRes.data?.likes]);
 
   /* For setting the fetched hasLiked to the local hasLiked 
-  ==================================================== */
+  =================================================== */
   R.useEffect(() => {
     setHasLiked(likesRes.data?.hasLiked || false);
   }, [likesRes.data?.hasLiked]);
 
+  /* Toggle alert when there is an like error
+  =================================================== */
+  R.useEffect(() => {
+    if (likeUpdateError) setShowAlert(true);
+  }, [likeUpdateError]);
+
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes(likes => likes + 1);
+      setLikes(oldLikes => oldLikes + 1);
       setHasLiked(true);
     } else {
-      setLikes(likes => likes - 1);
+      setLikes(oldLikes => oldLikes - 1);
       setHasLiked(false);
     }
 
@@ -155,7 +158,7 @@ export default function ProjectDetails({
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
-        color={"red"}
+        color="red"
         show={showAlert}
         dismissible={{ onClose: () => setShowAlert(false) }}
       >
@@ -237,8 +240,8 @@ export default function ProjectDetails({
                 <SectionHeading>Tech Stack</SectionHeading>
                 <ul className="scrollbar-kece relative flex items-center gap-1 overflow-auto">
                   {project?.tech.map(
-                    (tech: technologies, i): JSX.Element => (
-                      <li key={i}>{TechWithTooltip[tech]()}</li>
+                    (tech: Technologies): JSX.Element => (
+                      <li key={tech}>{TechWithTooltip[tech]()}</li>
                     ),
                   )}
                 </ul>
@@ -345,18 +348,6 @@ export default function ProjectDetails({
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const projects = await JSONSerialize(await getAllProjects());
-
-  if (projects) {
-    const paths = projects.map(p => ({ params: { slug: p.slug } }));
-
-    return { fallback: false, paths };
-  } else {
-    return { fallback: false, paths: [] };
-  }
-};
-
 export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;
 
@@ -369,7 +360,6 @@ export const getStaticProps: GetStaticProps = async context => {
 
   if (props) {
     return props.project === null ? { notFound: true } : { props };
-  } else {
-    return { notFound: true };
   }
+  return { notFound: true };
 };

@@ -24,6 +24,8 @@ export default function useNetworkStatus() {
 
       setError(e as Error);
     }
+
+    return () => {};
   }, []);
 
   return { isOnline, error };

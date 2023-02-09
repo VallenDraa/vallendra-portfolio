@@ -11,12 +11,12 @@ export default function useIntersectionObserver(
     root = null,
     rootMargin = "0%",
     freezeOnceVisible = false,
-  }: UseIntersectionObserverProps
+  }: UseIntersectionObserverProps,
 ): IntersectionObserverEntry | undefined {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
   const frozen = entry?.isIntersecting && freezeOnceVisible;
-  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
-    setEntry(entry);
+  const updateEntry = ([entryArgs]: IntersectionObserverEntry[]): void => {
+    setEntry(entryArgs);
   };
 
   useEffect(() => {
@@ -30,14 +30,10 @@ export default function useIntersectionObserver(
 
     observer.observe(node);
 
+    // eslint-disable-next-line consistent-return
     return () => observer.disconnect();
-  }, [
-    elementRef?.current,
-    JSON.stringify(threshold),
-    root,
-    rootMargin,
-    frozen,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elementRef, JSON.stringify(threshold), root, rootMargin, frozen]);
 
   return entry;
 }

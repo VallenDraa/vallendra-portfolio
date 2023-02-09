@@ -5,16 +5,14 @@ import GoToTopBtn from "../GoToTopBtn";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
-      <div className="flex flex-col">
-        <NavbarComponent />
-        <BreathingBackground />
+    <div className="flex flex-col">
+      <NavbarComponent />
+      <BreathingBackground />
 
-        {children}
+      {children}
 
-        {/* back to top button */}
-        <GoToTopBtn />
-      </div>
-    </>
+      {/* back to top button */}
+      <GoToTopBtn />
+    </div>
   );
 }

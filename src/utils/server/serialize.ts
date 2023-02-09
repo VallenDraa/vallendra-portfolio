@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  *
  * @param arg any type of argument is okay

@@ -54,11 +54,9 @@ const handler: NextApiHandler = async (req, res) => {
             await editLikersList(id, uniqueIpId, "add");
             await incCertificateStat(id, "likes");
           }
-        } else {
-          if (hasLiked) {
-            await editLikersList(id, uniqueIpId, "remove");
-            await decCertificateStat(id, "likes");
-          }
+        } else if (hasLiked) {
+          await editLikersList(id, uniqueIpId, "remove");
+          await decCertificateStat(id, "likes");
         }
 
         res.status(204).end();
@@ -71,6 +69,7 @@ const handler: NextApiHandler = async (req, res) => {
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     internalServerErrorRes(res);
   }

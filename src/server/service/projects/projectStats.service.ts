@@ -46,7 +46,7 @@ export async function decProjectStat(_id: string, field: "views" | "likes") {
 export async function editLikersList(
   projectId: string,
   uniqueId: string,
-  operation: "add" | "remove"
+  operation: "add" | "remove",
 ) {
   connectMongo();
 
@@ -57,7 +57,7 @@ export async function editLikersList(
       : { $pull: { likers: uniqueId } },
     {
       new: true,
-    }
+    },
   );
 }
 

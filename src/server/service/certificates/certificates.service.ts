@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { LeanDocument } from "mongoose";
 import Certificate from "../../../interfaces/certificate.interface";
 import CertificateModel from "../../mongo/model/certificate.model";
@@ -6,8 +7,8 @@ import connectMongo from "../../mongo/mongodb";
 export async function getCertificateWithPrevAndNext(slug: string) {
   connectMongo();
 
-  let nextCertificate: LeanDocument<Certificate>,
-    prevCertificate: LeanDocument<Certificate>;
+  let nextCertificate: LeanDocument<Certificate>;
+  let prevCertificate: LeanDocument<Certificate>;
   const certificate = await CertificateModel.findOne({
     slug,
   })
@@ -33,14 +34,12 @@ export async function getCertificateWithPrevAndNext(slug: string) {
   if (certificateIsFirst) {
     nextCertificate = await getNextCertificate(certificateCreatedAt);
     prevCertificate = await getLastCertificate(["slug", "name"]);
+  } else if (certificateIsLast) {
+    prevCertificate = await getPrevCertificate(certificateCreatedAt);
+    nextCertificate = await getFirstCertificate(["slug", "name"]);
   } else {
-    if (certificateIsLast) {
-      prevCertificate = await getPrevCertificate(certificateCreatedAt);
-      nextCertificate = await getFirstCertificate(["slug", "name"]);
-    } else {
-      prevCertificate = await getPrevCertificate(certificateCreatedAt);
-      nextCertificate = await getNextCertificate(certificateCreatedAt);
-    }
+    prevCertificate = await getPrevCertificate(certificateCreatedAt);
+    nextCertificate = await getNextCertificate(certificateCreatedAt);
   }
 
   return {

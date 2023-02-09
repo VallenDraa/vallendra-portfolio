@@ -6,19 +6,19 @@ import {
 } from "@material-tailwind/react";
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
+import R from "react";
 import TechsWithTooltip, {
   myTechStack,
 } from "../../MappedComponents/TechsWithTooltip";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
-import R from "react";
 
 export default function Profile() {
   const animationTechDelay = R.useMemo(() => {
     let delay = 0;
     const delayArray: number[] = [];
 
-    for (let i = 0; i < myTechStack.length; i++) {
+    for (let i = 0; i < myTechStack.length; i += 1) {
       delayArray[i] = delay;
 
       delay += 75;
@@ -102,25 +102,23 @@ export default function Profile() {
                   </Typography>
                   <ul className="scrollbar-kece relative mt-4 flex items-center gap-1 overflow-x-auto overflow-y-hidden">
                     {techCardIsVisible &&
-                      myTechStack.map((key, i) => {
-                        return (
-                          <Observe
-                            key={key}
-                            freezeOnceVisible
-                            onEnter={ref =>
-                              fadeIn(
-                                ref,
-                                "animate-fade-in-left",
-                                animationTechDelay[i],
-                              )
-                            }
-                          >
-                            <li className="opacity-0">
-                              {TechsWithTooltip[key]()}
-                            </li>
-                          </Observe>
-                        );
-                      })}
+                      myTechStack.map((key, i) => (
+                        <Observe
+                          key={key}
+                          freezeOnceVisible
+                          onEnter={ref =>
+                            fadeIn(
+                              ref,
+                              "animate-fade-in-left",
+                              animationTechDelay[i],
+                            )
+                          }
+                        >
+                          <li className="opacity-0">
+                            {TechsWithTooltip[key]()}
+                          </li>
+                        </Observe>
+                      ))}
                   </ul>
                 </CardBody>
                 <CardFooter

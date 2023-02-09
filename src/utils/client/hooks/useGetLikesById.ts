@@ -10,7 +10,7 @@ interface LikedResponse {
 export default function useGetLikesById(
   id: string,
   type: "certificates" | "projects",
-  willFetch: boolean
+  willFetch = true,
 ) {
   const url = R.useMemo(() => `/api/likes/${type}/${id}`, [type, id]);
 
@@ -21,11 +21,12 @@ export default function useGetLikesById(
     async () => {
       if (!willFetch) return;
 
-      const likes = await fetch(url).then((r) => r.json());
+      const likes = await fetch(url).then(r => r.json());
 
+      // eslint-disable-next-line consistent-return
       return likes;
     },
-    { revalidateOnFocus: true }
+    { revalidateOnFocus: true },
   );
 
   R.useEffect(() => {

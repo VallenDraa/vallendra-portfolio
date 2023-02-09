@@ -15,9 +15,11 @@ export default function GoToTopBtn() {
       scrollPercentage.current =
         (height.scrollTop / (height.scrollHeight - height.clientHeight)) * 100;
 
-      scrollPercentage.current > 5
-        ? goUpBtnRef.current?.classList.remove("translate-y-[200%]")
-        : goUpBtnRef.current?.classList.add("translate-y-[200%]");
+      if (scrollPercentage.current > 5) {
+        goUpBtnRef.current?.classList.remove("translate-y-[200%]");
+      } else {
+        goUpBtnRef.current?.classList.add("translate-y-[200%]");
+      }
     }
 
     window.addEventListener("scroll", goUpBtnViewHandler);
@@ -27,6 +29,7 @@ export default function GoToTopBtn() {
     };
   }, []);
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
       aria-label="Go to top link"
       href="#"

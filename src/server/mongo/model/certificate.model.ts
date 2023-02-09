@@ -1,9 +1,7 @@
 import m from "mongoose";
 import Certificate from "../../../interfaces/certificate.interface";
 
-interface CertificateDocument
-  extends Omit<Certificate, "_id">,
-    m.Document {
+interface CertificateDocument extends Omit<Certificate, "_id">, m.Document {
   madeAt: Date;
   updatedAt?: Date;
 }
@@ -30,7 +28,7 @@ const CertificateSchema = new m.Schema<CertificateDocument>(
     madeAt: { type: Date, required: true },
     certificateLink: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const CertificateModel: m.Model<CertificateDocument> =

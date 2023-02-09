@@ -15,12 +15,13 @@ const handler: NextApiHandler = async (req, res) => {
       return;
     }
 
-    return res.json({
+    res.json({
       apiVisitors: data?.visitors,
       message: getRandomMessage(),
       ...apiDocs,
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     internalServerErrorRes(res);
   }

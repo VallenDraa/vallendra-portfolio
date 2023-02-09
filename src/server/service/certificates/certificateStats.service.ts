@@ -32,7 +32,7 @@ export async function getAllCertificateStats(fields: StatsType[]) {
 ============================== */
 export async function incCertificateStat(
   _id: string,
-  field: "views" | "likes"
+  field: "views" | "likes",
 ) {
   connectMongo();
 
@@ -41,7 +41,7 @@ export async function incCertificateStat(
 
 export async function decCertificateStat(
   _id: string,
-  field: "views" | "likes"
+  field: "views" | "likes",
 ) {
   connectMongo();
 
@@ -53,7 +53,7 @@ export async function decCertificateStat(
 export async function editLikersList(
   certificateId: string,
   uniqueId: string,
-  operation: "add" | "remove"
+  operation: "add" | "remove",
 ) {
   connectMongo();
 
@@ -64,7 +64,7 @@ export async function editLikersList(
       : { $pull: { likers: uniqueId } },
     {
       new: true,
-    }
+    },
   );
 }
 

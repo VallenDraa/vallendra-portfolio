@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+
 export default function ServerErrorPage() {
   return (
     <div className="fade-bottom relative flex min-h-[75vh] translate-y-20 flex-col items-center justify-center gap-3 px-8 after:-top-20">

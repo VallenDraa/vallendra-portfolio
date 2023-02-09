@@ -3,7 +3,7 @@ import { useState, useEffect, DependencyList } from "react";
 export default function useDebounce(
   callback: () => void,
   duration: number,
-  deps: DependencyList
+  deps: DependencyList,
 ): [isWaiting: boolean, error: Error | null] {
   // states
   const [isWaiting, setIsWaiting] = useState(false);
@@ -24,6 +24,9 @@ export default function useDebounce(
     } catch (e) {
       setError(e as Error);
     }
+
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return [isWaiting, error];

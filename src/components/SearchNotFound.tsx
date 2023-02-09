@@ -8,7 +8,7 @@ export default function SearchNotFound() {
         as="span"
         className="text-lg text-indigo-500 dark:text-gray-300 md:text-xl lg:text-2xl"
       >
-        Sorry, Can't Find Anything 😕
+        Sorry, Can&apos;t Find Anything 😕
       </Typography>
       <Typography
         variant="h5"

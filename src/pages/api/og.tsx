@@ -20,6 +20,7 @@ const handler: NextApiHandler = req => {
       { width: 1280, height: 720 },
     );
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     return new Response(`Failed to generate the image`, { status: 500 });
   }

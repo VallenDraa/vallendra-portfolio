@@ -5,14 +5,13 @@ import {
   Accordion,
   AccordionBody,
 } from "@material-tailwind/react";
+import Link from "next/link";
+import { IoClose, IoChevronDown } from "react-icons/io5";
 import MENUS from "../../utils/data/menus";
 import Show from "../../utils/client/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
-import Link from "next/link";
-import NavIsOpenedContext from "../../context/NavIsOpenedCP";
-import { IoClose, IoChevronDown, IoCall } from "react-icons/io5";
+import { NavIsOpenedContext } from "../../context/NavIsOpenedCP";
 import NavBtn from "./NavBtn";
-import StyledButton from "../StyledComponents/StyledButton";
 
 interface Props {
   navListRef: RefObject<HTMLDivElement>;
@@ -48,9 +47,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
     setAccordionIsVisible(!(window.innerWidth >= 960));
 
     function menuAccordionHandler() {
-      window.innerWidth >= 960
-        ? setAccordionIsVisible(false)
-        : setAccordionIsVisible(true);
+      setAccordionIsVisible(window.innerWidth >= 960);
     }
 
     window.addEventListener("resize", menuAccordionHandler);
@@ -68,6 +65,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
     <Show when={navIsOpened}>
       {/* translucent overlay that is showed when navbar is opened */}
       <div
+        role="none"
         onClick={closeNav}
         ref={overlayRef}
         className="fixed inset-0 z-[60] h-screen bg-indigo-800/30 dark:bg-black/40 lg:hidden"
@@ -134,12 +132,14 @@ export default function NavList({ navListRef, overlayRef }: Props) {
                     }
                     menuItems={[
                       <Link
+                        key="/#top-picks"
                         href="/#top-picks"
                         className="inline-block h-full w-full p-3"
                       >
                         Top Picks
                       </Link>,
                       <Link
+                        key="/projects"
                         href="/projects"
                         className="inline-block h-full w-full p-3"
                       >

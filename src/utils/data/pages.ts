@@ -1,8 +1,8 @@
-enum pagesEnum {
+enum PagesEnum {
   index = "/",
   projects = "/projects",
   certificates = "/certificates",
   contact = "/contacts",
 }
 
-export default pagesEnum;
+export default PagesEnum;

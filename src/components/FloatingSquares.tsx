@@ -1,23 +1,23 @@
-import { FC, Fragment, useEffect, useState, useCallback } from "react";
+import R from "react";
 
 // GENERATING RANDOM SQUARES
-const FloatingSquares: FC = () => {
-  const changePopulation = useCallback(() => {
+function FloatingSquares() {
+  const changePopulation = R.useCallback(() => {
     if (window.innerWidth >= 1140) {
       return 12;
-    } else if (window.innerWidth >= 960) {
-      return 10;
-    } else {
-      return 8;
     }
+    if (window.innerWidth >= 960) {
+      return 10;
+    }
+    return 8;
   }, []);
 
-  const [population, setPopulation] = useState(8);
-  const [squares, setSquares] = useState<React.ReactElement[]>([]);
+  const [population, setPopulation] = R.useState(8);
+  const [squares, setSquares] = R.useState<React.ReactElement[]>([]);
 
   /* Change the population of squares according to the screen size
   =============================================================== */
-  useEffect(() => {
+  R.useEffect(() => {
     setPopulation(changePopulation());
 
     window.addEventListener("resize", () => setPopulation(changePopulation));
@@ -30,11 +30,11 @@ const FloatingSquares: FC = () => {
 
   /* Render the population into actual floating squares
   ==================================================== */
-  useEffect(() => {
+  R.useEffect(() => {
     const newSquares: JSX.Element[] = [];
 
     // generating the squares
-    for (let i = 0; i < population; i++) {
+    for (let i = 0; i < population; i += 1) {
       const delay = Math.round(Math.random() * 35 + 1);
       const left = Math.round(Math.random() * 100 + 1);
       const size = Math.round(Math.random() * 120 + 50);
@@ -60,10 +60,11 @@ const FloatingSquares: FC = () => {
   return (
     <ul className="sm:margin-0 padding-0 absolute inset-0 z-0 h-full w-full overflow-hidden">
       {squares.map((square, i) => (
-        <Fragment key={i}>{square}</Fragment>
+        // eslint-disable-next-line react/no-array-index-key
+        <R.Fragment key={i}>{square}</R.Fragment>
       ))}
     </ul>
   );
-};
+}
 
 export default FloatingSquares;

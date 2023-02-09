@@ -16,6 +16,19 @@ interface PickedCertificates {
   [key: string]: Certificate;
 }
 
+function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
+  let imgIsPriority;
+
+  // determining if the image is important
+  if (categoryIndex === 0) {
+    imgIsPriority = projectIndex < 4;
+  } else {
+    imgIsPriority = false;
+  }
+
+  return imgIsPriority;
+}
+
 export default function CertificateCategorySection({
   categoryIndex,
   category,
@@ -33,6 +46,7 @@ export default function CertificateCategorySection({
     }, {});
 
     return pickedCertificates;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -52,38 +66,23 @@ export default function CertificateCategorySection({
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
         <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
-          {category.items.map((id, i) => {
-            return (
-              <li key={id}>
-                <ItemCard
-                  _id={id}
-                  type="certificates"
-                  imgIsPriority={isImgImportant(categoryIndex, i)}
-                  imgSrc={certificatesInCategory[id].image}
-                  itemLikes={certificatesInCategory[id].likes}
-                  itemLink={`/certificates/${certificatesInCategory[id].slug}`}
-                  itemName={certificatesInCategory[id].name}
-                  itemShortDesc={certificatesInCategory[id].shortDescriptionEN}
-                  itemViews={certificatesInCategory[id].views}
-                />
-              </li>
-            );
-          })}
+          {category.items.map((id, i) => (
+            <li key={id}>
+              <ItemCard
+                _id={id}
+                type="certificates"
+                imgIsPriority={isImgImportant(categoryIndex, i)}
+                imgSrc={certificatesInCategory[id].image}
+                itemLikes={certificatesInCategory[id].likes}
+                itemLink={`/certificates/${certificatesInCategory[id].slug}`}
+                itemName={certificatesInCategory[id].name}
+                itemShortDesc={certificatesInCategory[id].shortDescriptionEN}
+                itemViews={certificatesInCategory[id].views}
+              />
+            </li>
+          ))}
         </ul>
       </Observe>
     </section>
   );
-}
-
-function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
-  let imgIsPriority;
-
-  // determining if the image is important
-  if (categoryIndex === 0) {
-    imgIsPriority = projectIndex < 4 ? true : false;
-  } else {
-    imgIsPriority = false;
-  }
-
-  return imgIsPriority;
 }

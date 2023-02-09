@@ -15,10 +15,13 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
-import { TextSize, technologies } from "../../types/types";
+import { TextSize, Technologies } from "../../types/types";
 
 const techIcons: {
-  [key in technologies]: (size: TextSize, isColorOn?: boolean) => JSX.Element;
+  [key in Technologies]: (
+    size: TextSize,
+    isColorOn?: boolean,
+  ) => JSX.Element | null;
 } = {
   html: (size, isColorOn = true) => (
     <SiHtml5
@@ -155,7 +158,7 @@ const techIcons: {
       }`}
     />
   ),
-  ejs: (size, isColorOn = true) => <></>,
+  ejs: () => null,
 };
 
 export default techIcons;

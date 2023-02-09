@@ -1,15 +1,15 @@
 import { Typography } from "@material-tailwind/react";
+import R from "react";
+import { useRouter } from "next/router";
+import { GetStaticProps } from "next";
 import SiteFooter from "../../components/SiteFooter";
 import Project from "../../interfaces/project.interface";
 import Show from "../../utils/client/jsx/Show";
-import R from "react";
 import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
 import SearchInput from "../../components/SearchInput";
-import { useRouter } from "next/router";
 import ItemCard from "../../components/Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
 import SearchNotFound from "../../components/SearchNotFound";
-import { GetStaticProps } from "next";
 import { getAllProjects } from "../../server/service/projects/projects.service";
 import { getAllProjectCategories } from "../../server/service/projects/projectCategory.service";
 import { JSONSerialize } from "../../utils/server/serialize";
@@ -49,6 +49,8 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
     return newShowedIndex;
   }, [query]);
+
+  R.useEffect(() => setIsError(projects.length === 0), [projects.length]);
 
   return (
     <>
@@ -90,11 +92,10 @@ export default function ProjectsPage({ projects, categories }: Props) {
           >
             <div className="opacity-0">
               <SearchInput
-                willRedirect
                 defaultValue={query}
                 placeholder="Search Projects"
                 loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
-                callback={query => setQuery(query)}
+                callback={newQuery => setQuery(newQuery)}
               />
             </div>
           </Observe>
@@ -112,17 +113,15 @@ export default function ProjectsPage({ projects, categories }: Props) {
           {/* initial render for projects with categories */}
           <Show when={projects.length > 0 && query === ""}>
             <div className="space-y-10">
-              {categories.map((category, i) => {
-                return (
-                  // index is used for determining the image priority prop
-                  <ProjectCategorySection
-                    categoryIndex={i}
-                    key={category._id}
-                    category={category}
-                    projects={projects}
-                  />
-                );
-              })}
+              {categories.map((category, i) => (
+                // index is used for determining the image priority prop
+                <ProjectCategorySection
+                  categoryIndex={i}
+                  key={category._id}
+                  category={category}
+                  projects={projects}
+                />
+              ))}
             </div>
           </Show>
 
@@ -130,27 +129,23 @@ export default function ProjectsPage({ projects, categories }: Props) {
           <Show
             when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
           >
-            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {showedIndex.map(idx => {
-                if (projects[idx]) {
-                  return (
-                    <li key={projects[idx]._id}>
-                      <ItemCard
-                        _id={projects[idx]._id}
-                        type="projects"
-                        imgIsPriority={false}
-                        imgSrc={projects[idx].image}
-                        itemLikes={projects[idx].likes}
-                        itemLink={`/projects/${projects[idx].slug}`}
-                        itemName={projects[idx].name}
-                        itemShortDesc={projects[idx].shortDescriptionEN}
-                        itemViews={projects[idx].views}
-                        techs={projects[idx].tech}
-                      />
-                    </li>
-                  );
-                }
-              })}
+            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
+              {showedIndex.map(idx => (
+                <li key={projects[idx]._id}>
+                  <ItemCard
+                    _id={projects[idx]._id}
+                    type="projects"
+                    imgIsPriority={false}
+                    imgSrc={projects[idx].image}
+                    itemLikes={projects[idx].likes}
+                    itemLink={`/projects/${projects[idx].slug}`}
+                    itemName={projects[idx].name}
+                    itemShortDesc={projects[idx].shortDescriptionEN}
+                    itemViews={projects[idx].views}
+                    techs={projects[idx].tech}
+                  />
+                </li>
+              ))}
             </ul>
           </Show>
 
@@ -168,7 +163,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
                 as="h2"
                 className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
               >
-                Sorry, Can't Seem To Load The Projects 😅
+                Sorry, Can&apos;t Seem To Load The Projects 😅
               </Typography>
               <Typography
                 variant="h5"

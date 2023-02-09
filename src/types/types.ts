@@ -1,4 +1,4 @@
-export type technologies =
+export type Technologies =
   | "html"
   | "node.js"
   | "javascript"
@@ -16,7 +16,9 @@ export type technologies =
   | "mongodb"
   | "next.js";
 
-export type categories = "website" | "desktop" | "cli" | "games";
+export type TwistDirection = "right" | "left";
+
+export type Categories = "website" | "desktop" | "cli" | "games";
 
 export type Language = "id" | "en";
 

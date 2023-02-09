@@ -1,5 +1,5 @@
-import Project from "../../interfaces/project.interface";
 import { useMemo } from "react";
+import Project from "../../interfaces/project.interface";
 import SectionHeading from "../SectionHeading";
 import ItemCard from "../Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
@@ -14,6 +14,19 @@ interface Props {
 
 interface PickedProjects {
   [key: string]: Project;
+}
+
+function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
+  let imgIsPriority;
+
+  // determining if the image is important
+  if (categoryIndex === 0) {
+    imgIsPriority = projectIndex < 4;
+  } else {
+    imgIsPriority = false;
+  }
+
+  return imgIsPriority;
 }
 
 export default function ProjectCategorySection({
@@ -31,6 +44,7 @@ export default function ProjectCategorySection({
     }, {});
 
     return pickedProjects;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -50,39 +64,24 @@ export default function ProjectCategorySection({
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
         <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
-          {category.items.map((id, i) => {
-            return (
-              <li key={id}>
-                <ItemCard
-                  _id={id}
-                  type="projects"
-                  imgIsPriority={isImgImportant(categoryIndex, i)}
-                  imgSrc={projectsInCategory[id].image}
-                  itemLikes={projectsInCategory[id].likes}
-                  itemLink={`/projects/${projectsInCategory[id].slug}`}
-                  itemName={projectsInCategory[id].name}
-                  itemShortDesc={projectsInCategory[id].shortDescriptionEN}
-                  itemViews={projectsInCategory[id].views}
-                  techs={projectsInCategory[id].tech}
-                />
-              </li>
-            );
-          })}
+          {category.items.map((id, i) => (
+            <li key={id}>
+              <ItemCard
+                _id={id}
+                type="projects"
+                imgIsPriority={isImgImportant(categoryIndex, i)}
+                imgSrc={projectsInCategory[id].image}
+                itemLikes={projectsInCategory[id].likes}
+                itemLink={`/projects/${projectsInCategory[id].slug}`}
+                itemName={projectsInCategory[id].name}
+                itemShortDesc={projectsInCategory[id].shortDescriptionEN}
+                itemViews={projectsInCategory[id].views}
+                techs={projectsInCategory[id].tech}
+              />
+            </li>
+          ))}
         </ul>
       </Observe>
     </section>
   );
-}
-
-function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
-  let imgIsPriority;
-
-  // determining if the image is important
-  if (categoryIndex === 0) {
-    imgIsPriority = projectIndex < 4 ? true : false;
-  } else {
-    imgIsPriority = false;
-  }
-
-  return imgIsPriority;
 }

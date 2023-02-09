@@ -1,16 +1,15 @@
 import { useTheme } from "next-themes";
-import darkLayeredWave from "../../../../public/svg/dark-layered-wave.svg";
-import lightLayeredWave from "../../../../public/svg/light-layered-wave.svg";
 import Image from "next/image";
 import R, { useEffect } from "react";
+import darkLayeredWave from "../../../../public/svg/dark-layered-wave.svg";
+import lightLayeredWave from "../../../../public/svg/light-layered-wave.svg";
 
 export default function TopBottomWaves() {
   const { theme } = useTheme();
   const [isDark, setIsDark] = R.useState(true);
 
-  useEffect(() => {
-    theme === "dark" ? setIsDark(true) : setIsDark(false);
-  }, [theme]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setIsDark(theme === "dark"), [theme]);
 
   return (
     <>

@@ -17,14 +17,14 @@ const CertificateCategorySchema = new m.Schema<CertificateCategory>(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const CertificateCategoryModel: m.Model<CertificateCategory> =
   m.models["certificate-categories"] ||
   m.model<CertificateCategory>(
     "certificate-categories",
-    CertificateCategorySchema
+    CertificateCategorySchema,
   );
 
 export default CertificateCategoryModel;

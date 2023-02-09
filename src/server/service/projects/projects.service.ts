@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { LeanDocument } from "mongoose";
 import ProjectModel from "../../mongo/model/project.model";
 import Project from "../../../interfaces/project.interface";
@@ -19,7 +20,8 @@ export async function getTopPickedProjects() {
 export async function getProjectWithPrevAndNext(slug: string) {
   connectMongo();
 
-  let nextProject: LeanDocument<Project>, prevProject: LeanDocument<Project>;
+  let nextProject: LeanDocument<Project>;
+  let prevProject: LeanDocument<Project>;
   const project = await ProjectModel.findOne({
     slug,
   })
@@ -45,14 +47,12 @@ export async function getProjectWithPrevAndNext(slug: string) {
   if (projectIsFirst) {
     nextProject = await getNextProject(projectCreatedAt);
     prevProject = await getLastProject(["slug", "name"]);
+  } else if (projectIsLast) {
+    prevProject = await getPrevProject(projectCreatedAt);
+    nextProject = await getFirstProject(["slug", "name"]);
   } else {
-    if (projectIsLast) {
-      prevProject = await getPrevProject(projectCreatedAt);
-      nextProject = await getFirstProject(["slug", "name"]);
-    } else {
-      prevProject = await getPrevProject(projectCreatedAt);
-      nextProject = await getNextProject(projectCreatedAt);
-    }
+    prevProject = await getPrevProject(projectCreatedAt);
+    nextProject = await getNextProject(projectCreatedAt);
   }
 
   return {

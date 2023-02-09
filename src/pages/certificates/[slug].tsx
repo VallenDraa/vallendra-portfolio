@@ -1,15 +1,18 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import SiteFooter from "../../components/SiteFooter";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaRegNewspaper } from "react-icons/fa";
+import R from "react";
+import { CldImage } from "next-cloudinary";
+import { useRouter } from "next/router";
+import { IoWarning } from "react-icons/io5";
+import SiteFooter from "../../components/SiteFooter";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionHeading from "../../components/SectionHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import R from "react";
 import Certificate from "../../interfaces/certificate.interface";
 import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
@@ -20,16 +23,13 @@ import {
   getAllCertificates,
   getCertificateWithPrevAndNext,
 } from "../../server/service/certificates/certificates.service";
-import { CldImage } from "next-cloudinary";
 import { JSONSerialize } from "../../utils/server/serialize";
-import { useRouter } from "next/router";
 import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
 import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 import showcaseSeo from "../../seo/showcase.seo";
 import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
 import StyledAlert from "../../components/StyledComponents/StyledAlert";
-import { IoWarning } from "react-icons/io5";
 import alertHandler from "../../utils/client/helpers/alertHandler";
 
 interface CertificateRedirect {
@@ -137,12 +137,18 @@ export default function CertificateDetails({
     setHasLiked(likesRes.data?.hasLiked || false);
   }, [likesRes.data?.hasLiked]);
 
+  /* Toggle alert when there is an like error
+  =================================================== */
+  R.useEffect(() => {
+    if (likeUpdateError) setShowAlert(true);
+  }, [likeUpdateError]);
+
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes(likes => likes + 1);
+      setLikes(oldLikes => oldLikes + 1);
       setHasLiked(true);
     } else {
-      setLikes(likes => likes - 1);
+      setLikes(oldLikes => oldLikes - 1);
       setHasLiked(false);
     }
 
@@ -155,7 +161,7 @@ export default function CertificateDetails({
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
-        color={"red"}
+        color="red"
         show={showAlert}
         dismissible={{ onClose: () => setShowAlert(false) }}
       >
@@ -250,7 +256,7 @@ export default function CertificateDetails({
 
             {/* link for the code of this certificate */}
             <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
-              {/* see certificate and copy link button*/}
+              {/* see certificate and copy link button */}
               <div className="flex w-full flex-col gap-3">
                 <ActionButton
                   href={certificate.certificateLink}
@@ -324,9 +330,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = certificates.map(c => ({ params: { slug: c.slug } }));
 
     return { fallback: false, paths };
-  } else {
-    return { fallback: false, paths: [] };
   }
+  return { fallback: false, paths: [] };
 };
 
 export const getStaticProps: GetStaticProps = async context => {
@@ -341,7 +346,6 @@ export const getStaticProps: GetStaticProps = async context => {
 
   if (props) {
     return props.certificate === null ? { notFound: true } : { props };
-  } else {
-    return { notFound: true };
   }
+  return { notFound: true };
 };

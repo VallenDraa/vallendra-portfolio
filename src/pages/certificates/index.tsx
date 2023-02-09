@@ -1,10 +1,9 @@
 import { Typography } from "@material-tailwind/react";
-import SiteFooter from "../../components/SiteFooter";
-import Head from "next/head";
-import Show from "../../utils/client/jsx/Show";
-import { useState, useMemo } from "react";
-import SearchInput from "../../components/SearchInput";
+import R from "react";
 import { useRouter } from "next/router";
+import SiteFooter from "../../components/SiteFooter";
+import Show from "../../utils/client/jsx/Show";
+import SearchInput from "../../components/SearchInput";
 import Certificate from "../../interfaces/certificate.interface";
 import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
 import ItemCard from "../../components/Cards/ItemCard";
@@ -26,13 +25,13 @@ interface Props {
 export default function ProjectsPage({ certificates, categories }: Props) {
   const router = useRouter();
 
-  const [isError, setIsError] = useState(certificates.length === 0);
-  const [query, setQuery] = useState<string>(
+  const [isError, setIsError] = R.useState(certificates.length === 0);
+  const [query, setQuery] = R.useState<string>(
     (router.query.find as string) || "",
   );
-  const [searchIsLoading, setSearchIsLoading] = useState(false);
+  const [searchIsLoading, setSearchIsLoading] = R.useState(false);
 
-  const showedIndex = useMemo<number[]>(() => {
+  const showedIndex = R.useMemo<number[]>(() => {
     const newShowedIndex: number[] = certificates.reduce(
       (result, project, i) => {
         if (query === "") return [...result, i];
@@ -52,6 +51,11 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
     return newShowedIndex;
   }, [query]);
+
+  R.useEffect(
+    () => setIsError(certificates.length === 0),
+    [certificates.length],
+  );
 
   return (
     <>
@@ -93,11 +97,10 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           >
             <div className="opacity-0">
               <SearchInput
-                willRedirect
                 defaultValue={query}
                 placeholder="Search Certificates"
                 loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
-                callback={query => setQuery(query)}
+                callback={newQuery => setQuery(newQuery)}
               />
             </div>
           </Observe>
@@ -115,17 +118,15 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           {/* initial render for certificates with categories */}
           <Show when={certificates.length > 0 && query === ""}>
             <div className="space-y-10">
-              {categories.map((category, i) => {
-                return (
-                  // index is used for determining the image priority prop
-                  <CertificateCategorySection
-                    categoryIndex={i}
-                    key={category._id}
-                    category={category}
-                    certificates={certificates}
-                  />
-                );
-              })}
+              {categories.map((category, i) => (
+                // index is used for determining the image priority prop
+                <CertificateCategorySection
+                  categoryIndex={i}
+                  key={category._id}
+                  category={category}
+                  certificates={certificates}
+                />
+              ))}
             </div>
           </Show>
 
@@ -135,26 +136,22 @@ export default function ProjectsPage({ certificates, categories }: Props) {
               certificates.length > 0 && showedIndex.length > 0 && query !== ""
             }
           >
-            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {showedIndex.map(idx => {
-                if (certificates[idx]) {
-                  return (
-                    <li key={certificates[idx]._id}>
-                      <ItemCard
-                        _id={certificates[idx]._id}
-                        type="certificates"
-                        imgIsPriority={false}
-                        imgSrc={certificates[idx].image}
-                        itemLikes={certificates[idx].likes}
-                        itemLink={`/certificates/${certificates[idx].slug}`}
-                        itemName={certificates[idx].name}
-                        itemShortDesc={certificates[idx].shortDescriptionEN}
-                        itemViews={certificates[idx].views}
-                      />
-                    </li>
-                  );
-                }
-              })}
+            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
+              {showedIndex.map(idx => (
+                <li key={certificates[idx]._id}>
+                  <ItemCard
+                    _id={certificates[idx]._id}
+                    type="certificates"
+                    imgIsPriority={false}
+                    imgSrc={certificates[idx].image}
+                    itemLikes={certificates[idx].likes}
+                    itemLink={`/certificates/${certificates[idx].slug}`}
+                    itemName={certificates[idx].name}
+                    itemShortDesc={certificates[idx].shortDescriptionEN}
+                    itemViews={certificates[idx].views}
+                  />
+                </li>
+              ))}
             </ul>
           </Show>
 
@@ -172,7 +169,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
                 as="h2"
                 className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
               >
-                Sorry, Can't Seem To Load The certificates 😅
+                Sorry, Can&apos;t Seem To Load The certificates 😅
               </Typography>
               <Typography
                 variant="h5"

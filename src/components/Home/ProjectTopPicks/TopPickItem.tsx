@@ -1,18 +1,16 @@
 import R from "react";
-import Project from "../../../interfaces/project.interface";
 import { CldImage } from "next-cloudinary";
 import { Typography } from "@material-tailwind/react";
-import { Language, technologies } from "../../../types/types";
+import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
+import Project from "../../../interfaces/project.interface";
+import { Technologies, TwistDirection } from "../../../types/types";
 import Show from "../../../utils/client/jsx/Show";
 import techsWithTooltip from "../../MappedComponents/TechsWithTooltip";
 import StyledButton from "../../StyledComponents/StyledButton";
-import { BsArrowRight } from "react-icons/bs";
-import Link from "next/link";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 import LeftRightMesh from "./LeftRightMesh";
-
-export type TwistDirection = "right" | "left";
 
 interface Props {
   projectOrder: number;
@@ -33,7 +31,7 @@ export default function TopPickItem({
     let delay = 0;
     const delayArray: number[] = [];
 
-    for (let i = 0; i < project.tech.length; i++) {
+    for (let i = 0; i < project.tech.length; i += 1) {
       delayArray[i] = delay;
 
       delay += 75;
@@ -105,7 +103,7 @@ export default function TopPickItem({
         </div>
       </Observe>
 
-      {/* picture wrapper*/}
+      {/* picture wrapper */}
       <div
         ref={picWrapperRef}
         className="relative flex basis-1/2 scale-90 items-center grayscale transition duration-500"
@@ -157,10 +155,10 @@ export default function TopPickItem({
                 twistDirection === "left" ? "" : "justify-end lg:justify-start"
               }`}
             >
-              {project.tech.map((tech: technologies, i): JSX.Element => {
-                return (
+              {project.tech.map(
+                (tech: Technologies, i): JSX.Element => (
                   <Observe
-                    key={i}
+                    key={tech}
                     freezeOnceVisible
                     onEnter={ref =>
                       fadeIn(ref, "animate-fade-in-left", animationTechDelay[i])
@@ -168,8 +166,8 @@ export default function TopPickItem({
                   >
                     <li className="opacity-0">{techsWithTooltip[tech]()}</li>
                   </Observe>
-                );
-              })}
+                ),
+              )}
             </ul>
 
             <Link

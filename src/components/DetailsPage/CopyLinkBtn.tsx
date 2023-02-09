@@ -1,6 +1,6 @@
 import R from "react";
-import Show from "../../utils/client/jsx/Show";
 import { AiOutlineCheck, AiOutlineClose, AiOutlineLink } from "react-icons/ai";
+import Show from "../../utils/client/jsx/Show";
 import ActionButton from "../StyledComponents/ActionButton";
 
 export default function CopyLinkBtn() {
@@ -10,7 +10,6 @@ export default function CopyLinkBtn() {
   const [copyLinkIsSupported, setCopyLinkIsSupported] = R.useState<
     boolean | null
   >();
-  null;
 
   const [hasBeenPressed, setHasBeenPressed] = R.useState(false);
   const [isError, setIsError] = R.useState(false);

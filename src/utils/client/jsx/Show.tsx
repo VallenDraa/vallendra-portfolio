@@ -1,12 +1,10 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface Props {
   when: boolean;
-  children: ReactNode[] | ReactNode | string | null;
+  children: ReactNode;
 }
 
-const Show: FC<Props> = ({ when, children }) => {
-  return <>{when ? children : null}</>;
-};
-
-export default Show;
+export default function Show({ when, children }: Props) {
+  return when ? <> {children} </> : null;
+}

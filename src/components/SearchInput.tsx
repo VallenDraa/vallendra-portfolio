@@ -1,73 +1,47 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import useDebounce from "../utils/client/hooks/useDebounce";
-import { useRouter } from "next/router";
-import StyledInput from "./StyledComponents/StyledInput";
+import { useState, useEffect } from "react";
 import { InputProps } from "@material-tailwind/react";
-import Show from "../utils/client/jsx/Show";
 import { AiOutlineLoading } from "react-icons/ai";
+import useDebounce from "../utils/client/hooks/useDebounce";
+import StyledInput from "./StyledComponents/StyledInput";
+import Show from "../utils/client/jsx/Show";
 
 interface Props extends InputProps {
-  queryKey?: string; // will default to find if not provided
   defaultValue?: string;
   debounceMs?: number;
-  willRedirect: boolean; // will redirect to query url (ex. /projects?q=lorem)
   loadingCallback?: (isWaiting: boolean) => void;
   callback: (query: string) => void;
 }
-
-const DEFAULT_QUERY_KEY = "find";
 
 export default function SearchInput({
   ref,
   placeholder,
   disabled,
-  queryKey,
   defaultValue,
-  debounceMs,
-  willRedirect,
+  debounceMs = 600,
   loadingCallback,
   callback,
   onChange,
   ...props
 }: Props) {
-  const router = useRouter();
-
   const [tempQuery, setTempQuery] = useState(defaultValue || "");
   const [finalQuery, setFinalQuery] = useState(defaultValue || "");
   const [isWaitingResult, searchError] = useDebounce(
     () => setFinalQuery(tempQuery),
-    debounceMs || 600,
+    debounceMs,
     [tempQuery],
   );
 
-  /* will trigger everytime isWaitingResult changes */
+  /* will trigger everytime isWaitingResult changes 
+  ================================================================= */
   useEffect(() => {
     if (loadingCallback) loadingCallback(isWaitingResult);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isWaitingResult]);
 
-  /* will call the callback and redirect to the query url if told to
+  /* will call the callback everytime final query changes
   ================================================================= */
-  useEffect(() => {
-    const redirectURL = finalQuery
-      ? `${router.pathname}?${queryKey || DEFAULT_QUERY_KEY}=${finalQuery}`
-      : router.pathname;
-
-    callback(finalQuery);
-
-    if (willRedirect) {
-      router?.push(redirectURL, undefined, { shallow: true });
-    }
-  }, [finalQuery]);
-
-  /* will trigger everytime the query url changes
-  ================================================================= */
-  useEffect(() => {
-    const query = router.query[queryKey || DEFAULT_QUERY_KEY];
-
-    setTempQuery((query as string) || "");
-    setFinalQuery((query as string) || "");
-  }, [router.query[queryKey || DEFAULT_QUERY_KEY]]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => callback(finalQuery), [finalQuery]);
 
   return (
     <StyledInput

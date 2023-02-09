@@ -25,9 +25,11 @@ export default function Observe<T extends HTMLElement>({
 
   R.useEffect(() => {
     if (entry?.isIntersecting) {
-      onEnter && onEnter(ref);
-    } else {
-      onExit && onExit(ref);
+      if (onEnter) onEnter(ref);
+    }
+
+    if (!entry?.isIntersecting) {
+      if (onExit) onExit(ref);
     }
   }, [entry?.isIntersecting]);
 

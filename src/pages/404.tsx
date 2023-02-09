@@ -17,7 +17,7 @@ export default function NotFoundPage() {
           as="span"
           className="text-indigo-300 dark:text-gray-500"
         >
-          Can't seem to find the page
+          Can&apos;t seem to find the page
         </Typography>
       </div>
 

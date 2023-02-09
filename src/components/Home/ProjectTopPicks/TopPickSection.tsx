@@ -1,12 +1,13 @@
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import Project from "../../../interfaces/project.interface";
 import { useRef } from "react";
-import TopPickItem, { TwistDirection } from "./TopPickItem";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
+import TopPickItem from "./TopPickItem";
+import Project from "../../../interfaces/project.interface";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 import TopBottomWaves from "./TopBottomWaves";
+import { TwistDirection } from "../../../types/types";
 
 interface Props {
   topPickedProjects: Project[];

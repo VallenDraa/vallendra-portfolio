@@ -33,7 +33,7 @@ const ProjectSchema = new m.Schema<ProjectDocument>(
     gitLink: { type: String, required: true },
     isTopPick: { type: Boolean, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const ProjectModel: m.Model<ProjectDocument> =
