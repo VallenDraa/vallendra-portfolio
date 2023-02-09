@@ -1,4 +1,4 @@
-import { technologies } from "../types/types";
+import { Technologies } from "../types/types";
 
 export default interface Project {
   _id: string;
@@ -13,7 +13,7 @@ export default interface Project {
   likes: number;
   likers: string[];
   image: string;
-  tech: technologies[];
+  tech: Technologies[];
   categoryIds: string[];
   madeAt: Date | string;
   createdAt?: Date | string;
