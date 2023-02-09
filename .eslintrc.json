@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  "ignorePatterns": ["**/*.config.js", "**/*.config.cjs", "**/*.config.ts"],
   "extends": [
     "eslint:recommended",
     "airbnb",
