@@ -1,5 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import Image from "next/image";
+import { HiArrowLongDown } from "react-icons/hi2";
+import Link from "next/link";
 import myPic from "../../../../public/images/vallen-icon.png";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
@@ -44,7 +46,7 @@ export default function Hero() {
                 variant="h3"
                 className="invisible absolute font-bold text-white/80 opacity-0 xl:visible xl:relative"
               >
-                Yes it&apos;s him,
+                Stuff about
               </Typography>
             </Observe>
             <Observe
@@ -75,6 +77,13 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <Link
+        href="/#profile"
+        className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-white/60 lg:bottom-10"
+      >
+        <HiArrowLongDown className=" animate-bounce text-5xl" />
+      </Link>
     </section>
   );
 }
