@@ -30,7 +30,7 @@ export default function NavbarSubMenu({ Handler, menuItems, offset }: Props) {
           color="indigo"
           variant="text"
           fullWidth
-          className="p-0 text-base font-semibold text-indigo-400 hover:text-indigo-500 dark:text-gray-300 dark:hover:text-white"
+          className="p-0 text-base font-semibold text-indigo-400 hover:text-indigo-500 dark:text-gray-200 dark:hover:text-white"
         >
           {Handler}
         </Button>
