@@ -84,6 +84,7 @@ export default function Hero() {
       >
         <Link
           href="/#profile"
+          aria-label="Go to profile button"
           className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-white/60 opacity-0 lg:bottom-10"
         >
           <HiArrowLongDown className=" animate-bounce text-5xl" />
