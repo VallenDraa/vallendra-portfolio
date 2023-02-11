@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 import R from "react";
 
 export default function Comment() {
-  const { pathname, query } = useRouter();
+  const { theme } = useTheme();
+  const { pathname, query, asPath } = useRouter();
+
+  const [commentIsVisible, setCommentIsVisible] = R.useState(true);
   const term = R.useMemo(() => {
     const splitPathname = pathname.split("/");
     splitPathname[2] = query.slug as string;
@@ -13,7 +16,15 @@ export default function Comment() {
 
     return result;
   }, [pathname, query]);
-  const { theme } = useTheme();
+
+  R.useEffect(() => {
+    setCommentIsVisible(false);
+    setTimeout(() => {
+      setCommentIsVisible(true);
+    }, 100);
+  }, [asPath]);
+
+  if (!commentIsVisible) return null;
 
   return (
     <Giscus
