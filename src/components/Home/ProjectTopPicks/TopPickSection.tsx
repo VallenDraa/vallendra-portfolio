@@ -28,38 +28,43 @@ export default function TopPickSection({ topPickedProjects }: Props) {
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}
-          <div className="relative z-20 pt-24 pb-1 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
-            <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
-              <Observe
-                freezeOnceVisible
-                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
-              >
-                <div className="flex items-center opacity-0">
-                  <Typography
-                    as="h2"
-                    variant="h1"
-                    className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
-                  >
-                    Top Picks
-                  </Typography>
-                  <span className="text-3xl">🌟</span>
-                </div>
-              </Observe>
-
-              <Observe
-                freezeOnceVisible
-                onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
-              >
-                <Typography
-                  as="p"
-                  variant="paragraph"
-                  className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-gray-300 md:text-lg"
+          <Observe
+            freezeOnceVisible
+            onEnter={ref => fadeIn(ref, "animate-fade-in", 0)}
+          >
+            <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
+              <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
+                <Observe
+                  freezeOnceVisible
+                  onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
                 >
-                  A selection of my best projects as of now.
-                </Typography>
-              </Observe>
+                  <div className="flex items-center opacity-0">
+                    <Typography
+                      as="h2"
+                      variant="h1"
+                      className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
+                    >
+                      Top Picks
+                    </Typography>
+                    <span className="text-3xl">🌟</span>
+                  </div>
+                </Observe>
+
+                <Observe
+                  freezeOnceVisible
+                  onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
+                >
+                  <Typography
+                    as="p"
+                    variant="paragraph"
+                    className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-gray-300 md:text-lg"
+                  >
+                    A selection of my best projects as of now.
+                  </Typography>
+                </Observe>
+              </div>
             </div>
-          </div>
+          </Observe>
 
           {/* projects */}
           <div>
@@ -83,31 +88,36 @@ export default function TopPickSection({ topPickedProjects }: Props) {
           </div>
 
           {/* see all projects */}
-          <div className="relative flex w-full flex-col items-center gap-1 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-300/50 after:z-50 after:h-40 after:w-[2px] after:bg-indigo-300/50 dark:before:border-white/40 dark:after:bg-white/30">
-            {/* blur */}
-            <div className="absolute left-1/2 top-[40%] h-24 w-24 -translate-x-1/2 -translate-y-[40%] rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
+          <Observe
+            freezeOnceVisible
+            onEnter={ref => fadeIn(ref, "animate-fade-in", 50)}
+          >
+            <div className="relative flex w-full flex-col items-center gap-1 opacity-0 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-300/50 after:z-50 after:h-40 after:w-[2px] after:bg-indigo-300/50 dark:before:border-white/40 dark:after:bg-white/30">
+              {/* blur */}
+              <div className="absolute left-1/2 top-[40%] h-24 w-24 -translate-x-1/2 -translate-y-[40%] rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
 
-            <Link aria-label="All projects link" href="/projects">
-              <Tooltip
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content="See All Projects"
-              >
-                {/* dot in line */}
-                <IconButton
-                  aria-label="All projects button"
-                  variant="gradient"
-                  color="deep-purple"
-                  size="lg"
-                  className="group relative z-[55] rounded-full transition duration-200 hover:scale-125"
+              <Link aria-label="All projects link" href="/projects">
+                <Tooltip
+                  animate={{
+                    mount: { scale: 1, y: 0 },
+                    unmount: { scale: 0, y: 25 },
+                  }}
+                  content="See All Projects"
                 >
-                  <BsArrowRight className="text-3xl" />
-                </IconButton>
-              </Tooltip>
-            </Link>
-          </div>
+                  {/* dot in line */}
+                  <IconButton
+                    aria-label="All projects button"
+                    variant="gradient"
+                    color="deep-purple"
+                    size="lg"
+                    className="group relative z-[55] rounded-full transition duration-200 hover:scale-125"
+                  >
+                    <BsArrowRight className="text-3xl" />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+            </div>
+          </Observe>
         </div>
       </div>
     </section>
