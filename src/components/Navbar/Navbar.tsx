@@ -89,10 +89,14 @@ export default function NavbarComponent() {
       ref={navbarRef}
       className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/90 py-3 px-0 dark:bg-gray-800/90 [@supports(backdrop-filter:blur(12px))]:bg-indigo-100/30 [@supports(backdrop-filter:blur(12px))]:backdrop-blur-md dark:[@supports(backdrop-filter:blur(12px))]:bg-gray-800/30"
     >
-      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 text-indigo-500 dark:text-gray-200 2xl:px-2">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 2xl:px-2">
         {/* name section */}
-        <Typography as="h2" className="text-lg font-bold lg:basis-1/3">
-          <Link href="/">Jestine Vallendra Dwi Putra</Link>
+        <Typography
+          as="h2"
+          variant="h5"
+          className="text-indigo-500 dark:text-gray-200 lg:basis-1/3"
+        >
+          <Link href="/">VallenDra</Link>
         </Typography>
 
         {/* the nav list section */}

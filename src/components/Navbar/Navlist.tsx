@@ -1,10 +1,5 @@
 import { useEffect, useState, useContext, RefObject, Fragment } from "react";
-import {
-  Typography,
-  Button,
-  Accordion,
-  AccordionBody,
-} from "@material-tailwind/react";
+import { Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 import MENUS from "../../utils/data/menus";
@@ -81,7 +76,7 @@ export default function NavList({ navListRef, overlayRef }: Props) {
           <Typography
             as="span"
             variant="paragraph"
-            className="text-lg font-semibold text-indigo-500 dark:text-gray-300"
+            className="font-medium text-indigo-500 dark:text-gray-400"
           >
             Menu
           </Typography>
@@ -151,30 +146,26 @@ export default function NavList({ navListRef, overlayRef }: Props) {
 
                 {/* project menu for small navbar */}
                 <Show when={accordionIsVisible}>
-                  <Accordion open={openedAccordion === 1}>
-                    <Button
-                      color="indigo"
-                      variant="text"
-                      fullWidth
+                  <details>
+                    <summary
                       onClick={() => handleOpenAccordion(1)}
-                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-300"
+                      className="flex cursor-pointer items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-200"
                     >
-                      {menu}
+                      Projects
                       <IoChevronDown
                         className={`mr-2 h-5 w-5 transition duration-200 ${
                           openedAccordion === 1 ? "rotate-180" : "rotate-0"
                         }`}
                       />
-                    </Button>
-
-                    <AccordionBody className="py-1.5">
+                    </summary>
+                    <div className="py-1.5">
                       <Link href="/#top-picks">
                         <Button
                           onClick={closeNav}
                           color="indigo"
                           variant="text"
                           fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-gray-300"
+                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-300"
                         >
                           Top Picks
                         </Button>
@@ -185,13 +176,13 @@ export default function NavList({ navListRef, overlayRef }: Props) {
                           color="indigo"
                           variant="text"
                           fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-gray-300"
+                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-300"
                         >
                           All Collections
                         </Button>
                       </Link>
-                    </AccordionBody>
-                  </Accordion>
+                    </div>
+                  </details>
                 </Show>
               </Show>
             </Fragment>
