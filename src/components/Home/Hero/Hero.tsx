@@ -78,12 +78,17 @@ export default function Hero() {
         </div>
       </div>
 
-      <Link
-        href="/#profile"
-        className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-white/60 lg:bottom-10"
+      <Observe
+        freezeOnceVisible
+        onEnter={ref => fadeIn(ref, "animate-fade-in", 850)}
       >
-        <HiArrowLongDown className=" animate-bounce text-5xl" />
-      </Link>
+        <Link
+          href="/#profile"
+          className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-white/60 opacity-0 lg:bottom-10"
+        >
+          <HiArrowLongDown className=" animate-bounce text-5xl" />
+        </Link>
+      </Observe>
     </section>
   );
 }
