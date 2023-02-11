@@ -54,8 +54,8 @@ const techIcons: {
     <SiJavascript
       className={`${size} ${
         isColorOn
-          ? "text-yellow-600"
-          : "text-white/50 transition-colors duration-200 group-hover:text-yellow-600 hover:text-yellow-600"
+          ? "bg-gray-800 text-yellow-600 dark:bg-transparent"
+          : "text-white/50 transition-colors duration-200 group-hover:text-yellow-600  hover:bg-gray-800 hover:text-yellow-600 dark:hover:bg-transparent"
       }`}
     />
   ),
@@ -81,8 +81,8 @@ const techIcons: {
     <SiReact
       className={`${size} ${
         isColorOn
-          ? "text-light-blue-200"
-          : "text-white/50 transition-colors duration-200 group-hover:text-light-blue-200 hover:text-light-blue-200"
+          ? "text-light-blue-300 dark:text-light-blue-200"
+          : "text-white/50 transition-colors duration-200 group-hover:text-light-blue-300 hover:text-light-blue-300  group-hover:dark:text-light-blue-200 hover:dark:text-light-blue-200"
       }`}
     />
   ),
