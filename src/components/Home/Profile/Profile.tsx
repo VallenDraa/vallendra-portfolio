@@ -64,7 +64,7 @@ export default function Profile() {
                 <Typography
                   as="p"
                   variant="paragraph"
-                  className="pl-0.5 text-justify font-medium leading-loose text-indigo-700/80 dark:text-gray-300"
+                  className="pl-0.5 text-justify font-normal leading-loose text-indigo-700/80 dark:text-gray-300"
                 >
                   My name is Jestine Vallendra Dwi Putra. I started my coding
                   journey in Game Development using Unity but soon realized that
@@ -95,7 +95,8 @@ export default function Profile() {
                   </Typography>
                   <Typography
                     as="p"
-                    className="font-medium text-indigo-600 dark:text-gray-400"
+                    variant="paragraph"
+                    className="font-normal text-indigo-600 dark:text-gray-400"
                   >
                     Languages and frameworks that I use for projects and college
                     !
@@ -152,8 +153,9 @@ export default function Profile() {
                   EDUCATION
                 </Typography>
                 <Typography
+                  variant="paragraph"
                   as="p"
-                  className="font-medium text-indigo-600 dark:text-gray-400"
+                  className="font-normal text-indigo-600 dark:text-gray-400"
                 >
                   Majoring in Informatics / Computer Science at UIN Syarif
                   Hidayatullah Jakarta.
@@ -186,8 +188,9 @@ export default function Profile() {
                   ACTIVITY
                 </Typography>
                 <Typography
+                  variant="paragraph"
                   as="p"
-                  className="font-medium text-indigo-600 dark:text-gray-400"
+                  className="font-normal text-indigo-600 dark:text-gray-400"
                 >
                   An active member of Google Developer Students Club UIN Syarif
                   Hidayatullah Jakarta.
