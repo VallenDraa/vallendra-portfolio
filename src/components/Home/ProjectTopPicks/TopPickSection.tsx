@@ -32,7 +32,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in", 0)}
           >
-            <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-500/50 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
               <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
                 <Observe
                   freezeOnceVisible
@@ -92,7 +92,7 @@ export default function TopPickSection({ topPickedProjects }: Props) {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in", 50)}
           >
-            <div className="relative flex w-full flex-col items-center gap-1 opacity-0 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-300/50 after:z-50 after:h-40 after:w-[2px] after:bg-indigo-300/50 dark:before:border-white/40 dark:after:bg-white/30">
+            <div className="relative flex w-full flex-col items-center gap-1 opacity-0 before:z-50 before:h-28 before:w-12 before:-translate-x-6 before:rounded-tr-lg before:border-r-2 before:border-dashed before:border-indigo-300/70 after:z-50 after:h-40 after:w-[1.5px] after:bg-indigo-300/70 dark:before:border-white/40 dark:after:bg-white/30">
               {/* blur */}
               <div className="absolute left-1/2 top-[40%] h-24 w-24 -translate-x-1/2 -translate-y-[40%] rounded-full bg-deep-purple-300 blur-2xl dark:bg-deep-purple-500" />
 

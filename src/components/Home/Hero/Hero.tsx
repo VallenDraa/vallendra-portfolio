@@ -85,9 +85,9 @@ export default function Hero() {
         <Link
           href="/#profile"
           aria-label="Go to profile button"
-          className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-white/60 opacity-0 lg:bottom-10"
+          className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-indigo-300/70 opacity-0 dark:text-white/70 xl:bottom-10"
         >
-          <HiArrowLongDown className=" animate-bounce text-5xl" />
+          <HiArrowLongDown className="animate-bounce text-5xl" />
         </Link>
       </Observe>
     </section>

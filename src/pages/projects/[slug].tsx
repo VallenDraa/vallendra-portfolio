@@ -255,7 +255,7 @@ export default function ProjectDetails({
                 <SectionHeading>Description</SectionHeading>
                 <Typography
                   variant="paragraph"
-                  className="px-3 font-normal leading-loose text-indigo-600 dark:text-gray-400"
+                  className="px-3 text-justify font-normal leading-loose text-indigo-600  dark:text-gray-400"
                 >
                   <Show when={activeLanguage === "en"}>
                     {project.descriptionEN}
