@@ -78,7 +78,6 @@ export default function TopPickItem({
         }`}
       >
         {/* Mesh */}
-
         <LeftRightMesh
           className="hidden lg:block"
           twistDirection={twistDirection}
@@ -142,7 +141,7 @@ export default function TopPickItem({
             <Typography
               variant="h2"
               as="h3"
-              className="primary-gradient animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold !leading-[initial] text-transparent"
+              className="bg-gradient-to-r from-pink-200 to-amber-200 bg-gradient bg-clip-text font-bold !leading-[initial] text-transparent"
             >
               {project.name}
             </Typography>

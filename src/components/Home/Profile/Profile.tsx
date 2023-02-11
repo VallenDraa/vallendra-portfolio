@@ -83,12 +83,12 @@ export default function Profile() {
                 fadeIn(ref, "animate-fade-in-left", 200);
               }}
             >
-              <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md duration-200">
+              <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md">
                 <CardBody>
                   <Typography
                     as="h3"
                     variant="h3"
-                    className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-200 bg-clip-text text-2xl font-bold uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
+                    className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-200 bg-clip-text text-2xl font-bold uppercase text-transparent  dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
                   >
                     <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
                     Technologies
@@ -142,7 +142,7 @@ export default function Profile() {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
           >
-            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
+            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <CardBody>
                 <Typography
                   as="h3"
@@ -177,7 +177,7 @@ export default function Profile() {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
           >
-            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md duration-200 xl:basis-auto">
+            <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <CardBody>
                 <Typography
                   as="h3"
