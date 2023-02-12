@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import { ReactNode } from "react";
 
-export default function SectionHeading({
+export default function SectionSubHeading({
   children,
 }: {
   children: ReactNode[] | ReactNode;

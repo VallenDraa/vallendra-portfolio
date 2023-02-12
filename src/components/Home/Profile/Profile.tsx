@@ -12,6 +12,8 @@ import TechsWithTooltip, {
 } from "../../MappedComponents/TechsWithTooltip";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import SectionHeading from "../../Typography/SectionHeading";
+import StyledScrollbar from "../../StyledComponents/StyledScrollbar";
 
 export default function Profile() {
   const animationTechDelay = R.useMemo(() => {
@@ -34,43 +36,34 @@ export default function Profile() {
       id="profile"
       className="relative z-10 space-y-8 bg-indigo-50 dark:bg-gray-900"
     >
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 px-8 py-16 overflow-x-hidden xl:flex-row 2xl:px-2">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 overflow-x-hidden px-8 pt-10 pb-16 xl:flex-row 2xl:px-2">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
-          <Observe
-            freezeOnceVisible
-            onEnter={ref => fadeIn(ref, "animate-fade-in-left", 0)}
-          >
-            <header className="gradient-underline gradient-underline--primary relative flex w-fit items-center gap-1 opacity-0">
-              <Typography
-                as="h2"
-                variant="h2"
-                className="primary-gradient relative z-40 animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-5xl font-bold capitalize text-transparent"
-              >
-                Hello World
-              </Typography>
-              <span className="text-5xl">👋</span>
-            </header>
-          </Observe>
+          <SectionHeading
+            title="Profile"
+            animation={{ title: "animate-fade-in-left" }}
+            duration={{ title: 100 }}
+            willFade
+          />
 
           {/* small paragraph and tech stack */}
-          <footer className="relative z-40 mt-5 flex grow flex-col gap-5">
+          <div className="relative z-40 mt-2 flex grow flex-col gap-5">
             {/* small paragraph about me */}
             <Observe
               freezeOnceVisible
               onEnter={ref => fadeIn(ref, "animate-fade-in-left", 0)}
             >
-              <div className="mb-8 opacity-0 xl:mb-0 xl:basis-2/3">
+              <div className="opacity-0 xl:mb-0 xl:basis-2/3">
                 <Typography
                   as="p"
                   variant="paragraph"
-                  className="pl-0.5 text-justify font-normal leading-loose text-indigo-700/80 dark:text-gray-300"
+                  className="pl-0.5 text-justify font-normal leading-loose text-indigo-700 dark:text-gray-300"
                 >
                   My name is Jestine Vallendra Dwi Putra. I started my coding
                   journey in Game Development using Unity but soon realized that
-                  I have a potato PC, so I diverted my attention to Web
-                  Development. I mainly use React and its tech stacks when
-                  making stuff now.
+                  I have a potato PC and so I diverted my attention to Web Dev
+                  which I still pursue to this day. I mainly use React and its
+                  tech stacks when making stuff now.
                 </Typography>
               </div>
             </Observe>
@@ -83,7 +76,7 @@ export default function Profile() {
                 fadeIn(ref, "animate-fade-in-left", 200);
               }}
             >
-              <Card className="indigo-pink-gradient card-colors rounded-md opacity-0 shadow-md">
+              <Card className="card-colors rounded-md opacity-0 shadow-md">
                 <CardBody>
                   <Typography
                     as="h3"
@@ -93,6 +86,7 @@ export default function Profile() {
                     <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
                     Technologies
                   </Typography>
+
                   <Typography
                     as="p"
                     variant="paragraph"
@@ -101,7 +95,15 @@ export default function Profile() {
                     Languages and frameworks that I use for projects and college
                     !
                   </Typography>
-                  <ul className="scrollbar-kece relative mt-4 flex items-center gap-1 overflow-x-auto overflow-y-hidden">
+
+                  <StyledScrollbar
+                    autoHeight
+                    autoHeightMin="100%"
+                    autoHeightMax="100%"
+                    renderView={props => (
+                      <ul {...props} className="flex md:!overflow-auto" />
+                    )}
+                  >
                     {techCardIsVisible &&
                       myTechStack.map((key, i) => (
                         <Observe
@@ -120,19 +122,22 @@ export default function Profile() {
                           </li>
                         </Observe>
                       ))}
-                  </ul>
+                  </StyledScrollbar>
                 </CardBody>
                 <CardFooter
                   divider
                   className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
                 >
-                  <Typography variant="small" className="text-right">
+                  <Typography
+                    variant="small"
+                    className="text-right font-normal"
+                  >
                     And Learning More 😎
                   </Typography>
                 </CardFooter>
               </Card>
             </Observe>
-          </footer>
+          </div>
         </div>
 
         {/* right side */}
@@ -157,15 +162,14 @@ export default function Profile() {
                   as="p"
                   className="font-normal text-indigo-600 dark:text-gray-400"
                 >
-                  Majoring in Informatics / Computer Science at UIN Syarif
-                  Hidayatullah Jakarta.
+                  Majoring in Informatics at UIN Syarif Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
                 divider
                 className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
               >
-                <Typography variant="small" className="text-right">
+                <Typography variant="small" className="text-right font-normal">
                   EST. 2022 - 2026
                 </Typography>
               </CardFooter>
@@ -192,15 +196,14 @@ export default function Profile() {
                   as="p"
                   className="font-normal text-indigo-600 dark:text-gray-400"
                 >
-                  An active member of Google Developer Students Club UIN Syarif
-                  Hidayatullah Jakarta.
+                  An active member of GDSC UIN Syarif Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
                 divider
                 className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
               >
-                <Typography variant="small" className="text-right">
+                <Typography variant="small" className="text-right font-normal">
                   EST. 2022 - 2023
                 </Typography>
               </CardFooter>

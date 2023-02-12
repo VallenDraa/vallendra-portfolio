@@ -11,6 +11,7 @@ import StyledButton from "../../StyledComponents/StyledButton";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 import LeftRightMesh from "./LeftRightMesh";
+import StyledScrollbar from "../../StyledComponents/StyledScrollbar";
 
 interface Props {
   projectOrder: number;
@@ -139,9 +140,9 @@ export default function TopPickItem({
           >
             {/* short description */}
             <Typography
-              variant="h2"
               as="h3"
-              className="bg-gradient-to-r from-pink-200 to-amber-200 bg-gradient bg-clip-text font-bold !leading-[initial] text-transparent"
+              variant="h2"
+              className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent"
             >
               {project.name}
             </Typography>
@@ -153,12 +154,20 @@ export default function TopPickItem({
             </Typography>
 
             <div className="flex flex-col">
-              <ul
-                className={`scrollbar-kece relative flex items-center gap-1 overflow-x-auto overflow-y-hidden ${
-                  twistDirection === "left"
-                    ? ""
-                    : "justify-end lg:justify-start"
-                }`}
+              <StyledScrollbar
+                autoHeight
+                autoHeightMin="100%"
+                autoHeightMax="100%"
+                renderView={props => (
+                  <ul
+                    {...props}
+                    className={`relative flex items-center gap-1 ${
+                      twistDirection === "left"
+                        ? ""
+                        : "justify-end lg:justify-start"
+                    }`}
+                  />
+                )}
               >
                 {project.tech.map(
                   (tech: Technologies, i): JSX.Element => (
@@ -177,7 +186,7 @@ export default function TopPickItem({
                     </Observe>
                   ),
                 )}
-              </ul>
+              </StyledScrollbar>
 
               <Link
                 href={`/projects/${project.slug}`}

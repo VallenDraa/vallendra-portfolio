@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-type FadeInAnimation =
+export type FadeInAnimation =
   | "animate-fade-in"
   | "animate-fade-in-left"
   | "animate-fade-in-right"

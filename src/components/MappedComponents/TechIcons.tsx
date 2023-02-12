@@ -54,8 +54,8 @@ const techIcons: {
     <SiJavascript
       className={`${size} ${
         isColorOn
-          ? "bg-gray-800 text-yellow-600 dark:bg-transparent"
-          : "text-white/50 transition-colors duration-200 group-hover:text-yellow-600  hover:bg-gray-800 hover:text-yellow-600 dark:hover:bg-transparent"
+          ? "bg-gray-900 text-yellow-600 dark:bg-transparent"
+          : "text-white/50 transition-colors duration-200 group-hover:text-yellow-600 hover:bg-gray-900 hover:text-yellow-600 dark:hover:bg-transparent"
       }`}
     />
   ),
@@ -70,10 +70,10 @@ const techIcons: {
   ),
   typescript: (size, isColorOn = true) => (
     <SiTypescript
-      className={`${size} ${
+      className={`rounded ${size} ${
         isColorOn
-          ? "text-blue-700"
-          : "text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:text-blue-700"
+          ? "bg-white text-blue-700"
+          : "text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:bg-white hover:text-blue-700"
       }`}
     />
   ),

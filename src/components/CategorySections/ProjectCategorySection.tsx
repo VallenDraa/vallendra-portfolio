@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import Project from "../../interfaces/project.interface";
-import SectionHeading from "../SectionHeading";
+import SectionSubHeading from "../Typography/SectionSubHeading";
 import ItemCard from "../Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
 import Observe from "../Observe";
@@ -54,7 +54,7 @@ export default function ProjectCategorySection({
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
       >
         <div className="opacity-0">
-          <SectionHeading>{category.name}</SectionHeading>
+          <SectionSubHeading>{category.name}</SectionSubHeading>
         </div>
       </Observe>
 

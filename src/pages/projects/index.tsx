@@ -17,6 +17,7 @@ import Observe from "../../components/Observe";
 import fadeIn from "../../utils/client/helpers/animateOnObserved";
 import Seo from "../../seo/Seo";
 import projectsPageSeo from "../../seo/projectsPage.seo";
+import SectionHeading from "../../components/Typography/SectionHeading";
 
 interface Props {
   projects: Project[];
@@ -63,25 +64,12 @@ export default function ProjectsPage({ projects, categories }: Props) {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
           >
-            <div className="relative z-10 opacity-0">
-              <div className="relative flex w-fit items-center gap-1">
-                <Typography
-                  as="h2"
-                  variant="h2"
-                  className="primary-gradient relative z-40 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-                >
-                  All Projects
-                </Typography>
-                <span className="text-4xl md:text-5xl">💻</span>
-              </div>
-              <Typography
-                as="p"
-                variant="paragraph"
-                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
-              >
-                The ultimate showcase of all my projects. Mostly web but there
-                are others too.
-              </Typography>
+            <div className="opacity-0">
+              <SectionHeading
+                title="Projects"
+                subTitle="Things that I've made throughout my journey on programming
+                and web development."
+              />
             </div>
           </Observe>
 

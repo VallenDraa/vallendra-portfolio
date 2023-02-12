@@ -18,7 +18,7 @@ export default function consoleMessage() {
   console.log(
     `
    %cYou seemed interested in the code🤔, here is the repo link !
-    Also drop a ⭐ when you're visiting 😇
+    Also drop a ⭐ when you're visiting, Thanks 😇
     %chttps://github.com/VallenDraa/vallendra-portfolio
     `,
     "font-family: Segoe UI, sans-serif; font-size: 1rem; font-weight: 800; margin-top:0.2rem; color:#c5cae9",

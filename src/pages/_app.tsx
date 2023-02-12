@@ -9,6 +9,7 @@ import ProgressBar from "../components/ProgressBar";
 import useNetworkStatus from "../utils/client/hooks/useNetworkStatus";
 import OfflinePage from "../components/OfflinePage";
 import consoleEasterEgg from "../utils/easterEgg/consoleEasterEgg";
+import StyledScrollbar from "../components/StyledComponents/StyledScrollbar";
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -29,7 +30,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <ContextProviders>
       <ProgressBar />
       <Analytics />
-      {isOnline ? SiteLayout(<Component {...pageProps} />) : <OfflinePage />}
+      <StyledScrollbar autoHeight autoHeightMin="100vh" autoHeightMax="100vh">
+        {isOnline ? SiteLayout(<Component {...pageProps} />) : <OfflinePage />}
+      </StyledScrollbar>
     </ContextProviders>
   );
 }

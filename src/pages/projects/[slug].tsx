@@ -15,9 +15,8 @@ import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip"
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
-import SectionHeading from "../../components/SectionHeading";
+import SectionSubHeading from "../../components/Typography/SectionSubHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
-import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
@@ -33,6 +32,9 @@ import showcaseSeo from "../../seo/showcase.seo";
 import Seo from "../../seo/Seo";
 import StyledAlert from "../../components/StyledComponents/StyledAlert";
 import alertHandler from "../../utils/client/helpers/alertHandler";
+import ShowcaseStats from "../../components/DetailsPage/ShowcaseStats";
+import SectionHeading from "../../components/Typography/SectionHeading";
+import StyledScrollbar from "../../components/StyledComponents/StyledScrollbar";
 
 interface ProjectRedirect {
   slug: string;
@@ -170,7 +172,7 @@ export default function ProjectDetails({
 
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
         <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
-          <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
+          <section className="relative z-10 flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
             <div>
               {/* back to project button */}
               <LinkWithUnderline href="/projects">
@@ -179,34 +181,26 @@ export default function ProjectDetails({
               </LinkWithUnderline>
 
               {/* title */}
-              <Typography
-                as="h1"
-                variant="h1"
-                className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-              >
-                {project.name}
-              </Typography>
+              <div className="pt-4">
+                <SectionHeading
+                  title={project.name}
+                  subTitle={
+                    activeLanguage === "en"
+                      ? project.shortDescriptionEN
+                      : project.shortDescriptionID
+                  }
+                />
+              </div>
 
-              {/* short description */}
-              <Typography
-                as="p"
-                variant="paragraph"
-                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
-              >
-                <Show when={activeLanguage === "en"}>
-                  {project.shortDescriptionEN}
-                </Show>
-                <Show when={activeLanguage === "id"}>
-                  {project.shortDescriptionID}
-                </Show>
-              </Typography>
-
-              <ViewsAndLikes
-                isLoading={viewsRes.isLoading && likesRes.isLoading}
-                hasLiked={hasLiked}
-                likes={likes}
-                views={viewsRes.data?.views || project.views}
-              />
+              <div className="mt-5">
+                <ShowcaseStats
+                  dateString={project.madeAt as string}
+                  isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
+                  hasLiked={hasLiked}
+                  likes={likes}
+                  views={viewsRes.data?.views || project.views}
+                />
+              </div>
             </div>
             <div className="flex lg:self-end lg:px-2">
               <LanguageToggle
@@ -240,22 +234,32 @@ export default function ProjectDetails({
             <div className="relative flex basis-3/4 flex-col gap-12">
               {/* app tech stack */}
               <div className="relative z-10 flex flex-col gap-4">
-                <SectionHeading>Tech Stack</SectionHeading>
-                <ul className="scrollbar-kece relative flex items-center gap-1 overflow-auto">
+                <SectionSubHeading>Tech Stack</SectionSubHeading>
+                <StyledScrollbar
+                  autoHeight
+                  autoHeightMin="100%"
+                  autoHeightMax="100%"
+                  renderView={props => (
+                    <ul
+                      {...props}
+                      className="relative flex items-center gap-1"
+                    />
+                  )}
+                >
                   {project?.tech.map(
                     (tech: Technologies): JSX.Element => (
                       <li key={tech}>{TechWithTooltip[tech]()}</li>
                     ),
                   )}
-                </ul>
+                </StyledScrollbar>
               </div>
 
               {/* description and features of the app */}
               <div className="relative z-10 flex flex-col gap-4">
-                <SectionHeading>Description</SectionHeading>
+                <SectionSubHeading>Description</SectionSubHeading>
                 <Typography
                   variant="paragraph"
-                  className="px-3 text-justify font-normal leading-loose text-indigo-600  dark:text-gray-400"
+                  className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
                 >
                   <Show when={activeLanguage === "en"}>
                     {project.descriptionEN}
@@ -352,10 +356,10 @@ export default function ProjectDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const certificates = await JSONSerialize(await getAllProjects());
+  const projects = await JSONSerialize(await getAllProjects());
 
-  if (certificates) {
-    const paths = certificates.map(c => ({ params: { slug: c.slug } }));
+  if (projects) {
+    const paths = projects.map(p => ({ params: { slug: p.slug } }));
 
     return { fallback: false, paths };
   }

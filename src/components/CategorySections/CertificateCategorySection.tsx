@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import SectionHeading from "../SectionHeading";
+import SectionSubHeading from "../Typography/SectionSubHeading";
 import Certificate from "../../interfaces/certificate.interface";
 import ItemCard from "../Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
@@ -56,7 +56,7 @@ export default function CertificateCategorySection({
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
       >
         <div className="opacity-0">
-          <SectionHeading>{category.name}</SectionHeading>
+          <SectionSubHeading>{category.name}</SectionSubHeading>
         </div>
       </Observe>
 

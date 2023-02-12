@@ -16,6 +16,7 @@ import Observe from "../../components/Observe";
 import fadeIn from "../../utils/client/helpers/animateOnObserved";
 import Seo from "../../seo/Seo";
 import certificatesPageSeo from "../../seo/certificatePage.seo";
+import SectionHeading from "../../components/Typography/SectionHeading";
 
 interface Props {
   certificates: Certificate[];
@@ -68,25 +69,12 @@ export default function ProjectsPage({ certificates, categories }: Props) {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
           >
-            <div className="relative z-10 opacity-0">
-              <div className="relative flex w-fit items-center gap-1">
-                <Typography
-                  as="h2"
-                  variant="h2"
-                  className="primary-gradient relative z-40 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-                >
-                  My Certificates
-                </Typography>
-                <span className="text-4xl md:text-5xl">📃</span>
-              </div>
-
-              <Typography
-                as="p"
-                variant="paragraph"
-                className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
-              >
-                The not too ultimate showcase of all my certificates
-              </Typography>
+            <div className="opacity-0">
+              <SectionHeading
+                title="Certificates"
+                subTitle='These are the "certified" resources that I&apos;ve
+                used to learn about programming other than youtube.'
+              />
             </div>
           </Observe>
 

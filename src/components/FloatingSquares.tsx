@@ -1,7 +1,7 @@
 import R from "react";
 
 // GENERATING RANDOM SQUARES
-function FloatingSquares() {
+export default function FloatingSquares() {
   const changePopulation = R.useCallback(() => {
     if (window.innerWidth >= 1140) {
       return 12;
@@ -66,5 +66,3 @@ function FloatingSquares() {
     </ul>
   );
 }
-
-export default FloatingSquares;

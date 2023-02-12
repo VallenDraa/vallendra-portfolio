@@ -9,7 +9,7 @@ export default function SiteFooter() {
   return (
     <footer className="gradient-underline gradient-underline--primary relative flex flex-col gap-2 px-8 py-4 before:!top-0">
       {/* socials */}
-      <div className="mx-auto flex w-fit max-w-screen-xl items-center gap-2.5 text-3xl text-indigo-400 dark:text-gray-400 [&>*]:p-1">
+      <div className="mx-auto flex w-fit max-w-screen-xl items-center gap-2.5 text-3xl text-indigo-300 dark:text-gray-400 [&>*]:p-1">
         <a
           target="_blank"
           aria-label="Email link button"

@@ -12,8 +12,8 @@ module.exports = withMT({
     extend: {
       colors: {
         "top-pick": {
-          dark: "#2f2f2f",
-          light: "#dbdef1",
+          dark: "#272727",
+          light: "#e2e4f4",
         },
       },
       backgroundImage: {
@@ -86,6 +86,14 @@ module.exports = withMT({
             "border-radius": "50%",
           },
         },
+        raindrops: {
+          from: {
+            transform: "translateX(0)",
+          },
+          to: {
+            transform: "translateX(1000px)",
+          },
+        },
         marquee: {
           from: { transform: "translateX(120vw)" },
           to: { transform: "translateX(-120vw)" },
@@ -102,11 +110,12 @@ module.exports = withMT({
         "open-overlay": "open-overlay 350ms ease-in",
         "close-overlay": "close-overlay 350ms ease-in",
         squares: "squares 40s linear infinite",
+        raindrops: "raindrops 10s linear infinite",
         "main-gradient": "main-gradient 25s ease infinite",
         breathing: "main-gradient 8s ease infinite",
         marquee: "marquee 20s linear infinite",
       },
     },
   },
-  plugins: [require("tailwind-scrollbar"), require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/line-clamp")],
 });

@@ -11,10 +11,9 @@ import SiteFooter from "../../components/SiteFooter";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
-import SectionHeading from "../../components/SectionHeading";
+import SectionSubHeading from "../../components/Typography/SectionSubHeading";
 import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
 import Certificate from "../../interfaces/certificate.interface";
-import ViewsAndLikes from "../../components/DetailsPage/ViewsAndLikes";
 import DetailFooter from "../../components/DetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
@@ -31,6 +30,8 @@ import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
 import StyledAlert from "../../components/StyledComponents/StyledAlert";
 import alertHandler from "../../utils/client/helpers/alertHandler";
+import ShowcaseStats from "../../components/DetailsPage/ShowcaseStats";
+import SectionHeading from "../../components/Typography/SectionHeading";
 
 interface CertificateRedirect {
   slug: string;
@@ -179,33 +180,26 @@ export default function CertificateDetails({
               </LinkWithUnderline>
 
               {/* title */}
-              <Typography
-                as="h1"
-                variant="h1"
-                className="primary-gradient relative z-40 mt-4 w-fit animate-breathing bg-gradient-to-r bg-gradient bg-clip-text text-start text-4xl font-bold capitalize !leading-[initial] text-transparent md:text-5xl"
-              >
-                {certificate.name}
-              </Typography>
+              <div className="pt-4">
+                <SectionHeading
+                  title={certificate.name}
+                  subTitle={
+                    activeLanguage === "en"
+                      ? certificate.shortDescriptionEN
+                      : certificate.shortDescriptionID
+                  }
+                />
+              </div>
 
-              {/* short description */}
-              <Typography
-                as="p"
-                variant="paragraph"
-                className="mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
-              >
-                <Show when={activeLanguage === "en"}>
-                  {certificate.shortDescriptionEN}
-                </Show>
-                <Show when={activeLanguage === "id"}>
-                  {certificate.shortDescriptionID}
-                </Show>
-              </Typography>
-
-              <ViewsAndLikes
-                hasLiked={hasLiked}
-                likes={likes}
-                views={viewsRes.data?.views || certificate.views}
-              />
+              <div className="mt-5">
+                <ShowcaseStats
+                  dateString={certificate.madeAt as string}
+                  isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
+                  hasLiked={hasLiked}
+                  likes={likes}
+                  views={viewsRes.data?.views || certificate.views}
+                />
+              </div>
             </div>
             <div className="flex lg:self-end lg:px-2">
               <LanguageToggle
@@ -239,7 +233,7 @@ export default function CertificateDetails({
             <div className="relative flex basis-3/4 flex-col gap-12">
               {/* description of the certicates */}
               <div className="relative z-10 flex flex-col gap-4">
-                <SectionHeading>Description</SectionHeading>
+                <SectionSubHeading>Description</SectionSubHeading>
                 <Typography
                   variant="paragraph"
                   className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"

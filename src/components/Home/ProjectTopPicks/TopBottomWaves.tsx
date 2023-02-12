@@ -16,13 +16,13 @@ export default function TopBottomWaves() {
       <Image
         src={isDark ? darkLayeredWave : lightLayeredWave}
         alt={isDark ? "dark-wave" : "light-wave"}
-        className="absolute top-0 w-full rotate-180 transition"
+        className="absolute -top-1 w-full rotate-180 transition"
       />
 
       <Image
         src={isDark ? darkLayeredWave : lightLayeredWave}
         alt={isDark ? "dark-wave" : "light-wave"}
-        className="absolute bottom-0 w-full transition"
+        className="absolute -bottom-1 w-full transition"
       />
     </>
   );

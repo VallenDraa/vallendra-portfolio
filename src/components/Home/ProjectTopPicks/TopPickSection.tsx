@@ -1,4 +1,4 @@
-import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
+import { IconButton, Tooltip } from "@material-tailwind/react";
 import { useRef } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
 import TopBottomWaves from "./TopBottomWaves";
 import { TwistDirection } from "../../../types/types";
+import SectionHeading from "../../Typography/SectionHeading";
 
 interface Props {
   topPickedProjects: Project[];
@@ -34,34 +35,16 @@ export default function TopPickSection({ topPickedProjects }: Props) {
           >
             <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
               <div className="relative z-30 bg-[#dbdef1] dark:bg-[#2f2f2f] md:pb-0 [@supports(backdrop-filter:blur(12px))]:bg-transparent [@supports(backdrop-filter:blur(12px))]:backdrop-blur-sm dark:[@supports(backdrop-filter:blur(12px))]:bg-transparent">
-                <Observe
-                  freezeOnceVisible
-                  onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
-                >
-                  <div className="flex items-center opacity-0">
-                    <Typography
-                      as="h2"
-                      variant="h1"
-                      className="primary-gradient w-max animate-breathing bg-gradient-to-r bg-gradient bg-clip-text font-bold capitalize !leading-[initial] text-transparent"
-                    >
-                      Top Picks
-                    </Typography>
-                    <span className="text-3xl">🌟</span>
-                  </div>
-                </Observe>
-
-                <Observe
-                  freezeOnceVisible
-                  onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
-                >
-                  <Typography
-                    as="p"
-                    variant="paragraph"
-                    className="mb-5 pl-0.5 text-justify font-medium leading-loose text-indigo-700 opacity-0 dark:text-gray-300 md:text-lg"
-                  >
-                    A selection of my best projects as of now.
-                  </Typography>
-                </Observe>
+                <SectionHeading
+                  title="Top Projects"
+                  subTitle="A selection of my best projects as of now."
+                  animation={{
+                    title: "animate-fade-in-top",
+                    subTitle: "animate-fade-in-top",
+                  }}
+                  duration={{ title: 100, subTitle: 200 }}
+                  willFade
+                />
               </div>
             </div>
           </Observe>

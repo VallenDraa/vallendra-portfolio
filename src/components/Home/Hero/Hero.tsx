@@ -1,7 +1,5 @@
 import { Typography } from "@material-tailwind/react";
 import Image from "next/image";
-import { HiArrowLongDown } from "react-icons/hi2";
-import Link from "next/link";
 import myPic from "../../../../public/images/vallen-icon.png";
 import Observe from "../../Observe";
 import fadeIn from "../../../utils/client/helpers/animateOnObserved";
@@ -77,19 +75,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      <Observe
-        freezeOnceVisible
-        onEnter={ref => fadeIn(ref, "animate-fade-in", 850)}
-      >
-        <Link
-          href="/#profile"
-          aria-label="Go to profile button"
-          className="absolute left-1/2 -bottom-20 -translate-x-1/2 text-indigo-300/70 opacity-0 dark:text-white/70 xl:bottom-10"
-        >
-          <HiArrowLongDown className="animate-bounce text-5xl" />
-        </Link>
-      </Observe>
     </section>
   );
 }

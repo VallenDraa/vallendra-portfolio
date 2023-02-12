@@ -12,16 +12,10 @@
   /* cards 
   ======= */
   .card-colors {
-    @apply !bg-indigo-100/40 !shadow-indigo-100 dark:!bg-gray-800/40 dark:!shadow-gray-800/50;
+    @apply !bg-indigo-100/20 !shadow-indigo-100/50 dark:!bg-gray-800/40 dark:!shadow-gray-800/50;
   }
   .detail-aside-colors {
     @apply border-2 border-indigo-100 dark:border-[#30363d];
-  }
-
-  /* cool scrollbar
-  ================ */
-  .scrollbar-kece {
-    @apply scrollbar-thin scrollbar-track-indigo-50 scrollbar-thumb-indigo-200/60 hover:scrollbar-thumb-indigo-200  dark:scrollbar-track-gray-900 dark:scrollbar-thumb-white/30 dark:hover:scrollbar-thumb-white/50;
   }
 
   /* Normal underline css for text
@@ -56,7 +50,7 @@
   /* gradients
   ============ */
   .primary-gradient {
-    @apply from-purple-200 to-pink-200 dark:from-indigo-300 dark:to-pink-200;
+    @apply from-indigo-300 to-pink-300  dark:to-pink-200;
   }
 }
 
