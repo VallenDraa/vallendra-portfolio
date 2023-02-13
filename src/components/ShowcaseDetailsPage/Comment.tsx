@@ -19,14 +19,10 @@ export default function Comment() {
 
   R.useEffect(() => {
     setCommentIsVisible(false);
-    setTimeout(() => {
-      setCommentIsVisible(true);
-    }, 100);
+    setCommentIsVisible(true);
   }, [asPath]);
 
-  if (!commentIsVisible) return null;
-
-  return (
+  return commentIsVisible ? (
     <Giscus
       term={term}
       repo={(process.env.NEXT_PUBLIC_REPO as Repo) || ""}
@@ -42,5 +38,5 @@ export default function Comment() {
       theme={theme === "dark" ? "transparent_dark" : "light"}
       inputPosition="top"
     />
-  );
+  ) : null;
 }
