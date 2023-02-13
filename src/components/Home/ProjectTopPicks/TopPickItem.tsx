@@ -129,14 +129,12 @@ export default function TopPickItem({
         <div
           ref={descWrapperRef}
           className={`relative z-40 flex basis-1/2 scale-90 items-center pt-2 pb-8 grayscale transition duration-500 lg:p-0 ${
-            twistDirection === "left" ? "lg:justify-end" : "pl-5"
+            twistDirection === "left" ? "lg:justify-end" : ""
           }`}
         >
           <div
             className={`w-11/12 ${
-              twistDirection === "left"
-                ? ""
-                : "ml-auto text-end lg:ml-0 lg:text-start"
+              twistDirection === "left" ? "" : "ml-auto lg:ml-0"
             }`}
           >
             {/* short description */}
@@ -160,14 +158,7 @@ export default function TopPickItem({
                 autoHeightMin="100%"
                 autoHeightMax="100%"
                 renderView={props => (
-                  <ul
-                    {...props}
-                    className={`relative flex items-center gap-1 ${
-                      twistDirection === "left"
-                        ? ""
-                        : "justify-end lg:justify-start"
-                    }`}
-                  />
+                  <ul {...props} className="relative flex items-center gap-1" />
                 )}
               >
                 {project.tech.map(
