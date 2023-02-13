@@ -1,10 +1,17 @@
+import bundleAnalyzer from "@next/bundle-analyzer"
+
 /** @type {import('next').NextConfig} */
-export default {
-  productionBrowserSourceMaps: true,
+
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+export default withBundleAnalyzer({
   reactStrictMode: true,
-  images: {
-    domains: ["localhost", "vallendra.my.id"],
-  },
+  swcMinify: true,
+  compress: true,
+  images: { domains: ["localhost", "vallendra.my.id"] },
   async headers() {
     return [
       {
@@ -13,4 +20,4 @@ export default {
       },
     ];
   },
-};
+});
