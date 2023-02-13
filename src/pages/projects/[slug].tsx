@@ -8,7 +8,6 @@ import { CldImage } from "next-cloudinary";
 import R from "react";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
-import dynamic from "next/dynamic";
 import Project from "../../interfaces/project.interface";
 import SiteFooter from "../../components/SiteFooter";
 import { Language, LikesOperationBody, Technologies } from "../../types/types";
@@ -34,6 +33,7 @@ import Seo from "../../seo/Seo";
 import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "../../components/Typography/SectionHeading";
 import StyledScrollbar from "../../components/StyledComponents/StyledScrollbar";
+import StyledAlert from "../../components/StyledComponents/StyledAlert";
 
 interface ProjectRedirect {
   slug: string;
@@ -45,11 +45,6 @@ interface PropsData {
   prevProject: ProjectRedirect;
   nextProject: ProjectRedirect;
 }
-
-const StyledAlert = dynamic(
-  () => import("../../components/StyledComponents/StyledAlert"),
-  { ssr: false },
-);
 
 export default function ProjectDetails({
   project,

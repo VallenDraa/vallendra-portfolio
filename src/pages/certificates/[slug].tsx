@@ -7,7 +7,6 @@ import R from "react";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
-import dynamic from "next/dynamic";
 import SiteFooter from "../../components/SiteFooter";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
@@ -31,6 +30,7 @@ import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
 import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "../../components/Typography/SectionHeading";
+import StyledAlert from "../../components/StyledComponents/StyledAlert";
 
 interface CertificateRedirect {
   slug: string;
@@ -42,11 +42,6 @@ interface PropsData {
   prevCertificate: CertificateRedirect;
   nextCertificate: CertificateRedirect;
 }
-
-const StyledAlert = dynamic(
-  () => import("../../components/StyledComponents/StyledAlert"),
-  { ssr: false },
-);
 
 export default function CertificateDetails({
   certificate,
