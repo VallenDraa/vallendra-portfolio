@@ -342,7 +342,7 @@ export default function ProjectDetails({
                     onClick={toggleLike}
                     variant="text"
                     color={hasLiked ? "red" : "gray"}
-                    className={`flex animate-fade-in flex-col items-center gap-1 text-5xl ${
+                    className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
                       hasLiked ? "text-red-300" : ""
                     }`}
                   >
