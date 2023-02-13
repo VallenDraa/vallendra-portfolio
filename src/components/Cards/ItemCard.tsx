@@ -96,7 +96,7 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
           <Typography
             variant="paragraph"
             as="p"
-            className="mt-1 px-3 text-base font-normal text-gray-300 sm:text-sm md:line-clamp-2"
+            className="mt-1 px-3 text-base font-normal text-gray-300 line-clamp-2 sm:text-sm"
           >
             {props.itemShortDesc}
           </Typography>
