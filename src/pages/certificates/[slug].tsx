@@ -7,16 +7,17 @@ import R from "react";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
+import dynamic from "next/dynamic";
 import SiteFooter from "../../components/SiteFooter";
 import Show from "../../utils/client/jsx/Show";
-import CopyLinkBtn from "../../components/DetailsPage/CopyLinkBtn";
+import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionSubHeading from "../../components/Typography/SectionSubHeading";
-import LinkWithUnderline from "../../components/DetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "../../components/ShowcaseDetailsPage/LinkWithUnderline";
 import Certificate from "../../interfaces/certificate.interface";
-import DetailFooter from "../../components/DetailsPage/DetailFooter";
+import DetailFooter from "../../components/ShowcaseDetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
-import LanguageToggle from "../../components/DetailsPage/LanguageToggle";
+import LanguageToggle from "../../components/ShowcaseDetailsPage/LanguageToggle";
 import { Language, LikesOperationBody } from "../../types/types";
 import {
   getAllCertificates,
@@ -28,9 +29,7 @@ import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
 import showcaseSeo from "../../seo/showcase.seo";
 import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
-import StyledAlert from "../../components/StyledComponents/StyledAlert";
-import alertHandler from "../../utils/client/helpers/alertHandler";
-import ShowcaseStats from "../../components/DetailsPage/ShowcaseStats";
+import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "../../components/Typography/SectionHeading";
 
 interface CertificateRedirect {
@@ -43,6 +42,11 @@ interface PropsData {
   prevCertificate: CertificateRedirect;
   nextCertificate: CertificateRedirect;
 }
+
+const StyledAlert = dynamic(
+  () => import("../../components/StyledComponents/StyledAlert"),
+  { ssr: false },
+);
 
 export default function CertificateDetails({
   certificate,
@@ -101,6 +105,10 @@ export default function CertificateDetails({
 
         setWillSendLike(false);
       } catch (error) {
+        const alertHandler = (
+          await import("../../utils/client/helpers/alertHandler")
+        ).default;
+
         alertHandler({ setShowAlert });
       }
     },
@@ -117,6 +125,10 @@ export default function CertificateDetails({
           method: "PUT",
         });
       } catch (error) {
+        const alertHandler = (
+          await import("../../utils/client/helpers/alertHandler")
+        ).default;
+
         alertHandler({ setShowAlert });
       }
     })();
@@ -170,7 +182,7 @@ export default function CertificateDetails({
       </StyledAlert>
 
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
+        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
           <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
             <div>
               {/* back to certificates button */}
@@ -215,6 +227,7 @@ export default function CertificateDetails({
           {/* image */}
           <figure className="mx-auto w-full md:w-[95%]">
             <CldImage
+              format="webp"
               priority
               src={certificate.image}
               alt={certificate.name}

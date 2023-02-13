@@ -1,15 +1,13 @@
-import { Typography } from "@material-tailwind/react";
 import R from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
-import SiteFooter from "../../components/SiteFooter";
+import dynamic from "next/dynamic";
 import Project from "../../interfaces/project.interface";
 import Show from "../../utils/client/jsx/Show";
 import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
 import SearchInput from "../../components/SearchInput";
 import ItemCard from "../../components/Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
-import SearchNotFound from "../../components/SearchNotFound";
 import { getAllProjects } from "../../server/service/projects/projects.service";
 import { getAllProjectCategories } from "../../server/service/projects/projectCategory.service";
 import { JSONSerialize } from "../../utils/server/serialize";
@@ -23,6 +21,20 @@ interface Props {
   projects: Project[];
   categories: Category[];
 }
+
+const SiteFooter = dynamic(() => import("../../components/SiteFooter"), {
+  ssr: false,
+});
+
+const FailToLoad = dynamic(
+  () => import("../../components/ShowcaseIndexPage/FailToLoad"),
+  { ssr: false },
+);
+
+const SearchNotFound = dynamic(
+  () => import("../../components/SearchNotFound"),
+  { ssr: false },
+);
 
 export default function ProjectsPage({ projects, categories }: Props) {
   const router = useRouter();
@@ -58,7 +70,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
       <Seo base={projectsPageSeo.base} og={projectsPageSeo.og} />
 
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
+        <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -144,24 +156,7 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
           {/* fallback for when the projects failed to load */}
           <Show when={projects.length === 0 || !projects || isError}>
-            {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 animate-fade-in space-y-2 px-8 text-center lg:px-0">
-              <Typography
-                variant="h4"
-                as="h2"
-                className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
-              >
-                Sorry, Can&apos;t Seem To Load The Projects 😅
-              </Typography>
-              <Typography
-                variant="h5"
-                as="h3"
-                className="text-sm dark:text-gray-500 md:text-base lg:text-lg"
-              >
-                Try reloading the page. If the problem persists, please try
-                again later.
-              </Typography>
-            </div>
+            <FailToLoad />
           </Show>
         </main>
         <SiteFooter />

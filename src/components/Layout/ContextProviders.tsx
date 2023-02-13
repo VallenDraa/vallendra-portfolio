@@ -1,10 +1,14 @@
 import { ThemeProvider as MTThemeProvider } from "@material-tailwind/react";
 import { ThemeProvider as NextThemeProvider } from "next-themes";
-import customMaterialStyles from "../../../materialTailwind.config";
 import { NavIsOpenedCP } from "../../context/NavIsOpenedCP";
+import customMaterialStyles from "../../../materialTailwind.config";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ContextProviders({ children }: { children: any }) {
+export default function ContextProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <NextThemeProvider
       enableSystem={false}
@@ -13,11 +17,9 @@ export default function ContextProviders({ children }: { children: any }) {
       defaultTheme="dark"
       storageKey="color-theme"
     >
-      <NavIsOpenedCP>
-        <MTThemeProvider value={customMaterialStyles}>
-          {children}
-        </MTThemeProvider>
-      </NavIsOpenedCP>
+      <MTThemeProvider value={customMaterialStyles}>
+        <NavIsOpenedCP>{children}</NavIsOpenedCP>
+      </MTThemeProvider>
     </NextThemeProvider>
   );
 }

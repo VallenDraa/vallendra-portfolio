@@ -2,9 +2,11 @@ import { Typography, IconButton } from "@material-tailwind/react";
 import { useEffect, useContext, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
-import NavList from "./Navlist";
-import { NavIsOpenedContext } from "../../context/NavIsOpenedCP";
+import dynamic from "next/dynamic";
+import NavIsOpenedContext from "../../context/NavIsOpenedCP";
 import ThemeToggler from "./ThemeToggler";
+
+const NavList = dynamic(() => import("./Navlist"), { ssr: false });
 
 export default function NavbarComponent() {
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
@@ -92,7 +94,7 @@ export default function NavbarComponent() {
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 2xl:px-2">
         {/* name section */}
         <Typography
-          as="h2"
+          as="span"
           variant="h5"
           className="text-indigo-500 dark:text-gray-200 lg:basis-1/3"
         >

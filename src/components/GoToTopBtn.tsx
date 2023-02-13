@@ -1,51 +1,30 @@
 import { IconButton } from "@material-tailwind/react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { VscTriangleUp } from "react-icons/vsc";
 
-export default function GoToTopBtn() {
+export default function GoToTopBtn({
+  isVisible,
+  callback,
+}: {
+  isVisible: boolean;
+  callback: () => void;
+}) {
   const goUpBtnRef = useRef<HTMLButtonElement>(null);
-  const scrollPercentage = useRef<number>(0);
 
-  /* For showing and hiding go up button
-  ===================================== */
-  useEffect(() => {
-    const height = document.documentElement;
-
-    function goUpBtnViewHandler() {
-      scrollPercentage.current =
-        (height.scrollTop / (height.scrollHeight - height.clientHeight)) * 100;
-
-      if (scrollPercentage.current > 5) {
-        goUpBtnRef.current?.classList.remove("translate-y-[200%]");
-      } else {
-        goUpBtnRef.current?.classList.add("translate-y-[200%]");
-      }
-    }
-
-    window.addEventListener("scroll", goUpBtnViewHandler);
-
-    return () => {
-      window.removeEventListener("scroll", goUpBtnViewHandler);
-    };
-  }, []);
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <a
-      aria-label="Go to top link"
-      href="#"
-      className="fixed bottom-5 right-10 z-50 inline-block translate-x-0 opacity-30 hover:opacity-100"
+    <IconButton
+      aria-label="Go to top button"
+      ref={goUpBtnRef}
+      size="lg"
+      ripple={false}
+      variant="filled"
+      color="deep-purple"
+      onClick={callback}
+      className={`fixed bottom-5 right-10 z-50 inline-block translate-x-0 p-2 opacity-30 duration-500 hover:opacity-100 ${
+        isVisible ? "" : "translate-y-[200%]"
+      }`}
     >
-      <IconButton
-        aria-label="Go to top button"
-        ref={goUpBtnRef}
-        size="lg"
-        ripple={false}
-        variant="filled"
-        color="deep-purple"
-        className="p-2"
-      >
-        <VscTriangleUp className="text-xl" />
-      </IconButton>
-    </a>
+      <VscTriangleUp className="text-xl" />
+    </IconButton>
   );
 }

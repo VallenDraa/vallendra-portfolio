@@ -118,6 +118,7 @@ export default function TopPickItem({
             alt={project.name}
             width={960}
             height={540}
+            format="webp"
             className={`mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0 ${
               twistDirection === "left" ? "" : "ml-auto"
             }`}

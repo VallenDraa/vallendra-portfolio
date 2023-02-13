@@ -7,6 +7,7 @@ import fadeIn, {
 import Show from "../../utils/client/jsx/Show";
 
 interface Props {
+  titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   title: ReactNode;
   subTitle?: ReactNode;
   willFade?: boolean;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function SectionHeading({
+  titleAs = "h1",
   title,
   subTitle = "",
   duration = null,
@@ -41,7 +43,7 @@ export default function SectionHeading({
         }
       >
         <Typography
-          as="h1"
+          as={titleAs}
           variant="h1"
           className={`primary-gradient bg-gradient-to-r bg-clip-text text-4xl font-bold !leading-[initial] text-transparent md:text-5xl ${
             willFade ? "opacity-0" : ""

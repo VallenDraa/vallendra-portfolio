@@ -1,15 +1,8 @@
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  ReactNode,
-  useMemo,
-} from "react";
+import R from "react";
 
 export interface NavIsOpened {
   navIsOpened: boolean;
-  setNavIsOpened: Dispatch<SetStateAction<boolean>>;
+  setNavIsOpened: R.Dispatch<R.SetStateAction<boolean>>;
 }
 
 export const navInitialState = {
@@ -17,12 +10,12 @@ export const navInitialState = {
   setNavIsOpened() {},
 };
 
-export const NavIsOpenedContext = createContext<NavIsOpened>(navInitialState);
+const NavIsOpenedContext = R.createContext<NavIsOpened>(navInitialState);
 
-export function NavIsOpenedCP({ children }: { children: ReactNode }) {
-  const [navIsOpened, setNavIsOpened] = useState(false);
+export function NavIsOpenedCP({ children }: { children: R.ReactNode }) {
+  const [navIsOpened, setNavIsOpened] = R.useState(false);
 
-  const navOpenedValue = useMemo(
+  const navOpenedValue = R.useMemo(
     () => ({ navIsOpened, setNavIsOpened }),
     [navIsOpened],
   );

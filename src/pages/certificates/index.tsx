@@ -1,14 +1,12 @@
-import { Typography } from "@material-tailwind/react";
 import R from "react";
 import { useRouter } from "next/router";
-import SiteFooter from "../../components/SiteFooter";
+import dynamic from "next/dynamic";
 import Show from "../../utils/client/jsx/Show";
 import SearchInput from "../../components/SearchInput";
 import Certificate from "../../interfaces/certificate.interface";
 import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
 import ItemCard from "../../components/Cards/ItemCard";
 import Category from "../../interfaces/category.interface";
-import SearchNotFound from "../../components/SearchNotFound";
 import { getAllCertificates } from "../../server/service/certificates/certificates.service";
 import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
 import { JSONSerialize } from "../../utils/server/serialize";
@@ -22,6 +20,20 @@ interface Props {
   certificates: Certificate[];
   categories: Category[];
 }
+
+const SiteFooter = dynamic(() => import("../../components/SiteFooter"), {
+  ssr: false,
+});
+
+const FailToLoad = dynamic(
+  () => import("../../components/ShowcaseIndexPage/FailToLoad"),
+  { ssr: false },
+);
+
+const SearchNotFound = dynamic(
+  () => import("../../components/SearchNotFound"),
+  { ssr: false },
+);
 
 export default function ProjectsPage({ certificates, categories }: Props) {
   const router = useRouter();
@@ -63,7 +75,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
       <Seo base={certificatesPageSeo.base} og={certificatesPageSeo.og} />
 
       <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="z-60 relative mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col overflow-hidden px-8 2xl:px-2">
+        <header className="mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -150,24 +162,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
           {/* fallback for when the certificates failed to load */}
           <Show when={certificates.length === 0 || !certificates || isError}>
-            {/* text fallback */}
-            <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 animate-fade-in space-y-2 px-8 text-center lg:px-0">
-              <Typography
-                variant="h4"
-                as="h2"
-                className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
-              >
-                Sorry, Can&apos;t Seem To Load The certificates 😅
-              </Typography>
-              <Typography
-                variant="h5"
-                as="h3"
-                className="text-sm dark:text-gray-500 md:text-base lg:text-lg"
-              >
-                Try reloading the page. If the problem persists, please try
-                again later.
-              </Typography>
-            </div>
+            <FailToLoad />
           </Show>
         </main>
         <SiteFooter />

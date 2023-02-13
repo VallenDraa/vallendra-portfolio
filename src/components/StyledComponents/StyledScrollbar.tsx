@@ -1,14 +1,13 @@
 import Scrollbars, { ScrollbarProps } from "react-custom-scrollbars-2";
+import R from "react";
 
 const classes =
   "z-[70] rounded-full bg-indigo-300/60 hover:bg-indigo-300 active:bg-indigo-300 dark:bg-white/30 dark:hover:bg-white/80 dark:active:bg-white/80";
 
-export default function StyledScrollbar({
-  children,
-  ...props
-}: ScrollbarProps) {
-  return (
+const StyledScrollbar = R.forwardRef<Scrollbars, ScrollbarProps>(
+  ({ children, ...props }, forwardedRef) => (
     <Scrollbars
+      {...props}
       universal
       autoHide
       renderThumbHorizontal={thumbProps => (
@@ -17,9 +16,11 @@ export default function StyledScrollbar({
       renderThumbVertical={thumbProps => (
         <div {...thumbProps} className={classes} />
       )}
-      {...props}
+      ref={forwardedRef}
     >
       {children}
     </Scrollbars>
-  );
-}
+  ),
+);
+
+export default StyledScrollbar;
