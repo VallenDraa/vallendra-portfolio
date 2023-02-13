@@ -8,6 +8,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 export default withBundleAnalyzer({
   reactStrictMode: true,
+  swcMinify: true,
   compress: true,
   images: { domains: ["localhost", "vallendra.my.id"] },
   async headers() {

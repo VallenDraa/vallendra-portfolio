@@ -1,8 +1,14 @@
 import { Typography } from "@material-tailwind/react";
-import { useMemo } from "react";
+import R from "react";
 import { AiFillCalendar, AiFillEye, AiFillHeart } from "react-icons/ai";
-import { commaSeparator } from "../../utils/client/helpers/formatter";
+import {
+  commaSeparator,
+  dateFormatter,
+} from "../../utils/client/helpers/formatter";
 import Show from "../../utils/client/jsx/Show";
+
+const dateSkeleton =
+  "after:h-4 after:w-44 after:animate-pulse after:rounded-full after:bg-white/20";
 
 const skeleton =
   "after:h-4 after:w-20 after:animate-pulse after:rounded-full after:bg-white/20";
@@ -26,30 +32,35 @@ export default function ShowcaseStats({
   hasLiked,
   isLoadingStats = false,
 }: Props) {
-  const formattedDate = useMemo(() => {
-    const dateObj = new Date(dateString || unixTime);
+  const [dateIsLoaded, setDateIsLoaded] = R.useState(false);
+  const [formattedDate, setFormattedData] = R.useState("");
 
-    return new Intl.DateTimeFormat(undefined, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(dateObj);
+  const formattedViews = R.useMemo(() => commaSeparator.format(views), [views]);
+  const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+
+  /* Format the date client side to prevent hydration mismatch
+  ============================================================ */
+  R.useEffect(() => {
+    setFormattedData(dateFormatter.format(new Date(dateString || unixTime)));
   }, [dateString, unixTime]);
 
-  const formattedViews = useMemo(() => commaSeparator.format(views), [views]);
-  const formattedLikes = useMemo(() => commaSeparator.format(likes), [likes]);
+  R.useEffect(() => setDateIsLoaded(formattedDate !== ""), [formattedDate]);
 
   return (
     <div className="flex flex-wrap gap-3 text-indigo-300 dark:text-gray-500">
       <Typography
         variant="small"
         as="span"
-        className="flex items-center gap-1 font-medium"
+        className={`flex items-center gap-1 font-medium ${
+          !dateIsLoaded ? dateSkeleton : ""
+        }`}
       >
         <AiFillCalendar />
-        {timestampMessage}
-        {formattedDate}
+
+        <Show when={dateIsLoaded}>
+          {timestampMessage}
+          {formattedDate}
+        </Show>
       </Typography>
 
       <span>&bull;</span>
