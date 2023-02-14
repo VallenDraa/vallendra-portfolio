@@ -2,7 +2,7 @@ import R from "react";
 import useIntersectionObserver, {
   UseIntersectionObserverProps,
 } from "utils/client/hooks/useIntersectionObserver";
-import { IS_PROD } from "constants";
+import { IS_PROD } from "@/constants";
 
 interface Props<T extends HTMLElement> extends UseIntersectionObserverProps {
   children: React.ReactElement;
