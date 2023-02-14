@@ -22,6 +22,7 @@ export default function Seo({
       <meta property="og:type" content={og.contentType} />
       <meta property="og:url" content={og.siteUrl} />
       <meta property="og:image" content={og.imageUrl} />
+      <meta property="og:image:secure_url" content={og.imageUrl} />
       <meta property="og:image:alt" content={og.imageAlt} />
       <meta property="og:image:width" content="960" />
       <meta property="og:image:height" content="540" />
