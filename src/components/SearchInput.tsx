@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { InputProps } from "@material-tailwind/react";
 import { AiOutlineLoading } from "react-icons/ai";
 import useDebounce from "utils/client/hooks/useDebounce";
-import StyledInput from "./StyledComponents/StyledInput";
 import Show from "utils/client/jsx/Show";
+import StyledInput from "./StyledComponents/StyledInput";
 
 interface Props extends InputProps {
   defaultValue?: string;
