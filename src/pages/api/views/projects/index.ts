@@ -1,9 +1,9 @@
 import { NextApiHandler } from "next";
-import { getAllProjectStats } from "../../../../server/service/projects/projectStats.service";
+import { getAllProjectStats } from "server/service/projects/projectStats.service";
 import {
   internalServerErrorRes,
   invalidHttpMethodRes,
-} from "../../../../server/error/response.error";
+} from "server/error/response.error";
 
 /* This handles getting all the project views */
 const handler: NextApiHandler = async (req, res) => {

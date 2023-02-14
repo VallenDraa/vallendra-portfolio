@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import Head from "next/head";
 import BreathingBackground from "./BreathingBackground";
 import Observe from "./Observe";
-import fadeIn from "../utils/client/helpers/animateOnObserved";
+import fadeIn from "utils/client/helpers/animateOnObserved";
 
 export default function OfflinePage() {
   return (

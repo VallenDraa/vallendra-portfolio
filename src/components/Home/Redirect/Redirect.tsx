@@ -1,8 +1,8 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
-import Observe from "../../Observe";
-import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Observe from "components/Observe";
 
 /* redirects the user to a contacts page or to my github account
 ================================================================ */
@@ -30,7 +30,7 @@ export default function Redirect() {
           className="relative z-10 mt-8 opacity-0"
         >
           <Button
-            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 focus:text-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:focus:bg-white dark:focus:text-gray-900 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
+            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 focus:text-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:focus:bg-white dark:focus:text-gray-900 dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
             variant="text"
           >
             <span>Contact Me</span>

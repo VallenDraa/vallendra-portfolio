@@ -4,7 +4,7 @@
 //   internalServerErrorRes,
 //   invalidHttpMethodRes,
 //   invalidBodyRes,
-// } from "../../src/server/error/response.error";
+// } from "src/server/error/response.error";
 
 // export interface EmailBody {
 //   senderEmail: string;
@@ -62,4 +62,4 @@
 
 // export default handler;
 
-export {}
+export {};

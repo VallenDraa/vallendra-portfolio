@@ -1,6 +1,6 @@
+import techIcons from "components/MappedComponents/TechIcons";
 import React from "react";
-import { Technologies } from "../../types/types";
-import techIcons from "../MappedComponents/TechIcons";
+import { Technologies } from "types/types";
 
 export default function TechsSection({ techs }: { techs: Technologies[] }) {
   return (

@@ -8,27 +8,27 @@ import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
-import Show from "../../utils/client/jsx/Show";
-import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
-import ActionButton from "../../components/StyledComponents/ActionButton";
-import SectionSubHeading from "../../components/Typography/SectionSubHeading";
-import LinkWithUnderline from "../../components/ShowcaseDetailsPage/LinkWithUnderline";
-import Certificate from "../../interfaces/certificate.interface";
-import { commaSeparator } from "../../utils/client/helpers/formatter";
-import LanguageToggle from "../../components/ShowcaseDetailsPage/LanguageToggle";
-import { Language, LikesOperationBody } from "../../types/types";
+import Show from "utils/client/jsx/Show";
+import CopyLinkBtn from "components/ShowcaseDetailsPage/CopyLinkBtn";
+import ActionButton from "components/StyledComponents/ActionButton";
+import SectionSubHeading from "components/Typography/SectionSubHeading";
+import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import Certificate from "interfaces/certificate.interface";
+import { commaSeparator } from "utils/client/helpers/formatter";
+import LanguageToggle from "components/ShowcaseDetailsPage/LanguageToggle";
+import { Language, LikesOperationBody } from "types/types";
 import {
   getAllCertificates,
   getCertificateWithPrevAndNext,
-} from "../../server/service/certificates/certificates.service";
-import { JSONSerialize } from "../../utils/server/serialize";
-import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
-import showcaseSeo from "../../seo/showcase.seo";
-import useDebounce from "../../utils/client/hooks/useDebounce";
-import Seo from "../../seo/Seo";
-import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
-import SectionHeading from "../../components/Typography/SectionHeading";
+} from "server/service/certificates/certificates.service";
+import { JSONSerialize } from "utils/server/serialize";
+import useGetViewsById from "utils/client/hooks/useGetViewsById";
+import useGetLikesById from "utils/client/hooks/useGetLikesById";
+import showcaseSeo from "seo/showcase.seo";
+import useDebounce from "utils/client/hooks/useDebounce";
+import Seo from "seo/Seo";
+import ShowcaseStats from "components/ShowcaseDetailsPage/ShowcaseStats";
+import SectionHeading from "components/Typography/SectionHeading";
 
 interface CertificateRedirect {
   slug: string;
@@ -42,12 +42,12 @@ interface PropsData {
 }
 
 const StyledAlert = dynamic(
-  () => import("../../components/StyledComponents/StyledAlert"),
+  () => import("components/StyledComponents/StyledAlert"),
   { ssr: false },
 );
 
 const DetailFooter = dynamic(
-  () => import("../../components/ShowcaseDetailsPage/DetailFooter"),
+  () => import("components/ShowcaseDetailsPage/DetailFooter"),
   { ssr: false },
 );
 
@@ -117,9 +117,8 @@ export default function CertificateDetails({
 
         setWillSendLike(false);
       } catch (error) {
-        const alertHandler = (
-          await import("../../utils/client/helpers/alertHandler")
-        ).default;
+        const alertHandler = (await import("utils/client/helpers/alertHandler"))
+          .default;
 
         alertHandler({ setShowAlert });
       }
@@ -137,9 +136,8 @@ export default function CertificateDetails({
           method: "PUT",
         });
       } catch (error) {
-        const alertHandler = (
-          await import("../../utils/client/helpers/alertHandler")
-        ).default;
+        const alertHandler = (await import("utils/client/helpers/alertHandler"))
+          .default;
 
         alertHandler({ setShowAlert });
       } finally {

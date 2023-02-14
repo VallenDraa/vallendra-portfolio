@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { LeanDocument } from "mongoose";
-import Certificate from "../../../interfaces/certificate.interface";
-import CertificateModel from "../../mongo/model/certificate.model";
-import connectMongo from "../../mongo/mongodb";
+import Certificate from "interfaces/certificate.interface";
+import connectMongo from "server/mongo/mongodb";
+import CertificateModel from "server/mongo/model/certificate.model";
 
 export async function getCertificateWithPrevAndNext(slug: string) {
   connectMongo();

@@ -15,7 +15,7 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
-import { TextSize, Technologies } from "../../types/types";
+import { TextSize, Technologies } from "types/types";
 
 const techIcons: {
   [key in Technologies]: (
@@ -28,7 +28,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-deep-orange-400"
-          : "text-white/50 transition-colors duration-200 group-hover:text-deep-orange-400 hover:text-deep-orange-400"
+          : "text-white/50 transition-colors duration-200 hover:text-deep-orange-400 group-hover:text-deep-orange-400"
       }`}
     />
   ),
@@ -37,7 +37,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-blue-600"
-          : "text-white/50 transition-colors duration-200 group-hover:text-blue-600 hover:text-blue-600"
+          : "text-white/50 transition-colors duration-200 hover:text-blue-600 group-hover:text-blue-600"
       }`}
     />
   ),
@@ -46,7 +46,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-cyan-400"
-          : "text-white/50 transition-colors duration-200 group-hover:text-cyan-400 hover:text-cyan-400"
+          : "text-white/50 transition-colors duration-200 hover:text-cyan-400 group-hover:text-cyan-400"
       }`}
     />
   ),
@@ -55,7 +55,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "bg-gray-900 text-yellow-600 dark:bg-transparent"
-          : "text-white/50 transition-colors duration-200 group-hover:text-yellow-600 hover:bg-gray-900 hover:text-yellow-600 dark:hover:bg-transparent"
+          : "text-white/50 transition-colors duration-200 hover:bg-gray-900 hover:text-yellow-600 group-hover:text-yellow-600 dark:hover:bg-transparent"
       }`}
     />
   ),
@@ -64,7 +64,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-blue-700"
-          : "text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:text-blue-700"
+          : "text-white/50 transition-colors duration-200 hover:text-blue-700 group-hover:text-blue-700"
       }`}
     />
   ),
@@ -73,7 +73,7 @@ const techIcons: {
       className={`rounded ${size} ${
         isColorOn
           ? "bg-white text-blue-700"
-          : "text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:bg-white hover:text-blue-700"
+          : "text-white/50 transition-colors duration-200 hover:bg-white hover:text-blue-700 group-hover:text-blue-700"
       }`}
     />
   ),
@@ -82,7 +82,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-light-blue-300 dark:text-light-blue-200"
-          : "text-white/50 transition-colors duration-200 group-hover:text-light-blue-300 hover:text-light-blue-300  group-hover:dark:text-light-blue-200 hover:dark:text-light-blue-200"
+          : "text-white/50 transition-colors duration-200 hover:text-light-blue-300 group-hover:text-light-blue-300  hover:dark:text-light-blue-200 group-hover:dark:text-light-blue-200"
       }`}
     />
   ),
@@ -91,7 +91,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-green-400"
-          : "text-white/50 transition-colors duration-200 group-hover:text-green-400 hover:text-green-400"
+          : "text-white/50 transition-colors duration-200 hover:text-green-400 group-hover:text-green-400"
       }`}
     />
   ),
@@ -100,7 +100,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-green-600"
-          : "text-white/50 transition-colors duration-200 group-hover:text-green-600 hover:text-green-600"
+          : "text-white/50 transition-colors duration-200 hover:text-green-600 group-hover:text-green-600"
       }`}
     />
   ),
@@ -109,7 +109,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
+          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
       }`}
     />
   ),
@@ -118,7 +118,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-blue-700"
-          : "text-white/50 transition-colors duration-200 group-hover:text-blue-700 hover:text-blue-700"
+          : "text-white/50 transition-colors duration-200 hover:text-blue-700 group-hover:text-blue-700"
       }`}
     />
   ),
@@ -127,7 +127,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-purple-400"
-          : "text-white/50 transition-colors duration-200 group-hover:text-purple-400 hover:text-purple-400"
+          : "text-white/50 transition-colors duration-200 hover:text-purple-400 group-hover:text-purple-400"
       }`}
     />
   ),
@@ -136,7 +136,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
+          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
       }`}
     />
   ),
@@ -145,7 +145,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-red-700"
-          : "text-white/50 transition-colors duration-200 group-hover:text-red-700 hover:text-red-700"
+          : "text-white/50 transition-colors duration-200 hover:text-red-700 group-hover:text-red-700"
       }`}
     />
   ),
@@ -154,7 +154,7 @@ const techIcons: {
       className={`${size} ${
         isColorOn
           ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 group-hover:text-gray-900 hover:text-gray-900 dark:group-hover:text-gray-100 dark:hover:text-gray-100"
+          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
       }`}
     />
   ),

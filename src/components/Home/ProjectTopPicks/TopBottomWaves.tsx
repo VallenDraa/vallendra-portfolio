@@ -1,8 +1,8 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import R, { useEffect } from "react";
-import darkLayeredWave from "../../../../public/svg/dark-layered-wave.svg";
-import lightLayeredWave from "../../../../public/svg/light-layered-wave.svg";
+import darkLayeredWave from "@/public/svg/dark-layered-wave.svg";
+import lightLayeredWave from "@/public/svg/light-layered-wave.svg";
 
 export default function TopBottomWaves() {
   const { theme } = useTheme();

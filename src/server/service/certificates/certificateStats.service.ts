@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
-import { StatsType } from "../../../types/types";
-import CertificateModel from "../../mongo/model/certificate.model";
-import connectMongo from "../../mongo/mongodb";
+import { StatsType } from "types/types";
+import CertificateModel from "server/mongo/model/certificate.model";
+import connectMongo from "server/mongo/mongodb";
 
 /* Services for fetching stats
 ============================== */

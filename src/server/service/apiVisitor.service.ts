@@ -1,4 +1,4 @@
-import ApiVisitorModel from "../mongo/model/apiVisitor.model";
+import ApiVisitorModel from "mongo/model/apiVisitor.model";
 
 // eslint-disable-next-line import/prefer-default-export
 export async function incApiVisitors() {

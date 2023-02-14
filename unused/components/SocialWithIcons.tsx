@@ -1,9 +1,9 @@
 // import Link from "next/link";
-// import IconWithTooltip from "../src/components/IconWithTooltip";
+// import IconWithTooltip from "src/components/IconWithTooltip";
 // import { FaGithub, FaGithubSquare } from "react-icons/fa";
 // import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
-// import Show from "../src/utils/client/jsx/Show";
-// import { TextSizes } from "../src/types/types";
+// import Show from "src/utils/client/jsx/Show";
+// import { TextSizes } from "src/types/types";
 // import { MdEmail } from "react-icons/md";
 
 // export default function SocialsWithIcon({
@@ -107,4 +107,4 @@
 //   );
 // }
 
-export {}
+export {};

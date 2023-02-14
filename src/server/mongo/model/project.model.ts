@@ -1,5 +1,5 @@
 import m from "mongoose";
-import Project from "../../../interfaces/project.interface";
+import Project from "interfaces/project.interface";
 
 interface ProjectDocument extends Omit<Project, "_id">, m.Document {
   createdAt: Date;

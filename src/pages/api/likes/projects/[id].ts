@@ -5,14 +5,14 @@ import {
   getProjectStats,
   editLikersList,
   getHasLiked,
-} from "../../../../server/service/projects/projectStats.service";
-import getUniqueIpId from "../../../../utils/server/getUniqueIpId";
-import { LikesOperationBody } from "../../../../types/types";
+} from "server/service/projects/projectStats.service";
+import getUniqueIpId from "utils/server/getUniqueIpId";
+import { LikesOperationBody } from "types/types";
 import {
   internalServerErrorRes,
   invalidBodyRes,
   invalidHttpMethodRes,
-} from "../../../../server/error/response.error";
+} from "server/error/response.error";
 
 /* this handles operation on likes for a single project
 ====================================================== */

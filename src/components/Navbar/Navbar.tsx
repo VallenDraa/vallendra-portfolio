@@ -3,7 +3,7 @@ import { useEffect, useContext, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import NavIsOpenedContext from "../../context/NavIsOpenedCP";
+import NavIsOpenedContext from "context/NavIsOpenedCP";
 import ThemeToggler from "./ThemeToggler";
 
 const NavList = dynamic(() => import("./Navlist"), { ssr: false });
@@ -89,7 +89,7 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/90 py-3 px-0 dark:bg-gray-800/90 [@supports(backdrop-filter:blur(12px))]:bg-indigo-100/30 [@supports(backdrop-filter:blur(12px))]:backdrop-blur-md dark:[@supports(backdrop-filter:blur(12px))]:bg-gray-800/30"
+      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/90 py-3 px-0 backdrop-saturate-150 dark:bg-gray-800/90 [@supports(backdrop-filter:blur(12px))]:bg-indigo-100/30 [@supports(backdrop-filter:blur(12px))]:backdrop-blur-md dark:[@supports(backdrop-filter:blur(12px))]:bg-gray-800/30"
     >
       <div className="mx-auto flex max-w-screen-xl items-center justify-between px-8 2xl:px-2">
         {/* name section */}

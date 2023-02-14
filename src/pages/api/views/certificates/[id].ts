@@ -2,12 +2,12 @@ import { NextApiHandler } from "next";
 import {
   getCertificateStats,
   incCertificateStat,
-} from "../../../../server/service/certificates/certificateStats.service";
+} from "server/service/certificates/certificateStats.service";
 import {
   internalServerErrorRes,
   invalidBodyRes,
   invalidHttpMethodRes,
-} from "../../../../server/error/response.error";
+} from "server/error/response.error";
 
 /* this handles operation on views for a single project
 ====================================================== */

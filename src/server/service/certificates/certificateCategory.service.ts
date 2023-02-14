@@ -1,5 +1,5 @@
-import CertificateCategoryModel from "../../mongo/model/certificateCategory.model";
-import connectMongo from "../../mongo/mongodb";
+import connectMongo from "server/mongo/mongodb";
+import CertificateCategoryModel from "server/mongo/model/certificateCategory.model";
 
 // eslint-disable-next-line import/prefer-default-export
 export async function getAllCertificateCategories() {

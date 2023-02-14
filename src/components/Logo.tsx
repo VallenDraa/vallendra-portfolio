@@ -1,5 +1,5 @@
 import Image from "next/image";
-import vallen from "../../images/vallen.png";
+import vallen from "images/vallen.png";
 
 export default function Logo() {
   return (

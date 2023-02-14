@@ -6,7 +6,7 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import MENUS from "../../utils/data/menus";
+import MENUS from "utils/data/menus";
 
 interface Props {
   Handler: JSX.Element;

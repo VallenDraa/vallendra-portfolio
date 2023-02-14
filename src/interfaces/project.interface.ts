@@ -1,4 +1,4 @@
-import { Technologies } from "../types/types";
+import { Technologies } from "types/types";
 
 export default interface Project {
   _id: string;

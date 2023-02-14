@@ -1,12 +1,12 @@
 import Giscus, { Repo } from "@giscus/react";
 import { useTheme } from "next-themes";
 import { BsArrowLeft } from "react-icons/bs";
-import Observe from "../components/Observe";
-import SectionHeading from "../components/Typography/SectionHeading";
-import Seo from "../seo/Seo";
-import guestbookPageSeo from "../seo/guestbook.seo";
-import fadeIn from "../utils/client/helpers/animateOnObserved";
-import LinkWithUnderline from "../components/ShowcaseDetailsPage/LinkWithUnderline";
+import Observe from "components/Observe";
+import SectionHeading from "components/Typography/SectionHeading";
+import Seo from "seo/Seo";
+import guestbookPageSeo from "seo/guestbook.seo";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
 
 export default function Guestbook() {
   const { theme } = useTheme();

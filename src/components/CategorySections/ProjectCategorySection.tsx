@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import Project from "../../interfaces/project.interface";
-import SectionSubHeading from "../Typography/SectionSubHeading";
-import ItemCard from "../Cards/ItemCard";
-import Category from "../../interfaces/category.interface";
-import Observe from "../Observe";
-import fadeIn from "../../utils/client/helpers/animateOnObserved";
+import Project from "interfaces/project.interface";
+import Category from "interfaces/category.interface";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Observe from "components/Observe";
+import SectionSubHeading from "components/Typography/SectionSubHeading";
+import ItemCard from "components/Cards/ItemCard";
 
 interface Props {
   categoryIndex: number;

@@ -1,5 +1,5 @@
-import IconWithTooltip from "../IconWithTooltip";
-import { Technologies } from "../../types/types";
+import { Technologies } from "types/types";
+import IconWithTooltip from "components/IconWithTooltip";
 import techIcons from "./TechIcons";
 
 const techsWithTooltip: {

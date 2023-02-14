@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@material-tailwind/react";
 import { forwardRef } from "react";
-import Show from "../../utils/client/jsx/Show";
+import Show from "utils/client/jsx/Show";
 
 interface Props extends ButtonProps {
   icon?: JSX.Element;

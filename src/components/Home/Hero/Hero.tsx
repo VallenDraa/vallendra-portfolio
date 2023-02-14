@@ -1,8 +1,8 @@
 import { Typography } from "@material-tailwind/react";
+import Observe from "components/Observe";
 import Image from "next/image";
-import myPic from "../../../../public/images/vallen-icon.png";
-import Observe from "../../Observe";
-import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import myPic from "@/public/images/vallen-icon.png";
 
 export default function Hero() {
   return (

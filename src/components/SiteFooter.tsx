@@ -10,7 +10,7 @@ export default function SiteFooter() {
   return (
     <footer className="gradient-underline gradient-underline--primary relative flex flex-col gap-2 px-8 py-4 before:!top-0">
       {/* site links */}
-      <ul className="mx-auto mb-4 flex max-w-screen-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-indigo-300 dark:text-gray-400">
+      <ul className="mx-auto mb-4 flex max-w-screen-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-indigo-300 dark:text-gray-400">
         <li>
           <Link href="/#home">Home</Link>
         </li>

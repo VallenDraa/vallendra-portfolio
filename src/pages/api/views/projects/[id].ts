@@ -2,12 +2,12 @@ import { NextApiHandler } from "next";
 import {
   getProjectStats,
   incProjectStat,
-} from "../../../../server/service/projects/projectStats.service";
+} from "server/service/projects/projectStats.service";
 import {
   internalServerErrorRes,
   invalidBodyRes,
   invalidHttpMethodRes,
-} from "../../../../server/error/response.error";
+} from "server/error/response.error";
 
 /* this handles operation on views for a single project
 ====================================================== */

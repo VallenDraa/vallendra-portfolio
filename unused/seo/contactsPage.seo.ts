@@ -1,5 +1,5 @@
-// import { SEO } from "../../src/interfaces/seo.interface";
-// import { ogLinkMaker } from "../../src/utils/client/helpers/ogLinkMaker";
+// import { SEO } from "src/interfaces/seo.interface";
+// import { ogLinkMaker } from "src/utils/client/helpers/ogLinkMaker";
 
 // const contactsPageSeo: SEO = {
 //   base: {

@@ -5,14 +5,14 @@ import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { CldImage } from "next-cloudinary";
 import R from "react";
-import StyledButton from "../StyledComponents/StyledButton";
-import Show from "../../utils/client/jsx/Show";
-import TechsSection from "./TechsSection";
-import { ShowcaseType, Technologies } from "../../types/types";
+import Show from "utils/client/jsx/Show";
+import { ShowcaseType, Technologies } from "types/types";
+import useGetViewsById from "utils/client/hooks/useGetViewsById";
+import useGetLikesById from "utils/client/hooks/useGetLikesById";
+import Observe from "components/Observe";
+import StyledButton from "components/StyledComponents/StyledButton";
 import Stats from "./Stats";
-import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
-import Observe from "../Observe";
+import TechsSection from "./TechsSection";
 
 interface Props {
   // for data fetching purpose

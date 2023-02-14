@@ -1,7 +1,7 @@
 // import { Typography } from "@material-tailwind/react";
 // import { FaQuoteLeft } from "react-icons/fa";
-// import Observe from "../src/components/Observe";
-// import fadeIn from "../src/utils/client/helpers/animateOnObserved";
+// import Observe from "src/components/Observe";
+// import fadeIn from "src/utils/client/helpers/animateOnObserved";
 
 // export default function Quotes() {
 //   const quoteGradient =
@@ -40,4 +40,4 @@
 //   );
 // }
 
-export {}
+export {};

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import OgComponent from "../../interfaces/ogComponent.interface";
+import OgComponent from "interfaces/ogComponent.interface";
 
 export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
   return (

@@ -2,20 +2,20 @@ import R from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import Project from "../../interfaces/project.interface";
-import Show from "../../utils/client/jsx/Show";
-import ProjectCategorySection from "../../components/CategorySections/ProjectCategorySection";
-import SearchInput from "../../components/SearchInput";
-import ItemCard from "../../components/Cards/ItemCard";
-import Category from "../../interfaces/category.interface";
-import { getAllProjects } from "../../server/service/projects/projects.service";
-import { getAllProjectCategories } from "../../server/service/projects/projectCategory.service";
-import { JSONSerialize } from "../../utils/server/serialize";
-import Observe from "../../components/Observe";
-import fadeIn from "../../utils/client/helpers/animateOnObserved";
-import Seo from "../../seo/Seo";
-import projectsPageSeo from "../../seo/projectsPage.seo";
-import SectionHeading from "../../components/Typography/SectionHeading";
+import Project from "interfaces/project.interface";
+import Show from "utils/client/jsx/Show";
+import ProjectCategorySection from "components/CategorySections/ProjectCategorySection";
+import SearchInput from "components/SearchInput";
+import ItemCard from "components/Cards/ItemCard";
+import Category from "interfaces/category.interface";
+import { getAllProjects } from "server/service/projects/projects.service";
+import { getAllProjectCategories } from "server/service/projects/projectCategory.service";
+import { JSONSerialize } from "utils/server/serialize";
+import Observe from "components/Observe";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Seo from "seo/Seo";
+import projectsPageSeo from "seo/projectsPage.seo";
+import SectionHeading from "components/Typography/SectionHeading";
 
 interface Props {
   projects: Project[];
@@ -23,14 +23,13 @@ interface Props {
 }
 
 const FailToLoad = dynamic(
-  () => import("../../components/ShowcaseIndexPage/FailToLoad"),
+  () => import("components/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
 );
 
-const SearchNotFound = dynamic(
-  () => import("../../components/SearchNotFound"),
-  { ssr: false },
-);
+const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
+  ssr: false,
+});
 
 export default function ProjectsPage({ projects, categories }: Props) {
   const router = useRouter();

@@ -2,10 +2,10 @@ import { useEffect, useState, useContext, RefObject, Fragment } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import Link from "next/link";
 import { IoClose, IoChevronDown } from "react-icons/io5";
-import MENUS from "../../utils/data/menus";
-import Show from "../../utils/client/jsx/Show";
+import MENUS from "utils/data/menus";
+import Show from "utils/client/jsx/Show";
 import NavbarSubMenu from "./NavbarSubMenu";
-import NavIsOpenedContext from "../../context/NavIsOpenedCP";
+import NavIsOpenedContext from "context/NavIsOpenedCP";
 import NavBtn from "./NavBtn";
 
 interface Props {

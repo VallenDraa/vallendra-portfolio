@@ -1,10 +1,10 @@
 import { Typography } from "@material-tailwind/react";
+import Observe from "components/Observe";
 import { ReactNode } from "react";
-import Observe from "../Observe";
 import fadeIn, {
   FadeInAnimation,
-} from "../../utils/client/helpers/animateOnObserved";
-import Show from "../../utils/client/jsx/Show";
+} from "utils/client/helpers/animateOnObserved";
+import Show from "utils/client/jsx/Show";
 
 interface Props {
   titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

@@ -1,4 +1,4 @@
-import OgComponent from "../../../interfaces/ogComponent.interface";
+import OgComponent from "interfaces/ogComponent.interface";
 
 // eslint-disable-next-line import/prefer-default-export
 export function ogLinkMaker({ title, shortDesc, imgLink }: OgComponent) {

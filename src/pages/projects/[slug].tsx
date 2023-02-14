@@ -9,29 +9,29 @@ import R from "react";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
-import Project from "../../interfaces/project.interface";
-import { Language, LikesOperationBody, Technologies } from "../../types/types";
-import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip";
-import Show from "../../utils/client/jsx/Show";
-import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
-import ActionButton from "../../components/StyledComponents/ActionButton";
-import SectionSubHeading from "../../components/Typography/SectionSubHeading";
-import LinkWithUnderline from "../../components/ShowcaseDetailsPage/LinkWithUnderline";
-import { commaSeparator } from "../../utils/client/helpers/formatter";
-import LanguageToggle from "../../components/ShowcaseDetailsPage/LanguageToggle";
+import Project from "interfaces/project.interface";
+import { Language, LikesOperationBody, Technologies } from "types/types";
+import TechWithTooltip from "components/MappedComponents/TechsWithTooltip";
+import Show from "utils/client/jsx/Show";
+import CopyLinkBtn from "components/ShowcaseDetailsPage/CopyLinkBtn";
+import ActionButton from "components/StyledComponents/ActionButton";
+import SectionSubHeading from "components/Typography/SectionSubHeading";
+import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import { commaSeparator } from "utils/client/helpers/formatter";
+import LanguageToggle from "components/ShowcaseDetailsPage/LanguageToggle";
 import {
   getAllProjects,
   getProjectWithPrevAndNext,
-} from "../../server/service/projects/projects.service";
-import { JSONSerialize } from "../../utils/server/serialize";
-import useGetViewsById from "../../utils/client/hooks/useGetViewsById";
-import useGetLikesById from "../../utils/client/hooks/useGetLikesById";
-import useDebounce from "../../utils/client/hooks/useDebounce";
-import showcaseSeo from "../../seo/showcase.seo";
-import Seo from "../../seo/Seo";
-import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
-import SectionHeading from "../../components/Typography/SectionHeading";
-import StyledScrollbar from "../../components/StyledComponents/StyledScrollbar";
+} from "server/service/projects/projects.service";
+import { JSONSerialize } from "utils/server/serialize";
+import useGetViewsById from "utils/client/hooks/useGetViewsById";
+import useGetLikesById from "utils/client/hooks/useGetLikesById";
+import useDebounce from "utils/client/hooks/useDebounce";
+import showcaseSeo from "seo/showcase.seo";
+import Seo from "seo/Seo";
+import ShowcaseStats from "components/ShowcaseDetailsPage/ShowcaseStats";
+import SectionHeading from "components/Typography/SectionHeading";
+import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 
 interface ProjectRedirect {
   slug: string;
@@ -45,12 +45,12 @@ interface PropsData {
 }
 
 const StyledAlert = dynamic(
-  () => import("../../components/StyledComponents/StyledAlert"),
+  () => import("components/StyledComponents/StyledAlert"),
   { ssr: false },
 );
 
 const DetailFooter = dynamic(
-  () => import("../../components/ShowcaseDetailsPage/DetailFooter"),
+  () => import("components/ShowcaseDetailsPage/DetailFooter"),
   { ssr: false },
 );
 
@@ -112,9 +112,8 @@ export default function ProjectDetails({
 
         setWillSendLike(false);
       } catch (error) {
-        const alertHandler = (
-          await import("../../utils/client/helpers/alertHandler")
-        ).default;
+        const alertHandler = (await import("utils/client/helpers/alertHandler"))
+          .default;
 
         alertHandler({ setShowAlert });
       }
@@ -131,9 +130,8 @@ export default function ProjectDetails({
         setWillFetchStats(false);
         await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
       } catch (error) {
-        const alertHandler = (
-          await import("../../utils/client/helpers/alertHandler")
-        ).default;
+        const alertHandler = (await import("utils/client/helpers/alertHandler"))
+          .default;
 
         alertHandler({ setShowAlert });
       } finally {

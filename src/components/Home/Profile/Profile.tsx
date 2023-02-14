@@ -7,13 +7,13 @@ import {
 import { IoSchool, IoCodeSlash } from "react-icons/io5";
 import { FaGoogle } from "react-icons/fa";
 import R from "react";
-import TechsWithTooltip, {
+import Observe from "components/Observe";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
+import techsWithTooltip, {
   myTechStack,
-} from "../../MappedComponents/TechsWithTooltip";
-import Observe from "../../Observe";
-import fadeIn from "../../../utils/client/helpers/animateOnObserved";
-import SectionHeading from "../../Typography/SectionHeading";
-import StyledScrollbar from "../../StyledComponents/StyledScrollbar";
+} from "components/MappedComponents/TechsWithTooltip";
+import SectionHeading from "components/Typography/SectionHeading";
 
 export default function Profile() {
   const animationTechDelay = R.useMemo(() => {
@@ -36,14 +36,14 @@ export default function Profile() {
       id="profile"
       className="relative z-10 scroll-m-12 space-y-8 bg-indigo-50 dark:bg-gray-900"
     >
-      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 overflow-x-hidden px-8 pt-10 pb-16 xl:flex-row 2xl:px-2">
+      <div className="relative mx-auto flex max-w-screen-xl flex-col gap-8 overflow-y-hidden px-8 pt-10 pb-16 xl:flex-row 2xl:px-2">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <SectionHeading
             titleAs="h2"
             title="Profile"
-            animation={{ title: "animate-fade-in-left" }}
-            duration={{ title: 100 }}
+            animation={{ title: "animate-fade-in-top" }}
+            duration={{ title: 0 }}
             willFade
           />
 
@@ -52,7 +52,7 @@ export default function Profile() {
             {/* small paragraph about me */}
             <Observe
               freezeOnceVisible
-              onEnter={ref => fadeIn(ref, "animate-fade-in-left", 0)}
+              onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
             >
               <div className="opacity-0 xl:mb-0 xl:basis-2/3">
                 <Typography
@@ -74,7 +74,7 @@ export default function Profile() {
               freezeOnceVisible
               onEnter={ref => {
                 setTechCardIsVisible(true);
-                fadeIn(ref, "animate-fade-in-left", 200);
+                fadeIn(ref, "animate-fade-in-top", 200);
               }}
             >
               <Card className="card-colors rounded-md opacity-0 shadow-md">
@@ -119,7 +119,7 @@ export default function Profile() {
                           }
                         >
                           <li className="opacity-0">
-                            {TechsWithTooltip[key]()}
+                            {techsWithTooltip[key]()}
                           </li>
                         </Observe>
                       ))}
@@ -146,7 +146,7 @@ export default function Profile() {
           {/* education */}
           <Observe
             freezeOnceVisible
-            onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 300)}
           >
             <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <CardBody>
@@ -180,7 +180,7 @@ export default function Profile() {
           {/* activity */}
           <Observe
             freezeOnceVisible
-            onEnter={ref => fadeIn(ref, "animate-fade-in-right", 300)}
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 400)}
           >
             <Card className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <CardBody>

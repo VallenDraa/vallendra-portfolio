@@ -1,10 +1,10 @@
+import ItemCard from "components/Cards/ItemCard";
+import Observe from "components/Observe";
+import SectionSubHeading from "components/Typography/SectionSubHeading";
+import Category from "interfaces/category.interface";
+import Certificate from "interfaces/certificate.interface";
 import { useMemo } from "react";
-import SectionSubHeading from "../Typography/SectionSubHeading";
-import Certificate from "../../interfaces/certificate.interface";
-import ItemCard from "../Cards/ItemCard";
-import Category from "../../interfaces/category.interface";
-import Observe from "../Observe";
-import fadeIn from "../../utils/client/helpers/animateOnObserved";
+import fadeIn from "utils/client/helpers/animateOnObserved";
 
 interface Props {
   categoryIndex: number;

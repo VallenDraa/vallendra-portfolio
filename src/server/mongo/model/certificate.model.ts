@@ -1,5 +1,5 @@
 import m from "mongoose";
-import Certificate from "../../../interfaces/certificate.interface";
+import Certificate from "interfaces/certificate.interface";
 
 interface CertificateDocument extends Omit<Certificate, "_id">, m.Document {
   madeAt: Date;

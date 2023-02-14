@@ -1,7 +1,7 @@
 import R from "react";
 import { AiOutlineCheck, AiOutlineClose, AiOutlineLink } from "react-icons/ai";
-import Show from "../../utils/client/jsx/Show";
-import ActionButton from "../StyledComponents/ActionButton";
+import Show from "utils/client/jsx/Show";
+import ActionButton from "components/StyledComponents/ActionButton";
 
 export default function CopyLinkBtn() {
   const [shareIsSupported, setShareIsSupported] = R.useState<boolean | null>(

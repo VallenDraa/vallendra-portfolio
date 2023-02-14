@@ -1,11 +1,8 @@
 import { Typography } from "@material-tailwind/react";
 import R from "react";
 import { AiFillCalendar, AiFillEye, AiFillHeart } from "react-icons/ai";
-import {
-  commaSeparator,
-  dateFormatter,
-} from "../../utils/client/helpers/formatter";
-import Show from "../../utils/client/jsx/Show";
+import { commaSeparator, dateFormatter } from "utils/client/helpers/formatter";
+import Show from "utils/client/jsx/Show";
 
 const dateSkeleton =
   "after:h-4 after:w-44 after:animate-pulse after:rounded-full after:bg-white/20";

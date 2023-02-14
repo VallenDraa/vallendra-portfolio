@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import R from "react";
-import Show from "../../utils/client/jsx/Show";
-import { compactNumberFormatter } from "../../utils/client/helpers/formatter";
+import Show from "utils/client/jsx/Show";
+import { compactNumberFormatter } from "utils/client/helpers/formatter";
 
 const skeleton =
   "after:h-4 after:w-8 after:animate-pulse after:rounded-full after:bg-white/20";

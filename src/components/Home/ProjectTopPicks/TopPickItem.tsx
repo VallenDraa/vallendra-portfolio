@@ -3,15 +3,15 @@ import { CldImage } from "next-cloudinary";
 import { Typography } from "@material-tailwind/react";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
-import Project from "../../../interfaces/project.interface";
-import { Technologies, TwistDirection } from "../../../types/types";
-import Show from "../../../utils/client/jsx/Show";
-import techsWithTooltip from "../../MappedComponents/TechsWithTooltip";
-import StyledButton from "../../StyledComponents/StyledButton";
-import Observe from "../../Observe";
-import fadeIn from "../../../utils/client/helpers/animateOnObserved";
+import Project from "interfaces/project.interface";
+import { Technologies, TwistDirection } from "types/types";
+import Show from "utils/client/jsx/Show";
+import Observe from "components/Observe";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
+import techsWithTooltip from "components/MappedComponents/TechsWithTooltip";
+import StyledButton from "components/StyledComponents/StyledButton";
 import LeftRightMesh from "./LeftRightMesh";
-import StyledScrollbar from "../../StyledComponents/StyledScrollbar";
 
 interface Props {
   projectOrder: number;

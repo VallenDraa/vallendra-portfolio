@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
-import { StatsType } from "../../../types/types";
-import ProjectModel from "../../mongo/model/project.model";
-import connectMongo from "../../mongo/mongodb";
+import { StatsType } from "types/types";
+import ProjectModel from "server/mongo/model/project.model";
+import connectMongo from "server/mongo/mongodb";
 
 /* Services for fetching stats
 ============================== */

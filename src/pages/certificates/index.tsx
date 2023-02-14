@@ -1,20 +1,20 @@
 import R from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import Show from "../../utils/client/jsx/Show";
-import SearchInput from "../../components/SearchInput";
-import Certificate from "../../interfaces/certificate.interface";
-import CertificateCategorySection from "../../components/CategorySections/CertificateCategorySection";
-import ItemCard from "../../components/Cards/ItemCard";
-import Category from "../../interfaces/category.interface";
-import { getAllCertificates } from "../../server/service/certificates/certificates.service";
-import { getAllCertificateCategories } from "../../server/service/certificates/certificateCategory.service";
-import { JSONSerialize } from "../../utils/server/serialize";
-import Observe from "../../components/Observe";
-import fadeIn from "../../utils/client/helpers/animateOnObserved";
-import Seo from "../../seo/Seo";
-import certificatesPageSeo from "../../seo/certificatePage.seo";
-import SectionHeading from "../../components/Typography/SectionHeading";
+import Show from "utils/client/jsx/Show";
+import SearchInput from "components/SearchInput";
+import Certificate from "interfaces/certificate.interface";
+import CertificateCategorySection from "components/CategorySections/CertificateCategorySection";
+import ItemCard from "components/Cards/ItemCard";
+import Category from "interfaces/category.interface";
+import { getAllCertificates } from "server/service/certificates/certificates.service";
+import { getAllCertificateCategories } from "server/service/certificates/certificateCategory.service";
+import { JSONSerialize } from "utils/server/serialize";
+import Observe from "components/Observe";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Seo from "seo/Seo";
+import certificatesPageSeo from "seo/certificatePage.seo";
+import SectionHeading from "components/Typography/SectionHeading";
 
 interface Props {
   certificates: Certificate[];
@@ -22,14 +22,13 @@ interface Props {
 }
 
 const FailToLoad = dynamic(
-  () => import("../../components/ShowcaseIndexPage/FailToLoad"),
+  () => import("components/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
 );
 
-const SearchNotFound = dynamic(
-  () => import("../../components/SearchNotFound"),
-  { ssr: false },
-);
+const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
+  ssr: false,
+});
 
 export default function ProjectsPage({ certificates, categories }: Props) {
   const router = useRouter();

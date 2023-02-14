@@ -7,20 +7,20 @@
 //   IoPaperPlane,
 //   IoShareSocial,
 // } from "react-icons/io5";
-// import StyledInput from "../components/StyledComponents/StyledInput";
-// import StyledTextArea from "../components/StyledComponents/StyledTextArea";
-// import StyledButton from "../components/StyledComponents/StyledButton";
+// import StyledInput from "components/StyledComponents/StyledInput";
+// import StyledTextArea from "components/StyledComponents/StyledTextArea";
+// import StyledButton from "components/StyledComponents/StyledButton";
 // import { BiBlock } from "react-icons/bi";
-// import SocialsWithIcon from "../components/SocialWithIcons";
-// import IconWithTooltip from "../components/IconWithTooltip";
-// import Observe from "../components/Observe";
-// import fadeIn from "../utils/client/helpers/animateOnObserved";
+// import SocialsWithIcon from "components/SocialWithIcons";
+// import IconWithTooltip from "components/IconWithTooltip";
+// import Observe from "components/Observe";
+// import fadeIn from "utils/client/helpers/animateOnObserved";
 // import R from "react";
 // import { EmailBody } from "./api/email";
-// import Seo from "../seo/Seo";
-// import contactsPageSeo from "../seo/contactsPage.seo";
-// import StyledAlert from "../components/StyledComponents/StyledAlert";
-// import alertHandler from "../utils/client/helpers/alertHandler";
+// import Seo from "seo/Seo";
+// import contactsPageSeo from "seo/contactsPage.seo";
+// import StyledAlert from "components/StyledComponents/StyledAlert";
+// import alertHandler from "utils/client/helpers/alertHandler";
 
 // export default function Contacts() {
 //   /* Email body content refs
