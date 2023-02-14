@@ -217,8 +217,9 @@ export default function ProjectDetails({
                   viewsRes.isLoading &&
                   likesRes.isLoading &&
                   !(viewsRes.error && likesRes.error) &&
-                  !willFetchStats &&
-                  !viewsRes.data
+                  !viewsRes.data?.views &&
+                  !likesRes.data?.likes &&
+                  !willFetchStats
                 }
                 hasLiked={hasLiked}
                 likes={likes}
@@ -336,8 +337,9 @@ export default function ProjectDetails({
                 viewsRes.isLoading &&
                 likesRes.isLoading &&
                 !(viewsRes.error && likesRes.error) &&
-                !willFetchStats &&
-                !viewsRes.data
+                !viewsRes.data?.views &&
+                !likesRes.data?.likes &&
+                !willFetchStats
               }
             >
               <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
@@ -349,7 +351,8 @@ export default function ProjectDetails({
               when={
                 !(viewsRes.isLoading && likesRes.isLoading) &&
                 !(viewsRes.error && likesRes.error) &&
-                !!viewsRes.data &&
+                !!viewsRes.data?.views &&
+                !!likesRes.data?.likes &&
                 willFetchStats
               }
             >
