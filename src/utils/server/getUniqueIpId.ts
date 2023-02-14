@@ -8,9 +8,10 @@ import crypto from "crypto";
  */
 export default function getUniqueIpId(req: NextApiRequest) {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
   const uniqueId = crypto
     .createHash("md5")
-    .update(ip as string)
+    .update((ip as string) + process.env.IP_SALT)
     .digest("hex");
 
   return uniqueId;
