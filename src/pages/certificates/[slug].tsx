@@ -83,11 +83,16 @@ export default function CertificateDetails({
 
   /* Dynamic Views
   ================== */
-  const viewsRes = useGetViewsById(certificate._id, "certificates", true);
-  const likesRes = useGetLikesById(certificate._id, "certificates", true);
+  const [willFetchViews, setWillFetchViews] = R.useState(false);
+  const viewsRes = useGetViewsById(
+    certificate._id,
+    "certificates",
+    willFetchViews,
+  );
 
   /* Likes
   ================== */
+  const likesRes = useGetLikesById(certificate._id, "certificates", true);
   const [likes, setLikes] = R.useState(certificate.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
@@ -133,6 +138,8 @@ export default function CertificateDetails({
         ).default;
 
         alertHandler({ setShowAlert });
+      } finally {
+        setWillFetchViews(true);
       }
     })();
   }, [router.asPath, certificate._id]);

@@ -86,11 +86,12 @@ export default function ProjectDetails({
 
   /* Dynamic Views
   ================== */
-  const viewsRes = useGetViewsById(project._id, "projects", true);
-  const likesRes = useGetLikesById(project._id, "projects", true);
+  const [willFetchViews, setWillFetchViews] = R.useState(false);
+  const viewsRes = useGetViewsById(project._id, "projects", willFetchViews);
 
   /* Likes
   ================== */
+  const likesRes = useGetLikesById(project._id, "projects", true);
   const [likes, setLikes] = R.useState(project.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
@@ -127,6 +128,7 @@ export default function ProjectDetails({
   R.useEffect(() => {
     (async () => {
       try {
+        setWillFetchViews(false);
         await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
       } catch (error) {
         const alertHandler = (
@@ -134,6 +136,8 @@ export default function ProjectDetails({
         ).default;
 
         alertHandler({ setShowAlert });
+      } finally {
+        setWillFetchViews(true);
       }
     })();
   }, [router.asPath, project._id]);
