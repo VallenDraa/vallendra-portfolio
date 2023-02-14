@@ -21,7 +21,10 @@ export default function Seo({
       <meta property="og:site_name" content={og.siteName} />
       <meta property="og:type" content={og.contentType} />
       <meta property="og:url" content={og.siteUrl} />
-      <meta name="image" property="og:image" content={og.imageUrl} />
+      <meta property="og:image" content={og.imageUrl} />
+      <meta property="og:image:alt" content={og.imageAlt} />
+      <meta property="og:image:width" content="960" />
+      <meta property="og:image:height" content="540" />
 
       {/* twitter meta */}
       <meta name="twitter:card" content="summary_large_image" />

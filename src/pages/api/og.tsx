@@ -17,7 +17,7 @@ const handler: NextApiHandler = req => {
 
     return new ImageResponse(
       <Showcase title={title} shortDesc={shortDesc} imgLink={imgLink} />,
-      { width: 1280, height: 720 },
+      { width: 960, height: 540 },
     );
   } catch (error) {
     // eslint-disable-next-line no-console
