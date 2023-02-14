@@ -220,12 +220,8 @@ export default function CertificateDetails({
               <ShowcaseStats
                 dateString={certificate.madeAt as string}
                 isLoadingStats={
-                  viewsRes.isLoading &&
-                  likesRes.isLoading &&
                   !(viewsRes.error && likesRes.error) &&
-                  !viewsRes.data?.views &&
-                  !likesRes.data?.likes &&
-                  !willFetchStats
+                  (!viewsRes.data?.views || !likesRes.data?.likes)
                 }
                 hasLiked={hasLiked}
                 likes={likes}
@@ -305,12 +301,8 @@ export default function CertificateDetails({
             {/* Like button */}
             <Show
               when={
-                viewsRes.isLoading &&
-                likesRes.isLoading &&
                 !(viewsRes.error && likesRes.error) &&
-                !viewsRes.data?.views &&
-                !likesRes.data?.likes &&
-                !willFetchStats
+                (!viewsRes.data?.views || !likesRes.data?.likes)
               }
             >
               <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
@@ -320,11 +312,9 @@ export default function CertificateDetails({
             </Show>
             <Show
               when={
-                !(viewsRes.isLoading && likesRes.isLoading) &&
                 !(viewsRes.error && likesRes.error) &&
-                !!viewsRes.data?.views &&
-                !!likesRes.data?.likes &&
-                willFetchStats
+                viewsRes.data?.views !== undefined &&
+                likesRes.data?.likes !== undefined
               }
             >
               <Tooltip
