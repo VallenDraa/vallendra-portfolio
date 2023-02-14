@@ -4,7 +4,6 @@ import R from "react";
 interface ViewsResponse {
   _id: string;
   views: number;
-  hasLiked: boolean; // has liked the project
 }
 
 export default function useGetViewsById(
@@ -12,11 +11,11 @@ export default function useGetViewsById(
   type: "certificates" | "projects",
   willFetch = true,
 ) {
+  const { mutate: reFetch } = useSWRConfig();
+
   const url = R.useMemo(() => `/api/views/${type}/${id}`, [type, id]);
 
-  const { mutate } = useSWRConfig();
-
-  const { data, isLoading, error } = useSWR<ViewsResponse>(
+  const { data, isLoading, error, mutate } = useSWR<ViewsResponse>(
     url,
     async () => {
       if (!willFetch) return;
@@ -30,8 +29,8 @@ export default function useGetViewsById(
   );
 
   R.useEffect(() => {
-    if (willFetch) mutate(url);
+    if (willFetch) reFetch(url);
   }, [willFetch, id]);
 
-  return { data, isLoading, error };
+  return { data, isLoading, error, mutate };
 }

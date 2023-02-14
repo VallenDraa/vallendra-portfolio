@@ -12,11 +12,11 @@ export default function useGetLikesById(
   type: "certificates" | "projects",
   willFetch = true,
 ) {
+  const { mutate: reFetch } = useSWRConfig();
+
   const url = R.useMemo(() => `/api/likes/${type}/${id}`, [type, id]);
 
-  const { mutate } = useSWRConfig();
-
-  const { data, isLoading, error } = useSWR<LikedResponse>(
+  const { data, isLoading, error, mutate } = useSWR<LikedResponse>(
     url,
     async () => {
       if (!willFetch) return;
@@ -30,8 +30,8 @@ export default function useGetLikesById(
   );
 
   R.useEffect(() => {
-    if (willFetch) mutate(url);
+    if (willFetch) reFetch(url);
   }, [willFetch, id]);
 
-  return { data, isLoading, error };
+  return { data, isLoading, error, mutate };
 }

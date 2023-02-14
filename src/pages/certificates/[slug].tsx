@@ -97,10 +97,17 @@ export default function CertificateDetails({
 
   /* Likes
   ================== */
-  const [likes, setLikes] = R.useState(certificate.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
-  const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+  const formattedLikes = R.useMemo(
+    () =>
+      commaSeparator.format(
+        likesRes.data?.likes !== undefined
+          ? likesRes.data?.likes
+          : certificate.likes,
+      ),
+    [likesRes.data?.likes, certificate.likes],
+  );
   const [, likeUpdateError] = useDebounce(
     async () => {
       if (!willSendLike) return;
@@ -132,6 +139,7 @@ export default function CertificateDetails({
   R.useEffect(() => {
     (async () => {
       try {
+        setWillFetchStats(false);
         await fetch(`/api/views/certificates/${certificate._id}`, {
           method: "PUT",
         });
@@ -146,18 +154,8 @@ export default function CertificateDetails({
     })();
   }, [router.asPath, certificate._id]);
 
-  /* For setting the fetched like to the local likes 
-  ==================================================== */
-  R.useEffect(() => {
-    setLikes(
-      typeof likesRes.data?.likes !== "number"
-        ? certificate.likes
-        : likesRes.data?.likes,
-    );
-  }, [likesRes.data?.likes]);
-
   /* For setting the fetched hasLiked to the local hasLiked 
-  ==================================================== */
+  =================================================== */
   R.useEffect(() => {
     setHasLiked(likesRes.data?.hasLiked || false);
   }, [likesRes.data?.hasLiked]);
@@ -170,11 +168,29 @@ export default function CertificateDetails({
 
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes(oldLikes => oldLikes + 1);
       setHasLiked(true);
+
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: true,
+              likes: likesRes.data.likes + 1,
+            },
+      );
     } else {
-      setLikes(oldLikes => oldLikes - 1);
       setHasLiked(false);
+
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: false,
+              likes: likesRes.data.likes - 1,
+            },
+      );
     }
 
     setWillSendLike(true);
@@ -223,8 +239,16 @@ export default function CertificateDetails({
                     likesRes.data?.likes === undefined)
                 }
                 hasLiked={hasLiked}
-                likes={likes}
-                views={viewsRes.data?.views || certificate.views}
+                likes={
+                  likesRes.data?.likes !== undefined
+                    ? likesRes.data?.likes
+                    : certificate.likes
+                }
+                views={
+                  viewsRes.data?.views !== undefined
+                    ? viewsRes.data?.views
+                    : certificate.views
+                }
               />
             </div>
           </div>

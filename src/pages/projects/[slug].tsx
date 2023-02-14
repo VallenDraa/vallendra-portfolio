@@ -92,10 +92,17 @@ export default function ProjectDetails({
 
   /* Likes
   ================== */
-  const [likes, setLikes] = R.useState(project.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
-  const formattedLikes = R.useMemo(() => commaSeparator.format(likes), [likes]);
+  const formattedLikes = R.useMemo(
+    () =>
+      commaSeparator.format(
+        likesRes.data?.likes !== undefined
+          ? likesRes.data?.likes
+          : project.likes,
+      ),
+    [likesRes.data?.likes, project.likes],
+  );
   const [, likeUpdateError] = useDebounce(
     async () => {
       if (!willSendLike) return;
@@ -140,16 +147,6 @@ export default function ProjectDetails({
     })();
   }, [router.asPath, project._id]);
 
-  /* For setting the fetched like to the local likes 
-  =================================================== */
-  R.useEffect(() => {
-    setLikes(
-      typeof likesRes.data?.likes !== "number"
-        ? project.likes
-        : likesRes.data?.likes,
-    );
-  }, [likesRes.data?.likes]);
-
   /* For setting the fetched hasLiked to the local hasLiked 
   =================================================== */
   R.useEffect(() => {
@@ -164,10 +161,28 @@ export default function ProjectDetails({
 
   async function toggleLike() {
     if (!hasLiked) {
-      setLikes(oldLikes => oldLikes + 1);
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: true,
+              likes: likesRes.data.likes + 1,
+            },
+        { revalidate: false },
+      );
       setHasLiked(true);
     } else {
-      setLikes(oldLikes => oldLikes - 1);
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: false,
+              likes: likesRes.data.likes - 1,
+            },
+        { revalidate: false },
+      );
       setHasLiked(false);
     }
 
@@ -217,8 +232,16 @@ export default function ProjectDetails({
                     likesRes.data?.likes === undefined)
                 }
                 hasLiked={hasLiked}
-                likes={likes}
-                views={viewsRes.data?.views || project.views}
+                likes={
+                  likesRes.data?.likes !== undefined
+                    ? likesRes.data?.likes
+                    : project.likes
+                }
+                views={
+                  viewsRes.data?.views !== undefined
+                    ? viewsRes.data?.views
+                    : project.views
+                }
               />
             </div>
           </div>
