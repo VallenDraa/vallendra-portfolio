@@ -10,7 +10,13 @@ export default withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: true,
   compress: true,
-  images: { domains: ["localhost", "vallendra.my.id"] },
+  images: {
+    domains: [
+      "localhost",
+      "vallendra.my.id",
+      "vallendra-portfolio-git-dev-vallendraa.vercel.app",
+    ],
+  },
   async headers() {
     return [
       {
