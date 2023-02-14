@@ -219,7 +219,8 @@ export default function CertificateDetails({
                 dateString={certificate.madeAt as string}
                 isLoadingStats={
                   !(viewsRes.error && likesRes.error) &&
-                  (!viewsRes.data?.views || !likesRes.data?.likes)
+                  (viewsRes.data?.views === undefined ||
+                    likesRes.data?.likes === undefined)
                 }
                 hasLiked={hasLiked}
                 likes={likes}
@@ -300,7 +301,8 @@ export default function CertificateDetails({
             <Show
               when={
                 !(viewsRes.error && likesRes.error) &&
-                (!viewsRes.data?.views || !likesRes.data?.likes)
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
               }
             >
               <div className="flex h-24 w-24 animate-pulse flex-col gap-2">

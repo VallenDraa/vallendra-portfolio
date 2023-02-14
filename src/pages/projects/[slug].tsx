@@ -213,7 +213,8 @@ export default function ProjectDetails({
                 dateString={project.madeAt as string}
                 isLoadingStats={
                   !(viewsRes.error && likesRes.error) &&
-                  (!viewsRes.data?.views || !likesRes.data?.likes)
+                  (viewsRes.data?.views === undefined ||
+                    likesRes.data?.likes === undefined)
                 }
                 hasLiked={hasLiked}
                 likes={likes}
@@ -329,7 +330,8 @@ export default function ProjectDetails({
             <Show
               when={
                 !(viewsRes.error && likesRes.error) &&
-                (!viewsRes.data?.views || !likesRes.data?.likes)
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
               }
             >
               <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
