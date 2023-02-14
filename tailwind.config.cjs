@@ -26,26 +26,22 @@ module.exports = withMT({
         "fade-in-left": {
           "0%": { transform: "translateX(-80px)", opacity: 0 },
           "50%": { transform: "translateX(4.8px)", opacity: 0.6 },
-          "75%": { transform: "translateX(-1.2px)", opacity: 0.8 },
           "100%": { transform: "translateX(0)", opacity: 1 },
         },
         "fade-in-right": {
           "0%": { transform: "translateX(80px)", opacity: 0 },
           "50%": { transform: "translateX(-4.8px)", opacity: 0.6 },
-          "75%": { transform: "translateX(1.2px)", opacity: 0.8 },
-          "100%": { transform: "translateX(%)", opacity: 1 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
         },
         "fade-in-bottom": {
           "0%": { transform: "translateY(-80px)", opacity: 0 },
           "50%": { transform: "translateY(4.8px)", opacity: 0.6 },
-          "75%": { transform: "translateY(-2.4px)", opacity: 0.8 },
           "100%": { transform: "translateX(0)", opacity: 1 },
         },
         "fade-in-top": {
           "0%": { transform: "translateY(80px)", opacity: 0 },
           "50%": { transform: "translateY(-4.8px)", opacity: 0.6 },
-          "75%": { transform: "translateY(2.4px)", opacity: 0.8 },
-          "100%": { transform: "translateX(0%)", opacity: 1 },
+          "100%": { transform: "translateX(0)", opacity: 1 },
         },
         "fade-in": {
           from: { opacity: 0 },
@@ -100,10 +96,10 @@ module.exports = withMT({
         },
       },
       animation: {
-        "fade-in-left": "fade-in-left 850ms ease-in-out",
-        "fade-in-right": "fade-in-right 850ms ease-in-out",
-        "fade-in-bottom": "fade-in-bottom 850ms ease-in-out",
-        "fade-in-top": "fade-in-top 850ms ease-in-out",
+        "fade-in-left": "fade-in-left 700ms ease-in-out",
+        "fade-in-right": "fade-in-right 700ms ease-in-out",
+        "fade-in-bottom": "fade-in-bottom 700ms ease-in-out",
+        "fade-in-top": "fade-in-top 700ms ease-in-out",
         "fade-in": "fade-in 350ms ease-out",
         "open-nav": "open-nav 350ms ease-in",
         "close-nav": "close-nav 350ms ease-in",
