@@ -32,7 +32,7 @@ export default function Guestbook() {
               <div className="opacity-0">
                 <SectionHeading
                   title="Guestbook"
-                  subTitle="This is where you post messages about this site, me, or just about anything you want, Please be civil (tolong jangan bar-bar)."
+                  subTitle="This is where you post messages about this site, me, or just about anything you want."
                 />
               </div>
             </Observe>
