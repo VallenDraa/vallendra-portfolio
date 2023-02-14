@@ -213,7 +213,9 @@ export default function ProjectDetails({
             <div className="mt-5">
               <ShowcaseStats
                 dateString={project.madeAt as string}
-                isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
+                isLoadingStats={
+                  viewsRes.isLoading && likesRes.isLoading && !willFetchStats
+                }
                 hasLiked={hasLiked}
                 likes={likes}
                 views={viewsRes.data?.views || project.views}
@@ -325,13 +327,19 @@ export default function ProjectDetails({
             </div>
 
             {/* Like button */}
-            <Show when={viewsRes.isLoading && likesRes.isLoading}>
+            <Show
+              when={viewsRes.isLoading && likesRes.isLoading && !willFetchStats}
+            >
               <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
                 <div className="basis-3/4 rounded-lg bg-white/20" />
                 <div className="basis-1/4 rounded-lg bg-white/20" />
               </div>
             </Show>
-            <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
+            <Show
+              when={
+                !(viewsRes.isLoading && likesRes.isLoading && willFetchStats)
+              }
+            >
               <Tooltip
                 placement="top"
                 animate={{
