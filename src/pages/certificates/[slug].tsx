@@ -81,18 +81,22 @@ export default function CertificateDetails({
     });
   }, [certificate, activeLanguage]);
 
-  /* Dynamic Views
+  /* Dynamic data
   ================== */
-  const [willFetchViews, setWillFetchViews] = R.useState(false);
+  const [willFetchStats, setWillFetchStats] = R.useState(false);
   const viewsRes = useGetViewsById(
     certificate._id,
     "certificates",
-    willFetchViews,
+    willFetchStats,
+  );
+  const likesRes = useGetLikesById(
+    certificate._id,
+    "certificates",
+    willFetchStats,
   );
 
   /* Likes
   ================== */
-  const likesRes = useGetLikesById(certificate._id, "certificates", true);
   const [likes, setLikes] = R.useState(certificate.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
@@ -139,7 +143,7 @@ export default function CertificateDetails({
 
         alertHandler({ setShowAlert });
       } finally {
-        setWillFetchViews(true);
+        setWillFetchStats(true);
       }
     })();
   }, [router.asPath, certificate._id]);

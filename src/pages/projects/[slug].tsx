@@ -84,14 +84,14 @@ export default function ProjectDetails({
     });
   }, [project, activeLanguage]);
 
-  /* Dynamic Views
+  /* Dynamic data
   ================== */
-  const [willFetchViews, setWillFetchViews] = R.useState(false);
-  const viewsRes = useGetViewsById(project._id, "projects", willFetchViews);
+  const [willFetchStats, setWillFetchStats] = R.useState(false);
+  const viewsRes = useGetViewsById(project._id, "projects", willFetchStats);
+  const likesRes = useGetLikesById(project._id, "projects", willFetchStats);
 
   /* Likes
   ================== */
-  const likesRes = useGetLikesById(project._id, "projects", true);
   const [likes, setLikes] = R.useState(project.likes);
   const [willSendLike, setWillSendLike] = R.useState(false);
   const [hasLiked, setHasLiked] = R.useState(false);
@@ -128,7 +128,7 @@ export default function ProjectDetails({
   R.useEffect(() => {
     (async () => {
       try {
-        setWillFetchViews(false);
+        setWillFetchStats(false);
         await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
       } catch (error) {
         const alertHandler = (
@@ -137,7 +137,7 @@ export default function ProjectDetails({
 
         alertHandler({ setShowAlert });
       } finally {
-        setWillFetchViews(true);
+        setWillFetchStats(true);
       }
     })();
   }, [router.asPath, project._id]);
