@@ -21,10 +21,6 @@ interface Props {
   categories: Category[];
 }
 
-const SiteFooter = dynamic(() => import("../../components/SiteFooter"), {
-  ssr: false,
-});
-
 const FailToLoad = dynamic(
   () => import("../../components/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
@@ -72,10 +68,10 @@ export default function ProjectsPage({ certificates, categories }: Props) {
 
   return (
     <>
-      <Seo base={certificatesPageSeo.base} og={certificatesPageSeo.og} />
+      <Seo {...certificatesPageSeo} />
 
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
+      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
+        <div className="mx-auto flex max-w-screen-xl flex-col px-8 pt-16 2xl:px-2">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -104,69 +100,68 @@ export default function ProjectsPage({ certificates, categories }: Props) {
               />
             </div>
           </Observe>
-        </header>
+        </div>
+      </header>
 
-        {/* the certificates list */}
-        <main
-          className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
-            /* overlay for awaiting search results */
-            searchIsLoading
-              ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
-              : ""
-          }`}
+      {/* the certificates list */}
+      <main
+        className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
+          /* overlay for awaiting search results */
+          searchIsLoading
+            ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
+            : ""
+        }`}
+      >
+        {/* initial render for certificates with categories */}
+        <Show when={certificates.length > 0 && query === ""}>
+          <div className="space-y-10">
+            {categories.map((category, i) => (
+              // index is used for determining the image priority prop
+              <CertificateCategorySection
+                categoryIndex={i}
+                key={category._id}
+                category={category}
+                certificates={certificates}
+              />
+            ))}
+          </div>
+        </Show>
+
+        {/* search results */}
+        <Show
+          when={
+            certificates.length > 0 && showedIndex.length > 0 && query !== ""
+          }
         >
-          {/* initial render for certificates with categories */}
-          <Show when={certificates.length > 0 && query === ""}>
-            <div className="space-y-10">
-              {categories.map((category, i) => (
-                // index is used for determining the image priority prop
-                <CertificateCategorySection
-                  categoryIndex={i}
-                  key={category._id}
-                  category={category}
-                  certificates={certificates}
+          <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
+            {showedIndex.map(idx => (
+              <li key={certificates[idx]._id}>
+                <ItemCard
+                  _id={certificates[idx]._id}
+                  type="certificates"
+                  imgIsPriority={false}
+                  imgSrc={certificates[idx].image}
+                  itemLikes={certificates[idx].likes}
+                  itemLink={`/certificates/${certificates[idx].slug}`}
+                  itemName={certificates[idx].name}
+                  itemShortDesc={certificates[idx].shortDescriptionEN}
+                  itemViews={certificates[idx].views}
                 />
-              ))}
-            </div>
-          </Show>
+              </li>
+            ))}
+          </ul>
+        </Show>
 
-          {/* search results */}
-          <Show
-            when={
-              certificates.length > 0 && showedIndex.length > 0 && query !== ""
-            }
-          >
-            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
-              {showedIndex.map(idx => (
-                <li key={certificates[idx]._id}>
-                  <ItemCard
-                    _id={certificates[idx]._id}
-                    type="certificates"
-                    imgIsPriority={false}
-                    imgSrc={certificates[idx].image}
-                    itemLikes={certificates[idx].likes}
-                    itemLink={`/certificates/${certificates[idx].slug}`}
-                    itemName={certificates[idx].name}
-                    itemShortDesc={certificates[idx].shortDescriptionEN}
-                    itemViews={certificates[idx].views}
-                  />
-                </li>
-              ))}
-            </ul>
-          </Show>
+        {/* for empty search result */}
+        <Show when={certificates.length > 0 && showedIndex.length === 0}>
+          <SearchNotFound />
+        </Show>
 
-          {/* for empty search result */}
-          <Show when={certificates.length > 0 && showedIndex.length === 0}>
-            <SearchNotFound />
-          </Show>
-
-          {/* fallback for when the certificates failed to load */}
-          <Show when={certificates.length === 0 || !certificates || isError}>
-            <FailToLoad />
-          </Show>
-        </main>
-        <SiteFooter />
-      </div>
+        {/* fallback for when the certificates failed to load */}
+        <Show when={certificates.length === 0 || !certificates || isError}>
+          <FailToLoad />
+        </Show>
+      </main>
     </>
   );
 }

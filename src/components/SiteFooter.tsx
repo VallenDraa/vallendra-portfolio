@@ -1,3 +1,4 @@
+import Link from "next/link";
 import R from "react";
 import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { FaGithub } from "react-icons/fa";
@@ -8,6 +9,28 @@ export default function SiteFooter() {
 
   return (
     <footer className="gradient-underline gradient-underline--primary relative flex flex-col gap-2 px-8 py-4 before:!top-0">
+      {/* site links */}
+      <ul className="mx-auto mb-4 flex max-w-screen-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-indigo-300 dark:text-gray-400">
+        <li>
+          <Link href="/#home">Home</Link>
+        </li>
+        <li>
+          <Link href="/#profile">Profile</Link>
+        </li>
+        <li>
+          <Link href="/#top-picks">Top Projects</Link>
+        </li>
+        <li>
+          <Link href="/projects">All Projects</Link>
+        </li>
+        <li>
+          <Link href="/certificates">Certificates</Link>
+        </li>
+        <li>
+          <Link href="/guestbook">Guestbook</Link>
+        </li>
+      </ul>
+
       {/* socials */}
       <div className="mx-auto flex w-fit max-w-screen-xl items-center gap-2.5 text-3xl text-indigo-300 dark:text-gray-400 [&>*]:p-1">
         <a

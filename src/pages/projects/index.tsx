@@ -22,10 +22,6 @@ interface Props {
   categories: Category[];
 }
 
-const SiteFooter = dynamic(() => import("../../components/SiteFooter"), {
-  ssr: false,
-});
-
 const FailToLoad = dynamic(
   () => import("../../components/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
@@ -67,10 +63,10 @@ export default function ProjectsPage({ projects, categories }: Props) {
 
   return (
     <>
-      <Seo base={projectsPageSeo.base} og={projectsPageSeo.og} />
+      <Seo {...projectsPageSeo} />
 
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="relative z-[45] mx-auto mt-6 mb-3 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
+      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
+        <div className="mx-auto flex max-w-screen-xl flex-col px-8 pt-20 2xl:px-2">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -99,68 +95,67 @@ export default function ProjectsPage({ projects, categories }: Props) {
               />
             </div>
           </Observe>
-        </header>
+        </div>
+      </header>
 
-        {/* the projects list */}
-        <main
-          className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
-            /* overlay for awaiting search results */
-            searchIsLoading
-              ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
-              : ""
-          }`}
+      {/* the projects list */}
+      <main
+        className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
+          /* overlay for awaiting search results */
+          searchIsLoading
+            ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
+            : ""
+        }`}
+      >
+        {/* initial render for projects with categories */}
+        <Show when={projects.length > 0 && query === ""}>
+          <div className="space-y-10">
+            {categories.map((category, i) => (
+              // index is used for determining the image priority prop
+              <ProjectCategorySection
+                categoryIndex={i}
+                key={category._id}
+                category={category}
+                projects={projects}
+              />
+            ))}
+          </div>
+        </Show>
+
+        {/* search results */}
+        <Show
+          when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
         >
-          {/* initial render for projects with categories */}
-          <Show when={projects.length > 0 && query === ""}>
-            <div className="space-y-10">
-              {categories.map((category, i) => (
-                // index is used for determining the image priority prop
-                <ProjectCategorySection
-                  categoryIndex={i}
-                  key={category._id}
-                  category={category}
-                  projects={projects}
+          <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
+            {showedIndex.map(idx => (
+              <li key={projects[idx]._id}>
+                <ItemCard
+                  _id={projects[idx]._id}
+                  type="projects"
+                  imgIsPriority={false}
+                  imgSrc={projects[idx].image}
+                  itemLikes={projects[idx].likes}
+                  itemLink={`/projects/${projects[idx].slug}`}
+                  itemName={projects[idx].name}
+                  itemShortDesc={projects[idx].shortDescriptionEN}
+                  itemViews={projects[idx].views}
+                  techs={projects[idx].tech}
                 />
-              ))}
-            </div>
-          </Show>
+              </li>
+            ))}
+          </ul>
+        </Show>
 
-          {/* search results */}
-          <Show
-            when={projects.length > 0 && showedIndex.length > 0 && query !== ""}
-          >
-            <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
-              {showedIndex.map(idx => (
-                <li key={projects[idx]._id}>
-                  <ItemCard
-                    _id={projects[idx]._id}
-                    type="projects"
-                    imgIsPriority={false}
-                    imgSrc={projects[idx].image}
-                    itemLikes={projects[idx].likes}
-                    itemLink={`/projects/${projects[idx].slug}`}
-                    itemName={projects[idx].name}
-                    itemShortDesc={projects[idx].shortDescriptionEN}
-                    itemViews={projects[idx].views}
-                    techs={projects[idx].tech}
-                  />
-                </li>
-              ))}
-            </ul>
-          </Show>
+        {/* for empty search result */}
+        <Show when={projects.length > 0 && showedIndex.length === 0}>
+          <SearchNotFound />
+        </Show>
 
-          {/* for empty search result */}
-          <Show when={projects.length > 0 && showedIndex.length === 0}>
-            <SearchNotFound />
-          </Show>
-
-          {/* fallback for when the projects failed to load */}
-          <Show when={projects.length === 0 || !projects || isError}>
-            <FailToLoad />
-          </Show>
-        </main>
-        <SiteFooter />
-      </div>
+        {/* fallback for when the projects failed to load */}
+        <Show when={projects.length === 0 || !projects || isError}>
+          <FailToLoad />
+        </Show>
+      </main>
     </>
   );
 }

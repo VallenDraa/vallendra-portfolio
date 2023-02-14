@@ -19,9 +19,6 @@ const Profile = dynamic(() => import("../components/Home/Profile/Profile"), {
   ),
 });
 
-const SiteFooter = dynamic(() => import("../components/SiteFooter"), {
-  ssr: false,
-});
 const Redirect = dynamic(() => import("../components/Home/Redirect/Redirect"), {
   ssr: false,
 });
@@ -29,7 +26,7 @@ const Redirect = dynamic(() => import("../components/Home/Redirect/Redirect"), {
 export default function Home({ topPickedProjects }: Props) {
   return (
     <>
-      <Seo base={defaultSeo.base} og={defaultSeo.og} />
+      <Seo {...defaultSeo} />
 
       {/* hero section */}
       <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
@@ -40,7 +37,6 @@ export default function Home({ topPickedProjects }: Props) {
         <TopPickSection topPickedProjects={topPickedProjects} />
         <Redirect />
       </main>
-      <SiteFooter />
     </>
   );
 }

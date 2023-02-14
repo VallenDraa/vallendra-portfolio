@@ -8,8 +8,8 @@ import { CldImage } from "next-cloudinary";
 import R from "react";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
+import dynamic from "next/dynamic";
 import Project from "../../interfaces/project.interface";
-import SiteFooter from "../../components/SiteFooter";
 import { Language, LikesOperationBody, Technologies } from "../../types/types";
 import TechWithTooltip from "../../components/MappedComponents/TechsWithTooltip";
 import Show from "../../utils/client/jsx/Show";
@@ -17,7 +17,6 @@ import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionSubHeading from "../../components/Typography/SectionSubHeading";
 import LinkWithUnderline from "../../components/ShowcaseDetailsPage/LinkWithUnderline";
-import DetailFooter from "../../components/ShowcaseDetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/ShowcaseDetailsPage/LanguageToggle";
 import {
@@ -33,7 +32,6 @@ import Seo from "../../seo/Seo";
 import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "../../components/Typography/SectionHeading";
 import StyledScrollbar from "../../components/StyledComponents/StyledScrollbar";
-import StyledAlert from "../../components/StyledComponents/StyledAlert";
 
 interface ProjectRedirect {
   slug: string;
@@ -45,6 +43,16 @@ interface PropsData {
   prevProject: ProjectRedirect;
   nextProject: ProjectRedirect;
 }
+
+const StyledAlert = dynamic(
+  () => import("../../components/StyledComponents/StyledAlert"),
+  { ssr: false },
+);
+
+const DetailFooter = dynamic(
+  () => import("../../components/ShowcaseDetailsPage/DetailFooter"),
+  { ssr: false },
+);
 
 export default function ProjectDetails({
   project,
@@ -166,7 +174,7 @@ export default function ProjectDetails({
 
   return (
     <>
-      <Seo base={seoData.base} og={seoData.og} />
+      <Seo {...seoData} />
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
@@ -177,188 +185,183 @@ export default function ProjectDetails({
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
-          <section className="relative z-10 flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
-            <div>
-              {/* back to project button */}
-              <LinkWithUnderline href="/projects">
-                <BsArrowLeft />
-                Back To Projects
-              </LinkWithUnderline>
+      <header className="fade-bottom relative mt-6 mb-3 w-full px-8 after:-top-7">
+        <section className="mx-auto flex max-w-screen-xl flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5 2xl:px-2">
+          <div>
+            {/* back to project button */}
+            <LinkWithUnderline href="/projects">
+              <BsArrowLeft />
+              Back To Projects
+            </LinkWithUnderline>
 
-              {/* title */}
-              <div className="pt-4">
-                <SectionHeading
-                  title={project.name}
-                  subTitle={
-                    activeLanguage === "en"
-                      ? project.shortDescriptionEN
-                      : project.shortDescriptionID
-                  }
-                />
-              </div>
-
-              <div className="mt-5">
-                <ShowcaseStats
-                  dateString={project.madeAt as string}
-                  isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
-                  hasLiked={hasLiked}
-                  likes={likes}
-                  views={viewsRes.data?.views || project.views}
-                />
-              </div>
-            </div>
-            <div className="flex lg:self-end lg:px-2">
-              <LanguageToggle
-                activeLanguage={activeLanguage}
-                setActiveLanguage={setActiveLanguage}
+            {/* title */}
+            <div className="pt-4">
+              <SectionHeading
+                title={project.name}
+                subTitle={
+                  activeLanguage === "en"
+                    ? project.shortDescriptionEN
+                    : project.shortDescriptionID
+                }
               />
             </div>
-          </section>
-        </header>
 
-        {/* the project data */}
-        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
-          {/* image */}
-          <figure className="mx-auto w-full md:w-[95%]">
-            <CldImage
-              format="webp"
-              priority
-              src={project.image}
-              alt={project.name}
-              width={1280}
-              height={720}
-              className="w-full rounded-md object-cover opacity-90 shadow"
+            <div className="mt-5">
+              <ShowcaseStats
+                dateString={project.madeAt as string}
+                isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
+                hasLiked={hasLiked}
+                likes={likes}
+                views={viewsRes.data?.views || project.views}
+              />
+            </div>
+          </div>
+
+          <div className="flex lg:self-end lg:px-2">
+            <LanguageToggle
+              activeLanguage={activeLanguage}
+              setActiveLanguage={setActiveLanguage}
             />
+          </div>
+        </section>
+      </header>
 
-            <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
-              <span>Screenshot of {project.name}</span>
-            </figcaption>
-          </figure>
+      {/* the project data */}
+      <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
+        {/* image */}
+        <figure className="mx-auto w-full md:w-[95%]">
+          <CldImage
+            format="webp"
+            priority
+            src={project.image}
+            alt={project.name}
+            width={1280}
+            height={720}
+            className="w-full rounded-md object-cover opacity-90 shadow"
+          />
 
-          {/* details */}
-          <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
-            <div className="relative flex basis-3/4 flex-col gap-12">
-              {/* app tech stack */}
-              <div className="relative z-10 flex flex-col gap-4">
-                <SectionSubHeading>Tech Stack</SectionSubHeading>
-                <StyledScrollbar
-                  autoHeight
-                  autoHeightMin="100%"
-                  autoHeightMax="100%"
-                  renderView={props => (
-                    <ul
-                      {...props}
-                      className="relative flex items-center gap-1"
-                    />
-                  )}
-                >
-                  {project?.tech.map(
-                    (tech: Technologies): JSX.Element => (
-                      <li key={tech}>{TechWithTooltip[tech]()}</li>
-                    ),
-                  )}
-                </StyledScrollbar>
-              </div>
+          <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
+            <span>Screenshot of {project.name}</span>
+          </figcaption>
+        </figure>
 
-              {/* description and features of the app */}
-              <div className="relative z-10 flex flex-col gap-4">
-                <SectionSubHeading>Description</SectionSubHeading>
-                <Typography
-                  variant="paragraph"
-                  className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
-                >
-                  <Show when={activeLanguage === "en"}>
-                    {project.descriptionEN}
-                  </Show>
-                  <Show when={activeLanguage === "id"}>
-                    {project.descriptionID}
-                  </Show>
-                </Typography>
-              </div>
+        {/* details */}
+        <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
+          <div className="relative flex basis-3/4 flex-col gap-12">
+            {/* app tech stack */}
+            <div className="relative z-10 flex flex-col gap-4">
+              <SectionSubHeading>Tech Stack</SectionSubHeading>
+              <StyledScrollbar
+                autoHeight
+                autoHeightMin="100%"
+                autoHeightMax="100%"
+                renderView={props => (
+                  <ul {...props} className="relative flex items-center gap-1" />
+                )}
+              >
+                {project?.tech.map(
+                  (tech: Technologies): JSX.Element => (
+                    <li key={tech}>{TechWithTooltip[tech]()}</li>
+                  ),
+                )}
+              </StyledScrollbar>
             </div>
 
-            {/* link for the code of this project */}
-            <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
-              <div className="flex w-full flex-col gap-3">
-                {/* when the project has download link */}
-                <Show when={!!project.downloadLink === true}>
-                  <ActionButton
-                    href={`${project.downloadLink}`}
-                    icon={<FaDownload className="text-lg text-blue-500" />}
-                  >
-                    Download
-                  </ActionButton>
+            {/* description and features of the app */}
+            <div className="relative z-10 flex flex-col gap-4">
+              <SectionSubHeading>Description</SectionSubHeading>
+              <Typography
+                variant="paragraph"
+                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
+              >
+                <Show when={activeLanguage === "en"}>
+                  {project.descriptionEN}
                 </Show>
-
-                {/* when the project has a website link */}
-                <Show when={!!project.siteLink === true}>
-                  <ActionButton
-                    href={`${project.siteLink}`}
-                    icon={<SlGlobe className="text-lg text-blue-500" />}
-                  >
-                    Visit Site
-                  </ActionButton>
+                <Show when={activeLanguage === "id"}>
+                  {project.descriptionID}
                 </Show>
+              </Typography>
+            </div>
+          </div>
 
-                {/* Github Link */}
+          {/* link for the code of this project */}
+          <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
+            <div className="flex w-full flex-col gap-3">
+              {/* when the project has download link */}
+              <Show when={!!project.downloadLink === true}>
                 <ActionButton
-                  icon={<FaGithub className="text-lg" />}
-                  href={project.gitLink}
-                  color="gray"
+                  href={`${project.downloadLink}`}
+                  icon={<FaDownload className="text-lg text-blue-500" />}
                 >
-                  Visit Repo
+                  Download
                 </ActionButton>
-
-                {/* copy link to clipboard */}
-                <CopyLinkBtn />
-              </div>
-
-              {/* Like button */}
-              <Show when={viewsRes.isLoading && likesRes.isLoading}>
-                <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-                  <div className="basis-3/4 rounded-lg bg-white/20" />
-                  <div className="basis-1/4 rounded-lg bg-white/20" />
-                </div>
               </Show>
-              <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
-                <Tooltip
-                  placement="top"
-                  animate={{
-                    mount: { scale: 1, y: 0 },
-                    unmount: { scale: 0, y: 25 },
-                  }}
-                  content={
-                    hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                  }
+
+              {/* when the project has a website link */}
+              <Show when={!!project.siteLink === true}>
+                <ActionButton
+                  href={`${project.siteLink}`}
+                  icon={<SlGlobe className="text-lg text-blue-500" />}
                 >
-                  <Button
-                    onClick={toggleLike}
-                    variant="text"
-                    color={hasLiked ? "red" : "gray"}
-                    className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
-                      hasLiked ? "text-red-300" : ""
-                    }`}
-                  >
-                    <AiFillHeart />
-                    <span className="text-sm">{formattedLikes}</span>
-                  </Button>
-                </Tooltip>
+                  Visit Site
+                </ActionButton>
               </Show>
-            </aside>
-          </section>
 
-          {/* comments */}
-          <DetailFooter
-            prevLink={`/projects/${prevProject.slug}`}
-            prevTitle={prevProject.name}
-            nextLink={`/projects/${nextProject.slug}`}
-            nextTitle={nextProject.name}
-          />
-        </main>
-        <SiteFooter />
-      </div>
+              {/* Github Link */}
+              <ActionButton
+                icon={<FaGithub className="text-lg" />}
+                href={project.gitLink}
+                color="gray"
+              >
+                Visit Repo
+              </ActionButton>
+
+              {/* copy link to clipboard */}
+              <CopyLinkBtn />
+            </div>
+
+            {/* Like button */}
+            <Show when={viewsRes.isLoading && likesRes.isLoading}>
+              <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
+                <div className="basis-3/4 rounded-lg bg-white/20" />
+                <div className="basis-1/4 rounded-lg bg-white/20" />
+              </div>
+            </Show>
+            <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
+              <Tooltip
+                placement="top"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                content={
+                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
+                }
+              >
+                <Button
+                  onClick={toggleLike}
+                  variant="text"
+                  color={hasLiked ? "red" : "gray"}
+                  className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
+                    hasLiked ? "text-red-300" : ""
+                  }`}
+                >
+                  <AiFillHeart />
+                  <span className="text-sm">{formattedLikes}</span>
+                </Button>
+              </Tooltip>
+            </Show>
+          </aside>
+        </section>
+
+        {/* comments */}
+        <DetailFooter
+          prevLink={`/projects/${prevProject.slug}`}
+          prevTitle={prevProject.name}
+          nextLink={`/projects/${nextProject.slug}`}
+          nextTitle={nextProject.name}
+        />
+      </main>
     </>
   );
 }

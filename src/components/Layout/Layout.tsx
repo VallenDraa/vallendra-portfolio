@@ -1,10 +1,13 @@
 import R from "react";
 import { useRouter } from "next/router";
 import Scrollbars from "react-custom-scrollbars-2";
+import dynamic from "next/dynamic";
 import NavbarComponent from "../Navbar/Navbar";
 import BreathingBackground from "../BreathingBackground";
 import StyledScrollbar from "../StyledComponents/StyledScrollbar";
 import GoToTopBtn from "../GoToTopBtn";
+
+const SiteFooter = dynamic(() => import("../SiteFooter"), { ssr: false });
 
 export default function Layout({ children }: { children: R.ReactNode }) {
   const router = useRouter();
@@ -36,6 +39,8 @@ export default function Layout({ children }: { children: R.ReactNode }) {
       <BreathingBackground />
 
       {children}
+
+      <SiteFooter />
 
       {/* back to top button */}
       <GoToTopBtn

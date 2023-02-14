@@ -7,14 +7,13 @@ import R from "react";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
-import SiteFooter from "../../components/SiteFooter";
+import dynamic from "next/dynamic";
 import Show from "../../utils/client/jsx/Show";
 import CopyLinkBtn from "../../components/ShowcaseDetailsPage/CopyLinkBtn";
 import ActionButton from "../../components/StyledComponents/ActionButton";
 import SectionSubHeading from "../../components/Typography/SectionSubHeading";
 import LinkWithUnderline from "../../components/ShowcaseDetailsPage/LinkWithUnderline";
 import Certificate from "../../interfaces/certificate.interface";
-import DetailFooter from "../../components/ShowcaseDetailsPage/DetailFooter";
 import { commaSeparator } from "../../utils/client/helpers/formatter";
 import LanguageToggle from "../../components/ShowcaseDetailsPage/LanguageToggle";
 import { Language, LikesOperationBody } from "../../types/types";
@@ -30,7 +29,6 @@ import useDebounce from "../../utils/client/hooks/useDebounce";
 import Seo from "../../seo/Seo";
 import ShowcaseStats from "../../components/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "../../components/Typography/SectionHeading";
-import StyledAlert from "../../components/StyledComponents/StyledAlert";
 
 interface CertificateRedirect {
   slug: string;
@@ -42,6 +40,16 @@ interface PropsData {
   prevCertificate: CertificateRedirect;
   nextCertificate: CertificateRedirect;
 }
+
+const StyledAlert = dynamic(
+  () => import("../../components/StyledComponents/StyledAlert"),
+  { ssr: false },
+);
+
+const DetailFooter = dynamic(
+  () => import("../../components/ShowcaseDetailsPage/DetailFooter"),
+  { ssr: false },
+);
 
 export default function CertificateDetails({
   certificate,
@@ -165,7 +173,7 @@ export default function CertificateDetails({
 
   return (
     <>
-      <Seo base={seoData.base} og={seoData.og} />
+      <Seo {...seoData} />
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
@@ -176,151 +184,148 @@ export default function CertificateDetails({
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <div className="fade-bottom relative flex min-h-[80vh] translate-y-20 flex-col after:-top-20">
-        <header className="mx-auto mt-6 flex w-full max-w-screen-xl flex-col px-8 2xl:px-2">
-          <section className="relative z-10 flex flex-col justify-between gap-5 border-b-2 border-indigo-100 pb-3 dark:border-white/30 lg:flex-row">
-            <div>
-              {/* back to certificates button */}
-              <LinkWithUnderline href="/certificates">
-                <BsArrowLeft />
-                Back To Certificates
-              </LinkWithUnderline>
+      <header className="fade-bottom relative mt-6 mb-3 w-full px-8 after:-top-7">
+        <section className="mx-auto flex max-w-screen-xl flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5 2xl:px-2">
+          <div>
+            {/* back to certificates button */}
+            <LinkWithUnderline href="/certificates">
+              <BsArrowLeft />
+              Back To Certificates
+            </LinkWithUnderline>
 
-              {/* title */}
-              <div className="pt-4">
-                <SectionHeading
-                  title={certificate.name}
-                  subTitle={
-                    activeLanguage === "en"
-                      ? certificate.shortDescriptionEN
-                      : certificate.shortDescriptionID
-                  }
-                />
-              </div>
-
-              <div className="mt-5">
-                <ShowcaseStats
-                  dateString={certificate.madeAt as string}
-                  isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
-                  hasLiked={hasLiked}
-                  likes={likes}
-                  views={viewsRes.data?.views || certificate.views}
-                />
-              </div>
-            </div>
-            <div className="flex lg:self-end lg:px-2">
-              <LanguageToggle
-                activeLanguage={activeLanguage}
-                setActiveLanguage={setActiveLanguage}
+            {/* title */}
+            <div className="pt-4">
+              <SectionHeading
+                title={certificate.name}
+                subTitle={
+                  activeLanguage === "en"
+                    ? certificate.shortDescriptionEN
+                    : certificate.shortDescriptionID
+                }
               />
             </div>
-          </section>
-        </header>
 
-        {/* the certificate data */}
-        <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
-          {/* image */}
-          <figure className="mx-auto w-full md:w-[95%]">
-            <CldImage
-              format="webp"
-              priority
-              src={certificate.image}
-              alt={certificate.name}
-              width={1280}
-              height={720}
-              className="w-full rounded-md object-cover opacity-90"
+            <div className="mt-5">
+              <ShowcaseStats
+                dateString={certificate.madeAt as string}
+                isLoadingStats={viewsRes.isLoading && likesRes.isLoading}
+                hasLiked={hasLiked}
+                likes={likes}
+                views={viewsRes.data?.views || certificate.views}
+              />
+            </div>
+          </div>
+          <div className="flex lg:self-end lg:px-2">
+            <LanguageToggle
+              activeLanguage={activeLanguage}
+              setActiveLanguage={setActiveLanguage}
             />
+          </div>
+        </section>
+      </header>
 
-            <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
-              <span>Screenshot of {certificate.name}</span>
-            </figcaption>
-          </figure>
+      {/* the certificate data */}
+      <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
+        {/* image */}
+        <figure className="mx-auto w-full md:w-[95%]">
+          <CldImage
+            format="webp"
+            priority
+            src={certificate.image}
+            alt={certificate.name}
+            width={1280}
+            height={720}
+            className="w-full rounded-md object-cover opacity-90"
+          />
 
-          {/* details */}
-          <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
-            <div className="relative flex basis-3/4 flex-col gap-12">
-              {/* description of the certicates */}
-              <div className="relative z-10 flex flex-col gap-4">
-                <SectionSubHeading>Description</SectionSubHeading>
-                <Typography
-                  variant="paragraph"
-                  className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
-                >
-                  <Show when={activeLanguage === "en"}>
-                    {certificate.descriptionEN}
-                  </Show>
-                  <Show when={activeLanguage === "id"}>
-                    {certificate.descriptionID}
-                  </Show>
-                </Typography>
-              </div>
+          <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
+            <span>Screenshot of {certificate.name}</span>
+          </figcaption>
+        </figure>
+
+        {/* details */}
+        <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
+          <div className="relative flex basis-3/4 flex-col gap-12">
+            {/* description of the certicates */}
+            <div className="relative z-10 flex flex-col gap-4">
+              <SectionSubHeading>Description</SectionSubHeading>
+              <Typography
+                variant="paragraph"
+                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
+              >
+                <Show when={activeLanguage === "en"}>
+                  {certificate.descriptionEN}
+                </Show>
+                <Show when={activeLanguage === "id"}>
+                  {certificate.descriptionID}
+                </Show>
+              </Typography>
+            </div>
+          </div>
+
+          {/* link for the code of this certificate */}
+          <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
+            {/* see certificate and copy link button */}
+            <div className="flex w-full flex-col gap-3">
+              <ActionButton
+                href={certificate.certificateLink}
+                variant="outlined"
+                color="blue"
+                className="flex w-full justify-center"
+              >
+                {/* certificate link text */}
+                <Show when={!!certificate.certificateLink}>
+                  <FaRegNewspaper className="text-lg text-blue-500" />
+                  <span>See Certificate</span>
+                </Show>
+              </ActionButton>
+
+              {/* copy link to clipboard */}
+              <CopyLinkBtn />
             </div>
 
-            {/* link for the code of this certificate */}
-            <aside className="detail-aside-colors sticky top-10 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
-              {/* see certificate and copy link button */}
-              <div className="flex w-full flex-col gap-3">
-                <ActionButton
-                  href={certificate.certificateLink}
-                  variant="outlined"
-                  color="blue"
-                  className="flex w-full justify-center"
-                >
-                  {/* certificate link text */}
-                  <Show when={!!certificate.certificateLink}>
-                    <FaRegNewspaper className="text-lg text-blue-500" />
-                    <span>See Certificate</span>
-                  </Show>
-                </ActionButton>
-
-                {/* copy link to clipboard */}
-                <CopyLinkBtn />
+            {/* Like button */}
+            <Show when={viewsRes.isLoading && likesRes.isLoading}>
+              <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
+                <div className="basis-3/4 rounded-lg bg-white/20" />
+                <div className="basis-1/4 rounded-lg bg-white/20" />
               </div>
-
-              {/* Like button */}
-              <Show when={viewsRes.isLoading && likesRes.isLoading}>
-                <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-                  <div className="basis-3/4 rounded-lg bg-white/20" />
-                  <div className="basis-1/4 rounded-lg bg-white/20" />
-                </div>
-              </Show>
-              <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
-                <Tooltip
-                  placement="top"
-                  animate={{
-                    mount: { scale: 1, y: 0 },
-                    unmount: { scale: 0, y: 25 },
-                  }}
-                  content={
-                    hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                  }
+            </Show>
+            <Show when={!(viewsRes.isLoading && likesRes.isLoading)}>
+              <Tooltip
+                placement="top"
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                content={
+                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
+                }
+              >
+                <Button
+                  onClick={toggleLike}
+                  variant="text"
+                  color={hasLiked ? "red" : "gray"}
+                  className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
+                    hasLiked ? "text-red-300" : ""
+                  }`}
                 >
-                  <Button
-                    onClick={toggleLike}
-                    variant="text"
-                    color={hasLiked ? "red" : "gray"}
-                    className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
-                      hasLiked ? "text-red-300" : ""
-                    }`}
-                  >
-                    <AiFillHeart />
-                    <span className="text-sm">{formattedLikes}</span>
-                  </Button>
-                </Tooltip>
-              </Show>
-            </aside>
-          </section>
+                  <AiFillHeart />
+                  <span className="text-sm">{formattedLikes}</span>
+                </Button>
+              </Tooltip>
+            </Show>
+          </aside>
+        </section>
 
-          {/* details footer, includes link */}
-          <DetailFooter
-            prevLink={`/certificates/${prevCertificate.slug}`}
-            prevTitle={prevCertificate.name}
-            nextLink={`/certificates/${nextCertificate.slug}`}
-            nextTitle={nextCertificate.name}
-          />
-        </main>
-        <SiteFooter />
-      </div>
+        {/* details footer, includes link */}
+        <DetailFooter
+          prevLink={`/certificates/${prevCertificate.slug}`}
+          prevTitle={prevCertificate.name}
+          nextLink={`/certificates/${nextCertificate.slug}`}
+          nextTitle={nextCertificate.name}
+        />
+      </main>
     </>
   );
 }
