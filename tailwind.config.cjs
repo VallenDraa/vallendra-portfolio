@@ -5,7 +5,7 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 /** @type {import('tailwindcss').Config} */
 module.exports = withMT({
   darkMode: "class",
-  content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
+  content: ["./src/**/*.tsx"],
   theme: {
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
