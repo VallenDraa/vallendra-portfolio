@@ -8,7 +8,6 @@ const projectsPageSeo: SEO = {
   },
   og: {
     siteName: "Jestine Vallendra Dwi Putra",
-    contentType: "programming projects showcase",
     imageUrl: ogLinkMaker({
       title: "Projects",
       shortDesc:

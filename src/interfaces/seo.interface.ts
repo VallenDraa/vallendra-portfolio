@@ -7,7 +7,6 @@ export interface BaseSeo {
 export interface OgSeo {
   siteName: string;
   siteUrl: string;
-  contentType: string;
   imageUrl: string;
   imageAlt: string;
 }

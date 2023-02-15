@@ -8,7 +8,6 @@ const projectsPageSeo: SEO = {
   },
   og: {
     siteName: "Jestine Vallendra Dwi Putra",
-    contentType: "portfolio guestbook",
     imageUrl: ogLinkMaker({
       title: "Guestbook",
       shortDesc:

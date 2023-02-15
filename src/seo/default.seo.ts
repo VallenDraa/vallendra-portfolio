@@ -8,7 +8,6 @@ const defaultSeo: SEO = {
   },
   og: {
     siteName: "Jestine Vallendra Dwi Putra",
-    contentType: "portfolio website",
     imageUrl: ogLinkMaker({
       title: "VallenDra",
       shortDesc:

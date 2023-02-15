@@ -19,7 +19,6 @@ export default function showcaseSeo({
     base: { title: `VallenDra | ${title}`, desc: shortDesc },
     og: {
       siteName: "Jestine Vallendra Dwi Putra",
-      contentType: `${type} showcase`,
       imageUrl: ogLinkMaker({ title, shortDesc }),
       imageAlt: `A screenshot of the ${title}.`,
       siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/${type}/${slug}`,

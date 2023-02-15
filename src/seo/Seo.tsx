@@ -15,18 +15,14 @@ export default function Seo({
       <meta name="theme-color" content="#7986cb" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content={base.robots || "follow, index"} />
+      <link rel="canonical" href={og.siteUrl} />
 
       {/* open graph meta */}
       <meta property="og:title" content={base.title} />
       <meta property="og:site_name" content={og.siteName} />
-      <meta property="og:type" content={og.contentType} />
+      <meta property="og:type" content="website" />
       <meta property="og:url" content={og.siteUrl} />
-      <meta property="og:image" content={og.imageUrl} />
-      <meta property="og:image:secure_url" content={og.imageUrl} />
-      <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:alt" content={og.imageAlt} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta itemProp="image" property="og:image" content={og.imageUrl} />
 
       {/* twitter meta */}
       <meta name="twitter:card" content="summary_large_image" />

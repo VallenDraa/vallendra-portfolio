@@ -8,7 +8,6 @@ const certificatesPageSeo: SEO = {
   },
   og: {
     siteName: "Jestine Vallendra Dwi Putra",
-    contentType: "certificates showcase",
     imageUrl: ogLinkMaker({
       title: "Certificates",
       shortDesc:
