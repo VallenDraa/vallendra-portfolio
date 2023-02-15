@@ -133,7 +133,7 @@ export default function Profile() {
                     variant="small"
                     className="text-right font-normal"
                   >
-                    And Learning More 😎
+                    And Learning More
                   </Typography>
                 </CardFooter>
               </Card>

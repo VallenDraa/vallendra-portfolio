@@ -62,7 +62,7 @@
     "typescript": "*"
   },
   "lint-staged": {
-    "src/*.(js|jsx|ts|tsx)": "next lint --fix"
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "config": {
     "commitizen": {
