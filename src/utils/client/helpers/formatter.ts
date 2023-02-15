@@ -7,7 +7,6 @@ export const commaSeparator = Intl.NumberFormat(undefined, {
 });
 
 export const dateFormatter = Intl.DateTimeFormat("en-US", {
-  weekday: "long",
   year: "numeric",
   month: "long",
   day: "numeric",
