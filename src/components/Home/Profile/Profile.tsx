@@ -171,7 +171,7 @@ export default function Profile() {
                 className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
               >
                 <Typography variant="small" className="text-right font-normal">
-                  EST. 2022 - 2026
+                  2022 - 2026
                 </Typography>
               </CardFooter>
             </Card>
@@ -205,7 +205,7 @@ export default function Profile() {
                 className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
               >
                 <Typography variant="small" className="text-right font-normal">
-                  EST. 2022 - 2023
+                  2022 - 2023
                 </Typography>
               </CardFooter>
             </Card>

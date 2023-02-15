@@ -61,6 +61,9 @@
     "tailwindcss": "^3.1.8",
     "typescript": "*"
   },
+  "lint-staged": {
+    "src/*.(js|jsx|ts|tsx)": "next lint --fix"
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
