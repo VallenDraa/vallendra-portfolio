@@ -15,7 +15,7 @@ export default function Redirect() {
       >
         <Typography
           as="h2"
-          className="relative z-10 text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
+          className="relative z-10 text-center text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
         >
           Wanna Work Together ?
         </Typography>
