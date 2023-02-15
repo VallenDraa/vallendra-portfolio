@@ -18,16 +18,23 @@ export default function Guestbook() {
       <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
         <div className="mx-auto flex max-w-screen-xl flex-col px-8 pt-16 2xl:px-2">
           {/* back to project button */}
-          <LinkWithUnderline href="/">
-            <BsArrowLeft />
-            Back To Home Page
-          </LinkWithUnderline>
+          <Observe
+            freezeOnceVisible
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
+          >
+            <div className="opacity-0">
+              <LinkWithUnderline href="/">
+                <BsArrowLeft />
+                Back To Home Page
+              </LinkWithUnderline>
+            </div>
+          </Observe>
 
           {/* heading */}
           <div className="pt-4">
             <Observe
               freezeOnceVisible
-              onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
+              onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
             >
               <div className="opacity-0">
                 <SectionHeading
