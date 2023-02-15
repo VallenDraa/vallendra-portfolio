@@ -1,32 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import OgComponent from "interfaces/ogComponent.interface";
 
-export default function Showcase({ title, shortDesc, imgLink }: OgComponent) {
+export default function Showcase({ title, shortDesc }: OgComponent) {
   return (
     <div tw="flex flex-col w-full h-full font-sans justify-around">
       {/* top */}
-      <div tw="flex items-center justify-between w-full text-white h-[450px] bg-[#212121] relative">
+      <div tw="flex w-full text-white h-[540px] bg-[#212121] relative">
         <div
-          tw="absolute h-[300px] w-[300px] rounded-full bg-[#7986cb] opacity-100 top-[50px] right-[340px]"
+          tw="absolute h-[650px] w-[650px] rounded-full bg-[#7986cb] opacity-100 top-[-120px] right-[-80px]"
           style={{ zIndex: "30" }}
         />
         <div
-          tw="absolute h-[300px] w-[300px] shadow-2xl rounded-full bg-[#ce93d8] opacity-100 top-[120px] right-[260px]"
+          tw="absolute h-[700px] w-[700px] shadow-2xl rounded-full bg-[#ce93d8] opacity-100 top-[80px] right-[-25px]"
           style={{ zIndex: "0" }}
         />
         {/* data */}
-        <div tw="flex flex-col px-10 w-[450px] h-[450px] justify-center">
-          <p tw="text-5xl text-white mb-0 text-gray-50 opacity-90 font-bold">
-            {title}
-          </p>
+        <div tw="flex flex-col px-10 w-[500px] h-[540px] justify-center">
+          <p tw="text-5xl text-white mb-0 text-gray-50 opacity-90">{title}</p>
           <p tw="text-xl text-gray-300">{shortDesc}</p>
         </div>
-        {/* image */}
-        <img
-          tw="rounded w-[505px] mr-1 shadow-2xl"
-          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${imgLink}.png`}
-          alt={title}
-        />
       </div>
 
       {/* bottom */}

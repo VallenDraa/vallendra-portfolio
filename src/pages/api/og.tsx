@@ -11,14 +11,11 @@ const handler: NextApiHandler = req => {
     const title = searchParams.get("title") ?? "Default title";
     const shortDesc =
       searchParams.get("short-desc") ?? "Default short description";
-    const imgLink =
-      searchParams.get("cld-img") ??
-      `${process.env.URL}/images/vallen-icon.png`;
 
-    return new ImageResponse(
-      <Showcase title={title} shortDesc={shortDesc} imgLink={imgLink} />,
-      { width: 960, height: 540 },
-    );
+    return new ImageResponse(<Showcase title={title} shortDesc={shortDesc} />, {
+      width: 1200,
+      height: 630,
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);

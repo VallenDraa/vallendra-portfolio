@@ -68,12 +68,10 @@ export default function CertificateDetails({
   /* Seo Data
   =================== */
   const seoData = R.useMemo(() => {
-    const { name, slug, image, shortDescriptionEN, shortDescriptionID } =
-      certificate;
+    const { name, slug, shortDescriptionEN, shortDescriptionID } = certificate;
 
     return showcaseSeo({
       title: name,
-      cldImage: image,
       slug,
       shortDesc:
         activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,

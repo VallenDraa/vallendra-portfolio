@@ -13,7 +13,6 @@ const certificatesPageSeo: SEO = {
       title: "Certificates",
       shortDesc:
         "The page where all of VallenDra's programming certificates are showcased.",
-      imgLink: "pages/certificates-page_wlduyl",
     }),
     imageAlt: "A screenshot of the certificates page",
     siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/certificates`,

@@ -71,12 +71,10 @@ export default function ProjectDetails({
   /* Seo Data
   =================== */
   const seoData = R.useMemo(() => {
-    const { name, slug, image, shortDescriptionEN, shortDescriptionID } =
-      project;
+    const { name, slug, shortDescriptionEN, shortDescriptionID } = project;
 
     return showcaseSeo({
       title: name,
-      cldImage: image,
       slug,
       shortDesc:
         activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,

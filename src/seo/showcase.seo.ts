@@ -6,7 +6,6 @@ interface Args {
   title: string;
   slug: string;
   shortDesc: string;
-  cldImage: string;
   type: ShowcaseType;
 }
 
@@ -14,7 +13,6 @@ export default function showcaseSeo({
   title,
   slug,
   shortDesc,
-  cldImage,
   type,
 }: Args): SEO {
   return {
@@ -22,7 +20,7 @@ export default function showcaseSeo({
     og: {
       siteName: "Jestine Vallendra Dwi Putra",
       contentType: `${type} showcase`,
-      imageUrl: ogLinkMaker({ title, shortDesc, imgLink: cldImage }),
+      imageUrl: ogLinkMaker({ title, shortDesc }),
       imageAlt: `A screenshot of the ${title}.`,
       siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/${type}/${slug}`,
     },
