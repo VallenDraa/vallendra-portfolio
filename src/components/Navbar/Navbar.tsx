@@ -25,28 +25,16 @@ export default function NavbarComponent() {
   ================================================ */
   useEffect(() => {
     if (navIsOpened && window.innerWidth < 960) {
-      overlayRef.current?.classList.add("animate-open-overlay");
-      navListRef.current?.classList.add("animate-open-nav");
-
       setTimeout(() => {
-        overlayRef.current?.classList.remove("animate-open-overlay");
-        navListRef.current?.classList.remove("animate-open-nav");
-      }, 350);
+        navListRef.current?.classList.remove("-translate-x-full");
+        overlayRef.current?.classList.remove("opacity-0");
+      }, 10);
     } else {
-      navListRef.current?.classList.remove("animate-close-nav");
-      overlayRef.current?.classList.remove("animate-close-overlay");
+      setTimeout(() => {
+        navListRef.current?.classList.add("-translate-x-full");
+        overlayRef.current?.classList.add("opacity-0");
+      }, 10);
     }
-  }, [navIsOpened]);
-
-  /* disable and enable scroll on nav state change
-  ================================================ */
-  useEffect(() => {
-    if (window.innerWidth >= 960 && navIsOpened) {
-      document.body.style.overflowY = "auto";
-      return;
-    }
-
-    document.body.style.overflowY = navIsOpened ? "hidden" : "auto";
   }, [navIsOpened]);
 
   /* open navigation according to screen size

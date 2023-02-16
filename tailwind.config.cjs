@@ -47,25 +47,6 @@ module.exports = withMT({
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
-        "open-nav": {
-          "0%": { transform: "translateX(-100%)", opacity: "0.7" },
-          "50%": { transform: "translateX(3px)", opacity: "1" },
-          "70%": { transform: "translateX(-1px)" },
-          "100%": { transform: "translateX(0px)" },
-        },
-        "close-nav": {
-          "0%": { transform: "translateX(0)", opacity: 1 },
-          "50%": { transform: "translateX(8px)", opacity: "1" },
-          "100%": { transform: "translateX(-100%)", opacity: "0.7" },
-        },
-        "open-overlay": {
-          "0%": { opacity: "0.1" },
-          "100%": { opacity: 1 },
-        },
-        "close-overlay": {
-          "0%": { opacity: 1 },
-          "100%": { opacity: "0.1" },
-        },
         "main-gradient": {
           "0%, 100%": { backgroundPosition: "0% 75%" },
           "50%": { backgroundPosition: "100% 25%" },
@@ -82,18 +63,6 @@ module.exports = withMT({
             "border-radius": "50%",
           },
         },
-        raindrops: {
-          from: {
-            transform: "translateX(0)",
-          },
-          to: {
-            transform: "translateX(1000px)",
-          },
-        },
-        marquee: {
-          from: { transform: "translateX(120vw)" },
-          to: { transform: "translateX(-120vw)" },
-        },
       },
       animation: {
         "fade-in-left": "fade-in-left 700ms ease-in-out",
@@ -101,15 +70,9 @@ module.exports = withMT({
         "fade-in-bottom": "fade-in-bottom 700ms ease-in-out",
         "fade-in-top": "fade-in-top 700ms ease-in-out",
         "fade-in": "fade-in 350ms ease-out",
-        "open-nav": "open-nav 350ms ease-in",
-        "close-nav": "close-nav 350ms ease-in",
-        "open-overlay": "open-overlay 350ms ease-in",
-        "close-overlay": "close-overlay 350ms ease-in",
         squares: "squares 40s linear infinite",
-        raindrops: "raindrops 10s linear infinite",
         "main-gradient": "main-gradient 25s ease infinite",
         breathing: "main-gradient 8s ease infinite",
-        marquee: "marquee 20s linear infinite",
       },
     },
   },

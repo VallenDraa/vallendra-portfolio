@@ -22,18 +22,13 @@ export default function NavList({ navListRef, overlayRef }: Props) {
     setOpenedAccordion(openedAccordion === value ? 0 : value);
   }
 
+  /* letting the close animation play and then destroying the navlist itself
+  ========================================================================== */
   function closeNav() {
-    navListRef.current?.classList.add("animate-close-nav");
-    overlayRef.current?.classList.add("animate-close-overlay");
+    navListRef.current?.classList.add("-translate-x-full");
+    overlayRef.current?.classList.add("opacity-0");
 
-    setTimeout(() => {
-      navListRef.current?.classList.add("opacity-0");
-      overlayRef.current?.classList.add("opacity-0");
-    }, 340);
-
-    setTimeout(() => {
-      setNavIsOpened(false);
-    }, 345);
+    setTimeout(() => setNavIsOpened(false), 310);
   }
 
   /* for handling accordion visibility
@@ -63,13 +58,13 @@ export default function NavList({ navListRef, overlayRef }: Props) {
         role="none"
         onClick={closeNav}
         ref={overlayRef}
-        className="fixed inset-0 z-[60] h-screen bg-indigo-800/30 dark:bg-black/40 lg:hidden"
+        className="fixed inset-0 z-[60] h-screen bg-indigo-800/50 opacity-0 transition-opacity duration-300 dark:bg-black/50 lg:hidden"
       />
 
       {/* the nav list */}
       <nav
         ref={navListRef}
-        className="navlist-underlay fixed top-0 left-0 z-[70] flex h-screen w-72 flex-col gap-1 bg-indigo-50 shadow-none dark:bg-gray-900 dark:shadow-2xl dark:shadow-gray-900 lg:static lg:h-max lg:w-max lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent dark:lg:shadow-none"
+        className="fixed top-0 left-0 z-[70] flex h-screen w-72 -translate-x-full flex-col gap-1 bg-indigo-50 transition-transform duration-300 dark:bg-gray-900 lg:static lg:h-max lg:w-max lg:translate-x-0 lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent"
       >
         {/* close button for small screen nav */}
         <div className="gradient-underline gradient-underline--primary relative mb-3 flex items-center justify-between px-5 pt-3 pb-0.5 lg:hidden lg:px-3">
