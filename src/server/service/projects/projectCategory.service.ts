@@ -6,6 +6,9 @@ export async function getAllProjectCategories() {
   connectMongo();
 
   const allProjectCategories = await ProjectCategoryModel.find().lean();
+  const sortedCategories = allProjectCategories.sort(
+    (a, b) => b.items.length - a.items.length,
+  ); // sort by the largest amounts of items
 
-  return allProjectCategories;
+  return sortedCategories;
 }
