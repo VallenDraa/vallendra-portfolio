@@ -19,7 +19,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "promise", "unused-imports"],
+  "plugins": ["@typescript-eslint", "unused-imports"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-no-bind": "off",
