@@ -9,14 +9,14 @@ import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
 import Show from "utils/client/jsx/Show";
-import CopyLinkBtn from "components/ShowcaseDetailsPage/CopyLinkBtn";
+import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
 import ActionButton from "components/StyledComponents/ActionButton";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
-import Certificate from "interfaces/certificate.interface";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
+import type Certificate from "interfaces/certificate.interface";
 import { commaSeparator } from "utils/client/helpers/formatter";
-import LanguageToggle from "components/ShowcaseDetailsPage/LanguageToggle";
-import { Language, LikesOperationBody } from "types/types";
+import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
+import type { Language } from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import {
   getAllCertificates,
   getCertificateWithPrevAndNext,
@@ -27,8 +27,9 @@ import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import showcaseSeo from "seo/showcase.seo";
 import useDebounce from "utils/client/hooks/useDebounce";
 import Seo from "seo/Seo";
-import ShowcaseStats from "components/ShowcaseDetailsPage/ShowcaseStats";
+import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
+import type { LikesOperationBody } from "types/api.types";
 
 interface CertificateRedirect {
   slug: string;
@@ -47,7 +48,7 @@ const StyledAlert = dynamic(
 );
 
 const DetailFooter = dynamic(
-  () => import("components/ShowcaseDetailsPage/DetailFooter"),
+  () => import("components/Showcase/ShowcaseDetailsPage/DetailFooter"),
   { ssr: false },
 );
 

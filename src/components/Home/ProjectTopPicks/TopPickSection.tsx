@@ -2,9 +2,8 @@ import { IconButton, Tooltip } from "@material-tailwind/react";
 import { useRef } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
-import Project from "interfaces/project.interface";
+import type Project from "interfaces/project.interface";
 import fadeIn from "utils/client/helpers/animateOnObserved";
-import { TwistDirection } from "types/types";
 import Observe from "components/Observe";
 import SectionHeading from "components/Typography/SectionHeading";
 import TopBottomWaves from "./TopBottomWaves";
@@ -13,6 +12,8 @@ import TopPickItem from "./TopPickItem";
 interface Props {
   topPickedProjects: Project[];
 }
+
+export type TwistDirection = "right" | "left";
 
 export default function TopPickSection({ topPickedProjects }: Props) {
   const lineTwistDirection = useRef<TwistDirection>("left");

@@ -1,6 +1,9 @@
+import type Project from "interfaces/project.interface";
+import type Category from "interfaces/category.interface";
+import type Certificate from "interfaces/certificate.interface";
+import type { ShowcaseType } from "interfaces/showcase.interface";
+import type ShowcaseItem from "interfaces/showcase.interface";
 import { useMemo } from "react";
-import Project from "interfaces/project.interface";
-import Category from "interfaces/category.interface";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
@@ -8,20 +11,21 @@ import ItemCard from "components/Cards/ItemCard";
 
 interface Props {
   categoryIndex: number;
-  projects: Project[];
+  categoryItems: ShowcaseItem[];
   category: Category;
+  showcaseType: ShowcaseType;
 }
 
-interface PickedProjects {
-  [key: string]: Project;
+interface PickedItems {
+  [key: string]: Project | Certificate;
 }
 
-function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
+function isImgImportant(categoryIndex: number, itemIndex: number): boolean {
   let imgIsPriority;
 
   // determining if the image is important
   if (categoryIndex === 0) {
-    imgIsPriority = projectIndex < 4;
+    imgIsPriority = itemIndex < 4;
   } else {
     imgIsPriority = false;
   }
@@ -29,16 +33,17 @@ function isImgImportant(categoryIndex: number, projectIndex: number): boolean {
   return imgIsPriority;
 }
 
-export default function ProjectCategorySection({
+export default function ShowcaseCategorySection({
   categoryIndex,
   category,
-  projects,
+  categoryItems,
+  showcaseType,
 }: Props) {
-  const projectsInCategory = useMemo<PickedProjects>(() => {
-    const { items: allProjectIds } = category;
+  const itemsInCategory = useMemo<PickedItems>(() => {
+    const { items: allItemsId } = category;
 
-    const pickedProjects = allProjectIds.reduce((res, id) => {
-      const pickedProject = projects.find(project => project._id === id);
+    const pickedProjects = allItemsId.reduce((res, id) => {
+      const pickedProject = categoryItems.find(item => item._id === id);
 
       return { ...res, [id]: pickedProject };
     }, {});
@@ -68,15 +73,15 @@ export default function ProjectCategorySection({
             <li key={id}>
               <ItemCard
                 _id={id}
-                type="projects"
+                type={showcaseType}
                 imgIsPriority={isImgImportant(categoryIndex, i)}
-                imgSrc={projectsInCategory[id].image}
-                itemLikes={projectsInCategory[id].likes}
-                itemLink={`/projects/${projectsInCategory[id].slug}`}
-                itemName={projectsInCategory[id].name}
-                itemShortDesc={projectsInCategory[id].shortDescriptionEN}
-                itemViews={projectsInCategory[id].views}
-                techs={projectsInCategory[id].tech}
+                imgSrc={itemsInCategory[id].image}
+                itemLikes={itemsInCategory[id].likes}
+                itemLink={`/${showcaseType}/${itemsInCategory[id].slug}`}
+                itemName={itemsInCategory[id].name}
+                itemShortDesc={itemsInCategory[id].shortDescriptionEN}
+                itemViews={itemsInCategory[id].views}
+                techs={(itemsInCategory[id] as Project).tech || []}
               />
             </li>
           ))}

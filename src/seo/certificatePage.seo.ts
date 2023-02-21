@@ -1,4 +1,4 @@
-import { SEO } from "interfaces/seo.interface";
+import type { SEO } from "interfaces/seo.interface";
 import { ogLinkMaker } from "utils/client/helpers/ogLinkMaker";
 
 const certificatesPageSeo: SEO = {

@@ -9,16 +9,17 @@ import R from "react";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
-import Project from "interfaces/project.interface";
-import { Language, LikesOperationBody, Technologies } from "types/types";
+import type Project from "interfaces/project.interface";
+import type { Technologies } from "types/types";
 import TechWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import Show from "utils/client/jsx/Show";
-import CopyLinkBtn from "components/ShowcaseDetailsPage/CopyLinkBtn";
+import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
 import ActionButton from "components/StyledComponents/ActionButton";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { commaSeparator } from "utils/client/helpers/formatter";
-import LanguageToggle from "components/ShowcaseDetailsPage/LanguageToggle";
+import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
+import type { Language } from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import {
   getAllProjects,
   getProjectWithPrevAndNext,
@@ -29,9 +30,10 @@ import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useDebounce from "utils/client/hooks/useDebounce";
 import showcaseSeo from "seo/showcase.seo";
 import Seo from "seo/Seo";
-import ShowcaseStats from "components/ShowcaseDetailsPage/ShowcaseStats";
+import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
+import type { LikesOperationBody } from "types/api.types";
 
 interface ProjectRedirect {
   slug: string;
@@ -50,7 +52,7 @@ const StyledAlert = dynamic(
 );
 
 const DetailFooter = dynamic(
-  () => import("components/ShowcaseDetailsPage/DetailFooter"),
+  () => import("components/Showcase/ShowcaseDetailsPage/DetailFooter"),
   { ssr: false },
 );
 

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import R from "react";
-import { TwistDirection } from "types/types";
 import lightMesh from "@/public/svg/light-mesh.svg";
 import darkMesh from "@/public/svg/dark-mesh.svg";
+import type { TwistDirection } from "./TopPickSection";
 
 export default function LeftRightMesh({
   twistDirection,

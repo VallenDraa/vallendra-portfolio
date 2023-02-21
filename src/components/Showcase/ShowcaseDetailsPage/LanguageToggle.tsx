@@ -1,7 +1,8 @@
 import { IoLanguage } from "react-icons/io5";
 import { Dispatch, SetStateAction } from "react";
 import ActionButton from "components/StyledComponents/ActionButton";
-import { Language } from "types/types";
+
+export type Language = "id" | "en";
 
 export default function LanguageToggle({
   activeLanguage,

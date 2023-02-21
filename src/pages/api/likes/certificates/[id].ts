@@ -7,12 +7,12 @@ import {
   getHasLiked,
 } from "server/service/certificates/certificateStats.service";
 import getUniqueIpId from "utils/server/getUniqueIpId";
-import { LikesOperationBody } from "types/types";
 import {
   internalServerErrorRes,
   invalidBodyRes,
   invalidHttpMethodRes,
 } from "server/error/response.error";
+import { LikesOperationBody } from "types/api.types";
 
 /* this handles operation on likes for a single project
 ====================================================== */

@@ -2,12 +2,11 @@ import R from "react";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import Project from "interfaces/project.interface";
+import type Project from "interfaces/project.interface";
 import Show from "utils/client/jsx/Show";
-import ProjectCategorySection from "components/CategorySections/ProjectCategorySection";
 import SearchInput from "components/SearchInput";
 import ItemCard from "components/Cards/ItemCard";
-import Category from "interfaces/category.interface";
+import type Category from "interfaces/category.interface";
 import { getAllProjects } from "server/service/projects/projects.service";
 import { getAllProjectCategories } from "server/service/projects/projectCategory.service";
 import { JSONSerialize } from "utils/server/serialize";
@@ -16,6 +15,7 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import Seo from "seo/Seo";
 import projectsPageSeo from "seo/projectsPage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
+import ShowcaseCategorySection from "components/Showcase/ShowcaseCategorySection";
 
 interface Props {
   projects: Project[];
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const FailToLoad = dynamic(
-  () => import("components/ShowcaseIndexPage/FailToLoad"),
+  () => import("components/Showcase/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
 );
 
@@ -111,11 +111,12 @@ export default function ProjectsPage({ projects, categories }: Props) {
           <div className="space-y-10">
             {categories.map((category, i) => (
               // index is used for determining the image priority prop
-              <ProjectCategorySection
+              <ShowcaseCategorySection
+                showcaseType="projects"
                 categoryIndex={i}
                 key={category._id}
                 category={category}
-                projects={projects}
+                categoryItems={projects}
               />
             ))}
           </div>

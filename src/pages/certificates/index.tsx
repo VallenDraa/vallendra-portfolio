@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Show from "utils/client/jsx/Show";
 import SearchInput from "components/SearchInput";
-import Certificate from "interfaces/certificate.interface";
-import CertificateCategorySection from "components/CategorySections/CertificateCategorySection";
+import type Certificate from "interfaces/certificate.interface";
 import ItemCard from "components/Cards/ItemCard";
-import Category from "interfaces/category.interface";
+import type Category from "interfaces/category.interface";
 import { getAllCertificates } from "server/service/certificates/certificates.service";
 import { getAllCertificateCategories } from "server/service/certificates/certificateCategory.service";
 import { JSONSerialize } from "utils/server/serialize";
@@ -15,6 +14,7 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import Seo from "seo/Seo";
 import certificatesPageSeo from "seo/certificatePage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
+import ShowcaseCategorySection from "components/Showcase/ShowcaseCategorySection";
 
 interface Props {
   certificates: Certificate[];
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const FailToLoad = dynamic(
-  () => import("components/ShowcaseIndexPage/FailToLoad"),
+  () => import("components/Showcase/ShowcaseIndexPage/FailToLoad"),
   { ssr: false },
 );
 
@@ -116,11 +116,12 @@ export default function ProjectsPage({ certificates, categories }: Props) {
           <div className="space-y-10">
             {categories.map((category, i) => (
               // index is used for determining the image priority prop
-              <CertificateCategorySection
+              <ShowcaseCategorySection
+                showcaseType="certificates"
                 categoryIndex={i}
                 key={category._id}
                 category={category}
-                certificates={certificates}
+                categoryItems={certificates}
               />
             ))}
           </div>

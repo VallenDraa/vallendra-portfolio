@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Hero from "components/Home/Hero/Hero";
-import Project from "interfaces/project.interface";
+import type Project from "interfaces/project.interface";
 import { getTopPickedProjects } from "server/service/projects/projects.service";
 import TopPickSection from "components/Home/ProjectTopPicks/TopPickSection";
 import { JSONSerialize } from "utils/server/serialize";

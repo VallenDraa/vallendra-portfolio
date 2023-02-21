@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 
 export default function NotFoundPage() {
   return (

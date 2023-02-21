@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { LeanDocument } from "mongoose";
-import Certificate from "interfaces/certificate.interface";
+import type Certificate from "interfaces/certificate.interface";
 import connectMongo from "server/mongo/mongodb";
 import CertificateModel from "server/mongo/model/certificate.model";
 

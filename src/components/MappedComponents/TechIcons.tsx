@@ -15,7 +15,7 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
-import { TextSize, Technologies } from "types/types";
+import type { TextSize, Technologies } from "types/types";
 
 const techIcons: {
   [key in Technologies]: (

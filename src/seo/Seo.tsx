@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { BaseSeo, OgSeo, SEO } from "interfaces/seo.interface";
+import type { BaseSeo, OgSeo, SEO } from "interfaces/seo.interface";
 import defaultSeo from "./default.seo";
 
 export default function Seo({

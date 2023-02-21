@@ -6,7 +6,7 @@ import SectionHeading from "components/Typography/SectionHeading";
 import Seo from "seo/Seo";
 import guestbookPageSeo from "seo/guestbook.seo";
 import fadeIn from "utils/client/helpers/animateOnObserved";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 
 export default function Guestbook() {
   const { theme } = useTheme();

@@ -1,5 +1,5 @@
 import m from "mongoose";
-import Category from "interfaces/category.interface";
+import type Category from "interfaces/category.interface";
 
 interface CertificateCategory extends Omit<Category, "_id">, m.Document {
   madeAt: Date;

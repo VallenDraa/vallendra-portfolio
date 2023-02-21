@@ -6,11 +6,12 @@ import { BsArrowRight } from "react-icons/bs";
 import { CldImage } from "next-cloudinary";
 import R from "react";
 import Show from "utils/client/jsx/Show";
-import { ShowcaseType, Technologies } from "types/types";
+import { Technologies } from "types/types";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import Observe from "components/Observe";
 import StyledButton from "components/StyledComponents/StyledButton";
+import type { ShowcaseType } from "interfaces/showcase.interface";
 import Stats from "./Stats";
 import TechsSection from "./TechsSection";
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { LeanDocument } from "mongoose";
 import ProjectModel from "server/mongo/model/project.model";
-import Project from "interfaces/project.interface";
+import type Project from "interfaces/project.interface";
 import connectMongo from "server/mongo/mongodb";
 
 export async function getTopPickedProjects() {

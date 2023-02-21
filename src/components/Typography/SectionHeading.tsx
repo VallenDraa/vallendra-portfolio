@@ -1,9 +1,10 @@
 import { Typography } from "@material-tailwind/react";
 import Observe from "components/Observe";
 import { ReactNode } from "react";
-import fadeIn, {
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import type  {
   FadeInAnimation,
-} from "utils/client/helpers/animateOnObserved";
+} from "utils/client/helpers/animateOnObserved"
 import Show from "utils/client/jsx/Show";
 
 interface Props {
