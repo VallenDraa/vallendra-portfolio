@@ -4,7 +4,7 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
 import SectionHeading from "components/Typography/SectionHeading";
 import TopBottomWaves from "./TopBottomWaves";
-import TopPickItem from "./TopPickItem";
+import TopPickItem from "./TopProjectsItem";
 
 type TopPickSectionProps = {
   topPickedProjects: Project[];
@@ -33,7 +33,7 @@ export default function TopPickSection({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in", 0)}
           >
-            <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[0.5px] after:translate-x-1/2 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/30 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
+            <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[1px] after:translate-x-1/2 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/40 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
               <div className="relative z-30 bg-[#dbdef1] supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm dark:bg-[#2f2f2f] dark:supports-[backdrop-filter]:bg-transparent md:pb-0">
                 <SectionHeading
                   titleAs="h2"
@@ -71,7 +71,7 @@ export default function TopPickSection({
             })}
           </div>
 
-          <div className="relative h-52 w-[calc(50%-1px)] -translate-y-1 rounded-tr-2xl border-r-2 border-dashed border-indigo-300/70 dark:border-white/40" />
+          <div className="relative h-52 w-1/2 border-r-2 border-indigo-300/70  dark:border-white/40 lg:rounded-tr-2xl" />
         </div>
       </div>
     </section>

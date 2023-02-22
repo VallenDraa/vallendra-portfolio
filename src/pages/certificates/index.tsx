@@ -16,7 +16,7 @@ import certificatesPageSeo from "seo/certificatePage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import ShowcaseCategorySection from "components/Showcase/ShowcaseCategorySection";
 
-type ProjectsPageProps = {
+type CertificatePageProps = {
   certificates: Certificate[];
   categories: Category[];
 };
@@ -30,10 +30,10 @@ const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
   ssr: false,
 });
 
-export default function ProjectsPage({
+export default function CertificatePage({
   certificates,
   categories,
-}: ProjectsPageProps) {
+}: CertificatePageProps) {
   const router = useRouter();
 
   const [isError, setIsError] = R.useState(certificates.length === 0);
@@ -44,11 +44,11 @@ export default function ProjectsPage({
 
   const showedIndex = R.useMemo<number[]>(() => {
     const newShowedIndex: number[] = certificates.reduce(
-      (result, project, i) => {
+      (result, certificate, i) => {
         if (query === "") return [...result, i];
 
         if (
-          project.name
+          certificate.name
             .toLocaleLowerCase()
             .includes(query.toLocaleLowerCase().trim())
         ) {

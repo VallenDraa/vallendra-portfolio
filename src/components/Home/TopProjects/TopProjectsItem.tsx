@@ -11,7 +11,8 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import techsWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import StyledButton from "components/StyledComponents/StyledButton";
-import type { TwistDirection } from "./TopPickSection";
+import clsx from "clsx";
+import type { TwistDirection } from "./TopProjectsSection";
 import LeftRightMesh from "./LeftRightMesh";
 
 type TopPickItemProps = {
@@ -67,42 +68,39 @@ export default function TopPickItem({
       onEnter={ref => fadeIn(ref, "animate-fade-in", 50)}
     >
       <div
-        className={`relative flex min-h-[500px] flex-col gap-0.5 border-t-2 border-dashed border-indigo-300/70 opacity-0 dark:border-white/40 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none ${
-          isLast ? "border-b-2" : ""
-        } ${
-          twistDirection === "left"
-            ? `rounded-r-2xl border-r-2 after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-2 after:border-dashed after:border-indigo-300/70 dark:after:border-white/40 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl ${
-                isFirst
-                  ? "after:rounded-tr-2xl lg:after:rounded-none"
-                  : "ml-3 after:rounded-tr-2xl lg:ml-0"
-              }`
-            : "mx-auto mr-3 rounded-l-xl border-l-2 before:absolute before:inset-y-0 before:left-0 before:z-50 before:hidden before:w-12 before:rounded-tl-2xl before:border-l-2 before:border-dashed before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 before:lg:rounded-bl-2xl"
-        }`}
+        className={clsx(
+          "relative flex min-h-[500px] flex-col gap-0.5 border-t-2 border-dashed border-indigo-300/70 opacity-0 dark:border-white/40 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none",
+          isLast && "border-b-2",
+          twistDirection !== "left"
+            ? "border-l-2 pr-3 before:absolute before:inset-y-0 before:left-0 before:z-50 before:mx-auto before:hidden before:w-12 before:border-l-2 before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:rounded-l-xl lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 lg:before:rounded-tl-2xl before:lg:rounded-bl-2xl"
+            : clsx(
+                !isFirst && "lg:after:rounded-r-2xl",
+                "border-r-2 after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/40 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl",
+              ),
+        )}
       >
         {/* Mesh */}
-        <LeftRightMesh
-          className="hidden lg:block"
-          twistDirection={twistDirection}
-        />
+        <LeftRightMesh twistDirection={twistDirection} />
 
         {/* div to hide the top-left border for smaller screen */}
         <Show when={isFirst}>
-          <div className="absolute left-0 right-1/2 -top-3 block h-3 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
+          <div className="absolute left-0 right-[calc(50%-1px)] -top-3 block h-3.5 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
         </Show>
 
         {/* div to hide the bottom-right border for smaller screen */}
         <Show when={isLast}>
-          <div className="absolute right-0 left-1/2 -bottom-3 block h-3 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
+          <div className="absolute right-0 left-[calc(50%-1px)] -bottom-3 block h-3.5 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
         </Show>
 
         {/* project number */}
         <Observe onEnter={projectInView} onExit={projectNotInView}>
           <div
-            className={`absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-gray-400 ${
+            className={clsx(
+              "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-gray-400",
               twistDirection === "left"
                 ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
-                : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]"
-            }`}
+                : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]",
+            )}
           >
             {projectOrder}
           </div>
@@ -121,9 +119,10 @@ export default function TopPickItem({
             height={576}
             format="webp"
             quality={50}
-            className={`mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0 ${
-              twistDirection === "left" ? "" : "ml-auto"
-            }`}
+            className={clsx(
+              "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0",
+              twistDirection === "left" ? "" : "ml-auto",
+            )}
           />
         </div>
 
