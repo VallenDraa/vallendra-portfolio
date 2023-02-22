@@ -131,7 +131,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                       variant="text"
                       fullWidth
                       onClick={() => handleOpenAccordion(i)}
-                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-white/70"
+                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-200"
                     >
                       {menu.name}
                       <IoChevronDown
@@ -149,7 +149,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                             color="indigo"
                             variant="text"
                             fullWidth
-                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
+                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-200"
                           >
                             {subMenu.name}
                           </Button>
