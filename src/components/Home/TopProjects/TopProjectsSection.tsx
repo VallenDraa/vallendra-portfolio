@@ -4,17 +4,17 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
 import SectionHeading from "components/Typography/SectionHeading";
 import TopBottomWaves from "./TopBottomWaves";
-import TopPickItem from "./TopProjectsItem";
+import TopProjectsItem from "./TopProjectsItem";
 
-type TopPickSectionProps = {
+type TopProjectsSectionProps = {
   topPickedProjects: Project[];
 };
 
 export type TwistDirection = "right" | "left";
 
-export default function TopPickSection({
+export default function TopProjectsSection({
   topPickedProjects,
-}: TopPickSectionProps) {
+}: TopProjectsSectionProps) {
   const lineTwistDirection = useRef<TwistDirection>("left");
 
   return (
@@ -54,7 +54,7 @@ export default function TopPickSection({
           <div>
             {topPickedProjects.map((project, i) => {
               const component = (
-                <TopPickItem
+                <TopProjectsItem
                   projectOrder={i + 1}
                   key={project._id}
                   project={project}

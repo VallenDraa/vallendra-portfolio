@@ -1,8 +1,14 @@
 import { useEffect, useState, useContext, RefObject, Fragment } from "react";
-import { Typography, Button } from "@material-tailwind/react";
+import {
+  Typography,
+  Button,
+  Accordion,
+  AccordionBody,
+} from "@material-tailwind/react";
 import Link from "next/link";
 import { IoClose, IoChevronDown } from "react-icons/io5";
-import MENUS from "utils/data/menus";
+import { menuData } from "utils/data/menus";
+import clsx from "clsx";
 import Show from "utils/client/jsx/Show";
 import NavIsOpenedContext from "context/NavIsOpenedCP";
 import NavbarSubMenu from "./NavbarSubMenu";
@@ -15,11 +21,11 @@ type NavListProps = {
 
 export default function NavList({ navListRef, overlayRef }: NavListProps) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
-  const [openedAccordion, setOpenedAccordion] = useState(0);
+  const [openedAccordion, setOpenedAccordion] = useState<number | null>(0);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
   function handleOpenAccordion(value: number) {
-    setOpenedAccordion(openedAccordion === value ? 0 : value);
+    setOpenedAccordion(prev => (prev === value ? null : value));
   }
 
   /* letting the close animation play and then destroying the navlist itself
@@ -88,101 +94,75 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
         </div>
 
         {/* menu lists */}
-        {MENUS.map(
-          (menu): React.ReactNode => (
-            <Fragment key={menu}>
-              {/* menu for other than projects and certicates */}
-              <Show when={menu !== "projects" && menu !== "certificates"}>
-                <NavBtn
-                  onClick={() => window.innerWidth < 960 && closeNav()}
-                  menu={menu}
-                  href={`/#${menu}`}
-                />
-              </Show>
-
-              {/* for certticates page menu */}
-              <Show when={menu === "certificates"}>
-                <NavBtn
-                  onClick={() => window.innerWidth < 960 && closeNav()}
-                  menu={menu}
-                  href={`/${menu}`}
-                />
-              </Show>
-
-              {/* for project menu link */}
-              <Show when={menu === "projects"}>
-                {/* project menu for large navbar */}
+        {menuData.map((menu, i) => (
+          <Fragment key={menu.name}>
+            {menu.subMenus === undefined ? (
+              <NavBtn
+                onClick={() => window.innerWidth < 960 && closeNav()}
+                menu={menu.name}
+                href={menu.url}
+              />
+            ) : (
+              <>
                 <Show when={!accordionIsVisible}>
                   <NavbarSubMenu
                     offset={14}
                     Handler={
                       <div className="flex items-center py-2 px-5 capitalize lg:px-3">
-                        {menu}
+                        {menu.name}
                       </div>
                     }
-                    menuItems={[
+                    menuItems={menu.subMenus.map(subMenu => (
                       <Link
-                        key="/#top-picks"
-                        href="/#top-picks"
-                        className="inline-block h-full w-full p-3"
+                        key={subMenu.url}
+                        href={subMenu.url}
+                        className="inline-block h-full w-full p-3 capitalize"
                       >
-                        Top Picks
-                      </Link>,
-                      <Link
-                        key="/projects"
-                        href="/projects"
-                        className="inline-block h-full w-full p-3"
-                      >
-                        All Projects
-                      </Link>,
-                    ]}
+                        {subMenu.name}
+                      </Link>
+                    ))}
                   />
                 </Show>
 
                 {/* project menu for small navbar */}
                 <Show when={accordionIsVisible}>
-                  <details>
-                    <summary
-                      onClick={() => handleOpenAccordion(1)}
-                      className="flex cursor-pointer items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  transition-colors duration-200 hover:bg-indigo-500/10 hover:text-indigo-500 active:bg-indigo-500/20 dark:text-gray-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-200"
+                  <Accordion open={openedAccordion === i}>
+                    <Button
+                      color="indigo"
+                      variant="text"
+                      fullWidth
+                      onClick={() => handleOpenAccordion(i)}
+                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-white/70"
                     >
-                      Projects
+                      {menu.name}
                       <IoChevronDown
                         className={`mr-2 h-5 w-5 transition duration-200 ${
-                          openedAccordion === 1 ? "rotate-180" : "rotate-0"
+                          openedAccordion === i ? "rotate-180" : "rotate-0"
                         }`}
                       />
-                    </summary>
-                    <div className="py-1.5">
-                      <Link href="/#top-picks">
-                        <Button
-                          onClick={closeNav}
-                          color="indigo"
-                          variant="text"
-                          fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-300"
-                        >
-                          Top Picks
-                        </Button>
-                      </Link>
-                      <Link href="/projects">
-                        <Button
-                          onClick={closeNav}
-                          color="indigo"
-                          variant="text"
-                          fullWidth
-                          className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-300"
-                        >
-                          All Collections
-                        </Button>
-                      </Link>
-                    </div>
-                  </details>
+                    </Button>
+
+                    <AccordionBody className="py-1.5">
+                      {menu.subMenus.map(subMenu => (
+                        <Link key={subMenu.url} href={subMenu.url}>
+                          <Button
+                            onClick={closeNav}
+                            color="indigo"
+                            variant="text"
+                            fullWidth
+                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-500 dark:hover:text-white dark:lg:text-white/70"
+                          >
+                            {subMenu.name}
+                          </Button>
+                        </Link>
+                      ))}
+                    </AccordionBody>
+                  </Accordion>
                 </Show>
-              </Show>
-            </Fragment>
-          ),
-        )}
+              </>
+            )}
+          </Fragment>
+        ))}
 
         <div className="mt-auto self-center pb-6 lg:hidden">
           <Typography

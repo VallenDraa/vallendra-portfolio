@@ -15,7 +15,7 @@ import clsx from "clsx";
 import type { TwistDirection } from "./TopProjectsSection";
 import LeftRightMesh from "./LeftRightMesh";
 
-type TopPickItemProps = {
+type TopProjectsItemProps = {
   projectOrder: number;
   twistDirection: TwistDirection;
   project: Project;
@@ -23,13 +23,13 @@ type TopPickItemProps = {
   isLast: boolean;
 };
 
-export default function TopPickItem({
+export default function TopProjectsItem({
   projectOrder,
   twistDirection,
   project,
   isFirst = false,
   isLast = false,
-}: TopPickItemProps) {
+}: TopProjectsItemProps) {
   const animationTechDelay = R.useMemo(() => {
     let delay = 0;
     const delayArray: number[] = [];
@@ -75,7 +75,7 @@ export default function TopPickItem({
             ? "border-l-2 pr-3 before:absolute before:inset-y-0 before:left-0 before:z-50 before:mx-auto before:hidden before:w-12 before:border-l-2 before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:rounded-l-xl lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 lg:before:rounded-tl-2xl before:lg:rounded-bl-2xl"
             : clsx(
                 !isFirst && "lg:after:rounded-r-2xl",
-                "border-r-2 after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/40 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl",
+                "border-r-2 pl-3 after:absolute after:inset-y-0 after:right-0 after:z-50 after:hidden after:w-12 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/40 lg:flex-row lg:border-0 lg:border-r-0 lg:after:right-1/2 lg:after:block after:lg:rounded-br-2xl",
               ),
         )}
       >
