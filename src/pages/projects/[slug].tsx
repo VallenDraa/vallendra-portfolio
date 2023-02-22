@@ -35,16 +35,16 @@ import SectionHeading from "components/Typography/SectionHeading";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import type { LikesOperationBody } from "types/api.types";
 
-interface ProjectRedirect {
+type ProjectRedirect = {
   slug: string;
   name: string;
-}
+};
 
-interface PropsData {
+type ProjectDetailsPropsData = {
   project: Project;
   prevProject: ProjectRedirect;
   nextProject: ProjectRedirect;
-}
+};
 
 const StyledAlert = dynamic(
   () => import("components/StyledComponents/StyledAlert"),
@@ -60,7 +60,7 @@ export default function ProjectDetails({
   project,
   prevProject,
   nextProject,
-}: PropsData) {
+}: ProjectDetailsPropsData) {
   /* Others
   =================== */
   const router = useRouter();

@@ -9,16 +9,16 @@ import Observe from "components/Observe";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
 import ItemCard from "components/Cards/ItemCard";
 
-interface Props {
+type ShowcaseCategorySectionProps = {
   categoryIndex: number;
   categoryItems: ShowcaseItem[];
   category: Category;
   showcaseType: ShowcaseType;
-}
+};
 
-interface PickedItems {
+type PickedItems = {
   [key: string]: Project | Certificate;
-}
+};
 
 function isImgImportant(categoryIndex: number, itemIndex: number): boolean {
   let imgIsPriority;
@@ -38,7 +38,7 @@ export default function ShowcaseCategorySection({
   category,
   categoryItems,
   showcaseType,
-}: Props) {
+}: ShowcaseCategorySectionProps) {
   const itemsInCategory = useMemo<PickedItems>(() => {
     const { items: allItemsId } = category;
 

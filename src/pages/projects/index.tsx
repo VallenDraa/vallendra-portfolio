@@ -17,10 +17,10 @@ import projectsPageSeo from "seo/projectsPage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import ShowcaseCategorySection from "components/Showcase/ShowcaseCategorySection";
 
-interface Props {
+type ProjectsPageProps = {
   projects: Project[];
   categories: Category[];
-}
+};
 
 const FailToLoad = dynamic(
   () => import("components/Showcase/ShowcaseIndexPage/FailToLoad"),
@@ -31,7 +31,10 @@ const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
   ssr: false,
 });
 
-export default function ProjectsPage({ projects, categories }: Props) {
+export default function ProjectsPage({
+  projects,
+  categories,
+}: ProjectsPageProps) {
   const router = useRouter();
 
   const [isError, setIsError] = R.useState(projects.length === 0);

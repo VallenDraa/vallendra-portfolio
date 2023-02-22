@@ -10,7 +10,7 @@ const dateSkeleton =
 const skeleton =
   "after:h-4 after:w-20 after:animate-pulse after:rounded-full after:bg-white/20";
 
-interface Props {
+type ShowcaseStatsProps = {
   timestampMessage?: string;
   views: number;
   likes: number;
@@ -18,7 +18,7 @@ interface Props {
   isLoadingStats?: boolean;
   dateString?: string;
   unixTime?: number;
-}
+};
 
 export default function ShowcaseStats({
   dateString = new Date().toISOString(),
@@ -28,7 +28,7 @@ export default function ShowcaseStats({
   likes,
   hasLiked,
   isLoadingStats = false,
-}: Props) {
+}: ShowcaseStatsProps) {
   const [dateIsLoaded, setDateIsLoaded] = R.useState(false);
   const [formattedDate, setFormattedData] = R.useState("");
 

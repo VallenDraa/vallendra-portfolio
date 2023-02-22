@@ -1,17 +1,17 @@
 import Link, { LinkProps } from "next/link";
 import { ReactNode } from "react";
 
-interface Props extends LinkProps {
+type LinkWithUnderlineProps = {
   children: ReactNode;
   href: string;
   className?: string;
-}
+} & LinkProps;
 
 export default function LinkWithUnderline({
   children,
   href,
   className,
-}: Props) {
+}: LinkWithUnderlineProps) {
   return (
     <Link
       href={href}

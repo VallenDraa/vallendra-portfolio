@@ -24,23 +24,23 @@ import {
 import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
-import showcaseSeo from "seo/showcase.seo";
 import useDebounce from "utils/client/hooks/useDebounce";
 import Seo from "seo/Seo";
 import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
 import type { LikesOperationBody } from "types/api.types";
+import showcaseSeo from "seo/showcase.seo";
 
-interface CertificateRedirect {
+type CertificateRedirect = {
   slug: string;
   name: string;
-}
+};
 
-interface PropsData {
+type CertificateDetailsProps = {
   certificate: Certificate;
   prevCertificate: CertificateRedirect;
   nextCertificate: CertificateRedirect;
-}
+};
 
 const StyledAlert = dynamic(
   () => import("components/StyledComponents/StyledAlert"),
@@ -56,7 +56,7 @@ export default function CertificateDetails({
   certificate,
   prevCertificate,
   nextCertificate,
-}: PropsData) {
+}: CertificateDetailsProps) {
   /* Others
   =================== */
   const router = useRouter();

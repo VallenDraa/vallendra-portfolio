@@ -1,10 +1,10 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
 
-interface ViewsResponse {
+type ViewsResponse = {
   _id: string;
   views: number;
-}
+};
 
 export default function useGetViewsById(
   id: string,

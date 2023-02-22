@@ -2,13 +2,13 @@ import { Button, ButtonProps } from "@material-tailwind/react";
 import { forwardRef } from "react";
 import Show from "utils/client/jsx/Show";
 
-interface Props extends ButtonProps {
+type StyledButtonProps = {
   icon?: JSX.Element;
   textClasses?: string;
   iconClasses?: string;
-}
+} & ButtonProps;
 
-const StyledButton = forwardRef<HTMLButtonElement, Props>(
+const StyledButton = forwardRef<HTMLButtonElement, StyledButtonProps>(
   (
     { ref, className = "", textClasses = "", iconClasses = "", icon, ...props },
     forwardedRef,

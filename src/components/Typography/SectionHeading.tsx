@@ -5,7 +5,7 @@ import fadeIn from "utils/client/helpers/animateOnObserved";
 import type { FadeInAnimation } from "utils/client/helpers/animateOnObserved";
 import Show from "utils/client/jsx/Show";
 
-interface Props {
+type SectioHeadingProps = {
   titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   title: ReactNode;
   subTitle?: ReactNode;
@@ -18,7 +18,7 @@ interface Props {
     title?: number;
     subTitle?: number;
   } | null;
-}
+};
 
 export default function SectionHeading({
   titleAs = "h1",
@@ -27,7 +27,7 @@ export default function SectionHeading({
   duration = null,
   willFade = false,
   animation,
-}: Props) {
+}: SectioHeadingProps) {
   return (
     <>
       <Observe

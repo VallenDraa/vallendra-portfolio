@@ -5,26 +5,26 @@ import { BsArrowRight } from "react-icons/bs";
 import { CldImage } from "next-cloudinary";
 import R from "react";
 import Show from "utils/client/jsx/Show";
-import useGetViewsById from "utils/client/hooks/useGetViewsById";
-import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import Observe from "components/Observe";
 import StyledButton from "components/StyledComponents/StyledButton";
 import type { ShowcaseType } from "interfaces/showcase.interface";
 import type ShowcaseItem from "interfaces/showcase.interface";
 import Project from "interfaces/project.interface";
+import useGetViewsById from "utils/client/hooks/useGetViewsById";
+import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import Stats from "./Stats";
 import TechsSection from "./TechsSection";
 
-interface Props {
+type ItemCardProps = {
   // for data fetching purpose
   type: ShowcaseType;
 
   // image props
   imgIsPriority: boolean;
   data: ShowcaseItem;
-}
+};
 
-export default function ItemCard({ data, type, imgIsPriority }: Props) {
+export default function ItemCard({ data, type, imgIsPriority }: ItemCardProps) {
   /* Helper state
    ====================== */
   const [hasFetched, setHasFetched] = R.useState(false);

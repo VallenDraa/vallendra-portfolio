@@ -5,12 +5,12 @@ import useDebounce from "utils/client/hooks/useDebounce";
 import Show from "utils/client/jsx/Show";
 import StyledInput from "./StyledComponents/StyledInput";
 
-interface Props extends InputProps {
+type SearchInputProps = {
   defaultValue?: string;
   debounceMs?: number;
   loadingCallback?: (isWaiting: boolean) => void;
   callback: (query: string) => void;
-}
+} & InputProps;
 
 export default function SearchInput({
   ref,
@@ -22,7 +22,7 @@ export default function SearchInput({
   callback,
   onChange,
   ...props
-}: Props) {
+}: SearchInputProps) {
   const [tempQuery, setTempQuery] = useState(defaultValue || "");
   const [finalQuery, setFinalQuery] = useState(defaultValue || "");
   const [isWaitingResult, searchError] = useDebounce(

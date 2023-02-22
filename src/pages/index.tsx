@@ -8,9 +8,9 @@ import { JSONSerialize } from "utils/server/serialize";
 import Seo from "seo/Seo";
 import defaultSeo from "seo/default.seo";
 
-interface Props {
+type HomeProps = {
   topPickedProjects: Project[];
-}
+};
 
 const Profile = dynamic(() => import("components/Home/Profile/Profile"), {
   ssr: false,
@@ -23,7 +23,7 @@ const Redirect = dynamic(() => import("components/Home/Redirect/Redirect"), {
   ssr: false,
 });
 
-export default function Home({ topPickedProjects }: Props) {
+export default function Home({ topPickedProjects }: HomeProps) {
   return (
     <>
       <Seo {...defaultSeo} />

@@ -1,20 +1,20 @@
 import { ogLinkMaker } from "utils/client/helpers/ogLinkMaker";
-import type { SEO } from "interfaces/seo.interface";
 import type { ShowcaseType } from "interfaces/showcase.interface";
+import type { SEO } from "./Seo";
 
-interface Args {
+type ShowcaseSeoArgs = {
   title: string;
   slug: string;
   shortDesc: string;
   type: ShowcaseType;
-}
+};
 
 export default function showcaseSeo({
   title,
   slug,
   shortDesc,
   type,
-}: Args): SEO {
+}: ShowcaseSeoArgs): SEO {
   return {
     base: { title: `VallenDra | ${title}`, desc: shortDesc },
     og: {

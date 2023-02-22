@@ -6,7 +6,7 @@
 //   invalidBodyRes,
 // } from "src/server/error/response.error";
 
-// export interface EmailBody {
+// export typeEmailBody {
 //   senderEmail: string;
 //   emailSubject: string;
 //   message: string;

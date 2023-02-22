@@ -8,12 +8,12 @@ import NavIsOpenedContext from "context/NavIsOpenedCP";
 import NavbarSubMenu from "./NavbarSubMenu";
 import NavBtn from "./NavBtn";
 
-interface Props {
+type NavListProps = {
   navListRef: RefObject<HTMLDivElement>;
   overlayRef: RefObject<HTMLDivElement>;
-}
+};
 
-export default function NavList({ navListRef, overlayRef }: Props) {
+export default function NavList({ navListRef, overlayRef }: NavListProps) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const [openedAccordion, setOpenedAccordion] = useState(0);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);

@@ -6,13 +6,15 @@ import SectionHeading from "components/Typography/SectionHeading";
 import TopBottomWaves from "./TopBottomWaves";
 import TopPickItem from "./TopPickItem";
 
-interface Props {
+type TopPickSectionProps = {
   topPickedProjects: Project[];
-}
+};
 
 export type TwistDirection = "right" | "left";
 
-export default function TopPickSection({ topPickedProjects }: Props) {
+export default function TopPickSection({
+  topPickedProjects,
+}: TopPickSectionProps) {
   const lineTwistDirection = useRef<TwistDirection>("left");
 
   return (

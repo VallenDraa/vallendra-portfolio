@@ -1,9 +1,9 @@
 import R from "react";
 
-export interface NavIsOpened {
+export type NavIsOpened = {
   navIsOpened: boolean;
   setNavIsOpened: R.Dispatch<R.SetStateAction<boolean>>;
-}
+};
 
 export const navInitialState = {
   navIsOpened: false,

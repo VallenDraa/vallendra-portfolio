@@ -4,11 +4,11 @@ import useIntersectionObserver, {
 } from "utils/client/hooks/useIntersectionObserver";
 import { IS_PROD } from "@/constants";
 
-interface Props<T extends HTMLElement> extends UseIntersectionObserverProps {
+type ObserveProps<T extends HTMLElement> = {
   children: React.ReactElement;
   onEnter?: (element: R.RefObject<T>) => void;
   onExit?: (element: R.RefObject<T>) => void;
-}
+} & UseIntersectionObserverProps;
 
 export default function Observe<T extends HTMLElement>({
   children,
@@ -16,7 +16,7 @@ export default function Observe<T extends HTMLElement>({
   onExit,
   freezeOnceVisible,
   ...others
-}: Props<T>) {
+}: ObserveProps<T>) {
   const ref = R.useRef<T>(null);
   const entry = useIntersectionObserver(ref, {
     ...others,

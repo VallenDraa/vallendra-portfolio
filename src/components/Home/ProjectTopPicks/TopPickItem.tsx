@@ -14,13 +14,13 @@ import StyledButton from "components/StyledComponents/StyledButton";
 import type { TwistDirection } from "./TopPickSection";
 import LeftRightMesh from "./LeftRightMesh";
 
-interface Props {
+type TopPickItemProps = {
   projectOrder: number;
   twistDirection: TwistDirection;
   project: Project;
   isFirst: boolean;
   isLast: boolean;
-}
+};
 
 export default function TopPickItem({
   projectOrder,
@@ -28,7 +28,7 @@ export default function TopPickItem({
   project,
   isFirst = false,
   isLast = false,
-}: Props) {
+}: TopPickItemProps) {
   const animationTechDelay = R.useMemo(() => {
     let delay = 0;
     const delayArray: number[] = [];

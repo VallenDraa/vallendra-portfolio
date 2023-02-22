@@ -1,7 +1,5 @@
-interface Category<T = string> {
+export default interface Category {
   _id: string;
   name: string;
-  items: string[] | T[];
+  items: string[];
 }
-
-export default Category;

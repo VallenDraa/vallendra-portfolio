@@ -1,8 +1,8 @@
 import { Alert, AlertProps } from "@material-tailwind/react";
 
-interface Props extends Omit<AlertProps, "color"> {
+type StyledAlertProps = {
   color: "green" | "red" | "deep-purple";
-}
+} &  Omit<AlertProps, "color">
 
 export default function StyledAlert({
   show,
@@ -12,7 +12,7 @@ export default function StyledAlert({
   children,
   dismissible,
   ...props
-}: Props) {
+}: StyledAlertProps) {
   return (
     <Alert
       icon={icon}

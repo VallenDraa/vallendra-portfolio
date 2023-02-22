@@ -1,10 +1,27 @@
 import Head from "next/head";
-import type { BaseSeo, OgSeo, SEO } from "interfaces/seo.interface";
 import defaultSeo from "./default.seo";
 
+export type BaseSeo = {
+  title: string;
+  desc: string;
+  robots?: string;
+};
+
+export type OgSeo = {
+  siteName: string;
+  siteUrl: string;
+  imageUrl: string;
+  imageAlt: string;
+};
+
+export type SEO = {
+  base: BaseSeo;
+  og: OgSeo;
+};
+
 export default function Seo({
-  base = defaultSeo.base as BaseSeo,
-  og = defaultSeo.og as OgSeo,
+  base = defaultSeo.base,
+  og = defaultSeo.og,
 }: SEO) {
   return (
     <Head>

@@ -1,10 +1,11 @@
 import m from "mongoose";
 import type Certificate from "interfaces/certificate.interface";
 
-interface CertificateDocument extends Omit<Certificate, "_id">, m.Document {
+type CertificateDocument = {
   madeAt: Date;
   updatedAt?: Date;
-}
+} & Omit<Certificate, "_id"> &
+  m.Document;
 
 const CertificateSchema = new m.Schema<CertificateDocument>(
   {

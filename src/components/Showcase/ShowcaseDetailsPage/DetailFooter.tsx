@@ -2,19 +2,19 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Comment from "./Comment";
 import LinkWithUnderline from "./LinkWithUnderline";
 
-interface Props {
+type DetailFooterProps = {
   prevLink: string;
   prevTitle: string;
   nextLink: string;
   nextTitle: string;
-}
+};
 
 export default function DetailFooter({
   prevLink,
   prevTitle,
   nextLink,
   nextTitle,
-}: Props) {
+}: DetailFooterProps) {
   return (
     <section className="mb-5">
       <Comment />

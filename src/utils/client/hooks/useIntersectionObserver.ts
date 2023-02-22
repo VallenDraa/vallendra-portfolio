@@ -1,8 +1,8 @@
 import { RefObject, useEffect, useState } from "react";
 
-export interface UseIntersectionObserverProps extends IntersectionObserverInit {
+export type UseIntersectionObserverProps = {
   freezeOnceVisible?: boolean;
-}
+} & IntersectionObserverInit;
 
 export default function useIntersectionObserver(
   elementRef: RefObject<Element>,

@@ -3,12 +3,12 @@ import Link from "next/link";
 import { forwardRef } from "react";
 import Show from "utils/client/jsx/Show";
 
-interface Props extends ButtonProps {
+type ActionButtonProps = {
   href?: string;
   icon?: JSX.Element;
-}
+} & ButtonProps;
 
-const ActionButton = forwardRef<HTMLButtonElement, Props>(
+const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
   (
     { ref, className = "", children, href, icon, variant, fullWidth, ...props },
     forwardedRef,
