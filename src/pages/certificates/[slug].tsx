@@ -267,6 +267,7 @@ export default function CertificateDetails({
           <CldImage
             format="webp"
             priority
+            quality={45}
             src={certificate.image}
             alt={certificate.name}
             width={1280}

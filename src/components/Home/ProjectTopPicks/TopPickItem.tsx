@@ -117,9 +117,10 @@ export default function TopPickItem({
           <CldImage
             src={project.image}
             alt={project.name}
-            width={960}
-            height={540}
+            width={1024}
+            height={576}
             format="webp"
+            quality={50}
             className={`mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0 ${
               twistDirection === "left" ? "" : "ml-auto"
             }`}

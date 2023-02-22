@@ -262,6 +262,7 @@ export default function ProjectDetails({
           <CldImage
             format="webp"
             priority
+            quality={45}
             src={project.image}
             alt={project.name}
             width={1280}

@@ -58,14 +58,14 @@ export default function ItemCard({ data, type, imgIsPriority }: Props) {
         {/* image */}
         <CldImage
           priority={imgIsPriority}
-          width="750"
-          height="750"
+          width={500}
+          height={500}
           src={data.image}
           alt={data.name}
           format="webp"
           crop="fill"
-          className="absolute h-full object-cover opacity-90 transition duration-300 ease-out group-hover:scale-105"
-          sizes="25w"
+          quality={45}
+          className="absolute w-full object-cover opacity-90 transition duration-300 ease-out group-hover:scale-105"
         />
 
         {/* fade */}
