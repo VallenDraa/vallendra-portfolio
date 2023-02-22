@@ -6,7 +6,6 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import MENUS from "utils/data/menus";
 
 type NavbarSubMenuProps = {
   Handler: JSX.Element;
@@ -41,10 +40,10 @@ export default function NavbarSubMenu({
       </MenuHandler>
 
       <MenuList className="border-0 bg-indigo-100/90 shadow supports-[backdrop-filter]:bg-indigo-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-gray-800/90 dark:supports-[backdrop-filter]:bg-gray-800/30">
-        {menuItems.map((menuItem: JSX.Element, i) => (
+        {menuItems.map((menuItem: JSX.Element) => (
           <MenuItem
             className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 focus:bg-white/20 dark:text-gray-300 dark:hover:text-white"
-            key={MENUS[i]}
+            key={menuItem.key}
           >
             {menuItem}
           </MenuItem>

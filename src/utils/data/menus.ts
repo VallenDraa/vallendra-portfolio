@@ -1,4 +1,4 @@
-type Menu =
+export type Menu =
   | {
       readonly name: string;
       readonly url: string;
@@ -10,7 +10,7 @@ type Menu =
       readonly subMenus: { name: string; url: string }[];
     };
 
-export const menuData: Menu[] = [
+const menuData: Menu[] = [
   { name: "home", url: `/#home` },
   { name: "profile", url: `/#profile` },
   { name: "blog", url: "/blog" },
@@ -24,6 +24,4 @@ export const menuData: Menu[] = [
   { name: "certificates", url: "/certificates" },
 ];
 
-const MENUS = ["home", "profile", "blog", "projects", "certificates"];
-
-export default MENUS;
+export default menuData;

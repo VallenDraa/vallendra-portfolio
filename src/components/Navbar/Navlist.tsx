@@ -7,8 +7,7 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { IoClose, IoChevronDown } from "react-icons/io5";
-import { menuData } from "utils/data/menus";
-import clsx from "clsx";
+import menuData from "utils/data/menus";
 import Show from "utils/client/jsx/Show";
 import NavIsOpenedContext from "context/NavIsOpenedCP";
 import NavbarSubMenu from "./NavbarSubMenu";
