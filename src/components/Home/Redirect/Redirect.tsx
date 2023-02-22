@@ -3,12 +3,20 @@ import { IoCall } from "react-icons/io5";
 import Link from "next/link";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
+import BlurredBlob from "components/BlurredBlob";
 
-/* redirects the user to a contacts page or to my github account
+/* redirects the user to a contacts page or to the projects page
 ================================================================ */
 export default function Redirect() {
   return (
     <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pb-24 pt-10">
+      <BlurredBlob
+        left="left-1/2"
+        top="-top-12"
+        scale="scale-[115%]"
+        translateX="-translate-x-1/2"
+      />
+
       <Observe
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
@@ -53,7 +61,7 @@ export default function Redirect() {
             color="gray"
             className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
           >
-            See other projects instead
+            See my other projects instead
           </Button>
         </Link>
       </Observe>
