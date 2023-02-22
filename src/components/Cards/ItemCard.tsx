@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
@@ -6,36 +5,26 @@ import { BsArrowRight } from "react-icons/bs";
 import { CldImage } from "next-cloudinary";
 import R from "react";
 import Show from "utils/client/jsx/Show";
-import { Technologies } from "types/types";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import Observe from "components/Observe";
 import StyledButton from "components/StyledComponents/StyledButton";
 import type { ShowcaseType } from "interfaces/showcase.interface";
+import type ShowcaseItem from "interfaces/showcase.interface";
+import Project from "interfaces/project.interface";
 import Stats from "./Stats";
 import TechsSection from "./TechsSection";
 
 interface Props {
   // for data fetching purpose
-  _id: string;
   type: ShowcaseType;
 
   // image props
   imgIsPriority: boolean;
-  imgSrc: string | StaticImageData;
-
-  // project props
-  itemLink: string;
-  itemName: string;
-  itemShortDesc: string;
-  itemViews: number;
-  itemLikes: number;
-
-  // optional props
-  techs?: Technologies[];
+  data: ShowcaseItem;
 }
 
-export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
+export default function ItemCard({ data, type, imgIsPriority }: Props) {
   /* Helper state
    ====================== */
   const [hasFetched, setHasFetched] = R.useState(false);
@@ -43,8 +32,8 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
 
   /* Getting the stats
   ====================== */
-  const viewsRes = useGetViewsById(_id, type, willFetch);
-  const likesRes = useGetLikesById(_id, type, willFetch);
+  const viewsRes = useGetViewsById(data._id, type, willFetch);
+  const likesRes = useGetLikesById(data._id, type, willFetch);
 
   /* Check if views and likes had been fetched 
   =========================================== */
@@ -63,16 +52,16 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
       onEnter={() => !hasFetched && setWillFetch(true)}
     >
       <Link
-        href={props.itemLink}
+        href={`/${type}/${data.slug}`}
         className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
       >
         {/* image */}
         <CldImage
-          priority={props.imgIsPriority}
+          priority={imgIsPriority}
           width="750"
           height="750"
-          src={props.imgSrc}
-          alt={props.itemName}
+          src={data.image}
+          alt={data.name}
           format="webp"
           crop="fill"
           className="absolute h-full object-cover opacity-90 transition duration-300 ease-out group-hover:scale-105"
@@ -90,7 +79,7 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
             as="span"
             className="block bg-gradient-to-r from-pink-200 to-amber-200 bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl"
           >
-            {props.itemName}
+            {data.name}
           </Typography>
 
           {/* props short description */}
@@ -99,7 +88,7 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
             as="p"
             className="mt-1 px-3 text-base font-normal text-gray-300 line-clamp-2 sm:text-sm"
           >
-            {props.itemShortDesc}
+            {data.shortDescriptionEN}
           </Typography>
 
           {/* props likes and views */}
@@ -108,19 +97,19 @@ export default function ItemCard({ techs = [], type, _id, ...props }: Props) {
               icon={<AiFillEye />}
               textColor="text-teal-300"
               isLoading={viewsRes?.isLoading || !hasFetched}
-              number={viewsRes?.data?.views || props.itemViews}
+              number={viewsRes?.data?.views || data.views}
             />
 
             <Stats
               icon={<AiFillHeart />}
               textColor="text-red-300"
               isLoading={likesRes.isLoading || !hasFetched}
-              number={likesRes?.data?.likes || props.itemLikes}
+              number={likesRes?.data?.likes || data.likes}
             />
           </div>
 
-          <Show when={techs.length > 0}>
-            <TechsSection techs={techs} />
+          <Show when={(data as Project).tech?.length > 0}>
+            <TechsSection techs={(data as Project).tech} />
           </Show>
 
           <StyledButton

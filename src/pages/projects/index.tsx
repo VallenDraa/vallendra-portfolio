@@ -130,16 +130,9 @@ export default function ProjectsPage({ projects, categories }: Props) {
             {showedIndex.map(idx => (
               <li key={projects[idx]._id}>
                 <ItemCard
-                  _id={projects[idx]._id}
+                  data={projects[idx]}
                   type="projects"
                   imgIsPriority={false}
-                  imgSrc={projects[idx].image}
-                  itemLikes={projects[idx].likes}
-                  itemLink={`/projects/${projects[idx].slug}`}
-                  itemName={projects[idx].name}
-                  itemShortDesc={projects[idx].shortDescriptionEN}
-                  itemViews={projects[idx].views}
-                  techs={projects[idx].tech}
                 />
               </li>
             ))}

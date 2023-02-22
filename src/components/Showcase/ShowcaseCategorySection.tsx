@@ -72,16 +72,9 @@ export default function ShowcaseCategorySection({
           {category.items.map((id, i) => (
             <li key={id}>
               <ItemCard
-                _id={id}
                 type={showcaseType}
                 imgIsPriority={isImgImportant(categoryIndex, i)}
-                imgSrc={itemsInCategory[id].image}
-                itemLikes={itemsInCategory[id].likes}
-                itemLink={`/${showcaseType}/${itemsInCategory[id].slug}`}
-                itemName={itemsInCategory[id].name}
-                itemShortDesc={itemsInCategory[id].shortDescriptionEN}
-                itemViews={itemsInCategory[id].views}
-                techs={(itemsInCategory[id] as Project).tech || []}
+                data={itemsInCategory[id]}
               />
             </li>
           ))}

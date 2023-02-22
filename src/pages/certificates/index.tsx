@@ -137,15 +137,9 @@ export default function ProjectsPage({ certificates, categories }: Props) {
             {showedIndex.map(idx => (
               <li key={certificates[idx]._id}>
                 <ItemCard
-                  _id={certificates[idx]._id}
                   type="certificates"
+                  data={certificates[idx]}
                   imgIsPriority={false}
-                  imgSrc={certificates[idx].image}
-                  itemLikes={certificates[idx].likes}
-                  itemLink={`/certificates/${certificates[idx].slug}`}
-                  itemName={certificates[idx].name}
-                  itemShortDesc={certificates[idx].shortDescriptionEN}
-                  itemViews={certificates[idx].views}
                 />
               </li>
             ))}
