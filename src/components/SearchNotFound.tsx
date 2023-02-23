@@ -13,7 +13,7 @@ export default function SearchNotFound() {
       <Typography
         variant="h5"
         as="span"
-        className="text-sm text-indigo-300 dark:text-gray-500 md:text-base lg:text-lg"
+        className="text-sm text-indigo-300 dark:text-gray-400 md:text-base lg:text-lg"
       >
         Try searching for something else.
       </Typography>

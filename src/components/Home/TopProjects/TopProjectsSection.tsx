@@ -25,7 +25,7 @@ export default function TopProjectsSection({
     >
       <TopBottomWaves />
 
-      <div className="relative mx-auto flex w-full max-w-screen-xl flex-col items-center gap-10 px-8 2xl:px-2">
+      <div className="layout relative flex flex-col items-center gap-10">
         {/* project timeline */}
         <div className="relative w-full">
           {/* section Title */}

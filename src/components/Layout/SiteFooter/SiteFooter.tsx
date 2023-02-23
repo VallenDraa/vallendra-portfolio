@@ -8,7 +8,7 @@ export default function SiteFooter() {
   return (
     <footer className="gradient-underline gradient-underline--primary relative flex animate-fade-in flex-col gap-2 px-8 py-4 before:!top-0">
       {/* site links */}
-      <ul className="mx-auto mb-4 flex max-w-screen-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-indigo-300 dark:text-gray-400">
+      <ul className="layout mb-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-indigo-300 dark:text-gray-400">
         {menuData.map(menu => (
           <SiteFooterMenu key={menu.name} data={menu} />
         ))}
@@ -18,7 +18,7 @@ export default function SiteFooter() {
       </ul>
 
       {/* socials */}
-      <div className="mx-auto flex w-fit max-w-screen-xl items-center gap-2.5 text-3xl text-indigo-300 dark:text-gray-400 [&>*]:p-1">
+      <div className="layout flex w-fit items-center gap-2.5 text-3xl text-indigo-300 dark:text-gray-400 [&>*]:p-1">
         <a
           target="_blank"
           aria-label="Email link button"
@@ -52,7 +52,7 @@ export default function SiteFooter() {
       </div>
 
       {/* tech */}
-      <div className="mx-auto flex max-w-screen-xl flex-col items-center text-indigo-300 dark:text-gray-500">
+      <div className="layout flex flex-col items-center text-indigo-300 dark:text-gray-500">
         {/* portfolio tech stack */}
         <div className="flex items-center gap-1 text-sm">
           <span>Built with</span>

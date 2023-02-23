@@ -48,8 +48,8 @@ export default function ShowcaseStats({
     <div className="flex flex-wrap gap-3 text-indigo-300 dark:text-gray-500">
       <time
         className={clsx(
-          "ap-1 flex items-center font-medium",
-          dateIsLoaded && dateSkeleton,
+          "flex items-center gap-1 font-medium",
+          !dateIsLoaded && dateSkeleton,
         )}
       >
         <AiFillCalendar />

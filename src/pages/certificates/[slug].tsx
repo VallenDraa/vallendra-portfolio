@@ -1,10 +1,8 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { AiFillHeart } from "react-icons/ai";
+import { Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaRegNewspaper } from "react-icons/fa";
 import R from "react";
-import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
@@ -25,21 +23,18 @@ import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useDebounce from "utils/client/hooks/useDebounce";
-import Seo from "seo/Seo";
 import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
 import type { LikesOperationBody } from "types/api.types";
-import showcaseSeo from "seo/showcase.seo";
-
-type CertificateRedirect = {
-  slug: string;
-  name: string;
-};
+import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
+import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
+import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
+import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
 
 type CertificateDetailsProps = {
   certificate: Certificate;
-  prevCertificate: CertificateRedirect;
-  nextCertificate: CertificateRedirect;
+  prevCertificate: ShowcaseDetailRedirect;
+  nextCertificate: ShowcaseDetailRedirect;
 };
 
 const StyledAlert = dynamic(
@@ -65,20 +60,6 @@ export default function CertificateDetails({
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
-
-  /* Seo Data
-  =================== */
-  const seoData = R.useMemo(() => {
-    const { name, slug, shortDescriptionEN, shortDescriptionID } = certificate;
-
-    return showcaseSeo({
-      title: name,
-      slug,
-      shortDesc:
-        activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,
-      type: "certificates",
-    });
-  }, [certificate, activeLanguage]);
 
   /* Dynamic data
   ================== */
@@ -197,7 +178,10 @@ export default function CertificateDetails({
 
   return (
     <>
-      <Seo {...seoData} />
+      <ShowcaseSeoComponent
+        activeLanguage={activeLanguage}
+        showcaseItem={certificate}
+      />
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
@@ -208,8 +192,8 @@ export default function CertificateDetails({
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full px-8 after:-top-7">
-        <section className="mx-auto flex max-w-screen-xl flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5 2xl:px-2">
+      <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
           <div>
             {/* back to certificates button */}
             <LinkWithUnderline href="/certificates">
@@ -261,24 +245,11 @@ export default function CertificateDetails({
       </header>
 
       {/* the certificate data */}
-      <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
-        {/* image */}
-        <figure className="mx-auto w-full md:w-[95%]">
-          <CldImage
-            format="webp"
-            priority
-            quality={45}
-            src={certificate.image}
-            alt={certificate.name}
-            width={1280}
-            height={720}
-            className="w-full rounded-md object-cover opacity-90"
-          />
-
-          <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
-            <span>Screenshot of {certificate.name}</span>
-          </figcaption>
-        </figure>
+      <main className="layout relative flex grow flex-col gap-8 py-5">
+        <ShowcaseImage
+          cldImageSrc={certificate.image}
+          name={certificate.name}
+        />
 
         {/* details */}
         <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
@@ -322,57 +293,29 @@ export default function CertificateDetails({
             </div>
 
             {/* Like button */}
-            <Show
-              when={
+            <LikeButton
+              showSkeleton={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
                   likesRes.data?.likes === undefined)
               }
-            >
-              <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-                <div className="basis-3/4 rounded-lg bg-white/20" />
-                <div className="basis-1/4 rounded-lg bg-white/20" />
-              </div>
-            </Show>
-            <Show
-              when={
+              revealButton={
                 !(viewsRes.error && likesRes.error) &&
                 viewsRes.data?.views !== undefined &&
                 likesRes.data?.likes !== undefined
               }
-            >
-              <Tooltip
-                placement="top"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content={
-                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                }
-              >
-                <Button
-                  onClick={toggleLike}
-                  variant="text"
-                  color={hasLiked ? "red" : "gray"}
-                  className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
-                    hasLiked ? "text-red-300" : ""
-                  }`}
-                >
-                  <AiFillHeart />
-                  <span className="text-sm">{formattedLikes}</span>
-                </Button>
-              </Tooltip>
-            </Show>
+              hasLikedShowcase={hasLiked}
+              formattedLikes={formattedLikes}
+              onClick={toggleLike}
+            />
           </aside>
         </section>
 
         {/* details footer, includes link */}
         <DetailFooter
-          prevLink={`/certificates/${prevCertificate.slug}`}
-          prevTitle={prevCertificate.name}
-          nextLink={`/certificates/${nextCertificate.slug}`}
-          nextTitle={nextCertificate.name}
+          showcaseType="certificates"
+          prevShowcase={prevCertificate}
+          nextShowcase={nextCertificate}
         />
       </main>
     </>

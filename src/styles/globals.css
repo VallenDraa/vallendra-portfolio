@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .layout {
+    @apply mx-auto w-[90%] max-w-screen-xl;
+  }
+
   /* icons
   ======= */
   .icon-with-bg-colors {

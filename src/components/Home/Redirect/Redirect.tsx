@@ -9,7 +9,7 @@ import BlurredBlob from "components/BlurredBlob";
 ================================================================ */
 export default function Redirect() {
   return (
-    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pb-24 pt-10">
+    <section className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10">
       <BlurredBlob
         left="left-1/2"
         top="-top-12"

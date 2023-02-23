@@ -10,7 +10,6 @@ import SectionSubHeading from "components/Typography/SectionSubHeading";
 import ItemCard from "components/Cards/ItemCard";
 
 type ShowcaseCategorySectionProps = {
-  categoryIndex: number;
   categoryItems: ShowcaseItem[];
   category: Category;
   showcaseType: ShowcaseType;
@@ -20,21 +19,7 @@ type PickedItems = {
   [key: string]: Project | Certificate;
 };
 
-function isImgImportant(categoryIndex: number, itemIndex: number): boolean {
-  let imgIsPriority;
-
-  // determining if the image is important
-  if (categoryIndex === 0) {
-    imgIsPriority = itemIndex < 4;
-  } else {
-    imgIsPriority = false;
-  }
-
-  return imgIsPriority;
-}
-
 export default function ShowcaseCategorySection({
-  categoryIndex,
   category,
   categoryItems,
   showcaseType,
@@ -69,13 +54,9 @@ export default function ShowcaseCategorySection({
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
         <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
-          {category.items.map((id, i) => (
+          {category.items.map(id => (
             <li key={id}>
-              <ItemCard
-                type={showcaseType}
-                imgIsPriority={isImgImportant(categoryIndex, i)}
-                data={itemsInCategory[id]}
-              />
+              <ItemCard type={showcaseType} data={itemsInCategory[id]} />
             </li>
           ))}
         </ul>

@@ -18,3 +18,8 @@ export default interface ShowcaseItem {
 }
 
 export type ShowcaseType = "projects" | "certificates";
+
+export type ShowcaseDetailRedirect = {
+  slug: string;
+  name: string;
+};

@@ -20,11 +20,10 @@ type ItemCardProps = {
   type: ShowcaseType;
 
   // image props
-  imgIsPriority: boolean;
   data: ShowcaseItem;
 };
 
-export default function ItemCard({ data, type, imgIsPriority }: ItemCardProps) {
+export default function ItemCard({ data, type }: ItemCardProps) {
   /* Helper state
    ====================== */
   const [hasFetched, setHasFetched] = R.useState(false);
@@ -57,7 +56,6 @@ export default function ItemCard({ data, type, imgIsPriority }: ItemCardProps) {
       >
         {/* image */}
         <CldImage
-          priority={imgIsPriority}
           width={500}
           height={500}
           src={data.image}

@@ -1,10 +1,8 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { AiFillHeart } from "react-icons/ai";
+import { Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
-import { CldImage } from "next-cloudinary";
 import R from "react";
 import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
@@ -27,22 +25,19 @@ import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useDebounce from "utils/client/hooks/useDebounce";
-import showcaseSeo from "seo/showcase.seo";
-import Seo from "seo/Seo";
 import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import type { LikesOperationBody } from "types/api.types";
+import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
+import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
+import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
+import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
 
-type ProjectRedirect = {
-  slug: string;
-  name: string;
-};
-
-type ProjectDetailsPropsData = {
+export type ProjectDetailsProps = {
   project: Project;
-  prevProject: ProjectRedirect;
-  nextProject: ProjectRedirect;
+  prevProject: ShowcaseDetailRedirect;
+  nextProject: ShowcaseDetailRedirect;
 };
 
 const StyledAlert = dynamic(
@@ -57,9 +52,9 @@ const DetailFooter = dynamic(
 
 export default function ProjectDetails({
   project,
-  prevProject,
   nextProject,
-}: ProjectDetailsPropsData) {
+  prevProject,
+}: ProjectDetailsProps) {
   /* Others
   =================== */
   const router = useRouter();
@@ -68,20 +63,6 @@ export default function ProjectDetails({
   /* Language switcher
   =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
-
-  /* Seo Data
-  =================== */
-  const seoData = R.useMemo(() => {
-    const { name, slug, shortDescriptionEN, shortDescriptionID } = project;
-
-    return showcaseSeo({
-      title: name,
-      slug,
-      shortDesc:
-        activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,
-      type: "projects",
-    });
-  }, [project, activeLanguage]);
 
   /* Dynamic data
   ================== */
@@ -190,7 +171,10 @@ export default function ProjectDetails({
 
   return (
     <>
-      <Seo {...seoData} />
+      <ShowcaseSeoComponent
+        activeLanguage={activeLanguage}
+        showcaseItem={project}
+      />
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
@@ -201,8 +185,8 @@ export default function ProjectDetails({
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full px-8 after:-top-7">
-        <section className="mx-auto flex max-w-screen-xl flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5 2xl:px-2">
+      <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
           <div>
             {/* back to project button */}
             <LinkWithUnderline href="/projects">
@@ -255,24 +239,9 @@ export default function ProjectDetails({
       </header>
 
       {/* the project data */}
-      <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
+      <main className="layout relative flex grow flex-col gap-8 py-5">
         {/* image */}
-        <figure className="mx-auto w-full md:w-[95%]">
-          <CldImage
-            format="webp"
-            priority
-            quality={45}
-            src={project.image}
-            alt={project.name}
-            width={1280}
-            height={720}
-            className="w-full rounded-md object-cover opacity-90 shadow"
-          />
-
-          <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
-            <span>Screenshot of {project.name}</span>
-          </figcaption>
-        </figure>
+        <ShowcaseImage cldImageSrc={project.image} name={project.name} />
 
         {/* details */}
         <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
@@ -288,7 +257,7 @@ export default function ProjectDetails({
                   <ul {...props} className="relative flex items-center gap-1" />
                 )}
               >
-                {project?.tech.map(
+                {project.tech.map(
                   (tech: Technologies): JSX.Element => (
                     <li key={tech}>{TechWithTooltip[tech]()}</li>
                   ),
@@ -350,57 +319,29 @@ export default function ProjectDetails({
             </div>
 
             {/* Like button */}
-            <Show
-              when={
+            <LikeButton
+              showSkeleton={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
                   likesRes.data?.likes === undefined)
               }
-            >
-              <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-                <div className="basis-3/4 rounded-lg bg-white/20" />
-                <div className="basis-1/4 rounded-lg bg-white/20" />
-              </div>
-            </Show>
-            <Show
-              when={
+              revealButton={
                 !(viewsRes.error && likesRes.error) &&
                 viewsRes.data?.views !== undefined &&
                 likesRes.data?.likes !== undefined
               }
-            >
-              <Tooltip
-                placement="top"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content={
-                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                }
-              >
-                <Button
-                  onClick={toggleLike}
-                  variant="text"
-                  color={hasLiked ? "red" : "gray"}
-                  className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
-                    hasLiked ? "text-red-300" : ""
-                  }`}
-                >
-                  <AiFillHeart />
-                  <span className="text-sm">{formattedLikes}</span>
-                </Button>
-              </Tooltip>
-            </Show>
+              hasLikedShowcase={hasLiked}
+              formattedLikes={formattedLikes}
+              onClick={toggleLike}
+            />
           </aside>
         </section>
 
         {/* comments */}
         <DetailFooter
-          prevLink={`/projects/${prevProject.slug}`}
-          prevTitle={prevProject.name}
-          nextLink={`/projects/${nextProject.slug}`}
-          nextTitle={nextProject.name}
+          showcaseType="projects"
+          prevShowcase={prevProject}
+          nextShowcase={nextProject}
         />
       </main>
     </>
