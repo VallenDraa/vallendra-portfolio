@@ -34,7 +34,7 @@ export default function OfflinePage() {
             <Typography
               variant="h4"
               as="span"
-              className="text-indigo-300 opacity-0 dark:text-gray-500"
+              className="text-indigo-300 opacity-0 dark:text-gray-400"
             >
               Come back later when you are reconnected to the network.
             </Typography>

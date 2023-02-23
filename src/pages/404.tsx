@@ -15,7 +15,7 @@ export default function NotFoundPage() {
         <Typography
           variant="h4"
           as="span"
-          className="text-indigo-300 dark:text-gray-500"
+          className="text-indigo-300 dark:text-gray-400"
         >
           Can&apos;t seem to find the page
         </Typography>

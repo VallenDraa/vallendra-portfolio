@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
 import type Project from "interfaces/project.interface";
-import type { Technologies } from "types/types";
+import type { Technologies, Language } from "types/types";
 import TechWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import Show from "utils/client/jsx/Show";
 import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
@@ -19,7 +19,6 @@ import SectionSubHeading from "components/Typography/SectionSubHeading";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
-import type { Language } from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import {
   getAllProjects,
   getProjectWithPrevAndNext,

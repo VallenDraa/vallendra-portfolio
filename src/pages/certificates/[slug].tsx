@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from "next";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsArrowLeft } from "react-icons/bs";
@@ -16,7 +16,7 @@ import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithU
 import type Certificate from "interfaces/certificate.interface";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
-import type { Language } from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
+import type { Language } from "types/types";
 import {
   getAllCertificates,
   getCertificateWithPrevAndNext,

@@ -1,6 +1,6 @@
 import R from "react";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
+import type { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import type Project from "interfaces/project.interface";
 import Show from "utils/client/jsx/Show";

@@ -16,6 +16,8 @@ export type Technologies =
   | "mongodb"
   | "next.js";
 
+export type Language = "id" | "en";
+
 /* Font Sizes
 ============= */
 export type TextSize =

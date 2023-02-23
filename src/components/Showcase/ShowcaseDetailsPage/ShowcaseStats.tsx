@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import clsx from "clsx";
 import R from "react";
 import { AiFillCalendar, AiFillEye, AiFillHeart } from "react-icons/ai";
 import { commaSeparator, dateFormatter } from "utils/client/helpers/formatter";
@@ -45,12 +46,11 @@ export default function ShowcaseStats({
 
   return (
     <div className="flex flex-wrap gap-3 text-indigo-300 dark:text-gray-500">
-      <Typography
-        variant="small"
-        as="span"
-        className={`flex items-center gap-1 font-medium ${
-          !dateIsLoaded ? dateSkeleton : ""
-        }`}
+      <time
+        className={clsx(
+          "ap-1 flex items-center font-medium",
+          dateIsLoaded && dateSkeleton,
+        )}
       >
         <AiFillCalendar />
 
@@ -58,7 +58,7 @@ export default function ShowcaseStats({
           {timestampMessage}
           {formattedDate}
         </Show>
-      </Typography>
+      </time>
 
       <span>&bull;</span>
 

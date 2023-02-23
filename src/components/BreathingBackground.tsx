@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import PagesEnum from "utils/data/pages";
+import PagesData from "utils/data/pages";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import useNetworkStatus from "utils/client/hooks/useNetworkStatus";
 import Observe from "./Observe";
@@ -21,7 +21,7 @@ export default function BreathingBackground() {
     }
 
     switch (route) {
-      case PagesEnum.index:
+      case PagesData.index:
         bgRef.current.style.height = "750px";
         break;
 

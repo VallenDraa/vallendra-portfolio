@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import type { GetStaticProps } from "next/types";
 import dynamic from "next/dynamic";
 import Hero from "components/Home/Hero/Hero";
 import type Project from "interfaces/project.interface";
