@@ -17,11 +17,15 @@ const menuData: Menu[] = [
   {
     name: "projects",
     subMenus: [
-      { name: "top picks", url: "/#top-projects" },
+      { name: "top projects", url: "/#top-projects" },
       { name: "all collections", url: "/projects" },
     ],
   },
   { name: "certificates", url: "/certificates" },
+];
+
+export const siteFooterMenus: Menu[] = [
+  { name: "guestbook", url: "/guestbook" },
 ];
 
 export default menuData;

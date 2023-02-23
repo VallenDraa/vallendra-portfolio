@@ -1,34 +1,20 @@
-import Link from "next/link";
-import R from "react";
 import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import menuData, { siteFooterMenus } from "utils/data/menus";
+import SiteFooterMenu from "./SiteFooterMenu";
 
 export default function SiteFooter() {
-  const year = R.useMemo(() => new Date().getFullYear(), []);
-
   return (
-    <footer className="gradient-underline gradient-underline--primary relative flex flex-col gap-2 px-8 py-4 before:!top-0">
+    <footer className="gradient-underline gradient-underline--primary relative flex animate-fade-in flex-col gap-2 px-8 py-4 before:!top-0">
       {/* site links */}
       <ul className="mx-auto mb-4 flex max-w-screen-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-indigo-300 dark:text-gray-400">
-        <li>
-          <Link href="/#home">Home</Link>
-        </li>
-        <li>
-          <Link href="/#profile">Profile</Link>
-        </li>
-        <li>
-          <Link href="/#top-picks">Top Projects</Link>
-        </li>
-        <li>
-          <Link href="/projects">All Projects</Link>
-        </li>
-        <li>
-          <Link href="/certificates">Certificates</Link>
-        </li>
-        <li>
-          <Link href="/guestbook">Guestbook</Link>
-        </li>
+        {menuData.map(menu => (
+          <SiteFooterMenu key={menu.name} data={menu} />
+        ))}
+        {siteFooterMenus.map(menu => (
+          <SiteFooterMenu key={menu.name} data={menu} />
+        ))}
       </ul>
 
       {/* socials */}
@@ -93,7 +79,9 @@ export default function SiteFooter() {
         </div>
 
         <div className="flex items-center gap-2 text-xs">
-          <span>&copy; {year} VallenDra | Front-End Developer</span>
+          <span>
+            &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
+          </span>
         </div>
       </div>
     </footer>
