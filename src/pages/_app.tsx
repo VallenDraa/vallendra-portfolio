@@ -1,3 +1,4 @@
+import "react-tooltip/dist/react-tooltip.css";
 import { ReactElement, ReactNode, useEffect } from "react";
 import type { AppProps } from "next/app";
 import { NextPage } from "next";

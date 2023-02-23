@@ -6,10 +6,12 @@ import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
 import GoToTopBtn from "components/GoToTopBtn";
+import StyledTooltip from "components/StyledComponents/StyledTooltip";
 
-const SiteFooter = dynamic(() => import("components/SiteFooter"), {
-  ssr: false,
-});
+const SiteFooter = dynamic(
+  () => import("components/Layout/SiteFooter/SiteFooter"),
+  { ssr: false },
+);
 
 export default function Layout({ children }: { children: R.ReactNode }) {
   const router = useRouter();
@@ -49,6 +51,9 @@ export default function Layout({ children }: { children: R.ReactNode }) {
         isVisible={goTopBtnIsVisible}
         callback={() => scrollbarRef.current?.scrollToTop()}
       />
+
+      {/* tooltip declarartions */}
+      <StyledTooltip anchorSelect=".icon-tooltip" />
     </StyledScrollbar>
   );
 }
