@@ -6,6 +6,8 @@ export type FrontMatter = {
   description: string;
   language: Language;
   tags: BlogTags;
+  banner: string;
+  bannerSrc: string;
 };
 
 export type PostData = {
@@ -13,7 +15,7 @@ export type PostData = {
   date: string;
   description: string;
   slug: string;
-};
+} & FrontMatter;
 
 const BLOG_TAGS = ["life"] as const;
 

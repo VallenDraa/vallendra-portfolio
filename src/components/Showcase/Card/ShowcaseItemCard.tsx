@@ -51,6 +51,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
       onEnter={() => !hasFetched && setWillFetch(true)}
     >
       <Link
+        title={data.name}
         href={`/${type}/${data.slug}`}
         className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
       >

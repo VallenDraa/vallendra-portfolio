@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
-import ItemCard from "components/Cards/ItemCard";
+import ItemCard from "components/Showcase/Card/ShowcaseItemCard";
 
 type ShowcaseCategorySectionProps = {
   categoryItems: ShowcaseItem[];

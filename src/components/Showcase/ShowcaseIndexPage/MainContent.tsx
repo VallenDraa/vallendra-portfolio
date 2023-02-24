@@ -1,7 +1,7 @@
 import type { ShowcaseType } from "interfaces/showcase.interface";
 import type ShowcaseItem from "interfaces/showcase.interface";
 import Show from "utils/client/jsx/Show";
-import ItemCard from "components/Cards/ItemCard";
+import ItemCard from "components/Showcase/Card/ShowcaseItemCard";
 import type Category from "interfaces/category.interface";
 import dynamic from "next/dynamic";
 import ShowcaseCategorySection from "../ShowcaseCategorySection";
