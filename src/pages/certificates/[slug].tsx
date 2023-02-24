@@ -30,7 +30,6 @@ import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage
 import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
 import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
 import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
-import { mutate } from "swr";
 
 type CertificateDetailsProps = {
   certificate: Certificate;
@@ -97,23 +96,30 @@ export default function CertificateDetails({
     [likesRes.data?.likes, certificate.likes],
   );
 
-  const optimisticLikeUpdate = R.useCallback(() => {
-    setHasLiked(prev => {
+  const optimisticLikeUpdate = R.useCallback(async () => {
+    if (!hasLiked) {
       likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: !prev,
-              likes: !prev ? likesRes.data.likes + 1 : likesRes.data.likes - 1,
-            },
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: true, likes: oldData.likes + 1 },
         { revalidate: false },
       );
 
-      setWillSendLike(true);
+      setHasLiked(true);
+    } else {
+      likesRes.mutate(
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: false, likes: oldData.likes - 1 },
+        { revalidate: false },
+      );
 
-      return !prev;
-    });
+      setHasLiked(false);
+    }
+
+    setWillSendLike(true);
   }, [hasLiked]);
 
   const updateLike = R.useCallback(async () => {
@@ -128,8 +134,6 @@ export default function CertificateDetails({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(operation),
       });
-
-      mutate(`/api/likes/certificates/${certificate._id}`);
 
       setWillSendLike(false);
     } catch (error) {
