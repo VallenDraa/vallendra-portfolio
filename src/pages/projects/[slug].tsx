@@ -4,7 +4,6 @@ import { BsArrowLeft } from "react-icons/bs";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
 import R from "react";
-import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
 import type Project from "interfaces/project.interface";
@@ -33,6 +32,8 @@ import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage
 import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
 import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
 import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
+import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import { mutate } from "swr";
 
 export type ProjectDetailsProps = {
   project: Project;
@@ -55,20 +56,35 @@ export default function ProjectDetails({
   nextProject,
   prevProject,
 }: ProjectDetailsProps) {
-  /* Others
-  =================== */
-  const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
-
-  /* Language switcher
-  =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* add view on load 
+  =================== */
+  const onIncrementError = R.useCallback(async () => {
+    const alertHandler = (await import("utils/client/helpers/alertHandler"))
+      .default;
+
+    alertHandler({ setShowAlert });
+  }, []);
+  const { finishedUpdatingViews } = useIncrementViewOnLoad(
+    project._id,
+    "projects",
+    onIncrementError,
+  );
 
   /* Dynamic data
   ================== */
-  const [willFetchStats, setWillFetchStats] = R.useState(false);
-  const viewsRes = useGetViewsById(project._id, "projects", willFetchStats);
-  const likesRes = useGetLikesById(project._id, "projects", willFetchStats);
+  const viewsRes = useGetViewsById(
+    project._id,
+    "projects",
+    finishedUpdatingViews,
+  );
+  const likesRes = useGetLikesById(
+    project._id,
+    "projects",
+    finishedUpdatingViews,
+  );
 
   /* Likes
   ================== */
@@ -83,91 +99,62 @@ export default function ProjectDetails({
       ),
     [likesRes.data?.likes, project.likes],
   );
-  const [, likeUpdateError] = useDebounce(
-    async () => {
-      if (!willSendLike) return;
-      const operation: LikesOperationBody = {
-        operation: hasLiked ? "increment" : "decrement",
-      };
 
-      try {
-        await fetch(`/api/likes/projects/${project._id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(operation),
-        });
+  const optimisticLikeUpdate = R.useCallback(() => {
+    setHasLiked(prev => {
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: !prev,
+              likes: !prev ? likesRes.data.likes + 1 : likesRes.data.likes - 1,
+            },
+        { revalidate: false },
+      );
 
-        setWillSendLike(false);
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
+      setWillSendLike(true);
 
-        alertHandler({ setShowAlert });
-      }
-    },
-    500,
-    [willSendLike, hasLiked],
+      return !prev;
+    });
+  }, [hasLiked]);
+
+  const updateLike = R.useCallback(async () => {
+    if (!willSendLike) return;
+    const operation: LikesOperationBody = {
+      operation: hasLiked ? "increment" : "decrement",
+    };
+
+    try {
+      await fetch(`/api/likes/projects/${project._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(operation),
+      });
+
+      mutate(`/api/likes/projects/${project._id}`);
+
+      setWillSendLike(false);
+    } catch (error) {
+      onIncrementError();
+    }
+  }, [willSendLike, hasLiked]);
+
+  const [, likeUpdateError] = useDebounce(updateLike, 500, [
+    willSendLike,
+    hasLiked,
+  ]);
+
+  R.useEffect(
+    () => setHasLiked(likesRes.data?.hasLiked || false),
+    [likesRes.data?.hasLiked],
   );
-
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        setWillFetchStats(false);
-        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
-
-        alertHandler({ setShowAlert });
-      } finally {
-        setWillFetchStats(true);
-      }
-    })();
-  }, [router.asPath, project._id]);
-
-  /* For setting the fetched hasLiked to the local hasLiked 
-  =================================================== */
-  R.useEffect(() => {
-    setHasLiked(likesRes.data?.hasLiked || false);
-  }, [likesRes.data?.hasLiked]);
 
   /* Toggle alert when there is an like error
   =================================================== */
   R.useEffect(() => {
     if (likeUpdateError) setShowAlert(true);
   }, [likeUpdateError]);
-
-  async function toggleLike() {
-    if (!hasLiked) {
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: true,
-              likes: likesRes.data.likes + 1,
-            },
-        { revalidate: false },
-      );
-      setHasLiked(true);
-    } else {
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: false,
-              likes: likesRes.data.likes - 1,
-            },
-        { revalidate: false },
-      );
-      setHasLiked(false);
-    }
-
-    setWillSendLike(true);
-  }
 
   return (
     <>
@@ -332,7 +319,7 @@ export default function ProjectDetails({
               }
               hasLikedShowcase={hasLiked}
               formattedLikes={formattedLikes}
-              onClick={toggleLike}
+              onClick={optimisticLikeUpdate}
             />
           </aside>
         </section>

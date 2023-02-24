@@ -1,5 +1,6 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
+import type { ShowcaseType } from "interfaces/showcase.interface";
 
 type LikedResponse = {
   _id: string;
@@ -9,7 +10,7 @@ type LikedResponse = {
 
 export default function useGetLikesById(
   id: string,
-  type: "certificates" | "projects",
+  type: ShowcaseType,
   willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();

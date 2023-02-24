@@ -3,7 +3,6 @@ import { Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaRegNewspaper } from "react-icons/fa";
 import R from "react";
-import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
 import Show from "utils/client/jsx/Show";
@@ -30,6 +29,8 @@ import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
 import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
 import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
 import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
+import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import { mutate } from "swr";
 
 type CertificateDetailsProps = {
   certificate: Certificate;
@@ -52,27 +53,34 @@ export default function CertificateDetails({
   prevCertificate,
   nextCertificate,
 }: CertificateDetailsProps) {
-  /* Others
-  =================== */
-  const router = useRouter();
   const [showAlert, setShowAlert] = R.useState(false);
-
-  /* Language switcher
-  =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* add view on load 
+  =================== */
+  const onIncrementError = R.useCallback(async () => {
+    const alertHandler = (await import("utils/client/helpers/alertHandler"))
+      .default;
+
+    alertHandler({ setShowAlert });
+  }, []);
+  const { finishedUpdatingViews } = useIncrementViewOnLoad(
+    certificate._id,
+    "certificates",
+    onIncrementError,
+  );
 
   /* Dynamic data
   ================== */
-  const [willFetchStats, setWillFetchStats] = R.useState(false);
   const viewsRes = useGetViewsById(
     certificate._id,
     "certificates",
-    willFetchStats,
+    finishedUpdatingViews,
   );
   const likesRes = useGetLikesById(
     certificate._id,
     "certificates",
-    willFetchStats,
+    finishedUpdatingViews,
   );
 
   /* Likes
@@ -88,93 +96,62 @@ export default function CertificateDetails({
       ),
     [likesRes.data?.likes, certificate.likes],
   );
-  const [, likeUpdateError] = useDebounce(
-    async () => {
-      if (!willSendLike) return;
-      const operation: LikesOperationBody = {
-        operation: hasLiked ? "increment" : "decrement",
-      };
 
-      try {
-        await fetch(`/api/likes/certificates/${certificate._id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(operation),
-        });
+  const optimisticLikeUpdate = R.useCallback(() => {
+    setHasLiked(prev => {
+      likesRes.mutate(
+        likesRes.data === undefined
+          ? undefined
+          : {
+              ...likesRes.data,
+              hasLiked: !prev,
+              likes: !prev ? likesRes.data.likes + 1 : likesRes.data.likes - 1,
+            },
+        { revalidate: false },
+      );
 
-        setWillSendLike(false);
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
+      setWillSendLike(true);
 
-        alertHandler({ setShowAlert });
-      }
-    },
-    500,
-    [willSendLike, hasLiked],
+      return !prev;
+    });
+  }, [hasLiked]);
+
+  const updateLike = R.useCallback(async () => {
+    if (!willSendLike) return;
+    const operation: LikesOperationBody = {
+      operation: hasLiked ? "increment" : "decrement",
+    };
+
+    try {
+      await fetch(`/api/likes/certificates/${certificate._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(operation),
+      });
+
+      mutate(`/api/likes/certificates/${certificate._id}`);
+
+      setWillSendLike(false);
+    } catch (error) {
+      onIncrementError();
+    }
+  }, [willSendLike, hasLiked]);
+
+  const [, likeUpdateError] = useDebounce(updateLike, 500, [
+    willSendLike,
+    hasLiked,
+  ]);
+
+  R.useEffect(
+    () => setHasLiked(likesRes.data?.hasLiked || false),
+    [likesRes.data?.hasLiked],
   );
-
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        setWillFetchStats(false);
-        await fetch(`/api/views/certificates/${certificate._id}`, {
-          method: "PUT",
-        });
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
-
-        alertHandler({ setShowAlert });
-      } finally {
-        setWillFetchStats(true);
-      }
-    })();
-  }, [router.asPath, certificate._id]);
-
-  /* For setting the fetched hasLiked to the local hasLiked 
-  =================================================== */
-  R.useEffect(() => {
-    setHasLiked(likesRes.data?.hasLiked || false);
-  }, [likesRes.data?.hasLiked]);
 
   /* Toggle alert when there is an like error
   =================================================== */
   R.useEffect(() => {
     if (likeUpdateError) setShowAlert(true);
   }, [likeUpdateError]);
-
-  async function toggleLike() {
-    if (!hasLiked) {
-      setHasLiked(true);
-
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: true,
-              likes: likesRes.data.likes + 1,
-            },
-      );
-    } else {
-      setHasLiked(false);
-
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: false,
-              likes: likesRes.data.likes - 1,
-            },
-      );
-    }
-
-    setWillSendLike(true);
-  }
 
   return (
     <>
@@ -306,7 +283,7 @@ export default function CertificateDetails({
               }
               hasLikedShowcase={hasLiked}
               formattedLikes={formattedLikes}
-              onClick={toggleLike}
+              onClick={optimisticLikeUpdate}
             />
           </aside>
         </section>

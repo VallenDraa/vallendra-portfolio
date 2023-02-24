@@ -1,5 +1,6 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
+import type { ShowcaseType } from "interfaces/showcase.interface";
 
 type ViewsResponse = {
   _id: string;
@@ -8,7 +9,7 @@ type ViewsResponse = {
 
 export default function useGetViewsById(
   id: string,
-  type: "certificates" | "projects",
+  type: ShowcaseType,
   willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();
