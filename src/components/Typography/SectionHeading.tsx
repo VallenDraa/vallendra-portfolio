@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import clsx from "clsx";
 import Observe from "components/Observe";
 import { ReactNode } from "react";
 import fadeIn from "utils/client/helpers/animateOnObserved";
@@ -44,9 +45,10 @@ export default function SectionHeading({
         <Typography
           as={titleAs}
           variant="h1"
-          className={`primary-gradient bg-gradient-to-r bg-clip-text text-4xl font-bold !leading-[initial] text-transparent md:text-5xl ${
-            willFade ? "opacity-0" : ""
-          }`}
+          className={clsx(
+            willFade && "opacity-0",
+            "primary-gradient bg-gradient-to-r bg-clip-text text-4xl font-bold !leading-[initial] text-transparent md:text-5xl",
+          )}
         >
           {title}
         </Typography>
@@ -67,9 +69,10 @@ export default function SectionHeading({
           <Typography
             as="p"
             variant="lead"
-            className={`mb-4 pl-0.5 text-base font-medium text-indigo-400 dark:text-gray-400 md:text-lg ${
-              willFade ? "opacity-0" : ""
-            }`}
+            className={clsx(
+              willFade && "opacity-0",
+              "mt-1 mb-4 pl-0.5 text-base font-medium text-indigo-400 dark:text-gray-400 md:text-lg",
+            )}
           >
             {subTitle}
           </Typography>

@@ -62,7 +62,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           alt={data.name}
           format="webp"
           crop="fill"
-          quality={45}
+          quality={50}
           className="absolute w-full object-cover opacity-90 transition duration-300 ease-out group-hover:scale-105"
         />
 

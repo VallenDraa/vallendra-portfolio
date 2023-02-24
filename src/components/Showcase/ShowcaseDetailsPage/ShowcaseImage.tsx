@@ -12,11 +12,12 @@ export default function ShowcaseImage({
       <CldImage
         format="webp"
         priority
-        quality={45}
+        quality={50}
         src={cldImageSrc}
         alt={name}
         width={1280}
         height={720}
+        sizes="(max-width: 768px) 80vw, 100vw"
         className="w-full rounded-md object-cover opacity-90 shadow"
       />
 
