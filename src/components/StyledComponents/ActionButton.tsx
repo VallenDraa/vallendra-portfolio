@@ -1,16 +1,27 @@
 import { Button, ButtonProps } from "@material-tailwind/react";
 import Link from "next/link";
-import { forwardRef } from "react";
+import { HTMLAttributeAnchorTarget, forwardRef } from "react";
 import Show from "utils/client/jsx/Show";
 
 type ActionButtonProps = {
   href?: string;
   icon?: JSX.Element;
+  hrefTarget?: HTMLAttributeAnchorTarget;
 } & ButtonProps;
 
 const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
   (
-    { ref, className = "", children, href, icon, variant, fullWidth, ...props },
+    {
+      ref,
+      className = "",
+      children,
+      href,
+      hrefTarget = "_blank",
+      icon,
+      variant,
+      fullWidth,
+      ...props
+    },
     forwardedRef,
   ) => {
     const button = (
@@ -33,7 +44,7 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
     );
 
     return href ? (
-      <Link className="inline-block" target="_blank" href={href}>
+      <Link className="inline-block" target={hrefTarget} href={href}>
         {button}
       </Link>
     ) : (

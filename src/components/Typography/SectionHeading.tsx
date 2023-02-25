@@ -71,7 +71,7 @@ export default function SectionHeading({
             variant="lead"
             className={clsx(
               willFade && "opacity-0",
-              "mt-1 mb-4 pl-0.5 text-base font-medium text-indigo-400 dark:text-gray-400 md:text-lg",
+              "mb-2 mt-1 pl-0.5 text-base font-medium text-indigo-400 dark:text-gray-400 md:text-lg",
             )}
           >
             {subTitle}

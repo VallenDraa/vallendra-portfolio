@@ -14,6 +14,7 @@ export async function getPostData(slug: string) {
   const mdxSource = fs.readFileSync(fullPath, "utf-8");
 
   const { code, frontmatter } = await bundleMDX({
+    cwd: process.cwd(),
     source: mdxSource,
     esbuildOptions: options => ({ ...options, minify: true }),
     mdxOptions: options => ({

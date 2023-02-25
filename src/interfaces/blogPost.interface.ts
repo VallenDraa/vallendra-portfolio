@@ -1,10 +1,8 @@
-import { Language } from "types/types";
-
 export type FrontMatter = {
   title: string;
   date: string;
   description: string;
-  language: Language;
+  englishOnly: boolean;
   tags: BlogTags;
   banner: string;
   bannerSrc: string;

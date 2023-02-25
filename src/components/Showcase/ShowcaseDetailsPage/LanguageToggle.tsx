@@ -17,7 +17,7 @@ export default function LanguageToggle({
       color="teal"
       onClick={() => setActiveLanguage(prev => (prev === "en" ? "id" : "en"))}
     >
-      {activeLanguage === "en" ? "Read In Indonesian" : "Read In English"}
+      Read In {activeLanguage === "en" ? "Indonesian" : "English"}
     </ActionButton>
   );
 }

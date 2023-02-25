@@ -177,50 +177,45 @@ export default function ProjectDetails({
       </StyledAlert>
 
       <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
-          <div>
-            {/* back to project button */}
-            <LinkWithUnderline href="/projects">
-              <BsArrowLeft />
-              Back To Projects
-            </LinkWithUnderline>
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30">
+          {/* back to project button */}
+          <LinkWithUnderline href="/projects">
+            <BsArrowLeft />
+            Back To Project Page
+          </LinkWithUnderline>
 
-            {/* title */}
-            <div className="pt-4">
-              <SectionHeading
-                title={project.name}
-                subTitle={
-                  activeLanguage === "en"
-                    ? project.shortDescriptionEN
-                    : project.shortDescriptionID
-                }
-              />
-            </div>
-
-            <div className="mt-5">
-              <ShowcaseStats
-                dateString={project.madeAt as string}
-                isLoadingStats={
-                  !(viewsRes.error && likesRes.error) &&
-                  (viewsRes.data?.views === undefined ||
-                    likesRes.data?.likes === undefined)
-                }
-                hasLiked={hasLiked}
-                likes={
-                  likesRes.data?.likes !== undefined
-                    ? likesRes.data?.likes
-                    : project.likes
-                }
-                views={
-                  viewsRes.data?.views !== undefined
-                    ? viewsRes.data?.views
-                    : project.views
-                }
-              />
-            </div>
+          {/* title */}
+          <div className="pt-2">
+            <SectionHeading
+              title={project.name}
+              subTitle={
+                activeLanguage === "en"
+                  ? project.shortDescriptionEN
+                  : project.shortDescriptionID
+              }
+            />
           </div>
 
-          <div className="flex lg:self-end lg:px-2">
+          <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+            <ShowcaseStats
+              dateString={project.madeAt as string}
+              isLoadingStats={
+                !(viewsRes.error && likesRes.error) &&
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
+              }
+              hasLiked={hasLiked}
+              likes={
+                likesRes.data?.likes !== undefined
+                  ? likesRes.data?.likes
+                  : project.likes
+              }
+              views={
+                viewsRes.data?.views !== undefined
+                  ? viewsRes.data?.views
+                  : project.views
+              }
+            />
             <LanguageToggle
               activeLanguage={activeLanguage}
               setActiveLanguage={setActiveLanguage}

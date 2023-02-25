@@ -174,49 +174,44 @@ export default function CertificateDetails({
       </StyledAlert>
 
       <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5">
-          <div>
-            {/* back to certificates button */}
-            <LinkWithUnderline href="/certificates">
-              <BsArrowLeft />
-              Back To Certificates
-            </LinkWithUnderline>
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30">
+          <LinkWithUnderline href="/certificates">
+            <BsArrowLeft />
+            Back To Certificate Page
+          </LinkWithUnderline>
 
-            {/* title */}
-            <div className="pt-4">
-              <SectionHeading
-                title={certificate.name}
-                subTitle={
-                  activeLanguage === "en"
-                    ? certificate.shortDescriptionEN
-                    : certificate.shortDescriptionID
-                }
-              />
-            </div>
-
-            <div className="mt-5">
-              <ShowcaseStats
-                dateString={certificate.madeAt as string}
-                isLoadingStats={
-                  !(viewsRes.error && likesRes.error) &&
-                  (viewsRes.data?.views === undefined ||
-                    likesRes.data?.likes === undefined)
-                }
-                hasLiked={hasLiked}
-                likes={
-                  likesRes.data?.likes !== undefined
-                    ? likesRes.data?.likes
-                    : certificate.likes
-                }
-                views={
-                  viewsRes.data?.views !== undefined
-                    ? viewsRes.data?.views
-                    : certificate.views
-                }
-              />
-            </div>
+          {/* title */}
+          <div className="pt-2">
+            <SectionHeading
+              title={certificate.name}
+              subTitle={
+                activeLanguage === "en"
+                  ? certificate.shortDescriptionEN
+                  : certificate.shortDescriptionID
+              }
+            />
           </div>
-          <div className="flex lg:self-end lg:px-2">
+
+          <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+            <ShowcaseStats
+              dateString={certificate.madeAt as string}
+              isLoadingStats={
+                !(viewsRes.error && likesRes.error) &&
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
+              }
+              hasLiked={hasLiked}
+              likes={
+                likesRes.data?.likes !== undefined
+                  ? likesRes.data?.likes
+                  : certificate.likes
+              }
+              views={
+                viewsRes.data?.views !== undefined
+                  ? viewsRes.data?.views
+                  : certificate.views
+              }
+            />
             <LanguageToggle
               activeLanguage={activeLanguage}
               setActiveLanguage={setActiveLanguage}

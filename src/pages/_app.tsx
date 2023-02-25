@@ -1,4 +1,6 @@
 import "react-tooltip/dist/react-tooltip.css";
+import "styles/prism-one-dark.css";
+
 import { ReactElement, ReactNode, useEffect } from "react";
 import type { AppProps } from "next/app";
 import { NextPage } from "next";

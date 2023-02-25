@@ -26,7 +26,6 @@ export default function BlogCard({ post }: { post: PostData }) {
         width={960}
         height={540}
         crop="fill"
-        gravity="auto"
         title={post.bannerSrc}
         src={post.banner}
         alt={post.bannerSrc}

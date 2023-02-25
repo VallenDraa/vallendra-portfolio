@@ -53,22 +53,24 @@ export default function BlogsPage({
         </div>
       </header>
 
-      <Observe
-        freezeOnceVisible
-        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
+      <main
+        className={clsx(
+          "layout relative",
+          searchIsLoading &&
+            "cursor-not-allowed after:absolute after:inset-0 after:z-20",
+        )}
       >
-        <main
-          className={clsx(
-            "layout relative grid grid-cols-1 px-3 pt-5 pb-10 md:grid-cols-2 lg:grid-cols-3",
-            searchIsLoading &&
-              "cursor-not-allowed after:absolute after:inset-0 after:z-20",
-          )}
+        <Observe
+          freezeOnceVisible
+          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 250)}
         >
-          {allPostData.map(post => (
-            <BlogCard post={post} key={`${post.slug}-${post.date}`} />
-          ))}
-        </main>
-      </Observe>
+          <ul className="grid grid-cols-1 px-3 pt-5 pb-10 opacity-0 md:grid-cols-2 lg:grid-cols-3">
+            {allPostData.map(post => (
+              <BlogCard post={post} key={`${post.slug}-${post.date}`} />
+            ))}
+          </ul>
+        </Observe>
+      </main>
     </>
   );
 }

@@ -48,7 +48,7 @@ export default function ShowcaseStats({
     <div className="flex flex-wrap gap-3 text-indigo-300 dark:text-gray-500">
       <time
         className={clsx(
-          "flex items-center gap-1 font-medium",
+          "flex items-center gap-1 text-sm font-medium",
           !dateIsLoaded && dateSkeleton,
         )}
       >
