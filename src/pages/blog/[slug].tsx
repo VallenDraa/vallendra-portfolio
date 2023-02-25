@@ -19,6 +19,8 @@ import Show from "utils/client/jsx/Show";
 import { parsePostSlug } from "utils/data/blogHelper";
 import { useRouter } from "next/router";
 import { IoLanguage } from "react-icons/io5";
+import Seo from "seo/Seo";
+import blogPostSeo from "seo/blogPost.seo";
 
 type BlogPostProps = {
   code: string;
@@ -27,106 +29,121 @@ type BlogPostProps = {
 
 export default function BlogPost({ code, frontmatter }: BlogPostProps) {
   const router = useRouter();
+  const { slug } = router.query as { slug: string };
+
+  const blogPostArg = R.useMemo(
+    () => ({
+      title: frontmatter.title,
+      desc: frontmatter.description,
+      publishedAt: new Date(frontmatter.date),
+      slug,
+    }),
+    [code],
+  );
   const Component = R.useMemo(() => getMDXComponent(code), [code]);
 
-  const { slugPrefix, parsedSlug } = parsePostSlug(router.query.slug as string);
+  const { slugPrefix, parsedSlug } = parsePostSlug(slug);
 
   return (
-    <article className="fade-bottom relative mt-6 mb-3 after:-top-7">
-      <div className="layout">
-        <header>
-          <section
+    <>
+      <Seo {...blogPostSeo(blogPostArg)} />
+
+      <article className="fade-bottom relative mt-6 mb-3 after:-top-7">
+        <div className="layout">
+          <header>
+            <section
+              className={clsx(
+                "not-prose prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30",
+              )}
+            >
+              {/* back to project button */}
+              <LinkWithUnderline href="/blog">
+                <BsArrowLeft />
+                Back To Blog
+              </LinkWithUnderline>
+
+              {/* title */}
+              <div className="pt-4">
+                <SectionHeading
+                  title={frontmatter.title}
+                  subTitle={frontmatter.description}
+                />
+              </div>
+
+              <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+                <ShowcaseStats
+                  dateString={frontmatter.date}
+                  isLoadingStats={false}
+                  hasLiked
+                  likes={200}
+                  views={1024}
+                />
+                <Show when={!frontmatter.englishOnly}>
+                  <ActionButton
+                    className="w-full lg:w-max"
+                    icon={<IoLanguage />}
+                    color="teal"
+                    hrefTarget="_self"
+                    href={
+                      slugPrefix === "en-"
+                        ? `id-${parsedSlug}`
+                        : `en-${parsedSlug}`
+                    }
+                  >
+                    Read In {slugPrefix === "en-" ? "Indonesian" : "English"}
+                  </ActionButton>
+                </Show>
+              </div>
+            </section>
+          </header>
+          <main
             className={clsx(
-              "not-prose prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
-              "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30",
+              "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "my-4 mx-auto",
             )}
           >
-            {/* back to project button */}
-            <LinkWithUnderline href="/blog">
-              <BsArrowLeft />
-              Back To Blog
-            </LinkWithUnderline>
-
-            {/* title */}
-            <div className="pt-4">
-              <SectionHeading
-                title={frontmatter.title}
-                subTitle={frontmatter.description}
-              />
-            </div>
-
-            <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
-              <ShowcaseStats
-                dateString={frontmatter.date}
-                isLoadingStats={false}
-                hasLiked
-                likes={200}
-                views={1024}
-              />
-              <Show when={!frontmatter.englishOnly}>
-                <ActionButton
-                  className="w-full lg:w-max"
-                  icon={<IoLanguage />}
-                  color="teal"
-                  hrefTarget="_self"
-                  href={
-                    slugPrefix === "en-"
-                      ? `id-${parsedSlug}`
-                      : `en-${parsedSlug}`
-                  }
-                >
-                  Read In {slugPrefix === "en-" ? "Indonesian" : "English"}
-                </ActionButton>
-              </Show>
-            </div>
-          </section>
-        </header>
-        <main
-          className={clsx(
-            "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
-            "my-4 mx-auto",
-          )}
-        >
-          <ShowcaseImage
-            cldImageSrc={frontmatter.banner}
-            title={frontmatter.bannerSrc}
-            titleAsCaption
-          />
-          <Component />
-        </main>
-        <footer
-          className={clsx(
-            "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
-            "mx-auto mb-4 flex flex-col gap-4",
-          )}
-        >
-          <section className="detail-aside-colors sticky top-20  mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
-            <div className="grow space-y-3">
-              <ActionButton
-                icon={<FaGithub className="text-lg" />}
-                href=""
-                color="gray"
-              >
-                See on Github
-              </ActionButton>
-
-              <CopyLinkBtn />
-            </div>
-
-            {/* Like button */}
-            <LikeButton
-              showSkeleton={false}
-              revealButton
-              hasLikedShowcase
-              formattedLikes="2000"
-              onClick={console.log}
+            <ShowcaseImage
+              cldImageSrc={frontmatter.banner}
+              title={frontmatter.bannerSrc}
+              titleAsCaption
             />
-          </section>
+            <Component />
+          </main>
+          <footer
+            className={clsx(
+              "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "mx-auto mb-4 flex flex-col gap-4",
+            )}
+          >
+            <section className="detail-aside-colors sticky top-20  mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
+              <div className="grow space-y-3">
+                <ActionButton
+                  icon={<FaGithub className="text-lg" />}
+                  href=""
+                  color="gray"
+                >
+                  See on Github
+                </ActionButton>
 
-          <Comment />
-        </footer>
-      </div>
-    </article>
+                <CopyLinkBtn />
+              </div>
+
+              {/* Like button */}
+              <LikeButton
+                showSkeleton={false}
+                revealButton
+                hasLikedShowcase
+                formattedLikes="2000"
+                onClick={console.log}
+              />
+            </section>
+
+            <Comment />
+          </footer>
+        </div>
+      </article>
+    </>
   );
 }
 

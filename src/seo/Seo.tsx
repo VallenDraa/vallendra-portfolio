@@ -14,14 +14,21 @@ export type OgSeo = {
   imageAlt: string;
 };
 
+export type BlogSeo = {
+  author: string;
+  publishedAt: string;
+};
+
 export type SEO = {
   base: BaseSeo;
   og: OgSeo;
+  blog?: BlogSeo | null;
 };
 
 export default function Seo({
   base = defaultSeo.base,
   og = defaultSeo.og,
+  blog = null,
 }: SEO) {
   return (
     <Head>
@@ -48,6 +55,15 @@ export default function Seo({
       <meta name="twitter:image" content={og.imageUrl} />
       <meta name="twitter:image:alt" content={og.imageAlt} />
       <meta name="twitter:site" content="@Jestinevallen" />
+
+      {/* blog meta */}
+      {blog !== null ? (
+        <>
+          <meta property="article:author" content={blog.author} />
+          <meta property="article:published_time" content={blog.publishedAt} />
+          <meta property="og:publish_date" content={blog.publishedAt} />
+        </>
+      ) : null}
 
       {/* microsoft icon */}
       <meta name="msapplication-TileColor" content="#7986cb" />
