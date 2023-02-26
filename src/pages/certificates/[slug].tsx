@@ -14,10 +14,6 @@ import type Certificate from "interfaces/certificate.interface";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import type { Language } from "types/types";
-import {
-  getAllCertificates,
-  getCertificateWithPrevAndNext,
-} from "server/service/certificates/certificates.service";
 import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
@@ -30,6 +26,11 @@ import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage
 import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
 import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
 import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import {
+  getAllItems,
+  getItemWithPrevAndNext,
+} from "server/service/universal/showcase.service";
+import CertificateModel from "server/mongo/model/certificate.model";
 
 type CertificateDetailsProps = {
   certificate: Certificate;
@@ -129,7 +130,7 @@ export default function CertificateDetails({
     };
 
     try {
-      await fetch(`/api/likes/certificates/${certificate._id}`, {
+      await fetch(`/api/certificates/likes/${certificate._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(operation),
@@ -299,7 +300,7 @@ export default function CertificateDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const certificates = await JSONSerialize(await getAllCertificates());
+  const certificates = await JSONSerialize(await getAllItems(CertificateModel));
 
   if (certificates) {
     const paths = certificates.map(c => ({ params: { slug: c.slug } }));
@@ -315,9 +316,16 @@ export const getStaticProps: GetStaticProps = async context => {
   if (!params?.slug) return { notFound: true };
   if (typeof params.slug !== "string") return { notFound: true };
 
-  const props = await JSONSerialize(
-    await getCertificateWithPrevAndNext(params.slug),
+  const { item, nextItem, prevItem } = await getItemWithPrevAndNext(
+    CertificateModel,
+    params.slug,
   );
+
+  const props = await JSONSerialize({
+    certificate: item,
+    nextCertificate: nextItem,
+    prevCertificate: prevItem,
+  });
 
   if (props) {
     return props.certificate === null ? { notFound: true } : { props };

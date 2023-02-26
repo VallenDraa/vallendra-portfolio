@@ -1,4 +1,4 @@
-import { NextApiHandler } from "next";
+import type { NextApiHandler } from "next";
 import { incApiVisitors } from "server/service/apiVisitor.service";
 import { internalServerErrorRes } from "server/error/response.error";
 import getRandomMessage from "utils/data/apiPageMessages";

@@ -17,7 +17,9 @@ export default interface ShowcaseItem {
   updatedAt?: Date | string;
 }
 
-export type ShowcaseType = "projects" | "certificates";
+export const SHOWCASE_TYPES = ["projects", "certificates"] as const;
+
+export type ShowcaseType = (typeof SHOWCASE_TYPES)[number];
 
 export type ShowcaseDetailRedirect = {
   slug: string;

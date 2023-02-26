@@ -8,12 +8,9 @@ export type FrontMatter = {
   bannerSrc: string;
 };
 
-export type PostData = {
-  title: string;
-  date: string;
-  description: string;
+export default interface BlogPost extends FrontMatter {
   slug: string;
-} & FrontMatter;
+}
 
 const BLOG_TAGS = ["life"] as const;
 

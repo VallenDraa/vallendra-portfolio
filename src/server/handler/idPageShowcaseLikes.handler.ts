@@ -1,11 +1,4 @@
-import { NextApiHandler } from "next";
-import {
-  incCertificateStat,
-  decCertificateStat,
-  getCertificateStats,
-  editLikersList,
-  getHasLiked,
-} from "server/service/certificates/certificateStats.service";
+import type { NextApiRequest, NextApiResponse } from "next";
 import getUniqueIpId from "utils/server/getUniqueIpId";
 import {
   internalServerErrorRes,
@@ -13,25 +6,36 @@ import {
   invalidHttpMethodRes,
 } from "server/error/response.error";
 import { LikesOperationBody } from "types/api.types";
+import { ProjectDocument } from "server/mongo/model/project.model";
+import { CertificateDocument } from "server/mongo/model/certificate.model";
+import { Model } from "mongoose";
+import {
+  decItemStat,
+  editItemLikersList,
+  getHasLiked,
+  incItemStat,
+  selectStatsFromItem,
+} from "server/service/universal/showcaseStats.service";
 
 /* this handles operation on likes for a single project
 ====================================================== */
-const handler: NextApiHandler = async (req, res) => {
+export default async function idPageShowcaseLikesHandler<
+  T extends ProjectDocument | CertificateDocument,
+>(model: Model<T>, id: string, req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { id } = req.query;
     if (typeof id !== "string" || !id) {
       invalidBodyRes(res);
       return;
     }
 
     const uniqueIpId = getUniqueIpId(req);
-    const hasLiked = await getHasLiked(id, uniqueIpId);
+    const hasLiked = await getHasLiked(model, id, uniqueIpId);
 
     /* Check the http method
     ======================= */
     switch (req.method) {
       case "GET": {
-        const likes = await getCertificateStats(id, ["likes"]);
+        const likes = await selectStatsFromItem(model, id, ["likes"]);
 
         const response = { ...likes, hasLiked };
 
@@ -51,12 +55,12 @@ const handler: NextApiHandler = async (req, res) => {
         =========================== */
         if (operation === "increment") {
           if (!hasLiked) {
-            await editLikersList(id, uniqueIpId, "add");
-            await incCertificateStat(id, "likes");
+            await editItemLikersList(model, id, uniqueIpId, "add");
+            await incItemStat(model, id, "likes");
           }
         } else if (hasLiked) {
-          await editLikersList(id, uniqueIpId, "remove");
-          await decCertificateStat(id, "likes");
+          await editItemLikersList(model, id, uniqueIpId, "remove");
+          await decItemStat(model, id, "likes");
         }
 
         res.status(204).end();
@@ -73,16 +77,4 @@ const handler: NextApiHandler = async (req, res) => {
     console.error(error);
     internalServerErrorRes(res);
   }
-};
-
-export default handler;
-
-/* API Route config
-=================== */
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "100kb",
-    },
-  },
-};
+}

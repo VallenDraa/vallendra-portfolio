@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import Stats from "components/Showcase/Card/Stats";
-import type { PostData } from "interfaces/blogPost.interface";
+import type PostData from "interfaces/blogPost.interface";
 import { CldImage } from "next-cloudinary";
 
 import Link from "next/link";

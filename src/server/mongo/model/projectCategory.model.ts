@@ -1,7 +1,7 @@
 import m from "mongoose";
 import type Category from "interfaces/category.interface";
 
-type ProjectCategory = {
+export type ProjectCategory = {
   madeAt: Date;
   updatedAt?: Date;
 } & Omit<Category, "_id"> &

@@ -2,8 +2,6 @@ import R from "react";
 import SearchInput from "components/SearchInput";
 import type Certificate from "interfaces/certificate.interface";
 import type Category from "interfaces/category.interface";
-import { getAllCertificates } from "server/service/certificates/certificates.service";
-import { getAllCertificateCategories } from "server/service/certificates/certificateCategory.service";
 import { JSONSerialize } from "utils/server/serialize";
 import Observe from "components/Observe";
 import fadeIn from "utils/client/helpers/animateOnObserved";
@@ -12,6 +10,10 @@ import certificatesPageSeo from "seo/certificatePage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import MainContent from "components/Showcase/ShowcaseIndexPage/MainContent";
 import clsx from "clsx";
+import { getAllItems } from "server/service/universal/showcase.service";
+import CertificateModel from "server/mongo/model/certificate.model";
+import { getAllItemCategories } from "server/service/universal/showcaseCategory.service";
+import CertificateCategoryModel from "server/mongo/model/certificateCategory.model";
 
 type CertificatePageProps = {
   certificates: Certificate[];
@@ -103,8 +105,10 @@ export default function CertificatePage({
 }
 
 export async function getStaticProps() {
-  const certificates = await JSONSerialize(await getAllCertificates());
-  const categories = await JSONSerialize(await getAllCertificateCategories());
+  const certificates = await JSONSerialize(await getAllItems(CertificateModel));
+  const categories = await JSONSerialize(
+    await getAllItemCategories(CertificateCategoryModel),
+  );
 
   return certificates && categories
     ? { props: { certificates, categories } }

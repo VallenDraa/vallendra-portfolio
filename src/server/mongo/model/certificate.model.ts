@@ -1,7 +1,7 @@
 import m from "mongoose";
 import type Certificate from "interfaces/certificate.interface";
 
-type CertificateDocument = {
+export type CertificateDocument = {
   madeAt: Date;
   updatedAt?: Date;
 } & Omit<Certificate, "_id"> &

@@ -3,8 +3,6 @@ import type { GetStaticProps } from "next";
 import type Project from "interfaces/project.interface";
 import SearchInput from "components/SearchInput";
 import type Category from "interfaces/category.interface";
-import { getAllProjects } from "server/service/projects/projects.service";
-import { getAllProjectCategories } from "server/service/projects/projectCategory.service";
 import { JSONSerialize } from "utils/server/serialize";
 import Observe from "components/Observe";
 import fadeIn from "utils/client/helpers/animateOnObserved";
@@ -13,6 +11,10 @@ import projectsPageSeo from "seo/projectsPage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import MainContent from "components/Showcase/ShowcaseIndexPage/MainContent";
 import clsx from "clsx";
+import { getAllItems } from "server/service/universal/showcase.service";
+import ProjectModel from "server/mongo/model/project.model";
+import { getAllItemCategories } from "server/service/universal/showcaseCategory.service";
+import ProjectCategoryModel from "server/mongo/model/projectCategory.model";
 
 type ProjectsPageProps = {
   projects: Project[];
@@ -101,8 +103,10 @@ export default function ProjectsPage({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await JSONSerialize(await getAllProjects());
-  const categories = await JSONSerialize(await getAllProjectCategories());
+  const projects = await JSONSerialize(await getAllItems(ProjectModel));
+  const categories = await JSONSerialize(
+    await getAllItemCategories(ProjectCategoryModel),
+  );
 
   return projects && categories
     ? { props: { projects, categories } }

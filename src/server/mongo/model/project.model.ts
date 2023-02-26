@@ -1,7 +1,7 @@
 import m from "mongoose";
 import type Project from "interfaces/project.interface";
 
-type ProjectDocument = {
+export type ProjectDocument = {
   createdAt: Date;
   updatedAt?: Date;
 } & Omit<Project, "_id"> &

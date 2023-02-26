@@ -1,4 +1,4 @@
-// import { NextApiHandler } from "next";
+// import type { NextApiHandler } from "next";
 // import nodemailer, { SendMailOptions } from "nodemailer";
 // import {
 //   internalServerErrorRes,

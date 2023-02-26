@@ -16,7 +16,7 @@ export default function useIncrementViewOnLoad(
       try {
         setFinishedUpdating(false);
 
-        await fetch(`/api/views/${showcaseType}/${showcaseItemId}`, {
+        await fetch(`/api/${showcaseType}/views/${showcaseItemId}`, {
           method: "PUT",
         });
       } catch (err) {

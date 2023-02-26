@@ -14,7 +14,7 @@ export default function useGetViewsById(
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
-  const url = R.useMemo(() => `/api/views/${type}/${id}`, [type, id]);
+  const url = R.useMemo(() => `/api/${type}/views/${id}`, [type, id]);
 
   const { data, isLoading, error, mutate } = useSWR<ViewsResponse>(
     url,

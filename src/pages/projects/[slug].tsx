@@ -16,10 +16,6 @@ import SectionSubHeading from "components/Typography/SectionSubHeading";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
-import {
-  getAllProjects,
-  getProjectWithPrevAndNext,
-} from "server/service/projects/projects.service";
 import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
@@ -33,6 +29,11 @@ import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
 import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
 import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
 import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import {
+  getAllItems,
+  getItemWithPrevAndNext,
+} from "server/service/universal/showcase.service";
+import ProjectModel from "server/mongo/model/project.model";
 
 export type ProjectDetailsProps = {
   project: Project;
@@ -132,7 +133,7 @@ export default function ProjectDetails({
     };
 
     try {
-      await fetch(`/api/likes/projects/${project._id}`, {
+      await fetch(`/api/projects/likes/${project._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(operation),
@@ -335,7 +336,7 @@ export default function ProjectDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const projects = await JSONSerialize(await getAllProjects());
+  const projects = await JSONSerialize(await getAllItems(ProjectModel));
 
   if (projects) {
     const paths = projects.map(p => ({ params: { slug: p.slug } }));
@@ -351,9 +352,16 @@ export const getStaticProps: GetStaticProps = async context => {
   if (!params?.slug) return { notFound: true };
   if (typeof params.slug !== "string") return { notFound: true };
 
-  const props = await JSONSerialize(
-    await getProjectWithPrevAndNext(params.slug),
+  const { item, nextItem, prevItem } = await getItemWithPrevAndNext(
+    ProjectModel,
+    params.slug,
   );
+
+  const props = await JSONSerialize({
+    project: item,
+    nextProject: nextItem,
+    prevProject: prevItem,
+  });
 
   if (props) {
     return props.project === null ? { notFound: true } : { props };

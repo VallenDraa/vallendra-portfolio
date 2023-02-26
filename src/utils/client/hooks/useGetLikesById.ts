@@ -15,7 +15,7 @@ export default function useGetLikesById(
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
-  const url = R.useMemo(() => `/api/likes/${type}/${id}`, [type, id]);
+  const url = R.useMemo(() => `/api/${type}/likes/${id}`, [type, id]);
 
   const { data, isLoading, error, mutate } = useSWR<LikedResponse>(
     url,
