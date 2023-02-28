@@ -8,7 +8,7 @@ export default function SiteFooter() {
   return (
     <footer className="gradient-underline gradient-underline--primary relative flex animate-fade-in flex-col gap-2 px-8 py-4 before:!top-0">
       {/* site links */}
-      <ul className="layout mb-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-indigo-300 dark:text-gray-400">
+      <ul className="layout mb-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-zinc-500 dark:text-zinc-300">
         {menuData.map(menu => (
           <SiteFooterMenu key={menu.name} data={menu} />
         ))}
@@ -18,7 +18,7 @@ export default function SiteFooter() {
       </ul>
 
       {/* socials */}
-      <div className="layout flex w-fit items-center gap-2.5 text-3xl text-indigo-300 dark:text-gray-400 [&>*]:p-1">
+      <div className="layout flex w-fit items-center gap-2.5 text-3xl text-zinc-500 dark:text-zinc-300 [&>*]:p-1">
         <a
           target="_blank"
           aria-label="Email link button"
@@ -52,14 +52,14 @@ export default function SiteFooter() {
       </div>
 
       {/* tech */}
-      <div className="layout flex flex-col items-center text-indigo-300 dark:text-gray-500">
+      <div className="layout flex flex-col items-center text-zinc-500 dark:text-zinc-400">
         {/* portfolio tech stack */}
         <div className="flex items-center gap-1 text-sm">
           <span>Built with</span>
           <a
             href="https://nextjs.org"
             target="_blank"
-            className="text-pink-300 underline underline-offset-2 dark:text-pink-200"
+            className="text-pink-400 underline underline-offset-2 dark:text-pink-300"
             rel="noreferrer"
           >
             Next.js,
@@ -67,13 +67,13 @@ export default function SiteFooter() {
           <a
             href="https://www.material-tailwind.com/"
             target="_blank"
-            className="text-pink-300 underline underline-offset-2 dark:text-pink-200"
+            className="text-pink-400 underline underline-offset-2 dark:text-pink-300"
             rel="noreferrer"
           >
             Material Tailwind,
           </a>
           <span>and</span>
-          <span className="translate-y-[1px] text-lg text-pink-300 dark:text-pink-200">
+          <span className="translate-y-[1px] text-lg text-pink-400 dark:text-pink-300">
             &hearts;
           </span>
         </div>

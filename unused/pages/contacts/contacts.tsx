@@ -111,7 +111,7 @@
 //             <Typography
 //               as="p"
 //               variant="paragraph"
-//               className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-gray-400 md:text-lg"
+//               className="mb-5 mt-1 pl-0.5 text-justify text-base font-medium leading-loose text-indigo-700 dark:text-zinc-400 md:text-lg"
 //             >
 //               You can contact me via email or through others means provided
 //               below !
@@ -143,7 +143,7 @@
 //                   </Typography>
 //                   <Typography
 //                     as="span"
-//                     className="font-medium text-indigo-600 dark:text-gray-400"
+//                     className="font-medium text-indigo-600 dark:text-zinc-400"
 //                   >
 //                     Fill the fields below to send a quick message via email !
 //                   </Typography>
@@ -209,8 +209,8 @@
 //             freezeOnceVisible
 //             onEnter={(ref) => fadeIn(ref, "animate-fade-in-top", 200)}
 //           >
-//             <aside className="card-colors flex flex-col items-start gap-0 rounded-md p-6 opacity-0 shadow-md transition-[flex-basis] duration-300 dark:bg-gray-800/40 dark:shadow-gray-800/60 sm:basis-1/12">
-//               <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 border-indigo-300 pb-5 dark:border-gray-700 sm:justify-center">
+//             <aside className="card-colors flex flex-col items-start gap-0 rounded-md p-6 opacity-0 shadow-md transition-[flex-basis] duration-300 dark:bg-zinc-800/40 dark:shadow-zinc-800/60 sm:basis-1/12">
+//               <header className="mb-3 w-full flex-col justify-start gap-2 space-y-1 border-b-2 border-indigo-300 pb-5 dark:border-zinc-700 sm:justify-center">
 //                 <div className="flex gap-2 sm:justify-center">
 //                   <IconWithTooltip
 //                     withPadding={false}
@@ -234,7 +234,7 @@
 //                 <Typography
 //                   as="p"
 //                   variant="paragraph"
-//                   className="font-medium text-indigo-600 dark:text-gray-400 sm:hidden"
+//                   className="font-medium text-indigo-600 dark:text-zinc-400 sm:hidden"
 //                 >
 //                   Connect with me and stay updated on my projects or thoughts on
 //                   these platforms

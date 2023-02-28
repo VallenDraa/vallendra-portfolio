@@ -34,7 +34,7 @@ export default function Profile() {
     <section
       aria-label="profile-section"
       id="profile"
-      className="relative z-10 scroll-m-12 space-y-8 bg-indigo-50 dark:bg-gray-900"
+      className="relative z-10 scroll-m-12 space-y-8 bg-indigo-50 dark:bg-zinc-900"
     >
       <div className="layout relative mx-auto flex flex-col gap-8 overflow-y-hidden pt-10 pb-16 xl:flex-row">
         {/* left side */}
@@ -58,13 +58,13 @@ export default function Profile() {
                 <Typography
                   as="p"
                   variant="paragraph"
-                  className="pl-0.5 text-justify font-normal leading-loose text-indigo-700 dark:text-gray-300"
+                  className="pl-0.5 text-justify font-normal leading-loose text-zinc-700 dark:text-zinc-300"
                 >
                   My name is Jestine Vallendra Dwi Putra. I started my coding
-                  journey in Game Development using Unity but soon realized that
-                  I have a potato PC and so I diverted my attention to Web Dev
-                  which I still pursue to this day. I mainly use React and its
-                  tech stacks when making stuff now.
+                  journey in Game Development using Unity but soon diverted to
+                  Web Dev which I still pursue to this day. I mainly use React
+                  when developing and I look forward to improving my skill as a
+                  Front-End Developer.
                 </Typography>
               </div>
             </Observe>
@@ -82,7 +82,7 @@ export default function Profile() {
                   <Typography
                     as="h3"
                     variant="h3"
-                    className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-200 bg-clip-text text-2xl font-bold uppercase text-transparent  dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
+                    className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-2xl font-bold uppercase text-transparent  dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
                   >
                     <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
                     Technologies
@@ -91,7 +91,7 @@ export default function Profile() {
                   <Typography
                     as="p"
                     variant="paragraph"
-                    className="font-normal text-indigo-600 dark:text-gray-400"
+                    className="font-normal text-zinc-600 dark:text-zinc-400"
                   >
                     Languages and frameworks that I use for projects and college
                     !
@@ -127,7 +127,7 @@ export default function Profile() {
                 </CardBody>
                 <CardFooter
                   divider
-                  className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
+                  className="border-indigo-400 py-3 text-zinc-500 dark:border-zinc-600 dark:text-zinc-500"
                 >
                   <Typography
                     variant="small"
@@ -153,7 +153,7 @@ export default function Profile() {
                 <Typography
                   as="h3"
                   variant="h4"
-                  className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-200 bg-clip-text font-bold uppercase text-transparent"
+                  className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-300 bg-clip-text font-bold uppercase text-transparent"
                 >
                   <IoSchool className="icon-with-bg-colors rounded-lg p-1 text-3xl text-light-blue-400" />
                   EDUCATION
@@ -161,14 +161,14 @@ export default function Profile() {
                 <Typography
                   variant="paragraph"
                   as="p"
-                  className="font-normal text-indigo-600 dark:text-gray-400"
+                  className="font-normal text-zinc-600 dark:text-zinc-400"
                 >
                   Majoring in Informatics at UIN Syarif Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
                 divider
-                className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
+                className="border-indigo-400 py-3 text-zinc-500 dark:border-zinc-600 dark:text-zinc-500"
               >
                 <Typography variant="small" className="text-right font-normal">
                   2022 - 2026
@@ -187,22 +187,22 @@ export default function Profile() {
                 <Typography
                   as="h3"
                   variant="h4"
-                  className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-300 to-pink-100 bg-clip-text font-bold uppercase text-transparent"
+                  className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text font-bold uppercase text-transparent"
                 >
-                  <FaGoogle className="icon-with-bg-colors rounded-lg p-1 text-3xl text-pink-300" />
+                  <FaGoogle className="icon-with-bg-colors rounded-lg p-1 text-3xl text-pink-500" />
                   ACTIVITY
                 </Typography>
                 <Typography
                   variant="paragraph"
                   as="p"
-                  className="font-normal text-indigo-600 dark:text-gray-400"
+                  className="font-normal text-zinc-600 dark:text-zinc-400"
                 >
                   An active member of GDSC UIN Syarif Hidayatullah Jakarta.
                 </Typography>
               </CardBody>
               <CardFooter
                 divider
-                className="border-indigo-400 py-3 text-indigo-500 dark:border-gray-600 dark:text-gray-500"
+                className="border-indigo-400 py-3 text-zinc-500 dark:border-zinc-600 dark:text-zinc-500"
               >
                 <Typography variant="small" className="text-right font-normal">
                   2022 - 2023

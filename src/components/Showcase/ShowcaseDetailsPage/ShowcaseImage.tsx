@@ -26,7 +26,7 @@ export default function ShowcaseImage({
         className="w-full rounded-md object-cover opacity-90 shadow"
       />
 
-      <figcaption className="pt-2 text-center !text-sm text-indigo-300 dark:text-gray-500">
+      <figcaption className="pt-2 text-center !text-sm text-indigo-300 dark:text-zinc-500">
         <span>{titleAsCaption ? title : `Screenshot of ${name}`}</span>
       </figcaption>
     </figure>

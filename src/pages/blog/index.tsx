@@ -44,7 +44,7 @@ export default function BlogsPage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
           >
-            <div className="opacity-0">
+            <div className="mt-4 opacity-0">
               <SearchInput
                 defaultValue={query}
                 placeholder="Search Posts"

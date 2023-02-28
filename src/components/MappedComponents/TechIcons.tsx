@@ -54,8 +54,8 @@ const techIcons: {
     <SiJavascript
       className={`${size} ${
         isColorOn
-          ? "bg-gray-900 text-yellow-600 dark:bg-transparent"
-          : "text-white/50 transition-colors duration-200 hover:bg-gray-900 hover:text-yellow-600 group-hover:text-yellow-600 dark:hover:bg-transparent"
+          ? "bg-zinc-900 text-yellow-400 dark:bg-transparent"
+          : "text-white/50 transition-colors duration-200 hover:bg-zinc-900 hover:text-yellow-400 group-hover:text-yellow-400 dark:hover:bg-transparent"
       }`}
     />
   ),
@@ -63,8 +63,8 @@ const techIcons: {
     <SiJquery
       className={`${size} ${
         isColorOn
-          ? "text-blue-700"
-          : "text-white/50 transition-colors duration-200 hover:text-blue-700 group-hover:text-blue-700"
+          ? "text-blue-500"
+          : "text-white/50 transition-colors duration-200 hover:text-blue-500 group-hover:text-blue-500"
       }`}
     />
   ),
@@ -72,8 +72,8 @@ const techIcons: {
     <SiTypescript
       className={`rounded ${size} ${
         isColorOn
-          ? "bg-white text-blue-700"
-          : "text-white/50 transition-colors duration-200 hover:bg-white hover:text-blue-700 group-hover:text-blue-700"
+          ? "bg-white text-blue-500"
+          : "text-white/50 transition-colors duration-200 hover:bg-white hover:text-blue-500 group-hover:text-blue-500"
       }`}
     />
   ),
@@ -90,8 +90,8 @@ const techIcons: {
     <SiNodedotjs
       className={`${size} ${
         isColorOn
-          ? "text-green-400"
-          : "text-white/50 transition-colors duration-200 hover:text-green-400 group-hover:text-green-400"
+          ? "text-green-500"
+          : "text-white/50 transition-colors duration-200 hover:text-green-500 group-hover:text-green-500"
       }`}
     />
   ),
@@ -108,8 +108,8 @@ const techIcons: {
     <SiSocketdotio
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),
@@ -135,8 +135,8 @@ const techIcons: {
     <SiUnity
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),
@@ -153,8 +153,8 @@ const techIcons: {
     <SiNextdotjs
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),

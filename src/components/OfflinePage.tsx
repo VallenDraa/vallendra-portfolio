@@ -12,7 +12,7 @@ export default function OfflinePage() {
       </Head>
       <BreathingBackground />
 
-      <div className="relative flex h-screen animate-fade-in flex-col items-center justify-center bg-indigo-50/60 px-8 dark:bg-gray-900/60">
+      <div className="bg--indigo-50/60 relative flex h-screen animate-fade-in flex-col items-center justify-center px-8 dark:bg-zinc-900/60">
         <div className="flex flex-col items-start space-y-2">
           <Observe
             freezeOnceVisible
@@ -21,7 +21,7 @@ export default function OfflinePage() {
             <Typography
               variant="h3"
               as="span"
-              className="relative z-10 font-bold text-indigo-500 opacity-0 dark:text-gray-300"
+              className="relative z-10 font-bold text-indigo-500 opacity-0 dark:text-zinc-300"
             >
               Oops you went offline... 😕
             </Typography>
@@ -34,7 +34,7 @@ export default function OfflinePage() {
             <Typography
               variant="h4"
               as="span"
-              className="text-indigo-300 opacity-0 dark:text-gray-400"
+              className="text-indigo-300 opacity-0 dark:text-zinc-400"
             >
               Come back later when you are reconnected to the network.
             </Typography>

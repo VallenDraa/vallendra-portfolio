@@ -20,7 +20,7 @@ export default function ThemeToggler({
       aria-label="Theme toggle button"
       size="md"
       variant="text"
-      color={theme === "light" ? "indigo" : "amber"}
+      color={theme === "light" ? "gray" : "yellow"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className={`text-lg ${className} `}
     >

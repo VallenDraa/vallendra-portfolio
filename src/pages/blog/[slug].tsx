@@ -162,8 +162,8 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
           <header>
             <section
               className={clsx(
-                "not-prose prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
-                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30",
+                "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700",
               )}
             >
               {/* back to project button */}
@@ -202,9 +202,9 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
                 />
                 <Show when={!frontmatter.englishOnly}>
                   <ActionButton
-                    className="w-full lg:w-max"
+                    className="w-full !border-indigo-400 !text-indigo-400 lg:w-max"
                     icon={<IoLanguage />}
-                    color="teal"
+                    color="indigo"
                     hrefTarget="_self"
                     href={
                       slugPrefix === "en-"
@@ -220,7 +220,7 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
           </header>
           <main
             className={clsx(
-              "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
               "my-4 mx-auto",
             )}
           >
@@ -233,7 +233,7 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
           </main>
           <footer
             className={clsx(
-              "prose prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
@@ -243,6 +243,7 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
                   icon={<FaGithub className="text-lg" />}
                   href=""
                   color="gray"
+                  className="dark:!border-zinc-400 dark:!text-zinc-400"
                 >
                   See on Github
                 </ActionButton>

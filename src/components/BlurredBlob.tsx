@@ -19,7 +19,7 @@ export default function BlurredBlob({
 }: BlurredBlobProps) {
   return (
     <div
-      className={`absolute h-72 w-72 rotate-12 skew-x-6 rounded-full bg-gradient-to-br from-indigo-100 to-pink-100 opacity-100 blur-3xl dark:from-indigo-700 dark:to-pink-700 dark:opacity-50 ${scale} ${left} ${right} ${top} ${bottom} ${translateX} ${translateY}`.trimEnd()}
+      className={`absolute h-72 w-72 rotate-12 skew-x-6 rounded-full bg-gradient-to-br from-indigo-50 to-pink-100 opacity-100 blur-3xl dark:from-indigo-700 dark:to-pink-700 dark:opacity-50 ${scale} ${left} ${right} ${top} ${bottom} ${translateX} ${translateY}`.trimEnd()}
     />
   );
 }

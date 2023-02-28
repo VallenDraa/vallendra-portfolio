@@ -53,7 +53,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
       <Link
         title={data.name}
         href={`/${type}/${data.slug}`}
-        className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-gray-800/30"
+        className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-zinc-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-zinc-800/30"
       >
         {/* image */}
         <CldImage
@@ -68,7 +68,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         />
 
         {/* fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 to-gray-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-gray-900/50 dark:to-gray-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/40 to-zinc-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-zinc-900/50 dark:to-zinc-900/90" />
 
         {/* detail */}
         <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
@@ -76,7 +76,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <Typography
             variant="h5"
             as="span"
-            className="block bg-gradient-to-r from-pink-200 to-amber-200 bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl"
+            className="secondary-gradient block bg-gradient-to-r bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl"
           >
             {data.name}
           </Typography>
@@ -85,7 +85,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <Typography
             variant="paragraph"
             as="p"
-            className="mt-1 px-3 text-base font-normal text-gray-300 line-clamp-2 sm:text-sm"
+            className="mt-1 px-3 text-base font-normal text-white/80 line-clamp-2 sm:text-sm"
           >
             {data.shortDescriptionEN}
           </Typography>
@@ -94,16 +94,16 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <div className="mt-1.5 flex gap-3 px-3">
             <Stats
               icon={<AiFillEye />}
-              textColor="text-teal-300"
-              isLoading={viewsRes?.isLoading || !hasFetched}
-              number={viewsRes?.data?.views || data.views}
+              textColor="text-teal-400"
+              isLoading={viewsRes?.isLoading ?? !hasFetched}
+              number={viewsRes?.data?.views ?? data.views}
             />
 
             <Stats
               icon={<AiFillHeart />}
-              textColor="text-red-300"
-              isLoading={likesRes.isLoading || !hasFetched}
-              number={likesRes?.data?.likes || data.likes}
+              textColor="text-red-400"
+              isLoading={likesRes.isLoading ?? !hasFetched}
+              number={likesRes?.data?.likes ?? data.likes}
             />
           </div>
 
@@ -114,7 +114,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <StyledButton
             variant="text"
             icon={<BsArrowRight />}
-            className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-gray-500/30 py-3 px-7 text-indigo-300"
+            className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400"
             color="indigo"
           >
             See Detail

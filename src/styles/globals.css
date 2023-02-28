@@ -10,22 +10,22 @@
   /* icons
   ======= */
   .icon-with-bg-colors {
-    @apply bg-indigo-100 dark:bg-gray-700/90;
+    @apply bg-indigo-100 dark:bg-zinc-700/90;
   }
 
   /* cards 
   ======= */
   .card-colors {
-    @apply !bg-indigo-100/20 !shadow-indigo-100/50 dark:!bg-gray-800/40 dark:!shadow-gray-800/50;
+    @apply !bg-indigo-100/50 !shadow-indigo-200/50 dark:!bg-zinc-800/50 dark:!shadow-zinc-700/50;
   }
   .detail-aside-colors {
-    @apply border-2 border-indigo-100 dark:border-[#30363d];
+    @apply border-2 border-indigo-200 dark:border-[#30363d];
   }
 
   /* Normal underline css for text
   ================================= */
   .normal-underline {
-    @apply before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full;
+    @apply before:absolute before:-bottom-2 before:left-0 before:h-[0.5px] before:w-full;
   }
 
   /* Gradient underline css for text
@@ -40,21 +40,25 @@
   /* navlist underlay for <lg screen size to smoothen open and closing animation 
   ================================================================================== */
   .navlist-underlay {
-    @apply before:absolute before:h-full before:w-8 before:-translate-x-8 before:bg-indigo-50 before:dark:bg-gray-900 lg:before:hidden;
+    @apply before:absolute before:h-full before:w-8 before:-translate-x-8 before:bg-indigo-50 before:dark:bg-zinc-900 lg:before:hidden;
   }
 
   .fade-bottom {
-    @apply after:absolute after:inset-x-0 after:z-40 after:h-20 after:bg-gradient-to-b after:from-transparent after:to-indigo-50 dark:after:to-gray-900;
+    @apply after:absolute after:inset-x-0 after:z-40 after:h-20 after:bg-gradient-to-b after:from-transparent after:to-indigo-50 dark:after:to-zinc-900;
   }
 
   .fade-top {
-    @apply before:absolute before:inset-x-0 before:z-40 before:h-20 before:bg-gradient-to-b before:from-indigo-50 before:to-transparent dark:before:from-gray-900;
+    @apply before:absolute before:inset-x-0 before:z-40 before:h-20 before:bg-gradient-to-b before:from-indigo-50 before:to-transparent dark:before:from-zinc-900;
   }
 
   /* gradients
   ============ */
   .primary-gradient {
-    @apply from-indigo-300 to-pink-300 dark:from-indigo-200 dark:to-pink-200;
+    @apply from-indigo-400 to-pink-400 dark:to-pink-300;
+  }
+
+  .secondary-gradient {
+    @apply from-pink-300 to-amber-300;
   }
 }
 

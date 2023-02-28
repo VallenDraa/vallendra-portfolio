@@ -2,7 +2,7 @@
  *       <details>
                     <summary
                       onClick={() => handleOpenAccordion(i)}
-                      className="flex cursor-pointer items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  transition-colors duration-200 hover:bg-indigo-500/10 hover:text-indigo-500 active:bg-indigo-500/20 dark:text-gray-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-200"
+                      className="flex cursor-pointer items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  transition-colors duration-200 hover:bg-zinc-500/10 hover:text-indigo-500 active:bg-zinc-500/20 dark:text-zinc-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-zinc-200"
                     >
                       {menu.name}
                       <IoChevronDown
@@ -20,7 +20,7 @@
                             color="indigo"
                             variant="text"
                             fullWidth
-                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-300"
+                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-300"
                           >
                             {subMenu.name}
                           </Button>

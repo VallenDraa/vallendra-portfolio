@@ -83,7 +83,7 @@
 //           aria-label="Github link button"
 //           icon={
 //             <FaGithubSquare
-//               className={`${sizeClasses} text-gray-800 dark:text-gray-100`}
+//               className={`${sizeClasses} text-zinc-800 dark:text-zinc-100`}
 //             />
 //           }
 //           text="Github"

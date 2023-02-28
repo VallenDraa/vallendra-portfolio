@@ -1,5 +1,6 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
+const defaultColors = require("tailwindcss/colors");
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
@@ -7,20 +8,21 @@ module.exports = withMT({
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
+    colors: { ...defaultColors },
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
     extend: {
       colors: {
         "top-pick": {
-          dark: "#272727",
-          light: "#e2e4f4",
+          dark: "#1d1d20",
+          light: "#e9eeff",
         },
       },
       backgroundImage: {
         "radial-fade":
           "radial-gradient(circle, rgba(33,33,33,0.24) 20%, rgba(33,33,33,0.5) 90%)",
         "main-gradient":
-          "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc, #22d3ee)",
+          "linear-gradient(80deg, #fbbf24, #fb7185, #818cf8, #c084fc)",
       },
       keyframes: {
         "fade-in-left": {

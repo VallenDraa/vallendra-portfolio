@@ -19,7 +19,7 @@
 //         <Typography
 //           as="q"
 //           variant="h1"
-//           className="relative z-20 pb-4 text-center text-5xl font-extrabold leading-[initial] text-white dark:text-gray-50 md:text-6xl xl:text-7xl"
+//           className="relative z-20 pb-4 text-center text-5xl font-extrabold leading-[initial] text-white dark:text--indigo-50 md:text-6xl xl:text-7xl"
 //         >
 //           I'm a very simple man. If it's{" "}
 //           <em className="text-[#818cf8] underline">Practical</em> then i like
@@ -34,7 +34,7 @@
 //         </Typography>
 
 //         {/* background and shadow for the quote */}
-//         <div className="absolute inset-y-0 left-12 right-12 z-10 -skew-x-12 transform rounded-md bg-gradient-to-r from-indigo-200/50 to-white/50 dark:from-gray-900/90 dark:to-gray-800/60" />
+//         <div className="absolute inset-y-0 left-12 right-12 z-10 -skew-x-12 transform rounded-md bg-gradient-to-r from-indigo-200/50 to-white/50 dark:from-zinc-900/90 dark:to-zinc-800/60" />
 //       </div>
 //     </Observe>
 //   );

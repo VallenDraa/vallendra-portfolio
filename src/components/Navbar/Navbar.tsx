@@ -77,14 +77,14 @@ export default function NavbarComponent() {
   return (
     <div
       ref={navbarRef}
-      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-indigo-100/90 py-3 px-0 backdrop-saturate-150 supports-[backdrop-filter]:bg-indigo-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-gray-800/90 dark:supports-[backdrop-filter]:bg-gray-800/30"
+      className="sticky top-0 z-[70] min-w-full rounded-none border-0 bg-zinc-100/90 py-3 px-0 backdrop-saturate-150 supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30"
     >
       <div className="layout flex items-center justify-between">
         {/* name section */}
         <Typography
           as="span"
           variant="h5"
-          className="text-indigo-500 dark:text-gray-200 lg:basis-1/3"
+          className="text-indigo-500 dark:text-zinc-200 lg:basis-1/3"
         >
           <Link href="/">VallenDra</Link>
         </Typography>
@@ -111,7 +111,7 @@ export default function NavbarComponent() {
             className="text-inherit"
             onClick={() => setNavIsOpened(true)}
           >
-            <BiMenu className="text-4xl text-indigo-400 transition duration-200 dark:text-gray-200" />
+            <BiMenu className="text-4xl text-indigo-400 transition duration-200 dark:text-zinc-200" />
           </IconButton>
         </div>
       </div>

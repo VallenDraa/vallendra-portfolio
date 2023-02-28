@@ -63,20 +63,20 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
         role="none"
         onClick={closeNav}
         ref={overlayRef}
-        className="fixed inset-0 z-[60] h-screen bg-indigo-800/50 opacity-0 transition-opacity duration-300 dark:bg-black/50 lg:hidden"
+        className="fixed inset-0 z-[60] h-screen bg-indigo-400/50 opacity-0 transition-opacity duration-300 dark:bg-black/50 lg:hidden"
       />
 
       {/* the nav list */}
       <nav
         ref={navListRef}
-        className="fixed top-0 left-0 z-[70] flex h-screen w-72 -translate-x-full flex-col gap-1 bg-indigo-50 transition-transform duration-300 dark:bg-gray-900 lg:static lg:h-max lg:w-max lg:translate-x-0 lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent"
+        className="fixed top-0 left-0 z-[70] flex h-screen w-72 -translate-x-full flex-col gap-1 bg-indigo-50 transition-transform duration-300 dark:bg-zinc-900 lg:static lg:h-max lg:w-max lg:translate-x-0 lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent"
       >
         {/* close button for small screen nav */}
-        <div className="gradient-underline gradient-underline--primary relative mb-3 flex items-center justify-between px-5 pt-3 pb-0.5 lg:hidden lg:px-3">
+        <div className="gradient-underline gradient-underline--primary relative mb-3 flex items-center justify-between pl-5 pr-3 pt-3 pb-0.5 lg:hidden lg:px-3">
           <Typography
             as="span"
             variant="paragraph"
-            className="font-medium text-indigo-500 dark:text-gray-400"
+            className="font-medium text-indigo-600 dark:text-zinc-300"
           >
             Menu
           </Typography>
@@ -86,7 +86,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
             onClick={closeNav}
             color="red"
             variant="text"
-            className="flex w-max items-center justify-center rounded-full p-2 text-xl text-red-800 transition duration-200 dark:hover:text-white"
+            className="flex w-max items-center justify-center rounded-full p-2 text-xl text-red-600 transition duration-200"
           >
             <IoClose />
           </Button>
@@ -131,7 +131,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                       variant="text"
                       fullWidth
                       onClick={() => handleOpenAccordion(i)}
-                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400  duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-gray-200"
+                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-zinc-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-zinc-200"
                     >
                       {menu.name}
                       <IoChevronDown
@@ -149,7 +149,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                             color="indigo"
                             variant="text"
                             fullWidth
-                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white dark:lg:text-gray-200"
+                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
                           >
                             {subMenu.name}
                           </Button>
@@ -167,7 +167,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
           <Typography
             as="span"
             variant="small"
-            className="text-xs font-semibold text-indigo-300 dark:text-gray-600"
+            className="text-xs font-semibold text-indigo-400 dark:text-zinc-500"
           >
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
           </Typography>

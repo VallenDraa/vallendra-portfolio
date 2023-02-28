@@ -15,7 +15,7 @@ type HomeProps = {
 const Profile = dynamic(() => import("components/Home/Profile/Profile"), {
   ssr: false,
   loading: () => (
-    <div className="relative z-10 h-screen w-screen scroll-m-12 space-y-8 bg-indigo-50 dark:bg-gray-900" />
+    <div className="bg--indigo-50 relative z-10 h-screen w-screen scroll-m-12 space-y-8 dark:bg-zinc-900" />
   ),
 });
 

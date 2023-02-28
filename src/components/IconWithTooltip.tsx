@@ -14,7 +14,7 @@ export default function IconWithTooltip({ icon, text }: IconWithTooltipProps) {
         "icon-tooltip",
         "transition-colors duration-200",
         "group inline-block rounded-md p-3.5",
-        "hover:bg-indigo-200/30 dark:hover:bg-gray-500/30",
+        "hover:bg-indigo-200/30 dark:hover:bg-zinc-500/30",
       )}
     >
       {icon}

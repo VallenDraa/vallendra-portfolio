@@ -45,7 +45,7 @@ export default function ShowcaseStats({
   R.useEffect(() => setDateIsLoaded(formattedDate !== ""), [formattedDate]);
 
   return (
-    <div className="flex flex-wrap gap-3 text-indigo-300 dark:text-gray-500">
+    <div className="flex flex-wrap gap-3 text-indigo-400">
       <time
         className={clsx(
           "flex items-center gap-1 text-sm font-medium",
@@ -79,7 +79,7 @@ export default function ShowcaseStats({
         variant="small"
         as="span"
         className={`flex items-center gap-1 font-medium ${
-          hasLiked ? "text-red-300" : "text-inherit"
+          hasLiked ? "text-red-400" : "text-inherit"
         } ${isLoadingStats ? skeleton : "animate-fade-in"}`}
       >
         <AiFillHeart />

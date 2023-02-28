@@ -73,7 +73,7 @@ export default function CertificatePage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
           >
-            <div className="opacity-0">
+            <div className="mt-4 opacity-0">
               <SearchInput
                 defaultValue={query}
                 placeholder="Search Certificates"

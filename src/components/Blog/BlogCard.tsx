@@ -49,7 +49,7 @@ export default function BlogCard({ post }: { post: PostData }) {
       <Link
         title={post.title}
         href={`/blog/${post.slug}`}
-        className="flex flex-col gap-3 rounded-md border border-indigo-200 p-4 shadow transition-colors duration-200 hover:shadow-indigo-200 dark:border-gray-700 hover:dark:shadow-gray-700"
+        className="flex flex-col gap-3 rounded-md border border-indigo-200 p-4 shadow transition-colors duration-200 hover:shadow-indigo-200 dark:border-zinc-700 hover:dark:shadow-zinc-700"
       >
         <CldImage
           className="rounded"
@@ -62,37 +62,37 @@ export default function BlogCard({ post }: { post: PostData }) {
           alt={post.bannerSrc}
         />
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <time
             dateTime={formattedDate}
-            className="text-sm font-medium text-pink-300 dark:text-pink-200"
+            className="text-sm font-medium text-pink-400 dark:text-pink-300"
           >
             {formattedDate}
           </time>
           <Typography
             as="h4"
             variant="h4"
-            className="text-indigo-500 dark:text-gray-200"
+            className="text-zinc-700 dark:text-zinc-200"
           >
             {post.title}
           </Typography>
         </div>
 
-        <span className="text-base text-indigo-300 dark:text-gray-400">
+        <span className="text-base text-zinc-600 dark:text-zinc-400">
           {post.description}
         </span>
 
         <div className="flex items-center gap-3">
           <Stats
             icon={<AiFillEye />}
-            textColor="text-teal-300"
+            textColor="text-teal-400"
             isLoading={viewsRes?.isLoading ?? !hasFetched}
             number={viewsRes?.data?.views ?? 0}
           />
 
           <Stats
             icon={<AiFillHeart />}
-            textColor="text-red-300"
+            textColor="text-red-400"
             isLoading={likesRes.isLoading ?? !hasFetched}
             number={likesRes?.data?.likes ?? 0}
           />

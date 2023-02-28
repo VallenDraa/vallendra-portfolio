@@ -92,7 +92,7 @@ export default function TopProjectsItem({
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
           className={clsx(
-            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-indigo-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-gray-400",
+            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-zinc-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-zinc-300",
             twistDirection === "left"
               ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]",
@@ -116,7 +116,7 @@ export default function TopProjectsItem({
           format="webp"
           quality={50}
           className={clsx(
-            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-indigo-100/50 dark:shadow-gray-900/50 lg:mt-0",
+            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 dark:shadow-zinc-900/50 lg:mt-0",
             twistDirection === "left" ? "" : "ml-auto",
           )}
         />
@@ -144,7 +144,7 @@ export default function TopProjectsItem({
           </Typography>
           <Typography
             variant="paragraph"
-            className="font-normal leading-loose text-indigo-600 dark:text-gray-300"
+            className="font-normal leading-loose text-zinc-600 dark:text-zinc-300"
           >
             {project.shortDescriptionEN}
           </Typography>
@@ -179,9 +179,9 @@ export default function TopProjectsItem({
             >
               <StyledButton
                 variant="outlined"
-                icon={<BsArrowRight className="text-teal-600" />}
-                className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 lg:w-max"
-                color="teal"
+                icon={<BsArrowRight className="text-indigo-400" />}
+                className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 !border-indigo-400 !text-indigo-400 lg:w-max"
+                color="indigo"
                 size="md"
               >
                 See Project

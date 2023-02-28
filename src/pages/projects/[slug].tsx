@@ -178,7 +178,7 @@ export default function ProjectDetails({
       </StyledAlert>
 
       <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700">
           {/* back to project button */}
           <LinkWithUnderline href="/projects">
             <BsArrowLeft />
@@ -257,7 +257,7 @@ export default function ProjectDetails({
               <SectionSubHeading>Description</SectionSubHeading>
               <Typography
                 variant="paragraph"
-                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
+                className="px-3 text-justify font-normal leading-loose text-zinc-600 dark:text-zinc-400"
               >
                 <Show when={activeLanguage === "en"}>
                   {project.descriptionEN}
@@ -273,7 +273,7 @@ export default function ProjectDetails({
           <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
             <div className="flex w-full flex-col gap-3">
               {/* when the project has download link */}
-              <Show when={!!project.downloadLink === true}>
+              <Show when={!!project.downloadLink}>
                 <ActionButton
                   href={`${project.downloadLink}`}
                   icon={<FaDownload className="text-lg text-blue-500" />}
@@ -283,7 +283,7 @@ export default function ProjectDetails({
               </Show>
 
               {/* when the project has a website link */}
-              <Show when={!!project.siteLink === true}>
+              <Show when={!!project.siteLink}>
                 <ActionButton
                   href={`${project.siteLink}`}
                   icon={<SlGlobe className="text-lg text-blue-500" />}
@@ -297,6 +297,7 @@ export default function ProjectDetails({
                 icon={<FaGithub className="text-lg" />}
                 href={project.gitLink}
                 color="gray"
+                className="dark:!border-zinc-400 dark:!text-zinc-400"
               >
                 Visit Repo
               </ActionButton>

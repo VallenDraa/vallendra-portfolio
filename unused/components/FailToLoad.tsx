@@ -6,14 +6,14 @@
 //       <Typography
 //         variant="h4"
 //         as="h2"
-//         className="text-lg dark:text-gray-300 md:text-xl lg:text-2xl"
+//         className="text-lg dark:text-zinc-300 md:text-xl lg:text-2xl"
 //       >
 //         Sorry, Can&apos;t Seem To Load The Showcase Items 😅
 //       </Typography>
 //       <Typography
 //         variant="h5"
 //         as="h3"
-//         className="text-sm dark:text-gray-400 md:text-base lg:text-lg"
+//         className="text-sm dark:text-zinc-400 md:text-base lg:text-lg"
 //       >
 //         Try reloading the page. If the problem persists, please try again later.
 //       </Typography>

@@ -3,27 +3,19 @@ import { IoCall } from "react-icons/io5";
 import Link from "next/link";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
-import BlurredBlob from "components/BlurredBlob";
 
 /* redirects the user to a contacts page or to the projects page
 ================================================================ */
 export default function Redirect() {
   return (
     <section className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10">
-      <BlurredBlob
-        left="left-1/2"
-        top="-top-12"
-        scale="scale-[115%]"
-        translateX="-translate-x-1/2"
-      />
-
       <Observe
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
       >
         <Typography
           as="h2"
-          className="relative z-10 text-center text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
+          className="relative z-10 text-center text-4xl font-bold text-indigo-500 opacity-0 dark:text-zinc-200 md:text-5xl lg:text-6xl"
         >
           Wanna Work Together ?
         </Typography>
@@ -38,7 +30,7 @@ export default function Redirect() {
           className="relative z-10 mt-8 opacity-0"
         >
           <Button
-            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 focus:text-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:focus:bg-white dark:focus:text-gray-900 dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
+            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 focus:text-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-zinc-300 dark:outline-zinc-300 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:hover:outline-white dark:focus:bg-white dark:focus:text-zinc-900 dark:active:bg-white dark:active:text-zinc-900 dark:active:outline-white lg:text-2xl"
             variant="text"
           >
             <span>Contact Me</span>
@@ -53,16 +45,9 @@ export default function Redirect() {
       >
         <Link
           href="/projects"
-          className="relative z-10 mt-4 inline-block opacity-0"
+          className="relative z-10 mt-4 inline-block text-sm font-medium capitalize text-indigo-400 underline-offset-4 opacity-0 hover:underline dark:text-zinc-400"
         >
-          <Button
-            variant="text"
-            size="sm"
-            color="gray"
-            className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
-          >
-            See my other projects instead
-          </Button>
+          See my other projects instead
         </Link>
       </Observe>
     </section>

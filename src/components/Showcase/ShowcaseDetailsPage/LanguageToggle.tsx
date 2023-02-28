@@ -12,9 +12,9 @@ export default function LanguageToggle({
 }) {
   return (
     <ActionButton
-      className="w-full lg:w-max"
+      className="w-full !border-indigo-400 !text-indigo-400 lg:w-max"
       icon={<IoLanguage />}
-      color="teal"
+      color="indigo"
       onClick={() => setActiveLanguage(prev => (prev === "en" ? "id" : "en"))}
     >
       Read In {activeLanguage === "en" ? "Indonesian" : "English"}

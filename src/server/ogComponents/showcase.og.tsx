@@ -16,8 +16,10 @@ export default function Showcase({ title, shortDesc }: OgComponent) {
         />
         {/* data */}
         <div tw="flex flex-col px-10 w-[500px] h-[540px] justify-center">
-          <p tw="text-5xl text-white mb-0 text-gray-50 opacity-90">{title}</p>
-          <p tw="text-xl text-gray-300">{shortDesc}</p>
+          <p tw="text-5xl text-white mb-0 text--indigo-50 opacity-90">
+            {title}
+          </p>
+          <p tw="text-xl text-zinc-300">{shortDesc}</p>
         </div>
       </div>
 
@@ -33,15 +35,15 @@ export default function Showcase({ title, shortDesc }: OgComponent) {
             height={80}
           />
           <div tw="flex flex-col">
-            <span tw="text-base text-gray-300 mb-0.5">
+            <span tw="text-base text-zinc-300 mb-0.5">
               Jestine Vallendra Dwi Putra
             </span>
-            <span tw="text-sm text-gray-400">Front-End Web Developer</span>
+            <span tw="text-sm text-zinc-400">Front-End Web Developer</span>
           </div>
         </div>
 
         {/* year */}
-        <span tw="text-gray-300">
+        <span tw="text-zinc-300">
           &copy; {new Date().getUTCFullYear()} | vallendra.my.id
         </span>
       </div>

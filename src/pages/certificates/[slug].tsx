@@ -175,7 +175,7 @@ export default function CertificateDetails({
       </StyledAlert>
 
       <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700">
           <LinkWithUnderline href="/certificates">
             <BsArrowLeft />
             Back To Certificate Page
@@ -236,7 +236,7 @@ export default function CertificateDetails({
               <SectionSubHeading>Description</SectionSubHeading>
               <Typography
                 variant="paragraph"
-                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
+                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-zinc-400"
               >
                 <Show when={activeLanguage === "en"}>
                   {certificate.descriptionEN}

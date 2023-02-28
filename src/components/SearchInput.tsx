@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import { InputProps } from "@material-tailwind/react";
 import { AiOutlineLoading } from "react-icons/ai";
 import useDebounce from "utils/client/hooks/useDebounce";
 import Show from "utils/client/jsx/Show";
-import StyledInput from "./StyledComponents/StyledInput";
+import StyledInput, { StyledInputProps } from "./StyledComponents/StyledInput";
 
 type SearchInputProps = {
   defaultValue?: string;
   debounceMs?: number;
   loadingCallback?: (isWaiting: boolean) => void;
   callback: (query: string) => void;
-} & InputProps;
+} & Omit<StyledInputProps, "icon">;
 
 export default function SearchInput({
   ref,
@@ -47,11 +46,11 @@ export default function SearchInput({
     <StyledInput
       icon={
         <Show when={isWaitingResult}>
-          <AiOutlineLoading className="animate-spin text-lg dark:text-gray-300" />
+          <AiOutlineLoading className="animate-spin text-lg text-indigo-700 dark:text-zinc-300" />
         </Show>
       }
       aria-label={placeholder || ""}
-      label={placeholder || ""}
+      placeholder={placeholder || ""}
       disabled={disabled || !!searchError}
       onChange={e => {
         if (onChange) onChange(e);
