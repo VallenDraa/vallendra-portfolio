@@ -1,6 +1,7 @@
-import m from "mongoose";
+import m, { ObjectId } from "mongoose";
 
 export type BlogPostDocument = {
+  _id: ObjectId;
   slug: string;
   likers: string[];
   likes: number;
@@ -9,9 +10,10 @@ export type BlogPostDocument = {
 
 const BlogPostSchema = new m.Schema<BlogPostDocument>(
   {
-    slug: { type: String },
-    views: { type: Number },
-    likes: { type: Number },
+    _id: m.Schema.Types.ObjectId,
+    slug: { type: String, unique: true },
+    views: Number,
+    likes: Number,
     likers: [{ type: String, default: [] }],
   },
   { timestamps: true },

@@ -6,7 +6,7 @@ import TopPickSection from "components/Home/TopProjects/TopProjectsSection";
 import { JSONSerialize } from "utils/server/serialize";
 import Seo from "seo/Seo";
 import defaultSeo from "seo/default.seo";
-import { getTopPickedProjects } from "server/service/universal/showcase.service";
+import { getTopPickedProjects } from "server/service/showcase/showcase.service";
 
 type HomeProps = {
   topPickedProjects: Project[];

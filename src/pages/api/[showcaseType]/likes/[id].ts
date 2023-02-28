@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/return-await */
 import CertificateModel from "server/mongo/model/certificate.model";
 import { NextApiHandler } from "next";
-import idPageShowcaseLikesHandler from "server/handler/idPageShowcaseLikes.handler";
 import ProjectModel from "server/mongo/model/project.model";
+import idPageShowcaseLikesHandler from "server/handler/showcase/showcaseLikes.handler";
+import BlogPostModel from "server/mongo/model/blogPost.model";
+import { checkIfBlogExist } from "server/service/blog/blog.service";
 
 const handler: NextApiHandler = async (req, res) => {
   const { showcaseType, id } = req.query;
@@ -18,8 +21,20 @@ const handler: NextApiHandler = async (req, res) => {
         res,
       );
 
+    case "blogs":
+      return await checkIfBlogExist(
+        id as string,
+        async () =>
+          await idPageShowcaseLikesHandler(
+            BlogPostModel,
+            id as string,
+            req,
+            res,
+          ),
+      );
+
     default:
-      return res.redirect("/404");
+      return res.redirect("/404").end();
   }
 };
 

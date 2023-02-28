@@ -3,7 +3,7 @@ export type FrontMatter = {
   date: string;
   description: string;
   englishOnly: boolean;
-  tags: BlogTags;
+  tags: BlogTags[];
   banner: string;
   bannerSrc: string;
 };

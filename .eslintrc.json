@@ -25,6 +25,7 @@
     "react/jsx-no-bind": "off",
     "react/jsx-props-no-spreading": "off",
     "react/display-name": "off",
+    "no-lonely-if": "off",
     "no-underscore-dangle": "off",
     "no-unused-expressions": "warn",
     "no-unused-labels": "warn",

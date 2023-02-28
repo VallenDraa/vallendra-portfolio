@@ -5,50 +5,41 @@ import type { Model } from "mongoose";
 
 import {
   internalServerErrorRes,
-  invalidBodyRes,
   invalidHttpMethodRes,
 } from "server/error/response.error";
+
 import {
   incItemStat,
   selectStatsFromItem,
-} from "server/service/universal/showcaseStats.service";
+} from "server/service/showcase/showcaseStats.service";
+import { BlogPostDocument } from "server/mongo/model/blogPost.model";
 
 /* this handles operation on views for a single project
 ====================================================== */
 export default async function idPageShowcaseViewsHandler<
-  T extends ProjectDocument | CertificateDocument,
+  T extends ProjectDocument | CertificateDocument | BlogPostDocument,
 >(model: Model<T>, id: string, req: NextApiRequest, res: NextApiResponse) {
   try {
-    if (typeof id !== "string" || !id) {
-      invalidBodyRes(res);
-      return;
-    }
-
     /* Check the http method
-    ======================= */
+      ======================= */
     switch (req.method) {
       case "GET": {
         const views = await selectStatsFromItem(model, id, ["views"]);
-
-        res.json(views);
-        break;
+        return res.status(200).json(views);
       }
 
       case "PUT": {
         await incItemStat(model, id, "views");
-
-        res.status(204).end();
-        break;
+        return res.status(204).end();
       }
 
       default: {
-        invalidHttpMethodRes(res);
-        break;
+        return invalidHttpMethodRes(res);
       }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
-    internalServerErrorRes(res);
+    return internalServerErrorRes(res);
   }
 }

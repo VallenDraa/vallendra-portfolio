@@ -32,7 +32,7 @@ import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
 import {
   getAllItems,
   getItemWithPrevAndNext,
-} from "server/service/universal/showcase.service";
+} from "server/service/showcase/showcase.service";
 import ProjectModel from "server/mongo/model/project.model";
 
 export type ProjectDetailsProps = {

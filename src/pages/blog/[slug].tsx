@@ -18,9 +18,16 @@ import { FaGithub } from "react-icons/fa";
 import Show from "utils/client/jsx/Show";
 import { parsePostSlug } from "utils/data/blogHelper";
 import { useRouter } from "next/router";
-import { IoLanguage } from "react-icons/io5";
+import { IoLanguage, IoWarning } from "react-icons/io5";
 import Seo from "seo/Seo";
 import blogPostSeo from "seo/blogPost.seo";
+import StyledAlert from "components/StyledComponents/StyledAlert";
+import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import useGetViewsById from "utils/client/hooks/useGetViewsById";
+import useGetLikesById from "utils/client/hooks/useGetLikesById";
+import { commaSeparator } from "utils/client/helpers/formatter";
+import useDebounce from "utils/client/hooks/useDebounce";
+import { LikesOperationBody } from "types/api.types";
 
 type BlogPostProps = {
   code: string;
@@ -29,9 +36,11 @@ type BlogPostProps = {
 
 export default function BlogPost({ code, frontmatter }: BlogPostProps) {
   const router = useRouter();
-  const { slug } = router.query as { slug: string };
 
-  const blogPostArg = R.useMemo(
+  const { slug } = router.query as { slug: string };
+  const { slugPrefix, parsedSlug } = parsePostSlug(slug);
+  const Component = R.useMemo(() => getMDXComponent(code), [code]);
+  const blogPostSeoArg = R.useMemo(
     () => ({
       title: frontmatter.title,
       desc: frontmatter.description,
@@ -40,13 +49,113 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
     }),
     [code],
   );
-  const Component = R.useMemo(() => getMDXComponent(code), [code]);
 
-  const { slugPrefix, parsedSlug } = parsePostSlug(slug);
+  const [showAlert, setShowAlert] = R.useState(false);
+
+  /* add view on load 
+  =================== */
+  const onIncrementError = R.useCallback(async () => {
+    const alertHandler = (await import("utils/client/helpers/alertHandler"))
+      .default;
+
+    alertHandler({ setShowAlert });
+  }, []);
+  const { finishedUpdatingViews } = useIncrementViewOnLoad(
+    parsedSlug,
+    "blogs",
+    onIncrementError,
+  );
+
+  /* Dynamic data
+  ================== */
+  const viewsRes = useGetViewsById(parsedSlug, "blogs", finishedUpdatingViews);
+  const likesRes = useGetLikesById(parsedSlug, "blogs", finishedUpdatingViews);
+
+  /* Likes
+  ================== */
+  const [willSendLike, setWillSendLike] = R.useState(false);
+  const [hasLiked, setHasLiked] = R.useState(false);
+  const formattedLikes = R.useMemo(
+    () =>
+      commaSeparator.format(
+        likesRes.data?.likes !== undefined ? likesRes.data?.likes : 0,
+      ),
+    [likesRes.data?.likes],
+  );
+
+  const optimisticLikeUpdate = R.useCallback(async () => {
+    if (!hasLiked) {
+      likesRes.mutate(
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: true, likes: oldData.likes + 1 },
+        { revalidate: false },
+      );
+
+      setHasLiked(true);
+    } else {
+      likesRes.mutate(
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: false, likes: oldData.likes - 1 },
+        { revalidate: false },
+      );
+
+      setHasLiked(false);
+    }
+
+    setWillSendLike(true);
+  }, [hasLiked]);
+
+  const updateLike = R.useCallback(async () => {
+    if (!willSendLike) return;
+    const operation: LikesOperationBody = {
+      operation: hasLiked ? "increment" : "decrement",
+    };
+
+    try {
+      await fetch(`/api/blogs/likes/${parsedSlug}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(operation),
+      });
+
+      setWillSendLike(false);
+    } catch (error) {
+      onIncrementError();
+    }
+  }, [willSendLike, hasLiked]);
+
+  const [, likeUpdateError] = useDebounce(updateLike, 500, [
+    willSendLike,
+    hasLiked,
+  ]);
+
+  R.useEffect(
+    () => setHasLiked(likesRes.data?.hasLiked || false),
+    [likesRes.data?.hasLiked],
+  );
+
+  /* Toggle alert when there is an like error
+  =================================================== */
+  R.useEffect(() => {
+    if (likeUpdateError) setShowAlert(true);
+  }, [likeUpdateError]);
 
   return (
     <>
-      <Seo {...blogPostSeo(blogPostArg)} />
+      <Seo {...blogPostSeo(blogPostSeoArg)} />
+
+      <StyledAlert
+        icon={<IoWarning className="text-2xl" />}
+        color="red"
+        show={showAlert}
+        dismissible={{ onClose: () => setShowAlert(false) }}
+      >
+        Oops, please try to reload or try visiting the page at a later time !
+      </StyledAlert>
 
       <article className="fade-bottom relative mt-6 mb-3 after:-top-7">
         <div className="layout">
@@ -74,10 +183,22 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
               <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
                 <ShowcaseStats
                   dateString={frontmatter.date}
-                  isLoadingStats={false}
-                  hasLiked
-                  likes={200}
-                  views={1024}
+                  isLoadingStats={
+                    !(viewsRes.error && likesRes.error) &&
+                    (viewsRes.data?.views === undefined ||
+                      likesRes.data?.likes === undefined)
+                  }
+                  hasLiked={hasLiked}
+                  likes={
+                    likesRes.data?.likes !== undefined
+                      ? likesRes.data?.likes
+                      : 0
+                  }
+                  views={
+                    viewsRes.data?.views !== undefined
+                      ? viewsRes.data?.views
+                      : 0
+                  }
                 />
                 <Show when={!frontmatter.englishOnly}>
                   <ActionButton
@@ -131,11 +252,19 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
 
               {/* Like button */}
               <LikeButton
-                showSkeleton={false}
-                revealButton
-                hasLikedShowcase
-                formattedLikes="2000"
-                onClick={console.log}
+                showSkeleton={
+                  !(viewsRes.error && likesRes.error) &&
+                  (viewsRes.data?.views === undefined ||
+                    likesRes.data?.likes === undefined)
+                }
+                revealButton={
+                  !(viewsRes.error && likesRes.error) &&
+                  viewsRes.data?.views !== undefined &&
+                  likesRes.data?.likes !== undefined
+                }
+                hasLikedShowcase={hasLiked}
+                formattedLikes={formattedLikes}
+                onClick={optimisticLikeUpdate}
               />
             </section>
 

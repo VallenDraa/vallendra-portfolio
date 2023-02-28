@@ -1,4 +1,5 @@
 import type { Model } from "mongoose";
+import { BlogPostDocument } from "server/mongo/model/blogPost.model";
 import type { CertificateDocument } from "server/mongo/model/certificate.model";
 import type { CertificateCategory } from "server/mongo/model/certificateCategory.model";
 import type { ProjectDocument } from "server/mongo/model/project.model";
@@ -17,5 +18,5 @@ export type MainShowcaseCategoryModels<
 > = Model<T>;
 
 export type MainShowcaseModels<
-  T extends ProjectDocument | CertificateDocument,
+  T extends ProjectDocument | CertificateDocument | BlogPostDocument,
 > = Model<T>;

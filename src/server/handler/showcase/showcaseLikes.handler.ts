@@ -15,19 +15,15 @@ import {
   getHasLiked,
   incItemStat,
   selectStatsFromItem,
-} from "server/service/universal/showcaseStats.service";
+} from "server/service/showcase/showcaseStats.service";
+import { BlogPostDocument } from "server/mongo/model/blogPost.model";
 
 /* this handles operation on likes for a single project
 ====================================================== */
 export default async function idPageShowcaseLikesHandler<
-  T extends ProjectDocument | CertificateDocument,
+  T extends ProjectDocument | CertificateDocument | BlogPostDocument,
 >(model: Model<T>, id: string, req: NextApiRequest, res: NextApiResponse) {
   try {
-    if (typeof id !== "string" || !id) {
-      invalidBodyRes(res);
-      return;
-    }
-
     const uniqueIpId = getUniqueIpId(req);
     const hasLiked = await getHasLiked(model, id, uniqueIpId);
 
@@ -39,42 +35,37 @@ export default async function idPageShowcaseLikesHandler<
 
         const response = { ...likes, hasLiked };
 
-        res.json(response);
-        break;
+        return res.status(200).json(response);
       }
 
       case "PUT": {
         const { operation } = req.body as LikesOperationBody;
 
         if (!operation) {
-          invalidBodyRes(res);
-          return;
+          return invalidBodyRes(res);
         }
-
         /* Check the operation type
-        =========================== */
+            =========================== */
         if (operation === "increment") {
           if (!hasLiked) {
             await editItemLikersList(model, id, uniqueIpId, "add");
             await incItemStat(model, id, "likes");
           }
-        } else if (hasLiked) {
-          await editItemLikersList(model, id, uniqueIpId, "remove");
-          await decItemStat(model, id, "likes");
+        } else {
+          if (hasLiked) {
+            await editItemLikersList(model, id, uniqueIpId, "remove");
+            await decItemStat(model, id, "likes");
+          }
         }
 
-        res.status(204).end();
-        break;
+        return res.status(204).end();
       }
-
-      default: {
-        invalidHttpMethodRes(res);
-        break;
-      }
+      default:
+        return invalidHttpMethodRes(res);
     }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(error);
-    internalServerErrorRes(res);
+    return internalServerErrorRes(res);
   }
 }

@@ -10,9 +10,9 @@ import certificatesPageSeo from "seo/certificatePage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import MainContent from "components/Showcase/ShowcaseIndexPage/MainContent";
 import clsx from "clsx";
-import { getAllItems } from "server/service/universal/showcase.service";
+import { getAllItems } from "server/service/showcase/showcase.service";
 import CertificateModel from "server/mongo/model/certificate.model";
-import { getAllItemCategories } from "server/service/universal/showcaseCategory.service";
+import { getAllItemCategories } from "server/service/showcase/showcaseCategory.service";
 import CertificateCategoryModel from "server/mongo/model/certificateCategory.model";
 
 type CertificatePageProps = {

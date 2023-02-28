@@ -29,7 +29,7 @@ import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
 import {
   getAllItems,
   getItemWithPrevAndNext,
-} from "server/service/universal/showcase.service";
+} from "server/service/showcase/showcase.service";
 import CertificateModel from "server/mongo/model/certificate.model";
 
 type CertificateDetailsProps = {

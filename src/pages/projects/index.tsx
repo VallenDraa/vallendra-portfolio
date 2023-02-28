@@ -11,9 +11,9 @@ import projectsPageSeo from "seo/projectsPage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
 import MainContent from "components/Showcase/ShowcaseIndexPage/MainContent";
 import clsx from "clsx";
-import { getAllItems } from "server/service/universal/showcase.service";
+import { getAllItems } from "server/service/showcase/showcase.service";
 import ProjectModel from "server/mongo/model/project.model";
-import { getAllItemCategories } from "server/service/universal/showcaseCategory.service";
+import { getAllItemCategories } from "server/service/showcase/showcaseCategory.service";
 import ProjectCategoryModel from "server/mongo/model/projectCategory.model";
 
 type ProjectsPageProps = {

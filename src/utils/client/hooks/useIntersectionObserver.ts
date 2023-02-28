@@ -12,7 +12,7 @@ export default function useIntersectionObserver(
     rootMargin = "0%",
     freezeOnceVisible = false,
   }: UseIntersectionObserverProps,
-): IntersectionObserverEntry | undefined {
+) {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
   const frozen = entry?.isIntersecting && freezeOnceVisible;
   const updateEntry = ([entryArgs]: IntersectionObserverEntry[]): void => {
