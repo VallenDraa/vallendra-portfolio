@@ -1,8 +1,8 @@
 import { Alert, AlertProps } from "@material-tailwind/react";
 
 type StyledAlertProps = {
-  color: "green" | "red" | "deep-purple";
-} &  Omit<AlertProps, "color">
+  color: "green" | "red" | "indigo";
+} & Omit<AlertProps, "color">;
 
 export default function StyledAlert({
   show,

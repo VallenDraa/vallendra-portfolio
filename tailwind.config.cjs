@@ -8,7 +8,7 @@ module.exports = withMT({
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
-    colors: { ...defaultColors },
+    colors: defaultColors,
     fontFamily,
     backgroundSize: { gradient: "400% 400%" },
     extend: {

@@ -53,7 +53,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
       <Link
         title={data.name}
         href={`/${type}/${data.slug}`}
-        className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-zinc-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-zinc-800/30"
+        className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-zinc-800/30"
       >
         {/* image */}
         <CldImage
@@ -68,7 +68,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         />
 
         {/* fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/40 to-zinc-900/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-zinc-900/50 dark:to-zinc-900/90" />
+        <div className="group-hover:opacity-901 absolute inset-0 bg-gradient-to-b from-zinc-900/40 to-zinc-900/80 transition-opacity duration-200" />
 
         {/* detail */}
         <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">

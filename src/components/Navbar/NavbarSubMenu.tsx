@@ -33,7 +33,7 @@ export default function NavbarSubMenu({
           color="indigo"
           variant="text"
           fullWidth
-          className="p-0 text-base font-semibold text-indigo-400 hover:text-indigo-500 dark:text-zinc-200 dark:hover:text-white"
+          className="p-0 text-base font-semibold text-zinc-700 hover:text-indigo-600 dark:text-zinc-200 dark:hover:text-white"
         >
           {Handler}
         </Button>
@@ -42,7 +42,7 @@ export default function NavbarSubMenu({
       <MenuList className="border-0 bg-zinc-100/90 shadow supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30">
         {menuItems.map((menuItem: JSX.Element) => (
           <MenuItem
-            className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 focus:bg-white/20 focus:text-indigo-600 dark:text-zinc-300 dark:hover:text-white"
+            className="p-0 text-zinc-700 hover:bg-white/10 hover:text-indigo-600 focus:bg-white/20 focus:text-indigo-600 dark:text-zinc-300 dark:hover:text-white"
             key={menuItem.key}
           >
             {menuItem}

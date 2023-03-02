@@ -28,7 +28,7 @@ export default function ThemeToggler({
       {theme === "dark" ? (
         <BsFillSunFill />
       ) : (
-        <BsFillMoonStarsFill className="text-indigo-500/70" />
+        <BsFillMoonStarsFill className="text-zinc-700" />
       )}
     </IconButton>
   );

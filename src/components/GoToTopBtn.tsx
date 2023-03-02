@@ -1,4 +1,5 @@
 import { IconButton } from "@material-tailwind/react";
+import clsx from "clsx";
 import { useRef } from "react";
 import { VscTriangleUp } from "react-icons/vsc";
 
@@ -18,11 +19,12 @@ export default function GoToTopBtn({
       size="lg"
       ripple={false}
       variant="filled"
-      color="deep-purple"
+      color="indigo"
       onClick={callback}
-      className={`fixed bottom-5 right-10 z-50 inline-block translate-x-0 p-2 opacity-30 duration-500 hover:opacity-100 ${
-        isVisible ? "" : "translate-y-[200%]"
-      }`}
+      className={clsx(
+        "fixed bottom-5 right-10 z-50 inline-block translate-x-0 p-2 opacity-30 duration-500 hover:opacity-100",
+        !isVisible && "translate-y-[200%]",
+      )}
     >
       <VscTriangleUp className="text-xl" />
     </IconButton>

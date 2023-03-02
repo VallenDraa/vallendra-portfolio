@@ -27,13 +27,13 @@ export default function ShowcaseCategorySection({
   const itemsInCategory = useMemo<PickedItems>(() => {
     const { items: allItemsId } = category;
 
-    const pickedProjects = allItemsId.reduce((res, id) => {
-      const pickedProject = categoryItems.find(item => item._id === id);
+    const pickedItemss = allItemsId.reduce((res, id) => {
+      const pickedItems = categoryItems.find(item => item._id === id);
 
-      return { ...res, [id]: pickedProject };
+      return { ...res, [id]: pickedItems };
     }, {});
 
-    return pickedProjects;
+    return pickedItemss;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -48,12 +48,12 @@ export default function ShowcaseCategorySection({
         </div>
       </Observe>
 
-      {/* display projects in this category */}
+      {/* display items in this category */}
       <Observe
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
       >
-        <ul className="grid grid-cols-1 gap-6 px-3 opacity-0 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-6 opacity-0 md:grid-cols-2 lg:grid-cols-3">
           {category.items.map(id => (
             <li key={id}>
               <ItemCard type={showcaseType} data={itemsInCategory[id]} />

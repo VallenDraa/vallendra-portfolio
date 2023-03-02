@@ -84,7 +84,7 @@ export default function NavbarComponent() {
         <Typography
           as="span"
           variant="h5"
-          className="text-indigo-500 dark:text-zinc-200 lg:basis-1/3"
+          className="text-zinc-700 dark:text-zinc-200 lg:basis-1/3"
         >
           <Link href="/">VallenDra</Link>
         </Typography>
@@ -111,7 +111,7 @@ export default function NavbarComponent() {
             className="text-inherit"
             onClick={() => setNavIsOpened(true)}
           >
-            <BiMenu className="text-4xl text-indigo-400 transition duration-200 dark:text-zinc-200" />
+            <BiMenu className="text-4xl text-zinc-700 transition duration-200 dark:text-zinc-200" />
           </IconButton>
         </div>
       </div>
