@@ -20,11 +20,12 @@ export default function DetailFooter({
   return (
     <section className="mb-5">
       <Comment />
+
       {/* links to previous and next projects */}
       <div className="mt-5 flex w-full justify-between gap-8 text-base">
         {/* link to previous listed projects */}
         <LinkWithUnderline
-          className="grow md:flex-grow-0"
+          className="grow sm:flex-grow-0"
           href={`/${showcaseType}/${prevShowcase.slug}`}
         >
           <BsArrowLeft />
@@ -33,7 +34,7 @@ export default function DetailFooter({
 
         {/* link to next listed projects */}
         <LinkWithUnderline
-          className="grow justify-end md:flex-grow-0"
+          className="grow justify-end sm:flex-grow-0"
           href={`/${showcaseType}/${nextShowcase.slug}`}
         >
           {nextShowcase.name}

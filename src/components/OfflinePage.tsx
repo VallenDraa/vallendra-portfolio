@@ -21,7 +21,7 @@ export default function OfflinePage() {
             <Typography
               variant="h3"
               as="span"
-              className="relative z-10 font-bold text-indigo-500 opacity-0 dark:text-zinc-300"
+              className="relative z-10 font-bold text-zinc-700 opacity-0 dark:text-zinc-300"
             >
               Oops you went offline... 😕
             </Typography>
@@ -34,7 +34,7 @@ export default function OfflinePage() {
             <Typography
               variant="h4"
               as="span"
-              className="text-indigo-300 opacity-0 dark:text-zinc-400"
+              className="text-zinc-500 opacity-0 dark:text-zinc-400"
             >
               Come back later when you are reconnected to the network.
             </Typography>

@@ -6,14 +6,14 @@ export default function SearchNotFound() {
       <Typography
         variant="h4"
         as="span"
-        className="text-lg text-indigo-500 dark:text-zinc-300 md:text-xl lg:text-2xl"
+        className="text-lg text-zinc-700 dark:text-zinc-300 md:text-xl lg:text-2xl"
       >
         Sorry, Can&apos;t Find Anything 😕
       </Typography>
       <Typography
         variant="h5"
         as="span"
-        className="text-sm text-indigo-300 dark:text-zinc-400 md:text-base lg:text-lg"
+        className="text-sm text-zinc-500 dark:text-zinc-300 md:text-base lg:text-lg"
       >
         Try searching for something else.
       </Typography>

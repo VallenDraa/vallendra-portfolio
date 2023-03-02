@@ -1,3 +1,27 @@
+:root {
+  --clr-gradient-indigo: #818cf8;
+  --clr-gradient-pink: #f472b6;
+}
+
+.dark {
+  --clr-gradient-pink: #f9a8d4;
+}
+
 .prose blockquote {
-  border-image: linear-gradient(to top, #818cf8, #f472b6) 1;
+  border-image: linear-gradient(
+      to top,
+      var(--clr-gradient-indigo),
+      var(--clr-gradient-pink)
+    )
+    1;
+}
+
+/* dark variant */
+.dark .prose blockquote {
+  border-image: linear-gradient(
+      to top,
+      var(--clr-gradient-indigo),
+      var(--clr-gradient-pink)
+    )
+    1;
 }

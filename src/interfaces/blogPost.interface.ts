@@ -15,3 +15,7 @@ export default interface BlogPost extends FrontMatter {
 const BLOG_TAGS = ["life"] as const;
 
 export type BlogTags = (typeof BLOG_TAGS)[number];
+
+export type BlogLang = "en-" | "id-";
+
+export type BlogType = "article" | "project" | "certificate" | "code-snippet";

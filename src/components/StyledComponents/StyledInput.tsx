@@ -37,8 +37,9 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
             "transition-all",
             "absolute left-2.5 -top-1.5 translate-y-0",
             "text-xs text-zinc-400",
-            "peer-focus:-top-1.5 peer-focus:left-2.5 peer-focus:translate-y-0 peer-focus:bg-indigo-50 peer-focus:text-xs peer-focus:text-zinc-400 dark:peer-focus:bg-zinc-900",
-            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:bg-indigo-50 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:backdrop-blur-none dark:peer-placeholder-shown:bg-zinc-900 dark:peer-placeholder-shown:text-zinc-400",
+            "bg-indigo-50 dark:bg-zinc-900",
+            "peer-focus:-top-1.5 peer-focus:left-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-zinc-400",
+            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:backdrop-blur-none dark:peer-placeholder-shown:text-zinc-400",
           )}
           htmlFor={inputId}
         >

@@ -7,14 +7,14 @@ export default function ServerErrorPage() {
         <Typography
           variant="h3"
           as="span"
-          className="relative z-10 font-bold text-indigo-500 dark:text-zinc-300"
+          className="relative z-10 font-bold text-zinc-700 dark:text-zinc-300"
         >
           Error 500 😕
         </Typography>
         <Typography
           variant="h4"
           as="span"
-          className="text-indigo-300 dark:text-zinc-400"
+          className="text-zinc-500 dark:text-zinc-300"
         >
           Please try reloading the page or come again later.
         </Typography>

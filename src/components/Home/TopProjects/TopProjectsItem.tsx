@@ -117,7 +117,7 @@ export default function TopProjectsItem({
           quality={50}
           className={clsx(
             "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 dark:shadow-zinc-900/50 lg:mt-0",
-            twistDirection === "left" ? "" : "ml-auto",
+            twistDirection !== "left" && "ml-auto",
           )}
         />
       </div>

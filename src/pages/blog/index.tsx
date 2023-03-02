@@ -12,6 +12,10 @@ import clsx from "clsx";
 import BlogCard from "components/Blog/BlogCard";
 import { Language } from "types/types";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
+import Show from "utils/client/jsx/Show";
+import dynamic from "next/dynamic";
+
+const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
 
 export default function BlogsPage({
   allPostData,
@@ -19,6 +23,24 @@ export default function BlogsPage({
   const [query, setQuery] = R.useState<string>("");
   const [searchIsLoading, setSearchIsLoading] = R.useState(false);
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  /* returns active index of showcase items based on search query 
+  ================================================================ */
+  const visibleBlogIndexes = R.useMemo(() => {
+    const newvisibleBlogIndexes = allPostData.reduce((result, post, i) => {
+      if (query === "") return [...result, i];
+
+      const hasStringInItemName = post.title
+        .toLocaleLowerCase()
+        .includes(query.toLocaleLowerCase().trim());
+
+      if (hasStringInItemName) return [...result, i];
+
+      return result;
+    }, [] as number[]);
+
+    return newvisibleBlogIndexes;
+  }, [query]);
 
   return (
     <>
@@ -71,30 +93,42 @@ export default function BlogsPage({
 
       <main
         className={clsx(
-          "layout relative",
+          "layout relative grow",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}
       >
-        <Observe
-          freezeOnceVisible
-          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 500)}
-        >
-          <ul className="grid grid-cols-1 gap-6 pt-5 pb-10 opacity-0 md:grid-cols-2 lg:grid-cols-3">
-            {allPostData.map(post => {
-              if (!post.slug.includes(activeLanguage)) return null;
+        <Show when={visibleBlogIndexes.length > 0}>
+          <Observe
+            freezeOnceVisible
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 500)}
+          >
+            <ul className="grid grid-cols-1 gap-6 pt-5 pb-10 opacity-0 md:grid-cols-2 lg:grid-cols-3">
+              {visibleBlogIndexes.map(idx => {
+                if (!allPostData[idx].slug.includes(activeLanguage))
+                  return null;
 
-              return <BlogCard post={post} key={`${post.slug}-${post.date}`} />;
-            })}
-          </ul>
-        </Observe>
+                return (
+                  <BlogCard
+                    post={allPostData[idx]}
+                    key={`${allPostData[idx].slug}-${allPostData[idx].date}`}
+                  />
+                );
+              })}
+            </ul>
+          </Observe>
+        </Show>
+
+        <Show when={visibleBlogIndexes.length === 0}>
+          <SearchNotFound />
+        </Show>
       </main>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const allPostData = await getBlogPostData();
+  const allPostData = await getBlogPostData("article");
 
   return { props: { allPostData } };
 }

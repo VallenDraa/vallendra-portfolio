@@ -10,7 +10,7 @@ import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { dateFormatter } from "utils/client/helpers/formatter";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
-import { parsePostSlug } from "utils/data/blogHelper";
+import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 
 export default function BlogCard({ post }: { post: PostData }) {
   const { parsedSlug } = parsePostSlug(post.slug);

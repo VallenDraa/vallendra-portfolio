@@ -1,11 +1,19 @@
-import type { GetStaticPaths, GetStaticProps } from "next/types";
-import type { FrontMatter } from "interfaces/blogPost.interface";
+import type { LikesOperationBody } from "types/api.types";
+import type {
+  InferGetStaticPropsType,
+  GetStaticPaths,
+  GetStaticPropsContext,
+} from "next/types";
 
 import R from "react";
-import { getAllPostSlugs, getPostData } from "utils/server/posts";
+import {
+  getAllPostSlugs,
+  getPostData,
+  getPrevAndNextPosts,
+} from "utils/server/posts";
 import { getMDXComponent } from "mdx-bundler/client";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
-import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import SectionHeading from "components/Typography/SectionHeading";
 import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
@@ -16,8 +24,6 @@ import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
 import ActionButton from "components/StyledComponents/ActionButton";
 import { FaGithub } from "react-icons/fa";
 import Show from "utils/client/jsx/Show";
-import { parsePostSlug } from "utils/data/blogHelper";
-import { useRouter } from "next/router";
 import { IoLanguage, IoWarning } from "react-icons/io5";
 import Seo from "seo/Seo";
 import blogPostSeo from "seo/blogPost.seo";
@@ -27,17 +33,15 @@ import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import useDebounce from "utils/client/hooks/useDebounce";
-import { LikesOperationBody } from "types/api.types";
+import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 
-type BlogPostProps = {
-  code: string;
-  frontmatter: FrontMatter;
-};
-
-export default function BlogPost({ code, frontmatter }: BlogPostProps) {
-  const router = useRouter();
-
-  const { slug } = router.query as { slug: string };
+export default function BlogPost({
+  code,
+  frontmatter,
+  next,
+  prev,
+  slug,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { slugPrefix, parsedSlug } = parsePostSlug(slug);
   const Component = R.useMemo(() => getMDXComponent(code), [code]);
   const blogPostSeoArg = R.useMemo(
@@ -238,7 +242,7 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
-            <section className="detail-aside-colors sticky top-20  mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
+            <section className="detail-aside-colors mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
               <div className="grow space-y-3">
                 <ActionButton
                   icon={<FaGithub className="text-lg" />}
@@ -271,6 +275,27 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
             </section>
 
             <Comment />
+
+            {/* links to previous and next projects */}
+            <div className="not-prose mt-5 flex w-full justify-between gap-8 text-base">
+              {/* link to previous listed projects */}
+              <LinkWithUnderline
+                className="grow sm:flex-grow-0"
+                href={`/blog/${prev.slug}`}
+              >
+                <BsArrowLeft />
+                Previous Post
+              </LinkWithUnderline>
+
+              {/* link to next listed projects */}
+              <LinkWithUnderline
+                className="grow justify-end sm:flex-grow-0"
+                href={`/blog/${next.slug}`}
+              >
+                Next Post
+                <BsArrowRight />
+              </LinkWithUnderline>
+            </div>
           </footer>
         </div>
       </article>
@@ -279,12 +304,17 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostSlugs();
+  const paths = await getAllPostSlugs("article");
 
   return { fallback: false, paths };
 };
-export const getStaticProps: GetStaticProps = async ctx => {
-  const postData = await getPostData(ctx.params?.slug as string);
 
-  return { props: { ...postData } };
-};
+export async function getStaticProps(ctx: GetStaticPropsContext) {
+  const postData = await getPostData(ctx.params?.slug as string, "article");
+  const prevAndNextSlug = await getPrevAndNextPosts(
+    ctx.params?.slug as string,
+    "article",
+  );
+
+  return { props: { ...postData, ...prevAndNextSlug } };
+}
