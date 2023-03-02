@@ -5,11 +5,18 @@ import dynamic from "next/dynamic";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
-import GoToTopBtn from "components/GoToTopBtn";
-import StyledTooltip from "components/StyledComponents/StyledTooltip";
 
 const SiteFooter = dynamic(
   () => import("components/Layout/SiteFooter/SiteFooter"),
+  { ssr: false },
+);
+
+const GoToTopBtn = dynamic(() => import("components/GoToTopBtn"), {
+  ssr: false,
+});
+
+const StyledTooltip = dynamic(
+  () => import("components/StyledComponents/StyledTooltip"),
   { ssr: false },
 );
 
