@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "react-tooltip/dist/react-tooltip.css";
+@import "styles/prism-one-dark.css";
+@import "blog.css";
+
 @layer components {
   .layout {
     @apply mx-auto w-[90%] max-w-screen-xl;
@@ -66,6 +70,6 @@
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -moz-tap-highlight-color: rgba(0, 0, 0, 0);
-    /* outline: 1px solid green; */
+    /* outline: 1px solid green;  for debugging*/
   }
 }

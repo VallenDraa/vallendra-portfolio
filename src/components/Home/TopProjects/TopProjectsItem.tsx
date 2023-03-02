@@ -41,7 +41,7 @@ export default function TopProjectsItem({
     }
 
     return delayArray;
-  }, [project.tech]);
+  }, []);
 
   const picWrapperRef = R.useRef<HTMLDivElement>(null);
   const descWrapperRef = R.useRef<HTMLDivElement>(null);

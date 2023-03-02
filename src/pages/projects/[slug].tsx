@@ -177,7 +177,7 @@ export default function ProjectDetails({
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <header className="fade-bottom relative mt-6 mb-3 after:-top-7">
+      <header className="fade-bottom relative mt-6 mb-3 after:-top-6">
         <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700">
           {/* back to project button */}
           <LinkWithUnderline href="/projects">

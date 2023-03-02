@@ -107,7 +107,7 @@ export default function NavbarComponent() {
             ref={navToggleRef}
             size="md"
             variant="text"
-            color="indigo"
+            color="gray"
             className="text-inherit"
             onClick={() => setNavIsOpened(true)}
           >

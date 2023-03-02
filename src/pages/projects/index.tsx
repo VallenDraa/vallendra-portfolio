@@ -50,7 +50,7 @@ export default function ProjectsPage({
     <>
       <Seo {...projectsPageSeo} />
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
+      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-6">
         <div className="layout flex flex-col pt-20">
           {/* heading */}
           <Observe

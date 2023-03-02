@@ -157,7 +157,7 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
         Oops, please try to reload or try visiting the page at a later time !
       </StyledAlert>
 
-      <article className="fade-bottom relative mt-6 mb-3 after:-top-7">
+      <article className="fade-bottom relative mt-6 mb-3 after:-top-6">
         <div className="layout">
           <header>
             <section
@@ -220,7 +220,8 @@ export default function BlogPost({ code, frontmatter }: BlogPostProps) {
           </header>
           <main
             className={clsx(
-              "prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose prose-zinc dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose-a:text-pink-400 dark:prose-a:text-pink-300",
               "my-4 mx-auto",
             )}
           >

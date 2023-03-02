@@ -1,0 +1,3 @@
+.prose blockquote {
+  border-image: linear-gradient(to top, #818cf8, #f472b6) 1;
+}

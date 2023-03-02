@@ -36,7 +36,7 @@ export default function Profile() {
       id="profile"
       className="relative z-10 scroll-m-12 space-y-8 bg-indigo-50 dark:bg-zinc-900"
     >
-      <div className="layout relative mx-auto flex flex-col gap-8 overflow-y-hidden pt-10 pb-16 xl:flex-row">
+      <div className="layout relative mx-auto flex flex-col gap-8 overflow-y-hidden pt-8 pb-16 xl:flex-row">
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <SectionHeading

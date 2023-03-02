@@ -49,7 +49,7 @@ export default function BlogCard({ post }: { post: PostData }) {
       <Link
         title={post.title}
         href={`/blog/${post.slug}`}
-        className="flex flex-col gap-3 rounded-md border border-indigo-200 p-4 shadow transition-colors duration-200 hover:shadow-indigo-200 dark:border-zinc-700 hover:dark:shadow-zinc-700"
+        className="flex flex-col gap-3 rounded-md border border-indigo-300 p-4 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-indigo-300 dark:border-zinc-700 hover:dark:shadow-zinc-700"
       >
         <CldImage
           className="rounded"
