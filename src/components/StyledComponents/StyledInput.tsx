@@ -23,7 +23,7 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
           placeholder={placeholder}
           className={clsx(
             "placeholder:text-transparent",
-            "peer h-10 w-full rounded-lg px-10 pl-4",
+            "peer h-10 w-full rounded-md px-10 pl-4",
             "transition-colors",
             "text-lg text-zinc-600 dark:text-zinc-300",
             "border border-zinc-600 outline-none focus:border-zinc-500",

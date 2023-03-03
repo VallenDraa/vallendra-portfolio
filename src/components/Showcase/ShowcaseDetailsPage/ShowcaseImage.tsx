@@ -44,7 +44,7 @@ export default function ShowcaseImage({
     <figure className="mx-auto w-full">
       <ImageComponent src={cldImageSrc} alt={name} title={title || name} />
 
-      <figcaption className="pt-2 text-center !text-sm text-indigo-300 dark:text-zinc-500">
+      <figcaption className="pt-2 text-center !text-sm text-zinc-600 dark:text-zinc-500">
         <span>{titleAsCaption ? title : `Screenshot of ${name}`}</span>
       </figcaption>
     </figure>

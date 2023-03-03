@@ -33,7 +33,7 @@ export async function getPostData(slug: string, blogType: BlogType) {
         rehypeSlug,
         [
           rehypeAutolinkHeadings,
-          { properties: { className: ["section-hash"] } },
+          { properties: { className: ["blog-section-hash"] } },
         ],
       ],
     }),
@@ -70,31 +70,63 @@ export async function getAllPostSlugs(blogType: BlogType) {
   }));
 }
 
+export async function getAllSlugsGroupedByLang(blogType: BlogType) {
+  const filenames = fs
+    .readdirSync(blogDirWithType(blogType))
+    .map(name => name.replace(/\.mdx$/, ""));
+
+  const groupedSlugs = filenames.reduce<{ en: string[]; id: string[] }>(
+    (prev, slug) => {
+      const { slugPrefix } = parsePostSlug(slug);
+
+      if (slugPrefix === "en-") {
+        return { ...prev, en: [...prev.en, slug] };
+      }
+
+      return { ...prev, id: [...prev.id, slug] };
+    },
+    { en: [], id: [] },
+  );
+
+  return groupedSlugs;
+}
+
 export async function getPrevAndNextPosts(
   currentPostSlug: string,
   blogType: BlogType,
 ) {
-  const { parsedSlug } = parsePostSlug(currentPostSlug);
-  const allSlugs = (await getAllPostSlugs(blogType)).map(
-    arg => arg.params.slug,
+  const allSlugs = await getAllSlugsGroupedByLang(blogType);
+  const { slugPrefix } = parsePostSlug(currentPostSlug);
+  const lang = slugPrefix === "en-" ? "en" : "id";
+  const postsLastIdx = allSlugs[lang].length - 1;
+
+  const currentSlugIdx = allSlugs[lang].findIndex(
+    slug => slug === currentPostSlug,
   );
+  const isCurrentSlugFirst = currentSlugIdx === 0;
+  const isCurrentSlugLast = currentSlugIdx === postsLastIdx;
 
-  const currentPostIdx = allSlugs.findIndex(slug => slug === currentPostSlug);
+  // return the current post if there is only 1 post
+  if (allSlugs[lang].length === 1) {
+    return {
+      prevPost: allSlugs[lang][0],
+      nextPost: allSlugs[lang][0],
+    };
+  }
 
-  const isCurrentSlugFirst = currentPostIdx === 0;
-  const isCurrentSlugLast = currentPostIdx === allSlugs.length - 1;
+  // return the other only exisitng post if there is only 2 post
+  if (allSlugs[lang].length === 2) {
+    return {
+      prevPost:
+        allSlugs[lang][isCurrentSlugFirst ? postsLastIdx : currentSlugIdx - 1],
+      nextPost: allSlugs[lang][isCurrentSlugLast ? 0 : currentSlugIdx + 1],
+    };
+  }
 
-  // check if the next or previous is the same post different language
+  // return the slugs adjacent to the current slug if there are > 2 post
   return {
-    prev: {
-      englishOnly: true,
-      slug: isCurrentSlugFirst
-        ? allSlugs[allSlugs.length - 1]
-        : allSlugs[currentPostIdx - 1],
-    },
-    next: {
-      englishOnly: true,
-      slug: isCurrentSlugLast ? allSlugs[0] : allSlugs[currentPostIdx + 1],
-    },
+    prevPost:
+      allSlugs[lang][isCurrentSlugFirst ? postsLastIdx : currentSlugIdx - 1],
+    nextPost: allSlugs[lang][isCurrentSlugLast ? 0 : currentSlugIdx + 1],
   };
 }

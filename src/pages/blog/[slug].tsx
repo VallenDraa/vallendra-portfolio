@@ -10,6 +10,7 @@ import {
   getAllPostSlugs,
   getPostData,
   getPrevAndNextPosts,
+  // getPrevAndNextPosts,
 } from "utils/server/posts";
 import { getMDXComponent } from "mdx-bundler/client";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
@@ -38,8 +39,8 @@ import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 export default function BlogPost({
   code,
   frontmatter,
-  next,
-  prev,
+  nextPost,
+  prevPost,
   slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { slugPrefix, parsedSlug } = parsePostSlug(slug);
@@ -281,7 +282,7 @@ export default function BlogPost({
               {/* link to previous listed projects */}
               <LinkWithUnderline
                 className="grow sm:flex-grow-0"
-                href={`/blog/${prev.slug}`}
+                href={`/blog/${prevPost}`}
               >
                 <BsArrowLeft />
                 Previous Post
@@ -290,7 +291,7 @@ export default function BlogPost({
               {/* link to next listed projects */}
               <LinkWithUnderline
                 className="grow justify-end sm:flex-grow-0"
-                href={`/blog/${next.slug}`}
+                href={`/blog/${nextPost}`}
               >
                 Next Post
                 <BsArrowRight />

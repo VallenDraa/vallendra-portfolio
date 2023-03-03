@@ -19,7 +19,7 @@ export default function Comment() {
 
   R.useEffect(() => {
     setCommentIsVisible(false);
-    setCommentIsVisible(true);
+    setTimeout(() => setCommentIsVisible(true), 200);
   }, [asPath]);
 
   return commentIsVisible ? (

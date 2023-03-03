@@ -7,7 +7,11 @@
   --clr-gradient-pink: #f9a8d4;
 }
 
-.prose blockquote {
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose *)) {
+  @apply relative w-max max-w-full scroll-m-20 break-words underline decoration-transparent underline-offset-4 hover:text-[var(--clr-gradient-pink)] hover:decoration-[var(--clr-gradient-pink)];
+}
+
+.prose :where(blockquote):not(:where(.not-prose *)) {
   border-image: linear-gradient(
       to top,
       var(--clr-gradient-indigo),
@@ -16,12 +20,15 @@
     1;
 }
 
-/* dark variant */
-.dark .prose blockquote {
-  border-image: linear-gradient(
-      to top,
-      var(--clr-gradient-indigo),
-      var(--clr-gradient-pink)
-    )
-    1;
+.prose .blog-section-hash {
+  @apply absolute inset-0;
+}
+
+.prose .blog-section-hash::after {
+  content: "#";
+  @apply invisible absolute -right-6 top-[calc(50%+2px)] -translate-y-1/2;
+}
+
+.prose .blog-section-hash:hover::after {
+  @apply visible;
 }
