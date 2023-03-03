@@ -29,17 +29,12 @@ export async function getItemWithPrevAndNext<
 
   let nextItem: LeanDocument<R>;
   let prevItem: LeanDocument<R>;
-  const item = await model
-    .findOne({
-      slug,
-    })
-    .select("-likers")
-    .lean();
+  const item = await model.findOne({ slug }).select("-likers").lean();
 
   if (item === null) throw new Error("The target item can't be found !");
 
   if (!item.createdAt)
-    throw new Error("The target projcet doesn't have a createdAt field !");
+    throw new Error("The target item doesn't have a createdAt field !");
 
   const itemId = item._id.toString();
   const itemCreatedAt = item.createdAt as Date;
@@ -115,9 +110,7 @@ async function getNextItem<
   R extends Project | Certificate,
 >(model: Model<T>, createdAt: Date) {
   const [nextItem] = await model
-    .find({
-      createdAt: { $gt: createdAt },
-    })
+    .find({ createdAt: { $gt: createdAt } })
     .sort({ createdAt: 1 })
     .limit(1)
     .select(["slug", "name"])
@@ -131,9 +124,7 @@ async function getPrevItem<
   R extends Project | Certificate,
 >(model: Model<T>, createdAt: Date) {
   const [prevItem] = await model
-    .find({
-      createdAt: { $lt: createdAt },
-    })
+    .find({ createdAt: { $lt: createdAt } })
     .sort({ createdAt: -1 })
     .limit(1)
     .select(["slug", "name"])

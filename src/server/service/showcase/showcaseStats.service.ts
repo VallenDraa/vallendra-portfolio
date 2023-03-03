@@ -20,8 +20,6 @@ export async function selectStatsFromItem<
     .select([...fields, "_id"])
     .lean();
 
-  if (stats === null) throw new Error("The target can't be found !");
-
   return stats;
 }
 
@@ -32,11 +30,9 @@ export async function incItemStat<
 >(model: MainShowcaseModels<T>, _id: string, field: "views" | "likes") {
   connectMongo();
 
-  await model
-    .updateOne(queryKey(model, _id), {
-      $inc: field === "likes" ? { likes: 1 } : { views: 1 },
-    })
-    .lean();
+  await model.updateOne(queryKey(model, _id), {
+    $inc: field === "likes" ? { likes: 1 } : { views: 1 },
+  });
 }
 
 export async function decItemStat<
@@ -44,11 +40,9 @@ export async function decItemStat<
 >(model: MainShowcaseModels<T>, _id: string, field: "views" | "likes") {
   connectMongo();
 
-  await model
-    .updateOne(queryKey(model, _id), {
-      $inc: field === "likes" ? { likes: -1 } : { views: -1 },
-    })
-    .lean();
+  await model.updateOne(queryKey(model, _id), {
+    $inc: field === "likes" ? { likes: -1 } : { views: -1 },
+  });
 }
 
 /* Services for project likes

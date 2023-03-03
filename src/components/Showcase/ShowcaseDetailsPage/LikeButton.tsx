@@ -37,7 +37,7 @@ export default function LikeButton({
           className={clsx(
             "icon-tooltip",
             "flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl",
-            hasLikedShowcase && "text-red-400",
+            hasLikedShowcase ? "text-red-400" : "text-zinc-400",
           )}
         >
           <AiFillHeart />
