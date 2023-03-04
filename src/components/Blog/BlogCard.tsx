@@ -22,29 +22,23 @@ export default function BlogCard({ post }: { post: PostData }) {
 
   /* Helper state
    ====================== */
-  const [hasFetched, setHasFetched] = R.useState(false);
   const [willFetch, setWillFetch] = R.useState(false);
 
   /* Getting the stats
   ====================== */
-  const viewsRes = useGetViewsById(parsedSlug, "blogs", willFetch);
-  const likesRes = useGetLikesById(parsedSlug, "blogs", willFetch);
+  const viewsRes = useGetViewsById(parsedSlug, "blog", willFetch);
+  const likesRes = useGetLikesById(parsedSlug, "blog", willFetch);
 
-  /* Check if views and likes had been fetched 
-  =========================================== */
   R.useEffect(() => {
-    if (
-      typeof viewsRes.data?.views === "number" &&
-      typeof likesRes.data?.likes === "number"
-    ) {
-      setHasFetched(true);
-    }
-  }, [viewsRes.data?.views, likesRes.data?.likes]);
+    console.log({ willFetch });
+  }, [willFetch]);
 
   return (
     <Observe
       freezeOnceVisible
-      onEnter={() => !hasFetched && setWillFetch(true)}
+      onIntersectingStatusChange={isIntersecing => {
+        setWillFetch(isIntersecing);
+      }}
     >
       <Link
         title={post.title}
@@ -86,14 +80,14 @@ export default function BlogCard({ post }: { post: PostData }) {
           <Stats
             icon={<AiFillEye />}
             textColor="text-teal-400"
-            isLoading={viewsRes?.isLoading ?? !hasFetched}
+            isLoading={viewsRes?.isLoading}
             number={viewsRes?.data?.views ?? 0}
           />
 
           <Stats
             icon={<AiFillHeart />}
             textColor="text-red-400"
-            isLoading={likesRes.isLoading ?? !hasFetched}
+            isLoading={likesRes.isLoading}
             number={likesRes?.data?.likes ?? 0}
           />
         </div>

@@ -19,7 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
         res,
       );
 
-    case "blogs":
+    case "blog":
       return idPageBlogLikesHandler(id as string, req, res);
 
     default:

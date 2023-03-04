@@ -26,7 +26,6 @@ type ItemCardProps = {
 export default function ItemCard({ data, type }: ItemCardProps) {
   /* Helper state
    ====================== */
-  const [hasFetched, setHasFetched] = R.useState(false);
   const [willFetch, setWillFetch] = R.useState(false);
 
   /* Getting the stats
@@ -34,21 +33,12 @@ export default function ItemCard({ data, type }: ItemCardProps) {
   const viewsRes = useGetViewsById(data._id, type, willFetch);
   const likesRes = useGetLikesById(data._id, type, willFetch);
 
-  /* Check if views and likes had been fetched 
-  =========================================== */
-  R.useEffect(() => {
-    if (
-      typeof viewsRes.data?.views === "number" &&
-      typeof likesRes.data?.likes === "number"
-    ) {
-      setHasFetched(true);
-    }
-  }, [viewsRes.data?.views, likesRes.data?.likes]);
-
   return (
     <Observe
       freezeOnceVisible
-      onEnter={() => !hasFetched && setWillFetch(true)}
+      onIntersectingStatusChange={isIntersecing => {
+        setWillFetch(isIntersecing);
+      }}
     >
       <Link
         title={data.name}
@@ -95,14 +85,14 @@ export default function ItemCard({ data, type }: ItemCardProps) {
             <Stats
               icon={<AiFillEye />}
               textColor="text-teal-400"
-              isLoading={viewsRes?.isLoading ?? !hasFetched}
+              isLoading={viewsRes?.isLoading}
               number={viewsRes?.data?.views ?? data.views}
             />
 
             <Stats
               icon={<AiFillHeart />}
               textColor="text-red-400"
-              isLoading={likesRes.isLoading ?? !hasFetched}
+              isLoading={likesRes.isLoading}
               number={likesRes?.data?.likes ?? data.likes}
             />
           </div>

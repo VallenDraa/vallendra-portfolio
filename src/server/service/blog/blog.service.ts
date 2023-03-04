@@ -67,12 +67,12 @@ export async function selectStatsFromBlog(slug: string, fields: StatsType[]) {
 
   const { blog } = await checkIfBlogExistAndReturn(slug);
 
-  const stats = fields.reduce<{ [K in StatsType]: number }>(
+  const stats = fields.reduce<{ [K in StatsType]?: number }>(
     (prev, curr) => ({
       ...prev,
       [curr]: blog[curr],
     }),
-    { likes: 0, views: 0 },
+    {},
   );
 
   return stats;

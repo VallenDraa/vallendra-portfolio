@@ -31,7 +31,7 @@ export default function useGetViewsById(
 
   R.useEffect(() => {
     if (willFetch) reFetch(url);
-  }, [willFetch, id]);
+  }, [willFetch, url]);
 
   return { data, isLoading, error, mutate };
 }

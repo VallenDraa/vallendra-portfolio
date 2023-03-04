@@ -17,7 +17,7 @@ export default interface ShowcaseItem {
   updatedAt?: Date | string;
 }
 
-export const SHOWCASE_TYPES = ["projects", "certificates", "blogs"] as const;
+export const SHOWCASE_TYPES = ["projects", "certificates", "blog"] as const;
 
 export type ShowcaseType = (typeof SHOWCASE_TYPES)[number];
 
