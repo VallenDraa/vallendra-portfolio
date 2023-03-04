@@ -3,6 +3,7 @@ import type {
   ShowcaseDetailRedirect,
   ShowcaseType,
 } from "interfaces/showcase.interface";
+import clsx from "clsx";
 import Comment from "./Comment";
 import LinkWithUnderline from "./LinkWithUnderline";
 
@@ -10,15 +11,17 @@ type DetailFooterProps = {
   showcaseType: ShowcaseType;
   prevShowcase: ShowcaseDetailRedirect;
   nextShowcase: ShowcaseDetailRedirect;
+  className?: string;
 };
 
 export default function DetailFooter({
   showcaseType,
   nextShowcase,
   prevShowcase,
+  className,
 }: DetailFooterProps) {
   return (
-    <section className="mb-5">
+    <section className={clsx("mb-5", className)}>
       <Comment />
 
       {/* links to previous and next projects */}

@@ -14,12 +14,11 @@ import {
 } from "utils/server/posts";
 import { getMDXComponent } from "mdx-bundler/client";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
 import SectionHeading from "components/Typography/SectionHeading";
 import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
 import clsx from "clsx";
-import Comment from "components/Showcase/ShowcaseDetailsPage/Comment";
 import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
 import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
 import ActionButton from "components/StyledComponents/ActionButton";
@@ -35,6 +34,7 @@ import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import { commaSeparator } from "utils/client/helpers/formatter";
 import useDebounce from "utils/client/hooks/useDebounce";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
+import DetailFooter from "components/Showcase/ShowcaseDetailsPage/DetailFooter";
 
 export default function BlogPost({
   code,
@@ -67,14 +67,14 @@ export default function BlogPost({
   }, []);
   const { finishedUpdatingViews } = useIncrementViewOnLoad(
     parsedSlug,
-    "blogs",
+    "blog",
     onIncrementError,
   );
 
   /* Dynamic data
   ================== */
-  const viewsRes = useGetViewsById(parsedSlug, "blogs", finishedUpdatingViews);
-  const likesRes = useGetLikesById(parsedSlug, "blogs", finishedUpdatingViews);
+  const viewsRes = useGetViewsById(parsedSlug, "blog", finishedUpdatingViews);
+  const likesRes = useGetLikesById(parsedSlug, "blog", finishedUpdatingViews);
 
   /* Likes
   ================== */
@@ -121,7 +121,7 @@ export default function BlogPost({
     };
 
     try {
-      await fetch(`/api/blogs/likes/${parsedSlug}`, {
+      await fetch(`/api/blog/likes/${parsedSlug}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(operation),
@@ -167,7 +167,7 @@ export default function BlogPost({
           <header>
             <section
               className={clsx(
-                "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+                "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
                 "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700",
               )}
             >
@@ -225,7 +225,7 @@ export default function BlogPost({
           </header>
           <main
             className={clsx(
-              "prose prose-zinc dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose prose-zinc dark:prose-invert md:prose-lg",
               "prose-a:text-pink-400 dark:prose-a:text-pink-300",
               "my-4 mx-auto",
             )}
@@ -239,7 +239,7 @@ export default function BlogPost({
           </main>
           <footer
             className={clsx(
-              "prose prose-zinc prose-pink dark:prose-invert md:prose-lg lg:prose-xl",
+              "prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
@@ -275,28 +275,12 @@ export default function BlogPost({
               />
             </section>
 
-            <Comment />
-
-            {/* links to previous and next projects */}
-            <div className="not-prose mt-5 flex w-full justify-between gap-8 text-base">
-              {/* link to previous listed projects */}
-              <LinkWithUnderline
-                className="grow sm:flex-grow-0"
-                href={`/blog/${prevPost}`}
-              >
-                <BsArrowLeft />
-                Previous Post
-              </LinkWithUnderline>
-
-              {/* link to next listed projects */}
-              <LinkWithUnderline
-                className="grow justify-end sm:flex-grow-0"
-                href={`/blog/${nextPost}`}
-              >
-                Next Post
-                <BsArrowRight />
-              </LinkWithUnderline>
-            </div>
+            <DetailFooter
+              showcaseType="blog"
+              nextShowcase={{ name: "Next Post", slug: nextPost }}
+              prevShowcase={{ name: "Previous Post", slug: prevPost }}
+              className="not-prose"
+            />
           </footer>
         </div>
       </article>

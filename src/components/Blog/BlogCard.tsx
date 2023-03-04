@@ -29,10 +29,6 @@ export default function BlogCard({ post }: { post: PostData }) {
   const viewsRes = useGetViewsById(parsedSlug, "blog", willFetch);
   const likesRes = useGetLikesById(parsedSlug, "blog", willFetch);
 
-  R.useEffect(() => {
-    console.log({ willFetch });
-  }, [willFetch]);
-
   return (
     <Observe
       freezeOnceVisible
