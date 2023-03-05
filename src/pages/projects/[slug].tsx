@@ -226,7 +226,10 @@ export default function ProjectDetails({
       </header>
 
       {/* the project data */}
-      <main className="layout relative flex grow flex-col gap-8 py-5">
+      <main
+        id="skip-to-content"
+        className="layout relative flex grow flex-col gap-8 py-5"
+      >
         {/* image */}
         <ShowcaseImage cldImageSrc={project.image} name={project.name} />
 

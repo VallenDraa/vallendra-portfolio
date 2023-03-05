@@ -102,6 +102,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           </Show>
 
           <StyledButton
+            tabIndex={-1}
             variant="text"
             icon={<BsArrowRight />}
             className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400"

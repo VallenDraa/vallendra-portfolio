@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from "@material-tailwind/react";
+import clsx from "clsx";
 import Link from "next/link";
 import { HTMLAttributeAnchorTarget, forwardRef } from "react";
 import Show from "utils/client/jsx/Show";
@@ -7,6 +8,7 @@ type ActionButtonProps = {
   href?: string;
   icon?: JSX.Element;
   hrefTarget?: HTMLAttributeAnchorTarget;
+  anchorClassName?: string;
 } & ButtonProps;
 
 const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
@@ -14,6 +16,7 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
     {
       ref,
       className = "",
+      anchorClassName = "",
       children,
       href,
       hrefTarget = "_blank",
@@ -26,11 +29,15 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
   ) => {
     const button = (
       <Button
+        {...props}
+        tabIndex={!href ? 0 : -1}
         fullWidth={fullWidth || true}
         variant={variant || "outlined"}
         ref={forwardedRef}
-        className={`flex items-center justify-center gap-1.5 rounded  shadow-sm hover:shadow ${className}`}
-        {...props}
+        className={clsx(
+          className,
+          "flex items-center justify-center gap-1.5 rounded shadow-sm hover:shadow",
+        )}
       >
         {/* when icon is visible */}
         <Show when={!!icon === true}>
@@ -44,7 +51,11 @@ const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
     );
 
     return href ? (
-      <Link className="inline-block" target={hrefTarget} href={href}>
+      <Link
+        className={clsx("inline", anchorClassName)}
+        target={hrefTarget}
+        href={href}
+      >
         {button}
       </Link>
     ) : (

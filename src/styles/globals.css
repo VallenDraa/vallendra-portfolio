@@ -72,4 +72,11 @@
     -moz-tap-highlight-color: rgba(0, 0, 0, 0);
     /* outline: 1px solid green;  for debugging*/
   }
+
+  a,
+  button,
+  input,
+  textarea {
+    @apply outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400;
+  }
 }

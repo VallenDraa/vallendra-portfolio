@@ -12,6 +12,7 @@ export default function NavBtn({
 }) {
   const ButtonElement = (
     <Button
+      tabIndex={!href ? 0 : -1}
       onClick={() => onClick && onClick()}
       color="indigo"
       variant="text"
@@ -22,5 +23,11 @@ export default function NavBtn({
     </Button>
   );
 
-  return href ? <Link href={href}>{ButtonElement}</Link> : ButtonElement;
+  return href ? (
+    <Link href={href} className="lg:rounded-md">
+      {ButtonElement}
+    </Link>
+  ) : (
+    ButtonElement
+  );
 }

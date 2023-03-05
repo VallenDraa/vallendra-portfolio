@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
+import ActionButton from "components/StyledComponents/ActionButton";
 
 const SiteFooter = dynamic(
   () => import("components/Layout/SiteFooter/SiteFooter"),
@@ -46,6 +47,16 @@ export default function Layout({ children }: { children: R.ReactNode }) {
       }}
       renderView={props => <div {...props} className="flex flex-col" />}
     >
+      <ActionButton
+        variant="filled"
+        href="#skip-to-content"
+        hrefTarget="_self"
+        color="indigo"
+        anchorClassName="fixed top-0 z-[100] -translate-y-full focus:translate-y-0 translate-all duration-200 h-max"
+      >
+        Skip Navigation
+      </ActionButton>
+
       <NavbarComponent />
       <BreathingBackground />
 

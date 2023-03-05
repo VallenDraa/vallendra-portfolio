@@ -34,9 +34,12 @@ export default function Profile() {
     <section
       aria-label="profile-section"
       id="profile"
-      className="relative z-10 scroll-m-12 space-y-8 bg-indigo-50 dark:bg-zinc-900"
+      className="relative z-10 scroll-m-20 space-y-8 bg-indigo-50 dark:bg-zinc-900"
     >
-      <div className="layout relative mx-auto flex flex-col gap-8 overflow-y-hidden pt-8 pb-16 xl:flex-row">
+      <div
+        id="skip-to-content"
+        className="layout relative mx-auto flex scroll-m-20 flex-col gap-8 overflow-y-hidden pt-8 pb-16 xl:flex-row"
+      >
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <SectionHeading
@@ -84,7 +87,7 @@ export default function Profile() {
                     variant="h3"
                     className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-2xl font-bold uppercase text-transparent  dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl"
                   >
-                    <IoCodeSlash className="icon-with-bg-colors rounded-lg p-1 text-3xl text-green-400" />
+                    <IoCodeSlash className="rounded-lg bg-indigo-100 p-1 text-3xl text-green-400 dark:bg-zinc-700/90" />
                     Technologies
                   </Typography>
 
@@ -155,7 +158,7 @@ export default function Profile() {
                   variant="h4"
                   className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-300 bg-clip-text font-bold uppercase text-transparent"
                 >
-                  <IoSchool className="icon-with-bg-colors rounded-lg p-1 text-3xl text-light-blue-400" />
+                  <IoSchool className="rounded-lg bg-indigo-100 p-1 text-3xl text-light-blue-400 dark:bg-zinc-700/90" />
                   EDUCATION
                 </Typography>
                 <Typography
@@ -189,7 +192,7 @@ export default function Profile() {
                   variant="h4"
                   className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text font-bold uppercase text-transparent"
                 >
-                  <FaGoogle className="icon-with-bg-colors rounded-lg p-1 text-3xl text-pink-500" />
+                  <FaGoogle className="rounded-lg bg-indigo-100 p-1 text-3xl text-pink-500 dark:bg-zinc-700/90" />
                   ACTIVITY
                 </Typography>
                 <Typography

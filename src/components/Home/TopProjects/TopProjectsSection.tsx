@@ -19,8 +19,8 @@ export default function TopProjectsSection({
 
   return (
     <section
-      aria-label="top-picks-section"
-      id="top-picks"
+      aria-label="top-projects-section"
+      id="top-projects"
       className="relative bg-indigo-100/40 transition-colors dark:bg-zinc-800/40"
     >
       <TopBottomWaves />
