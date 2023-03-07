@@ -9,7 +9,7 @@ export default function Hero() {
     <section
       aria-label="hero-section"
       id="home"
-      className="relative z-10 mb-24 scroll-mt-44 xl:mb-8"
+      className="relative z-10 mb-24 xl:mb-8"
     >
       <div className="layout flex flex-col items-center justify-center xl:min-h-[650px] xl:flex-row xl:justify-between">
         {/* left side */}

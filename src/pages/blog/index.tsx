@@ -96,7 +96,7 @@ export default function BlogsPage({
 
       <main
         className={clsx(
-          "layout relative grow",
+          "layout grow",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}

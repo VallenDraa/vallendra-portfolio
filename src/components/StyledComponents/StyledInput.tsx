@@ -23,7 +23,7 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
           placeholder={placeholder}
           className={clsx(
             "placeholder:text-transparent",
-            "peer h-10 w-full rounded-md px-10 pl-4",
+            "peer h-12 w-full rounded-md px-10 pl-4",
             "transition-colors",
             "text-lg text-zinc-600 dark:text-zinc-300",
             "border border-zinc-600 outline-none focus:border-indigo-400",
@@ -35,11 +35,11 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
           className={clsx(
             "px-1",
             "transition-all",
-            "absolute left-2.5 -top-1.5 translate-y-0",
-            "text-xs text-indigo-500",
+            "absolute left-2.5 top-1/2 -translate-y-8",
+            "text-sm text-zinc-500 dark:text-zinc-400",
             "bg-indigo-50 dark:bg-zinc-900",
-            "peer-focus:-top-1.5 peer-focus:left-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:text-indigo-500 dark:peer-focus:text-indigo-300",
-            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:backdrop-blur-none dark:peer-placeholder-shown:text-zinc-400",
+            "peer-focus:-translate-x-1 peer-focus:-translate-y-8 peer-focus:scale-90 peer-focus:text-indigo-500 dark:peer-focus:text-indigo-300",
+            "peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-zinc-500 dark:peer-placeholder-shown:text-zinc-400",
           )}
           htmlFor={inputId}
         >

@@ -1,10 +1,12 @@
 import type { Technologies } from "types/types";
+import type Project from "interfaces/project.interface";
+import type { TwistDirection } from "./TopProjectsSection";
+
 import R from "react";
 import { CldImage } from "next-cloudinary";
 import { Typography } from "@material-tailwind/react";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
-import type Project from "interfaces/project.interface";
 import Show from "utils/client/jsx/Show";
 import Observe from "components/Observe";
 import fadeIn from "utils/client/helpers/animateOnObserved";
@@ -12,8 +14,8 @@ import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import techsWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import StyledButton from "components/StyledComponents/StyledButton";
 import clsx from "clsx";
-import type { TwistDirection } from "./TopProjectsSection";
 import LeftRightMesh from "./LeftRightMesh";
+import ActionButton from "components/StyledComponents/ActionButton";
 
 type TopProjectsItemProps = {
   projectOrder: number;
@@ -173,20 +175,18 @@ export default function TopProjectsItem({
               )}
             </StyledScrollbar>
 
-            <Link
+            <StyledButton
+              hrefTarget="_self"
+              variant="outlined"
               href={`/projects/${project.slug}`}
-              className="mt-2 inline-block lg:w-max"
+              anchorClasses="lg:w-max mt-2"
+              icon={<BsArrowRight className="text-indigo-400" />}
+              className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 !border-indigo-400 !text-indigo-400"
+              color="indigo"
+              size="md"
             >
-              <StyledButton
-                variant="outlined"
-                icon={<BsArrowRight className="text-indigo-400" />}
-                className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 !border-indigo-400 !text-indigo-400 lg:w-max"
-                color="indigo"
-                size="md"
-              >
-                See Project
-              </StyledButton>
-            </Link>
+              See Project
+            </StyledButton>
           </div>
         </div>
       </div>

@@ -85,14 +85,22 @@ export default function ItemCard({ data, type }: ItemCardProps) {
             <Stats
               icon={<AiFillEye />}
               textColor="text-teal-400"
-              isLoading={viewsRes?.isLoading}
+              isLoading={
+                !(viewsRes.error && likesRes.error) &&
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
+              }
               number={viewsRes?.data?.views ?? data.views}
             />
 
             <Stats
               icon={<AiFillHeart />}
               textColor="text-red-400"
-              isLoading={likesRes.isLoading}
+              isLoading={
+                !(viewsRes.error && likesRes.error) &&
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
+              }
               number={likesRes?.data?.likes ?? data.likes}
             />
           </div>

@@ -76,15 +76,23 @@ export default function BlogCard({ post }: { post: PostData }) {
           <Stats
             icon={<AiFillEye />}
             textColor="text-teal-400"
-            isLoading={viewsRes?.isLoading}
             number={viewsRes?.data?.views ?? 0}
+            isLoading={
+              !(viewsRes.error && likesRes.error) &&
+              (viewsRes.data?.views === undefined ||
+                likesRes.data?.likes === undefined)
+            }
           />
 
           <Stats
             icon={<AiFillHeart />}
             textColor="text-red-400"
-            isLoading={likesRes.isLoading}
             number={likesRes?.data?.likes ?? 0}
+            isLoading={
+              !(viewsRes.error && likesRes.error) &&
+              (viewsRes.data?.views === undefined ||
+                likesRes.data?.likes === undefined)
+            }
           />
         </div>
       </Link>

@@ -3,6 +3,7 @@ import { IoCall } from "react-icons/io5";
 import Link from "next/link";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
+import clsx from "clsx";
 
 /* redirects the user to a contacts page or to the projects page
 ================================================================ */
@@ -30,7 +31,13 @@ export default function Redirect() {
           className="relative z-10 mt-8 opacity-0"
         >
           <Button
-            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 focus:text-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-zinc-300 dark:outline-zinc-300 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 dark:hover:outline-white dark:focus:bg-white dark:focus:text-zinc-900 dark:active:bg-white dark:active:text-zinc-900 dark:active:outline-white lg:text-2xl"
+            className={clsx(
+              "outline-none",
+              "flex items-center justify-center gap-2 rounded-full",
+              "hover:bg-indigo-500 active:bg-indigo-500 dark:hover:bg-zinc-100 dark:active:bg-white",
+              "border border-indigo-500 hover:border-indigo-500 active:border-indigo-500 dark:border-zinc-300 dark:hover:border-white dark:active:border-white",
+              "text-xl text-indigo-500 hover:text-indigo-50 active:text-indigo-50 dark:text-zinc-300 dark:hover:text-zinc-900 dark:active:text-zinc-900 lg:text-2xl",
+            )}
             variant="text"
           >
             <span>Contact Me</span>

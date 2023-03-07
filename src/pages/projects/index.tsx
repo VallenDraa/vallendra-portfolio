@@ -1,8 +1,9 @@
-import R from "react";
 import type { GetStaticProps } from "next";
 import type Project from "interfaces/project.interface";
-import SearchInput from "components/SearchInput";
 import type Category from "interfaces/category.interface";
+
+import R from "react";
+import SearchInput from "components/SearchInput";
 import { JSONSerialize } from "utils/server/serialize";
 import Observe from "components/Observe";
 import fadeIn from "utils/client/helpers/animateOnObserved";
@@ -88,7 +89,7 @@ export default function ProjectsPage({
 
       <main
         className={clsx(
-          "layout relative grow pt-5 pb-10",
+          "layout grow pt-5 pb-10",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}
