@@ -44,6 +44,7 @@ export default function SearchInput({
 
   return (
     <StyledInput
+      {...props}
       icon={
         <Show when={isWaitingResult}>
           <AiOutlineLoading className="animate-spin text-lg text-indigo-700 dark:text-zinc-300" />
@@ -59,7 +60,6 @@ export default function SearchInput({
       }}
       value={tempQuery}
       role="search"
-      {...props}
     />
   );
 }
