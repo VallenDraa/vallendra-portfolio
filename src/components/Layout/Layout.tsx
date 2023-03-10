@@ -6,6 +6,7 @@ import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
 import ActionButton from "components/StyledComponents/ActionButton";
+import clsx from "clsx";
 
 const SiteFooter = dynamic(
   () => import("components/Layout/SiteFooter/SiteFooter"),
@@ -45,7 +46,15 @@ export default function Layout({ children }: { children: R.ReactNode }) {
       onScrollFrame={values => {
         setGoTopBtnIsVisible(values.scrollTop > 0.3);
       }}
-      renderView={props => <div {...props} className="flex flex-col" />}
+      renderView={props => (
+        <div
+          {...props}
+          className={clsx(
+            "flex flex-col",
+            router.route === "/" && "scroll-smooth",
+          )}
+        />
+      )}
     >
       <ActionButton
         variant="filled"
