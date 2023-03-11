@@ -1,7 +1,6 @@
-import { IconButton } from "@material-tailwind/react";
 import clsx from "clsx";
-import { useRef } from "react";
 import { VscTriangleUp } from "react-icons/vsc";
+import StyledButton from "./StyledComponents/StyledButton";
 
 export default function GoToTopBtn({
   isVisible,
@@ -10,23 +9,18 @@ export default function GoToTopBtn({
   isVisible: boolean;
   callback: () => void;
 }) {
-  const goUpBtnRef = useRef<HTMLButtonElement>(null);
-
   return (
-    <IconButton
+    <StyledButton
       aria-label="Go to top button"
-      ref={goUpBtnRef}
-      size="lg"
-      ripple={false}
-      variant="filled"
-      color="indigo"
       onClick={callback}
       className={clsx(
-        "fixed bottom-5 right-10 z-50 inline-block translate-x-0 p-2 opacity-30 duration-500 hover:opacity-100",
+        "bg-indigo-500",
+        "text-white",
+        "fixed bottom-5 right-10 z-50 inline-block translate-x-0 rounded-md p-3 opacity-30 duration-500 hover:opacity-100",
         !isVisible && "translate-y-[200%]",
       )}
     >
-      <VscTriangleUp className="text-xl" />
-    </IconButton>
+      <VscTriangleUp className="text-2xl" />
+    </StyledButton>
   );
 }

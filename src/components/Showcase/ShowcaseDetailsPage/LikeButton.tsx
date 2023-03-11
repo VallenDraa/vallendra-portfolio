@@ -1,5 +1,5 @@
-import { Button } from "@material-tailwind/react";
 import clsx from "clsx";
+import StyledButton from "components/StyledComponents/StyledButton";
 import { AiFillHeart } from "react-icons/ai";
 import Show from "utils/client/jsx/Show";
 
@@ -27,22 +27,22 @@ export default function LikeButton({
         </div>
       </Show>
       <Show when={revealButton}>
-        <Button
+        <StyledButton
           onClick={onClick}
-          variant="text"
-          color={hasLikedShowcase ? "red" : "gray"}
           data-tooltip-content={
             hasLikedShowcase ? "Thank you so much !" : "Likes are appreciated !"
           }
           className={clsx(
             "icon-tooltip",
-            "flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl",
-            hasLikedShowcase ? "text-red-400" : "text-zinc-400",
+            "flex animate-fade-in flex-col items-center gap-1 overflow-hidden py-3 px-6",
+            hasLikedShowcase
+              ? "text-red-400 hover:bg-red-500/10"
+              : "text-zinc-400 hover:bg-zinc-500/10",
           )}
         >
-          <AiFillHeart />
+          <AiFillHeart className="text-5xl" />
           <span className="text-sm">{formattedLikes}</span>
-        </Button>
+        </StyledButton>
       </Show>
     </>
   );

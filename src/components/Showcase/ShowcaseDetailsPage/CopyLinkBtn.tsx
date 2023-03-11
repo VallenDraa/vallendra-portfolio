@@ -1,7 +1,8 @@
 import R from "react";
 import { AiOutlineCheck, AiOutlineClose, AiOutlineLink } from "react-icons/ai";
 import Show from "utils/client/jsx/Show";
-import ActionButton from "components/StyledComponents/ActionButton";
+import StyledButton from "components/StyledComponents/StyledButton";
+import clsx from "clsx";
 
 export default function CopyLinkBtn() {
   const [shareIsSupported, setShareIsSupported] = R.useState<boolean | null>(
@@ -52,10 +53,15 @@ export default function CopyLinkBtn() {
       </Show>
 
       <Show when={copyLinkIsSupported === true && shareIsSupported === false}>
-        <ActionButton
-          className="animate-fade-in"
+        <StyledButton
+          alwaysShowIcon
+          className={clsx(
+            "w-full animate-fade-in border py-3 px-6",
+            isError
+              ? "border-red-500 text-red-500 hover:bg-red-500/10"
+              : "border-teal-500 text-teal-500 hover:bg-teal-500/10",
+          )}
           onClick={copyLinkToClipBoard}
-          color={isError ? "red" : "teal"}
           icon={
             <>
               <Show when={!hasBeenPressed && !isError}>
@@ -81,15 +87,20 @@ export default function CopyLinkBtn() {
 
           {/* content for pressed and has error state */}
           <Show when={isError}>Fail To Copy !</Show>
-        </ActionButton>
+        </StyledButton>
       </Show>
 
       <Show when={shareIsSupported === true}>
-        <ActionButton
+        <StyledButton
+          alwaysShowIcon
           disabled={hasBeenPressed}
-          className="animate-fade-in"
           onClick={shareInfo}
-          color={isError ? "red" : "teal"}
+          className={clsx(
+            "w-full animate-fade-in border py-3 px-6",
+            isError
+              ? "border-red-500 text-red-500 hover:bg-red-500/10"
+              : "border-teal-500 text-teal-500 hover:bg-teal-500/10",
+          )}
           icon={
             <>
               <Show when={!hasBeenPressed && !isError}>
@@ -107,7 +118,7 @@ export default function CopyLinkBtn() {
 
           {/* content for pressed and has error state */}
           <Show when={isError}>Fail To Share !</Show>
-        </ActionButton>
+        </StyledButton>
       </Show>
     </>
   );

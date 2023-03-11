@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, Menu, MenuHandler } from "@material-tailwind/react";
+import { Menu, MenuHandler } from "@material-tailwind/react";
 import dynamic from "next/dynamic";
+import StyledButton from "components/StyledComponents/StyledButton";
 
 type NavbarSubMenuProps = {
   Handler: JSX.Element;
@@ -34,14 +35,11 @@ export default function NavbarSubMenu({
       offset={offset}
     >
       <MenuHandler>
-        <Button
-          color="indigo"
-          variant="text"
-          fullWidth
-          className="p-0 text-base font-semibold text-zinc-700 hover:text-indigo-600 dark:text-zinc-200 dark:hover:text-white"
-        >
-          {Handler}
-        </Button>
+        <div>
+          <StyledButton className="flex items-center rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white lg:justify-center lg:!rounded-md lg:px-3 dark:lg:text-zinc-200">
+            {Handler}
+          </StyledButton>
+        </div>
       </MenuHandler>
 
       <MenuList className="border-0 bg-zinc-100/90 shadow supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30">

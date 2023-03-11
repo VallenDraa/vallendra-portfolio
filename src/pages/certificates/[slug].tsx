@@ -7,7 +7,6 @@ import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
 import Show from "utils/client/jsx/Show";
 import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
-import ActionButton from "components/StyledComponents/ActionButton";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import type Certificate from "interfaces/certificate.interface";
@@ -31,6 +30,7 @@ import {
   getItemWithPrevAndNext,
 } from "server/service/showcase/showcase.service";
 import CertificateModel from "server/mongo/model/certificate.model";
+import StyledButton from "components/StyledComponents/StyledButton";
 
 type CertificateDetailsProps = {
   certificate: Certificate;
@@ -252,18 +252,16 @@ export default function CertificateDetails({
           <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
             {/* see certificate and copy link button */}
             <div className="flex w-full flex-col gap-3">
-              <ActionButton
-                href={certificate.certificateLink}
-                variant="outlined"
-                color="blue"
-                className="flex w-full justify-center"
-              >
-                {/* certificate link text */}
-                <Show when={!!certificate.certificateLink}>
-                  <FaRegNewspaper className="text-lg text-blue-500" />
-                  <span>See Certificate</span>
-                </Show>
-              </ActionButton>
+              <Show when={!!certificate.certificateLink}>
+                <StyledButton
+                  alwaysShowIcon
+                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  href={certificate.certificateLink}
+                  icon={<FaRegNewspaper className="text-lg text-blue-500" />}
+                >
+                  See Certificate
+                </StyledButton>
+              </Show>
 
               {/* copy link to clipboard */}
               <CopyLinkBtn />

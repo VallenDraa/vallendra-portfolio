@@ -11,7 +11,6 @@ import type { Technologies, Language } from "types/types";
 import TechWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import Show from "utils/client/jsx/Show";
 import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
-import ActionButton from "components/StyledComponents/ActionButton";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { commaSeparator } from "utils/client/helpers/formatter";
@@ -34,6 +33,7 @@ import {
   getItemWithPrevAndNext,
 } from "server/service/showcase/showcase.service";
 import ProjectModel from "server/mongo/model/project.model";
+import StyledButton from "components/StyledComponents/StyledButton";
 
 export type ProjectDetailsProps = {
   project: Project;
@@ -277,33 +277,37 @@ export default function ProjectDetails({
             <div className="flex w-full flex-col gap-3">
               {/* when the project has download link */}
               <Show when={!!project.downloadLink}>
-                <ActionButton
-                  href={`${project.downloadLink}`}
+                <StyledButton
+                  alwaysShowIcon
+                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  href={project.downloadLink as string}
                   icon={<FaDownload className="text-lg text-blue-500" />}
                 >
                   Download
-                </ActionButton>
+                </StyledButton>
               </Show>
 
               {/* when the project has a website link */}
               <Show when={!!project.siteLink}>
-                <ActionButton
-                  href={`${project.siteLink}`}
+                <StyledButton
+                  alwaysShowIcon
+                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  href={project.siteLink as string}
                   icon={<SlGlobe className="text-lg text-blue-500" />}
                 >
                   Visit Site
-                </ActionButton>
+                </StyledButton>
               </Show>
 
               {/* Github Link */}
-              <ActionButton
+              <StyledButton
+                alwaysShowIcon
                 icon={<FaGithub className="text-lg" />}
                 href={project.gitLink}
-                color="gray"
-                className="dark:!border-zinc-400 dark:!text-zinc-400"
+                className="border border-zinc-500 py-3 px-6 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
               >
                 Visit Repo
-              </ActionButton>
+              </StyledButton>
 
               {/* copy link to clipboard */}
               <CopyLinkBtn />

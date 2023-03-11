@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import clsx from "clsx";
 import Observe from "components/Observe";
 import { ReactNode } from "react";
@@ -7,7 +6,6 @@ import type { FadeInAnimation } from "utils/client/helpers/animateOnObserved";
 import Show from "utils/client/jsx/Show";
 
 type SectioHeadingProps = {
-  titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   title: ReactNode;
   subTitle?: ReactNode;
   willFade?: boolean;
@@ -22,7 +20,6 @@ type SectioHeadingProps = {
 };
 
 export default function SectionHeading({
-  titleAs = "h1",
   title,
   subTitle = "",
   duration = null,
@@ -42,16 +39,14 @@ export default function SectionHeading({
           )
         }
       >
-        <Typography
-          as={titleAs}
-          variant="h1"
+        <h1
           className={clsx(
             willFade && "opacity-0",
-            "primary-gradient bg-gradient-to-r bg-clip-text text-4xl font-bold !leading-[initial] text-transparent md:text-5xl",
+            "primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent",
           )}
         >
           {title}
-        </Typography>
+        </h1>
       </Observe>
 
       <Show when={subTitle !== ""}>
@@ -66,16 +61,14 @@ export default function SectionHeading({
             )
           }
         >
-          <Typography
-            as="p"
-            variant="lead"
+          <p
             className={clsx(
               willFade && "opacity-0",
               "mb-2 mt-0.5 pl-0.5 text-base font-medium text-zinc-500 dark:text-zinc-300 md:text-lg",
             )}
           >
             {subTitle}
-          </Typography>
+          </p>
         </Observe>
       </Show>
     </>

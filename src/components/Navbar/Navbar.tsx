@@ -1,4 +1,5 @@
-import { Typography, IconButton } from "@material-tailwind/react";
+import StyledButton from "components/StyledComponents/StyledButton";
+import { Typography } from "@material-tailwind/react";
 import { useEffect, useContext, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
@@ -14,7 +15,7 @@ export default function NavbarComponent() {
   /* Ref for navbar
   =============================================== */
   const navbarRef = useRef<HTMLDivElement>(null);
-  const navToggleRef = useRef<HTMLButtonElement>(null);
+  const navToggleRef = useRef<HTMLDivElement>(null);
 
   /* refs for navlist
   ================================================ */
@@ -102,17 +103,16 @@ export default function NavbarComponent() {
         <div className="flex items-center justify-end gap-3 lg:hidden">
           <ThemeToggler className="inline-block" />
 
-          <IconButton
-            aria-label="Navigation menu button"
-            ref={navToggleRef}
-            size="md"
-            variant="text"
-            color="gray"
-            className="text-inherit"
-            onClick={() => setNavIsOpened(true)}
-          >
-            <BiMenu className="text-4xl text-zinc-700 transition duration-200 dark:text-zinc-200" />
-          </IconButton>
+          <div ref={navToggleRef}>
+            <StyledButton
+              aria-label="Navigation menu button"
+              onClick={() => setNavIsOpened(true)}
+              className="flex h-10 w-10 items-center justify-center rounded-md p-0.5 !text-xl hover:bg-zinc-500/10"
+            >
+              {/* icon for dark mode */}
+              <BiMenu className="h-full w-full text-zinc-700 dark:text-zinc-200" />
+            </StyledButton>
+          </div>
         </div>
       </div>
     </div>

@@ -10,7 +10,6 @@ import {
   getAllPostSlugs,
   getPostData,
   getPrevAndNextPosts,
-  // getPrevAndNextPosts,
 } from "utils/server/posts";
 import { getMDXComponent } from "mdx-bundler/client";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
@@ -21,7 +20,6 @@ import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage
 import clsx from "clsx";
 import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
 import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
-import ActionButton from "components/StyledComponents/ActionButton";
 import { FaGithub } from "react-icons/fa";
 import Show from "utils/client/jsx/Show";
 import { IoLanguage, IoWarning } from "react-icons/io5";
@@ -35,6 +33,7 @@ import { commaSeparator } from "utils/client/helpers/formatter";
 import useDebounce from "utils/client/hooks/useDebounce";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 import DetailFooter from "components/Showcase/ShowcaseDetailsPage/DetailFooter";
+import StyledButton from "components/StyledComponents/StyledButton";
 
 export default function BlogPost({
   code,
@@ -163,7 +162,7 @@ export default function BlogPost({
       </StyledAlert>
 
       <article className="fade-bottom relative mt-6 mb-3 after:-top-6">
-        <div className="layout">
+        <div className="layout overflow-x-hidden">
           <header>
             <section
               className={clsx(
@@ -206,10 +205,10 @@ export default function BlogPost({
                   }
                 />
                 <Show when={!frontmatter.englishOnly}>
-                  <ActionButton
-                    className="w-full !border-indigo-400 !text-indigo-400 lg:w-max"
+                  <StyledButton
+                    alwaysShowIcon
+                    className="w-full border border-indigo-400 py-3 px-6 text-indigo-400 hover:bg-indigo-500/10 lg:w-max"
                     icon={<IoLanguage />}
-                    color="indigo"
                     hrefTarget="_self"
                     href={
                       slugPrefix === "en-"
@@ -218,7 +217,7 @@ export default function BlogPost({
                     }
                   >
                     Read In {slugPrefix === "en-" ? "Indonesian" : "English"}
-                  </ActionButton>
+                  </StyledButton>
                 </Show>
               </div>
             </section>
@@ -245,14 +244,14 @@ export default function BlogPost({
           >
             <section className="detail-aside-colors mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
               <div className="grow space-y-3">
-                <ActionButton
+                <StyledButton
+                  alwaysShowIcon
                   icon={<FaGithub className="text-lg" />}
                   href=""
-                  color="gray"
-                  className="dark:!border-zinc-400 dark:!text-zinc-400"
+                  className="w-full border border-zinc-500 px-6 py-3 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
                 >
-                  See on Github
-                </ActionButton>
+                  See On Github
+                </StyledButton>
 
                 <CopyLinkBtn />
               </div>

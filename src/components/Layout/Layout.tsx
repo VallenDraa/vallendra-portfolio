@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
-import ActionButton from "components/StyledComponents/ActionButton";
 import clsx from "clsx";
+import StyledButton from "components/StyledComponents/StyledButton";
 
 const SiteFooter = dynamic(
   () => import("components/Layout/SiteFooter/SiteFooter"),
@@ -56,15 +56,13 @@ export default function Layout({ children }: { children: R.ReactNode }) {
         />
       )}
     >
-      <ActionButton
-        variant="filled"
+      <StyledButton
         href="#skip-to-content"
         hrefTarget="_self"
-        color="indigo"
-        anchorClassName="fixed top-0 z-[100] -translate-y-full focus:translate-y-0 translate-all duration-200 h-max"
+        className="translate-all fixed top-0 z-[100] h-max w-max -translate-y-full bg-indigo-500 duration-200 focus:translate-y-0"
       >
         Skip Navigation
-      </ActionButton>
+      </StyledButton>
 
       <NavbarComponent />
       <BreathingBackground />

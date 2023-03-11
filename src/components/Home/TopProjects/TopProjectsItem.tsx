@@ -3,7 +3,6 @@ import type Project from "interfaces/project.interface";
 
 import R from "react";
 import { CldImage } from "next-cloudinary";
-import { Typography } from "@material-tailwind/react";
 import { BsArrowRight } from "react-icons/bs";
 import Show from "utils/client/jsx/Show";
 import Observe from "components/Observe";
@@ -80,19 +79,19 @@ export default function TopProjectsItem({
 
       {/* div to hide the top-left border for smaller screen */}
       <Show when={isFirst}>
-        <div className="absolute left-0 right-[calc(50%-1px)] -top-3 block h-3.5 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
+        <div className="absolute left-0 right-[calc(50%-1px)] -top-3 block h-3.5 bg-[#E9EDFF] dark:bg-[#1E1E21] lg:hidden" />
       </Show>
 
       {/* div to hide the bottom-right border for smaller screen */}
       <Show when={isLast}>
-        <div className="absolute right-0 left-[calc(50%-1px)] -bottom-3 block h-3.5 bg-top-pick-light dark:bg-top-pick-dark lg:hidden" />
+        <div className="absolute right-0 left-[calc(50%-1px)] -bottom-3 block h-3.5 bg-[#E9EDFF] dark:bg-[#1E1E21] lg:hidden" />
       </Show>
 
       {/* project number */}
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
           className={clsx(
-            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-top-pick-light text-xs text-zinc-900 dark:border-indigo-300 dark:bg-top-pick-dark dark:text-zinc-300",
+            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-[#E9EDFF] text-xs text-zinc-900 dark:border-indigo-300 dark:bg-[#1E1E21] dark:text-zinc-300",
             twistDirection === "left"
               ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]",
@@ -135,19 +134,12 @@ export default function TopProjectsItem({
           }`}
         >
           {/* short description */}
-          <Typography
-            as="h3"
-            variant="h2"
-            className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent"
-          >
+          <h2 className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">
             {project.name}
-          </Typography>
-          <Typography
-            variant="paragraph"
-            className="font-normal leading-loose text-zinc-600 dark:text-zinc-300"
-          >
+          </h2>
+          <p className="font-normal leading-loose text-zinc-600 dark:text-zinc-300">
             {project.shortDescriptionEN}
-          </Typography>
+          </p>
 
           <div className="flex flex-col">
             <StyledScrollbar
@@ -175,13 +167,11 @@ export default function TopProjectsItem({
 
             <StyledButton
               hrefTarget="_self"
-              variant="outlined"
               href={`/projects/${project.slug}`}
-              anchorClasses="lg:w-max mt-2"
+              alwaysShowIcon={false}
               icon={<BsArrowRight className="text-indigo-400" />}
-              className="relative flex w-full items-center justify-center gap-2 self-start rounded border-2 !border-indigo-400 !text-indigo-400"
+              className="relative mt-2 flex w-full items-center justify-center gap-2 self-start border !border-indigo-400 py-3 px-4 !text-indigo-400 hover:bg-indigo-500/10 lg:w-max"
               color="indigo"
-              size="md"
             >
               See Project
             </StyledButton>

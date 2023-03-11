@@ -1,10 +1,7 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+import StyledButton from "components/StyledComponents/StyledButton";
 import { useEffect, useState, useContext, RefObject, Fragment } from "react";
-import {
-  Typography,
-  Button,
-  Accordion,
-  AccordionBody,
-} from "@material-tailwind/react";
+import { Typography, Accordion, AccordionBody } from "@material-tailwind/react";
 import Link from "next/link";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 import menuData from "utils/data/menus";
@@ -81,15 +78,13 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
             Menu
           </Typography>
 
-          <Button
+          <StyledButton
             aria-label="Close menu button"
             onClick={closeNav}
-            color="red"
-            variant="text"
-            className="flex w-max items-center justify-center rounded-full p-2 text-xl text-red-600 transition duration-200"
+            className="flex w-max items-center justify-center rounded-full p-1.5 !text-xl text-red-600 transition duration-200 hover:bg-red-500/30"
           >
             <IoClose />
-          </Button>
+          </StyledButton>
         </div>
 
         {/* menu lists */}
@@ -106,11 +101,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                 <Show when={!accordionIsVisible}>
                   <NavbarSubMenu
                     offset={14}
-                    Handler={
-                      <div className="flex items-center py-2 px-5 capitalize lg:px-3">
-                        {menu.name}
-                      </div>
-                    }
+                    Handler={<>{menu.name}</>}
                     menuItems={menu.subMenus.map(subMenu => (
                       <Link
                         key={subMenu.url}
@@ -126,33 +117,27 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                 {/* project menu for small navbar */}
                 <Show when={accordionIsVisible}>
                   <Accordion open={openedAccordion === i}>
-                    <Button
-                      color="indigo"
-                      variant="text"
-                      fullWidth
+                    <StyledButton
                       onClick={() => handleOpenAccordion(i)}
-                      className="flex items-center justify-between rounded-none py-2 px-5 text-base font-semibold capitalize text-zinc-700 duration-200 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white lg:rounded-lg lg:px-3 dark:lg:text-zinc-200"
+                      className="flex w-full items-center justify-between rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white"
                     >
                       {menu.name}
                       <IoChevronDown
-                        className={`mr-2 h-5 w-5 transition duration-200 ${
+                        className={`h-5 w-5 transition duration-200 ${
                           openedAccordion === i ? "rotate-180" : "rotate-0"
                         }`}
                       />
-                    </Button>
+                    </StyledButton>
 
                     <AccordionBody className="py-1.5">
                       {menu.subMenus.map(subMenu => (
                         <Link key={subMenu.url} href={subMenu.url}>
-                          <Button
+                          <StyledButton
                             onClick={closeNav}
-                            color="indigo"
-                            variant="text"
-                            fullWidth
-                            className="rounded-none py-2 px-7 text-start text-base font-semibold capitalize text-zinc-700 duration-200 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
+                            className="w-full rounded-none py-2 px-7 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
                           >
                             {subMenu.name}
-                          </Button>
+                          </StyledButton>
                         </Link>
                       ))}
                     </AccordionBody>
