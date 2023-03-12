@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import Observe from "components/Observe";
 import Stats from "components/Showcase/Card/Stats";
 import type PostData from "interfaces/blogPost.interface";
@@ -59,13 +58,7 @@ export default function BlogCard({ post }: { post: PostData }) {
             >
               {formattedDate}
             </time>
-            <Typography
-              as="h4"
-              variant="h4"
-              className="text-zinc-700 dark:text-zinc-200"
-            >
-              {post.title}
-            </Typography>
+            <h4 className="text-zinc-700 dark:text-zinc-200">{post.title}</h4>
           </div>
 
           <span className="text-base text-zinc-600 dark:text-zinc-400">

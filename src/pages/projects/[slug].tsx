@@ -1,5 +1,4 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
@@ -258,17 +257,14 @@ export default function ProjectDetails({
             {/* description and features of the app */}
             <div className="relative z-10 flex flex-col gap-4">
               <SectionSubHeading>Description</SectionSubHeading>
-              <Typography
-                variant="paragraph"
-                className="px-3 text-justify font-normal leading-loose text-zinc-600 dark:text-zinc-400"
-              >
+              <p className="px-3 text-justify font-normal leading-loose text-zinc-600 dark:text-zinc-400">
                 <Show when={activeLanguage === "en"}>
                   {project.descriptionEN}
                 </Show>
                 <Show when={activeLanguage === "id"}>
                   {project.descriptionID}
                 </Show>
-              </Typography>
+              </p>
             </div>
           </div>
 

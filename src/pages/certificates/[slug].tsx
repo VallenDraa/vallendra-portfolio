@@ -1,5 +1,4 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaRegNewspaper } from "react-icons/fa";
 import R from "react";
@@ -234,17 +233,14 @@ export default function CertificateDetails({
             {/* description of the certicates */}
             <div className="relative z-10 flex flex-col gap-4">
               <SectionSubHeading>Description</SectionSubHeading>
-              <Typography
-                variant="paragraph"
-                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-zinc-400"
-              >
+              <p className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-zinc-400">
                 <Show when={activeLanguage === "en"}>
                   {certificate.descriptionEN}
                 </Show>
                 <Show when={activeLanguage === "id"}>
                   {certificate.descriptionID}
                 </Show>
-              </Typography>
+              </p>
             </div>
           </div>
 

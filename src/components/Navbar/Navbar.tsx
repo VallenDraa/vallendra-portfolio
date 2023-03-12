@@ -1,5 +1,4 @@
 import StyledButton from "components/StyledComponents/StyledButton";
-import { Typography } from "@material-tailwind/react";
 import { useEffect, useContext, useRef } from "react";
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
@@ -82,13 +81,9 @@ export default function NavbarComponent() {
     >
       <div className="layout flex items-center justify-between">
         {/* name section */}
-        <Typography
-          as="span"
-          variant="h5"
-          className="text-zinc-700 dark:text-zinc-200 lg:basis-1/3"
-        >
+        <span className="text-lg font-semibold text-zinc-700 dark:text-zinc-200 md:text-xl lg:basis-1/3">
           <Link href="/">VallenDra</Link>
-        </Typography>
+        </span>
 
         {/* the nav list section */}
         <NavList navListRef={navListRef} overlayRef={overlayRef} />

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Typography } from "@material-tailwind/react";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { CldImage } from "next-cloudinary";
@@ -63,22 +62,14 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         {/* detail */}
         <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
           {/* props title */}
-          <Typography
-            variant="h5"
-            as="span"
-            className="secondary-gradient block bg-gradient-to-r bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl"
-          >
+          <span className="secondary-gradient block bg-gradient-to-r bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl">
             {data.name}
-          </Typography>
+          </span>
 
           {/* props short description */}
-          <Typography
-            variant="paragraph"
-            as="p"
-            className="mt-1 px-3 text-base font-normal text-white/80 line-clamp-2 sm:text-sm"
-          >
+          <p className="mt-1 px-3 text-base font-normal text-white/80 line-clamp-2 sm:text-sm">
             {data.shortDescriptionEN}
-          </Typography>
+          </p>
 
           {/* props likes and views */}
           <div className="mt-1.5 flex gap-3 px-3">

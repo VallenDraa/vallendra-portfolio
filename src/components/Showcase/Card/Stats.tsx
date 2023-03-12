@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import R from "react";
 import Show from "utils/client/jsx/Show";
 import { compactNumberFormatter } from "utils/client/helpers/formatter";
@@ -27,9 +26,7 @@ export default function Stats({
   );
 
   return (
-    <Typography
-      variant="paragraph"
-      as="span"
+    <span
       className={clsx(
         textColor,
         fontSize,
@@ -39,6 +36,6 @@ export default function Stats({
     >
       {icon}
       <Show when={!isLoading}>{formattedNumber}</Show>
-    </Typography>
+    </span>
   );
 }

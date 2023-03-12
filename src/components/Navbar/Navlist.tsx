@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import StyledButton from "components/StyledComponents/StyledButton";
 import { useEffect, useState, useContext, RefObject, Fragment } from "react";
-import { Typography, Accordion, AccordionBody } from "@material-tailwind/react";
-import Link from "next/link";
+import { Popover } from "@headlessui/react";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 import menuData from "utils/data/menus";
 import Show from "utils/client/jsx/Show";
 import NavIsOpenedContext from "context/NavIsOpenedCP";
+import clsx from "clsx";
 import NavbarSubMenu from "./NavbarSubMenu";
 import NavBtn from "./NavBtn";
 
@@ -17,12 +17,7 @@ type NavListProps = {
 
 export default function NavList({ navListRef, overlayRef }: NavListProps) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
-  const [openedAccordion, setOpenedAccordion] = useState<number | null>(0);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
-
-  function handleOpenAccordion(value: number) {
-    setOpenedAccordion(prev => (prev === value ? null : value));
-  }
 
   /* letting the close animation play and then destroying the navlist itself
   ========================================================================== */
@@ -47,12 +42,6 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
     return () => window.removeEventListener("resize", menuAccordionHandler);
   }, []);
 
-  /* for closing accordion when screen size is large
-  ================================================== */
-  useEffect(() => {
-    if (!navIsOpened) setOpenedAccordion(0);
-  }, [navIsOpened]);
-
   return (
     <Show when={navIsOpened}>
       {/* translucent overlay that is showed when navbar is opened */}
@@ -70,13 +59,9 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
       >
         {/* close button for small screen nav */}
         <div className="gradient-underline gradient-underline--primary relative mb-3 flex items-center justify-between pl-5 pr-3 pt-3 pb-0.5 lg:hidden lg:px-3">
-          <Typography
-            as="span"
-            variant="paragraph"
-            className="font-medium text-indigo-600 dark:text-zinc-300"
-          >
+          <span className="font-medium text-indigo-600 dark:text-zinc-300">
             Menu
-          </Typography>
+          </span>
 
           <StyledButton
             aria-label="Close menu button"
@@ -88,7 +73,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
         </div>
 
         {/* menu lists */}
-        {menuData.map((menu, i) => (
+        {menuData.map(menu => (
           <Fragment key={menu.name}>
             {menu.subMenus === undefined ? (
               <NavBtn
@@ -100,48 +85,55 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
               <>
                 <Show when={!accordionIsVisible}>
                   <NavbarSubMenu
-                    offset={14}
                     Handler={<>{menu.name}</>}
                     menuItems={menu.subMenus.map(subMenu => (
-                      <Link
+                      <StyledButton
                         key={subMenu.url}
+                        hrefTarget="_self"
                         href={subMenu.url}
-                        className="inline-block h-full w-full p-3 capitalize"
+                        className={clsx(
+                          "p-3",
+                          "!text-left !text-sm !font-medium !capitalize text-zinc-700 hover:text-indigo-600 dark:text-zinc-300 hover:dark:text-white",
+                          "hover:bg-indigo-500/10 hover:dark:bg-zinc-50/10",
+                        )}
                       >
                         {subMenu.name}
-                      </Link>
+                      </StyledButton>
                     ))}
                   />
                 </Show>
 
                 {/* project menu for small navbar */}
                 <Show when={accordionIsVisible}>
-                  <Accordion open={openedAccordion === i}>
-                    <StyledButton
-                      onClick={() => handleOpenAccordion(i)}
-                      className="flex w-full items-center justify-between rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white"
-                    >
-                      {menu.name}
-                      <IoChevronDown
-                        className={`h-5 w-5 transition duration-200 ${
-                          openedAccordion === i ? "rotate-180" : "rotate-0"
-                        }`}
-                      />
-                    </StyledButton>
+                  <Popover>
+                    {({ open }) => (
+                      <>
+                        <Popover.Button className="flex w-full items-center justify-between rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white">
+                          {menu.name}
+                          <IoChevronDown
+                            className={clsx(
+                              open && "rotate-180",
+                              "h-5 w-5 transition duration-200",
+                            )}
+                          />
+                        </Popover.Button>
 
-                    <AccordionBody className="py-1.5">
-                      {menu.subMenus.map(subMenu => (
-                        <Link key={subMenu.url} href={subMenu.url}>
-                          <StyledButton
-                            onClick={closeNav}
-                            className="w-full rounded-none py-2 px-7 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
-                          >
-                            {subMenu.name}
-                          </StyledButton>
-                        </Link>
-                      ))}
-                    </AccordionBody>
-                  </Accordion>
+                        <Popover.Panel className="py-1.5">
+                          {menu.subMenus.map(subMenu => (
+                            <StyledButton
+                              key={subMenu.url}
+                              hrefTarget="_self"
+                              href={subMenu.url}
+                              onClick={closeNav}
+                              className="w-full rounded-none py-2 px-7 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
+                            >
+                              {subMenu.name}
+                            </StyledButton>
+                          ))}
+                        </Popover.Panel>
+                      </>
+                    )}
+                  </Popover>
                 </Show>
               </>
             )}
@@ -149,13 +141,9 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
         ))}
 
         <div className="mt-auto self-center pb-6 lg:hidden">
-          <Typography
-            as="span"
-            variant="small"
-            className="text-xs font-semibold text-zinc-700 dark:text-zinc-500"
-          >
+          <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-500">
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
-          </Typography>
+          </span>
         </div>
       </nav>
     </Show>

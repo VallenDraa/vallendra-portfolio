@@ -65,12 +65,12 @@ export default function SiteFooter() {
             Next.js,
           </a>
           <a
-            href="https://www.material-tailwind.com/"
+            href="https://www.tailwindcss.com/"
             target="_blank"
             className="text-pink-400 underline underline-offset-2 dark:text-pink-300"
             rel="noreferrer"
           >
-            Material Tailwind,
+            Tailwind CSS,
           </a>
           <span>and</span>
           <span className="translate-y-[1px] text-lg text-pink-400 dark:text-pink-300">

@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import clsx from "clsx";
 import R from "react";
 import { AiFillCalendar, AiFillEye, AiFillHeart } from "react-icons/ai";
@@ -62,31 +61,27 @@ export default function ShowcaseStats({
 
       <span>&bull;</span>
 
-      <Typography
-        variant="small"
-        as="span"
-        className={`flex items-center gap-1 font-medium ${
+      <span
+        className={`flex items-center gap-1 text-sm font-medium ${
           isLoadingStats ? skeleton : "animate-fade-in"
         }`}
       >
         <AiFillEye />
         <Show when={!isLoadingStats}>{formattedViews} views</Show>
-      </Typography>
+      </span>
 
       <span>&bull;</span>
 
-      <Typography
-        variant="small"
-        as="span"
+      <span
         className={clsx(
-          "flex items-center gap-1 font-medium ",
+          "flex items-center gap-1 text-sm font-medium ",
           hasLiked ? "text-red-400" : "text-inherit",
           isLoadingStats ? skeleton : "animate-fade-in",
         )}
       >
         <AiFillHeart className={hasLiked ? "text-red-400" : "text-inherit"} />
         <Show when={!isLoadingStats}>{formattedLikes} likes</Show>
-      </Typography>
+      </span>
     </div>
   );
 }

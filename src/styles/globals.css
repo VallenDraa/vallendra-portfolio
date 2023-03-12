@@ -101,6 +101,6 @@
   button,
   input,
   textarea {
-    @apply outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400;
+    @apply outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400;
   }
 }
