@@ -27,8 +27,8 @@ const techIcons: {
     <SiHtml5
       className={`${size} ${
         isColorOn
-          ? "text-deep-orange-400"
-          : "text-white/50 transition-colors duration-200 hover:text-deep-orange-400 group-hover:text-deep-orange-400"
+          ? "text-orange-500"
+          : "text-white/50 transition-colors duration-200 hover:text-orange-500 group-hover:text-orange-500"
       }`}
     />
   ),
@@ -81,8 +81,8 @@ const techIcons: {
     <SiReact
       className={`${size} ${
         isColorOn
-          ? "text-light-blue-300 dark:text-light-blue-200"
-          : "text-white/50 transition-colors duration-200 hover:text-light-blue-300 group-hover:text-light-blue-300  hover:dark:text-light-blue-200 group-hover:dark:text-light-blue-200"
+          ? "text-cyan-300"
+          : "text-white/50 transition-colors duration-200 hover:text-cyan-300 group-hover:text-cyan-300"
       }`}
     />
   ),

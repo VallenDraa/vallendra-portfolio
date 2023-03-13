@@ -34,12 +34,12 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
         <label
           className={clsx(
             "px-1",
-            "transition-all",
-            "absolute left-2.5 top-1/2 -translate-y-8",
+            "-translate-x-1 scale-90 transition-all",
+            "absolute left-2.5 top-1/2 -translate-y-9",
             "text-sm text-zinc-500 dark:text-zinc-400",
             "bg-indigo-50 dark:bg-zinc-900",
-            "peer-focus:-translate-x-1 peer-focus:-translate-y-8 peer-focus:scale-90 peer-focus:text-indigo-500 dark:peer-focus:text-indigo-300",
-            "peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-zinc-500 dark:peer-placeholder-shown:text-zinc-400",
+            "peer-focus:-translate-x-1 peer-focus:-translate-y-9 peer-focus:scale-90 peer-focus:text-indigo-500 dark:peer-focus:text-indigo-300",
+            "peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-zinc-500 dark:peer-placeholder-shown:text-zinc-400",
           )}
           htmlFor={inputId}
         >

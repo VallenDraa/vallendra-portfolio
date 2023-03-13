@@ -1,10 +1,8 @@
-const withMT = require("@material-tailwind/react/utils/withMT");
-
 const defaultColors = require("tailwindcss/colors");
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = withMT({
+module.exports = {
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
@@ -82,4 +80,4 @@ module.exports = withMT({
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
   ],
-});
+}

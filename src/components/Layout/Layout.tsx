@@ -59,7 +59,7 @@ export default function Layout({ children }: { children: R.ReactNode }) {
       <StyledButton
         href="#skip-to-content"
         hrefTarget="_self"
-        className="translate-all fixed top-0 z-[100] h-max w-max -translate-y-full bg-indigo-500 p-3 duration-200 focus:translate-y-0"
+        className="translate-all fixed top-0 z-[100] h-max w-max -translate-y-full bg-indigo-500 p-3 text-white duration-200 focus:translate-y-0"
       >
         Skip Navigation
       </StyledButton>

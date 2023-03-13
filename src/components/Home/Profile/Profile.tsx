@@ -71,10 +71,10 @@ export default function Profile() {
             >
               <div className="card-colors rounded-md opacity-0 shadow-md">
                 <div className="p-6">
-                  <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text uppercase text-transparent  dark:bg-gradient-to-tr dark:from-green-500 dark:to-white">
+                  <h2 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-2xl uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl">
                     <IoCodeSlash className="rounded-lg bg-indigo-100 p-1 text-3xl text-green-400 dark:bg-zinc-700/90" />
                     Technologies
-                  </h3>
+                  </h2>
 
                   <p className="mb-1 font-normal text-zinc-600 dark:text-zinc-400">
                     Languages and frameworks that I use for projects and college
@@ -109,8 +109,8 @@ export default function Profile() {
                       ))}
                   </StyledScrollbar>
                 </div>
-                <div className="border-t border-indigo-400 p-6 py-3 text-zinc-500 dark:border-zinc-600">
-                  <span className="block text-right text-sm">
+                <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+                  <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
                     And Learning More
                   </span>
                 </div>
@@ -128,16 +128,18 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h4 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-light-blue-500 to-light-blue-300 bg-clip-text uppercase text-transparent">
-                  <IoSchool className="rounded-lg bg-indigo-100 p-1 text-3xl text-light-blue-400 dark:bg-zinc-700/90" />
+                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-cyan-500 to-cyan-300 bg-clip-text text-xl uppercase text-transparent md:text-2xl">
+                  <IoSchool className="rounded-lg bg-indigo-100 p-1 text-3xl text-cyan-400 dark:bg-zinc-700/90" />
                   EDUCATION
-                </h4>
+                </h3>
                 <p className="font-normal text-zinc-600 dark:text-zinc-400">
                   Majoring in Informatics at UIN Syarif Hidayatullah Jakarta.
                 </p>
               </div>
-              <div className="border-t border-indigo-400 p-6 py-3 text-zinc-500 dark:border-zinc-600">
-                <span className="block text-right text-sm">2022 - 2026</span>
+              <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+                <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
+                  2022 - 2026
+                </span>
               </div>
             </div>
           </Observe>
@@ -149,16 +151,18 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h4 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text uppercase text-transparent">
+                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text text-xl uppercase text-transparent md:text-2xl">
                   <FaGoogle className="rounded-lg bg-indigo-100 p-1 text-3xl text-pink-500 dark:bg-zinc-700/90" />
                   ACTIVITY
-                </h4>
+                </h3>
                 <p className="font-normal text-zinc-600 dark:text-zinc-400">
                   An active member of GDSC UIN Syarif Hidayatullah Jakarta.
                 </p>
               </div>
-              <div className="border-t border-indigo-400 p-6 py-3 text-zinc-500 dark:border-zinc-600">
-                <span className="block text-right text-sm">2022 - 2023</span>
+              <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+                <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
+                  2022 - 2023
+                </span>
               </div>
             </div>
           </Observe>

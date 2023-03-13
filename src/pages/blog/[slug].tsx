@@ -156,9 +156,11 @@ export default function BlogPost({
         icon={<IoWarning className="text-2xl" />}
         color="red"
         show={showAlert}
-        dismissible={{ onClose: () => setShowAlert(false) }}
+        onClose={() => setShowAlert(false)}
       >
-        Oops, please try to reload or try visiting the page at a later time !
+        <span>
+          Oops, please try to reload or try visiting the page at a later time !
+        </span>
       </StyledAlert>
 
       <article className="fade-bottom relative mt-6 mb-3 after:-top-6">

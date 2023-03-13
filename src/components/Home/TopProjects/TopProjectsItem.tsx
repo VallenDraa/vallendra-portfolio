@@ -91,9 +91,9 @@ export default function TopProjectsItem({
       <Observe onEnter={projectInView} onExit={projectNotInView}>
         <div
           className={clsx(
-            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-300 bg-[#E9EDFF] text-xs text-zinc-900 dark:border-indigo-300 dark:bg-[#1E1E21] dark:text-zinc-300",
+            "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500/70 bg-[#E9EDFF] text-xs text-zinc-900 dark:bg-[#1E1E21] dark:text-zinc-300",
             twistDirection === "left"
-              ? "right-[-11px] lg:right-1/2 lg:translate-x-1/2"
+              ? "right-[-11px] lg:right-[calc(50%+1px)] lg:translate-x-1/2"
               : "left-[-11px] lg:left-1/2 lg:-translate-x-[33px]",
           )}
         >

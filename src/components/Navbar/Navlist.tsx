@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import StyledButton from "components/StyledComponents/StyledButton";
 import { useEffect, useState, useContext, RefObject, Fragment } from "react";
-import { Popover } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 import menuData from "utils/data/menus";
 import Show from "utils/client/jsx/Show";
@@ -27,6 +27,21 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
 
     setTimeout(() => setNavIsOpened(false), 310);
   }
+
+  /* For handling navigation keyboard control
+  =========================================== */
+  useEffect(() => {
+    function navlistKeyboardHandler(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        if (window.innerWidth < 1024 && navIsOpened) closeNav();
+      }
+    }
+
+    window.addEventListener("keydown", navlistKeyboardHandler);
+
+    return () => window.removeEventListener("keydown", navlistKeyboardHandler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navIsOpened]);
 
   /* for handling accordion visibility
   ==================================== */
@@ -113,24 +128,33 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                           <IoChevronDown
                             className={clsx(
                               open && "rotate-180",
-                              "h-5 w-5 transition duration-200",
+                              "h-5 w-5 transition duration-300",
                             )}
                           />
                         </Popover.Button>
 
-                        <Popover.Panel className="py-1.5">
-                          {menu.subMenus.map(subMenu => (
-                            <StyledButton
-                              key={subMenu.url}
-                              hrefTarget="_self"
-                              href={subMenu.url}
-                              onClick={closeNav}
-                              className="w-full rounded-none py-2 px-7 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
-                            >
-                              {subMenu.name}
-                            </StyledButton>
-                          ))}
-                        </Popover.Panel>
+                        <Transition
+                          enter="transition duration-200 ease-out"
+                          enterFrom="transform scale-95 opacity-0"
+                          enterTo="transform scale-100 opacity-100"
+                          leave="transition duration-200 ease-out"
+                          leaveFrom="transform scale-100 opacity-100"
+                          leaveTo="transform scale-95 opacity-0"
+                        >
+                          <Popover.Panel className="py-1.5">
+                            {menu.subMenus.map(subMenu => (
+                              <StyledButton
+                                key={subMenu.url}
+                                hrefTarget="_self"
+                                href={subMenu.url}
+                                onClick={closeNav}
+                                className="w-full rounded-none py-2 px-7 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
+                              >
+                                {subMenu.name}
+                              </StyledButton>
+                            ))}
+                          </Popover.Panel>
+                        </Transition>
                       </>
                     )}
                   </Popover>
