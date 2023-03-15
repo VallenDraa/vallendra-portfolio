@@ -7,6 +7,7 @@ import menuData from "utils/data/menus";
 import Show from "utils/client/jsx/Show";
 import NavIsOpenedContext from "context/NavIsOpenedCP";
 import clsx from "clsx";
+import useStyledRipple from "utils/client/hooks/useStyledRipple";
 import NavbarSubMenu from "./NavbarSubMenu";
 import NavBtn from "./NavBtn";
 
@@ -16,6 +17,8 @@ type NavListProps = {
 };
 
 export default function NavList({ navListRef, overlayRef }: NavListProps) {
+  const [ripple, event] = useStyledRipple();
+
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
@@ -123,7 +126,11 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
                   <Popover>
                     {({ open }) => (
                       <>
-                        <Popover.Button className="flex w-full items-center justify-between rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white">
+                        <Popover.Button
+                          ref={ripple}
+                          onMouseDown={event}
+                          className="flex w-full items-center justify-between rounded-none py-2 px-5 text-start !text-base font-semibold capitalize text-zinc-700 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white"
+                        >
                           {menu.name}
                           <IoChevronDown
                             className={clsx(

@@ -1,13 +1,8 @@
-const defaultColors = require("tailwindcss/colors");
-const { fontFamily } = require("tailwindcss/defaultTheme");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
-    colors: defaultColors,
-    fontFamily,
     backgroundSize: { gradient: "400% 400%" },
     extend: {
       colors: {
@@ -80,4 +75,4 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
   ],
-}
+};

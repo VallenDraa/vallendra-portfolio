@@ -11,11 +11,11 @@
   @apply !max-w-screen-md;
 }
 
-.prose :where(h1, h2, h3, h4, h5, h6):not(:where(.not-prose *)) {
+.prose :where(h1, h2, h3, h4, h5, h6):not(.not-prose *) {
   @apply relative w-max max-w-full scroll-m-20 break-words underline decoration-transparent underline-offset-4 hover:text-[var(--clr-gradient-pink)] hover:decoration-[var(--clr-gradient-pink)];
 }
 
-.prose :where(blockquote):not(:where(.not-prose *)) {
+.prose blockquote:not(.not-prose *) {
   border-image: linear-gradient(
       to top,
       var(--clr-gradient-indigo),

@@ -1,22 +1,17 @@
 import { Popover, Transition } from "@headlessui/react";
-import { useTheme } from "next-themes";
-import useRipple from "use-ripple-hook";
 import { Fragment } from "react";
+import useStyledRipple from "utils/client/hooks/useStyledRipple";
 
 type NavbarSubMenuProps = {
   Handler: JSX.Element;
   menuItems: JSX.Element[];
 };
+
 export default function NavbarSubMenu({
   Handler,
   menuItems,
 }: NavbarSubMenuProps) {
-  const { theme } = useTheme();
-  const [ripple, event] = useRipple({
-    duration: 500,
-    color: theme === "dark" ? "rgba(255, 255, 255, .2)" : "rgba(0, 0, 0, .2)",
-    cancelAutomatically: true,
-  });
+  const [ripple, event] = useStyledRipple();
 
   return (
     <Popover className="relative">
@@ -37,7 +32,7 @@ export default function NavbarSubMenu({
         leaveFrom="transform opacity-100 translate-y-0"
         leaveTo="transform opacity-0 translate-y-3"
       >
-        <Popover.Panel className="absolute left-1/2 mt-4 flex w-44 -translate-x-1/2 flex-col rounded-md bg-zinc-100/90 p-3 shadow backdrop-saturate-150 supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30">
+        <Popover.Panel className="absolute left-1/2 mt-4 flex w-44 -translate-x-1/2 flex-col rounded-md bg-zinc-100/40 p-3 dark:bg-zinc-800/40">
           {menuItems.map((menuItem: JSX.Element) => menuItem)}
         </Popover.Panel>
       </Transition>

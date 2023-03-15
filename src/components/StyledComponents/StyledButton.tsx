@@ -2,9 +2,8 @@
 import clsx from "clsx";
 import Link from "next/link";
 import R from "react";
-import { useTheme } from "next-themes";
-import useRipple from "use-ripple-hook";
 import Show from "utils/client/jsx/Show";
+import useStyledRipple from "utils/client/hooks/useStyledRipple";
 
 type StyledButtonProps = {
   href?: string;
@@ -28,12 +27,7 @@ export default function StyledButton({
   children,
   ...props
 }: StyledButtonProps) {
-  const { theme } = useTheme();
-  const [ripple, event] = useRipple({
-    duration: 500,
-    color: theme === "dark" ? "rgba(255, 255, 255, .2)" : "rgba(0, 0, 0, .2)",
-    cancelAutomatically: true,
-  });
+  const [ripple, event] = useStyledRipple();
 
   const pickedClassNames = R.useMemo(() => {
     if (alwaysShowIcon === false) {
@@ -55,7 +49,7 @@ export default function StyledButton({
     <>
       {/* when icon is visible */}
       <Show when={!!icon === true}>
-        <span className={iconClasses}>{icon}</span>
+        <span className={clsx(iconClasses, "text-sm")}>{icon}</span>
         <span className={textClasses}>{children}</span>
       </Show>
 

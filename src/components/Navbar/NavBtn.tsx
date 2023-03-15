@@ -1,14 +1,12 @@
 import StyledButton from "components/StyledComponents/StyledButton";
 
-export default function NavBtn({
-  menu,
-  href,
-  onClick,
-}: {
+type NavBtnProps = {
   menu: string;
   href?: string;
   onClick?: () => void;
-}) {
+};
+
+export default function NavBtn({ menu, href, onClick }: NavBtnProps) {
   return (
     <StyledButton
       href={href}

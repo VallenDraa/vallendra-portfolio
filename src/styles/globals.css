@@ -11,6 +11,10 @@
     @apply mx-auto w-[90%] max-w-screen-xl;
   }
 
+  .focus-highlight {
+    @apply outline-none outline-transparent ring-2 ring-indigo-400;
+  }
+
   /* icons
   ======= */
   .icon-with-bg-colors {
@@ -101,6 +105,6 @@
   button,
   input,
   textarea {
-    @apply outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400;
+    @apply outline-none focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-indigo-400;
   }
 }
