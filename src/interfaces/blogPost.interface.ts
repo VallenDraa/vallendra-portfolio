@@ -12,7 +12,7 @@ export default interface BlogPost extends FrontMatter {
   slug: string;
 }
 
-const BLOG_TAGS = ["life"] as const;
+export const BLOG_TAGS = ["life"] as const;
 
 export type BlogTags = (typeof BLOG_TAGS)[number];
 

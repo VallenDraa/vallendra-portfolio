@@ -12,7 +12,7 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
     /* Determine the border color of the input based on theme
     ========================================================= */
     return (
-      <div className="relative">
+      <div className="relative w-full">
         <div className="absolute right-4 top-1/2 -translate-y-1/2">{icon}</div>
 
         <input
@@ -22,9 +22,9 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
           ref={forwardedRef}
           placeholder={placeholder}
           className={clsx(
+            "transition-colors",
             "placeholder:text-transparent",
             "peer h-12 w-full rounded-md px-10 pl-4",
-            "transition-colors",
             "text-lg text-zinc-600 dark:text-zinc-300",
             "border border-zinc-600 outline-none focus:border-indigo-400",
             "bg-transparent disabled:cursor-not-allowed disabled:opacity-20",

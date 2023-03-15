@@ -20,6 +20,9 @@ export default function SiteFooter() {
       {/* socials */}
       <div className="layout flex w-fit items-center gap-2.5 text-3xl text-zinc-600 dark:text-zinc-300 [&>*]:p-1">
         <a
+          className="icon-tooltip"
+          data-tooltip-content="Email"
+          data-tooltip-place="top"
           target="_blank"
           aria-label="Email link button"
           href="mailto:vallenatwork@gmail.com"
@@ -28,12 +31,19 @@ export default function SiteFooter() {
           <MdEmail />
         </a>
         <a
+          className="icon-tooltip"
+          data-tooltip-content="Instagram"
+          data-tooltip-place="top"
+          target="_blank"
           aria-label="Instagram link button"
           href="https://instagram.com/vallendra_"
         >
           <AiFillInstagram />
         </a>
         <a
+          className="icon-tooltip"
+          data-tooltip-content="Github"
+          data-tooltip-place="top"
           target="_blank"
           aria-label="Github link button"
           href="https://github.com/vallendraa"
@@ -42,6 +52,9 @@ export default function SiteFooter() {
           <FaGithub />
         </a>
         <a
+          className="icon-tooltip"
+          data-tooltip-content="Linkedin"
+          data-tooltip-place="top"
           target="_blank"
           aria-label="Linkedin link"
           href="https://www.linkedin.com/in/vallendra/"

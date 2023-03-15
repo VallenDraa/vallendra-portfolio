@@ -2,6 +2,7 @@ import R from "react";
 import useIntersectionObserver, {
   UseIntersectionObserverProps,
 } from "utils/client/hooks/useIntersectionObserver";
+import { IS_PROD } from "@/constants";
 
 type ObserveProps<T extends HTMLElement> = {
   children: React.ReactElement;
@@ -24,7 +25,7 @@ export default function Observe<T extends HTMLElement>({
   const ref = R.useRef<T>(null);
   const entry = useIntersectionObserver(ref, {
     ...others,
-    freezeOnceVisible,
+    freezeOnceVisible: IS_PROD ? false : freezeOnceVisible,
   });
 
   R.useEffect(() => {
