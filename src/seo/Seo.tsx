@@ -36,7 +36,7 @@ export default function Seo({
       <title>{base.title}</title>
       <meta lang="en" />
       <meta name="description" content={base.desc} />
-      <meta name="theme-color" content="#7986cb" />
+      <meta name="theme-color" content="#6366f1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="robots" content={base.robots || "follow, index"} />
       <link rel="canonical" href={og.siteUrl} />

@@ -176,7 +176,7 @@ export default function CertificateDetails({
       </StyledAlert>
 
       <header className="fade-bottom relative mt-6 mb-3 after:-top-6">
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-20 pb-3 dark:border-zinc-700">
           <LinkWithUnderline href="/certificates">
             <BsArrowLeft />
             Back To Certificate Page

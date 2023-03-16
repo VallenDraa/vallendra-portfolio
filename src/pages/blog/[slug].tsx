@@ -169,7 +169,7 @@ export default function BlogPost({
             <section
               className={clsx(
                 "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
-                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pt-16 pb-3 dark:border-zinc-700",
+                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pt-20 pb-3 dark:border-zinc-700",
               )}
             >
               {/* back to project button */}
