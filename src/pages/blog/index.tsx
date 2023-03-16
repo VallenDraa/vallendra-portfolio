@@ -14,7 +14,6 @@ import { Language } from "types/types";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import Show from "utils/client/jsx/Show";
 import dynamic from "next/dynamic";
-import Filter from "components/StyledComponents/Filter";
 import { Listbox, RadioGroup } from "@headlessui/react";
 import { BLOG_TAGS } from "interfaces/blogPost.interface";
 import {
@@ -83,87 +82,26 @@ export default function BlogsPage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
           >
-            <div className="mt-4 flex gap-2 opacity-0">
+            <div className="mt-4 opacity-0">
               <SearchInput
                 defaultValue={query}
                 placeholder="Search Posts"
                 loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
                 callback={newQuery => setQuery(newQuery)}
               />
+            </div>
+          </Observe>
 
-              <Filter dropdownRelativeToToggleBtn={false}>
-                <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Tags</h6>
-                  <Listbox value={selectedTags} onChange={setSelectedTags}>
-                    <Listbox.Options static className="flex flex-wrap gap-2">
-                      {BLOG_TAGS.map(tag => (
-                        <Listbox.Option key={tag} value={tag}>
-                          {({ active, selected }) => (
-                            <StyledButton
-                              className={clsx(
-                                active && "bg-zinc-500/10",
-                                selected
-                                  ? "border-transparent bg-zinc-200 text-zinc-900 hover:bg-zinc-300 dark:bg-zinc-100 dark:hover:bg-zinc-200"
-                                  : "border-zinc-400 hover:bg-zinc-500/10 dark:text-zinc-400",
-                                "rounded border py-2 px-4 text-sm",
-                              )}
-                            >
-                              #{tag}
-                            </StyledButton>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Listbox>
-                </div>
-
-                <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Order</h6>
-                  <RadioGroup
-                    value={sortBy}
-                    onChange={setSortBy}
-                    className="flex flex-wrap gap-3"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Blog Sort
-                    </RadioGroup.Label>
-
-                    {BLOG_SORT_BY.map(type => (
-                      <RadioGroup.Option
-                        value={type}
-                        key={type}
-                        as={R.Fragment}
-                      >
-                        {({ checked }) => (
-                          <div className="grow">
-                            <StyledButton
-                              alwaysShowIcon
-                              icon={BlogSortIcons[type]()}
-                              className={clsx(
-                                checked
-                                  ? "bg-pink-500 text-white "
-                                  : "hover:bg-pink-500/10",
-                                "w-full border border-pink-500 py-2 px-4 text-pink-500",
-                              )}
-                            >
-                              Sort By {type}
-                            </StyledButton>
-                          </div>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Language</h6>
-                  <LanguageToggle
-                    className="lg:!w-full"
-                    activeLanguage={activeLanguage}
-                    setActiveLanguage={setActiveLanguage}
-                  />
-                </div>
-              </Filter>
+          {/* blog filters */}
+          <Observe
+            freezeOnceVisible
+            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 300)}
+          >
+            <div className="mt-5 opacity-0">
+              <LanguageToggle
+                activeLanguage={activeLanguage}
+                setActiveLanguage={setActiveLanguage}
+              />
             </div>
           </Observe>
         </div>
