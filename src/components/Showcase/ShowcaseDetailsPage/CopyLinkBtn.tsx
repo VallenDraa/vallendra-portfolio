@@ -1,25 +1,25 @@
-import R from "react";
+import { useEffect, useState, useCallback } from "react";
 import { AiOutlineCheck, AiOutlineClose, AiOutlineLink } from "react-icons/ai";
 import Show from "utils/client/jsx/Show";
 import StyledButton from "components/StyledComponents/StyledButton";
 import clsx from "clsx";
 
 export default function CopyLinkBtn() {
-  const [shareIsSupported, setShareIsSupported] = R.useState<boolean | null>(
+  const [shareIsSupported, setShareIsSupported] = useState<boolean | null>(
     null,
   );
-  const [copyLinkIsSupported, setCopyLinkIsSupported] = R.useState<
+  const [copyLinkIsSupported, setCopyLinkIsSupported] = useState<
     boolean | null
-  >();
+  >(null);
 
-  const [hasBeenPressed, setHasBeenPressed] = R.useState(false);
-  const [isError, setIsError] = R.useState(false);
+  const [hasBeenPressed, setHasBeenPressed] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  R.useEffect(() => setCopyLinkIsSupported(!!navigator.clipboard?.writeText));
+  useEffect(() => setCopyLinkIsSupported(!!navigator.clipboard?.writeText), []);
 
-  R.useEffect(() => setShareIsSupported(!!navigator.share), []);
+  useEffect(() => setShareIsSupported(!!navigator.share), []);
 
-  function copyLinkToClipBoard() {
+  const copyLinkToClipBoard = useCallback(() => {
     navigator.clipboard
       ?.writeText(window.location.href)
       .then(() => {
@@ -30,21 +30,23 @@ export default function CopyLinkBtn() {
         setIsError(true);
         setTimeout(() => setIsError(false), 1500);
       });
-  }
+  }, []);
 
-  function shareInfo() {
+  const shareInfo = useCallback(() => {
     navigator
       .share({
         title: globalThis.document.title,
         url: globalThis.window.location.href,
       })
       .then(() => setHasBeenPressed(true))
-      .catch(() => {
+      .catch(error => {
+        if (error.name === "AbortError") return;
+
         setIsError(true);
         setTimeout(() => setIsError(false), 1500);
       })
       .finally(() => setHasBeenPressed(false));
-  }
+  }, []);
 
   return (
     <>
