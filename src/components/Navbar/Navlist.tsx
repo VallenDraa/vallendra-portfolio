@@ -49,10 +49,10 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
   /* for handling accordion visibility
   ==================================== */
   useEffect(() => {
-    setAccordionIsVisible(!(window.innerWidth >= 960));
+    setAccordionIsVisible(!(window.innerWidth >= 1024));
 
     function menuAccordionHandler() {
-      setAccordionIsVisible(!(window.innerWidth >= 960));
+      setAccordionIsVisible(!(window.innerWidth >= 1024));
     }
 
     window.addEventListener("resize", menuAccordionHandler);
@@ -95,7 +95,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
           <Fragment key={menu.name}>
             {menu.subMenus === undefined ? (
               <NavBtn
-                onClick={() => window.innerWidth < 960 && closeNav()}
+                onClick={() => window.innerWidth < 1024 && closeNav()}
                 menu={menu.name}
                 href={menu.url}
               />

@@ -24,7 +24,7 @@ export default function NavbarComponent() {
   /* add open animation for small navbar
   ================================================ */
   useEffect(() => {
-    if (navIsOpened && window.innerWidth < 960) {
+    if (navIsOpened && window.innerWidth < 1024) {
       setTimeout(() => {
         navListRef.current?.classList.remove("-translate-x-full");
         overlayRef.current?.classList.remove("opacity-0");
@@ -41,7 +41,7 @@ export default function NavbarComponent() {
   =============================================== */
   useEffect(() => {
     const navHandler = () => {
-      setNavIsOpened(window.innerWidth >= 960);
+      setNavIsOpened(window.innerWidth >= 1024);
     };
 
     navHandler();
@@ -56,7 +56,7 @@ export default function NavbarComponent() {
   ========================================================================== */
   useEffect(() => {
     const closeNavOnOutsideClick = (e: MouseEvent) => {
-      if (window.innerWidth >= 960) return;
+      if (window.innerWidth >= 1024) return;
 
       const target = e.target as HTMLElement;
 

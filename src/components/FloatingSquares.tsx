@@ -6,7 +6,7 @@ export default function FloatingSquares() {
     if (window.innerWidth >= 1140) {
       return 12;
     }
-    if (window.innerWidth >= 960) {
+    if (window.innerWidth >= 1024) {
       return 10;
     }
     return 8;
