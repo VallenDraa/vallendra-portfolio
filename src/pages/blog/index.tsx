@@ -14,7 +14,7 @@ import { Language } from "types/types";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import Show from "utils/client/jsx/Show";
 import dynamic from "next/dynamic";
-import { Listbox, RadioGroup } from "@headlessui/react";
+import { RadioGroup } from "@headlessui/react";
 import { BLOG_TAGS } from "interfaces/blogPost.interface";
 import {
   BlogSortIcons,
@@ -22,6 +22,8 @@ import {
   BLOG_SORT_BY,
 } from "components/MappedComponents/BlogSort";
 import StyledButton from "components/StyledComponents/StyledButton";
+import Filter from "components/StyledComponents/Filter";
+import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 
 const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
 
@@ -41,6 +43,13 @@ export default function BlogsPage({
   ================================================================ */
   const visibleBlogIndexes = R.useMemo(() => {
     const newvisibleBlogIndexes = allPostData.reduce((result, post, i) => {
+      const tagsAreSelected =
+        selectedTags.length > 0
+          ? post.tags.join(",") === selectedTags.join(",")
+          : true;
+
+      if (!tagsAreSelected) return result;
+
       if (query === "") return [...result, i];
 
       const hasStringInItemName = post.title
@@ -53,7 +62,7 @@ export default function BlogsPage({
     }, [] as number[]);
 
     return newvisibleBlogIndexes;
-  }, [query]);
+  }, [query, selectedTags]);
 
   return (
     <>
@@ -82,26 +91,97 @@ export default function BlogsPage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
           >
-            <div className="mt-4 opacity-0">
+            <div className="mt-4 flex items-center gap-2 opacity-0">
               <SearchInput
                 defaultValue={query}
                 placeholder="Search Posts"
                 loadingCallback={isWaiting => setSearchIsLoading(isWaiting)}
                 callback={newQuery => setQuery(newQuery)}
               />
-            </div>
-          </Observe>
 
-          {/* blog filters */}
-          <Observe
-            freezeOnceVisible
-            onEnter={ref => fadeIn(ref, "animate-fade-in-top", 300)}
-          >
-            <div className="mt-5 opacity-0">
-              <LanguageToggle
-                activeLanguage={activeLanguage}
-                setActiveLanguage={setActiveLanguage}
-              />
+              <Filter dropdownRelativeToToggleBtn={false}>
+                <div className="space-y-2">
+                  <h6 className="text-zinc-700 dark:text-zinc-300">Tags</h6>
+                  <StyledScrollbar
+                    autoHeight
+                    autoHeightMin="100%"
+                    autoHeightMax="90px"
+                    renderView={props => (
+                      <ul {...props} className="flex flex-wrap gap-2" />
+                    )}
+                  >
+                    {BLOG_TAGS.map(tag => (
+                      <li key={tag}>
+                        <StyledButton
+                          onClick={() =>
+                            // push tag if not already selected else filter it out
+                            setSelectedTags(tags =>
+                              tags.includes(tag)
+                                ? tags.filter(oldTag => oldTag !== tag)
+                                : [...tags, tag],
+                            )
+                          }
+                          className={clsx(
+                            "rounded border border-indigo-400 py-1.5 px-3 text-sm",
+                            selectedTags.includes(tag)
+                              ? "border-transparent bg-indigo-400 text-white"
+                              : "text-indigo-400 hover:bg-indigo-500/10",
+                          )}
+                        >
+                          {tag}
+                        </StyledButton>
+                      </li>
+                    ))}
+                  </StyledScrollbar>
+                </div>
+
+                <div className="space-y-2">
+                  <h6 className="text-zinc-700 dark:text-zinc-300">Order</h6>
+                  <RadioGroup
+                    value={sortBy}
+                    onChange={setSortBy}
+                    className="flex flex-wrap gap-3"
+                  >
+                    <RadioGroup.Label className="sr-only">
+                      Blog Sort
+                    </RadioGroup.Label>
+
+                    {BLOG_SORT_BY.map(type => (
+                      <RadioGroup.Option
+                        value={type}
+                        key={type}
+                        as={R.Fragment}
+                      >
+                        {({ checked }) => (
+                          <div className="grow">
+                            <StyledButton
+                              alwaysShowIcon
+                              icon={BlogSortIcons[type]()}
+                              className={clsx(
+                                checked
+                                  ? "bg-indigo-400 text-white"
+                                  : "hover:bg-indigo-500/10",
+                                "w-full border border-indigo-400 py-2 px-4 text-indigo-400",
+                              )}
+                            >
+                              Sort By {type}
+                            </StyledButton>
+                          </div>
+                        )}
+                      </RadioGroup.Option>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div className="space-y-2">
+                  <h6 className="text-zinc-700 dark:text-zinc-300">Language</h6>
+                  <LanguageToggle
+                    className="lg:!w-full"
+                    activeLanguage={activeLanguage}
+                    setActiveLanguage={setActiveLanguage}
+                  />
+                </div>
+              </Filter>
             </div>
           </Observe>
         </div>

@@ -12,10 +12,18 @@ export default interface BlogPost extends FrontMatter {
   slug: string;
 }
 
-export const BLOG_TAGS = ["life"] as const;
+export const BLOG_TAGS = [
+  "life",
+  "typescript",
+  "css",
+  "tailwindcss",
+  "javascript",
+  "react",
+  "php",
+] as const;
 
 export type BlogTags = (typeof BLOG_TAGS)[number];
 
-export type BlogLang = "en-" | "id-";
+export type BlogLangPrefix = "en-" | "id-";
 
 export type BlogType = "article" | "project" | "certificate" | "code-snippet";
