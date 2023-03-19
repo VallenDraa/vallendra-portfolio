@@ -35,9 +35,13 @@ export default function CertificatePage({
       (result, certificate, i) => {
         if (query === "") return [...result, i];
 
-        const hasStringInItemName = certificate.name
-          .toLocaleLowerCase()
-          .includes(query.toLocaleLowerCase().trim());
+        const hasStringInItemName =
+          certificate.name
+            .toLocaleLowerCase()
+            .includes(query.toLocaleLowerCase().trim()) ||
+          certificate.descriptionEN
+            .toLocaleLowerCase()
+            .includes(query.toLocaleLowerCase().trim());
 
         if (hasStringInItemName) return [...result, i];
 

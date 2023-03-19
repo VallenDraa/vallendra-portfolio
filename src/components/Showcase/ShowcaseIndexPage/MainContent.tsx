@@ -42,7 +42,7 @@ export default function MainContent({
 
       {/* search results */}
       <Show when={activeShowcaseIndex.length > 0 && currentSearchQuery !== ""}>
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {activeShowcaseIndex.map(idx => (
             <li key={showcaseItems[idx]._id}>
               <ItemCard data={showcaseItems[idx]} type={showcaseType} />

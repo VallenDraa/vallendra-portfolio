@@ -35,9 +35,13 @@ export default function ProjectsPage({
     const newActiveProjects = projects.reduce((result, project, i) => {
       if (query === "") return [...result, i];
 
-      const hasStringInItemName = project.name
-        .toLocaleLowerCase()
-        .includes(query.toLocaleLowerCase().trim());
+      const hasStringInItemName =
+        project.name
+          .toLocaleLowerCase()
+          .includes(query.toLocaleLowerCase().trim()) ||
+        project.descriptionEN
+          .toLocaleLowerCase()
+          .includes(query.toLocaleLowerCase().trim());
 
       if (hasStringInItemName) return [...result, i];
 

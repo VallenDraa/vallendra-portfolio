@@ -42,24 +42,29 @@ export default function BlogsPage({
   /* returns active index of showcase items based on search query 
   ================================================================ */
   const visibleBlogIndexes = R.useMemo(() => {
-    const newvisibleBlogIndexes = allPostData.reduce((result, post, i) => {
-      const tagsAreSelected =
-        selectedTags.length > 0
-          ? post.tags.join(",") === selectedTags.join(",")
-          : true;
+    const newvisibleBlogIndexes = allPostData.reduce<number[]>(
+      (results, post, i) => {
+        const tagsAreSelected =
+          selectedTags.length > 0
+            ? post.tags.join(",") === selectedTags.join(",")
+            : true;
 
-      if (!tagsAreSelected) return result;
+        if (!tagsAreSelected) return results;
 
-      if (query === "") return [...result, i];
+        if (query === "") return [...results, i];
 
-      const hasStringInItemName = post.title
-        .toLocaleLowerCase()
-        .includes(query.toLocaleLowerCase().trim());
+        const hasStringInItemName =
+          post.title
+            .toLocaleLowerCase()
+            .includes(query.toLocaleLowerCase().trim()) ||
+          post.description
+            .toLocaleLowerCase()
+            .includes(query.toLocaleLowerCase().trim());
 
-      if (hasStringInItemName) return [...result, i];
-
-      return result;
-    }, [] as number[]);
+        return hasStringInItemName ? [...results, i] : results;
+      },
+      [],
+    );
 
     return newvisibleBlogIndexes;
   }, [query, selectedTags]);
