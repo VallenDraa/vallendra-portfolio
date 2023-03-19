@@ -1,11 +1,13 @@
 import clsx from "clsx";
 import Observe from "components/Observe";
 import { ReactNode } from "react";
+
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import type { FadeInAnimation } from "utils/client/helpers/animateOnObserved";
 import Show from "utils/client/jsx/Show";
 
 type SectioHeadingProps = {
+  titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   title: ReactNode;
   subTitle?: ReactNode;
   willFade?: boolean;
@@ -19,7 +21,11 @@ type SectioHeadingProps = {
   } | null;
 };
 
+const HEADER_CLASS =
+  "primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent text-4xl font-bold md:text-5xl";
+
 export default function SectionHeading({
+  titleAs = "h1",
   title,
   subTitle = "",
   duration = null,
@@ -39,14 +45,14 @@ export default function SectionHeading({
           )
         }
       >
-        <h1
-          className={clsx(
-            willFade && "opacity-0",
-            "primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent",
-          )}
-        >
-          {title}
-        </h1>
+        <div className={willFade ? "opacity-0" : ""}>
+          {titleAs === "h1" && <h1 className={HEADER_CLASS}>{title}</h1>}
+          {titleAs === "h2" && <h2 className={HEADER_CLASS}>{title}</h2>}
+          {titleAs === "h3" && <h3 className={HEADER_CLASS}>{title}</h3>}
+          {titleAs === "h4" && <h4 className={HEADER_CLASS}>{title}</h4>}
+          {titleAs === "h5" && <h5 className={HEADER_CLASS}>{title}</h5>}
+          {titleAs === "h6" && <h6 className={HEADER_CLASS}>{title}</h6>}
+        </div>
       </Observe>
 
       <Show when={subTitle !== ""}>

@@ -172,7 +172,7 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
         ))}
 
         <div className="mt-auto self-center pb-6 lg:hidden">
-          <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-500">
+          <span className="text-xs font-semibold text-zinc-500">
             &copy; {new Date().getFullYear()} VallenDra | Front-End Developer
           </span>
         </div>

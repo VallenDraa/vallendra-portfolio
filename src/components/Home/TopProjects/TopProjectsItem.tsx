@@ -64,7 +64,7 @@ export default function TopProjectsItem({
   return (
     <div
       className={clsx(
-        "relative flex min-h-[500px] flex-col gap-0.5 border-t-2 border-dashed border-indigo-300/70 dark:border-white/40 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none",
+        "relative flex min-h-[500px] flex-col gap-0.5 border-t-2 border-dashed border-indigo-300/70 before:border-dashed after:border-dashed dark:border-white/40 lg:h-fit lg:items-center lg:gap-0 lg:rounded-tr-none",
         isLast && "border-b-2",
         twistDirection !== "left"
           ? "border-l-2 pr-3 before:absolute before:inset-y-0 before:left-0 before:z-50 before:mx-auto before:hidden before:w-12 before:border-l-2 before:border-indigo-300/70 dark:before:border-white/40 lg:w-full lg:flex-row-reverse lg:justify-end lg:rounded-l-xl lg:border-0 lg:border-l-0 lg:before:left-1/2 lg:before:block lg:before:-translate-x-1/2 lg:before:rounded-tl-2xl before:lg:rounded-bl-2xl"
@@ -134,10 +134,10 @@ export default function TopProjectsItem({
           }`}
         >
           {/* short description */}
-          <h2 className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">
+          <h3 className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">
             {project.name}
-          </h2>
-          <p className="font-normal leading-loose text-zinc-600 dark:text-zinc-300">
+          </h3>
+          <p className="mt-1 leading-relaxed text-zinc-600 dark:text-zinc-300">
             {project.shortDescriptionEN}
           </p>
 

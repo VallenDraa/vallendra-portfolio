@@ -122,10 +122,10 @@ export default function BlogsPage({
                             )
                           }
                           className={clsx(
-                            "rounded border border-indigo-400 py-1.5 px-3 text-sm",
+                            "rounded border border-zinc-200 py-1.5 px-3 text-sm",
                             selectedTags.includes(tag)
-                              ? "border-transparent bg-indigo-400 text-white"
-                              : "text-indigo-400 hover:bg-indigo-500/10",
+                              ? "border-transparent bg-zinc-100 text-zinc-900"
+                              : "text-zinc-200 hover:bg-zinc-500/10",
                           )}
                         >
                           {tag}
@@ -159,9 +159,9 @@ export default function BlogsPage({
                               icon={BlogSortIcons[type]()}
                               className={clsx(
                                 checked
-                                  ? "bg-indigo-400 text-white"
-                                  : "hover:bg-indigo-500/10",
-                                "w-full border border-indigo-400 py-2 px-4 text-indigo-400",
+                                  ? "bg-pink-500 text-white"
+                                  : "hover:bg-pink-500/10",
+                                "w-full border border-pink-500 py-2 px-4 text-pink-500",
                               )}
                             >
                               Sort By {type}
@@ -189,7 +189,7 @@ export default function BlogsPage({
 
       <main
         className={clsx(
-          "layout grow",
+          "layout flex grow items-center justify-center",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}

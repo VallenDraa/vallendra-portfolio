@@ -4,7 +4,6 @@ import Scrollbars from "react-custom-scrollbars-2";
 import dynamic from "next/dynamic";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
-import clsx from "clsx";
 import StyledButton from "components/StyledComponents/StyledButton";
 
 const SiteFooter = dynamic(
@@ -35,9 +34,7 @@ export default function Layout({ children }: { children: R.ReactNode }) {
   }, [router.asPath]);
 
   return (
-    <div
-      className={clsx("flex flex-col", router.route === "/" && "scroll-smooth")}
-    >
+    <div className="flex min-h-screen flex-col">
       <StyledButton
         href="#skip-to-content"
         hrefTarget="_self"

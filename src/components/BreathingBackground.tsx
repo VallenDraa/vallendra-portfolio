@@ -17,7 +17,7 @@ export default function BreathingBackground() {
           className={clsx(
             "animate-main-gradient bg-main-gradient bg-gradient",
             !isOnline && "h-screen",
-            isOnline && route === PagesData.index && "h-[750px]",
+            isOnline && route === PagesData.index && "h-[750px] xl:h-[780px]",
             isOnline && route !== PagesData.index && "h-36",
           )}
         >

@@ -36,6 +36,7 @@ export default function TopProjectsSection({
             <div className="relative z-20 pt-24 pb-1 opacity-0 after:absolute after:inset-y-0 after:right-1/2 after:w-[1px] after:translate-x-1/2 after:border-r-2 after:border-indigo-300/70 dark:after:border-white/40 md:w-1/2 md:pt-48 md:pr-5 md:after:right-0 md:after:translate-x-0">
               <div className="relative z-30 bg-[#E9EDFF] supports-[backdrop-filter]:bg-transparent supports-[backdrop-filter]:backdrop-blur-sm dark:bg-[#1E1E21] dark:supports-[backdrop-filter]:bg-transparent md:pb-0">
                 <SectionHeading
+                  titleAs="h2"
                   title="Top Projects"
                   subTitle="A selection of my best projects as of now."
                   animation={{

@@ -19,10 +19,10 @@ export default function Home({ topPickedProjects }: HomeProps) {
       <Seo {...defaultSeo} />
 
       {/* hero section */}
-      <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
+      <header>
         <Hero />
       </header>
-      <main>
+      <main className="fade-bottom relative after:-top-20">
         <Profile />
         <TopPickSection topPickedProjects={topPickedProjects} />
         <Redirect />

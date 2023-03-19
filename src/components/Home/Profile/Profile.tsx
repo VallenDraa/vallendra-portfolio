@@ -28,15 +28,16 @@ export default function Profile() {
     <section
       aria-label="profile-section"
       id="profile"
-      className="relative z-10 scroll-m-20 space-y-8 bg-indigo-50 dark:bg-zinc-900"
+      className=" relative z-30 scroll-m-20 space-y-8 bg-indigo-50 dark:bg-zinc-900"
     >
       <div
         id="skip-to-content"
-        className="layout relative mx-auto flex scroll-m-20 flex-col gap-8 overflow-y-hidden pt-8 pb-16 xl:flex-row"
+        className="layout relative mx-auto flex scroll-m-20 flex-col gap-8 pt-8 pb-16 xl:flex-row"
       >
         {/* left side */}
         <div className="relative mt-4 flex flex-col xl:basis-2/3">
           <SectionHeading
+            titleAs="h2"
             title="Profile"
             animation={{ title: "animate-fade-in-top" }}
             duration={{ title: 0 }}
@@ -71,10 +72,10 @@ export default function Profile() {
             >
               <div className="card-colors rounded-md opacity-0 shadow-md">
                 <div className="p-6">
-                  <h2 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-2xl uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-3xl">
+                  <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-xl uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-2xl">
                     <IoCodeSlash className="rounded-lg bg-indigo-100 p-1 text-3xl text-green-400 dark:bg-zinc-700/90" />
                     Technologies
-                  </h2>
+                  </h3>
 
                   <p className="mb-1 font-normal text-zinc-600 dark:text-zinc-400">
                     Languages and frameworks that I use for projects and college
@@ -128,7 +129,7 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-cyan-500 to-cyan-300 bg-clip-text text-xl uppercase text-transparent md:text-2xl">
+                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-cyan-500 to-cyan-300 bg-clip-text text-xl uppercase text-transparent">
                   <IoSchool className="rounded-lg bg-indigo-100 p-1 text-3xl text-cyan-400 dark:bg-zinc-700/90" />
                   EDUCATION
                 </h3>
@@ -151,7 +152,7 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text text-xl uppercase text-transparent md:text-2xl">
+                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text text-xl uppercase text-transparent">
                   <FaGoogle className="rounded-lg bg-indigo-100 p-1 text-3xl text-pink-500 dark:bg-zinc-700/90" />
                   ACTIVITY
                 </h3>

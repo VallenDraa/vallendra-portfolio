@@ -17,18 +17,18 @@ export default function OfflinePage() {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 150)}
           >
-            <h3 className="relative z-10 font-bold text-zinc-700 opacity-0 dark:text-zinc-300">
+            <span className="relative z-10 text-2xl font-bold text-white/80 opacity-0">
               Oops you went offline... 😕
-            </h3>
+            </span>
           </Observe>
 
           <Observe
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
           >
-            <h4 className="text-zinc-500 opacity-0 dark:text-zinc-400">
+            <span className="text-xl font-medium text-white/60 opacity-0">
               Come back later when you are reconnected to the network.
-            </h4>
+            </span>
           </Observe>
         </div>
       </div>

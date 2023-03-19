@@ -6,6 +6,8 @@ import { IS_PROD } from "@/constants";
 
 type ObserveProps<T extends HTMLElement> = {
   children: React.ReactElement;
+  onMount?: (element: R.RefObject<T>) => void;
+  onUnmount?: (element: R.RefObject<T>) => void;
   onEnter?: (element: R.RefObject<T>) => void;
   onExit?: (element: R.RefObject<T>) => void;
   onIntersectingStatusChange?: (
@@ -16,6 +18,8 @@ type ObserveProps<T extends HTMLElement> = {
 
 export default function Observe<T extends HTMLElement>({
   children,
+  onMount,
+  onUnmount,
   onEnter,
   onExit,
   onIntersectingStatusChange,
@@ -41,6 +45,14 @@ export default function Observe<T extends HTMLElement>({
       if (onExit) onExit(ref);
     }
   }, [entry?.isIntersecting]);
+
+  /* for executing onMount and onUnmount callback 
+  ============================================== */
+  R.useEffect(() => {
+    if (onMount) onMount(ref);
+
+    return () => onUnmount && onUnmount(ref);
+  }, [ref]);
 
   return R.cloneElement(children, { ref });
 }

@@ -91,7 +91,7 @@ export default function CertificatePage({
 
       <main
         className={clsx(
-          "layout grow pt-5 pb-10",
+          "layout flex grow items-center justify-center pt-5 pb-10",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}
