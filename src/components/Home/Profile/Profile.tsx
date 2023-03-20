@@ -83,7 +83,7 @@ export default function Profile() {
                   </p>
 
                   <StyledScrollbar
-                    style={{ height: 70, overflowY: "hidden" }}
+                    style={{ height: 76, overflowY: "hidden" }}
                     renderView={props => (
                       <ul {...props} className="flex md:!overflow-auto" />
                     )}
