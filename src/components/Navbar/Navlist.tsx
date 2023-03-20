@@ -22,6 +22,12 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
 
+  /* For disabling scroll when navbar is opened */
+  useEffect(() => {
+    document.body.style.overflowY =
+      window.innerWidth < 1024 && navIsOpened ? "hidden" : "auto";
+  }, [navIsOpened]);
+
   /* letting the close animation play and then destroying the navlist itself
   ========================================================================== */
   function closeNav() {
