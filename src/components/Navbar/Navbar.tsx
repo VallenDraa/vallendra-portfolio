@@ -89,13 +89,13 @@ export default function NavbarComponent() {
         <NavList navListRef={navListRef} overlayRef={overlayRef} />
 
         {/* right section */}
-        <div className="hidden items-center justify-end gap-3 sm:basis-1/3 lg:flex">
+        <div className="hidden translate-x-[10px] items-center justify-end gap-3 sm:basis-1/3 lg:flex">
           {/* theme toggler */}
           <ThemeToggler className="hidden lg:inline-block" />
         </div>
 
         {/* show when screen is small */}
-        <div className="flex items-center justify-end gap-3 lg:hidden">
+        <div className="flex translate-x-[10px] items-center justify-end gap-3 lg:hidden">
           <ThemeToggler className="inline-block" />
 
           <div ref={navToggleRef}>
