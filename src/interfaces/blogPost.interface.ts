@@ -14,12 +14,11 @@ export default interface BlogPost extends FrontMatter {
 
 export const BLOG_TAGS = [
   "life",
+  "javascript",
   "typescript",
+  "react",
   "css",
   "tailwindcss",
-  "javascript",
-  "react",
-  "php",
 ] as const;
 
 export type BlogTags = (typeof BLOG_TAGS)[number];

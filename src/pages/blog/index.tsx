@@ -1,3 +1,4 @@
+import type { Language } from "types/types";
 import type { InferGetStaticPropsType } from "next";
 
 import { getBlogPostData } from "utils/server/posts";
@@ -10,20 +11,17 @@ import blogsPageSeo from "seo/blogPage.seo";
 import R from "react";
 import clsx from "clsx";
 import BlogCard from "components/Blog/BlogCard";
-import { Language } from "types/types";
 import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import Show from "utils/client/jsx/Show";
 import dynamic from "next/dynamic";
-import { RadioGroup } from "@headlessui/react";
-import { BLOG_TAGS } from "interfaces/blogPost.interface";
-import {
-  BlogSortIcons,
-  BlogSortBy,
-  BLOG_SORT_BY,
-} from "components/MappedComponents/BlogSort";
+import { BlogTags, BLOG_TAGS } from "interfaces/blogPost.interface";
 import StyledButton from "components/StyledComponents/StyledButton";
 import Filter from "components/StyledComponents/Filter";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
+import {
+  getAvailableTags,
+  parsePostSlug,
+} from "utils/client/helpers/blogClientHelper";
 
 const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
 
@@ -32,10 +30,30 @@ export default function BlogsPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   /* Blog filters
   =============== */
-  const [selectedTags, setSelectedTags] = R.useState<string[]>([]);
-  const [sortBy, setSortBy] = R.useState<BlogSortBy>("date");
+  const [selectedTags, setSelectedTags] = R.useState<BlogTags[]>([]);
   const [query, setQuery] = R.useState("");
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
+
+  const DEFAULT_AVAILABLE_TAGS = R.useMemo(() => {
+    const tempTags: BlogTags[] = [];
+    const postsInActiveLang = allPostData.filter(p => {
+      const { slugPrefix } = parsePostSlug(p.slug);
+
+      return slugPrefix.includes(activeLanguage);
+    });
+
+    postsInActiveLang.forEach(({ tags }) => {
+      tempTags.push(
+        ...tags.reduce<BlogTags[]>((prev, current) => [...prev, current], []),
+      );
+    });
+
+    return new Set(tempTags);
+  }, [activeLanguage]);
+
+  const [availableTags, setAvailableTags] = R.useState<Set<BlogTags>>(
+    new Set(),
+  );
 
   const [searchIsLoading, setSearchIsLoading] = R.useState(false);
 
@@ -44,10 +62,9 @@ export default function BlogsPage({
   const visibleBlogIndexes = R.useMemo(() => {
     const newvisibleBlogIndexes = allPostData.reduce<number[]>(
       (results, post, i) => {
-        const tagsAreSelected =
-          selectedTags.length > 0
-            ? post.tags.join(",") === selectedTags.join(",")
-            : true;
+        const tagsAreSelected = selectedTags.every(selectedTag =>
+          post.tags.includes(selectedTag),
+        );
 
         if (!tagsAreSelected) return results;
 
@@ -68,6 +85,23 @@ export default function BlogsPage({
 
     return newvisibleBlogIndexes;
   }, [query, selectedTags]);
+
+  /* Get the available tags based on selected tags and language
+  ================================================================ */
+  R.useEffect(() => {
+    (async () => {
+      setAvailableTags(
+        await getAvailableTags(selectedTags, allPostData, activeLanguage),
+      );
+    })();
+  }, [selectedTags, activeLanguage]);
+
+  /* Reset tag selection when the language change
+  ================================================================ */
+  R.useLayoutEffect(() => {
+    setSelectedTags([]);
+    setAvailableTags(DEFAULT_AVAILABLE_TAGS);
+  }, [activeLanguage, DEFAULT_AVAILABLE_TAGS]);
 
   return (
     <>
@@ -118,19 +152,25 @@ export default function BlogsPage({
                     {BLOG_TAGS.map(tag => (
                       <li key={tag}>
                         <StyledButton
-                          onClick={() =>
+                          disabled={
+                            availableTags.size > 0
+                              ? !availableTags.has(tag)
+                              : !DEFAULT_AVAILABLE_TAGS.has(tag)
+                          }
+                          onClick={async () => {
                             // push tag if not already selected else filter it out
                             setSelectedTags(tags =>
                               tags.includes(tag)
                                 ? tags.filter(oldTag => oldTag !== tag)
                                 : [...tags, tag],
-                            )
-                          }
+                            );
+                          }}
                           className={clsx(
-                            "rounded border border-zinc-200 py-1.5 px-3 text-sm",
+                            "rounded border border-pink-400 py-1.5 px-3 text-sm",
+                            "disabled:cursor-not-allowed disabled:border-zinc-400 disabled:text-zinc-400 disabled:hover:bg-transparent",
                             selectedTags.includes(tag)
-                              ? "border-transparent bg-zinc-100 text-zinc-900"
-                              : "text-zinc-200 hover:bg-zinc-500/10",
+                              ? "border-transparent bg-pink-500 text-white"
+                              : "text-pink-400 hover:bg-pink-500/10",
                           )}
                         >
                           {tag}
@@ -138,44 +178,6 @@ export default function BlogsPage({
                       </li>
                     ))}
                   </StyledScrollbar>
-                </div>
-
-                <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Order</h6>
-                  <RadioGroup
-                    value={sortBy}
-                    onChange={setSortBy}
-                    className="flex flex-wrap gap-3"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Blog Sort
-                    </RadioGroup.Label>
-
-                    {BLOG_SORT_BY.map(type => (
-                      <RadioGroup.Option
-                        value={type}
-                        key={type}
-                        as={R.Fragment}
-                      >
-                        {({ checked }) => (
-                          <div className="grow">
-                            <StyledButton
-                              alwaysShowIcon
-                              icon={BlogSortIcons[type]()}
-                              className={clsx(
-                                checked
-                                  ? "bg-pink-500 text-white"
-                                  : "hover:bg-pink-500/10",
-                                "w-full border border-pink-500 py-2 px-4 text-pink-500",
-                              )}
-                            >
-                              Sort By {type}
-                            </StyledButton>
-                          </div>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </RadioGroup>
                 </div>
 
                 <div className="space-y-2">
@@ -206,8 +208,9 @@ export default function BlogsPage({
           >
             <ul className="grid grid-cols-1 gap-6 pt-5 pb-10 opacity-0 md:grid-cols-2 lg:grid-cols-3">
               {visibleBlogIndexes.map(idx => {
-                if (!allPostData[idx].slug.includes(activeLanguage))
-                  return null;
+                const { slugPrefix } = parsePostSlug(allPostData[idx].slug);
+
+                if (!slugPrefix.includes(activeLanguage)) return null;
 
                 return (
                   <BlogCard

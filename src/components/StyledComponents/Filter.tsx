@@ -53,7 +53,7 @@ export default function Filter({
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Popover.Panel className="absolute right-0 z-10 mt-4 w-full origin-top space-y-4 rounded-md bg-indigo-50 p-5 shadow-md shadow-indigo-200 focus-visible:outline-none dark:bg-zinc-800 dark:shadow-zinc-900 md:w-[500px] md:origin-top-right">
+            <Popover.Panel className="absolute right-0 z-10 mt-4 w-full origin-top space-y-4 rounded-md bg-indigo-50 p-5 shadow-md shadow-indigo-300 focus-visible:outline-none dark:bg-zinc-800 dark:shadow-zinc-800 md:w-[500px] md:origin-top-right">
               <h4 className="text-zinc-800 dark:text-zinc-100">
                 Filter Options
               </h4>
