@@ -61,7 +61,7 @@ export default function CertificatePage({
         id="skip-to-content"
         className="fade-bottom relative mt-6 mb-3 w-full after:-top-6"
       >
-        <div className="layout flex flex-col pt-16">
+        <div className="layout flex flex-col pt-20">
           {/* heading */}
           <Observe
             freezeOnceVisible
