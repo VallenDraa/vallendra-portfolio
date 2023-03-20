@@ -42,24 +42,7 @@ export default function TopProjectsItem({
     return delayArray;
   }, []);
 
-  const picWrapperRef = R.useRef<HTMLDivElement>(null);
-  const descWrapperRef = R.useRef<HTMLDivElement>(null);
-
-  function projectInView() {
-    picWrapperRef.current?.classList.remove("grayscale");
-    picWrapperRef.current?.classList.remove("scale-90");
-
-    descWrapperRef.current?.classList.remove("grayscale");
-    descWrapperRef.current?.classList.remove("scale-90");
-  }
-
-  function projectNotInView() {
-    picWrapperRef.current?.classList.add("grayscale");
-    picWrapperRef.current?.classList.add("scale-90");
-
-    descWrapperRef.current?.classList.add("grayscale");
-    descWrapperRef.current?.classList.add("scale-90");
-  }
+  const [projectIsInView, setProjectIsInView] = R.useState(false);
 
   return (
     <div
@@ -88,7 +71,9 @@ export default function TopProjectsItem({
       </Show>
 
       {/* project number */}
-      <Observe onEnter={projectInView} onExit={projectNotInView}>
+      <Observe
+        onIntersectingStatusChange={isInView => setProjectIsInView(isInView)}
+      >
         <div
           className={clsx(
             "absolute top-1/2 z-[60] flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border-2 border-indigo-500/70 bg-[#E9EDFF] text-xs text-zinc-900 dark:bg-[#1E1E21] dark:text-zinc-300",
@@ -103,8 +88,10 @@ export default function TopProjectsItem({
 
       {/* picture wrapper */}
       <div
-        ref={picWrapperRef}
-        className="relative flex basis-1/2 scale-90 items-center grayscale transition duration-500"
+        className={clsx(
+          !projectIsInView && "scale-90 grayscale",
+          "relative flex basis-1/2 items-center transition duration-500",
+        )}
       >
         {/* picture */}
         <CldImage
@@ -115,7 +102,7 @@ export default function TopProjectsItem({
           format="webp"
           quality={50}
           className={clsx(
-            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 dark:shadow-zinc-900/50 lg:mt-0",
+            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 transition-transform duration-200 dark:shadow-zinc-600/50 lg:mt-0",
             twistDirection !== "left" && "ml-auto",
           )}
         />
@@ -123,15 +110,17 @@ export default function TopProjectsItem({
 
       {/* description */}
       <div
-        ref={descWrapperRef}
-        className={`relative z-40 flex basis-1/2 scale-90 items-center pt-2 pb-8 grayscale transition duration-500 lg:p-0 ${
-          twistDirection === "left" ? "lg:justify-end" : ""
-        }`}
+        className={clsx(
+          !projectIsInView && "scale-90 grayscale",
+          twistDirection === "left" && "lg:justify-end",
+          "relative z-40 flex basis-1/2 items-center pt-2 pb-8 transition duration-500 lg:p-0",
+        )}
       >
         <div
-          className={`w-11/12 ${
-            twistDirection === "left" ? "" : "ml-auto lg:ml-0"
-          }`}
+          className={clsx(
+            "w-11/12",
+            twistDirection === "left" ? "" : "ml-auto lg:ml-0",
+          )}
         >
           {/* short description */}
           <h3 className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">

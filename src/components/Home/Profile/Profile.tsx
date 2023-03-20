@@ -71,7 +71,7 @@ export default function Profile() {
               }}
             >
               <div className="card-colors rounded-md opacity-0 shadow-md">
-                <div className="p-6">
+                <div className="p-6 pb-0">
                   <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-xl uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-2xl">
                     <IoCodeSlash className="rounded-lg bg-indigo-100 p-1 text-3xl text-green-400 dark:bg-zinc-700/90" />
                     Technologies
@@ -83,9 +83,7 @@ export default function Profile() {
                   </p>
 
                   <StyledScrollbar
-                    autoHeight
-                    autoHeightMin="100%"
-                    autoHeightMax="100%"
+                    style={{ height: 70, overflowY: "hidden" }}
                     renderView={props => (
                       <ul {...props} className="flex md:!overflow-auto" />
                     )}

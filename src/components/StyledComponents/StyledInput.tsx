@@ -26,7 +26,7 @@ const StyledInput = R.forwardRef<HTMLInputElement, StyledInputProps>(
             "placeholder:text-transparent",
             "peer h-12 w-full rounded-md px-10 pl-4",
             "text-lg text-zinc-600 dark:text-zinc-300",
-            "border border-zinc-600 outline-none focus:border-indigo-400",
+            "border border-zinc-600 outline-none focus:border-transparent",
             "bg-transparent disabled:cursor-not-allowed disabled:opacity-20",
             className,
           )}

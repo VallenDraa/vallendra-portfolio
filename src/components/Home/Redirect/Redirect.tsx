@@ -5,7 +5,6 @@ import Observe from "components/Observe";
 import clsx from "clsx";
 import useRipple from "use-ripple-hook";
 import { useTheme } from "next-themes";
-import BlurredBlob from "components/BlurredBlob";
 
 /* redirects the user to a contacts page or to the projects page
 ================================================================ */
@@ -20,7 +19,7 @@ export default function Redirect() {
 
   return (
     <section className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10">
-      <BlurredBlob className="top-0 scale-90 opacity-0 sm:-top-8 sm:scale-110 md:scale-125" />
+      {/* <BlurredBlob className="top-0 scale-90 opacity-0 sm:-top-8 sm:scale-110 md:scale-125" /> */}
 
       <Observe
         freezeOnceVisible
