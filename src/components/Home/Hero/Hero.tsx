@@ -21,7 +21,7 @@ export default function Hero() {
             <Image
               src={myPic}
               alt="Jestine Vallendra Dwi Putra"
-              className="relative w-full xl:-left-8"
+              className="relative w-11/12 xl:-left-8"
               width={800}
               height={800}
               priority

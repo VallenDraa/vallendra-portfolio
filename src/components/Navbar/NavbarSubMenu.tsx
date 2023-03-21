@@ -32,7 +32,7 @@ export default function NavbarSubMenu({
         leaveFrom="transform opacity-100 translate-y-0"
         leaveTo="transform opacity-0 translate-y-3"
       >
-        <Popover.Panel className="absolute left-1/2 mt-4 flex w-44 -translate-x-1/2 flex-col rounded-md bg-zinc-100/40 p-3 dark:bg-zinc-800/40">
+        <Popover.Panel className="absolute left-1/2 mt-4 flex w-44 -translate-x-1/2 flex-col rounded-md bg-zinc-100/90 p-3 backdrop-saturate-150 supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30">
           {menuItems.map((menuItem: JSX.Element) => menuItem)}
         </Popover.Panel>
       </Transition>
