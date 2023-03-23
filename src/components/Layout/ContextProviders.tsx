@@ -1,5 +1,6 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NavIsOpenedCP } from "context/NavIsOpenedCP";
+import { LightboxIsActiveCP } from "context/LightboxStatusCP";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ContextProviders({
@@ -15,7 +16,9 @@ export default function ContextProviders({
       defaultTheme="dark"
       storageKey="color-theme"
     >
-      <NavIsOpenedCP>{children}</NavIsOpenedCP>
+      <LightboxIsActiveCP>
+        <NavIsOpenedCP>{children}</NavIsOpenedCP>
+      </LightboxIsActiveCP>
     </NextThemesProvider>
   );
 }

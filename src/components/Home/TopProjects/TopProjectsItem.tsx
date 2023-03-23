@@ -2,7 +2,7 @@ import type { Technologies } from "types/types";
 import type Project from "interfaces/project.interface";
 
 import R from "react";
-import { CldImage } from "next-cloudinary";
+import LightboxIsActiveContext from "context/LightboxStatusCP";
 import { BsArrowRight } from "react-icons/bs";
 import Show from "utils/client/jsx/Show";
 import Observe from "components/Observe";
@@ -11,6 +11,7 @@ import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import techsWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import StyledButton from "components/StyledComponents/StyledButton";
 import clsx from "clsx";
+import ImgWithLightbox from "components/StyledComponents/ImgWithLightbox";
 import type { TwistDirection } from "./TopProjectsSection";
 import LeftRightMesh from "./LeftRightMesh";
 
@@ -43,6 +44,7 @@ export default function TopProjectsItem({
   }, []);
 
   const [projectIsInView, setProjectIsInView] = R.useState(false);
+  const { lightboxIsActive } = R.useContext(LightboxIsActiveContext);
 
   return (
     <div
@@ -89,12 +91,13 @@ export default function TopProjectsItem({
       {/* picture wrapper */}
       <div
         className={clsx(
-          !projectIsInView && "scale-90 grayscale",
+          !projectIsInView && !lightboxIsActive && "scale-90 grayscale",
           "relative flex basis-1/2 items-center transition duration-500",
         )}
       >
         {/* picture */}
-        <CldImage
+        <ImgWithLightbox
+          disabled={!projectIsInView}
           src={project.image}
           alt={project.name}
           width={1024}
@@ -102,7 +105,7 @@ export default function TopProjectsItem({
           format="webp"
           quality={50}
           className={clsx(
-            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 transition-transform duration-200 dark:shadow-zinc-600/50 lg:mt-0",
+            "mt-8 aspect-video w-11/12 rounded object-cover shadow-lg shadow-zinc-100/50 dark:shadow-zinc-600/50 lg:mt-0",
             twistDirection !== "left" && "ml-auto",
           )}
         />

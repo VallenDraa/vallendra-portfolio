@@ -4,11 +4,7 @@ import Scrollbars from "react-custom-scrollbars-2";
 import dynamic from "next/dynamic";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
-
-const SiteFooter = dynamic(
-  () => import("components/Layout/SiteFooter/SiteFooter"),
-  { ssr: false },
-);
+import SiteFooter from "components/Layout/SiteFooter/SiteFooter";
 
 const GoToTopBtn = dynamic(() => import("components/GoToTopBtn"), {
   ssr: false,

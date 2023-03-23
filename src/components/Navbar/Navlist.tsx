@@ -8,6 +8,7 @@ import Show from "utils/client/jsx/Show";
 import NavIsOpenedContext from "context/NavIsOpenedCP";
 import clsx from "clsx";
 import useStyledRipple from "utils/client/hooks/useStyledRipple";
+import LightboxIsActiveContext from "context/LightboxStatusCP";
 import NavbarSubMenu from "./NavbarSubMenu";
 import NavBtn from "./NavBtn";
 
@@ -21,12 +22,18 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
 
   const [accordionIsVisible, setAccordionIsVisible] = useState(false);
   const { navIsOpened, setNavIsOpened } = useContext(NavIsOpenedContext);
+  const { lightboxIsActive } = useContext(LightboxIsActiveContext);
 
   /* For disabling scroll when navbar is opened */
   useEffect(() => {
+    if (lightboxIsActive) {
+      document.body.style.overflowY = "hidden";
+      return;
+    }
+
     document.body.style.overflowY =
       window.innerWidth < 1024 && navIsOpened ? "hidden" : "auto";
-  }, [navIsOpened]);
+  }, [navIsOpened, lightboxIsActive]);
 
   /* letting the close animation play and then destroying the navlist itself
   ========================================================================== */
