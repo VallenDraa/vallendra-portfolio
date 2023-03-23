@@ -102,6 +102,7 @@ export default function TopProjectsItem({
           alt={project.name}
           width={1024}
           height={576}
+          title={project.name}
           format="webp"
           quality={50}
           className={clsx(
