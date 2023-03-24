@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import { BiZoomIn, BiZoomOut } from "react-icons/bi";
-import Show from "utils/client/jsx/Show";
 import LightboxIsActiveContext from "context/LightboxStatusCP";
 import { BsAspectRatio } from "react-icons/bs";
 import throttle from "just-throttle";
@@ -15,7 +14,6 @@ type ImgWithLightboxProps = CldImageProps & {
   title?: string;
 };
 
-const THRESHOLD = 20;
 const TRANSLATE_INTERVAL = 50;
 const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
@@ -89,14 +87,11 @@ export default function ImgWithLightbox({
       if (!imageWrapperRef.current) return;
 
       const { x: xStart, y: yStart } = dragStartPointRef.current;
-      const { top, left, right, bottom } =
-        imageWrapperRef.current.getBoundingClientRect();
 
       const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
       const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
 
       setXTranslate(prev => prev + (pageX - xStart) / imageScale);
-
       setYTranslate(prev => prev + (pageY - yStart) / imageScale);
 
       dragStartPointRef.current = { x: pageX, y: pageY };
@@ -192,11 +187,14 @@ export default function ImgWithLightbox({
     }
   }, [imageScale]);
 
+  /* control context
+  ================================================= */
+  R.useEffect(() => setLightboxIsActive(isLightboxActive), [isLightboxActive]);
+
   return (
     <>
-      {/* translucent backdrop */}
       <Transition
-        as={R.Fragment}
+        as="div"
         show={isLightboxActive}
         enter="transition duration-300 ease-out"
         enterFrom="opacity-0"
@@ -204,13 +202,19 @@ export default function ImgWithLightbox({
         leave="transition duration-300 ease-out"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        className="fixed inset-0 left-1/2 top-1/2 z-[100] flex h-screen w-screen -translate-x-1/2 -translate-y-1/2 items-center justify-center"
       >
-        <div role="none" className="fixed inset-0 z-[90] dark:bg-zinc-900/80" />
-      </Transition>
+        {/* translucent backdrop */}
+        <div
+          role="none"
+          onClick={() => {
+            setIsLightboxActive(false);
+          }}
+          className="fixed inset-0 bg-indigo-100/80 dark:bg-zinc-900/80"
+        />
 
-      {/* lightbox controls */}
-      <Show when={isLightboxActive}>
-        <div className="fixed inset-x-0 top-0 z-[110] bg-indigo-200/50 py-3 dark:bg-zinc-800/50">
+        {/* lightbox controls */}
+        <div className="fixed top-0 z-[110] w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
           <div className="layout flex items-center justify-between">
             <span className="text-xl font-medium text-zinc-700/90 dark:text-white/90">
               {title}
@@ -261,7 +265,6 @@ export default function ImgWithLightbox({
               <StyledButton
                 onClick={() => {
                   setIsLightboxActive(false);
-                  setLightboxIsActive(false);
                 }}
                 className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-red-500/30 dark:text-white/90"
               >
@@ -270,32 +273,15 @@ export default function ImgWithLightbox({
             </div>
           </div>
         </div>
-      </Show>
 
-      {/* lightbox image */}
-      <Transition
-        as="div"
-        show={isLightboxActive}
-        enter="transition duration-300 ease-out"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition duration-300 ease-out"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-        className={clsx(
-          !isLightboxActive && "hidden",
-          isLightboxActive &&
-            "fixed left-1/2 top-1/2 z-[100] w-[80%] -translate-x-1/2 -translate-y-1/2 lg:w-[70%]",
-        )}
-      >
+        {/* lightbox image */}
         <div
           ref={imageWrapperRef}
           role="none"
           style={{
-            transform: isLightboxActive
-              ? `scale(${imageScale}) translate(${xTranslate}px, ${yTranslate}px)`
-              : "",
+            transform: `scale(${imageScale}) translate(${xTranslate}px, ${yTranslate}px)`,
           }}
+          draggable={false}
           onMouseLeave={() => isDragging && setIsDragging(false)}
           onMouseDown={handleStartDrag}
           onMouseUp={handleStopDrag}
@@ -311,16 +297,22 @@ export default function ImgWithLightbox({
             )
           }
           className={clsx(
-            "w-full",
+            !isLightboxActive && "hidden",
             isLightboxActive &&
               !isDragging &&
               "transition-transform duration-300",
-            isLightboxActive && imageScale > MAX_IMG_SCALE
+            isLightboxActive && imageScale > MIN_IMG_SCALE
               ? "cursor-move"
               : "cursor-zoom-in",
           )}
         >
-          <CldImage {...props} format="webp" quality={50} draggable={false} />
+          <CldImage
+            {...props}
+            quality={50}
+            format="webp"
+            draggable={false}
+            className="mx-auto"
+          />
         </div>
       </Transition>
 
@@ -330,7 +322,6 @@ export default function ImgWithLightbox({
         onClick={e => {
           if (!isLightboxActive && !disabled) {
             setIsLightboxActive(true);
-            setLightboxIsActive(true);
           }
 
           if (props.onClick) props.onClick(e);

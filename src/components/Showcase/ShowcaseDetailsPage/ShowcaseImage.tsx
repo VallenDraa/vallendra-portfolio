@@ -1,4 +1,4 @@
-import { CldImage } from "next-cloudinary";
+import ImgWithLightbox from "components/StyledComponents/ImgWithLightbox";
 
 function ImageComponent({
   src,
@@ -10,7 +10,7 @@ function ImageComponent({
   alt: string;
 }) {
   return (
-    <CldImage
+    <ImgWithLightbox
       format="webp"
       priority
       quality={50}

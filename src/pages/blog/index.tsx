@@ -28,13 +28,16 @@ const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
 export default function BlogsPage({
   allPostData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  // suppress useLayoutEffect warning
+  if (typeof window === "undefined") R.useLayoutEffect = R.useEffect;
+
   /* Blog filters
   =============== */
   const [selectedTags, setSelectedTags] = R.useState<BlogTags[]>([]);
   const [query, setQuery] = R.useState("");
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
 
-  const DEFAULT_AVAILABLE_TAGS = R.useMemo(() => {
+  const defaultTagsAccordingToLang = R.useMemo(() => {
     const tempTags: BlogTags[] = [];
     const postsInActiveLang = allPostData.filter(p => {
       const { slugPrefix } = parsePostSlug(p.slug);
@@ -100,8 +103,8 @@ export default function BlogsPage({
   ================================================================ */
   R.useLayoutEffect(() => {
     setSelectedTags([]);
-    setAvailableTags(DEFAULT_AVAILABLE_TAGS);
-  }, [activeLanguage, DEFAULT_AVAILABLE_TAGS]);
+    setAvailableTags(defaultTagsAccordingToLang);
+  }, [activeLanguage, defaultTagsAccordingToLang]);
 
   return (
     <>
@@ -155,7 +158,7 @@ export default function BlogsPage({
                           disabled={
                             availableTags.size > 0
                               ? !availableTags.has(tag)
-                              : !DEFAULT_AVAILABLE_TAGS.has(tag)
+                              : !defaultTagsAccordingToLang.has(tag)
                           }
                           onClick={async () => {
                             // push tag if not already selected else filter it out
@@ -196,7 +199,7 @@ export default function BlogsPage({
 
       <main
         className={clsx(
-          "layout flex grow items-center justify-center",
+          "layout flex min-h-[480px] grow items-center justify-center",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}
