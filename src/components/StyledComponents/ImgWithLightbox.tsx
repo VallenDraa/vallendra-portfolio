@@ -7,6 +7,7 @@ import { BiZoomIn, BiZoomOut } from "react-icons/bi";
 import Show from "utils/client/jsx/Show";
 import LightboxIsActiveContext from "context/LightboxStatusCP";
 import { BsAspectRatio } from "react-icons/bs";
+import throttle from "just-throttle";
 import StyledButton from "./StyledButton";
 
 type ImgWithLightboxProps = CldImageProps & {
@@ -14,12 +15,26 @@ type ImgWithLightboxProps = CldImageProps & {
   title?: string;
 };
 
+const THRESHOLD = 20;
 const TRANSLATE_INTERVAL = 50;
 const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
 const MAX_IMG_SCALE = 3;
 
-const scaleChecker = (prev: number, newVal: number) => {
+const scaleChecker = (
+  prev: number,
+  incoming: { add?: number; override?: number },
+) => {
+  let newVal: number;
+
+  if (incoming.add) {
+    newVal = prev + incoming.add;
+  } else if (incoming.override) {
+    newVal = incoming.override;
+  } else {
+    newVal = MIN_IMG_SCALE;
+  }
+
   if (newVal > MAX_IMG_SCALE) return MAX_IMG_SCALE;
   if (newVal < MIN_IMG_SCALE) return MIN_IMG_SCALE;
 
@@ -39,98 +54,117 @@ export default function ImgWithLightbox({
   const [imageScale, setImageScale] = R.useReducer(scaleChecker, MIN_IMG_SCALE);
 
   const [isDragging, setIsDragging] = R.useState(false);
+
+  const dragStartPointRef = R.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const [xTranslate, setXTranslate] = R.useState(0);
   const [yTranslate, setYTranslate] = R.useState(0);
 
-  const handleDragging = (
-    e: R.MouseEvent<HTMLDivElement> | R.TouchEvent<HTMLDivElement>,
-  ) => {
-    if (!isDragging) return;
-    if (!imageWrapperRef.current) return;
-
-    const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
-    const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
-    const newXTranslate =
-      pageX - window.scrollX - imageWrapperRef.current.clientWidth;
-    const newYTranslate =
-      pageY - window.scrollY - imageWrapperRef.current.clientHeight;
-
-    setXTranslate(newXTranslate);
-    setYTranslate(newYTranslate);
-  };
-
-  const resetPositioning = () => {
+  const resetPositioning = R.useCallback(() => {
     setXTranslate(0);
     setYTranslate(0);
-  };
+  }, []);
 
-  const resetScaleAndPositioning = () => {
-    setImageScale(MIN_IMG_SCALE);
+  const resetScaleAndPositioning = R.useCallback(() => {
+    setImageScale({ override: MIN_IMG_SCALE });
     resetPositioning();
     setIsDragging(false);
-  };
+  }, []);
 
-  const LightboxKbdHandler = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case "Escape":
-        if (isLightboxActive) setIsLightboxActive(false);
-        break;
+  const handleStartDrag = R.useCallback(
+    (e: R.MouseEvent<HTMLDivElement> | R.TouchEvent<HTMLDivElement>) => {
+      if (imageScale === MIN_IMG_SCALE) return;
+      setIsDragging(true);
 
-      case "r":
-        resetScaleAndPositioning();
-        break;
+      const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
+      const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
 
-      case "=":
-        setImageScale(imageScale + SCALE_INTERVAL);
-        break;
+      dragStartPointRef.current = { x: pageX, y: pageY };
+    },
+    [imageScale],
+  );
 
-      case "-":
-        setImageScale(imageScale - SCALE_INTERVAL);
-        break;
+  const handleDragging = R.useCallback(
+    (e: R.MouseEvent<HTMLDivElement> | R.TouchEvent<HTMLDivElement>) => {
+      if (!isDragging) return;
+      if (!imageWrapperRef.current) return;
 
-      // invert controls for scale > 1
-      case "ArrowUp":
-        setYTranslate(prev =>
-          imageScale > 1
-            ? prev + TRANSLATE_INTERVAL
-            : prev - TRANSLATE_INTERVAL,
-        );
-        break;
+      const { x: xStart, y: yStart } = dragStartPointRef.current;
+      const { top, left, right, bottom } =
+        imageWrapperRef.current.getBoundingClientRect();
 
-      case "ArrowDown":
-        setYTranslate(prev =>
-          imageScale > 1
-            ? prev - TRANSLATE_INTERVAL
-            : prev + TRANSLATE_INTERVAL,
-        );
-        break;
+      const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
+      const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
 
-      case "ArrowRight":
-        setXTranslate(prev =>
-          imageScale > 1
-            ? prev - TRANSLATE_INTERVAL
-            : prev + TRANSLATE_INTERVAL,
-        );
-        break;
+      setXTranslate(prev => prev + (pageX - xStart) / imageScale);
 
-      case "ArrowLeft":
-        setXTranslate(prev =>
-          imageScale > 1
-            ? prev + TRANSLATE_INTERVAL
-            : prev - TRANSLATE_INTERVAL,
-        );
-        break;
+      setYTranslate(prev => prev + (pageY - yStart) / imageScale);
 
-      default:
-        break;
-    }
-  };
+      dragStartPointRef.current = { x: pageX, y: pageY };
+    },
+    [isDragging, imageScale],
+  );
+
+  const handleStopDrag = R.useCallback(() => {
+    if (!isDragging) return;
+    setIsDragging(false);
+  }, [isDragging]);
+
+  const LightboxKbdHandler = R.useCallback(
+    throttle(
+      (e: KeyboardEvent) => {
+        switch (e.key) {
+          case "Escape":
+            if (isLightboxActive) setIsLightboxActive(false);
+            break;
+
+          case "r":
+            resetScaleAndPositioning();
+            break;
+
+          case "=":
+            if (imageScale < MAX_IMG_SCALE)
+              setImageScale({ add: SCALE_INTERVAL });
+            break;
+
+          case "-":
+            if (imageScale > MIN_IMG_SCALE)
+              setImageScale({ add: -SCALE_INTERVAL });
+            break;
+
+          // invert controls for scale > 1
+          case "ArrowUp":
+            if (imageScale > MIN_IMG_SCALE)
+              setYTranslate(prev => prev + TRANSLATE_INTERVAL);
+            break;
+
+          case "ArrowDown":
+            if (imageScale > MIN_IMG_SCALE)
+              setYTranslate(prev => prev - TRANSLATE_INTERVAL);
+            break;
+
+          case "ArrowRight":
+            if (imageScale > MIN_IMG_SCALE)
+              setXTranslate(prev => prev - TRANSLATE_INTERVAL);
+            break;
+
+          case "ArrowLeft":
+            if (imageScale > MIN_IMG_SCALE)
+              setXTranslate(prev => prev + TRANSLATE_INTERVAL);
+            break;
+
+          default:
+            break;
+        }
+      },
+      150,
+      { leading: true },
+    ),
+    [isLightboxActive, imageScale],
+  );
 
   /* disable window scroll when lightbox is active
   ================================================= */
   R.useEffect(() => {
-    setLightboxIsActive(isLightboxActive);
-
     document.body.style.overflowY = isLightboxActive ? "hidden" : "auto";
   }, [isLightboxActive]);
 
@@ -150,10 +184,12 @@ export default function ImgWithLightbox({
     resetScaleAndPositioning();
   }, [isLightboxActive]);
 
-  /* reset positioning when scale is 1
+  /* reset position if scale is 1
   ================================================= */
   R.useEffect(() => {
-    if (imageScale === 1) resetPositioning();
+    if (imageScale === MIN_IMG_SCALE) {
+      resetPositioning();
+    }
   }, [imageScale]);
 
   return (
@@ -169,11 +205,7 @@ export default function ImgWithLightbox({
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div
-          role="none"
-          onClick={() => setIsLightboxActive(false)}
-          className="fixed inset-0 z-[90] supports-[backdrop-filter]:backdrop-blur-sm dark:bg-zinc-900/60"
-        />
+        <div role="none" className="fixed inset-0 z-[90] dark:bg-zinc-900/80" />
       </Transition>
 
       {/* lightbox controls */}
@@ -185,34 +217,53 @@ export default function ImgWithLightbox({
             </span>
 
             <div className="flex items-center gap-2">
-              {/* reset scale and positioning of the image */}
-              <StyledButton
-                onClick={resetScaleAndPositioning}
-                className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
-              >
-                <BsAspectRatio />
-              </StyledButton>
-
               {/* zoom the image in */}
               <StyledButton
-                onClick={() => setImageScale(imageScale + SCALE_INTERVAL)}
-                className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
+                onClick={() => setImageScale({ add: SCALE_INTERVAL })}
+                disabled={imageScale === MAX_IMG_SCALE}
+                className={clsx(
+                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                )}
               >
                 <BiZoomIn />
               </StyledButton>
 
               {/* zoom the image out */}
               <StyledButton
-                onClick={() => setImageScale(imageScale - SCALE_INTERVAL)}
-                className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
+                onClick={() => setImageScale({ add: -SCALE_INTERVAL })}
+                disabled={imageScale === MIN_IMG_SCALE}
+                className={clsx(
+                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                )}
               >
                 <BiZoomOut />
               </StyledButton>
 
+              {/* reset scale and positioning of the image */}
+              <StyledButton
+                onClick={resetScaleAndPositioning}
+                disabled={
+                  imageScale === MIN_IMG_SCALE &&
+                  xTranslate === 0 &&
+                  yTranslate === 0
+                }
+                className={clsx(
+                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                )}
+              >
+                <BsAspectRatio />
+              </StyledButton>
+
               {/* close the lightbox */}
               <StyledButton
-                onClick={() => setIsLightboxActive(false)}
-                className="hover:bg-red-TRANSLATE_INTERVAL0/30 items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 dark:text-white/90"
+                onClick={() => {
+                  setIsLightboxActive(false);
+                  setLightboxIsActive(false);
+                }}
+                className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-red-500/30 dark:text-white/90"
               >
                 <IoClose />
               </StyledButton>
@@ -245,17 +296,18 @@ export default function ImgWithLightbox({
               ? `scale(${imageScale}) translate(${xTranslate}px, ${yTranslate}px)`
               : "",
           }}
-          onMouseDown={() => setIsDragging(true)}
-          onMouseUp={() => setIsDragging(false)}
+          onMouseLeave={() => isDragging && setIsDragging(false)}
+          onMouseDown={handleStartDrag}
+          onMouseUp={handleStopDrag}
           onMouseMove={handleDragging}
-          onTouchStart={() => setIsDragging(true)}
-          onTouchEnd={() => setIsDragging(false)}
+          onTouchStart={handleStartDrag}
+          onTouchEnd={handleStopDrag}
           onTouchMove={handleDragging}
           onDoubleClick={() =>
             setImageScale(
               imageScale >= MAX_IMG_SCALE
-                ? MIN_IMG_SCALE
-                : imageScale + SCALE_INTERVAL,
+                ? { override: MIN_IMG_SCALE }
+                : { add: SCALE_INTERVAL },
             )
           }
           className={clsx(
@@ -276,8 +328,10 @@ export default function ImgWithLightbox({
       <CldImage
         {...props}
         onClick={e => {
-          if (!isLightboxActive && !disabled)
-            setIsLightboxActive(prev => !prev);
+          if (!isLightboxActive && !disabled) {
+            setIsLightboxActive(true);
+            setLightboxIsActive(true);
+          }
 
           if (props.onClick) props.onClick(e);
         }}
