@@ -21,6 +21,7 @@
     "clsx": "^1.2.1",
     "esbuild": "^0.17.10",
     "gray-matter": "^4.0.3",
+    "just-throttle": "^4.2.0",
     "mdx-bundler": "^9.2.1",
     "mongoose": "^6.10.0",
     "next": "latest",
