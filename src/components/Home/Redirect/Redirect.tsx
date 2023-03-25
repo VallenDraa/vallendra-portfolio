@@ -25,7 +25,7 @@ export default function Redirect() {
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 50)}
       >
-        <h2 className="relative z-10 text-center text-4xl font-bold text-indigo-500/90 opacity-0 dark:text-zinc-200/90 md:text-5xl lg:text-6xl">
+        <h2 className="relative z-10 text-center text-4xl font-bold text-indigo-500/90 opacity-0 dark:text-zinc-100/90 md:text-5xl lg:text-6xl">
           Wanna Work Together ?
         </h2>
       </Observe>

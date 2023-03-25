@@ -127,7 +127,7 @@ export default function TopProjectsItem({
           )}
         >
           {/* short description */}
-          <h3 className="primary-gradient bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">
+          <h3 className="primary-gradient h2 bg-gradient-to-r bg-clip-text font-bold !leading-[initial] text-transparent">
             {project.name}
           </h3>
           <p className="mt-1 leading-relaxed text-zinc-600 dark:text-zinc-300">

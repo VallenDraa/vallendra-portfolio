@@ -247,7 +247,7 @@ export default function CertificateDetails({
           </div>
 
           {/* link for the code of this certificate */}
-          <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
+          <aside className="detail-aside-colors sticky  top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 p-4 lg:flex-col">
             {/* see certificate and copy link button */}
             <div className="flex w-full flex-col gap-3">
               <Show when={!!certificate.certificateLink}>

@@ -93,7 +93,7 @@ export default function ProjectsPage({
 
       <main
         className={clsx(
-          "layout flex grow items-center justify-center pt-5 pb-10",
+          "layout flex min-h-[480px] grow items-center justify-center pt-5 pb-10",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}

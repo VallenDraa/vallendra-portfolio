@@ -72,7 +72,7 @@ export default function Profile() {
             >
               <div className="card-colors rounded-md opacity-0 shadow-md">
                 <div className="p-6 pb-0">
-                  <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text text-xl uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white md:text-2xl">
+                  <h3 className="h4 mb-2 flex items-center gap-2 bg-gradient-to-tr from-green-500 to-green-300 bg-clip-text uppercase text-transparent dark:bg-gradient-to-tr dark:from-green-500 dark:to-white">
                     <IoCodeSlash className="rounded-lg bg-indigo-100 p-1 text-3xl text-green-400 dark:bg-zinc-700/90" />
                     Technologies
                   </h3>
@@ -108,7 +108,7 @@ export default function Profile() {
                       ))}
                   </StyledScrollbar>
                 </div>
-                <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+                <div className="gradient-underline relative px-6 py-3 before:top-0">
                   <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
                     And Learning More
                   </span>
@@ -127,7 +127,7 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-tr from-cyan-500 to-cyan-300 bg-clip-text text-xl uppercase text-transparent">
+                <h3 className="h4 mb-2 flex items-center gap-2 bg-gradient-to-tr from-cyan-500 to-cyan-300 bg-clip-text uppercase text-transparent">
                   <IoSchool className="rounded-lg bg-indigo-100 p-1 text-3xl text-cyan-400 dark:bg-zinc-700/90" />
                   EDUCATION
                 </h3>
@@ -135,7 +135,7 @@ export default function Profile() {
                   Majoring in Informatics at UIN Syarif Hidayatullah Jakarta.
                 </p>
               </div>
-              <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+              <div className="gradient-underline relative px-6 py-3 before:top-0">
                 <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
                   2022 - 2026
                 </span>
@@ -150,7 +150,7 @@ export default function Profile() {
           >
             <div className="card-colors grow basis-1/2 rounded-md opacity-0 shadow-md xl:basis-auto">
               <div className="p-6">
-                <h3 className="mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text text-xl uppercase text-transparent">
+                <h3 className="h4 mb-2 flex items-center gap-2 bg-gradient-to-br from-pink-500 to-pink-300 bg-clip-text uppercase text-transparent">
                   <FaGoogle className="rounded-lg bg-indigo-100 p-1 text-3xl text-pink-500 dark:bg-zinc-700/90" />
                   ACTIVITY
                 </h3>
@@ -158,7 +158,7 @@ export default function Profile() {
                   An active member of GDSC UIN Syarif Hidayatullah Jakarta.
                 </p>
               </div>
-              <div className="gradient-underline gradient-underline--primary relative px-6 py-3 before:top-0">
+              <div className="gradient-underline relative px-6 py-3 before:top-0">
                 <span className="block text-right text-sm text-zinc-600 dark:text-zinc-400">
                   2022 - 2023
                 </span>

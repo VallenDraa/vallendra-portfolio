@@ -28,7 +28,7 @@ export default function MainContent({
   return (
     <>
       <Show when={currentSearchQuery === ""}>
-        <div className="space-y-10">
+        <div className="w-full space-y-10">
           {categories.map(category => (
             <ShowcaseCategorySection
               showcaseType={showcaseType}

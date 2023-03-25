@@ -271,7 +271,7 @@ export default function ProjectDetails({
           </div>
 
           {/* link for the code of this project */}
-          <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
+          <aside className="detail-aside-colors sticky  top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 p-4 lg:flex-col">
             <div className="flex w-full flex-col gap-3">
               {/* when the project has download link */}
               <Show when={!!project.downloadLink}>

@@ -244,7 +244,7 @@ export default function BlogPost({
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
-            <section className="detail-aside-colors mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4">
+            <section className="detail-aside-colors mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 p-4">
               <div className="grow space-y-3">
                 <StyledButton
                   alwaysShowIcon

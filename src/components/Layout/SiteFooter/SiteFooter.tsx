@@ -6,7 +6,7 @@ import SiteFooterMenu from "./SiteFooterMenu";
 
 export default function SiteFooter() {
   return (
-    <footer className="gradient-underline gradient-underline--primary relative flex animate-fade-in flex-col gap-2 px-8 py-4 before:!top-0">
+    <footer className="gradient-underline relative flex animate-fade-in flex-col gap-2 px-8 py-4 before:!top-0">
       {/* site links */}
       <ul className="layout mb-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-medium text-zinc-600 dark:text-zinc-300">
         {menuData.map(menu => (
@@ -18,7 +18,7 @@ export default function SiteFooter() {
       </ul>
 
       {/* socials */}
-      <div className="layout flex w-fit items-center gap-2.5 text-3xl text-zinc-600 dark:text-zinc-300 [&>*]:p-1">
+      <div className="layout flex w-fit items-center justify-center gap-2.5 text-3xl text-zinc-600 dark:text-zinc-300 [&>*]:p-1">
         <a
           className="icon-tooltip"
           data-tooltip-content="Email"
