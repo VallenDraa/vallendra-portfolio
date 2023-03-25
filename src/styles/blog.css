@@ -29,7 +29,6 @@
 }
 
 .prose .blog-section-hash::after {
-  content: "#";
   @apply invisible absolute -right-6 top-[calc(50%+2px)] -translate-y-1/2;
 }
 

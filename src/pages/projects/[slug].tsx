@@ -236,14 +236,12 @@ export default function ProjectDetails({
 
         {/* details */}
         <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
-          <div className="relative flex basis-3/4 flex-col gap-12">
+          <div className="relative flex basis-3/4 flex-col gap-8">
             {/* app tech stack */}
             <div className="relative z-10 flex flex-col gap-4">
               <SectionSubHeading>Tech Stack</SectionSubHeading>
               <StyledScrollbar
-                autoHeight
-                autoHeightMin="100%"
-                autoHeightMax="100%"
+                style={{ height: 70, overflowY: "hidden" }}
                 renderView={props => (
                   <ul {...props} className="relative flex items-center gap-1" />
                 )}

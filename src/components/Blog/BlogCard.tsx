@@ -36,7 +36,6 @@ export default function BlogCard({ post }: { post: PostData }) {
       }}
     >
       <Link
-        title={post.title}
         href={`/blog/${post.slug}`}
         className="overflow-clip rounded-md border border-indigo-300 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-indigo-300 dark:border-zinc-700 hover:dark:shadow-zinc-700"
       >
@@ -45,7 +44,6 @@ export default function BlogCard({ post }: { post: PostData }) {
           width={960}
           height={540}
           crop="fill"
-          title={post.bannerSrc}
           src={post.banner}
           alt={post.bannerSrc}
         />
@@ -54,7 +52,7 @@ export default function BlogCard({ post }: { post: PostData }) {
           <div className="flex flex-col gap-1.5">
             <time
               dateTime={formattedDate}
-              className="text-sm font-medium text-indigo-500 dark:text-indigo-300"
+              className="text-sm font-medium text-pink-400 dark:text-pink-300"
             >
               {formattedDate}
             </time>
@@ -69,7 +67,7 @@ export default function BlogCard({ post }: { post: PostData }) {
             <div className="flex items-center gap-3">
               <Stats
                 icon={<AiFillEye />}
-                textColor="text-teal-400"
+                textColor="text-indigo-400 dark:text-indigo-300"
                 number={viewsRes?.data?.views ?? 0}
                 isLoading={
                   !(viewsRes.error && likesRes.error) &&
@@ -80,7 +78,7 @@ export default function BlogCard({ post }: { post: PostData }) {
 
               <Stats
                 icon={<AiFillHeart />}
-                textColor="text-red-400"
+                textColor="text-indigo-400 dark:text-indigo-300"
                 number={likesRes?.data?.likes ?? 0}
                 isLoading={
                   !(viewsRes.error && likesRes.error) &&

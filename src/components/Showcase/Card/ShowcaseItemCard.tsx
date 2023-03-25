@@ -40,7 +40,6 @@ export default function ItemCard({ data, type }: ItemCardProps) {
       }}
     >
       <Link
-        title={data.name}
         href={`/${type}/${data.slug}`}
         className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-zinc-800/30"
       >
@@ -75,7 +74,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <div className="mt-1.5 flex gap-3 px-3">
             <Stats
               icon={<AiFillEye />}
-              textColor="text-teal-400"
+              textColor="text-indigo-400"
               isLoading={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
@@ -86,7 +85,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
 
             <Stats
               icon={<AiFillHeart />}
-              textColor="text-red-400"
+              textColor="text-indigo-400"
               isLoading={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
@@ -105,7 +104,6 @@ export default function ItemCard({ data, type }: ItemCardProps) {
             type="button"
             icon={<BsArrowRight />}
             className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400 hover:bg-indigo-500/10"
-            color="indigo"
           >
             See Detail
           </StyledButton>
