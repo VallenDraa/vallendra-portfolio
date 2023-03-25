@@ -1,7 +1,7 @@
 import { CldImage, CldImageProps } from "next-cloudinary";
 import R from "react";
 import clsx from "clsx";
-import { Transition } from "@headlessui/react";
+import { Transition, Dialog } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import { BiZoomIn, BiZoomOut } from "react-icons/bi";
 import LightboxIsActiveContext from "context/LightboxStatusCP";
@@ -127,8 +127,8 @@ export default function ImgWithLightbox({
       (e: KeyboardEvent) => {
         switch (e.key) {
           case "Escape":
-            if (isLightboxActive) setIsLightboxActive(false);
-            return;
+            setIsLightboxActive(false);
+            break;
 
           case "r":
             resetScaleAndPositioning();
@@ -178,7 +178,7 @@ export default function ImgWithLightbox({
       150,
       { leading: true },
     ),
-    [isLightboxActive, imageScale, xTranslateRef, yTranslateRef],
+    [imageScale, xTranslateRef, yTranslateRef],
   );
 
   /*  lightbox lifecycle
@@ -212,127 +212,129 @@ export default function ImgWithLightbox({
 
   return (
     <>
-      <Transition
-        as="div"
-        show={isLightboxActive}
-        enter="transition duration-300 ease-out"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition duration-300 ease-out"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-        className="fixed inset-0 z-[100] flex h-screen items-center justify-center"
-      >
-        {/* translucent backdrop */}
-        <div
-          role="none"
-          onClick={() => setIsLightboxActive(false)}
-          className="fixed inset-0 bg-indigo-100/80 dark:bg-zinc-900/80"
-        />
+      <Transition show={isLightboxActive}>
+        <Dialog onClose={() => null} className="fixed z-[60]">
+          <Transition.Child
+            enter="transition duration-300 ease-out"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition duration-300 ease-out"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            className="fixed inset-0 flex h-screen items-center justify-center"
+          >
+            {/* translucent backdrop */}
+            <div
+              role="none"
+              onClick={() => setIsLightboxActive(false)}
+              className="fixed inset-0 bg-indigo-100/80 dark:bg-zinc-900/80"
+            />
 
-        {/* lightbox controls */}
-        <div className="absolute top-0 z-10 w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
-          <div className="layout flex items-center justify-between gap-2">
-            <span className="font-medium text-zinc-700/90 dark:text-white/90 md:text-lg lg:text-xl">
-              {title}
-            </span>
+            {/* lightbox controls */}
+            <Dialog.Panel className="absolute top-0 z-10 w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
+              <div className="layout flex items-center justify-between gap-2">
+                <Dialog.Title className="h5 font-medium text-zinc-700/90 dark:text-white/90">
+                  {title}
+                </Dialog.Title>
 
-            <div className="flex items-center gap-2">
-              {/* zoom the image in */}
-              <StyledButton
-                onClick={() => setImageScale({ add: SCALE_INTERVAL })}
-                disabled={imageScale === MAX_IMG_SCALE}
+                <div className="flex items-center gap-2">
+                  {/* zoom the image in */}
+                  <StyledButton
+                    onClick={() => setImageScale({ add: SCALE_INTERVAL })}
+                    disabled={imageScale === MAX_IMG_SCALE}
+                    className={clsx(
+                      "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                    )}
+                  >
+                    <BiZoomIn />
+                  </StyledButton>
+
+                  {/* zoom the image out */}
+                  <StyledButton
+                    onClick={() => setImageScale({ add: -SCALE_INTERVAL })}
+                    disabled={imageScale === MIN_IMG_SCALE}
+                    className={clsx(
+                      "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                    )}
+                  >
+                    <BiZoomOut />
+                  </StyledButton>
+
+                  {/* reset scale and positioning of the image */}
+                  <StyledButton
+                    onClick={() => {
+                      resetScaleAndPositioning();
+                      setIsDragging(false);
+                    }}
+                    disabled={imageScale === MIN_IMG_SCALE}
+                    className={clsx(
+                      "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                    )}
+                  >
+                    <BsAspectRatio />
+                  </StyledButton>
+
+                  {/* close the lightbox */}
+                  <StyledButton
+                    onClick={() => {
+                      setIsLightboxActive(false);
+                    }}
+                    className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-red-500/30 dark:text-white/90"
+                  >
+                    <IoClose />
+                  </StyledButton>
+                </div>
+              </div>
+            </Dialog.Panel>
+
+            {/* lightbox image */}
+            <Dialog.Panel
+              ref={imageWrapperRef}
+              role="none"
+              draggable={false}
+              onClick={() => setIsLightboxActive(false)}
+              className={clsx(
+                "layout relative",
+                isLightboxActive &&
+                  !isDragging &&
+                  "transition-transform duration-300",
+              )}
+              style={{ transform: `scale(1) translate(0px, 0px)` }}
+            >
+              {/* placeholder for loading image */}
+              <CldImage
+                {...props}
+                quality={90}
+                format="webp"
+                draggable={false}
+                onClick={e => e.stopPropagation()}
                 className={clsx(
-                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
+                  "relative z-10 mx-auto w-full",
+                  isLightboxActive && imageScale > MIN_IMG_SCALE
+                    ? "cursor-move"
+                    : "cursor-zoom-in",
                 )}
-              >
-                <BiZoomIn />
-              </StyledButton>
-
-              {/* zoom the image out */}
-              <StyledButton
-                onClick={() => setImageScale({ add: -SCALE_INTERVAL })}
-                disabled={imageScale === MIN_IMG_SCALE}
-                className={clsx(
-                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
-                )}
-              >
-                <BiZoomOut />
-              </StyledButton>
-
-              {/* reset scale and positioning of the image */}
-              <StyledButton
-                onClick={() => {
-                  resetScaleAndPositioning();
-                  setIsDragging(false);
+                onMouseLeave={() => isDragging && setIsDragging(false)}
+                onMouseDown={handleStartDrag}
+                onMouseUp={handleStopDrag}
+                onMouseMove={handleDragging}
+                onTouchStart={handleStartDrag}
+                onTouchEnd={handleStopDrag}
+                onTouchMove={handleDragging}
+                onDoubleClick={() => {
+                  setImageScale(
+                    imageScale >= MAX_IMG_SCALE
+                      ? { override: MIN_IMG_SCALE }
+                      : { add: SCALE_INTERVAL },
+                  );
                 }}
-                disabled={imageScale === MIN_IMG_SCALE}
-                className={clsx(
-                  "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                  "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
-                )}
-              >
-                <BsAspectRatio />
-              </StyledButton>
-
-              {/* close the lightbox */}
-              <StyledButton
-                onClick={() => {
-                  setIsLightboxActive(false);
-                }}
-                className="items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-red-500/30 dark:text-white/90"
-              >
-                <IoClose />
-              </StyledButton>
-            </div>
-          </div>
-        </div>
-
-        {/* lightbox image */}
-        <div
-          ref={imageWrapperRef}
-          role="none"
-          draggable={false}
-          onClick={() => setIsLightboxActive(false)}
-          className={clsx(
-            "layout relative",
-            isLightboxActive &&
-              !isDragging &&
-              "transition-transform duration-300",
-          )}
-          style={{ transform: `scale(1) translate(0px, 0px)` }}
-        >
-          {/* placeholder for loading image */}
-          <CldImage
-            {...props}
-            quality={90}
-            format="webp"
-            draggable={false}
-            onClick={e => e.stopPropagation()}
-            className={clsx(
-              "relative z-10 mx-auto w-full",
-              isLightboxActive && imageScale > MIN_IMG_SCALE
-                ? "cursor-move"
-                : "cursor-zoom-in",
-            )}
-            onMouseLeave={() => isDragging && setIsDragging(false)}
-            onMouseDown={handleStartDrag}
-            onMouseUp={handleStopDrag}
-            onMouseMove={handleDragging}
-            onTouchStart={handleStartDrag}
-            onTouchEnd={handleStopDrag}
-            onTouchMove={handleDragging}
-            onDoubleClick={() => {
-              setImageScale(
-                imageScale >= MAX_IMG_SCALE
-                  ? { override: MIN_IMG_SCALE }
-                  : { add: SCALE_INTERVAL },
-              );
-            }}
-          />
-        </div>
+              />
+            </Dialog.Panel>
+          </Transition.Child>
+        </Dialog>
       </Transition>
 
       {/* preview image */}
