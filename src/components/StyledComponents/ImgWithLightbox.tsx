@@ -14,10 +14,14 @@ type ImgWithLightboxProps = CldImageProps & {
   title?: string;
 };
 
+type DragEvent =
+  | R.MouseEvent<HTMLImageElement>
+  | R.TouchEvent<HTMLImageElement>;
+
 const TRANSLATE_INTERVAL = 50;
 const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
-const MAX_IMG_SCALE = 3;
+const MAX_IMG_SCALE = 4;
 
 const scaleChecker = (
   prev: number,
@@ -54,22 +58,30 @@ export default function ImgWithLightbox({
   const [isDragging, setIsDragging] = R.useState(false);
 
   const dragStartPointRef = R.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [xTranslate, setXTranslate] = R.useState(0);
-  const [yTranslate, setYTranslate] = R.useState(0);
+  const xTranslateRef = R.useRef(0);
+  const yTranslateRef = R.useRef(0);
 
   const resetPositioning = R.useCallback(() => {
-    setXTranslate(0);
-    setYTranslate(0);
+    xTranslateRef.current = 0;
+    yTranslateRef.current = 0;
   }, []);
 
   const resetScaleAndPositioning = R.useCallback(() => {
     setImageScale({ override: MIN_IMG_SCALE });
     resetPositioning();
-    setIsDragging(false);
   }, []);
 
+  const renderImgPosition = R.useCallback(
+    (scale: number, xTranslate: number, yTranslate: number) => {
+      if (!imageWrapperRef.current) return;
+
+      imageWrapperRef.current.style.transform = `scale(${scale}) translate(${xTranslate}px, ${yTranslate}px)`;
+    },
+    [imageWrapperRef],
+  );
+
   const handleStartDrag = R.useCallback(
-    (e: R.MouseEvent<HTMLDivElement> | R.TouchEvent<HTMLDivElement>) => {
+    (e: DragEvent) => {
       if (imageScale === MIN_IMG_SCALE) return;
       setIsDragging(true);
 
@@ -82,7 +94,7 @@ export default function ImgWithLightbox({
   );
 
   const handleDragging = R.useCallback(
-    (e: R.MouseEvent<HTMLDivElement> | R.TouchEvent<HTMLDivElement>) => {
+    (e: DragEvent) => {
       if (!isDragging) return;
       if (!imageWrapperRef.current) return;
 
@@ -91,12 +103,18 @@ export default function ImgWithLightbox({
       const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
       const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
 
-      setXTranslate(prev => prev + (pageX - xStart) / imageScale);
-      setYTranslate(prev => prev + (pageY - yStart) / imageScale);
+      xTranslateRef.current += (pageX - xStart) / imageScale;
+      yTranslateRef.current += (pageY - yStart) / imageScale;
+
+      renderImgPosition(
+        imageScale,
+        xTranslateRef.current,
+        yTranslateRef.current,
+      );
 
       dragStartPointRef.current = { x: pageX, y: pageY };
     },
-    [isDragging, imageScale],
+    [isDragging, imageScale, xTranslateRef, yTranslateRef],
   );
 
   const handleStopDrag = R.useCallback(() => {
@@ -110,10 +128,11 @@ export default function ImgWithLightbox({
         switch (e.key) {
           case "Escape":
             if (isLightboxActive) setIsLightboxActive(false);
-            break;
+            return;
 
           case "r":
             resetScaleAndPositioning();
+            setIsDragging(false);
             break;
 
           case "=":
@@ -126,41 +145,53 @@ export default function ImgWithLightbox({
               setImageScale({ add: -SCALE_INTERVAL });
             break;
 
-          // invert controls for scale > 1
           case "ArrowUp":
             if (imageScale > MIN_IMG_SCALE)
-              setYTranslate(prev => prev + TRANSLATE_INTERVAL);
+              yTranslateRef.current += TRANSLATE_INTERVAL;
             break;
 
           case "ArrowDown":
             if (imageScale > MIN_IMG_SCALE)
-              setYTranslate(prev => prev - TRANSLATE_INTERVAL);
+              yTranslateRef.current -= TRANSLATE_INTERVAL;
             break;
 
           case "ArrowRight":
             if (imageScale > MIN_IMG_SCALE)
-              setXTranslate(prev => prev - TRANSLATE_INTERVAL);
+              xTranslateRef.current -= TRANSLATE_INTERVAL;
             break;
 
           case "ArrowLeft":
             if (imageScale > MIN_IMG_SCALE)
-              setXTranslate(prev => prev + TRANSLATE_INTERVAL);
+              xTranslateRef.current += TRANSLATE_INTERVAL;
             break;
 
           default:
             break;
         }
+
+        renderImgPosition(
+          imageScale,
+          xTranslateRef.current,
+          yTranslateRef.current,
+        );
       },
       150,
       { leading: true },
     ),
-    [isLightboxActive, imageScale],
+    [isLightboxActive, imageScale, xTranslateRef, yTranslateRef],
   );
 
-  /* disable window scroll when lightbox is active
+  /*  lightbox lifecycle
   ================================================= */
   R.useEffect(() => {
-    document.body.style.overflowY = isLightboxActive ? "hidden" : "auto";
+    setLightboxIsActive(isLightboxActive);
+
+    if (isLightboxActive) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      setIsDragging(false);
+      resetScaleAndPositioning();
+    }
   }, [isLightboxActive]);
 
   /* handle navigation keyboard control
@@ -171,25 +202,13 @@ export default function ImgWithLightbox({
     return () => window.removeEventListener("keydown", LightboxKbdHandler);
   }, [isLightboxActive, imageScale]);
 
-  /* reset controls when lightbox is turned off 
+  /* re-render image after scale is changed
   ================================================= */
   R.useEffect(() => {
-    if (isLightboxActive) return;
+    if (imageScale === MIN_IMG_SCALE) resetPositioning();
 
-    resetScaleAndPositioning();
-  }, [isLightboxActive]);
-
-  /* reset position if scale is 1
-  ================================================= */
-  R.useEffect(() => {
-    if (imageScale === MIN_IMG_SCALE) {
-      resetPositioning();
-    }
+    renderImgPosition(imageScale, xTranslateRef.current, yTranslateRef.current);
   }, [imageScale]);
-
-  /* control context
-  ================================================= */
-  R.useEffect(() => setLightboxIsActive(isLightboxActive), [isLightboxActive]);
 
   return (
     <>
@@ -202,21 +221,19 @@ export default function ImgWithLightbox({
         leave="transition duration-300 ease-out"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
-        className="fixed inset-0 left-1/2 top-1/2 z-[100] flex h-screen w-screen -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+        className="fixed inset-0 z-[100] flex h-screen items-center justify-center"
       >
         {/* translucent backdrop */}
         <div
           role="none"
-          onClick={() => {
-            setIsLightboxActive(false);
-          }}
+          onClick={() => setIsLightboxActive(false)}
           className="fixed inset-0 bg-indigo-100/80 dark:bg-zinc-900/80"
         />
 
         {/* lightbox controls */}
-        <div className="fixed top-0 z-[110] w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
-          <div className="layout flex items-center justify-between">
-            <span className="text-xl font-medium text-zinc-700/90 dark:text-white/90">
+        <div className="absolute top-0 z-10 w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
+          <div className="layout flex items-center justify-between gap-2">
+            <span className="font-medium text-zinc-700/90 dark:text-white/90 md:text-lg lg:text-xl">
               {title}
             </span>
 
@@ -247,12 +264,11 @@ export default function ImgWithLightbox({
 
               {/* reset scale and positioning of the image */}
               <StyledButton
-                onClick={resetScaleAndPositioning}
-                disabled={
-                  imageScale === MIN_IMG_SCALE &&
-                  xTranslate === 0 &&
-                  yTranslate === 0
-                }
+                onClick={() => {
+                  resetScaleAndPositioning();
+                  setIsDragging(false);
+                }}
+                disabled={imageScale === MIN_IMG_SCALE}
                 className={clsx(
                   "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
                   "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
@@ -278,40 +294,43 @@ export default function ImgWithLightbox({
         <div
           ref={imageWrapperRef}
           role="none"
-          style={{
-            transform: `scale(${imageScale}) translate(${xTranslate}px, ${yTranslate}px)`,
-          }}
           draggable={false}
-          onMouseLeave={() => isDragging && setIsDragging(false)}
-          onMouseDown={handleStartDrag}
-          onMouseUp={handleStopDrag}
-          onMouseMove={handleDragging}
-          onTouchStart={handleStartDrag}
-          onTouchEnd={handleStopDrag}
-          onTouchMove={handleDragging}
-          onDoubleClick={() =>
-            setImageScale(
-              imageScale >= MAX_IMG_SCALE
-                ? { override: MIN_IMG_SCALE }
-                : { add: SCALE_INTERVAL },
-            )
-          }
+          onClick={() => setIsLightboxActive(false)}
           className={clsx(
-            !isLightboxActive && "hidden",
+            "layout relative",
             isLightboxActive &&
               !isDragging &&
               "transition-transform duration-300",
-            isLightboxActive && imageScale > MIN_IMG_SCALE
-              ? "cursor-move"
-              : "cursor-zoom-in",
           )}
+          style={{ transform: `scale(1) translate(0px, 0px)` }}
         >
+          {/* placeholder for loading image */}
           <CldImage
             {...props}
-            quality={50}
+            quality={90}
             format="webp"
             draggable={false}
-            className="mx-auto"
+            onClick={e => e.stopPropagation()}
+            className={clsx(
+              "relative z-10 mx-auto w-full",
+              isLightboxActive && imageScale > MIN_IMG_SCALE
+                ? "cursor-move"
+                : "cursor-zoom-in",
+            )}
+            onMouseLeave={() => isDragging && setIsDragging(false)}
+            onMouseDown={handleStartDrag}
+            onMouseUp={handleStopDrag}
+            onMouseMove={handleDragging}
+            onTouchStart={handleStartDrag}
+            onTouchEnd={handleStopDrag}
+            onTouchMove={handleDragging}
+            onDoubleClick={() => {
+              setImageScale(
+                imageScale >= MAX_IMG_SCALE
+                  ? { override: MIN_IMG_SCALE }
+                  : { add: SCALE_INTERVAL },
+              );
+            }}
           />
         </div>
       </Transition>
