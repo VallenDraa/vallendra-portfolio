@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { AiFillEye, AiFillHeart } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
-import { CldImage } from "next-cloudinary";
 import R from "react";
 import Show from "utils/client/jsx/Show";
 import Observe from "components/Observe";
@@ -11,6 +10,7 @@ import type ShowcaseItem from "interfaces/showcase.interface";
 import Project from "interfaces/project.interface";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
+import CldImgWithBlur from "components/StyledComponents/CldImgWithBlur";
 import Stats from "./Stats";
 import TechsSection from "./TechsSection";
 
@@ -44,7 +44,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         className="group relative block aspect-square w-full overflow-clip rounded-md bg-transparent shadow-lg shadow-indigo-100 transition-transform duration-300 ease-out hover:scale-105 dark:shadow-zinc-800/30"
       >
         {/* image */}
-        <CldImage
+        <CldImgWithBlur
           width={500}
           height={500}
           src={data.image}
@@ -103,7 +103,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
             tabIndex={-1}
             type="button"
             icon={<BsArrowRight />}
-            className="relative mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400 hover:bg-indigo-500/10"
+            className="relative z-20 mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400 hover:bg-indigo-500/10"
           >
             See Detail
           </StyledButton>

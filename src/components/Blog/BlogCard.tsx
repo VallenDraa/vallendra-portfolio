@@ -1,7 +1,6 @@
 import Observe from "components/Observe";
 import Stats from "components/Showcase/Card/Stats";
 import type PostData from "interfaces/blogPost.interface";
-import { CldImage } from "next-cloudinary";
 
 import Link from "next/link";
 import R from "react";
@@ -10,6 +9,7 @@ import { dateFormatter } from "utils/client/helpers/formatter";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
+import CldImgWithBlur from "components/StyledComponents/CldImgWithBlur";
 
 export default function BlogCard({ post }: { post: PostData }) {
   const { parsedSlug } = parsePostSlug(post.slug);
@@ -39,7 +39,7 @@ export default function BlogCard({ post }: { post: PostData }) {
         href={`/blog/${post.slug}`}
         className="overflow-clip rounded-md border border-indigo-300 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-indigo-300 dark:border-zinc-700 hover:dark:shadow-zinc-700"
       >
-        <CldImage
+        <CldImgWithBlur
           quality={50}
           width={960}
           height={540}

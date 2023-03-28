@@ -1,4 +1,4 @@
-import { CldImage, CldImageProps } from "next-cloudinary";
+import { CldImageProps } from "next-cloudinary";
 import R from "react";
 import clsx from "clsx";
 import { Transition, Dialog } from "@headlessui/react";
@@ -8,6 +8,7 @@ import LightboxIsActiveContext from "context/LightboxStatusCP";
 import { BsAspectRatio } from "react-icons/bs";
 import throttle from "just-throttle";
 import StyledButton from "./StyledButton";
+import CldImgWithBlur from "./CldImgWithBlur";
 
 type ImgWithLightboxProps = CldImageProps & {
   disabled?: boolean;
@@ -79,6 +80,8 @@ export default function ImgWithLightbox({
     },
     [imageWrapperRef],
   );
+
+  // const pullImgBack = R.useCallback(() => {}, [xTranslateRef, yTranslateRef]);
 
   const handleStartDrag = R.useCallback(
     (e: DragEvent) => {
@@ -213,7 +216,7 @@ export default function ImgWithLightbox({
   return (
     <>
       <Transition show={isLightboxActive}>
-        <Dialog onClose={() => null} className="fixed z-[60]">
+        <Dialog onClose={() => null} className="fixed z-[70]">
           <Transition.Child
             enter="transition duration-300 ease-out"
             enterFrom="opacity-0"
@@ -304,15 +307,14 @@ export default function ImgWithLightbox({
               )}
               style={{ transform: `scale(1) translate(0px, 0px)` }}
             >
-              {/* placeholder for loading image */}
-              <CldImage
+              <CldImgWithBlur
                 {...props}
                 quality={90}
                 format="webp"
                 draggable={false}
                 onClick={e => e.stopPropagation()}
                 className={clsx(
-                  "relative z-10 mx-auto w-full",
+                  "mx-auto w-full",
                   isLightboxActive && imageScale > MIN_IMG_SCALE
                     ? "cursor-move"
                     : "cursor-zoom-in",
@@ -338,7 +340,7 @@ export default function ImgWithLightbox({
       </Transition>
 
       {/* preview image */}
-      <CldImage
+      <CldImgWithBlur
         {...props}
         onClick={e => {
           if (!isLightboxActive && !disabled) {

@@ -16,6 +16,7 @@ function ImageComponent({
       quality={50}
       src={src}
       alt={alt}
+      title={title}
       width={1280}
       height={720}
       sizes="(max-width: 768px) 80vw, 100vw"
