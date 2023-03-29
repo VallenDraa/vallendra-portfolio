@@ -24,7 +24,6 @@ const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
 const MAX_IMG_SCALE = 4;
 
-const WALL_PADDING = 20;
 const MAX_BROWSER_WALL_DISTANCE = 100;
 
 const scaleChecker = (
@@ -104,6 +103,10 @@ export default function ImgWithLightbox({
     const tooMuchTop = topDist > MAX_BROWSER_WALL_DISTANCE;
     const tooMuchBottom = bottomDist > MAX_BROWSER_WALL_DISTANCE;
 
+    // re-calculate y axis drag max distance for smaller screen
+    const yMaxDistance =
+      window.innerWidth < 540 ? 300 / imageScale : MAX_BROWSER_WALL_DISTANCE;
+
     if (tooMuchLeft) {
       xTranslateRef.current -=
         Math.abs(leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE) /
@@ -118,14 +121,12 @@ export default function ImgWithLightbox({
 
     if (tooMuchTop) {
       yTranslateRef.current -=
-        Math.abs(topDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE) /
-        imageScale;
+        Math.abs(topDist - yDragAmount - yMaxDistance) / imageScale;
     }
 
     if (tooMuchBottom) {
       yTranslateRef.current +=
-        Math.abs(bottomDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE) /
-        imageScale;
+        Math.abs(bottomDist - yDragAmount - yMaxDistance) / imageScale;
     }
   }, [
     xTranslateRef,
