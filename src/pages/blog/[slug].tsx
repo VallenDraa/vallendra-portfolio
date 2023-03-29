@@ -24,6 +24,7 @@ import { FaGithub } from "react-icons/fa";
 import Show from "utils/client/jsx/Show";
 import { IoLanguage, IoWarning } from "react-icons/io5";
 import Seo from "seo/Seo";
+import TagChip from "components/Blog/TagChip";
 import blogPostSeo from "seo/blogPost.seo";
 import StyledAlert from "components/StyledComponents/StyledAlert";
 import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
@@ -34,6 +35,12 @@ import useDebounce from "utils/client/hooks/useDebounce";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 import DetailFooter from "components/Showcase/ShowcaseDetailsPage/DetailFooter";
 import StyledButton from "components/StyledComponents/StyledButton";
+import dynamic from "next/dynamic";
+
+const TableOfContents = dynamic(
+  () => import("components/Blog/TableOfContents"),
+  { ssr: false },
+);
 
 export default function BlogPost({
   code,
@@ -163,13 +170,13 @@ export default function BlogPost({
         </span>
       </StyledAlert>
 
-      <article className="fade-bottom relative mt-6 mb-3 after:-top-6">
+      <article className="fade-bottom relative mb-3 mt-6 after:-top-6">
         <div className="layout overflow-x-hidden">
           <header id="skip-to-content">
             <section
               className={clsx(
                 "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
-                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pt-20 pb-3 dark:border-zinc-700",
+                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pb-3 pt-20 dark:border-zinc-700",
               )}
             >
               {/* back to project button */}
@@ -179,14 +186,22 @@ export default function BlogPost({
               </LinkWithUnderline>
 
               {/* title */}
-              <div className="pt-4">
+              <div className="mt-4">
                 <SectionHeading
                   title={frontmatter.title}
                   subTitle={frontmatter.description}
                 />
               </div>
 
-              <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+              {/* tags */}
+              <div>
+                {frontmatter.tags.map((tag: string, i: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <TagChip key={`${tag}-${i}`} tag={tag} />
+                ))}
+              </div>
+
+              <div className="mt-2 flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
                 <ShowcaseStats
                   dateString={frontmatter.date}
                   isLoadingStats={
@@ -209,7 +224,7 @@ export default function BlogPost({
                 <Show when={!frontmatter.englishOnly}>
                   <StyledButton
                     alwaysShowIcon
-                    className="w-full border border-indigo-400 py-3 px-6 text-indigo-400 hover:bg-indigo-500/10 lg:w-max"
+                    className="w-full border border-indigo-400 px-6 py-3 text-indigo-400 hover:bg-indigo-500/10 lg:w-max"
                     icon={<IoLanguage />}
                     hrefTarget="_self"
                     href={
@@ -226,9 +241,10 @@ export default function BlogPost({
           </header>
           <main
             className={clsx(
+              "blog-content",
               "prose prose-zinc dark:prose-invert md:prose-lg",
               "prose-a:text-pink-400 dark:prose-a:text-pink-300",
-              "my-4 mx-auto",
+              "mx-auto my-4",
             )}
           >
             <ShowcaseImage
@@ -236,6 +252,9 @@ export default function BlogPost({
               title={frontmatter.bannerSrc}
               titleAsCaption
             />
+
+            <TableOfContents slug={slug} />
+
             <Component />
           </main>
           <footer
@@ -244,7 +263,7 @@ export default function BlogPost({
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
-            <section className="detail-aside-colors mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 p-4">
+            <section className="detail-aside-colors mt-3 flex h-fit grow items-center justify-between gap-4 rounded-md border-2 p-4">
               <div className="grow space-y-3">
                 <StyledButton
                   alwaysShowIcon

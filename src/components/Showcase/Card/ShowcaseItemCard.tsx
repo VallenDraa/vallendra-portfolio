@@ -66,7 +66,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           </span>
 
           {/* props short description */}
-          <p className="mt-1 px-3 text-base font-normal text-white/80 line-clamp-2 sm:text-sm">
+          <p className="line-clamp-2 mt-1 px-3 text-base font-normal text-white/80 sm:text-sm">
             {data.shortDescriptionEN}
           </p>
 
@@ -74,7 +74,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           <div className="mt-1.5 flex gap-3 px-3">
             <Stats
               icon={<AiFillEye />}
-              textColor="text-indigo-400"
+              textColor="text-teal-400"
               isLoading={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
@@ -85,7 +85,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
 
             <Stats
               icon={<AiFillHeart />}
-              textColor="text-indigo-400"
+              textColor="text-red-400"
               isLoading={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||

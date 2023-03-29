@@ -86,7 +86,12 @@ export default function NavList({ navListRef, overlayRef }: NavListProps) {
       {/* the nav list */}
       <nav
         ref={navListRef}
-        className="fixed top-0 left-0 z-[70] flex h-screen w-72 -translate-x-full flex-col gap-1 bg-indigo-50 transition-transform duration-300 dark:bg-zinc-900 lg:static lg:h-max lg:w-max lg:translate-x-0 lg:animate-fade-in lg:flex-row lg:items-center lg:bg-transparent dark:lg:bg-transparent"
+        className={clsx(
+          "fixed top-0 left-0 z-[70]",
+          "lg:animate-fade-in transition-transform duration-300",
+          "bg-indigo-50 dark:bg-zinc-900 lg:bg-transparent dark:lg:bg-transparent",
+          "flex h-screen w-72 -translate-x-full flex-col gap-1 lg:static lg:h-max lg:w-max lg:translate-x-0 lg:flex-row lg:items-center",
+        )}
       >
         {/* close button for small screen nav */}
         <div className="gradient-underline relative mb-3 flex items-center justify-between pl-5 pr-3 pt-3 pb-0.5 lg:hidden lg:px-3">

@@ -67,7 +67,7 @@ export default function BlogCard({ post }: { post: PostData }) {
             <div className="flex items-center gap-3">
               <Stats
                 icon={<AiFillEye />}
-                textColor="text-indigo-400 dark:text-indigo-300"
+                textColor="text-teal-400"
                 number={viewsRes?.data?.views ?? 0}
                 isLoading={
                   !(viewsRes.error && likesRes.error) &&
@@ -78,7 +78,7 @@ export default function BlogCard({ post }: { post: PostData }) {
 
               <Stats
                 icon={<AiFillHeart />}
-                textColor="text-indigo-400 dark:text-indigo-300"
+                textColor="text-red-400"
                 number={likesRes?.data?.likes ?? 0}
                 isLoading={
                   !(viewsRes.error && likesRes.error) &&

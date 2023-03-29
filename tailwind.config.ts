@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default {
   darkMode: "class",
   content: ["./src/**/*.tsx"],
   theme: {
@@ -19,28 +20,28 @@ module.exports = {
       },
       keyframes: {
         "fade-in-left": {
-          "0%": { transform: "translateX(-80px)", opacity: 0 },
-          "50%": { transform: "translateX(4.8px)", opacity: 0.6 },
-          "100%": { transform: "translateX(0)", opacity: 1 },
+          "0%": { transform: "translateX(-80px)", opacity: "0" },
+          "50%": { transform: "translateX(4.8px)", opacity: "0.6" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
         },
         "fade-in-right": {
-          "0%": { transform: "translateX(80px)", opacity: 0 },
-          "50%": { transform: "translateX(-4.8px)", opacity: 0.6 },
-          "100%": { transform: "translateX(0)", opacity: 1 },
+          "0%": { transform: "translateX(80px)", opacity: "0" },
+          "50%": { transform: "translateX(-4.8px)", opacity: "0.6" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
         },
         "fade-in-bottom": {
-          "0%": { transform: "translateY(-80px)", opacity: 0 },
-          "50%": { transform: "translateY(4.8px)", opacity: 0.6 },
-          "100%": { transform: "translateX(0)", opacity: 1 },
+          "0%": { transform: "translateY(-80px)", opacity: "0" },
+          "50%": { transform: "translateY(4.8px)", opacity: "0.6" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
         },
         "fade-in-top": {
-          "0%": { transform: "translateY(80px)", opacity: 0 },
-          "50%": { transform: "translateY(-4.8px)", opacity: 0.6 },
-          "100%": { transform: "translateX(0)", opacity: 1 },
+          "0%": { transform: "translateY(80px)", opacity: "0" },
+          "50%": { transform: "translateY(-4.8px)", opacity: "0.6" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
         },
         "fade-in": {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
         "main-gradient": {
           "0%, 100%": { backgroundPosition: "0% 75%" },
@@ -49,12 +50,12 @@ module.exports = {
         squares: {
           from: {
             transform: "translateY(0) rotate(0deg)",
-            opacity: 1,
-            "border-radius": 0,
+            opacity: "1",
+            "border-radius": "0",
           },
           to: {
             transform: "translateY(-1000px) rotate(720deg)",
-            opacity: 0,
+            opacity: "0",
             "border-radius": "50%",
           },
         },
@@ -72,4 +73,4 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/typography")],
-};
+} satisfies Config;

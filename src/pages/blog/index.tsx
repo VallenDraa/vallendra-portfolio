@@ -23,14 +23,14 @@ import {
   parsePostSlug,
 } from "utils/client/helpers/blogClientHelper";
 
+// suppress useLayoutEffect warning
+if (typeof window === "undefined") R.useLayoutEffect = R.useEffect;
+
 const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
 
 export default function BlogsPage({
   allPostData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // suppress useLayoutEffect warning
-  if (typeof window === "undefined") R.useLayoutEffect = R.useEffect;
-
   /* Blog filters
   =============== */
   const [selectedTags, setSelectedTags] = R.useState<BlogTags[]>([]);
@@ -112,7 +112,7 @@ export default function BlogsPage({
 
       <header
         id="skip-to-content"
-        className="fade-bottom relative mt-6 mb-3 w-full after:-top-6"
+        className="fade-bottom relative mb-3 mt-6 w-full after:-top-6"
       >
         <div className="layout relative flex flex-col pt-20">
           {/* heading */}
@@ -169,7 +169,7 @@ export default function BlogsPage({
                             );
                           }}
                           className={clsx(
-                            "rounded border border-pink-400 py-1.5 px-3 text-sm",
+                            "rounded border border-pink-400 px-3 py-1.5 text-sm",
                             "disabled:cursor-not-allowed disabled:border-zinc-400 disabled:text-zinc-400 disabled:hover:bg-transparent",
                             selectedTags.includes(tag)
                               ? "border-transparent bg-pink-500 text-white"
@@ -209,7 +209,7 @@ export default function BlogsPage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 500)}
           >
-            <ul className="grid grid-cols-1 gap-6 pt-5 pb-10 opacity-0 md:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-6 pb-10 pt-5 opacity-0 md:grid-cols-2 lg:grid-cols-3">
               {visibleBlogIndexes.map(idx => {
                 const { slugPrefix } = parsePostSlug(allPostData[idx].slug);
 

@@ -19,6 +19,7 @@ type SectioHeadingProps = {
     title?: number;
     subTitle?: number;
   } | null;
+  center?: boolean;
 };
 
 const HEADER_CLASS =
@@ -30,6 +31,7 @@ export default function SectionHeading({
   subTitle = "",
   duration = null,
   willFade = false,
+  center = false,
   animation,
 }: SectioHeadingProps) {
   return (
@@ -45,7 +47,9 @@ export default function SectionHeading({
           )
         }
       >
-        <div className={willFade ? "opacity-0" : ""}>
+        <div
+          className={clsx(center && "text-center", willFade ? "opacity-0" : "")}
+        >
           {titleAs === "h1" && <h1 className={HEADER_CLASS}>{title}</h1>}
           {titleAs === "h2" && <h2 className={HEADER_CLASS}>{title}</h2>}
           {titleAs === "h3" && <h3 className={HEADER_CLASS}>{title}</h3>}
@@ -69,8 +73,9 @@ export default function SectionHeading({
         >
           <p
             className={clsx(
+              center && "text-center",
               willFade && "opacity-0",
-              "mb-2 mt-0.5 pl-0.5 text-base font-medium text-zinc-500 dark:text-zinc-300 md:text-lg",
+              "mb-2 mt-1 pl-0.5 text-base font-medium text-zinc-500 dark:text-zinc-300 md:text-lg",
             )}
           >
             {subTitle}
