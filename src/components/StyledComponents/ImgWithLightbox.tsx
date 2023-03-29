@@ -184,7 +184,7 @@ export default function ImgWithLightbox({
     pullImgBack();
 
     renderImgPosition(imageScale, xTranslateRef.current, yTranslateRef.current);
-  }, [isDragging, xTranslateRef, yTranslateRef]);
+  }, [isDragging, xTranslateRef, yTranslateRef, imageScale]);
 
   const LightboxKbdHandler = R.useCallback(
     throttle(

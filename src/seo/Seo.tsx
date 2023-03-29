@@ -38,7 +38,10 @@ export default function Seo({
       <meta name="description" content={base.desc} />
       <meta name="theme-color" content="#6366f1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="google-site-verification" content="nTkY_YWFMPrOGoVVKOqAEp2r20AdFeF6ezznLZFz_Ek" />
+      <meta
+        name="google-site-verification"
+        content="nTkY_YWFMPrOGoVVKOqAEp2r20AdFeF6ezznLZFz_Ek"
+      />
       <meta name="robots" content={base.robots || "follow, index"} />
       <link rel="canonical" href={og.siteUrl} />
 
