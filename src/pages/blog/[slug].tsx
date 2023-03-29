@@ -165,7 +165,7 @@ export default function BlogPost({
 
       <article className="fade-bottom relative mt-6 mb-3 after:-top-6">
         <div className="layout overflow-x-hidden">
-          <header>
+          <header id="skip-to-content">
             <section
               className={clsx(
                 "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
