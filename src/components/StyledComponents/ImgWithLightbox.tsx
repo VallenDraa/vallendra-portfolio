@@ -24,6 +24,9 @@ const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
 const MAX_IMG_SCALE = 4;
 
+const WALL_PADDING = 20;
+const MAX_BROWSER_WALL_DISTANCE = 40;
+
 const scaleChecker = (
   prev: number,
   incoming: { add?: number; override?: number },
@@ -59,8 +62,12 @@ export default function ImgWithLightbox({
   const [isDragging, setIsDragging] = R.useState(false);
 
   const dragStartPointRef = R.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const dragAmountRef = R.useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const xTranslateRef = R.useRef(0);
   const yTranslateRef = R.useRef(0);
+
+  const hasAnimation =
+    isLightboxActive && imageScale > MIN_IMG_SCALE && !isDragging;
 
   const resetPositioning = R.useCallback(() => {
     xTranslateRef.current = 0;
@@ -81,7 +88,46 @@ export default function ImgWithLightbox({
     [imageWrapperRef],
   );
 
-  // const pullImgBack = R.useCallback(() => {}, [xTranslateRef, yTranslateRef]);
+  const pullImgBack = R.useCallback(() => {
+    if (!imageWrapperRef.current) return;
+
+    const { x: xDragAmount, y: yDragAmount } = dragAmountRef.current;
+    const rect = imageWrapperRef.current.getBoundingClientRect();
+
+    const leftDist = rect.left;
+    const rightDist = window.innerWidth - rect.right;
+    const topDist = rect.top;
+    const bottomDist = window.innerHeight - rect.bottom;
+
+    const tooMuchLeft = leftDist > MAX_BROWSER_WALL_DISTANCE;
+    const tooMuchRight = rightDist > MAX_BROWSER_WALL_DISTANCE;
+    const tooMuchTop = topDist > MAX_BROWSER_WALL_DISTANCE;
+    const tooMuchBottom = bottomDist > MAX_BROWSER_WALL_DISTANCE;
+
+    if (tooMuchLeft) {
+      xTranslateRef.current -= Math.abs(
+        leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
+      );
+    }
+
+    if (tooMuchRight) {
+      xTranslateRef.current += Math.abs(
+        rightDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
+      );
+    }
+
+    if (tooMuchTop) {
+      yTranslateRef.current -= Math.abs(
+        topDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
+      );
+    }
+
+    if (tooMuchBottom) {
+      yTranslateRef.current += Math.abs(
+        bottomDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
+      );
+    }
+  }, [xTranslateRef, yTranslateRef, imageWrapperRef, dragAmountRef]);
 
   const handleStartDrag = R.useCallback(
     (e: DragEvent) => {
@@ -106,8 +152,11 @@ export default function ImgWithLightbox({
       const pageX = "pageX" in e ? e.pageX : e.changedTouches[0].pageX;
       const pageY = "pageY" in e ? e.pageY : e.changedTouches[0].pageY;
 
-      xTranslateRef.current += (pageX - xStart) / imageScale;
-      yTranslateRef.current += (pageY - yStart) / imageScale;
+      const newXDragAmount = (pageX - xStart) / imageScale;
+      const newYDragAmount = (pageY - yStart) / imageScale;
+
+      xTranslateRef.current += newXDragAmount;
+      yTranslateRef.current += newYDragAmount;
 
       renderImgPosition(
         imageScale,
@@ -115,6 +164,7 @@ export default function ImgWithLightbox({
         yTranslateRef.current,
       );
 
+      dragAmountRef.current = { x: newXDragAmount, y: newYDragAmount };
       dragStartPointRef.current = { x: pageX, y: pageY };
     },
     [isDragging, imageScale, xTranslateRef, yTranslateRef],
@@ -122,8 +172,12 @@ export default function ImgWithLightbox({
 
   const handleStopDrag = R.useCallback(() => {
     if (!isDragging) return;
+
     setIsDragging(false);
-  }, [isDragging]);
+    pullImgBack();
+
+    renderImgPosition(imageScale, xTranslateRef.current, yTranslateRef.current);
+  }, [isDragging, xTranslateRef, yTranslateRef]);
 
   const LightboxKbdHandler = R.useCallback(
     throttle(
@@ -172,6 +226,7 @@ export default function ImgWithLightbox({
             break;
         }
 
+        pullImgBack();
         renderImgPosition(
           imageScale,
           xTranslateRef.current,
@@ -312,12 +367,12 @@ export default function ImgWithLightbox({
                 quality={90}
                 format="webp"
                 draggable={false}
+                hasDynamicSize={false}
                 onClick={e => e.stopPropagation()}
                 className={clsx(
                   "mx-auto w-full",
-                  isLightboxActive && imageScale > MIN_IMG_SCALE
-                    ? "cursor-move"
-                    : "cursor-zoom-in",
+                  hasAnimation ? "cursor-move" : "cursor-zoom-in",
+                  isDragging && "cursor-grabbing",
                 )}
                 onMouseLeave={() => isDragging && setIsDragging(false)}
                 onMouseDown={handleStartDrag}
