@@ -25,7 +25,7 @@ const MIN_IMG_SCALE = 1;
 const MAX_IMG_SCALE = 4;
 
 const WALL_PADDING = 20;
-const MAX_BROWSER_WALL_DISTANCE = 40;
+const MAX_BROWSER_WALL_DISTANCE = 100;
 
 const scaleChecker = (
   prev: number,
@@ -105,29 +105,35 @@ export default function ImgWithLightbox({
     const tooMuchBottom = bottomDist > MAX_BROWSER_WALL_DISTANCE;
 
     if (tooMuchLeft) {
-      xTranslateRef.current -= Math.abs(
-        leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
-      );
+      xTranslateRef.current -=
+        Math.abs(leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        imageScale;
     }
 
     if (tooMuchRight) {
-      xTranslateRef.current += Math.abs(
-        rightDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
-      );
+      xTranslateRef.current +=
+        Math.abs(rightDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        imageScale;
     }
 
     if (tooMuchTop) {
-      yTranslateRef.current -= Math.abs(
-        topDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
-      );
+      yTranslateRef.current -=
+        Math.abs(topDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        imageScale;
     }
 
     if (tooMuchBottom) {
-      yTranslateRef.current += Math.abs(
-        bottomDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE - WALL_PADDING,
-      );
+      yTranslateRef.current +=
+        Math.abs(bottomDist - yDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        imageScale;
     }
-  }, [xTranslateRef, yTranslateRef, imageWrapperRef, dragAmountRef]);
+  }, [
+    xTranslateRef,
+    yTranslateRef,
+    imageWrapperRef,
+    dragAmountRef,
+    imageScale,
+  ]);
 
   const handleStartDrag = R.useCallback(
     (e: DragEvent) => {
