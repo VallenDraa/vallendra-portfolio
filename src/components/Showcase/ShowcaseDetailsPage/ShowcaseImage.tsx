@@ -19,7 +19,6 @@ function ImageComponent({
       title={title}
       width={1280}
       height={720}
-      sizes="(max-width: 768px) 80vw, 100vw"
       className="w-full rounded-md object-cover opacity-90 shadow"
     />
   );
