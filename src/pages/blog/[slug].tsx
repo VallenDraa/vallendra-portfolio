@@ -10,7 +10,7 @@ import {
   getAllPostSlugs,
   getPostData,
   getPrevAndNextPosts,
-} from "utils/server/posts";
+} from "utils/server/mdxProcessor";
 import { getMDXComponent } from "mdx-bundler/client";
 import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { BsArrowLeft } from "react-icons/bs";
@@ -24,7 +24,7 @@ import { FaGithub } from "react-icons/fa";
 import Show from "utils/client/jsx/Show";
 import { IoLanguage, IoWarning } from "react-icons/io5";
 import Seo from "seo/Seo";
-import TagChip from "components/Blog/TagChip";
+import TagChip from "components/Mdx/TagChip";
 import blogPostSeo from "seo/blogPost.seo";
 import StyledAlert from "components/StyledComponents/StyledAlert";
 import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
@@ -38,7 +38,7 @@ import StyledButton from "components/StyledComponents/StyledButton";
 import dynamic from "next/dynamic";
 
 const TableOfContents = dynamic(
-  () => import("components/Blog/TableOfContents"),
+  () => import("components/Mdx/TableOfContents"),
   { ssr: false },
 );
 
@@ -252,9 +252,8 @@ export default function BlogPost({
               title={frontmatter.bannerSrc}
               titleAsCaption
             />
-
             <TableOfContents slug={slug} />
-
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <Component />
           </main>
           <footer

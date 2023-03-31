@@ -7,6 +7,7 @@ import { bundleMDX } from "mdx-bundler";
 import remarkGfm from "remark-gfm";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 
@@ -29,6 +30,7 @@ export async function getPostData(slug: string, blogType: BlogType) {
       remarkPlugins: [...(options.remarkPlugins ?? []), remarkGfm],
       rehypePlugins: [
         ...(options.rehypePlugins ?? []),
+        rehypeCodeTitles,
         rehypePrism,
         rehypeSlug,
         [

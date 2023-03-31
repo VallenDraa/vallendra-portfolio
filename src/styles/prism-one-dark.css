@@ -444,3 +444,19 @@ pre > code.diff-highlight .token.token.inserted:not(.prefix) *::selection {
 .prism-previewer-easing.prism-previewer-easing circle {
   fill: transparent;
 }
+
+.rehype-code-title {
+  margin-bottom: -0.6rem;
+  padding: 0.5rem 1rem;
+  font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono",
+    monospace;
+
+  background-color: hsl(220, 13%, 28%);
+  color: hsl(220, 14%, 71%);
+  font-weight: 500;
+  z-index: 0;
+  font-size: 1rem;
+
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}

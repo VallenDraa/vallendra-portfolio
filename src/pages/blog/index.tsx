@@ -1,7 +1,7 @@
 import type { Language } from "types/types";
 import type { InferGetStaticPropsType } from "next";
 
-import { getBlogPostData } from "utils/server/posts";
+import { getBlogPostData } from "utils/server/mdxProcessor";
 import Observe from "components/Observe";
 import SectionHeading from "components/Typography/SectionHeading";
 import fadeIn from "utils/client/helpers/animateOnObserved";

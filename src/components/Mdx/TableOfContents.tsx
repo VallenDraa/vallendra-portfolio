@@ -71,16 +71,18 @@ export default function TableOfContents({ slug }: { slug: string }) {
       <span className="h3 mb-4 block text-zinc-900 dark:text-zinc-50">
         Table Of Contents
       </span>
-      <ul className="ml-5 flex list-disc flex-col gap-3">
-        {sectionHeadings.map(heading => (
-          <ContentItem
-            key={heading.name}
-            name={heading.name}
-            hash={heading.hash}
-            type={heading.type}
-          />
-        ))}
-      </ul>
+      <nav>
+        <ul className="ml-5 flex list-disc flex-col gap-3">
+          {sectionHeadings.map(heading => (
+            <ContentItem
+              key={heading.name}
+              name={heading.name}
+              hash={heading.hash}
+              type={heading.type}
+            />
+          ))}
+        </ul>
+      </nav>
     </section>
   );
 }
