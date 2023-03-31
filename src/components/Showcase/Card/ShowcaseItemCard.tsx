@@ -56,7 +56,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         />
 
         {/* fade */}
-        <div className="group-hover:opacity-901 absolute inset-0 bg-gradient-to-b from-zinc-900/40 to-zinc-900/80 transition-opacity duration-200" />
+        <div className="group-hover:opacity-901 absolute inset-0 bg-gradient-to-b from-slate-800/40 to-slate-800/80 transition-opacity duration-200 dark:from-zinc-900/40 dark:to-zinc-900/80" />
 
         {/* detail */}
         <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
@@ -66,7 +66,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
           </span>
 
           {/* props short description */}
-          <p className="line-clamp-2 mt-1 px-3 text-base font-normal text-white/80 sm:text-sm">
+          <p className="mt-1 line-clamp-2 px-3 text-base font-normal text-white/80 sm:text-sm">
             {data.shortDescriptionEN}
           </p>
 
@@ -103,7 +103,7 @@ export default function ItemCard({ data, type }: ItemCardProps) {
             tabIndex={-1}
             type="button"
             icon={<BsArrowRight />}
-            className="relative z-20 mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 py-3 px-7 text-indigo-400 hover:bg-indigo-500/10"
+            className="relative z-20 mt-2 flex w-full items-center justify-center gap-2 rounded-none border-t-2 border-zinc-500/30 px-7 py-3 text-indigo-400 hover:bg-indigo-500/10"
           >
             See Detail
           </StyledButton>

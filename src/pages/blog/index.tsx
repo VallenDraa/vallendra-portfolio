@@ -149,7 +149,7 @@ export default function BlogsPage({
                     autoHeightMin="100%"
                     autoHeightMax="90px"
                     renderView={props => (
-                      <ul {...props} className="flex flex-wrap gap-2" />
+                      <ul {...props} className="flex flex-wrap gap-2 pb-2" />
                     )}
                   >
                     {BLOG_TAGS.map(tag => (

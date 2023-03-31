@@ -21,11 +21,10 @@ export default function CldImgWithBlur({
       <CldImage
         {...props}
         quality={1}
-        effects={[{ blur: "2000" }]}
+        sizes="75vw"
         format="webp"
-        sizes="75vw, (min-width: 480px) 80vw, (min-width: 768px) 100vw"
-        draggable={false}
-        className="absolute mx-auto my-0 w-full"
+        effects={[{ blur: "2000" }]}
+        className="absolute my-0 h-full w-full"
       />
 
       <CldImage
