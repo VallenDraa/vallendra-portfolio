@@ -3,7 +3,6 @@ import {
   SiCsharp,
   SiCss3,
   SiHtml5,
-  SiJava,
   SiJavascript,
   SiJquery,
   SiMongodb,
@@ -15,6 +14,7 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
+import { FaJava } from "react-icons/fa";
 import type { TextSize, Technologies } from "types/types";
 
 const techIcons: {
@@ -141,11 +141,11 @@ const techIcons: {
     />
   ),
   java: (size, isColorOn = true) => (
-    <SiJava
+    <FaJava
       className={`${size} ${
         isColorOn
-          ? "text-red-700"
-          : "text-white/50 transition-colors duration-200 hover:text-red-700 group-hover:text-red-700"
+          ? "text-red-500"
+          : "text-white/50 transition-colors duration-200 hover:text-red-500 group-hover:text-red-500"
       }`}
     />
   ),
