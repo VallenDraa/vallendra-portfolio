@@ -1,125 +1,101 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import { AiOutlineCheck, AiOutlineClose, AiOutlineLink } from "react-icons/ai";
 import Show from "utils/client/jsx/Show";
 import StyledButton from "components/StyledComponents/StyledButton";
 import clsx from "clsx";
+import useCopyToClipboard from "utils/client/hooks/useCopyToClipboard";
+import useShareInfo from "utils/client/hooks/useShareInfo";
 
 export default function CopyLinkBtn() {
-  const [shareIsSupported, setShareIsSupported] = useState<boolean | null>(
-    null,
-  );
-  const [copyLinkIsSupported, setCopyLinkIsSupported] = useState<
-    boolean | null
-  >(null);
+  const [copy, copyIsSupported, hasBeenCopied, hasCopyError] =
+    useCopyToClipboard();
 
-  const [hasBeenPressed, setHasBeenPressed] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [share, shareIsSupported, hasBeenShared, hasSharingError] =
+    useShareInfo();
 
-  useEffect(() => setCopyLinkIsSupported(!!navigator.clipboard?.writeText), []);
-
-  useEffect(() => setShareIsSupported(!!navigator.share), []);
-
-  const copyLinkToClipBoard = useCallback(() => {
-    navigator.clipboard
-      ?.writeText(window.location.href)
-      .then(() => {
-        setHasBeenPressed(true);
-        setTimeout(() => setHasBeenPressed(false), 1500);
-      })
-      .catch(() => {
-        setIsError(true);
-        setTimeout(() => setIsError(false), 1500);
-      });
-  }, []);
-
-  const shareInfo = useCallback(() => {
-    navigator
-      .share({
-        title: globalThis.document.title,
-        url: globalThis.window.location.href,
-      })
-      .then(() => setHasBeenPressed(true))
-      .catch(error => {
-        if (error.name === "AbortError") return;
-
-        setIsError(true);
-        setTimeout(() => setIsError(false), 1500);
-      })
-      .finally(() => setHasBeenPressed(false));
-  }, []);
+  /* Handle Error
+  =============== */
+  useEffect(() => {}, [hasCopyError, hasSharingError]);
 
   return (
     <>
-      <Show when={copyLinkIsSupported === null && shareIsSupported === null}>
-        <div className="h-9 w-full animate-pulse rounded bg-white/20 py-2 px-4 shadow-sm hover:shadow" />
+      <Show when={!copyIsSupported && !shareIsSupported}>
+        <div className="h-9 w-full animate-pulse rounded bg-white/20 px-4 py-2 shadow-sm hover:shadow" />
       </Show>
 
-      <Show when={copyLinkIsSupported === true && shareIsSupported === false}>
+      {/* copy link to clipboard */}
+      <Show when={copyIsSupported && !shareIsSupported}>
         <StyledButton
           alwaysShowIcon
           className={clsx(
-            "w-full animate-fade-in border py-3 px-6",
-            isError
+            "animate-fade-in w-full border px-6 py-3",
+            hasCopyError
               ? "border-red-500 text-red-500 hover:bg-red-500/10"
               : "border-teal-500 text-teal-500 hover:bg-teal-500/10",
           )}
-          onClick={copyLinkToClipBoard}
+          onClick={() => copy(window.location.href)}
           icon={
             <>
-              <Show when={!hasBeenPressed && !isError}>
+              <Show when={!hasBeenCopied && !hasCopyError}>
                 <AiOutlineLink className="text-teal-500" />
               </Show>
 
               {/* content for pressed and errorless state */}
-              <Show when={hasBeenPressed && !isError}>
+              <Show when={hasBeenCopied && !hasCopyError}>
                 <AiOutlineCheck />
               </Show>
 
-              <Show when={hasBeenPressed && isError}>
+              <Show when={hasBeenCopied && hasCopyError}>
                 <AiOutlineClose />
               </Show>
             </>
           }
         >
           {/* content for  unpressed state  */}
-          <Show when={!hasBeenPressed && !isError}>Copy Link</Show>
+          <Show when={!hasBeenCopied && !hasCopyError}>Copy Link</Show>
 
           {/* content for pressed and errorless state */}
-          <Show when={hasBeenPressed && !isError}>Link Copied !</Show>
+          <Show when={hasBeenCopied && !hasCopyError}>Link Copied !</Show>
 
           {/* content for pressed and has error state */}
-          <Show when={isError}>Fail To Copy !</Show>
+          <Show when={hasCopyError}>Fail To Copy !</Show>
         </StyledButton>
       </Show>
 
-      <Show when={shareIsSupported === true}>
+      {/* share page  */}
+      <Show when={shareIsSupported}>
         <StyledButton
           alwaysShowIcon
-          disabled={hasBeenPressed}
-          onClick={shareInfo}
+          disabled={hasBeenShared}
+          onClick={() =>
+            share({
+              title: globalThis.document.title,
+              url: globalThis.window.location.href,
+            })
+          }
           className={clsx(
-            "w-full animate-fade-in border py-3 px-6",
-            isError
+            "animate-fade-in w-full border px-6 py-3",
+            hasSharingError
               ? "border-red-500 text-red-500 hover:bg-red-500/10"
               : "border-teal-500 text-teal-500 hover:bg-teal-500/10",
           )}
           icon={
             <>
-              <Show when={!hasBeenPressed && !isError}>
+              <Show when={!hasBeenShared && !hasSharingError}>
                 <AiOutlineLink className="text-teal-500" />
               </Show>
 
-              <Show when={isError}>
+              <Show when={hasSharingError}>
                 <AiOutlineClose />
               </Show>
             </>
           }
         >
           {/* content for  unpressed state  */}
-          <Show when={!hasBeenPressed && !isError}>Share Page</Show>
+          <Show when={!hasBeenShared && !hasSharingError}>Share Page</Show>
 
           {/* content for pressed and has error state */}
-          <Show when={isError}>Fail To Share !</Show>
+          <Show when={hasSharingError}>Fail To Share !</Show>
         </StyledButton>
       </Show>
     </>
