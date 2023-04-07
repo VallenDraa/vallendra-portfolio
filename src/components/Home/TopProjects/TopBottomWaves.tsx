@@ -3,8 +3,6 @@ import Image from "next/image";
 import R, { useEffect } from "react";
 import darkLayeredWave from "@/public/svg/dark-layered-wave.svg";
 import lightLayeredWave from "@/public/svg/light-layered-wave.svg";
-import Observe from "components/Observe";
-import fadeIn from "utils/client/helpers/animateOnObserved";
 
 export default function TopBottomWaves() {
   const { theme } = useTheme();
@@ -15,27 +13,17 @@ export default function TopBottomWaves() {
 
   return (
     <>
-      <Observe
-        freezeOnceVisible
-        onEnter={ref => fadeIn(ref, "animate-fade-in")}
-      >
-        <Image
-          src={isDark ? darkLayeredWave : lightLayeredWave}
-          alt={isDark ? "dark-wave" : "light-wave"}
-          className="absolute -top-1 w-full rotate-180 opacity-0"
-        />
-      </Observe>
+      <Image
+        src={isDark ? darkLayeredWave : lightLayeredWave}
+        alt={isDark ? "dark-wave" : "light-wave"}
+        className="absolute -top-1 w-full rotate-180"
+      />
 
-      <Observe
-        freezeOnceVisible
-        onEnter={ref => fadeIn(ref, "animate-fade-in")}
-      >
-        <Image
-          src={isDark ? darkLayeredWave : lightLayeredWave}
-          alt={isDark ? "dark-wave" : "light-wave"}
-          className="absolute -bottom-1 w-full opacity-0"
-        />
-      </Observe>
+      <Image
+        src={isDark ? darkLayeredWave : lightLayeredWave}
+        alt={isDark ? "dark-wave" : "light-wave"}
+        className="absolute -bottom-1 w-full"
+      />
     </>
   );
 }

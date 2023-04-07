@@ -1,6 +1,7 @@
 import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { TbBrandFiverr } from "react-icons/tb";
 import menuData, { siteFooterMenus } from "utils/data/menus";
 import SiteFooterMenu from "./SiteFooterMenu";
 
@@ -18,9 +19,9 @@ export default function SiteFooter() {
       </ul>
 
       {/* socials */}
-      <div className="layout flex w-fit items-center justify-center gap-2.5 text-3xl text-zinc-600 dark:text-zinc-300 [&>*]:p-1">
+      <div className="layout flex w-fit items-center justify-center gap-2 text-3xl text-zinc-600 dark:text-zinc-300 [&>*]:p-1">
         <a
-          className="icon-tooltip"
+          className="icon-tooltip px-1.5 duration-200 hover:text-pink-400 dark:hover:text-pink-300"
           data-tooltip-content="Email"
           data-tooltip-place="top"
           target="_blank"
@@ -31,7 +32,7 @@ export default function SiteFooter() {
           <MdEmail />
         </a>
         <a
-          className="icon-tooltip"
+          className="icon-tooltip px-1.5 duration-200 hover:text-pink-400 dark:hover:text-pink-300"
           data-tooltip-content="Instagram"
           data-tooltip-place="top"
           target="_blank"
@@ -41,24 +42,32 @@ export default function SiteFooter() {
           <AiFillInstagram />
         </a>
         <a
-          className="icon-tooltip"
+          className="icon-tooltip px-1.5 duration-200 hover:text-pink-400 dark:hover:text-pink-300"
+          data-tooltip-content="Check my Fiverr gig out !"
+          data-tooltip-place="top"
+          target="_blank"
+          aria-label="Vallendra's Fiverr Gig"
+          href="https://www.fiverr.com/share/LLvRZo"
+        >
+          <TbBrandFiverr />
+        </a>
+        <a
+          className="icon-tooltip px-1.5 duration-200 hover:text-pink-400 dark:hover:text-pink-300"
           data-tooltip-content="Github"
           data-tooltip-place="top"
           target="_blank"
           aria-label="Github link button"
           href="https://github.com/vallendraa"
-          rel="noreferrer"
         >
           <FaGithub />
         </a>
         <a
-          className="icon-tooltip"
+          className="icon-tooltip px-1.5 duration-200 hover:text-pink-400 dark:hover:text-pink-300"
           data-tooltip-content="Linkedin"
           data-tooltip-place="top"
           target="_blank"
           aria-label="Linkedin link"
           href="https://www.linkedin.com/in/vallendra/"
-          rel="noreferrer"
         >
           <AiFillLinkedin />
         </a>

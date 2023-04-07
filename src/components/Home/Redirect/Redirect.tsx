@@ -42,7 +42,7 @@ export default function Redirect() {
             className={clsx(
               "font-bold uppercase",
               "outline-none transition-colors duration-200",
-              "relative z-10 mt-8 flex items-center justify-center gap-2 rounded-full py-3 px-6",
+              "relative z-10 mt-8 flex items-center justify-center gap-2 rounded-full px-6 py-3",
               "hover:bg-indigo-500 dark:hover:bg-zinc-100",
               "border border-indigo-500 hover:border-transparent active:border-transparent dark:border-white/80",
               "text-xl text-indigo-500 hover:text-indigo-50 dark:text-white/80 dark:hover:text-zinc-900 lg:text-2xl",
@@ -60,7 +60,7 @@ export default function Redirect() {
       >
         <Link
           href="/projects"
-          className="relative z-10 mt-4 inline-block rounded py-1 px-2 text-sm font-medium capitalize text-indigo-500 underline-offset-4 opacity-0 hover:underline dark:text-white/80"
+          className="normal-underline relative z-10 mt-4 inline-block rounded py-1 text-sm font-medium capitalize text-indigo-400 opacity-0 duration-200 before:transition before:duration-200 hover:text-pink-400 before:hover:-translate-y-1 before:hover:bg-pink-400 dark:text-white/80 dark:hover:text-pink-300 dark:before:hover:bg-pink-300"
         >
           See my other projects instead
         </Link>
