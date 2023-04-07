@@ -1,18 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
 
 export default function useShareInfo() {
-  const [shareIsSupported, setShareIsSupported] = useState(false);
+  const [isSupported, setIsSupported] = useState(false);
   const [hasBeenPressed, setHasBeenPressed] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => setShareIsSupported(!!navigator.share), []);
+  useEffect(() => {
+    setIsSupported(!!navigator?.share);
 
-  const shareInfo = useCallback(
+    setIsLoading(true);
+  }, []);
+
+  const share = useCallback(
     (data: ShareData, waitDuration = 1500) => {
-      if (!shareIsSupported) return;
+      if (!isSupported) return;
 
       navigator
-        .share(data)
+        ?.share(data)
         .then(() => setHasBeenPressed(true))
         .catch(error => {
           if (error.name === "AbortError") return;
@@ -22,8 +27,14 @@ export default function useShareInfo() {
         })
         .finally(() => setHasBeenPressed(false));
     },
-    [shareIsSupported],
+    [isSupported],
   );
 
-  return [shareInfo, shareIsSupported, hasBeenPressed, isError] as const;
+  return {
+    share,
+    isLoading,
+    isSupported,
+    hasBeenPressed,
+    isError,
+  } as const;
 }

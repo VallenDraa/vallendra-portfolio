@@ -3,13 +3,17 @@ import { useEffect, useState, useCallback } from "react";
 export default function useCopyToClipboard() {
   const [isError, setIsError] = useState(false);
   const [hasBeenPressed, setHasBeenPressed] = useState(false);
-  const [copyLinkIsSupported, setCopyLinkIsSupported] = useState(false);
+  const [isSupported, setIsSupported] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => setCopyLinkIsSupported(!!navigator.clipboard.writeText), []);
+  useEffect(() => {
+    setIsSupported(!!navigator.clipboard?.writeText);
+    setIsLoading(false);
+  }, []);
 
   const copy = useCallback(
     (str: string, waitDuration = 1500) => {
-      if (!copyLinkIsSupported) return;
+      if (!isSupported) return;
 
       navigator.clipboard
         ?.writeText(str)
@@ -22,8 +26,14 @@ export default function useCopyToClipboard() {
           setTimeout(() => setIsError(false), waitDuration);
         });
     },
-    [copyLinkIsSupported],
+    [isSupported],
   );
 
-  return [copy, copyLinkIsSupported, hasBeenPressed, isError] as const;
+  return {
+    copy,
+    isLoading,
+    isSupported,
+    hasBeenPressed,
+    isError,
+  } as const;
 }

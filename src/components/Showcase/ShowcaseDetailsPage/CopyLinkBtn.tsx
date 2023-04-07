@@ -7,28 +7,36 @@ import useCopyToClipboard from "utils/client/hooks/useCopyToClipboard";
 import useShareInfo from "utils/client/hooks/useShareInfo";
 
 export default function CopyLinkBtn() {
-  const [copy, copyIsSupported, hasBeenCopied, hasCopyError] =
-    useCopyToClipboard();
+  const {
+    copy,
+    isLoading: copyIsLoading,
+    isSupported: copyIsSupported,
+    hasBeenPressed: hasBeenCopied,
+    isError: hasCopyError,
+  } = useCopyToClipboard();
 
-  const [share, shareIsSupported, hasBeenShared, hasSharingError] =
-    useShareInfo();
+  const {
+    share,
+    isLoading: shareIsLoading,
+    isSupported: shareIsSupported,
+    hasBeenPressed: hasBeenShared,
+    isError: hasSharingError,
+  } = useShareInfo();
 
   /* Handle Error
   =============== */
   useEffect(() => {}, [hasCopyError, hasSharingError]);
 
-  return (
+  return copyIsLoading && shareIsLoading ? (
+    <div className="h-9 w-full animate-pulse rounded bg-white/20 px-4 py-2 shadow-sm hover:shadow" />
+  ) : (
     <>
-      <Show when={!copyIsSupported && !shareIsSupported}>
-        <div className="h-9 w-full animate-pulse rounded bg-white/20 px-4 py-2 shadow-sm hover:shadow" />
-      </Show>
-
       {/* copy link to clipboard */}
       <Show when={copyIsSupported && !shareIsSupported}>
         <StyledButton
           alwaysShowIcon
           className={clsx(
-            "animate-fade-in w-full border px-6 py-3",
+            "w-full animate-fade-in border px-6 py-3",
             hasCopyError
               ? "border-red-500 text-red-500 hover:bg-red-500/10"
               : "border-teal-500 text-teal-500 hover:bg-teal-500/10",
@@ -74,7 +82,7 @@ export default function CopyLinkBtn() {
             })
           }
           className={clsx(
-            "animate-fade-in w-full border px-6 py-3",
+            "w-full animate-fade-in border px-6 py-3",
             hasSharingError
               ? "border-red-500 text-red-500 hover:bg-red-500/10"
               : "border-teal-500 text-teal-500 hover:bg-teal-500/10",

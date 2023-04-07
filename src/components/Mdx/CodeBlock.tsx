@@ -21,7 +21,7 @@ export default function CustomCode({
 }: React.ComponentPropsWithRef<"code">) {
   const textRef = useRef<HTMLDivElement>(null);
 
-  const [copy, copyIsSupported, hasBeenCopied] = useCopyToClipboard();
+  const { copy, isSupported, hasBeenPressed } = useCopyToClipboard();
 
   const language = className?.includes("language")
     ? className.replace("language-", "").replace(" code-highlight", "")
@@ -48,7 +48,7 @@ export default function CustomCode({
           className="absolute right-2 top-2 rounded border border-zinc-600 !p-2 transition-colors hover:bg-zinc-700"
           onClick={() => copy(textRef?.current?.textContent ?? "")}
         >
-          {hasBeenCopied ? (
+          {hasBeenPressed ? (
             <HiCheckCircle className="text-indigo-400" />
           ) : (
             <HiClipboard />
