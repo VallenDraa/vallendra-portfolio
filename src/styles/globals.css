@@ -16,15 +16,15 @@
   /* Gradient underline css for text
   ================================= */
   .gradient-underline {
-    @apply before:primary-gradient before:animate-breathing before:bg-gradient before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full before:bg-gradient-to-r;
+    @apply before:primary-gradient before:absolute before:-bottom-2 before:left-0 before:h-[1px] before:w-full before:animate-breathing before:bg-gradient-to-r before:bg-gradient;
   }
 
   .fade-bottom {
-    @apply after:absolute after:inset-x-0 after:z-40 after:h-20 after:bg-gradient-to-b after:from-transparent after:to-indigo-50 dark:after:to-zinc-900;
+    @apply after:absolute after:inset-x-0 after:z-30 after:h-20 after:bg-gradient-to-b after:from-transparent after:to-indigo-50 dark:after:to-zinc-900;
   }
 
   .fade-top {
-    @apply before:absolute before:inset-x-0 before:z-40 before:h-20 before:bg-gradient-to-b before:from-indigo-50 before:to-transparent dark:before:from-zinc-900;
+    @apply before:absolute before:inset-x-0 before:z-30 before:h-20 before:bg-gradient-to-b before:from-indigo-50 before:to-transparent dark:before:from-zinc-900;
   }
 
   /* navlist underlay for <lg screen size to smoothen open and closing animation 

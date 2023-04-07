@@ -57,9 +57,9 @@ export default function ProjectsPage({
 
       <header
         id="skip-to-content"
-        className="fade-bottom relative mt-6 mb-3 w-full after:-top-6"
+        className="fade-bottom relative mb-3 mt-6 w-full after:top-10"
       >
-        <div className="layout flex flex-col pt-20">
+        <div className="layout flex flex-col pt-36">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -93,7 +93,7 @@ export default function ProjectsPage({
 
       <main
         className={clsx(
-          "layout flex min-h-[480px] grow items-center justify-center pt-5 pb-10",
+          "layout flex min-h-[480px] grow items-center justify-center pb-10 pt-5",
           searchIsLoading &&
             "cursor-not-allowed after:absolute after:inset-0 after:z-20",
         )}

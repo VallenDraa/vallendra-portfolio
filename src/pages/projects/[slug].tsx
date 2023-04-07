@@ -180,9 +180,9 @@ export default function ProjectDetails({
 
       <header
         id="skip-to-content"
-        className="fade-bottom relative mt-6 mb-3 after:-top-6"
+        className="fade-bottom relative mb-3 mt-6 after:top-10"
       >
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-20 pb-3 dark:border-zinc-700">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pb-3 pt-36 dark:border-zinc-700">
           {/* back to project button */}
           <LinkWithUnderline href="/projects">
             <BsArrowLeft />
@@ -275,7 +275,7 @@ export default function ProjectDetails({
               <Show when={!!project.downloadLink}>
                 <StyledButton
                   alwaysShowIcon
-                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  className="border border-blue-500 px-6 py-3 text-blue-500 hover:bg-blue-500/10"
                   href={project.downloadLink as string}
                   icon={<FaDownload className="text-lg text-blue-500" />}
                 >
@@ -287,7 +287,7 @@ export default function ProjectDetails({
               <Show when={!!project.siteLink}>
                 <StyledButton
                   alwaysShowIcon
-                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  className="border border-blue-500 px-6 py-3 text-blue-500 hover:bg-blue-500/10"
                   href={project.siteLink as string}
                   icon={<SlGlobe className="text-lg text-blue-500" />}
                 >
@@ -300,7 +300,7 @@ export default function ProjectDetails({
                 alwaysShowIcon
                 icon={<FaGithub className="text-lg" />}
                 href={project.gitLink}
-                className="border border-zinc-500 py-3 px-6 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
+                className="border border-zinc-500 px-6 py-3 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
               >
                 Visit Repo
               </StyledButton>

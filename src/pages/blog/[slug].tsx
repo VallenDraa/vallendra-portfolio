@@ -170,13 +170,13 @@ export default function BlogPost({
         </span>
       </StyledAlert>
 
-      <article className="fade-bottom relative mb-3 mt-6 after:-top-6">
+      <article className="fade-bottom mt-6after:top-10 relative mb-3">
         <div className="layout overflow-x-hidden">
           <header id="skip-to-content">
             <section
               className={clsx(
                 "not-prose prose prose-zinc prose-pink dark:prose-invert md:prose-lg",
-                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pb-3 pt-20 dark:border-zinc-700",
+                "mx-auto flex w-full flex-col justify-between border-b-2 border-indigo-200 pb-3 pt-36 dark:border-zinc-700",
               )}
             >
               {/* back to project button */}

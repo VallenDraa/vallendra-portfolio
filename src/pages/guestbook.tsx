@@ -15,8 +15,8 @@ export default function Guestbook() {
     <>
       <Seo {...guestbookPageSeo} />
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-6">
-        <div className="layout flex flex-col pt-20">
+      <header className="fade-bottom relative mb-3 mt-6 w-full after:top-10">
+        <div className="layout flex flex-col pt-36">
           {/* back to project button */}
           <Observe
             freezeOnceVisible
@@ -46,7 +46,7 @@ export default function Guestbook() {
           </div>
         </div>
       </header>
-      <main className="layout grow pt-5 pb-10">
+      <main className="layout grow pb-10 pt-5">
         <Giscus
           term="/guestbook"
           repo={(process.env.NEXT_PUBLIC_REPO as Repo) || ""}

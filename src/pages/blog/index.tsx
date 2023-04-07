@@ -112,9 +112,9 @@ export default function BlogsPage({
 
       <header
         id="skip-to-content"
-        className="fade-bottom relative mb-3 mt-6 w-full after:-top-6"
+        className="fade-bottom relative mb-3 mt-6 w-full after:top-10"
       >
-        <div className="layout relative flex flex-col pt-20">
+        <div className="layout relative flex flex-col pt-36">
           {/* heading */}
           <Observe
             freezeOnceVisible

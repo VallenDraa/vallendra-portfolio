@@ -177,9 +177,9 @@ export default function CertificateDetails({
 
       <header
         id="skip-to-content"
-        className="fade-bottom relative mt-6 mb-3 after:-top-6"
+        className="fade-bottom relative mb-3 mt-6 after:top-10"
       >
-        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pt-20 pb-3 dark:border-zinc-700">
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pb-3 pt-36 dark:border-zinc-700">
           <LinkWithUnderline href="/certificates">
             <BsArrowLeft />
             Back To Certificate Page
@@ -256,7 +256,7 @@ export default function CertificateDetails({
               <Show when={!!certificate.certificateLink}>
                 <StyledButton
                   alwaysShowIcon
-                  className="border border-blue-500 py-3 px-6 text-blue-500 hover:bg-blue-500/10"
+                  className="border border-blue-500 px-6 py-3 text-blue-500 hover:bg-blue-500/10"
                   href={certificate.certificateLink}
                   icon={<FaRegNewspaper className="text-lg text-blue-500" />}
                 >

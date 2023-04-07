@@ -19,7 +19,7 @@ export default function Home({ topPickedProjects }: HomeProps) {
       <Seo {...defaultSeo} />
 
       {/* hero section */}
-      <header>
+      <header className="pt-14">
         <Hero />
       </header>
       <main className="fade-bottom relative after:-top-20">

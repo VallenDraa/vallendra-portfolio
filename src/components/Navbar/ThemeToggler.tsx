@@ -23,7 +23,7 @@ export default function ThemeToggler({
       className={clsx(
         "!flex h-10 w-10 items-center justify-center rounded-md p-2 text-center !text-xl",
         theme === "light"
-          ? "text-zinc-700 hover:bg-zinc-500/10"
+          ? "text-zinc-800 hover:bg-zinc-500/10"
           : "text-yellow-500 hover:bg-yellow-500/30",
         className,
       )}
