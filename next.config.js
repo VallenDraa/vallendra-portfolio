@@ -1,7 +1,5 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 
-/** @type {import('next').NextConfig} */
-
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
@@ -21,7 +19,11 @@ export default withBundleAnalyzer({
     return [
       {
         source: "/(.*)?",
-        headers: [{ key: "X-Frame-Options", value: "DENY" }],
+        headers: [
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "X-XSS-Protection", value: "1; mode=block" },
+          { key: "X-Frame-Options", value: "DENY" },
+        ],
       },
     ];
   },

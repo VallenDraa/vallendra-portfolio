@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: R.ReactNode }) {
     <div className="flex min-h-screen flex-col">
       <a
         href="#skip-to-content"
-        className="translate-all fixed top-0 z-[100] h-max w-max -translate-y-full bg-indigo-500 p-3 text-white duration-200 focus-visible:translate-y-0"
+        className="translate-all fixed left-1/2 top-0 z-[100] h-max w-max -translate-x-1/2 -translate-y-full bg-indigo-500 p-3 text-white opacity-0 duration-200 focus-visible:translate-y-0 focus-visible:opacity-100 md:left-0 md:translate-x-0"
       >
         Skip Navigation
       </a>

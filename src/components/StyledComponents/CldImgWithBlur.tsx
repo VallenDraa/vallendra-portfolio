@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { CldImage, CldImageProps } from "next-cloudinary";
 import { useState } from "react";
+import Show from "utils/client/jsx/Show";
 
 type CldImgWithBlurProps = CldImageProps & {
   hasDynamicSize?: boolean;
@@ -21,15 +22,17 @@ export default function CldImgWithBlur({
         "overflow-clip",
       )}
     >
-      <CldImage
-        {...props}
-        quality={1}
-        height={144}
-        width={192}
-        format="webp"
-        effects={[{ blur: "2000" }]}
-        className={clsx(!hasLoaded && "blur-sm", "absolute my-0 h-full w-full")}
-      />
+      <Show when={!hasLoaded}>
+        <CldImage
+          {...props}
+          quality={1}
+          height={144}
+          width={192}
+          format="webp"
+          effects={[{ blur: "2000" }]}
+          className="absolute my-0 h-full w-full blur-sm"
+        />
+      </Show>
 
       <CldImage
         {...props}

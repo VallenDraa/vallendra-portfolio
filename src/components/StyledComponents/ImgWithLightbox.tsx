@@ -305,6 +305,7 @@ export default function ImgWithLightbox({
                 <div className="flex items-center gap-2">
                   {/* zoom the image in */}
                   <StyledButton
+                    aria-label="Zoom-in image button"
                     onClick={() => setImageScale({ add: SCALE_INTERVAL })}
                     disabled={imageScale === MAX_IMG_SCALE}
                     className={clsx(
@@ -317,6 +318,7 @@ export default function ImgWithLightbox({
 
                   {/* zoom the image out */}
                   <StyledButton
+                    aria-label="Zoom-out image button"
                     onClick={() => setImageScale({ add: -SCALE_INTERVAL })}
                     disabled={imageScale === MIN_IMG_SCALE}
                     className={clsx(
@@ -329,6 +331,7 @@ export default function ImgWithLightbox({
 
                   {/* reset scale and positioning of the image */}
                   <StyledButton
+                    aria-label="Reset image scale and position button"
                     onClick={() => {
                       resetScaleAndPositioning();
                       setIsDragging(false);
@@ -344,6 +347,7 @@ export default function ImgWithLightbox({
 
                   {/* close the lightbox */}
                   <StyledButton
+                    aria-label="Exit lightbox button"
                     onClick={() => {
                       setIsLightboxActive(false);
                     }}
