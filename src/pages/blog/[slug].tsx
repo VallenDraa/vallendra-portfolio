@@ -170,7 +170,7 @@ export default function BlogPost({
         </span>
       </StyledAlert>
 
-      <article className="fade-bottom mt-6after:top-10 relative mb-3">
+      <article className="fade-bottom after:top-10 relative mb-3 mt-6">
         <div className="layout overflow-x-hidden">
           <header id="skip-to-content">
             <section
