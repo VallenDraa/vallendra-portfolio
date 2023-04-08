@@ -67,11 +67,14 @@ export default function TableOfContents({ slug }: { slug: string }) {
     // skeleton
     <section className="h-96 w-full animate-pulse rounded-lg bg-white/20" />
   ) : (
-    <section className="not-prose">
-      <span className="h3 mb-4 block text-zinc-900 dark:text-zinc-50">
+    <>
+      <h2 id="table-of-content">
         Table Of Contents
-      </span>
-      <nav>
+        <a href="#table-of-content" className="blog-section-hash">
+          <span className="icon icon-link" />
+        </a>
+      </h2>
+      <nav className="not-prose">
         <ul className="ml-5 flex list-disc flex-col gap-3">
           {sectionHeadings.map(heading => (
             <ContentItem
@@ -83,6 +86,6 @@ export default function TableOfContents({ slug }: { slug: string }) {
           ))}
         </ul>
       </nav>
-    </section>
+    </>
   );
 }
