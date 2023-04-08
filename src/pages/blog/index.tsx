@@ -16,7 +16,6 @@ import Show from "utils/client/jsx/Show";
 import dynamic from "next/dynamic";
 import { BlogTags, BLOG_TAGS } from "interfaces/blogPost.interface";
 import StyledButton from "components/StyledComponents/StyledButton";
-import Filter from "components/StyledComponents/Filter";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import {
   getAvailableTags,
@@ -26,7 +25,13 @@ import {
 // suppress useLayoutEffect warning
 if (typeof window === "undefined") R.useLayoutEffect = R.useEffect;
 
-const SearchNotFound = dynamic(() => import("components/SearchNotFound"));
+const Filter = dynamic(() => import("components/StyledComponents/Filter"), {
+  ssr: false,
+});
+
+const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
+  ssr: false,
+});
 
 export default function BlogsPage({
   allPostData,
