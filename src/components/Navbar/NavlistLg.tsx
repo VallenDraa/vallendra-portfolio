@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import StyledButton from "components/StyledComponents/StyledButton";
 import menuData from "utils/data/menus";
+import NavbarSubMenu from "components/Navbar/NavbarSubMenu";
 import { Fragment } from "react";
 import clsx from "clsx";
-import NavbarSubMenu from "./NavbarSubMenu";
-import NavBtn from "./NavBtn";
+import NavBtn from "components/Navbar/NavBtn";
 
 export default function NavListLg() {
   return (
