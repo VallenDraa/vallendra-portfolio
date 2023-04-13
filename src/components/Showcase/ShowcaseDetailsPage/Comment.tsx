@@ -17,6 +17,11 @@ export default function Comment() {
     return result;
   }, [pathname, query]);
 
+  /* to force mount and unmount because
+  only changing the term doesn't change
+  the component's discussion target
+  so it needs to re-render fully
+  for the target to change */
   R.useEffect(() => {
     setCommentIsVisible(false);
     setTimeout(() => setCommentIsVisible(true), 200);
@@ -25,8 +30,8 @@ export default function Comment() {
   return commentIsVisible ? (
     <Giscus
       term={term}
-      repo={(process.env.NEXT_PUBLIC_REPO as Repo) || ""}
-      repoId={process.env.NEXT_PUBLIC_REPOID || ""}
+      repo={process.env.NEXT_PUBLIC_REPO as Repo}
+      repoId={process.env.NEXT_PUBLIC_REPOID as string}
       category="Comments"
       categoryId="DIC_kwDOIQ1RLM4CTkQ3"
       mapping="specific"
