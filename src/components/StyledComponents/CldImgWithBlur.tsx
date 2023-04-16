@@ -37,10 +37,11 @@ export default function CldImgWithBlur({
           {...props}
           src={src}
           quality={1}
-          height={72}
-          width={96}
+          height={36}
+          width={48}
           format="webp"
-          className="h-full w-full"
+          priority={false}
+          className="m-0 h-full w-full"
         />
       </Transition>
 
@@ -48,6 +49,8 @@ export default function CldImgWithBlur({
         {...props}
         src={src}
         format="webp"
+        priority={false}
+        onLoad={() => setHasNotLoaded(false)}
         sizes={
           hasDynamicSize
             ? "75vw, (min-width: 480px) 80vw, (min-width: 768px) 100vw"
@@ -57,7 +60,6 @@ export default function CldImgWithBlur({
           "z-10 w-full",
           !className?.includes("absolute") ? "relative" : "absolute",
         )}
-        onLoad={() => setHasNotLoaded(false)}
       />
     </div>
   );

@@ -296,7 +296,7 @@ export default function ImgWithLightbox({
             />
 
             {/* lightbox controls */}
-            <Dialog.Panel className="absolute top-0 z-10 w-full bg-indigo-50/50 py-3 dark:bg-zinc-800/50">
+            <Dialog.Panel className="absolute top-0 z-10 w-full bg-indigo-50/50 py-3 backdrop-blur-sm dark:bg-zinc-800/50">
               <div className="layout flex items-center justify-between gap-2">
                 <Dialog.Title className="h5 font-medium text-zinc-700/90 dark:text-white/90">
                   {title}
