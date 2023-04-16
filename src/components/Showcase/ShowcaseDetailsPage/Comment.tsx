@@ -1,35 +1,15 @@
 import Giscus, { Repo } from "@giscus/react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import R from "react";
 
 export default function Comment() {
   const { theme } = useTheme();
-  const { pathname, query, asPath } = useRouter();
+  const { asPath } = useRouter();
 
-  const [commentIsVisible, setCommentIsVisible] = R.useState(true);
-  const term = R.useMemo(() => {
-    const splitPathname = pathname.split("/");
-    splitPathname[2] = query.slug as string;
-
-    const result = splitPathname.join("/");
-
-    return result;
-  }, [pathname, query]);
-
-  /* to force mount and unmount because
-  only changing the term doesn't change
-  the component's discussion target
-  so it needs to re-render fully
-  for the target to change */
-  R.useEffect(() => {
-    setCommentIsVisible(false);
-    setTimeout(() => setCommentIsVisible(true), 200);
-  }, [asPath]);
-
-  return commentIsVisible ? (
+  return (
     <Giscus
-      term={term}
+      key={asPath} // this removes the need for force re-render
+      term={asPath}
       repo={process.env.NEXT_PUBLIC_REPO as Repo}
       repoId={process.env.NEXT_PUBLIC_REPOID as string}
       category="Comments"
@@ -43,5 +23,5 @@ export default function Comment() {
       theme={theme === "dark" ? "transparent_dark" : "light"}
       inputPosition="top"
     />
-  ) : null;
+  );
 }
