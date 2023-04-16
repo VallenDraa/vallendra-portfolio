@@ -69,7 +69,7 @@ export default function NavListSm() {
             className={clsx(
               "fixed left-0 top-0 z-[70]",
               "bg-indigo-50 dark:bg-zinc-900",
-              "flex h-screen w-72 flex-col gap-1"
+              "flex h-screen w-72 flex-col gap-1",
             )}
           >
             {/* close button for small screen nav */}
@@ -88,7 +88,7 @@ export default function NavListSm() {
             </div>
 
             {/* menu lists */}
-            {menuData.map((menu) => (
+            {menuData.map(menu => (
               <Fragment key={menu.name}>
                 {menu.subMenus === undefined ? (
                   <NavBtn
@@ -109,7 +109,7 @@ export default function NavListSm() {
                           <IoChevronDown
                             className={clsx(
                               open && "rotate-180",
-                              "h-5 w-5 transition duration-300"
+                              "h-5 w-5 transition duration-300",
                             )}
                           />
                         </Popover.Button>
@@ -123,7 +123,7 @@ export default function NavListSm() {
                           leaveTo="transform scale-95 opacity-0"
                         >
                           <Popover.Panel className="py-1.5">
-                            {menu.subMenus.map((subMenu) => (
+                            {menu.subMenus.map(subMenu => (
                               <StyledButton
                                 key={subMenu.url}
                                 hrefTarget="_self"

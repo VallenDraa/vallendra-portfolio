@@ -25,13 +25,13 @@ export default function CldImgWithBlur({
     >
       <Transition
         show={hasNotLoaded}
-        enter="ease-out duration-500"
+        enter="ease-out duration-150"
         enterFrom="opacity-0"
         enterTo="opacity-100"
-        leave="ease-in duration-500"
+        leave="ease-in duration-150"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
-        className="absolute inset-0 z-20"
+        className="absolute inset-0 z-20 blur-md backdrop-blur-md"
       >
         <CldImage
           {...props}
@@ -40,7 +40,7 @@ export default function CldImgWithBlur({
           height={72}
           width={96}
           format="webp"
-          className="my-0 h-full w-full blur-md"
+          className="h-full w-full"
         />
       </Transition>
 

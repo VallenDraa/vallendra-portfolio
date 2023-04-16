@@ -11,7 +11,7 @@ type LikedResponse = {
 export default function useGetLikesById(
   id: string,
   type: ShowcaseType,
-  willFetch = true
+  willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
@@ -22,12 +22,12 @@ export default function useGetLikesById(
     async () => {
       if (!willFetch) return;
 
-      const likes = await fetch(url).then((r) => r.json());
+      const likes = await fetch(url).then(r => r.json());
 
       // eslint-disable-next-line consistent-return
       return likes;
     },
-    { revalidateOnFocus: false }
+    { revalidateOnFocus: false },
   );
 
   R.useEffect(() => {

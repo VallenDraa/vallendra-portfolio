@@ -170,7 +170,7 @@ export default function BlogPost({
         </span>
       </StyledAlert>
 
-      <article className="fade-bottom after:top-10 relative mb-3 mt-6">
+      <article className="fade-bottom relative mb-3 mt-6 after:top-10">
         <div className="layout overflow-x-hidden">
           <header id="skip-to-content">
             <section
@@ -210,16 +210,8 @@ export default function BlogPost({
                       likesRes.data?.likes === undefined)
                   }
                   hasLiked={hasLiked}
-                  likes={
-                    likesRes.data?.likes !== undefined
-                      ? likesRes.data?.likes
-                      : 0
-                  }
-                  views={
-                    viewsRes.data?.views !== undefined
-                      ? viewsRes.data?.views
-                      : 0
-                  }
+                  likes={likesRes.data?.likes ?? 0}
+                  views={viewsRes.data?.views ?? 0}
                 />
                 <Show when={!frontmatter.englishOnly}>
                   <StyledButton
@@ -252,8 +244,8 @@ export default function BlogPost({
               title={frontmatter.bannerSrc}
               titleAsCaption
             />
+
             <TableOfContents slug={slug} />
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <Component />
           </main>
           <footer
@@ -262,12 +254,13 @@ export default function BlogPost({
               "mx-auto mb-4 flex flex-col gap-4",
             )}
           >
-            <section className="detail-aside-colors mt-3 flex h-fit grow items-center justify-between gap-4 rounded-md border-2 p-4">
+            <section className="detail-aside-colors not-prose mt-3 flex h-fit grow items-center justify-between gap-4 rounded-md border-2 p-4">
               <div className="grow space-y-3">
                 <StyledButton
                   alwaysShowIcon
                   icon={<FaGithub className="text-lg" />}
-                  href=""
+                  href={frontmatter.githubLink}
+                  hrefTarget="_blank"
                   className="w-full border border-zinc-500 px-6 py-3 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
                 >
                   See On Github
@@ -276,7 +269,6 @@ export default function BlogPost({
                 <CopyLinkBtn />
               </div>
 
-              {/* Like button */}
               <LikeButton
                 showSkeleton={
                   !(viewsRes.error && likesRes.error) &&

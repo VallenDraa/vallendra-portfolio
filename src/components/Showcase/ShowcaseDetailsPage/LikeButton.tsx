@@ -22,8 +22,8 @@ export default function LikeButton({
     <>
       <Show when={showSkeleton}>
         <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-          <div className="basis-3/4 rounded-lg bg-white/20" />
-          <div className="basis-1/4 rounded-lg bg-white/20" />
+          <div className="basis-3/4 rounded-lg bg-zinc-500/20 dark:bg-white/20" />
+          <div className="basis-1/4 rounded-lg bg-zinc-500/20 dark:bg-white/20" />
         </div>
       </Show>
       <Show when={revealButton}>
@@ -34,7 +34,7 @@ export default function LikeButton({
           }
           className={clsx(
             "icon-tooltip",
-            "flex animate-fade-in flex-col items-center gap-1 overflow-hidden py-3 px-6",
+            "flex animate-fade-in flex-col items-center gap-1 overflow-hidden px-6 py-3",
             hasLikedShowcase
               ? "text-red-400 hover:bg-red-500/10"
               : "text-zinc-400 hover:bg-zinc-500/10",

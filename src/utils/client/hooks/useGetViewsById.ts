@@ -10,7 +10,7 @@ type ViewsResponse = {
 export default function useGetViewsById(
   id: string,
   type: ShowcaseType,
-  willFetch = true
+  willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
@@ -21,12 +21,12 @@ export default function useGetViewsById(
     async () => {
       if (!willFetch) return;
 
-      const views = await fetch(url).then((r) => r.json());
+      const views = await fetch(url).then(r => r.json());
 
       // eslint-disable-next-line consistent-return
       return views;
     },
-    { revalidateOnFocus: false }
+    { revalidateOnFocus: false },
   );
 
   R.useEffect(() => {

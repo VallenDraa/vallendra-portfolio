@@ -27,7 +27,10 @@ function ContentItem({ name, hash, type }: ItemProps) {
       <a
         href={`#${hash}`}
         className={clsx(
-          "inline-block w-fit border-b border-dashed border-zinc-900 pb-0.5 text-sm text-zinc-900 underline-offset-2 hover:border-solid dark:border-zinc-300 dark:text-zinc-300 md:text-base",
+          "transition-colors",
+          "inline-block w-fit pb-0.5",
+          "text-sm text-zinc-900 hover:text-pink-400 dark:border-zinc-300 dark:text-zinc-300 dark:hover:text-pink-300 md:text-base",
+          "border-b border-dashed border-zinc-900 hover:border-solid hover:border-pink-400 dark:hover:border-pink-300",
         )}
       >
         {name}
@@ -75,7 +78,7 @@ export default function TableOfContents({ slug }: { slug: string }) {
         </a>
       </h2>
       <nav className="not-prose">
-        <ul className="ml-5 flex list-disc flex-col gap-3">
+        <ul className="flex flex-col gap-3">
           {sectionHeadings.map(heading => (
             <ContentItem
               key={heading.name}

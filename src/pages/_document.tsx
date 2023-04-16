@@ -9,7 +9,7 @@ export default function Document() {
         porftolio.
       </noscript>
 
-      <body className="overflow-x-hidden scroll-smooth bg-indigo-50 caret-pink-400 selection:bg-indigo-400/40 dark:bg-zinc-900 dark:caret-pink-300">
+      <body className="overflow-x-hidden scroll-smooth bg-indigo-50 caret-pink-400 dark:bg-zinc-900 dark:caret-pink-300">
         <Main />
         <NextScript />
       </body>

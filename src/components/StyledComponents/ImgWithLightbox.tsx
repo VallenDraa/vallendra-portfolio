@@ -19,16 +19,16 @@ type DragEvent =
   | R.MouseEvent<HTMLImageElement>
   | R.TouchEvent<HTMLImageElement>;
 
-const TRANSLATE_INTERVAL = 50;
+const TRANSLATE_INTERVAL_PX = 50;
+const MAX_BROWSER_WALL_DISTANCE_PX = 100;
+
 const SCALE_INTERVAL = 0.5;
 const MIN_IMG_SCALE = 1;
 const MAX_IMG_SCALE = 4;
 
-const MAX_BROWSER_WALL_DISTANCE = 100;
-
 const scaleChecker = (
   prev: number,
-  incoming: { add?: number; override?: number }
+  incoming: { add?: number; override?: number },
 ) => {
   let newVal: number;
 
@@ -84,7 +84,7 @@ export default function ImgWithLightbox({
 
       imageWrapperRef.current.style.transform = `scale(${scale}) translate(${xTranslate}px, ${yTranslate}px)`;
     },
-    [imageWrapperRef]
+    [imageWrapperRef],
   );
 
   const pullImgBack = R.useCallback(() => {
@@ -98,24 +98,24 @@ export default function ImgWithLightbox({
     const topDist = rect.top;
     const bottomDist = window.innerHeight - rect.bottom;
 
-    const tooMuchLeft = leftDist > MAX_BROWSER_WALL_DISTANCE;
-    const tooMuchRight = rightDist > MAX_BROWSER_WALL_DISTANCE;
-    const tooMuchTop = topDist > MAX_BROWSER_WALL_DISTANCE;
-    const tooMuchBottom = bottomDist > MAX_BROWSER_WALL_DISTANCE;
+    const tooMuchLeft = leftDist > MAX_BROWSER_WALL_DISTANCE_PX;
+    const tooMuchRight = rightDist > MAX_BROWSER_WALL_DISTANCE_PX;
+    const tooMuchTop = topDist > MAX_BROWSER_WALL_DISTANCE_PX;
+    const tooMuchBottom = bottomDist > MAX_BROWSER_WALL_DISTANCE_PX;
 
     // re-calculate y axis drag max distance for smaller screen
     const yMaxDistance =
-      window.innerWidth < 540 ? 300 / imageScale : MAX_BROWSER_WALL_DISTANCE;
+      window.innerWidth < 540 ? 300 / imageScale : MAX_BROWSER_WALL_DISTANCE_PX;
 
     if (tooMuchLeft) {
       xTranslateRef.current -=
-        Math.abs(leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        Math.abs(leftDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE_PX) /
         imageScale;
     }
 
     if (tooMuchRight) {
       xTranslateRef.current +=
-        Math.abs(rightDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE) /
+        Math.abs(rightDist - xDragAmount - MAX_BROWSER_WALL_DISTANCE_PX) /
         imageScale;
     }
 
@@ -146,7 +146,7 @@ export default function ImgWithLightbox({
 
       dragStartPointRef.current = { x: pageX, y: pageY };
     },
-    [imageScale]
+    [imageScale],
   );
 
   const handleDragging = R.useCallback(
@@ -168,13 +168,13 @@ export default function ImgWithLightbox({
       renderImgPosition(
         imageScale,
         xTranslateRef.current,
-        yTranslateRef.current
+        yTranslateRef.current,
       );
 
       dragAmountRef.current = { x: newXDragAmount, y: newYDragAmount };
       dragStartPointRef.current = { x: pageX, y: pageY };
     },
-    [isDragging, imageScale, xTranslateRef, yTranslateRef]
+    [isDragging, imageScale, xTranslateRef, yTranslateRef],
   );
 
   const handleStopDrag = R.useCallback(() => {
@@ -211,22 +211,22 @@ export default function ImgWithLightbox({
 
           case "ArrowUp":
             if (imageScale > MIN_IMG_SCALE)
-              yTranslateRef.current += TRANSLATE_INTERVAL;
+              yTranslateRef.current += TRANSLATE_INTERVAL_PX;
             break;
 
           case "ArrowDown":
             if (imageScale > MIN_IMG_SCALE)
-              yTranslateRef.current -= TRANSLATE_INTERVAL;
+              yTranslateRef.current -= TRANSLATE_INTERVAL_PX;
             break;
 
           case "ArrowRight":
             if (imageScale > MIN_IMG_SCALE)
-              xTranslateRef.current -= TRANSLATE_INTERVAL;
+              xTranslateRef.current -= TRANSLATE_INTERVAL_PX;
             break;
 
           case "ArrowLeft":
             if (imageScale > MIN_IMG_SCALE)
-              xTranslateRef.current += TRANSLATE_INTERVAL;
+              xTranslateRef.current += TRANSLATE_INTERVAL_PX;
             break;
 
           default:
@@ -237,13 +237,13 @@ export default function ImgWithLightbox({
         renderImgPosition(
           imageScale,
           xTranslateRef.current,
-          yTranslateRef.current
+          yTranslateRef.current,
         );
       },
       150,
-      { leading: true }
+      { leading: true },
     ),
-    [imageScale, xTranslateRef, yTranslateRef]
+    [imageScale, xTranslateRef, yTranslateRef],
   );
 
   /*  lightbox lifecycle
@@ -252,10 +252,10 @@ export default function ImgWithLightbox({
     setLightboxIsActive(isLightboxActive);
 
     if (isLightboxActive) {
+      resetScaleAndPositioning();
       document.body.style.overflowY = "hidden";
     } else {
       setIsDragging(false);
-      resetScaleAndPositioning();
     }
   }, [isLightboxActive]);
 
@@ -310,7 +310,7 @@ export default function ImgWithLightbox({
                     disabled={imageScale === MAX_IMG_SCALE}
                     className={clsx(
                       "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
                     )}
                   >
                     <BiZoomIn />
@@ -323,7 +323,7 @@ export default function ImgWithLightbox({
                     disabled={imageScale === MIN_IMG_SCALE}
                     className={clsx(
                       "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
                     )}
                   >
                     <BiZoomOut />
@@ -339,7 +339,7 @@ export default function ImgWithLightbox({
                     disabled={imageScale === MIN_IMG_SCALE}
                     className={clsx(
                       "disabled:cursor-not-allowed disabled:text-zinc-700/40 disabled:hover:bg-transparent disabled:dark:text-white/40",
-                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90"
+                      "items-center justify-center rounded-full p-1.5 !text-2xl text-zinc-700/90 transition duration-200 hover:bg-white/30 dark:text-white/90",
                     )}
                   >
                     <BsAspectRatio />
@@ -369,7 +369,7 @@ export default function ImgWithLightbox({
                 "layout relative",
                 isLightboxActive &&
                   !isDragging &&
-                  "transition-transform duration-300"
+                  "transition-transform duration-300",
               )}
               style={{ transform: `scale(1) translate(0px, 0px)` }}
             >
@@ -379,11 +379,11 @@ export default function ImgWithLightbox({
                 format="webp"
                 draggable={false}
                 hasDynamicSize={false}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
                 className={clsx(
                   "mx-auto w-full",
                   hasAnimation ? "cursor-move" : "cursor-zoom-in",
-                  isDragging && "cursor-grabbing"
+                  isDragging && "cursor-grabbing",
                 )}
                 onMouseLeave={() => isDragging && setIsDragging(false)}
                 onMouseDown={handleStartDrag}
@@ -396,7 +396,7 @@ export default function ImgWithLightbox({
                   setImageScale(
                     imageScale >= MAX_IMG_SCALE
                       ? { override: MIN_IMG_SCALE }
-                      : { add: SCALE_INTERVAL }
+                      : { add: SCALE_INTERVAL },
                   );
                 }}
               />
@@ -408,7 +408,7 @@ export default function ImgWithLightbox({
       {/* preview image */}
       <CldImgWithBlur
         {...props}
-        onClick={(e) => {
+        onClick={e => {
           if (!isLightboxActive && !disabled) {
             setIsLightboxActive(true);
           }
@@ -417,10 +417,10 @@ export default function ImgWithLightbox({
         }}
         className={clsx(
           className,
-          !isLightboxActive && !disabled && "cursor-zoom-in"
+          !isLightboxActive && !disabled && "cursor-zoom-in",
         )}
         format="webp"
-        quality={TRANSLATE_INTERVAL}
+        quality={TRANSLATE_INTERVAL_PX}
         draggable={false}
       />
     </>
