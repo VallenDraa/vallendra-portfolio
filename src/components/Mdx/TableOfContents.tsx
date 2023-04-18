@@ -1,6 +1,6 @@
 import R from "react";
 import clsx from "clsx";
-import { Popover, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { IoChevronDown } from "react-icons/io5";
 
 type HeadingTypes = "h2" | "h3" | "h4";
@@ -70,10 +70,10 @@ export default function TableOfContents({ slug }: { slug: string }) {
     // skeleton
     <section className="h-96 w-full animate-pulse rounded-lg bg-white/20" />
   ) : (
-    <Popover as="nav">
+    <Disclosure as="nav">
       {({ open }) => (
         <>
-          <Popover.Button className="h4 flex items-center gap-2 font-bold transition hover:text-pink-400 dark:hover:text-pink-300">
+          <Disclosure.Button className="h4 flex items-center gap-2 font-bold transition hover:text-pink-400 dark:hover:text-pink-300">
             Table Of Contents
             <IoChevronDown
               className={clsx(
@@ -81,30 +81,22 @@ export default function TableOfContents({ slug }: { slug: string }) {
                 "translate-y-0.5 transition",
               )}
             />
-          </Popover.Button>
-          <Transition
-            enter="transition duration-200 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-200 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
-          >
-            <Popover.Panel as="blockquote" className="not-prose">
-              <ul className="flex flex-col gap-3">
-                {sectionHeadings.map(heading => (
-                  <ContentItem
-                    key={heading.name}
-                    name={heading.name}
-                    hash={heading.hash}
-                    type={heading.type}
-                  />
-                ))}
-              </ul>
-            </Popover.Panel>
-          </Transition>
+          </Disclosure.Button>
+
+          <Disclosure.Panel as="blockquote" className="not-prose">
+            <ul className="flex flex-col gap-3">
+              {sectionHeadings.map(heading => (
+                <ContentItem
+                  key={heading.name}
+                  name={heading.name}
+                  hash={heading.hash}
+                  type={heading.type}
+                />
+              ))}
+            </ul>
+          </Disclosure.Panel>
         </>
       )}
-    </Popover>
+    </Disclosure>
   );
 }

@@ -25,7 +25,7 @@ export default function DetailFooter({
       <Comment />
 
       {/* links to previous and next projects */}
-      <div className="mt-5 flex w-full justify-between gap-8 text-base">
+      <div className="mt-5 flex flex-wrap w-full justify-between gap-8 text-base">
         {/* link to previous listed projects */}
         <LinkWithUnderline
           className="grow sm:flex-grow-0"

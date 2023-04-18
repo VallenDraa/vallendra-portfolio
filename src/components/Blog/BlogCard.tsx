@@ -11,7 +11,9 @@ import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import { parsePostSlug } from "utils/client/helpers/blogClientHelper";
 import CldImgWithBlur from "components/StyledComponents/CldImgWithBlur";
 
-export default function BlogCard({ post }: { post: PostData }) {
+type BlogCardProps = { post: PostData } & R.ComponentPropsWithoutRef<"a">;
+
+export default function BlogCard({ post, ...props }: BlogCardProps) {
   const { parsedSlug } = parsePostSlug(post.slug);
 
   const formattedDate = R.useMemo(
@@ -36,8 +38,9 @@ export default function BlogCard({ post }: { post: PostData }) {
       }}
     >
       <Link
+        {...props}
         href={`/blog/${post.slug}`}
-        className="overflow-clip rounded-md border border-indigo-300 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-indigo-300 dark:border-zinc-700 hover:dark:shadow-zinc-700"
+        className="overflow-clip rounded-md border border-zinc-300 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-indigo-300 dark:border-zinc-700 hover:dark:shadow-zinc-700"
       >
         <CldImgWithBlur
           quality={50}
@@ -56,10 +59,12 @@ export default function BlogCard({ post }: { post: PostData }) {
             >
               {formattedDate}
             </time>
-            <h4 className="text-zinc-700 dark:text-zinc-200">{post.title}</h4>
+            <h2 className="h4 line-clamp-2 text-zinc-700 dark:text-zinc-200">
+              {post.title}
+            </h2>
           </div>
 
-          <span className="text-base text-zinc-600 dark:text-zinc-400">
+          <span className="line-clamp-2 text-base text-zinc-600 dark:text-zinc-400">
             {post.description}
           </span>
 
