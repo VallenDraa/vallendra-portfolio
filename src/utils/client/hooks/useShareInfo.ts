@@ -13,7 +13,7 @@ export default function useShareInfo() {
   }, []);
 
   const share = useCallback(
-    (data: ShareData, waitDuration = 1500) => {
+    (data: ShareData, errorTimeoutMs = 1500) => {
       if (!isSupported) return;
 
       navigator
@@ -23,7 +23,7 @@ export default function useShareInfo() {
           if (error.name === "AbortError") return;
 
           setIsError(true);
-          setTimeout(() => setIsError(false), waitDuration);
+          setTimeout(() => setIsError(false), errorTimeoutMs);
         })
         .finally(() => setHasBeenPressed(false));
     },

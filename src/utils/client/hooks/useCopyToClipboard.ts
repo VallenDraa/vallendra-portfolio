@@ -12,18 +12,18 @@ export default function useCopyToClipboard() {
   }, []);
 
   const copy = useCallback(
-    (str: string, waitDuration = 1500) => {
+    (str: string, timeoutDurationMs = 1500) => {
       if (!isSupported) return;
 
       navigator.clipboard
         ?.writeText(str)
         .then(() => {
           setHasBeenPressed(true);
-          setTimeout(() => setHasBeenPressed(false), waitDuration);
+          setTimeout(() => setHasBeenPressed(false), timeoutDurationMs);
         })
         .catch(() => {
           setIsError(true);
-          setTimeout(() => setIsError(false), waitDuration);
+          setTimeout(() => setIsError(false), timeoutDurationMs);
         });
     },
     [isSupported],

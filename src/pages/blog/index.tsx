@@ -21,13 +21,9 @@ import {
   getAvailableTags,
   parsePostSlug,
 } from "utils/client/helpers/blogClientHelper";
+import useIsomorphicLayoutEffect from "utils/client/hooks/useIsomorphicLayoutEffect";
 
-// suppress useLayoutEffect warning
-if (typeof window === "undefined") R.useLayoutEffect = R.useEffect;
-
-const Filter = dynamic(() => import("components/StyledComponents/Filter"), {
-  ssr: false,
-});
+const Filter = dynamic(() => import("components/StyledComponents/Filter"));
 
 const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
   ssr: false,
@@ -106,7 +102,7 @@ export default function BlogsPage({
 
   /* Reset tag selection when the language change
   ================================================================ */
-  R.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setSelectedTags([]);
     setAvailableTags(defaultTagsAccordingToLang);
   }, [activeLanguage, defaultTagsAccordingToLang]);
@@ -148,7 +144,7 @@ export default function BlogsPage({
 
               <Filter dropdownRelativeToToggleBtn={false}>
                 <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Tags</h6>
+                  <h4 className="h6 text-zinc-700 dark:text-zinc-300">Tags</h4>
                   <StyledScrollbar
                     autoHeight
                     autoHeightMin="100%"
@@ -189,7 +185,9 @@ export default function BlogsPage({
                 </div>
 
                 <div className="space-y-2">
-                  <h6 className="text-zinc-700 dark:text-zinc-300">Language</h6>
+                  <h4 className="h6 text-zinc-700 dark:text-zinc-300">
+                    Language
+                  </h4>
                   <LanguageToggle
                     className="lg:!w-full"
                     activeLanguage={activeLanguage}
@@ -214,7 +212,10 @@ export default function BlogsPage({
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 500)}
           >
-            <ul className="grid grid-cols-1 gap-6 pb-10 pt-5 opacity-0 md:grid-cols-2 lg:grid-cols-3">
+            <div
+              role="list"
+              className="grid grid-cols-1 gap-6 pb-10 pt-5 opacity-0 md:grid-cols-2 lg:grid-cols-3"
+            >
               {visibleBlogIndexes.map(idx => {
                 const { slugPrefix } = parsePostSlug(allPostData[idx].slug);
 
@@ -222,12 +223,13 @@ export default function BlogsPage({
 
                 return (
                   <BlogCard
-                    post={allPostData[idx]}
+                    role="listitem"
                     key={`${allPostData[idx].slug}-${allPostData[idx].date}`}
+                    post={allPostData[idx]}
                   />
                 );
               })}
-            </ul>
+            </div>
           </Observe>
         </Show>
 
