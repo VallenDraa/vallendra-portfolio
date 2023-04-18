@@ -129,7 +129,6 @@ export default function NavListSm() {
                                 hrefTarget="_self"
                                 href={subMenu.url}
                                 onClick={() => setNavIsOpened(false)}
-                                useNormalAnchorTag={subMenu.url.includes("#")}
                                 className="w-full rounded-none px-7 py-2 text-start !text-base font-semibold capitalize text-zinc-800 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white dark:lg:text-zinc-200"
                               >
                                 {subMenu.name}

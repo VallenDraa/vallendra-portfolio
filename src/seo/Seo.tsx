@@ -70,7 +70,7 @@ export default function Seo({
       ) : null}
 
       {/* microsoft icon */}
-      <meta name="msapplication-TileColor" content="#7986cb" />
+      <meta name="msapplication-TileColor" content="#a5b4fc" />
       <meta
         name="msapplication-TileImage"
         content="/images/icons/apple-touch-icon-144x144.png"

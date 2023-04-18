@@ -7,7 +7,6 @@ import useStyledRipple from "utils/client/hooks/useStyledRipple";
 
 type StyledButtonProps = {
   href?: string;
-  useNormalAnchorTag?: boolean;
   hrefTarget?: R.HTMLAttributeAnchorTarget;
   icon?: JSX.Element;
   textClasses?: string;
@@ -18,7 +17,6 @@ type StyledButtonProps = {
 
 export default function StyledButton({
   href,
-  useNormalAnchorTag = false,
   alwaysShowIcon = false,
   hrefTarget = "_blank",
   className = "",
@@ -88,11 +86,12 @@ export default function StyledButton({
   );
 
   switch (true) {
-    case href && !useNormalAnchorTag:
+    case href !== undefined:
       return (
         <Link
           {...props}
           ref={ripple}
+          scroll={false}
           onMouseDown={event}
           className={clsx("inline-block", pickedClassNames)}
           target={hrefTarget}
@@ -100,20 +99,6 @@ export default function StyledButton({
         >
           {buttonLayout}
         </Link>
-      );
-
-    case href && useNormalAnchorTag:
-      return (
-        <a
-          {...props}
-          ref={ripple}
-          onMouseDown={event}
-          className={clsx("inline-block", pickedClassNames)}
-          target={hrefTarget}
-          href={href}
-        >
-          {buttonLayout}
-        </a>
       );
 
     default:

@@ -56,21 +56,21 @@ export default function ItemCard({ data, type }: ItemCardProps) {
         />
 
         {/* fade */}
-        <div className="group-hover:opacity-901 absolute inset-0 bg-gradient-to-b from-slate-800/40 to-slate-800/80 transition-opacity duration-200 dark:from-zinc-900/40 dark:to-zinc-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/40 to-slate-800/80 transition-opacity duration-200 group-hover:opacity-90 dark:from-zinc-900/40 dark:to-zinc-900/80" />
 
         {/* detail */}
         <div className="relative z-20 flex h-full w-full flex-col justify-end transition-colors duration-200">
-          {/* props title */}
-          <span className="secondary-gradient block bg-gradient-to-r bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl">
+          {/* showcase title */}
+          <span className="secondary-gradient line-clamp-2 block bg-gradient-to-r bg-clip-text px-3 text-2xl font-bold text-transparent md:text-xl">
             {data.name}
           </span>
 
-          {/* props short description */}
+          {/* showcase short description */}
           <p className="mt-1 line-clamp-2 px-3 text-base font-normal text-white/80 sm:text-sm">
             {data.shortDescriptionEN}
           </p>
 
-          {/* props likes and views */}
+          {/* showcase likes and views */}
           <div className="mt-1.5 flex gap-3 px-3">
             <Stats
               icon={<AiFillEye />}
