@@ -39,7 +39,7 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -moz-tap-highlight-color: rgba(0, 0, 0, 0);
     /* outline: 1px solid green;  for debugging*/
-    @apply selection:!bg-pink-300/40 selection:!text-pink-300;
+    @apply selection:!bg-pink-400/70 selection:!text-white;
   }
 
   h1,

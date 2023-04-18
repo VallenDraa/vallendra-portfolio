@@ -29,7 +29,7 @@ export default function Observe<T extends HTMLElement>({
   const ref = R.useRef<T>(null);
   const entry = useIntersectionObserver(ref, {
     ...others,
-    freezeOnceVisible: IS_PROD ? false : freezeOnceVisible,
+    freezeOnceVisible: IS_PROD ? freezeOnceVisible : false,
   });
 
   R.useEffect(() => {

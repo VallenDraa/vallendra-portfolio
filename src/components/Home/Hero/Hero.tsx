@@ -46,7 +46,7 @@ export default function Hero() {
               freezeOnceVisible
               onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
             >
-              <h1 className="p-2 text-center text-7xl font-bold text-white opacity-0 md:text-8xl xl:text-start xl:text-9xl">
+              <h1 className="p-2 text-center text-7xl font-bold text-white/90 opacity-0 md:text-8xl xl:text-start xl:text-9xl">
                 VallenDra
               </h1>
             </Observe>

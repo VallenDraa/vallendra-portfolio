@@ -186,7 +186,7 @@ export default function CertificateDetails({
           </LinkWithUnderline>
 
           {/* title */}
-          <div className="pt-2">
+          <div>
             <SectionHeading
               title={certificate.name}
               subTitle={
@@ -226,7 +226,7 @@ export default function CertificateDetails({
       </header>
 
       {/* the certificate data */}
-      <main className="layout relative flex grow flex-col gap-8 py-5">
+      <main className="layout relative flex grow flex-col gap-8 pb-3 pt-5">
         <ShowcaseImage
           cldImageSrc={certificate.image}
           name={certificate.name}
