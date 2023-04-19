@@ -76,10 +76,7 @@ export default function TableOfContents({ slug }: { slug: string }) {
           <Disclosure.Button className="h4 flex items-center gap-2 font-bold transition hover:text-pink-400 dark:hover:text-pink-300">
             Table Of Contents
             <IoChevronDown
-              className={clsx(
-                open && "rotate-180",
-                "translate-y-0.5 transition",
-              )}
+              className={clsx(open && "rotate-180", "transition",)}
             />
           </Disclosure.Button>
 
