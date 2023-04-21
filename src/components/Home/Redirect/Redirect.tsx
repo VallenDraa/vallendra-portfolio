@@ -18,9 +18,10 @@ export default function Redirect() {
   });
 
   return (
-    <section className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10">
-      {/* <BlurredBlob className="top-0 scale-90 opacity-0 sm:-top-8 sm:scale-110 md:scale-125" /> */}
-
+    <section
+      aria-label="redirect-to-contacts-or-projects-section"
+      className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10"
+    >
       <Observe
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 50)}
