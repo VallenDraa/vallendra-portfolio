@@ -232,7 +232,11 @@ export default function ProjectDetails({
       {/* the project data */}
       <main className="layout relative flex grow flex-col gap-8 pb-3 pt-5">
         {/* image */}
-        <ShowcaseImage cldImageSrc={project.image} name={project.name} />
+        <ShowcaseImage 
+          key={project.name}
+          cldImageSrc={project.image} 
+          name={project.name} 
+        />
 
         {/* details */}
         <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">

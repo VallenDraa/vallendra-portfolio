@@ -240,6 +240,7 @@ export default function BlogPost({
             )}
           >
             <ShowcaseImage
+            key={frontmatter.title}
               cldImageSrc={frontmatter.banner}
               title={frontmatter.bannerSrc}
               titleAsCaption

@@ -40,7 +40,7 @@ export default function CldImgWithBlur({
           height={36}
           width={48}
           format="webp"
-          priority={false}
+          priority
           className="m-0 h-full w-full"
         />
       </Transition>

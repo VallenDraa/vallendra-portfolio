@@ -228,6 +228,7 @@ export default function CertificateDetails({
       {/* the certificate data */}
       <main className="layout relative flex grow flex-col gap-8 pb-3 pt-5">
         <ShowcaseImage
+          key={certificate.name}
           cldImageSrc={certificate.image}
           name={certificate.name}
         />
