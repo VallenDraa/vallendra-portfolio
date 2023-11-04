@@ -6,7 +6,7 @@ export default function FloatingSquares() {
     if (window.innerWidth >= 1140) {
       return 12;
     }
-    if (window.innerWidth >= 960) {
+    if (window.innerWidth >= 1024) {
       return 10;
     }
     return 8;
@@ -58,7 +58,7 @@ export default function FloatingSquares() {
   }, [population]);
 
   return (
-    <ul className="sm:margin-0 padding-0 absolute inset-0 z-0 h-full w-full overflow-hidden">
+    <ul className="sm:margin-0 absolute inset-0 z-0 h-full w-full overflow-hidden p-0">
       {squares.map((square, i) => (
         // eslint-disable-next-line react/no-array-index-key
         <R.Fragment key={i}>{square}</R.Fragment>

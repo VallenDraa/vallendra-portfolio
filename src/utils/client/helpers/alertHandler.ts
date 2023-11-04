@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface Args {
+type AlertHandlerArgs = {
   setShowAlert: Dispatch<SetStateAction<boolean>>;
   onShow?: () => void;
   onHide?: () => void;
   showDelay?: number;
   showDuration?: number;
-}
+};
 
 export default function alertHandler({
   setShowAlert,
@@ -14,7 +14,7 @@ export default function alertHandler({
   onHide,
   showDelay = 0,
   showDuration = 4000,
-}: Args) {
+}: AlertHandlerArgs) {
   setTimeout(() => {
     if (onShow) onShow();
     setShowAlert(true);

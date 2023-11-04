@@ -1,23 +1,27 @@
-import { Typography } from "@material-tailwind/react";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Observe from "components/Observe";
 
 export default function ServerErrorPage() {
   return (
-    <div className="fade-bottom relative flex min-h-[75vh] translate-y-20 flex-col items-center justify-center gap-3 px-8 after:-top-20">
+    <div className="fade-bottom relative flex min-h-[75vh] w-full flex-col items-center justify-center gap-3 pt-20 after:top-16">
       <div className="flex flex-col items-start space-y-2">
-        <Typography
-          variant="h3"
-          as="span"
-          className="relative z-10 font-bold text-indigo-500 dark:text-gray-300"
+        <Observe
+          freezeOnceVisible
+          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 150)}
         >
-          Error 500 😕
-        </Typography>
-        <Typography
-          variant="h4"
-          as="span"
-          className="text-indigo-300 dark:text-gray-500"
+          <span className="relative z-10 text-2xl font-bold text-white/80 opacity-0">
+            Error 500 😕
+          </span>
+        </Observe>
+
+        <Observe
+          freezeOnceVisible
+          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
         >
-          Please try reloading the page or come again later.
-        </Typography>
+          <span className="text-xl font-medium text-white/60 opacity-0">
+            Please try reloading the page or come again later.
+          </span>
+        </Observe>
       </div>
     </div>
   );

@@ -1,26 +1,20 @@
-import { Button } from "@material-tailwind/react";
-import Link from "next/link";
+import StyledButton from "components/StyledComponents/StyledButton";
 
-export default function NavBtn({
-  menu,
-  href,
-  onClick,
-}: {
+type NavBtnProps = {
   menu: string;
   href?: string;
   onClick?: () => void;
-}) {
-  const ButtonElement = (
-    <Button
+};
+
+export default function NavBtn({ menu, href, onClick }: NavBtnProps) {
+  return (
+    <StyledButton
+      href={href}
+      hrefTarget="_self"
+      className="flex items-center rounded-none px-5 py-2 text-start !text-base font-semibold capitalize text-zinc-800 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white md:justify-center md:!rounded-md md:px-3 dark:md:text-zinc-200"
       onClick={() => onClick && onClick()}
-      color="indigo"
-      variant="text"
-      fullWidth
-      className="flex items-center rounded-none py-2 px-5 text-start text-base font-semibold capitalize text-indigo-400 duration-200 hover:text-indigo-500 dark:text-gray-400 dark:hover:text-white lg:rounded-md lg:px-3 dark:lg:text-gray-200"
     >
       {menu}
-    </Button>
+    </StyledButton>
   );
-
-  return href ? <Link href={href}>{ButtonElement}</Link> : ButtonElement;
 }

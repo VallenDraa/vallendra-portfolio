@@ -1,5 +1,5 @@
-import { SEO } from "interfaces/seo.interface";
 import { ogLinkMaker } from "utils/client/helpers/ogLinkMaker";
+import type { SEO } from "./Seo";
 
 const defaultSeo: SEO = {
   base: {

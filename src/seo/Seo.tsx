@@ -1,10 +1,34 @@
 import Head from "next/head";
-import { BaseSeo, OgSeo, SEO } from "interfaces/seo.interface";
 import defaultSeo from "./default.seo";
 
+export type BaseSeo = {
+  title: string;
+  desc: string;
+  robots?: string;
+};
+
+export type OgSeo = {
+  siteName: string;
+  siteUrl: string;
+  imageUrl: string;
+  imageAlt: string;
+};
+
+export type BlogSeo = {
+  author: string;
+  publishedAt: string;
+};
+
+export type SEO = {
+  base: BaseSeo;
+  og: OgSeo;
+  blog?: BlogSeo | null;
+};
+
 export default function Seo({
-  base = defaultSeo.base as BaseSeo,
-  og = defaultSeo.og as OgSeo,
+  base = defaultSeo.base,
+  og = defaultSeo.og,
+  blog = null,
 }: SEO) {
   return (
     <Head>
@@ -12,8 +36,12 @@ export default function Seo({
       <title>{base.title}</title>
       <meta lang="en" />
       <meta name="description" content={base.desc} />
-      <meta name="theme-color" content="#7986cb" />
+      <meta name="theme-color" content="#6366f1" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta
+        name="google-site-verification"
+        content="nTkY_YWFMPrOGoVVKOqAEp2r20AdFeF6ezznLZFz_Ek"
+      />
       <meta name="robots" content={base.robots || "follow, index"} />
       <link rel="canonical" href={og.siteUrl} />
 
@@ -32,8 +60,17 @@ export default function Seo({
       <meta name="twitter:image:alt" content={og.imageAlt} />
       <meta name="twitter:site" content="@Jestinevallen" />
 
+      {/* blog meta */}
+      {blog !== null ? (
+        <>
+          <meta property="article:author" content={blog.author} />
+          <meta property="article:published_time" content={blog.publishedAt} />
+          <meta property="og:publish_date" content={blog.publishedAt} />
+        </>
+      ) : null}
+
       {/* microsoft icon */}
-      <meta name="msapplication-TileColor" content="#7986cb" />
+      <meta name="msapplication-TileColor" content="#a5b4fc" />
       <meta
         name="msapplication-TileImage"
         content="/images/icons/apple-touch-icon-144x144.png"

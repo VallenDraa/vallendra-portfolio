@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-interface Props {
+type ShowProps = {
   when: boolean;
   children: ReactNode;
-}
+};
 
-export default function Show({ when, children }: Props) {
+export default function Show({ when, children }: ShowProps) {
   return when ? <> {children} </> : null;
 }

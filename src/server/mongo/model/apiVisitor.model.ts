@@ -1,8 +1,8 @@
 import m from "mongoose";
 
-interface ApiVisitorDocument extends m.Document {
+type ApiVisitorDocument = {
   visitors: number;
-}
+} & m.Document;
 
 const ApiVisitorSchema = new m.Schema<ApiVisitorDocument>({
   visitors: { type: Number, default: 0 },

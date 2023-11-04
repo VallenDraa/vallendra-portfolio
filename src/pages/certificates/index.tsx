@@ -1,76 +1,67 @@
+import type Certificate from "interfaces/certificate.interface";
+import type Category from "interfaces/category.interface";
+
 import R from "react";
-import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-import Show from "utils/client/jsx/Show";
 import SearchInput from "components/SearchInput";
-import Certificate from "interfaces/certificate.interface";
-import CertificateCategorySection from "components/CategorySections/CertificateCategorySection";
-import ItemCard from "components/Cards/ItemCard";
-import Category from "interfaces/category.interface";
-import { getAllCertificates } from "server/service/certificates/certificates.service";
-import { getAllCertificateCategories } from "server/service/certificates/certificateCategory.service";
 import { JSONSerialize } from "utils/server/serialize";
 import Observe from "components/Observe";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Seo from "seo/Seo";
 import certificatesPageSeo from "seo/certificatePage.seo";
 import SectionHeading from "components/Typography/SectionHeading";
+import MainContent from "components/Showcase/ShowcaseIndexPage/MainContent";
+import clsx from "clsx";
+import { getAllItems } from "server/service/showcase/showcase.service";
+import CertificateModel from "server/mongo/model/certificate.model";
+import { getAllItemCategories } from "server/service/showcase/showcaseCategory.service";
+import CertificateCategoryModel from "server/mongo/model/certificateCategory.model";
 
-interface Props {
+type CertificatePageProps = {
   certificates: Certificate[];
   categories: Category[];
-}
+};
 
-const FailToLoad = dynamic(
-  () => import("components/ShowcaseIndexPage/FailToLoad"),
-  { ssr: false },
-);
-
-const SearchNotFound = dynamic(() => import("components/SearchNotFound"), {
-  ssr: false,
-});
-
-export default function ProjectsPage({ certificates, categories }: Props) {
-  const router = useRouter();
-
-  const [isError, setIsError] = R.useState(certificates.length === 0);
-  const [query, setQuery] = R.useState<string>(
-    (router.query.find as string) || "",
-  );
+export default function CertificatePage({
+  certificates,
+  categories,
+}: CertificatePageProps) {
+  const [query, setQuery] = R.useState<string>("");
   const [searchIsLoading, setSearchIsLoading] = R.useState(false);
 
-  const showedIndex = R.useMemo<number[]>(() => {
-    const newShowedIndex: number[] = certificates.reduce(
-      (result, project, i) => {
+  /* returns active index of showcase items based on search query 
+  ================================================================ */
+  const activeCertificates = R.useMemo(() => {
+    const newActiveCertificates = certificates.reduce(
+      (result, certificate, i) => {
         if (query === "") return [...result, i];
 
-        if (
-          project.name
+        const hasStringInItemName =
+          certificate.name
             .toLocaleLowerCase()
-            .includes(query.toLocaleLowerCase().trim())
-        ) {
-          return [...result, i];
-        }
+            .includes(query.toLocaleLowerCase().trim()) ||
+          certificate.descriptionEN
+            .toLocaleLowerCase()
+            .includes(query.toLocaleLowerCase().trim());
+
+        if (hasStringInItemName) return [...result, i];
 
         return result;
       },
       [] as number[],
     );
 
-    return newShowedIndex;
+    return newActiveCertificates;
   }, [query]);
-
-  R.useEffect(
-    () => setIsError(certificates.length === 0),
-    [certificates.length],
-  );
 
   return (
     <>
       <Seo {...certificatesPageSeo} />
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
-        <div className="mx-auto flex max-w-screen-xl flex-col px-8 pt-16 2xl:px-2">
+      <header
+        id="skip-to-content"
+        className="fade-bottom relative mb-3  mt-6 w-full after:top-10"
+      >
+        <div className="layout flex flex-col pt-36">
           {/* heading */}
           <Observe
             freezeOnceVisible
@@ -90,7 +81,7 @@ export default function ProjectsPage({ certificates, categories }: Props) {
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 200)}
           >
-            <div className="opacity-0">
+            <div className="mt-4 opacity-0">
               <SearchInput
                 defaultValue={query}
                 placeholder="Search Certificates"
@@ -102,72 +93,30 @@ export default function ProjectsPage({ certificates, categories }: Props) {
         </div>
       </header>
 
-      {/* the certificates list */}
       <main
-        className={`relative mx-auto w-full max-w-screen-xl grow px-10 pt-5 pb-10 2xl:px-2 ${
-          /* overlay for awaiting search results */
-          searchIsLoading
-            ? "cursor-not-allowed after:absolute after:inset-0 after:z-20"
-            : ""
-        }`}
+        className={clsx(
+          "layout flex min-h-[480px] grow items-center justify-center pb-10 pt-5",
+          searchIsLoading &&
+            "cursor-not-allowed after:absolute after:inset-0 after:z-20",
+        )}
       >
-        {/* initial render for certificates with categories */}
-        <Show when={certificates.length > 0 && query === ""}>
-          <div className="space-y-10">
-            {categories.map((category, i) => (
-              // index is used for determining the image priority prop
-              <CertificateCategorySection
-                categoryIndex={i}
-                key={category._id}
-                category={category}
-                certificates={certificates}
-              />
-            ))}
-          </div>
-        </Show>
-
-        {/* search results */}
-        <Show
-          when={
-            certificates.length > 0 && showedIndex.length > 0 && query !== ""
-          }
-        >
-          <ul className="grid grid-cols-1 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3">
-            {showedIndex.map(idx => (
-              <li key={certificates[idx]._id}>
-                <ItemCard
-                  _id={certificates[idx]._id}
-                  type="certificates"
-                  imgIsPriority={false}
-                  imgSrc={certificates[idx].image}
-                  itemLikes={certificates[idx].likes}
-                  itemLink={`/certificates/${certificates[idx].slug}`}
-                  itemName={certificates[idx].name}
-                  itemShortDesc={certificates[idx].shortDescriptionEN}
-                  itemViews={certificates[idx].views}
-                />
-              </li>
-            ))}
-          </ul>
-        </Show>
-
-        {/* for empty search result */}
-        <Show when={certificates.length > 0 && showedIndex.length === 0}>
-          <SearchNotFound />
-        </Show>
-
-        {/* fallback for when the certificates failed to load */}
-        <Show when={certificates.length === 0 || !certificates || isError}>
-          <FailToLoad />
-        </Show>
+        <MainContent
+          showcaseType="certificates"
+          currentSearchQuery={query}
+          activeShowcaseIndex={activeCertificates}
+          categories={categories}
+          showcaseItems={certificates}
+        />
       </main>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const certificates = await JSONSerialize(await getAllCertificates());
-  const categories = await JSONSerialize(await getAllCertificateCategories());
+  const certificates = await JSONSerialize(await getAllItems(CertificateModel));
+  const categories = await JSONSerialize(
+    await getAllItemCategories(CertificateCategoryModel),
+  );
 
   return certificates && categories
     ? { props: { certificates, categories } }

@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import Head from "next/head";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import BreathingBackground from "./BreathingBackground";
@@ -12,32 +11,24 @@ export default function OfflinePage() {
       </Head>
       <BreathingBackground />
 
-      <div className="relative flex h-screen animate-fade-in flex-col items-center justify-center bg-indigo-50/60 px-8 dark:bg-gray-900/60">
+      <div className="bg--indigo-50/60 relative flex h-screen animate-fade-in flex-col items-center justify-center px-8 dark:bg-zinc-900/60">
         <div className="flex flex-col items-start space-y-2">
           <Observe
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 150)}
           >
-            <Typography
-              variant="h3"
-              as="span"
-              className="relative z-10 font-bold text-indigo-500 opacity-0 dark:text-gray-300"
-            >
+            <span className="relative z-10 text-2xl font-bold text-white/80 opacity-0">
               Oops you went offline... 😕
-            </Typography>
+            </span>
           </Observe>
 
           <Observe
             freezeOnceVisible
             onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
           >
-            <Typography
-              variant="h4"
-              as="span"
-              className="text-indigo-300 opacity-0 dark:text-gray-500"
-            >
+            <span className="text-xl font-medium text-white/60 opacity-0">
               Come back later when you are reconnected to the network.
-            </Typography>
+            </span>
           </Observe>
         </div>
       </div>

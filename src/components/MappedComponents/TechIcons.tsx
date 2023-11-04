@@ -3,7 +3,6 @@ import {
   SiCsharp,
   SiCss3,
   SiHtml5,
-  SiJava,
   SiJavascript,
   SiJquery,
   SiMongodb,
@@ -15,7 +14,8 @@ import {
   SiTypescript,
   SiUnity,
 } from "react-icons/si";
-import { TextSize, Technologies } from "types/types";
+import { FaJava } from "react-icons/fa";
+import type { TextSize, Technologies } from "types/types";
 
 const techIcons: {
   [key in Technologies]: (
@@ -27,8 +27,8 @@ const techIcons: {
     <SiHtml5
       className={`${size} ${
         isColorOn
-          ? "text-deep-orange-400"
-          : "text-white/50 transition-colors duration-200 hover:text-deep-orange-400 group-hover:text-deep-orange-400"
+          ? "text-orange-500"
+          : "text-white/50 transition-colors duration-200 hover:text-orange-500 group-hover:text-orange-500"
       }`}
     />
   ),
@@ -54,8 +54,8 @@ const techIcons: {
     <SiJavascript
       className={`${size} ${
         isColorOn
-          ? "bg-gray-900 text-yellow-600 dark:bg-transparent"
-          : "text-white/50 transition-colors duration-200 hover:bg-gray-900 hover:text-yellow-600 group-hover:text-yellow-600 dark:hover:bg-transparent"
+          ? "bg-zinc-900 text-yellow-400 dark:bg-transparent"
+          : "text-white/50 transition-colors duration-200 hover:bg-zinc-900 hover:text-yellow-400 group-hover:text-yellow-400 dark:hover:bg-transparent"
       }`}
     />
   ),
@@ -63,8 +63,8 @@ const techIcons: {
     <SiJquery
       className={`${size} ${
         isColorOn
-          ? "text-blue-700"
-          : "text-white/50 transition-colors duration-200 hover:text-blue-700 group-hover:text-blue-700"
+          ? "text-blue-500"
+          : "text-white/50 transition-colors duration-200 hover:text-blue-500 group-hover:text-blue-500"
       }`}
     />
   ),
@@ -72,8 +72,8 @@ const techIcons: {
     <SiTypescript
       className={`rounded ${size} ${
         isColorOn
-          ? "bg-white text-blue-700"
-          : "text-white/50 transition-colors duration-200 hover:bg-white hover:text-blue-700 group-hover:text-blue-700"
+          ? "bg-white text-blue-500"
+          : "text-white/50 transition-colors duration-200 hover:bg-white hover:text-blue-500 group-hover:text-blue-500"
       }`}
     />
   ),
@@ -81,8 +81,8 @@ const techIcons: {
     <SiReact
       className={`${size} ${
         isColorOn
-          ? "text-light-blue-300 dark:text-light-blue-200"
-          : "text-white/50 transition-colors duration-200 hover:text-light-blue-300 group-hover:text-light-blue-300  hover:dark:text-light-blue-200 group-hover:dark:text-light-blue-200"
+          ? "text-cyan-300"
+          : "text-white/50 transition-colors duration-200 hover:text-cyan-300 group-hover:text-cyan-300"
       }`}
     />
   ),
@@ -90,8 +90,8 @@ const techIcons: {
     <SiNodedotjs
       className={`${size} ${
         isColorOn
-          ? "text-green-400"
-          : "text-white/50 transition-colors duration-200 hover:text-green-400 group-hover:text-green-400"
+          ? "text-green-500"
+          : "text-white/50 transition-colors duration-200 hover:text-green-500 group-hover:text-green-500"
       }`}
     />
   ),
@@ -108,8 +108,8 @@ const techIcons: {
     <SiSocketdotio
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),
@@ -135,17 +135,17 @@ const techIcons: {
     <SiUnity
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),
   java: (size, isColorOn = true) => (
-    <SiJava
+    <FaJava
       className={`${size} ${
         isColorOn
-          ? "text-red-700"
-          : "text-white/50 transition-colors duration-200 hover:text-red-700 group-hover:text-red-700"
+          ? "text-red-500"
+          : "text-white/50 transition-colors duration-200 hover:text-red-500 group-hover:text-red-500"
       }`}
     />
   ),
@@ -153,8 +153,8 @@ const techIcons: {
     <SiNextdotjs
       className={`${size} ${
         isColorOn
-          ? "text-gray-900 dark:text-gray-100"
-          : "text-white/50 transition-colors duration-200 hover:text-gray-900 group-hover:text-gray-900 dark:hover:text-gray-100 dark:group-hover:text-gray-100"
+          ? "text-zinc-900 dark:text-zinc-100"
+          : "text-white/50 transition-colors duration-200 hover:text-zinc-900 group-hover:text-zinc-900 dark:hover:text-zinc-100 dark:group-hover:text-zinc-100"
       }`}
     />
   ),

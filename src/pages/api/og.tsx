@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import { NextApiHandler } from "next";
+import type { NextApiHandler } from "next";
 import Showcase from "server/ogComponents/showcase.og";
 
 export const config = { runtime: "edge" };

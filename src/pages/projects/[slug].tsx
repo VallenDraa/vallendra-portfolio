@@ -1,48 +1,44 @@
-import { GetStaticPaths, GetStaticProps } from "next";
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
-import { AiFillHeart } from "react-icons/ai";
+import type { GetStaticPaths, GetStaticProps } from "next";
 import { BsArrowLeft } from "react-icons/bs";
 import { FaDownload, FaGithub } from "react-icons/fa";
 import { SlGlobe } from "react-icons/sl";
-import { CldImage } from "next-cloudinary";
 import R from "react";
-import { useRouter } from "next/router";
 import { IoWarning } from "react-icons/io5";
 import dynamic from "next/dynamic";
-import Project from "interfaces/project.interface";
-import { Language, LikesOperationBody, Technologies } from "types/types";
+import type Project from "interfaces/project.interface";
+import type { Technologies, Language } from "types/types";
 import TechWithTooltip from "components/MappedComponents/TechsWithTooltip";
 import Show from "utils/client/jsx/Show";
-import CopyLinkBtn from "components/ShowcaseDetailsPage/CopyLinkBtn";
-import ActionButton from "components/StyledComponents/ActionButton";
+import CopyLinkBtn from "components/Showcase/ShowcaseDetailsPage/CopyLinkBtn";
 import SectionSubHeading from "components/Typography/SectionSubHeading";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 import { commaSeparator } from "utils/client/helpers/formatter";
-import LanguageToggle from "components/ShowcaseDetailsPage/LanguageToggle";
-import {
-  getAllProjects,
-  getProjectWithPrevAndNext,
-} from "server/service/projects/projects.service";
+import LanguageToggle from "components/Showcase/ShowcaseDetailsPage/LanguageToggle";
 import { JSONSerialize } from "utils/server/serialize";
 import useGetViewsById from "utils/client/hooks/useGetViewsById";
 import useGetLikesById from "utils/client/hooks/useGetLikesById";
 import useDebounce from "utils/client/hooks/useDebounce";
-import showcaseSeo from "seo/showcase.seo";
-import Seo from "seo/Seo";
-import ShowcaseStats from "components/ShowcaseDetailsPage/ShowcaseStats";
+import ShowcaseStats from "components/Showcase/ShowcaseDetailsPage/ShowcaseStats";
 import SectionHeading from "components/Typography/SectionHeading";
 import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
+import type { LikesOperationBody } from "types/api.types";
+import ShowcaseImage from "components/Showcase/ShowcaseDetailsPage/ShowcaseImage";
+import LikeButton from "components/Showcase/ShowcaseDetailsPage/LikeButton";
+import ShowcaseSeoComponent from "components/Showcase/ShowcaseDetailsPage/ShowcaseSeoComponent";
+import type { ShowcaseDetailRedirect } from "interfaces/showcase.interface";
+import useIncrementViewOnLoad from "utils/client/hooks/useIncrementViewOnLoad";
+import {
+  getAllItems,
+  getItemWithPrevAndNext,
+} from "server/service/showcase/showcase.service";
+import ProjectModel from "server/mongo/model/project.model";
+import StyledButton from "components/StyledComponents/StyledButton";
 
-interface ProjectRedirect {
-  slug: string;
-  name: string;
-}
-
-interface PropsData {
+export type ProjectDetailsProps = {
   project: Project;
-  prevProject: ProjectRedirect;
-  nextProject: ProjectRedirect;
-}
+  prevProject: ShowcaseDetailRedirect;
+  nextProject: ShowcaseDetailRedirect;
+};
 
 const StyledAlert = dynamic(
   () => import("components/StyledComponents/StyledAlert"),
@@ -50,43 +46,44 @@ const StyledAlert = dynamic(
 );
 
 const DetailFooter = dynamic(
-  () => import("components/ShowcaseDetailsPage/DetailFooter"),
+  () => import("components/Showcase/ShowcaseDetailsPage/DetailFooter"),
   { ssr: false },
 );
 
 export default function ProjectDetails({
   project,
-  prevProject,
   nextProject,
-}: PropsData) {
-  /* Others
-  =================== */
-  const router = useRouter();
+  prevProject,
+}: ProjectDetailsProps) {
   const [showAlert, setShowAlert] = R.useState(false);
-
-  /* Language switcher
-  =================== */
   const [activeLanguage, setActiveLanguage] = R.useState<Language>("en");
 
-  /* Seo Data
+  /* add view on load 
   =================== */
-  const seoData = R.useMemo(() => {
-    const { name, slug, shortDescriptionEN, shortDescriptionID } = project;
+  const onIncrementError = R.useCallback(async () => {
+    const alertHandler = (await import("utils/client/helpers/alertHandler"))
+      .default;
 
-    return showcaseSeo({
-      title: name,
-      slug,
-      shortDesc:
-        activeLanguage === "en" ? shortDescriptionEN : shortDescriptionID,
-      type: "projects",
-    });
-  }, [project, activeLanguage]);
+    alertHandler({ setShowAlert });
+  }, []);
+  const { finishedUpdatingViews } = useIncrementViewOnLoad(
+    project._id,
+    "projects",
+    onIncrementError,
+  );
 
   /* Dynamic data
   ================== */
-  const [willFetchStats, setWillFetchStats] = R.useState(false);
-  const viewsRes = useGetViewsById(project._id, "projects", willFetchStats);
-  const likesRes = useGetLikesById(project._id, "projects", willFetchStats);
+  const viewsRes = useGetViewsById(
+    project._id,
+    "projects",
+    finishedUpdatingViews,
+  );
+  const likesRes = useGetLikesById(
+    project._id,
+    "projects",
+    finishedUpdatingViews,
+  );
 
   /* Likes
   ================== */
@@ -101,55 +98,61 @@ export default function ProjectDetails({
       ),
     [likesRes.data?.likes, project.likes],
   );
-  const [, likeUpdateError] = useDebounce(
-    async () => {
-      if (!willSendLike) return;
-      const operation: LikesOperationBody = {
-        operation: hasLiked ? "increment" : "decrement",
-      };
 
-      try {
-        await fetch(`/api/likes/projects/${project._id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(operation),
-        });
+  const optimisticLikeUpdate = R.useCallback(async () => {
+    if (!hasLiked) {
+      likesRes.mutate(
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: true, likes: oldData.likes + 1 },
+        { revalidate: false },
+      );
 
-        setWillSendLike(false);
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
+      setHasLiked(true);
+    } else {
+      likesRes.mutate(
+        oldData =>
+          oldData === undefined
+            ? undefined
+            : { ...oldData, hasLiked: false, likes: oldData.likes - 1 },
+        { revalidate: false },
+      );
 
-        alertHandler({ setShowAlert });
-      }
-    },
-    500,
-    [willSendLike, hasLiked],
+      setHasLiked(false);
+    }
+
+    setWillSendLike(true);
+  }, [hasLiked]);
+
+  const updateLike = R.useCallback(async () => {
+    if (!willSendLike) return;
+    const operation: LikesOperationBody = {
+      operation: hasLiked ? "increment" : "decrement",
+    };
+
+    try {
+      await fetch(`/api/projects/likes/${project._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(operation),
+      });
+
+      setWillSendLike(false);
+    } catch (error) {
+      onIncrementError();
+    }
+  }, [willSendLike, hasLiked]);
+
+  const [, likeUpdateError] = useDebounce(updateLike, 500, [
+    willSendLike,
+    hasLiked,
+  ]);
+
+  R.useEffect(
+    () => setHasLiked(likesRes.data?.hasLiked || false),
+    [likesRes.data?.hasLiked],
   );
-
-  /* For incrementing view upon page load
-  ==================================================== */
-  R.useEffect(() => {
-    (async () => {
-      try {
-        setWillFetchStats(false);
-        await fetch(`/api/views/projects/${project._id}`, { method: "PUT" });
-      } catch (error) {
-        const alertHandler = (await import("utils/client/helpers/alertHandler"))
-          .default;
-
-        alertHandler({ setShowAlert });
-      } finally {
-        setWillFetchStats(true);
-      }
-    })();
-  }, [router.asPath, project._id]);
-
-  /* For setting the fetched hasLiked to the local hasLiked 
-  =================================================== */
-  R.useEffect(() => {
-    setHasLiked(likesRes.data?.hasLiked || false);
-  }, [likesRes.data?.hasLiked]);
 
   /* Toggle alert when there is an like error
   =================================================== */
@@ -157,94 +160,67 @@ export default function ProjectDetails({
     if (likeUpdateError) setShowAlert(true);
   }, [likeUpdateError]);
 
-  async function toggleLike() {
-    if (!hasLiked) {
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: true,
-              likes: likesRes.data.likes + 1,
-            },
-        { revalidate: false },
-      );
-      setHasLiked(true);
-    } else {
-      likesRes.mutate(
-        likesRes.data === undefined
-          ? undefined
-          : {
-              ...likesRes.data,
-              hasLiked: false,
-              likes: likesRes.data.likes - 1,
-            },
-        { revalidate: false },
-      );
-      setHasLiked(false);
-    }
-
-    setWillSendLike(true);
-  }
-
   return (
     <>
-      <Seo {...seoData} />
+      <ShowcaseSeoComponent
+        activeLanguage={activeLanguage}
+        showcaseItem={project}
+      />
 
       <StyledAlert
         icon={<IoWarning className="text-2xl" />}
         color="red"
         show={showAlert}
-        dismissible={{ onClose: () => setShowAlert(false) }}
+        onClose={() => setShowAlert(false)}
       >
-        Oops, please try to reload or try visiting the page at a later time !
+        <span>
+          Oops, please try to reload or try visiting the page at a later time !
+        </span>
       </StyledAlert>
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full px-8 after:-top-7">
-        <section className="mx-auto flex max-w-screen-xl flex-col justify-between gap-2 border-b-2 border-indigo-100 pt-16 pb-3 dark:border-white/30 lg:flex-row lg:gap-5 2xl:px-2">
+      <header
+        id="skip-to-content"
+        className="fade-bottom relative mb-3 mt-6 after:top-10"
+      >
+        <section className="layout flex flex-col justify-between gap-2 border-b-2 border-indigo-200 pb-3 pt-36 dark:border-zinc-700">
+          {/* back to project button */}
+          <LinkWithUnderline href="/projects">
+            <BsArrowLeft />
+            Back To Project Page
+          </LinkWithUnderline>
+
+          {/* title */}
           <div>
-            {/* back to project button */}
-            <LinkWithUnderline href="/projects">
-              <BsArrowLeft />
-              Back To Projects
-            </LinkWithUnderline>
-
-            {/* title */}
-            <div className="pt-4">
-              <SectionHeading
-                title={project.name}
-                subTitle={
-                  activeLanguage === "en"
-                    ? project.shortDescriptionEN
-                    : project.shortDescriptionID
-                }
-              />
-            </div>
-
-            <div className="mt-5">
-              <ShowcaseStats
-                dateString={project.madeAt as string}
-                isLoadingStats={
-                  !(viewsRes.error && likesRes.error) &&
-                  (viewsRes.data?.views === undefined ||
-                    likesRes.data?.likes === undefined)
-                }
-                hasLiked={hasLiked}
-                likes={
-                  likesRes.data?.likes !== undefined
-                    ? likesRes.data?.likes
-                    : project.likes
-                }
-                views={
-                  viewsRes.data?.views !== undefined
-                    ? viewsRes.data?.views
-                    : project.views
-                }
-              />
-            </div>
+            <SectionHeading
+              title={project.name}
+              subTitle={
+                activeLanguage === "en"
+                  ? project.shortDescriptionEN
+                  : project.shortDescriptionID
+              }
+            />
           </div>
 
-          <div className="flex lg:self-end lg:px-2">
+          <div className="flex flex-col justify-between gap-2 lg:flex-row lg:items-center">
+            <ShowcaseStats
+              dateString={project.madeAt as string}
+              isLoadingStats={
+                !(viewsRes.error && likesRes.error) &&
+                (viewsRes.data?.views === undefined ||
+                  likesRes.data?.likes === undefined)
+              }
+              hasLiked={hasLiked}
+              likes={
+                likesRes.data?.likes !== undefined
+                  ? likesRes.data?.likes
+                  : project.likes
+              }
+              views={
+                viewsRes.data?.views !== undefined
+                  ? viewsRes.data?.views
+                  : project.views
+              }
+            />
             <LanguageToggle
               activeLanguage={activeLanguage}
               setActiveLanguage={setActiveLanguage}
@@ -254,39 +230,27 @@ export default function ProjectDetails({
       </header>
 
       {/* the project data */}
-      <main className="relative mx-auto flex w-full max-w-screen-xl grow flex-col gap-8 px-8 py-5 2xl:px-2">
+      <main className="layout relative flex grow flex-col gap-8 pb-3 pt-5">
         {/* image */}
-        <figure className="mx-auto w-full md:w-[95%]">
-          <CldImage
-            format="webp"
-            priority
-            src={project.image}
-            alt={project.name}
-            width={1280}
-            height={720}
-            className="w-full rounded-md object-cover opacity-90 shadow"
-          />
-
-          <figcaption className="pt-2 text-center text-sm text-indigo-300 dark:text-gray-500">
-            <span>Screenshot of {project.name}</span>
-          </figcaption>
-        </figure>
+        <ShowcaseImage 
+          key={project.name}
+          cldImageSrc={project.image} 
+          name={project.name} 
+        />
 
         {/* details */}
         <section className="flex flex-col gap-8 lg:flex-row lg:gap-2">
-          <div className="relative flex basis-3/4 flex-col gap-12">
+          <div className="relative flex basis-3/4 flex-col gap-8">
             {/* app tech stack */}
             <div className="relative z-10 flex flex-col gap-4">
               <SectionSubHeading>Tech Stack</SectionSubHeading>
               <StyledScrollbar
-                autoHeight
-                autoHeightMin="100%"
-                autoHeightMax="100%"
+                style={{ height: 70, overflowY: "hidden" }}
                 renderView={props => (
                   <ul {...props} className="relative flex items-center gap-1" />
                 )}
               >
-                {project?.tech.map(
+                {project.tech.map(
                   (tech: Technologies): JSX.Element => (
                     <li key={tech}>{TechWithTooltip[tech]()}</li>
                   ),
@@ -297,108 +261,82 @@ export default function ProjectDetails({
             {/* description and features of the app */}
             <div className="relative z-10 flex flex-col gap-4">
               <SectionSubHeading>Description</SectionSubHeading>
-              <Typography
-                variant="paragraph"
-                className="px-3 text-justify font-normal leading-loose text-indigo-600 dark:text-gray-400"
-              >
+              <p className="px-3 text-justify font-normal leading-loose text-zinc-600 dark:text-zinc-400">
                 <Show when={activeLanguage === "en"}>
                   {project.descriptionEN}
                 </Show>
                 <Show when={activeLanguage === "id"}>
                   {project.descriptionID}
                 </Show>
-              </Typography>
+              </p>
             </div>
           </div>
 
           {/* link for the code of this project */}
-          <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md p-4 lg:flex-col">
+          <aside className="detail-aside-colors sticky top-20 mt-3 flex h-fit grow flex-row items-center justify-between gap-4 rounded-md border-2 p-4 lg:flex-col">
             <div className="flex w-full flex-col gap-3">
               {/* when the project has download link */}
-              <Show when={!!project.downloadLink === true}>
-                <ActionButton
-                  href={`${project.downloadLink}`}
+              <Show when={!!project.downloadLink}>
+                <StyledButton
+                  alwaysShowIcon
+                  className="border border-blue-500 px-6 py-3 text-blue-500 hover:bg-blue-500/10"
+                  href={project.downloadLink as string}
                   icon={<FaDownload className="text-lg text-blue-500" />}
                 >
                   Download
-                </ActionButton>
+                </StyledButton>
               </Show>
 
               {/* when the project has a website link */}
-              <Show when={!!project.siteLink === true}>
-                <ActionButton
-                  href={`${project.siteLink}`}
+              <Show when={!!project.siteLink}>
+                <StyledButton
+                  alwaysShowIcon
+                  className="border border-blue-500 px-6 py-3 text-blue-500 hover:bg-blue-500/10"
+                  href={project.siteLink as string}
                   icon={<SlGlobe className="text-lg text-blue-500" />}
                 >
                   Visit Site
-                </ActionButton>
+                </StyledButton>
               </Show>
 
               {/* Github Link */}
-              <ActionButton
+              <StyledButton
+                alwaysShowIcon
                 icon={<FaGithub className="text-lg" />}
                 href={project.gitLink}
-                color="gray"
+                className="border border-zinc-500 px-6 py-3 text-zinc-500 hover:bg-zinc-500/10 dark:border-zinc-400 dark:text-zinc-400"
               >
                 Visit Repo
-              </ActionButton>
+              </StyledButton>
 
               {/* copy link to clipboard */}
               <CopyLinkBtn />
             </div>
 
             {/* Like button */}
-            <Show
-              when={
+            <LikeButton
+              showSkeleton={
                 !(viewsRes.error && likesRes.error) &&
                 (viewsRes.data?.views === undefined ||
                   likesRes.data?.likes === undefined)
               }
-            >
-              <div className="flex h-24 w-24 animate-pulse flex-col gap-2">
-                <div className="basis-3/4 rounded-lg bg-white/20" />
-                <div className="basis-1/4 rounded-lg bg-white/20" />
-              </div>
-            </Show>
-            <Show
-              when={
+              revealButton={
                 !(viewsRes.error && likesRes.error) &&
                 viewsRes.data?.views !== undefined &&
                 likesRes.data?.likes !== undefined
               }
-            >
-              <Tooltip
-                placement="top"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-                content={
-                  hasLiked ? "Thank you so much !" : "Likes are appreciated !"
-                }
-              >
-                <Button
-                  onClick={toggleLike}
-                  variant="text"
-                  color={hasLiked ? "red" : "gray"}
-                  className={`flex animate-fade-in flex-col items-center gap-1 overflow-hidden text-5xl ${
-                    hasLiked ? "text-red-300" : ""
-                  }`}
-                >
-                  <AiFillHeart />
-                  <span className="text-sm">{formattedLikes}</span>
-                </Button>
-              </Tooltip>
-            </Show>
+              hasLikedShowcase={hasLiked}
+              formattedLikes={formattedLikes}
+              onClick={optimisticLikeUpdate}
+            />
           </aside>
         </section>
 
         {/* comments */}
         <DetailFooter
-          prevLink={`/projects/${prevProject.slug}`}
-          prevTitle={prevProject.name}
-          nextLink={`/projects/${nextProject.slug}`}
-          nextTitle={nextProject.name}
+          showcaseType="projects"
+          prevShowcase={prevProject}
+          nextShowcase={nextProject}
         />
       </main>
     </>
@@ -406,7 +344,7 @@ export default function ProjectDetails({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const projects = await JSONSerialize(await getAllProjects());
+  const projects = await JSONSerialize(await getAllItems(ProjectModel));
 
   if (projects) {
     const paths = projects.map(p => ({ params: { slug: p.slug } }));
@@ -422,9 +360,16 @@ export const getStaticProps: GetStaticProps = async context => {
   if (!params?.slug) return { notFound: true };
   if (typeof params.slug !== "string") return { notFound: true };
 
-  const props = await JSONSerialize(
-    await getProjectWithPrevAndNext(params.slug),
+  const { item, nextItem, prevItem } = await getItemWithPrevAndNext(
+    ProjectModel,
+    params.slug,
   );
+
+  const props = await JSONSerialize({
+    project: item,
+    nextProject: nextItem,
+    prevProject: prevItem,
+  });
 
   if (props) {
     return props.project === null ? { notFound: true } : { props };

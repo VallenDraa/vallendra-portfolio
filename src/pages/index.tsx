@@ -1,38 +1,28 @@
-import { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
+import type { GetStaticProps } from "next/types";
 import Hero from "components/Home/Hero/Hero";
-import Project from "interfaces/project.interface";
-import { getTopPickedProjects } from "server/service/projects/projects.service";
-import TopPickSection from "components/Home/ProjectTopPicks/TopPickSection";
+import type Project from "interfaces/project.interface";
+import TopPickSection from "components/Home/TopProjects/TopProjectsSection";
 import { JSONSerialize } from "utils/server/serialize";
 import Seo from "seo/Seo";
 import defaultSeo from "seo/default.seo";
+import { getTopPickedProjects } from "server/service/showcase/showcase.service";
+import Profile from "components/Home/Profile/Profile";
+import Redirect from "components/Home/Redirect/Redirect";
 
-interface Props {
+type HomeProps = {
   topPickedProjects: Project[];
-}
+};
 
-const Profile = dynamic(() => import("components/Home/Profile/Profile"), {
-  ssr: false,
-  loading: () => (
-    <div className="relative z-10 h-screen w-screen scroll-m-12 space-y-8 bg-indigo-50 dark:bg-gray-900" />
-  ),
-});
-
-const Redirect = dynamic(() => import("components/Home/Redirect/Redirect"), {
-  ssr: false,
-});
-
-export default function Home({ topPickedProjects }: Props) {
+export default function Home({ topPickedProjects }: HomeProps) {
   return (
     <>
       <Seo {...defaultSeo} />
 
       {/* hero section */}
-      <header className="fade-bottom relative z-30 after:bottom-0 after:z-0">
+      <header className="pt-14">
         <Hero />
       </header>
-      <main>
+      <main className="fade-bottom relative after:-top-20">
         <Profile />
         <TopPickSection topPickedProjects={topPickedProjects} />
         <Redirect />

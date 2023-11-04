@@ -1,19 +1,20 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
+import type { ShowcaseType } from "interfaces/showcase.interface";
 
-interface ViewsResponse {
+type ViewsResponse = {
   _id: string;
   views: number;
-}
+};
 
 export default function useGetViewsById(
   id: string,
-  type: "certificates" | "projects",
+  type: ShowcaseType,
   willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
-  const url = R.useMemo(() => `/api/views/${type}/${id}`, [type, id]);
+  const url = R.useMemo(() => `/api/${type}/views/${id}`, [type, id]);
 
   const { data, isLoading, error, mutate } = useSWR<ViewsResponse>(
     url,
@@ -25,12 +26,12 @@ export default function useGetViewsById(
       // eslint-disable-next-line consistent-return
       return views;
     },
-    { revalidateOnFocus: true },
+    { revalidateOnFocus: false },
   );
 
   R.useEffect(() => {
     if (willFetch) reFetch(url);
-  }, [willFetch, id]);
+  }, [willFetch, url]);
 
   return { data, isLoading, error, mutate };
 }

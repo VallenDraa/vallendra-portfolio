@@ -1,42 +1,24 @@
 import R from "react";
-import { useRouter } from "next/router";
-import Scrollbars from "react-custom-scrollbars-2";
 import dynamic from "next/dynamic";
-import StyledScrollbar from "components/StyledComponents/StyledScrollbar";
 import NavbarComponent from "components/Navbar/Navbar";
 import BreathingBackground from "components/BreathingBackground";
-import GoToTopBtn from "components/GoToTopBtn";
+import SiteFooter from "components/Layout/SiteFooter/SiteFooter";
+import StyledTooltip from "components/StyledComponents/StyledTooltip";
 
-const SiteFooter = dynamic(() => import("components/SiteFooter"), {
+const GoToTopBtn = dynamic(() => import("components/GoToTopBtn"), {
   ssr: false,
 });
 
 export default function Layout({ children }: { children: R.ReactNode }) {
-  const router = useRouter();
-
-  const [goTopBtnIsVisible, setGoTopBtnIsVisible] = R.useState(false);
-
-  const scrollbarRef = R.useRef<Scrollbars>(null);
-
-  /* scroll page to top on url change (except hash change)
-  ======================================================== */
-  R.useEffect(() => {
-    if (!router.asPath.includes("#")) {
-      scrollbarRef.current?.scrollToTop();
-    }
-  }, [router.asPath]);
-
   return (
-    <StyledScrollbar
-      autoHeight
-      ref={scrollbarRef}
-      autoHeightMin="100vh"
-      autoHeightMax="100vh"
-      onScrollFrame={values => {
-        setGoTopBtnIsVisible(values.scrollTop > 0.3);
-      }}
-      renderView={props => <div {...props} className="flex flex-col" />}
-    >
+    <div className="flex min-h-screen flex-col">
+      <a
+        href="#skip-to-content"
+        className="translate-all fixed left-1/2 top-0 z-[100] h-max w-max -translate-x-1/2 -translate-y-full bg-indigo-500 p-3 text-white opacity-0 duration-200 focus-visible:translate-y-0 focus-visible:opacity-100 md:left-0 md:translate-x-0"
+      >
+        Skip Navigation
+      </a>
+
       <NavbarComponent />
       <BreathingBackground />
 
@@ -45,10 +27,10 @@ export default function Layout({ children }: { children: R.ReactNode }) {
       <SiteFooter />
 
       {/* back to top button */}
-      <GoToTopBtn
-        isVisible={goTopBtnIsVisible}
-        callback={() => scrollbarRef.current?.scrollToTop()}
-      />
-    </StyledScrollbar>
+      <GoToTopBtn />
+
+      {/* tooltip declarartions */}
+      <StyledTooltip anchorSelect=".icon-tooltip" />
+    </div>
   );
 }

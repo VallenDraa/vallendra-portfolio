@@ -19,12 +19,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "promise", "unused-imports"],
+  "plugins": ["@typescript-eslint", "unused-imports"],
   "rules": {
     "react/require-default-props": "off",
     "react/jsx-no-bind": "off",
     "react/jsx-props-no-spreading": "off",
     "react/display-name": "off",
+    "no-lonely-if": "off",
     "no-underscore-dangle": "off",
     "no-unused-expressions": "warn",
     "no-unused-labels": "warn",

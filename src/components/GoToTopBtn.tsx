@@ -1,30 +1,51 @@
-import { IconButton } from "@material-tailwind/react";
-import { useRef } from "react";
+import clsx from "clsx";
 import { VscTriangleUp } from "react-icons/vsc";
+import { useRef, useEffect } from "react";
+import StyledButton from "./StyledComponents/StyledButton";
 
-export default function GoToTopBtn({
-  isVisible,
-  callback,
-}: {
-  isVisible: boolean;
-  callback: () => void;
-}) {
-  const goUpBtnRef = useRef<HTMLButtonElement>(null);
+export default function GoToTopBtn() {
+  const goUpBtnRef = useRef<HTMLDivElement>(null);
+  const scrollPercentage = useRef<number>(0);
+
+  /* For showing and hiding go up button
+  ===================================== */
+  useEffect(() => {
+    const height = document.documentElement;
+
+    function goUpBtnViewHandler() {
+      scrollPercentage.current =
+        (height.scrollTop / (height.scrollHeight - height.clientHeight)) * 100;
+
+      if (scrollPercentage.current > 5) {
+        goUpBtnRef.current?.classList.remove("translate-y-[200%]");
+      } else {
+        goUpBtnRef.current?.classList.add("translate-y-[200%]");
+      }
+    }
+
+    window.addEventListener("scroll", goUpBtnViewHandler);
+
+    return () => {
+      window.removeEventListener("scroll", goUpBtnViewHandler);
+    };
+  }, []);
 
   return (
-    <IconButton
-      aria-label="Go to top button"
+    <div
       ref={goUpBtnRef}
-      size="lg"
-      ripple={false}
-      variant="filled"
-      color="deep-purple"
-      onClick={callback}
-      className={`fixed bottom-5 right-10 z-50 inline-block translate-x-0 p-2 opacity-30 duration-500 hover:opacity-100 ${
-        isVisible ? "" : "translate-y-[200%]"
-      }`}
+      className="fixed bottom-5 right-10 z-50 inline-block transition duration-200"
     >
-      <VscTriangleUp className="text-xl" />
-    </IconButton>
+      <StyledButton
+        aria-label="Go to top button"
+        onClick={() => window.scroll({ top: 0, behavior: "smooth" })}
+        className={clsx(
+          "bg-indigo-500",
+          "text-white",
+          "rounded-md p-3 opacity-30 duration-300 hover:opacity-100",
+        )}
+      >
+        <VscTriangleUp className="text-2xl" />
+      </StyledButton>
+    </div>
   );
 }

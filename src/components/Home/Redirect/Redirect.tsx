@@ -1,42 +1,58 @@
-import { Button, Typography } from "@material-tailwind/react";
 import { IoCall } from "react-icons/io5";
 import Link from "next/link";
 import fadeIn from "utils/client/helpers/animateOnObserved";
 import Observe from "components/Observe";
+import clsx from "clsx";
+import useRipple from "use-ripple-hook";
+import { useTheme } from "next-themes";
 
-/* redirects the user to a contacts page or to my github account
+/* redirects the user to a contacts page or to the projects page
 ================================================================ */
 export default function Redirect() {
+  const { theme } = useTheme();
+
+  const [ripple, event] = useRipple({
+    duration: 700,
+    color: theme === "dark" ? "rgba(0, 0, 0, .2)" : "rgba(255, 255, 255, .2)",
+    cancelAutomatically: true,
+  });
+
   return (
-    <section className="relative z-30 mx-auto flex h-[full] max-w-screen-xl flex-col items-center pb-24 pt-10">
+    <section
+      aria-label="redirect-to-contacts-or-projects-section"
+      className="layout relative z-30 mx-auto flex h-[full] flex-col items-center pb-24 pt-10"
+    >
       <Observe
         freezeOnceVisible
-        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 0)}
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 50)}
       >
-        <Typography
-          as="h2"
-          className="relative z-10 text-center text-4xl font-bold text-indigo-500 opacity-0 dark:text-gray-200 md:text-5xl lg:text-6xl"
-        >
+        <h2 className="relative z-10 text-center text-4xl font-bold text-indigo-500/90 opacity-0 dark:text-zinc-100/90 md:text-5xl lg:text-6xl">
           Wanna Work Together ?
-        </Typography>
+        </h2>
       </Observe>
 
       <Observe
         freezeOnceVisible
         onEnter={ref => fadeIn(ref, "animate-fade-in-top", 100)}
       >
-        <a
-          href="mailto:vallenatwork@gmail.com"
-          className="relative z-10 mt-8 opacity-0"
-        >
-          <Button
-            className="flex items-center justify-center gap-2 rounded-full text-xl text-indigo-500 outline outline-2 outline-indigo-500 hover:scale-105 hover:bg-indigo-500 hover:text-indigo-50 hover:outline-indigo-500 focus:text-indigo-500 active:bg-indigo-500 active:text-indigo-50 active:outline-indigo-500 dark:text-gray-300 dark:outline-gray-300 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:outline-white dark:focus:bg-white dark:focus:text-gray-900 dark:active:bg-white dark:active:text-gray-900 dark:active:outline-white lg:text-2xl"
-            variant="text"
+        <div className="opacity-0">
+          <a
+            ref={ripple}
+            onMouseDown={event}
+            href="mailto:vallenatwork@gmail.com"
+            className={clsx(
+              "font-bold uppercase",
+              "outline-none transition-colors duration-200",
+              "relative z-10 mt-8 flex items-center justify-center gap-2 rounded-full px-6 py-3",
+              "hover:bg-indigo-500 dark:hover:bg-zinc-100",
+              "border border-indigo-500 hover:border-transparent active:border-transparent dark:border-white/80",
+              "text-xl text-indigo-500 hover:text-indigo-50 dark:text-white/80 dark:hover:text-zinc-900 lg:text-2xl",
+            )}
           >
             <span>Contact Me</span>
             <IoCall />
-          </Button>
-        </a>
+          </a>
+        </div>
       </Observe>
 
       <Observe
@@ -45,16 +61,9 @@ export default function Redirect() {
       >
         <Link
           href="/projects"
-          className="relative z-10 mt-4 inline-block opacity-0"
+          className="normal-underline relative z-10 mt-4 inline-block rounded py-1 text-sm font-medium capitalize text-indigo-400 opacity-0 duration-200 before:transition before:duration-200 hover:text-pink-400 before:hover:-translate-y-1 before:hover:bg-pink-400 dark:text-white/80 dark:hover:text-pink-300 dark:before:hover:bg-pink-300"
         >
-          <Button
-            variant="text"
-            size="sm"
-            color="gray"
-            className="rounded-full text-xs text-indigo-300 underline-offset-2 transition-colors duration-200 hover:text-indigo-500 hover:underline dark:text-gray-500 dark:hover:text-gray-300"
-          >
-            See other projects instead
-          </Button>
+          See my other projects instead
         </Link>
       </Observe>
     </section>

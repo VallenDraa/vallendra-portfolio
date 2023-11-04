@@ -1,20 +1,21 @@
 import useSWR, { useSWRConfig } from "swr";
 import R from "react";
+import type { ShowcaseType } from "interfaces/showcase.interface";
 
-interface LikedResponse {
+type LikedResponse = {
   _id: string;
   likes: number;
   hasLiked: boolean; // has liked the project
-}
+};
 
 export default function useGetLikesById(
   id: string,
-  type: "certificates" | "projects",
+  type: ShowcaseType,
   willFetch = true,
 ) {
   const { mutate: reFetch } = useSWRConfig();
 
-  const url = R.useMemo(() => `/api/likes/${type}/${id}`, [type, id]);
+  const url = R.useMemo(() => `/api/${type}/likes/${id}`, [type, id]);
 
   const { data, isLoading, error, mutate } = useSWR<LikedResponse>(
     url,
@@ -26,12 +27,12 @@ export default function useGetLikesById(
       // eslint-disable-next-line consistent-return
       return likes;
     },
-    { revalidateOnFocus: true },
+    { revalidateOnFocus: false },
   );
 
   R.useEffect(() => {
     if (willFetch) reFetch(url);
-  }, [willFetch, id]);
+  }, [willFetch, url]);
 
   return { data, isLoading, error, mutate };
 }

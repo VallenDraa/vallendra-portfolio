@@ -1,29 +1,38 @@
-import { Typography } from "@material-tailwind/react";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
+import fadeIn from "utils/client/helpers/animateOnObserved";
+import Observe from "components/Observe";
 
 export default function NotFoundPage() {
   return (
-    <div className="fade-bottom relative flex min-h-[75vh] translate-y-20 flex-col items-center justify-center gap-3 px-8 after:-top-20">
+    <div className="fade-bottom relative flex min-h-[75vh] w-full flex-col items-center justify-center gap-3 pt-20 after:top-16">
       <div className="flex flex-col items-start space-y-2">
-        <Typography
-          variant="h3"
-          as="span"
-          className="relative z-10 font-bold text-indigo-500 dark:text-gray-300"
+        <Observe
+          freezeOnceVisible
+          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 150)}
         >
-          Error 404 😕
-        </Typography>
-        <Typography
-          variant="h4"
-          as="span"
-          className="text-indigo-300 dark:text-gray-500"
+          <span className="h4 relative z-10 font-bold text-white/80 opacity-0">
+            Error 404 😕
+          </span>
+        </Observe>
+
+        <Observe
+          freezeOnceVisible
+          onEnter={ref => fadeIn(ref, "animate-fade-in-top", 350)}
         >
-          Can&apos;t seem to find the page
-        </Typography>
+          <span className="h5 font-medium text-white/60 opacity-0">
+            Can&apos;t seem to find the page you are looking for.
+          </span>
+        </Observe>
       </div>
 
-      <LinkWithUnderline href="/" className="relative z-10">
-        Back To Home Page
-      </LinkWithUnderline>
+      <Observe
+        freezeOnceVisible
+        onEnter={ref => fadeIn(ref, "animate-fade-in-top", 550)}
+      >
+        <div className="relative z-10 opacity-0">
+          <LinkWithUnderline href="/">Back To Home Page</LinkWithUnderline>
+        </div>
+      </Observe>
     </div>
   );
 }

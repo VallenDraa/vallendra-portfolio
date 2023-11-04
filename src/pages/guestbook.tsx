@@ -6,7 +6,7 @@ import SectionHeading from "components/Typography/SectionHeading";
 import Seo from "seo/Seo";
 import guestbookPageSeo from "seo/guestbook.seo";
 import fadeIn from "utils/client/helpers/animateOnObserved";
-import LinkWithUnderline from "components/ShowcaseDetailsPage/LinkWithUnderline";
+import LinkWithUnderline from "components/Showcase/ShowcaseDetailsPage/LinkWithUnderline";
 
 export default function Guestbook() {
   const { theme } = useTheme();
@@ -15,8 +15,8 @@ export default function Guestbook() {
     <>
       <Seo {...guestbookPageSeo} />
 
-      <header className="fade-bottom relative mt-6 mb-3 w-full after:-top-7">
-        <div className="mx-auto flex max-w-screen-xl flex-col px-8 pt-16 2xl:px-2">
+      <header className="fade-bottom relative mb-3 mt-6 w-full after:top-10">
+        <div className="layout flex flex-col pt-36">
           {/* back to project button */}
           <Observe
             freezeOnceVisible
@@ -46,7 +46,7 @@ export default function Guestbook() {
           </div>
         </div>
       </header>
-      <main className="mx-auto w-full max-w-screen-xl grow px-8 pt-5 pb-10 2xl:px-2">
+      <main className="layout grow pb-10 pt-5">
         <Giscus
           term="/guestbook"
           repo={(process.env.NEXT_PUBLIC_REPO as Repo) || ""}

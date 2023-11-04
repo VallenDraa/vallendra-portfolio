@@ -1,7 +1,8 @@
-import { IconButton } from "@material-tailwind/react";
+import StyledButton from "components/StyledComponents/StyledButton";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 export default function ThemeToggler({
   className = "",
@@ -16,20 +17,19 @@ export default function ThemeToggler({
   if (!mounted) return null;
 
   return (
-    <IconButton
+    <StyledButton
       aria-label="Theme toggle button"
-      size="md"
-      variant="text"
-      color={theme === "light" ? "indigo" : "amber"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className={`text-lg ${className} `}
+      className={clsx(
+        "!flex h-10 w-10 items-center justify-center rounded-md p-2 text-center !text-xl",
+        theme === "light"
+          ? "text-zinc-800 hover:bg-zinc-500/10"
+          : "text-yellow-500 hover:bg-yellow-500/30",
+        className,
+      )}
     >
       {/* icon for dark mode */}
-      {theme === "dark" ? (
-        <BsFillSunFill />
-      ) : (
-        <BsFillMoonStarsFill className="text-indigo-500/70" />
-      )}
-    </IconButton>
+      {theme === "dark" ? <BsFillSunFill /> : <BsFillMoonStarsFill />}
+    </StyledButton>
   );
 }

@@ -1,10 +1,11 @@
 import m from "mongoose";
-import Project from "interfaces/project.interface";
+import type Project from "interfaces/project.interface";
 
-interface ProjectDocument extends Omit<Project, "_id">, m.Document {
+export type ProjectDocument = {
   createdAt: Date;
   updatedAt?: Date;
-}
+} & Omit<Project, "_id"> &
+  m.Document;
 
 const ProjectSchema = new m.Schema<ProjectDocument>(
   {

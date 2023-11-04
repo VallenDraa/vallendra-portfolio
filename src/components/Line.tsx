@@ -1,14 +1,10 @@
 import R from "react";
 
-interface Props
-  extends R.DetailedHTMLProps<
-    R.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > {
+type LineProps = {
   scale?: string;
-}
+} & R.DetailedHTMLProps<R.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-const Line = R.forwardRef<HTMLDivElement, Props>(
+const Line = R.forwardRef<HTMLDivElement, LineProps>(
   ({ ref: normalRef, style, className, scale, ...props }, forwardRef) => (
     <div
       ref={forwardRef}

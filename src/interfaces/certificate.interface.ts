@@ -1,20 +1,5 @@
-interface Certificate {
-  _id: string;
-  name: string;
-  slug: string;
-  shortDescriptionEN: string;
-  descriptionEN: string;
-  shortDescriptionID: string;
-  descriptionID: string;
-  views: number;
-  likes: number;
-  likers: string[];
-  loadingImage?: string;
-  image: string;
-  categoryIds: string[];
-  madeAt: Date | string;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
+import type ShowcaseItem from "./showcase.interface";
+
+export default interface Certificate extends ShowcaseItem {
   certificateLink: string;
 }
-export default Certificate;

@@ -1,10 +1,11 @@
 import m from "mongoose";
-import Category from "interfaces/category.interface";
+import type Category from "interfaces/category.interface";
 
-interface ProjectCategory extends Omit<Category, "_id">, m.Document {
+export type ProjectCategory = {
   madeAt: Date;
   updatedAt?: Date;
-}
+} & Omit<Category, "_id"> &
+  m.Document;
 
 const ProjectCategorySchema = new m.Schema<ProjectCategory>(
   {

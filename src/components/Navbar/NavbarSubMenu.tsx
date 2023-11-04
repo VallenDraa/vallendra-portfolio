@@ -1,51 +1,41 @@
-import { useState } from "react";
-import {
-  Button,
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-} from "@material-tailwind/react";
-import MENUS from "utils/data/menus";
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import useStyledRipple from "utils/client/hooks/useStyledRipple";
 
-interface Props {
+type NavbarSubMenuProps = {
   Handler: JSX.Element;
   menuItems: JSX.Element[];
-  offset?: number;
-}
+};
 
-export default function NavbarSubMenu({ Handler, menuItems, offset }: Props) {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+export default function NavbarSubMenu({
+  Handler,
+  menuItems,
+}: NavbarSubMenuProps) {
+  const [ripple, event] = useStyledRipple();
 
   return (
-    <Menu
-      open={isVisible}
-      handler={() => setIsVisible((prev: boolean) => !prev)}
-      animate={{ mount: { y: 0 }, unmount: { y: 15 } }}
-      dismiss={{ outsidePointerDown: true }}
-      offset={offset}
-    >
-      <MenuHandler>
-        <Button
-          color="indigo"
-          variant="text"
-          fullWidth
-          className="p-0 text-base font-semibold text-indigo-400 hover:text-indigo-500 dark:text-gray-200 dark:hover:text-white"
-        >
-          {Handler}
-        </Button>
-      </MenuHandler>
+    <Popover className="relative">
+      <Popover.Button
+        ref={ripple}
+        onMouseDown={event}
+        className="flex items-center rounded-none px-5 py-2 text-start !text-base font-semibold capitalize text-zinc-800 duration-200 hover:bg-indigo-500/10 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-white md:justify-center md:!rounded-md md:px-3 dark:md:text-zinc-200"
+      >
+        {Handler}
+      </Popover.Button>
 
-      <MenuList className="border-0 bg-indigo-100/90 shadow dark:bg-gray-800/90 [@supports(backdrop-filter:blur(12px))]:bg-indigo-100/30 [@supports(backdrop-filter:blur(12px))]:backdrop-blur-md dark:[@supports(backdrop-filter:blur(12px))]:bg-gray-800/30">
-        {menuItems.map((menuItem: JSX.Element, i) => (
-          <MenuItem
-            className="p-0 text-indigo-500 hover:bg-white/10 hover:text-indigo-600 focus:bg-white/20 dark:text-gray-300 dark:hover:text-white"
-            key={MENUS[i]}
-          >
-            {menuItem}
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Menu>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform translate-y-3 opacity-0"
+        enterTo="transform opacity-100 translate-y-0"
+        leave="transition ease-out duration-100"
+        leaveFrom="transform opacity-100 translate-y-0"
+        leaveTo="transform opacity-0 translate-y-3"
+      >
+        <Popover.Panel className="absolute left-1/2 mt-4 flex w-44 -translate-x-1/2 flex-col rounded-md bg-zinc-100/90 p-3 backdrop-saturate-150 supports-[backdrop-filter]:bg-zinc-100/30 supports-[backdrop-filter]:backdrop-blur-md dark:bg-zinc-800/90 dark:supports-[backdrop-filter]:bg-zinc-800/30">
+          {menuItems.map((menuItem: JSX.Element) => menuItem)}
+        </Popover.Panel>
+      </Transition>
+    </Popover>
   );
 }
